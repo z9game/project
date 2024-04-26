@@ -32,6 +32,33 @@ public class CommunityController {
         return mav;
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @RequestMapping(value = "/communityFreeBoardForm.do")
     public ModelAndView communityFreeBoard(CommunityDTO communityDTO) {
     
