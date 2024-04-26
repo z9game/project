@@ -1,0 +1,97 @@
+* {
+	font-size: 15px;
+}
+
+table {
+	border: 1;
+	border-collapse: collapse;
+	border-color: gray;
+}
+
+th, td {
+	padding: 10px 15px 10px 15px;
+	border-color: gray;
+}
+
+th {
+	background-color: lightgray;
+}
+
+html,
+body {
+  /* width: 100%;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  overflow: hidden; */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol{
+	list-style:none;
+}
+
+a{
+	text-decoration:none;
+}
+
+.newMatchingBoardFormTitle{
+	position: relative;
+}
+
+.titleBackgoundImg{
+	opacity: 0.5;
+	width: 100%;
+	height: 100px;
+}
+
+.titleBackgoundText{
+	font-size: 40px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+}
+
+.newMatchingBoardFormRegTable{
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.boardResetBtn{
+	width: 100px;
+	height: 30px;
+	margin-top: 10px;
+	margin-left: 440px;
+}
+
+.boardRegBtn, .moveListBtn{
+	width: 150px;
+	height: 50px;
+	margin-top: 20px;
+}
+
+.newMatchingBoardFormBtnDiv{
+	text-align: center;
+}
+
+.search_boxes{
+	display: flex;
+}
+
+.search_boxes .searchBoxText{
+	margin-top: 7px;
+	margin-left: 10px;
+}
+
+.search_boxes .sido, .search_boxes .gungu{
+	margin-right: 10px;
+}
+
+.newMatchingBoardFormRegTable .search_boxes p{
+	font-size: 10px;
+}

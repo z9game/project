@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosmo.team.project.dao.MemberDAO">
+
+	<insert id="insertMember" parameterType="kosmo.team.project.dto.MemberDTO">
+		insert into member(
+					m_no
+					,name
+					,mid
+					,password
+					,nickname
+					,email
+					,birthdate
+					,phone
+					,gender
+					,sido_id
+					,sigungu_id
+					,detail_address
+				)
+		values(
+			(select nvl(max(m_no),0)+1 from member)
+			,#{name}
+			,#{mid}
+			,#{password}
+			,#{nickname}
+			,#{email}
+			,to_date(#{birthday},'YYYY-MM-DD')
+			,#{phone}
+			,#{gender}
+			,#{sido_id}
+			,#{sigungu_id}
+			,#{detail_address}
+		)
+	</insert>
+	
+	<select id="getmid" parameterType="kosmo.team.project.dto.MemberDTO" resultType="int">
+		select count(*)
+		from
+			member
+		where
+			mid = #{mid}
+	</select>
+	
+</mapper>

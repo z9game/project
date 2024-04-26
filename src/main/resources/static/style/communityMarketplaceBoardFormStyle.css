@@ -1,0 +1,83 @@
+* {
+	font-size: 15px;
+}
+html,
+body {
+  /* width: 100%;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  overflow: hidden; */
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol{
+	list-style:none;
+}
+
+a{
+	text-decoration:none;
+}
+
+.communityMarketplaceBoardFormTitle{
+	position: relative;
+}
+
+.titleBackgoundImg{
+	opacity: 0.5;
+	width: 100%;
+	height: 100px;
+}
+
+.titleBackgoundText{
+	font-size: 40px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+}
+
+.communityMarketplaceBoardFormContainer{
+	margin: 30px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.communityMarketplaceBoardFormBoard{
+	width: calc(25% - 20px);
+    max-width: 300px;
+    height: 380px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.communityMarketplaceBoardImageDiv {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.communityMarketplaceBoardSubject {
+	margin-top: 10px;
+}
+
+.communityMarketplaceBoardImage{
+	max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosmo.team.project.dao.CommunityDAO">
+	
+	<select id="getNoticeBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunityDTO">
+		    SELECT 
+		        b_no AS "b_no", 
+		        subject AS "subject",
+		        writer AS "writer",
+		        content AS "content",
+		        to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
+		        readcount AS "readcount"
+		    FROM 
+		        noticeboard
+		    order by
+		    	b_no desc
+	</select>
+	
+	<select id="getNoticeBoardListCnt" resultType="int">
+		select 
+			count(*) 
+		from
+		    noticeboard
+	</select>
+	
+	<select id="getFreeBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunityDTO">
+		    SELECT 
+		        b_no AS "b_no", 
+		        subject AS "subject",
+		        writer AS "writer",
+		        content AS "content",
+		        to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
+		        readcount AS "readcount"
+		    FROM 
+		        freeboard
+		    order by
+		    	b_no desc
+	</select>
+	
+	<select id="getFreeBoardListCnt" resultType="int">
+		select 
+			count(*) 
+		from
+		    freeboard
+	</select>
+	
+	<select id="getImageBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunityDTO">
+		    SELECT 
+		        subject AS "subject",
+		        writer AS "writer",
+		        to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
+		        readcount AS "readcount"
+		    FROM 
+		        imageboard
+	</select>
+	
+	<select id="getImageBoardListCnt" resultType="int">
+		select 
+			count(*) 
+		from
+		    imageboard
+	</select>
+</mapper>
