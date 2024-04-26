@@ -21,6 +21,9 @@ import kosmo.team.project.utility.Page;
 // ----------------------------------
 //	1.Git Push Test
 // ----------------------------------
+//----------------------------------
+//	2.Git Push Test
+//----------------------------------
 
 @Controller
 public class SampleController {
