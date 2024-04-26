@@ -7,6 +7,8 @@
 		<title>상세글</title>
 	</head>
 
+
+
 	<body>
 		<c:if test="${ empty requestScope.sampleDTO }">
 			<script>
