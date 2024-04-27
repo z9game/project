@@ -83,6 +83,7 @@
 	</div>
 
 
+
 	<form name="noticeboardUpDelForm">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7
 			style="border-collpase: collpase">
