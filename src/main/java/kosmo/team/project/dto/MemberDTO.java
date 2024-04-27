@@ -13,6 +13,7 @@ public class MemberDTO {
 	private int sido_id;
 	private int sigungu_id;
 	private String detail_address;
+	private String reg_date;
 	public int getM_no() {
 		return m_no;
 	}
@@ -76,8 +77,8 @@ public class MemberDTO {
 	public int getSigungu_id() {
 		return sigungu_id;
 	}
-	public void setSigungu_id(int sigingu_id) {
-		this.sigungu_id = sigingu_id;
+	public void setSigungu_id(int sigungu_id) {
+		this.sigungu_id = sigungu_id;
 	}
 	public String getDetail_address() {
 		return detail_address;
@@ -85,8 +86,18 @@ public class MemberDTO {
 	public void setDetail_address(String detail_address) {
 		this.detail_address = detail_address;
 	}
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
 	
 	
+	
+	
+	
+
 	
 	
 }

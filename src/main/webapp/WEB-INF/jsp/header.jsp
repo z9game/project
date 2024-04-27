@@ -69,7 +69,7 @@
 						<a href="#">마이페이지</a>
 						</c:if>
 						<c:if test="${sessionScope.mid== 'admin'}">
-						<a href="#">관리자페이지</a>
+						<a href="/adminForm.do">관리자페이지</a>
 						</c:if>		 
 							 <a href="/logoutProc.do">로그아웃</a>
 						</li>
