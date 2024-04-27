@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityFreeBoardForm</title>
+<title>adminFormTitle</title>
 <link href="/style/communityFreeBoardFormStyle.css" rel="stylesheet">
 <script src="/js/communityFreeBoardFormScript.js"></script>
 
