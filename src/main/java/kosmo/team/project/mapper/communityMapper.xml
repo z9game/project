@@ -71,7 +71,7 @@
 	</select>
 
 
-	<update id="updateReadCount" parameterType="int">
+	<update id="updateNoticeBoardReadCount" parameterType="int">
 
 		update noticeboard
 		set
@@ -109,7 +109,8 @@
 	</select>
 
 
-	<delete id="deleteNoticeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+	<delete id="deleteNoticeBoard"
+		parameterType="kosmo.team.project.dto.CommunityDTO">
 		delete from
 		noticeboard
 		where
@@ -122,7 +123,7 @@
 
 
 
-	
+
 
 
 
@@ -133,20 +134,25 @@
 
 	<select id="getFreeBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
-		parameterType="kosmo.team.project.dto.CommunityDTO">
-		SELECT
-		b_no AS "b_no",
+		parameterType="kosmo.team.project.dto.CommunitySearchDTO">
+		select * from ( select rownum RNUM, zxcvb.* from (
+
+		select
+		b_no AS
+		"b_no",
 		subject AS "subject",
-		writer AS
-		"writer",
+		writer AS "writer",
 		content AS "content",
-		to_char(reg_date, 'YYYY-MM-DD') AS
-		"reg_date",
+		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
 		readcount AS "readcount"
 		FROM
 		freeboard
 		order by
 		b_no desc
+		    	
+		    <![CDATA[
+			) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+		]]>
 	</select>
 
 	<select id="getFreeBoardListCnt" resultType="int">
@@ -156,6 +162,76 @@
 		freeboard
 	</select>
 
+	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
+	<select id="getFreeBoardAllCnt" resultType="int">
+		select count(*)
+		from
+		freeboard
+	</select>
+
+
+
+	<select id="getFreeBoard" parameterType="int"
+		resultType="kosmo.team.project.dto.CommunityDTO">
+
+		select
+		b_no "b_no"
+		,subject "subject"
+		,writer "writer"
+		,reg_date
+		"reg_date"
+		,readcount "readcount"
+		,content "content"
+
+
+		from freeboard
+
+		where
+		b_no=#{b_no}
+		<!-- ========================================== #{b_no} 뜻 ========================================== 
+			select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
+			또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
+			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
+
+
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 갤러리 -->
 	<select id="getImageBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
 		parameterType="kosmo.team.project.dto.CommunityDTO">

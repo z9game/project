@@ -231,22 +231,45 @@ public class CommunityController {
 	
 	
 	
-
+	
 	// ----------------------------------------------------------------
 
 	// ----------------------------------------------------------------
 	// 자유게시판
 	// ----------------------------------------------------------------
 	@RequestMapping(value = "/communityFreeBoardForm.do")
-	public ModelAndView communityFreeBoard(CommunityDTO communityDTO) {
+	public ModelAndView communityFreeBoard(CommunitySearchDTO communitySearchDTO) {
+		
+		
+		int freeBoardListAllCnt = this.communityService.getFreeBoardAllCnt();
 
-		int freeBoardListCnt = this.communityService.getFreeBoardListCnt(communityDTO);
+		int freeBoardListCnt = this.communityService.getFreeBoardListCnt(communitySearchDTO);
+		
+		Map<String, Integer> freeBoardMap = Page.getPagingMap(
 
-		List<CommunityDTO> freeBoardList = this.communityService.getFreeBoardList(communityDTO);
+				communitySearchDTO.getSelectPageNo()// 선택한 페이지 번호
+				, communitySearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+				, freeBoardListCnt // 검색 결과물 개수
+
+		);
+		
+		communitySearchDTO.setSelectPageNo((int) freeBoardMap.get("selectPageNo"));
+		communitySearchDTO.setRowCntPerPage((int) freeBoardMap.get("rowCntPerPage"));
+		communitySearchDTO.setBegin_rowNo((int) freeBoardMap.get("begin_rowNo"));
+		communitySearchDTO.setEnd_rowNo((int) freeBoardMap.get("end_rowNo"));
+		
+
+		List<CommunityDTO> freeBoardList = this.communityService.getFreeBoardList(communitySearchDTO);
 
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("freeBoardList", freeBoardList);
+
+		mav.addObject("freeBoardListCnt", freeBoardListCnt);
+
+		mav.addObject("freeBoardListAllCnt", freeBoardListAllCnt);
+
+		mav.addObject("freeBoardMap", freeBoardMap);
 
 		mav.setViewName("communityFreeBoardForm.jsp");
 
@@ -254,6 +277,21 @@ public class CommunityController {
 	}
 	// ----------------------------------------------------------------
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// ----------------------------------------------------------------
 	// 갤러리
 	// ----------------------------------------------------------------

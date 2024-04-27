@@ -56,7 +56,7 @@ public class CommunityServiceImplements implements CommunityService {
 	
 	public CommunityDTO getNoticeBoard(int b_no) {
 		
-		int updateCnt = this.communityDAO.updateReadCount(b_no);
+		int updateCnt = this.communityDAO.updateNoticeBoardReadCount(b_no);
 
 		CommunityDTO communityDTO = this.communityDAO.getNoticeBoard(b_no);
 
@@ -64,6 +64,9 @@ public class CommunityServiceImplements implements CommunityService {
 
 	}
 	
+	
+	
+	//이아래쪽은 공지사항 수정,삭제
 	
 	public CommunityDTO getNoticeBoardForUpDel(int b_no) {
 
@@ -131,23 +134,87 @@ public class CommunityServiceImplements implements CommunityService {
 	//자유게시판
 	//---------------------------------
 	
+	
+	
 	@Override
-	public int getFreeBoardListCnt(CommunityDTO communityDTO) {
+	public List<CommunityDTO> getFreeBoardList(CommunitySearchDTO communitySearchDTO) {
 
-		int freeBoardListCount = communityDAO.getFreeBoardListCnt(communityDTO);
-
-		return freeBoardListCount;
-
-	}
-
-	@Override
-	public List<CommunityDTO> getFreeBoardList(CommunityDTO communityDTO) {
-
-		List<CommunityDTO> freeBoardList = communityDAO.getFreeBoardList(communityDTO);
+		List<CommunityDTO> freeBoardList = this.communityDAO.getFreeBoardList(communitySearchDTO);
 
 		return freeBoardList;
 
 	}
+	
+	
+	@Override
+	public int getFreeBoardListCnt(CommunitySearchDTO communitySearchDTO) {
+
+		int freeBoardListCount = this.communityDAO.getFreeBoardListCnt(communitySearchDTO);
+
+		return freeBoardListCount;
+
+	}
+	
+	
+	
+	
+	public int getFreeBoardAllCnt() {
+		// --------------------------------------
+		// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
+		// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
+		// --------------------------------------
+		int freeBoardListAllCnt = this.communityDAO.getFreeBoardAllCnt();
+		// --------------------------------------
+		// 변수 boardListAllCnt 안의 데이터를 리턴하기
+		// --------------------------------------
+		return freeBoardListAllCnt;
+	}
+	
+	
+	
+	public CommunityDTO getFreeBoard(int b_no) {
+		
+
+		CommunityDTO communityDTO = this.communityDAO.getFreeBoard(b_no);
+
+		return communityDTO;
+
+	}
+	
+	//-------------------------------------------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//-----------------------------------
+	//갤러리
+	//-----------------------------------
 	
 	@Override
 	public int getImageBoardListCnt(CommunityDTO communityDTO) {

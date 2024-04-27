@@ -9,7 +9,9 @@ import kosmo.team.project.dto.CommunitySearchDTO;
 
 @Mapper
 public interface CommunityDAO {
-
+	// ----------------------------------------
+	// 공지사항
+	// ----------------------------------------
 	public List<CommunityDTO> getNoticeBoardList(CommunitySearchDTO communitySearchDTO);
 
 	public int getNoticeBoardListCnt(CommunitySearchDTO communitySearchDTO);
@@ -18,29 +20,43 @@ public interface CommunityDAO {
 
 	CommunityDTO getNoticeBoard(int b_no);
 
-	int updateReadCount(int b_no);
+	int updateNoticeBoardReadCount(int b_no);
 
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	// [1개 게시판] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
+	// [1개 공지사항] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 	int updateNoticeBoard(CommunityDTO communityDTO);
 
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	// [1개 게시판] 삭제 실행하고 삭제 적용행의 개수를 리턴하는 메소드 선언
+	// [1개 공지사항] 삭제 실행하고 삭제 적용행의 개수를 리턴하는 메소드 선언
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 	int deleteNoticeBoard(CommunityDTO communityDTO);
-	
-	
+
 	int getNoticeBoardCnt(int b_no);
 	
+
 	
 
+	//----------------------------------------
 	// 자유게시판
+	//----------------------------------------
 
-	public int getFreeBoardListCnt(CommunityDTO communityDTO);
+	public List<CommunityDTO> getFreeBoardList(CommunitySearchDTO communitySearchDTO);
 
-	public List<CommunityDTO> getFreeBoardList(CommunityDTO communityDTO);
+	public int getFreeBoardListCnt(CommunitySearchDTO communitySearchDTO);
 
+	public int getFreeBoardAllCnt();
+
+	CommunityDTO getFreeBoard(int b_no);
+	
+
+	
+	
+	
+	
+	
+	
+	//갤러리
 	public int getImageBoardListCnt(CommunityDTO communityDTO);
 
 	public List<CommunityDTO> getImageBoardList(CommunityDTO communityDTO);

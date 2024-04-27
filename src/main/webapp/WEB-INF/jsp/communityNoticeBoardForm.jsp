@@ -89,9 +89,7 @@ function search(){
   
             $(".communityNoticeBoardFormContainer").html(obj.filter(".communityNoticeBoardFormContainer").html());
 			
-            $(".pagingNos").html(
-                     obj.find(".pagingNos").html()
-               );
+            $(".pagingNos").html(obj.find(".pagingNos").html());
 
             
             
