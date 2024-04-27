@@ -5,9 +5,96 @@
 
 <mapper namespace="kosmo.team.project.dao.AdminDAO">
 
-    <!-- 모든 회원 목록을 가져오는 쿼리 정의 -->
-    <select id="getAllMembers" resultType="kosmo.team.project.dto.MemberDTO">
-        SELECT * FROM member
-    </select>
+	<!-- 모든 회원 목록을 가져오는 쿼리 정의 -->
+	<select id="getMemberList"
+		resultType="kosmo.team.project.dto.MemberDTO"
+		parameterType="kosmo.team.project.dto.MemberSearchDTO">
+		select * from ( select rownum RNUM, zxcvb.* from (
+
+		select
+		m_no AS
+		"m_no",
+		mid AS "mid",
+		name AS "name",
+		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date"
+		FROM
+		member
+		order by
+		m_no asc
+    	
+    <![CDATA[
+    ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+    ]]>
+	</select>
+
+
+
+	<select id="getMemberListCnt" resultType="int">
+		select
+		count(*)
+		from
+		member
+	</select>
+
+
+
+
+
+
+
+
+
+	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
+	<select id="getMemberListAllCnt" resultType="int">
+		select count(*)
+		from
+		member
+	</select>
+
+
+
+
+
+	<select id="getMember" parameterType="int"
+		resultType="kosmo.team.project.dto.MemberDTO">
+
+		select
+		m_no AS
+		"m_no",
+		mid AS "mid",
+		name AS "name",
+		to_char(reg_date,
+		'YYYY-MM-DD') AS "reg_date"
+		FROM
+		member
+		where
+		m_no=#{m_no}
+		<!-- ========================================== #{b_no} 뜻 ========================================== 
+			select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
+			또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
+			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
+
+
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

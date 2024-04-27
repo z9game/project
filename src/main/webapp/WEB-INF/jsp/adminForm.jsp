@@ -25,7 +25,7 @@
 		// 변수 boardSearchFormObj 선언하고 
 		// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
 		//---------------------------------------------
-		var boardSearchFormObj = $("[name='communityFreeBoardSearchForm']");
+		var boardSearchFormObj = $("[name='adminSearchForm']");
 
 
 		boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
@@ -34,7 +34,7 @@
 					//-------------------------------
 					// WAS 로 접속할 주소 설정
 					//-------------------------------
-					url : "/communityFreeBoardForm.do"
+					url : "/adminForm.do"
 					//-------------------------------
 					// WAS 로 접속하는 방법 설정. get 또는 post
 					//-------------------------------
@@ -49,7 +49,7 @@
 
 						var obj = $(responseHtml);
 
-						$(".communityFreeBoardFormContainer").html(obj.filter(".communityFreeBoardFormContainer").html());
+						$(".adminFormContainer").html(obj.filter(".adminFormContainer").html());
 
 						$(".pagingNos").html(obj.find(".pagingNos").html());
 
@@ -71,7 +71,7 @@
 		// 변수 boardSearchFormObj 선언하고 
 		// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
 		//---------------------------------------------
-		var boardSearchFormObj = $("[name='communityFreeBoardSearchForm']");
+		var boardSearchFormObj = $("[name='adminSearchForm']");
 
 		boardSearchFormObj.find(".selectPageNo").val("1")
 
@@ -91,7 +91,7 @@
 		// 즉 <input type="hidden" name="selectPageNo" value="1"> 태그에
 		// value 값에 [클릭한 페이지 번호]를 저장하기
 		//---------------------------------------------
-		$("[name='communityFreeBoardSearchForm']").find(".selectPageNo").val(clickPageNo)
+		$("[name='adminSearchForm']").find(".selectPageNo").val(clickPageNo)
 
 		search()
 
@@ -136,7 +136,7 @@
 				<c:forEach var="admin" items="${requestScope.memberList}"
 					varStatus="status">
 					<tr style="cursor: pointer">
-						<td align="center">${status.index + 1}</td>
+						<td align="center">${requestScope.memberMap.begin_serialNo_asc + status.index}</td>
 						<td>${admin.mid}</td>
 						<td align="center">${admin.name}</td>
 						<td align="center">${admin.reg_date}</td>
@@ -157,26 +157,26 @@
 
 		<span class="pagingNos"> <span style="cursor: pointer"
 			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.freeBoardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+			onClick="pageNoClick(${requestScope.memberMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
 
 
 			<c:forEach var="pageNo"
-				begin="${requestScope.freeBoardMap.begin_pageNo}"
-				end="${requestScope.freeBoardMap.end_pageNo}">
+				begin="${requestScope.memberMap.begin_pageNo}"
+				end="${requestScope.memberMap.end_pageNo}">
 
-				<c:if test="${requestScope.freeBoardMap.selectPageNo==pageNo}">
+				<c:if test="${requestScope.memberMap.selectPageNo==pageNo}">
             ${pageNo}
          </c:if>
 
-				<c:if test="${requestScope.freeBoardMap.selectPageNo!=pageNo}">
+				<c:if test="${requestScope.memberMap.selectPageNo!=pageNo}">
 					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
 				</c:if>
 			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.freeBoardMap.selectPageNo}+1)">[다음]</span>
+			onClick="pageNoClick(${requestScope.memberMap.selectPageNo}+1)">[다음]</span>
 			<span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.freeBoardMap.last_pageNo})">[마지막]</span>
+			onClick="pageNoClick(${requestScope.memberMap.last_pageNo})">[마지막]</span>
 			&nbsp;&nbsp;&nbsp;
-			[${requestScope.freeBoardListCnt}/${requestScope.freeBoardListAllCnt}]개
+			[${requestScope.memberListCnt}/${requestScope.memberListAllCnt}]개
 			&nbsp;&nbsp;
 		</span> <select name="rowCntPerPage" class="rowCntPerPage"
 			onChange="search()">
