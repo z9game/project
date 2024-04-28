@@ -16,9 +16,11 @@
 		"m_no",
 		mid AS "mid",
 		name AS "name",
+		nickname as "nickname",
 		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date"
 		FROM
 		member
+		where m_no != 1
 		order by
 		m_no asc
     	

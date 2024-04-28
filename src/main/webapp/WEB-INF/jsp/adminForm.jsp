@@ -127,9 +127,10 @@
 				bordercolor="gray" align="center"
 				style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
 				<tr>
-					<th style="width: 50px;">번호</th>
-					<th style="width: 300px;">아이디</th>
-					<th style="width: 80px;">이름</th>
+					<th style="width: 30px;">번호</th>
+					<th style="width: 50px;">아이디</th>
+					<th style="width: 50px;">이름</th>
+					<th style="width: 50px;">닉네임</th>
 					<th style="width: 100px;">등록일</th>
 				</tr>
 
@@ -137,8 +138,9 @@
 					varStatus="status">
 					<tr style="cursor: pointer">
 						<td align="center">${requestScope.memberMap.begin_serialNo_asc + status.index}</td>
-						<td>${admin.mid}</td>
+						<td align="center" >${admin.mid}</td>
 						<td align="center">${admin.name}</td>
+						<td align="center">${admin.nickname}</td>
 						<td align="center">${admin.reg_date}</td>
 					</tr>
 				</c:forEach>
