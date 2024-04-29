@@ -66,7 +66,7 @@ public class CommunityController {
 		return mav;
 	}
 
-	// 공지사항상세보기
+	// 공지사항상세보기 < 여기 작업
 	@RequestMapping(value = "/noticeboardDetailForm.do")
 	public ModelAndView noticeboardDetailForm(
 			// --------------------------------------
