@@ -188,7 +188,7 @@ public class AdminController {
 		// -------------------------------------------
 		int memberUpCnt = this.adminService.updateMember(memberDTO);
 		int playerRecordUpCnt = this.adminService.updatePlayerRecord(playerRecordDTO);
-
+		System.out.println(memberDTO.getNickname());
 		// -------------------------------------------
 		// HashMap 객체에 게시판 수정 행의 개수 저장하기기
 		// -------------------------------------------
@@ -221,10 +221,10 @@ public class AdminController {
 	) {
 		Map<String, String> resultMap = new HashMap<String, String>();
 
-		int boardDelCnt = this.adminService.deleteMember(memberDTO);
+		int memberDelCnt = this.adminService.deleteMember(memberDTO);
 		int PlayerRecordDelCnt = this.adminService.deletePlayerRecord(playerRecordDTO);
 
-		resultMap.put("result", boardDelCnt + "");
+		resultMap.put("result", memberDelCnt + "");
 		resultMap.put("result2", PlayerRecordDelCnt + "");
 
 		return resultMap;

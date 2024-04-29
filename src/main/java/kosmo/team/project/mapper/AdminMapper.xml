@@ -40,12 +40,6 @@
 
 
 
-
-
-
-
-
-
 	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
 	<select id="getMemberListAllCnt" resultType="int">
 		select count(*)
@@ -65,14 +59,17 @@
 		"m_no",
 		mid AS "mid",
 		name AS "name",
-		nickname as "nickname",
-		email  as "email",
+		nickname as
+		"nickname",
+		email as "email",
 		to_char(birthdate,
-		'YYYY-MM-DD') AS "birthday",
+		'YYYY-MM-DD') AS
+		"birthday",
 		phone as "phone",
 		gender as "gender",
-		detail_address as "detail_address",
-		
+		detail_address as
+		"detail_address",
+
 		to_char(reg_date,
 		'YYYY-MM-DD') AS "reg_date"
 		FROM
@@ -87,14 +84,17 @@
 
 		update member set
 
-		subject = #{subject}
-		,writer = #{writer}
-		,content
-		=
-		#{content}
-		, reg_date = SYSDATE
+		name = #{name}
+		,mid = #{mid}
+		,nickname=#{nickname}
+		,
+		email = #{email}
+		,birthdate = #{birthday}
+		,phone = #{phone}
+		,detail_address =
+		#{detail_address}
 
-		where b_no = #{b_no}
+		where m_no = #{m_no}
 
 		<!-- ========================================== #{subject} 뜻 ========================================== 
 			=============== {subject} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
@@ -102,19 +102,20 @@
 			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
 	</update>
 
-	<select id="getNoticeBoardCnt" parameterType="int"
-		resultType="int">
+	<select id="getMemberCnt" parameterType="int" resultType="int">
 		select
-		count(*) from noticeboard where b_no=#{b_no}
+		count(*) from member where m_no=#{m_no}
 	</select>
 
 
-	<delete id="deleteNoticeBoard"
-		parameterType="kosmo.team.project.dto.CommunityDTO">
+
+	<delete id="deleteMember"
+		parameterType="kosmo.team.project.dto.MemberDTO">
+
 		delete from
-		noticeboard
+		member
 		where
-		b_no=#{b_no}
+		m_no=#{m_no}
 		<!-- ========================================== #{b_no} 뜻 ========================================== 
 			=============== {b_no} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
 			b_no 안의 데이터를 표현하기 즉 게시판 번호를 표현하기 =============== # 의미 =============== 표현할 
@@ -136,9 +137,10 @@
 		player AS "player",
 		games_played AS "games_played",
 		wins as "wins",
-		draws  as "draws",
+		draws as "draws",
 		losses as "losses",
-		goals_for as "goals_for",
+		goals_for as
+		"goals_for",
 		goals_assist as "goals_assist"
 
 		FROM
@@ -149,17 +151,44 @@
 	</select>
 
 
+	<select id="getPlayerRecordCnt" parameterType="int"
+		resultType="int">
+		select
+		count(*) from player_record where player=#{m_no}
+	</select>
 
 
 
+	<update id="updatePlayerRecord"
+		parameterType="kosmo.team.project.dto.PlayerRecordDTO">
+
+		update player_record set
+
+		games_played = #{games_played}
+		,wins=#{wins}
+		,
+		draws = #{draws}
+		,losses = #{losses}
+		,goals_for =
+		#{goals_for}
+		,goals_assist =
+		#{goals_assist}
+
+		where player = #{player}
+
+	</update>
 
 
 
+	<delete id="deletePlayerRecord"
+		parameterType="kosmo.team.project.dto.PlayerRecordDTO">
 
+		delete from
+		player_record
+		where
+		player=#{m_no}
 
-
-
-
+	</delete>
 
 
 
