@@ -18,16 +18,15 @@
 		search();
 
 	});
-	function goMemberDetailForm(m_no) {
+	function goAdminMemberDetailForm(m_no) {
 	    // m_no와 함께 player_record_no 파라미터 추가
-	    $("[name='memberDetailForm'] [name='m_no']").val(m_no);
+	    $("[name='adminMemberDetailForm'] [name='m_no']").val(m_no);
 	    //$("[name='memberDetailForm'] [name='player_record_no']").val(player_record_no);
 	    
 	    // memberDetailForm 폼 submit
-	    document.memberDetailForm.submit();
+	    document.adminMemberDetailForm.submit();
 	}
 
-	
 
 	
 	function search() {
@@ -157,7 +156,7 @@
 				<c:forEach var="admin" items="${requestScope.memberList}"
 					varStatus="status">
 					<tr style="cursor: pointer"
-						onClick="goMemberDetailForm(${admin.m_no});">
+						onClick="goAdminMemberDetailForm(${admin.m_no});">
 						<td align="center">${requestScope.memberMap.begin_serialNo_asc + status.index}</td>
 						<td align="center">${admin.mid}</td>
 						<td align="center">${admin.name}</td>
@@ -210,11 +209,11 @@
 	</center>
 
 
-	<form name="memberDetailForm" action="/memberDetailForm.do"
+	<form name="adminMemberDetailForm" action="/adminMemberDetailForm.do"
 		method="post">
 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
 		<input type="hidden" name="m_no"> <input type="hidden"
-			name="player_record_no">
+			name="player">
 
 	</form>
 
