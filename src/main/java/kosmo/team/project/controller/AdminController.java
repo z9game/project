@@ -65,8 +65,8 @@ public class AdminController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/memberDetailForm.do")
-	public ModelAndView memberDetailForm(
+	@RequestMapping(value = "/adminMemberDetailForm.do")
+	public ModelAndView adminMemberDetailForm(
 			// --------------------------------------
 			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
 			// 매개변수 b_no 에 저장하고 들어온다.
@@ -104,18 +104,17 @@ public class AdminController {
 
 		mav.addObject("playerRecordDTO", playerRecordDTO);
 
-		System.out.println(playerRecordDTO.getPlayer());
 
 		// System.out.println(memberDTO.getGender());
-		mav.setViewName("memberDetailForm.jsp");
+		mav.setViewName("adminMemberDetailForm.jsp");
 
 		return mav;
 
 	}
 
-	@RequestMapping(value = "/memberUpDelForm.do")
+	@RequestMapping(value = "/adminDetailUpDelForm.do")
 
-	public ModelAndView memberUpDelForm(
+	public ModelAndView adminDetailUpDelForm(
 			// --------------------------------------
 			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
 			// 매개변수 b_no 에 저장하고 들어온다.
@@ -153,20 +152,20 @@ public class AdminController {
 		mav.addObject("playerRecordDTO", playerRecordDTO);
 
 
-		mav.setViewName("memberDetailForm.jsp");
+		mav.setViewName("adminDetailUpDelForm.jsp");
 
 		return mav;
 
 	}
 	
-	@RequestMapping(value = "/memberUpProc.do"
+	@RequestMapping(value = "/adminMemberUpProc.do"
 
 			, method = RequestMethod.POST
 
 			, produces = "application/json;charset=UTF-8"
 			)
 	@ResponseBody
-	public Map<String, String> memberUpProc(
+	public Map<String, String> adminMemberUpProc(
 			// -------------------------
 			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
 			// -------------------------
@@ -202,14 +201,14 @@ public class AdminController {
 		return resultMap;
 	}
 
-	@RequestMapping(value = "/memberDelProc.do"
+	@RequestMapping(value = "/adminMemberDelProc.do"
 
 			, method = RequestMethod.POST
 
 			, produces = "application/json;charset=UTF-8")
 
 	@ResponseBody
-	public Map<String, String> memberDelProc(
+	public Map<String, String> adminMemberDelProc(
 			// -------------------------
 			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
 			// -------------------------
