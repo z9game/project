@@ -70,7 +70,7 @@
 						<input type="checkbox" id="day6" name="day" onclick="setweekDay()" value="sat">토&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="checkbox" id="day7" name="day" onclick="setweekDay()" value="sun">일
 						<br>
-						<input type="checkbox" id="day0" name="day" value="everyday">상관없음
+						<input type="checkbox" id="day0" name="day" value="everyday" onclick="allday()">상관없음
 					</td>
 				</tr>
 				<tr>
