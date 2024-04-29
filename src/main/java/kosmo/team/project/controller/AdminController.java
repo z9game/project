@@ -123,6 +123,7 @@ public class AdminController {
 			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
 			// --------------------------------------
 			@RequestParam(value = "m_no") int m_no
+
 			,HttpSession session
 
 	) {
@@ -132,6 +133,7 @@ public class AdminController {
 			return new ModelAndView("redirect:/loginForm.do");
 		}
 		
+	
 		
 		
 		MemberDTO memberDTO = this.adminService.getMemberForUpDel(m_no);
