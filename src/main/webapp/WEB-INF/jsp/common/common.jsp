@@ -23,11 +23,13 @@
 function setweekgroup() {
       if ($("#workweekcdGroupA").is(":checked")) {
          $("#day1, #day2, #day3, #day4, #day5").prop("checked", true);
+         $("#day0").prop("checked", false);
       } else {
          $("#day1, #day2, #day3, #day4, #day5").prop("checked", false);
       }
       if ($("#workweekcdGroupB").is(":checked")) {
          $("#day6, #day7").prop("checked", true);
+         $("#day0").prop("checked", false);
       } else {
          $("#day6, #day7").prop("checked", false);
       }
@@ -39,15 +41,35 @@ function setweekgroup() {
    
       if ($("#day1").is(":checked") && $("#day2").is(":checked") && $("#day3").is(":checked") && $("#day4").is(":checked") && $("#day5").is(":checked")) {
          $("#workweekcdGroupA").prop("checked", true);
-      } else {
+      } 
+      else if($("#day1").is(":checked") || $("#day2").is(":checked") || $("#day3").is(":checked") || $("#day4").is(":checked") || $("#day5").is(":checked")) 
+      {
+    	  $("#day0").prop("checked", false);
+      }  
+      else {
          $("#workweekcdGroupA").prop("checked", false);
-   
       }
+      
+      
       if ($("#day6").is(":checked") && $("#day7").is(":checked")) {
          $("#workweekcdGroupB").prop("checked", true);
-      } else {
+      } 
+      else if($("#day6").is(":checked") || $("#day7").is(":checked"))
+      {
+    	  $("#day0").prop("checked", false);
+      }
+      
+      else {
          $("#workweekcdGroupB").prop("checked", false);
       }
    };
+   
+   
+   function allday()
+   {
+	  if ($("#day0").is(":checked")) {
+         $("#day1, #day2, #day3, #day4, #day5, #day6, #day7, #workweekcdGroupA, #workweekcdGroupB").prop("checked", false);
+      }
+   }
    
    </script>
