@@ -37,8 +37,13 @@ a{
 	text-decoration:none;
 }
 
+.newRecruitHiredBoardBtnDiv{
+	margin-top: 10px;
+	margin-right: 900px;
+	text-align: center;
+}
+
 .newRecruitHiredBoardBtn{
-	margin-left:250px;
 	width: 100px;
 	height: 30px;
 }

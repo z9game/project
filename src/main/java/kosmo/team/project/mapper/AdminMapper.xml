@@ -65,23 +65,88 @@
 		"m_no",
 		mid AS "mid",
 		name AS "name",
+		nickname as "nickname",
+		email  as "email",
+		to_char(birthdate,
+		'YYYY-MM-DD') AS "birthday",
+		phone as "phone",
+		gender as "gender",
+		detail_address as "detail_address",
+		
 		to_char(reg_date,
 		'YYYY-MM-DD') AS "reg_date"
 		FROM
 		member
 		where
 		m_no=#{m_no}
-		<!-- ========================================== #{b_no} 뜻 ========================================== 
-			select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
-			또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
-			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
-
 
 	</select>
 
+	<update id="updateMember"
+		parameterType="kosmo.team.project.dto.MemberDTO">
+
+		update member set
+
+		subject = #{subject}
+		,writer = #{writer}
+		,content
+		=
+		#{content}
+		, reg_date = SYSDATE
+
+		where b_no = #{b_no}
+
+		<!-- ========================================== #{subject} 뜻 ========================================== 
+			=============== {subject} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
+			subject 안의 데이터를 표현하기 즉 제목을 표현하기 =============== # 의미 =============== 표현할 
+			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
+	</update>
+
+	<select id="getNoticeBoardCnt" parameterType="int"
+		resultType="int">
+		select
+		count(*) from noticeboard where b_no=#{b_no}
+	</select>
+
+
+	<delete id="deleteNoticeBoard"
+		parameterType="kosmo.team.project.dto.CommunityDTO">
+		delete from
+		noticeboard
+		where
+		b_no=#{b_no}
+		<!-- ========================================== #{b_no} 뜻 ========================================== 
+			=============== {b_no} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
+			b_no 안의 데이터를 표현하기 즉 게시판 번호를 표현하기 =============== # 의미 =============== 표현할 
+			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
+	</delete>
 
 
 
+
+
+
+
+
+
+	<select id="getPlayerRecord" parameterType="int"
+		resultType="kosmo.team.project.dto.PlayerRecordDTO">
+
+		select
+		player AS "player",
+		games_played AS "games_played",
+		wins as "wins",
+		draws  as "draws",
+		losses as "losses",
+		goals_for as "goals_for",
+		goals_assist as "goals_assist"
+
+		FROM
+		player_record
+		where
+		player=#{m_no}
+
+	</select>
 
 
 

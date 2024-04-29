@@ -14,7 +14,8 @@
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="mainFormContainer">
 		<div class="section" id="sectionMain">
-		
+			<div class="sectionMainText">안녕하세요<br>우리는 1조<br>축구 매칭 사이트 제작</div>
+			<img src="/image/MainImage.jpg">
 		</div>
 		<div class="section" id="sectionStatistics">
 		
@@ -26,7 +27,19 @@
 		
 		</div>
 		<div class="section" id="sectionMedia">
-		
+			<div>
+				<strong>Gallary</strong>
+			</div>
+			<div class="sectionMediaGallaryContainer">
+				<c:forEach var="imageboard" items="${requestScope.imageBoardList}" varStatus="status">
+					<div class="sectionMediaGallaryFormBoard">
+						<div class="sectionMediaGallaryImageDiv">
+							<img src="/image/SoccerBall.jpg" class="sectionMediaGallaryImage">
+						</div>
+						<div class="sectionMediaGallarySubject">${imageboard.subject}</div>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 </body>

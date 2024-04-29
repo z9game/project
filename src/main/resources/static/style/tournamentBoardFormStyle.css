@@ -2,6 +2,22 @@
 	font-size: 15px;
 }
 
+table {
+	border-collapse: collapse;
+	border-color: gray;
+}
+
+th, td {
+	padding: 10px 15px 10px 15px;
+	border-color: gray;
+}
+
+th {
+	background-color: lightgray;
+}
+
+
+
 html,
 body {
   /* width: 100%;
@@ -40,3 +56,21 @@ a{
 	left: 50%;
 	transform: translate( -50%, -50% );
 }
+
+.region {
+    cursor: pointer;
+}
+
+.selected {
+    color: red; /* 변경하고 싶은 색상으로 수정하세요 */
+    font-weight: bold;
+}
+
+.tournament {
+    cursor: pointer;
+}
+.selected2 {
+    background-color: lightgray;
+}
+
+

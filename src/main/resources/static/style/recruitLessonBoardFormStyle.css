@@ -37,8 +37,13 @@ a{
 	text-decoration:none;
 }
 
+.newRecruitLessonBoardBtnDiv{
+	margin-top: 10px;
+	margin-right: 900px;
+	text-align: center;
+}
+
 .newRecruitLessonBoardBtn{
-	margin-left:250px;
 	width: 100px;
 	height: 30px;
 }

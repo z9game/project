@@ -68,3 +68,12 @@ a{
 	left: 50%;
 	transform: translate( -50%, -50% );
 }
+
+
+.admin_side_nav {
+    height: 100vh;
+    position: absolute;
+    display: inline-block;
+    float: left;
+    width: 190px;
+}

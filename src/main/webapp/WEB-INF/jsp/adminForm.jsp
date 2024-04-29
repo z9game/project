@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>adminFormTitle</title>
 <link href="/style/communityFreeBoardFormStyle.css" rel="stylesheet">
+
 <script src="/js/communityFreeBoardFormScript.js"></script>
 
 <script>
@@ -17,8 +18,19 @@
 		search();
 
 	});
+	function goMemberDetailForm(m_no) {
+	    // m_no와 함께 player_record_no 파라미터 추가
+	    $("[name='memberDetailForm'] [name='m_no']").val(m_no);
+	    //$("[name='memberDetailForm'] [name='player_record_no']").val(player_record_no);
+	    
+	    // memberDetailForm 폼 submit
+	    document.memberDetailForm.submit();
+	}
 
-
+	
+	
+	
+	
 	function search() {
 
 		//---------------------------------------------
@@ -101,6 +113,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
+
 	<div class="communityFreeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">어드민 페이지</p>
@@ -109,18 +122,26 @@
 
 
 	<form name="adminSearchForm" onsubmit="return false">
-
 		<input type="hidden" name="SelectPageNo" class="SelectPageNo"
 			value="1"> <input type="hidden" name="rowCntPerPage"
 			class="rowCntPerPage">
 	</form>
 
+	<div class="row admin_side_nav">
+		<ul class="nav nav-pills flex-column">
+			<li class="nav-item">관리자 메뉴</li>
+			<li class="nav-item"><a class="nav-link" href="adminForm.do">회원
+					관리</a></li>
+		</ul>
+	</div>
 
 
 
 
 
-	<center><b>회원목록</b></center>
+	<center>
+		<b>회원목록</b>
+	</center>
 	<div class="adminFormContainer">
 		<div class="adminListDiv" style="margin-bottom: 20px;">
 			<table class="adminListTable" cellpadding="7" border="1"
@@ -136,9 +157,10 @@
 
 				<c:forEach var="admin" items="${requestScope.memberList}"
 					varStatus="status">
-					<tr style="cursor: pointer">
+					<tr style="cursor: pointer"
+						onClick="goMemberDetailForm(${admin.m_no});">
 						<td align="center">${requestScope.memberMap.begin_serialNo_asc + status.index}</td>
-						<td align="center" >${admin.mid}</td>
+						<td align="center">${admin.mid}</td>
 						<td align="center">${admin.name}</td>
 						<td align="center">${admin.nickname}</td>
 						<td align="center">${admin.reg_date}</td>
@@ -189,7 +211,13 @@
 	</center>
 
 
+	<form name="memberDetailForm" action="/memberDetailForm.do"
+		method="post">
+		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+		<input type="hidden" name="m_no"> <input type="hidden"
+			name="player_record_no">
 
+	</form>
 
 
 

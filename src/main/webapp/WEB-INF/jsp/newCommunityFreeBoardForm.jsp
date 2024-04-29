@@ -13,7 +13,7 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="newCommunityFreeBoardFormTitle">
-    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+    	<img src="/image/CommunityTitleBackgroundImage.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">자유게시판 등록</p>
     </div>
     <div class="newCommunityFreeBoardFormContainer">
@@ -44,7 +44,7 @@
 					</td>
 				</tr>
 			</table>
-			<div class="nnewCommunityFreeBoardFormBtnDiv">
+			<div class="newCommunityFreeBoardFormBtnDiv">
 				<div class="resetBtnDiv">
 					<input type="reset" class="boardResetBtn"value="다시 작성">
 				</div>

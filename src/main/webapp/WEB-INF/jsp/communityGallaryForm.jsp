@@ -13,9 +13,12 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="communityGallaryFormTitle">
-    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+    	<img src="/image/CommunityTitleBackgroundImage.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">갤러리</p>
     </div>
+    <div class="newCommunityGallaryBtnDiv">
+		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="location.replace('/newCommunityGallaryForm.do')">
+	</div>
     <div class="communityGallaryFormContainer">
 		<c:forEach var="imageboard" items="${requestScope.imageBoardList}" varStatus="status">
 			<div class="communityGallaryFormBoard">

@@ -342,4 +342,20 @@ public class CommunityController {
 
 		return mav;
 	}
-}
+	
+	 @RequestMapping(value = "/newCommunityGallaryForm.do")
+	    public ModelAndView newCommunityGallaryForm(CommunityDTO communityDTO) {
+	    	
+	    	ModelAndView mav = new ModelAndView();
+	    	
+	        mav.setViewName("newCommunityGallaryForm.jsp");
+	        
+	        return mav;
+	    }
+	}
+	
+	
+	
+	
+	
+	

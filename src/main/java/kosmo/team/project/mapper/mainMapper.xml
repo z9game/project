@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosmo.team.project.dao.MainDAO">
+	<select id="getImageBoardList" resultType="kosmo.team.project.dto.MainDTO" parameterType="kosmo.team.project.dto.MainDTO">
+		    SELECT 
+		        subject AS "subject",
+		        writer AS "writer",
+		        to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
+		        readcount AS "readcount"
+		    FROM 
+		        imageboard
+	</select>
+	
+	<select id="getImageBoardListCnt" resultType="int">
+		select 
+			count(*) 
+		from
+		    imageboard
+	</select>
+</mapper>

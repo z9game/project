@@ -14,6 +14,8 @@ public class MemberDTO {
 	private int sigungu_id;
 	private String detail_address;
 	private String reg_date;
+	
+	
 	public int getM_no() {
 		return m_no;
 	}

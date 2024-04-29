@@ -61,6 +61,7 @@ public class LoginController {
 
 	return midpwdCnt;
 	}
+	
 
 	@RequestMapping(value = "/logoutProc.do")
 	public String logoutProc(HttpSession session) {

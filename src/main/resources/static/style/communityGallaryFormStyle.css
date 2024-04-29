@@ -36,6 +36,19 @@ a {
     transform: translate(-50%, -50%);
 }
 
+.newCommunityGallaryBtnDiv{
+	margin-top: 20px;
+	margin-right: 1050px;
+	text-align: center;
+}
+
+.newCommunityGallaryBtn{
+	width: 100px;
+	height: 30px;
+}
+
+
+
 .communityGallaryFormContainer {
 	margin: 30px auto;
     display: grid;

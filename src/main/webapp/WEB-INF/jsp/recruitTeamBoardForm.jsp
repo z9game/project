@@ -13,8 +13,12 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recruitTeamBoardFormTitle">
-    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+    	<img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">팀 / 팀원 모집</p>
+    </div>
+    <div class="matchingCategory">
+    	<input type="button" class="teamCategory" value="팀" onclick="changeCategory()">
+    	<input type="button" class="teamMemberCategory" value="팀원" onclick="changeCategory()">
     </div>
     <div class="recruitTeamBoardFormContainer">
     	<div class="recruitTeamBoardFormConditionalSearch">
