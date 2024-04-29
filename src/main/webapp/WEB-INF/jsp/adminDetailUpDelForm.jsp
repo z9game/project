@@ -140,25 +140,42 @@
 			<tr>
 				<th bgColor="lightgray">이 름</th>
 				<td><input type="text" name="writer" class="writer" size="10"
-					maxlength="15" value="${requestScope.communityDTO.writer}"></td>
+					maxlength="15" value="${requestScope.memberDTO.name}"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">제 목</th>
+				<th bgColor="lightgray">경기수</th>
 				<td><input type="text" name="subject" class="subject" size="40"
-					maxlength="30" value="${requestScope.communityDTO.subject}"></td>
+					maxlength="30" value="${requestScope.playerRecordDTO.games_played}"></td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">조회수</th>
-				<td>${requestScope.communityDTO.readcount}</td>
+				<td><input type="text" name="subject" class="subject" size="40"
+					maxlength="30" value="${requestScope.playerRecordDTO.wins}"></td>
 			</tr>
 
 			<tr>
 				<th bgColor="lightgray">내 용</th>
-				<td><textarea name="content" class="content" rows="13"
-						cols="40" maxlength="500">${requestScope.communityDTO.content}
-            </textarea>
+				<td><input type="text" name="subject" class="subject" size="40"
+					maxlength="30" value="${requestScope.playerRecordDTO.draws}"></td>
 			</tr>
-
+			<tr>
+				<th bgColor="lightgray">내 용</th>
+				<td><input type="text" name="subject" class="subject" size="40"
+					maxlength="30" value="${requestScope.playerRecordDTO.games_played}"></td>
+			</tr>
+			<tr>
+				<th bgColor="lightgray">내 용</th>
+				<td><input type="text" name="subject" class="subject" size="40"
+					maxlength="30" value="${requestScope.playerRecordDTO.games_played}"></td>
+			</tr>
+			<tr>
+				<th bgColor="lightgray">내 용</th>
+				<td><input type="text" name="subject" class="subject" size="40"
+					maxlength="30" value="${requestScope.playerRecordDTO.games_played}"></td>
+			</tr>
+			
+			
+			
 		</table>
 
 
