@@ -14,7 +14,7 @@
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="mainFormContainer">
 		<div class="section" id="sectionMain">
-			<div class="sectionMainText">안녕하세요<br>우리는 1조<br>축구 매칭 사이트 제작</div>
+			<div class="sectionMainText">안녕하세요<br>우리는 1조<br>축구 매칭 사이트 제작<br>병합완료<br>cjk Branch</div>
 			<img src="/image/MainImage.jpg">
 		</div>
 		<div class="section" id="sectionStatistics">
