@@ -206,7 +206,7 @@
 	<div style="height: 5px"></div>
 	<center>
 		<span style="cursor: pointer"
-			onclick="location.replace('/adminFrom.do')">[목록 화면으로]</span>
+			onclick="location.replace('/adminForm.do')">[목록 화면으로]</span>
 	</center>
 	<center>
 		<input type="button" value="수정" onclick="checkAdminMemberUpForm();">
