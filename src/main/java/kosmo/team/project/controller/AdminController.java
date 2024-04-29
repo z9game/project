@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.CommunitySearchDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.MemberSearchDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
@@ -236,15 +238,187 @@ public class AdminController {
 	
 	
 	
+	//------------------------------------------------------------------
+	//공지사항
+	//------------------------------------------------------------------
+	
+	
+	@RequestMapping("/adminNoticeBoardForm.do")
+	public ModelAndView adminNoticeBoardForm(CommunitySearchDTO communitySearchDTO, HttpSession session) {
+		// 세션에서 사용자 아이디를 가져옴
+		String userId = (String) session.getAttribute("mid");
+		// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+		if (userId == null || !userId.equals("admin")) {
+			return new ModelAndView("redirect:/loginForm.do");
+		}
+		// admin인 경우에만 회원 목록 조회 수행
+		int noticeBoardListAllCnt = this.adminService.getNoticeBoardAllCnt();
+
+		int noticeBoardListCnt = this.adminService.getNoticeBoardListCnt(communitySearchDTO);
+
+		Map<String, Integer> noticeBoardMap = Page.getPagingMap(
+
+				communitySearchDTO.getSelectPageNo()// 선택한 페이지 번호
+				, communitySearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+				, noticeBoardListCnt // 검색 결과물 개수
+
+		);
+
+		communitySearchDTO.setSelectPageNo((int) noticeBoardMap.get("selectPageNo"));
+		communitySearchDTO.setRowCntPerPage((int) noticeBoardMap.get("rowCntPerPage"));
+		communitySearchDTO.setBegin_rowNo((int) noticeBoardMap.get("begin_rowNo"));
+		communitySearchDTO.setEnd_rowNo((int) noticeBoardMap.get("end_rowNo"));
+
+		List<CommunityDTO> noticeBoardList = this.adminService.getNoticeBoardList(communitySearchDTO);
+
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("noticeBoardList", noticeBoardList);
+
+		mav.addObject("noticeBoardListCnt", noticeBoardListCnt);
+
+		mav.addObject("noticeBoardListAllCnt", noticeBoardListAllCnt);
+
+		mav.addObject("noticeBoardMap", noticeBoardMap);
+
+		mav.setViewName("adminNoticeBoardForm.jsp");
+
+		return mav;
+	}
+
+	// 공지사항상세보기 < 여기 작업이다
+	@RequestMapping(value = "/adminNoticeboardDetailForm.do")
+	public ModelAndView adminNoticeboardDetailForm(
+			// --------------------------------------
+			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
+			// 매개변수 b_no 에 저장하고 들어온다.
+			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
+			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
+			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
+			// --------------------------------------
+			@RequestParam(value = "b_no") int b_no
+
+	) {
+
+		// BoardDTO boardDTO = this.boardService.getBoard(b_no, true);
+		CommunityDTO communityDTO = this.adminService.getNoticeBoard(b_no);
+
+		ModelAndView mav = new ModelAndView();
+		// --------------------------------
+		// [ModelAndView 객체]에
+		// 키값 "boardDTO" 에
+		// 1행m열의 검색 데이터가 저장된 BoardDTO 객체 붙여 저장하기
+		// ModelAndView 객체에 저장된 객체는
+		// HttpServletRequest 객체에도 저장된다.
+		// --------------------------------
+		mav.addObject("communityDTO", communityDTO);
+
+		mav.setViewName("adminNoticeboardDetailForm.jsp");
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/adminNoticeboardUpDelForm.do")
+
+	public ModelAndView adminNoticeboardUpDelForm(
+			// --------------------------------------
+			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
+			// 매개변수 b_no 에 저장하고 들어온다.
+			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
+			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
+			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
+			// --------------------------------------
+			@RequestParam(value = "b_no") int b_no
+
+	) {
+
+		// BoardDTO boardDTO = this.boardService.getBoard(b_no,false);
+		CommunityDTO communityDTO = this.adminService.getNoticeBoardForUpDel(b_no);
+
+		ModelAndView mav = new ModelAndView();
+		// --------------------------------
+		// [ModelAndView 객체]에
+		// 키값 "boardDTO" 에
+		// 1행m열의 검색 데이터가 저장된 BoardDTO 객체 붙여 저장하기
+		// ModelAndView 객체에 저장된 객체는
+		// HttpServletRequest 객체에도 저장된다.
+		// --------------------------------
+		mav.addObject("communityDTO", communityDTO);
+
+		mav.setViewName("adminNoticeboardUpDelForm.jsp");
+
+		return mav;
+
+	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value = "/adminNoticeboardUpProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, String> adminNoticeboardUpProc(
+			// -------------------------
+			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
+			// -------------------------
+			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
+			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
+
+			CommunityDTO communityDTO
+
+	) {
+
+		// ------------------------------------------------
+		// 게시판 수정 결과물을 저장할 HashMap 객체 생성하기.
+		// ------------------------------------------------
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		// -------------------------------------------
+		// [BoardServiceImpl 객체]의 updateBoard 메소드 호출로
+		// 게시판 글 수정하고 [수정 적용행의 개수] 얻기
+		// -------------------------------------------
+		int noticeboardUpCnt = this.adminService.updateNoticeBoard(communityDTO);
+
+		// -------------------------------------------
+		// HashMap 객체에 게시판 수정 행의 개수 저장하기
+		// -------------------------------------------
+		resultMap.put("result", noticeboardUpCnt + "");
+
+		// -------------------------------------------
+		// HashMap 객체의 메위주 리턴하기
+		// -------------------------------------------
+		return resultMap;
+	}
+
+	@RequestMapping(value = "/adminNoticeboardDelProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> adminNoticeboardDelProc(
+			// -------------------------
+			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
+			// -------------------------
+			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
+			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
+
+			CommunityDTO communityDTO
+
+	) {
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		int boardDelCnt = this.adminService.deleteNoticeBoard(communityDTO);
+
+		resultMap.put("result", boardDelCnt + "");
+
+		return resultMap;
+	}
+
 	
 	
 

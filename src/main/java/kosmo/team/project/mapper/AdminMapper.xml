@@ -191,6 +191,125 @@
 	</delete>
 
 
+	<!-- 공지사항 -->
 
+	<select id="getNoticeBoardList"
+		resultType="kosmo.team.project.dto.CommunityDTO"
+		parameterType="kosmo.team.project.dto.CommunitySearchDTO">
+		select * from ( select rownum RNUM, zxcvb.* from (
+
+		select
+		b_no AS
+		"b_no",
+		subject AS "subject",
+		writer AS "writer",
+		content AS "content",
+		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
+		readcount AS "readcount"
+		FROM
+		noticeboard
+		order by
+		b_no desc
+		    	
+		    <![CDATA[
+			) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+		]]>
+	</select>
+
+
+
+	<select id="getNoticeBoardListCnt" resultType="int">
+		select
+		count(*)
+		from
+		noticeboard
+	</select>
+
+
+	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
+	<select id="getNoticeBoardAllCnt" resultType="int">
+		select count(*)
+		from
+		noticeboard
+	</select>
+
+
+
+	<select id="getNoticeBoard" parameterType="int"
+		resultType="kosmo.team.project.dto.CommunityDTO">
+
+		select
+		b_no "b_no"
+		,subject "subject"
+		,writer "writer"
+		,reg_date
+		"reg_date"
+		,readcount "readcount"
+		,content "content"
+
+
+		from noticeboard
+
+		where
+		b_no=#{b_no}
+		<!-- ========================================== #{b_no} 뜻 ========================================== 
+			select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
+			또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
+			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
+
+
+	</select>
+
+
+	<update id="updateNoticeBoardReadCount" parameterType="int">
+
+		update
+		noticeboard
+		set
+		readcount = readcount +1 where b_no = #{b_no}
+
+
+
+	</update>
+
+
+	<update id="updateNoticeBoard"
+		parameterType="kosmo.team.project.dto.CommunityDTO">
+
+		update noticeboard set
+
+		subject = #{subject}
+		,writer = #{writer}
+		,content
+		=
+		#{content}
+		, reg_date = SYSDATE
+
+		where b_no = #{b_no}
+
+		<!-- ========================================== #{subject} 뜻 ========================================== 
+			=============== {subject} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
+			subject 안의 데이터를 표현하기 즉 제목을 표현하기 =============== # 의미 =============== 표현할 
+			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
+	</update>
+
+	<select id="getNoticeBoardCnt" parameterType="int"
+		resultType="int">
+		select
+		count(*) from noticeboard where b_no=#{b_no}
+	</select>
+
+
+	<delete id="deleteNoticeBoard"
+		parameterType="kosmo.team.project.dto.CommunityDTO">
+		delete from
+		noticeboard
+		where
+		b_no=#{b_no}
+		<!-- ========================================== #{b_no} 뜻 ========================================== 
+			=============== {b_no} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
+			b_no 안의 데이터를 표현하기 즉 게시판 번호를 표현하기 =============== # 의미 =============== 표현할 
+			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
+	</delete>
 
 </mapper>
