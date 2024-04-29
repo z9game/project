@@ -116,7 +116,7 @@
 
 	<div class="communityFreeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">어드민 페이지</p>
+		<p class="titleBackgoundText">어드민 페이지 테스트</p>
 
 	</div>
 
