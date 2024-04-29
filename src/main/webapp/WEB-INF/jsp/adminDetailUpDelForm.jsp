@@ -19,8 +19,8 @@
 	function checkBoardUpForm() {
 
 		var formObj = $("[name='adminDetailUpDelForm']");
-		var writerObj = formObj.find(".writer");
-		var subjectObj = formObj.find(".subject");
+		var nameObj = formObj.find(".name");
+		var midObj = formObj.find(".mid");
 		var contentObj = formObj.find(".content");
 
 		if (confirm("정말수정하시겠습니까?") == false) {
@@ -120,8 +120,9 @@
 			</tr>
 			<tr>
 				<th bgColor="lightgray">상세주소</th>
-				<td><input type="text" name="mid" class="detail_address" size="40"
-					maxlength="30" value="${requestScope.memberDTO.detail_address}"></td>
+				<td><input type="text" name="mid" class="detail_address"
+					size="40" maxlength="30"
+					value="${requestScope.memberDTO.detail_address}"></td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">가입일</th>
@@ -148,34 +149,34 @@
 					maxlength="30" value="${requestScope.playerRecordDTO.games_played}"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">조회수</th>
+				<th bgColor="lightgray">승리수</th>
 				<td><input type="text" name="subject" class="subject" size="40"
 					maxlength="30" value="${requestScope.playerRecordDTO.wins}"></td>
 			</tr>
 
 			<tr>
-				<th bgColor="lightgray">내 용</th>
+				<th bgColor="lightgray">무승부</th>
 				<td><input type="text" name="subject" class="subject" size="40"
 					maxlength="30" value="${requestScope.playerRecordDTO.draws}"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">내 용</th>
+				<th bgColor="lightgray">패배수</th>
 				<td><input type="text" name="subject" class="subject" size="40"
-					maxlength="30" value="${requestScope.playerRecordDTO.games_played}"></td>
+					maxlength="30" value="${requestScope.playerRecordDTO.losses}"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">내 용</th>
+				<th bgColor="lightgray">골</th>
 				<td><input type="text" name="subject" class="subject" size="40"
-					maxlength="30" value="${requestScope.playerRecordDTO.games_played}"></td>
+					maxlength="30" value="${requestScope.playerRecordDTO.goals_for}"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">내 용</th>
+				<th bgColor="lightgray">어시스트</th>
 				<td><input type="text" name="subject" class="subject" size="40"
-					maxlength="30" value="${requestScope.playerRecordDTO.games_played}"></td>
+					maxlength="30" value="${requestScope.playerRecordDTO.goals_assist}"></td>
 			</tr>
-			
-			
-			
+
+
+
 		</table>
 
 
@@ -186,8 +187,9 @@
 
 
 
-		<input type="hidden" name="b_no"
-			value="${requestScope.communityDTO.b_no}">
+		<input type="hidden" name="m_no"
+			value="${requestScope.memberDTO.m_no}"> <input type="hidden"
+			name="player" value="${requestScope.playerRecordDTO.player}">
 	</form>
 
 
