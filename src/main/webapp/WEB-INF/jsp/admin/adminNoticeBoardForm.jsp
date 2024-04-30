@@ -20,7 +20,7 @@ $(document).ready(function() {
 });
 
 
-function goNoticeboardDetailForm(b_no) {
+function goNadminNticeboardDetailForm(b_no) {
 	
 	
 	//----------------------------------
@@ -31,7 +31,7 @@ function goNoticeboardDetailForm(b_no) {
 	
 	//location.replace("/boardDetailForm.do?b_no=" + b_no);
 	
-	$("[name='noticeboardDetailForm'] [name='b_no']").val(b_no); 
+	$("[name='adminNoticeboardDetailForm'] [name='b_no']").val(b_no); 
 	
 	//----------------------------------
 	// name='boardDetailForm' 을 가진 
@@ -40,7 +40,7 @@ function goNoticeboardDetailForm(b_no) {
 	// 즉 화면 이동하기.
 	//----------------------------------
 	
-	document.noticeboardDetailForm.submit();
+	document.adminNoticeboardDetailForm.submit();
 		
 	
 	//alert($("[name='boardDetailForm'] [name='b_no']").val());
@@ -58,7 +58,7 @@ function search(){
 	// 변수 boardSearchFormObj 선언하고 
 	// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
 	//---------------------------------------------
-    var boardSearchFormObj = $("[name='communityNoticeBoardSearchForm']");
+    var boardSearchFormObj = $("[name='adminNoticeBoardSearchForm']");
 
 
   
@@ -72,7 +72,7 @@ function search(){
     	//-------------------------------
 		// WAS 로 접속할 주소 설정
 		//-------------------------------
-		url      : "/communityNoticeBoardForm.do"
+		url      : "/adminNoticeBoardForm.do"
 		//-------------------------------
 		// WAS 로 접속하는 방법 설정. get 또는 post
 		//-------------------------------
@@ -121,7 +121,7 @@ function searchAll() {
 	// 변수 boardSearchFormObj 선언하고 
 	// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
 	//---------------------------------------------
-	var boardSearchFormObj = $("[name='communityNoticeBoardSearchForm']");
+	var boardSearchFormObj = $("[name='adminNoticeBoardSearchForm']");
 
 	
 	boardSearchFormObj.find(".selectPageNo").val("1")
@@ -145,7 +145,7 @@ function pageNoClick( clickPageNo ){
 	// 즉 <input type="hidden" name="selectPageNo" value="1"> 태그에
 	// value 값에 [클릭한 페이지 번호]를 저장하기
 	//---------------------------------------------
-	$("[name='communityNoticeBoardSearchForm']").find(".selectPageNo").val(clickPageNo)
+	$("[name='adminNoticeBoardSearchForm']").find(".selectPageNo").val(clickPageNo)
 	
 	
 	search()
@@ -176,7 +176,7 @@ function pageNoClick( clickPageNo ){
 	</div>
 
 
-	<form name="communityNoticeBoardSearchForm" onsubmit="return false">
+	<form name="adminNoticeBoardSearchForm" onsubmit="return false">
 
 		<input type="hidden" name="SelectPageNo" class="SelectPageNo"
 			value="1"> <input type="hidden" name="rowCntPerPage"
@@ -184,7 +184,15 @@ function pageNoClick( clickPageNo ){
 	</form>
 
 
-
+	<div class="row admin_side_nav">
+		<ul class="nav nav-pills flex-column">
+			<li class="nav-item">관리자 메뉴</li>
+			<li class="nav-item"><a class="nav-link" href="adminForm.do">회원
+					관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="adminNoticeBoardForm.do">공지사항
+			</a></li>
+		</ul>
+	</div>
 
 
 
@@ -216,7 +224,7 @@ function pageNoClick( clickPageNo ){
 						items="${requestScope.noticeBoardList}" varStatus="status">
 						
 					<tr style="cursor: pointer"
-					onClick="goNoticeboardDetailForm(${noticeboard.b_no});">
+					onClick="goNadminNticeboardDetailForm(${noticeboard.b_no});">
 
 							<td align="center">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
 							<td>${noticeboard.subject}</td>
@@ -272,7 +280,7 @@ function pageNoClick( clickPageNo ){
 
 
 	<!-- 이 form 태그를 /boardDetailForm.do로 WAS로 접속하기 위해 선언한다. -->
-	<form name="noticeboardDetailForm" action="/noticeboardDetailForm.do"
+	<form name="adminNoticeboardDetailForm" action="/adminNoticeboardDetailForm.do"
 		method="post">
 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
 		<input type="hidden" name="b_no">

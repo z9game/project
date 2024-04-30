@@ -25,6 +25,15 @@ import kosmo.team.project.utility.Page;
 @Controller
 public class AdminController {
 
+	
+	
+	private final String adminFolder = "/admin/"; 
+	
+	
+	
+	
+	
+	
 	@Autowired
 	private AdminService adminService;
 
@@ -62,7 +71,7 @@ public class AdminController {
 		mav.addObject("memberListCnt", memberListCnt);
 		mav.addObject("memberListAllCnt", memberListAllCnt);
 		mav.addObject("memberMap", memberMap);
-		mav.setViewName("adminForm.jsp");
+		mav.setViewName(adminFolder+"adminForm.jsp");
 
 		return mav;
 	}
@@ -108,7 +117,7 @@ public class AdminController {
 
 
 		// System.out.println(memberDTO.getGender());
-		mav.setViewName("adminMemberDetailForm.jsp");
+		mav.setViewName(adminFolder+"adminMemberDetailForm.jsp");
 
 		return mav;
 
@@ -156,7 +165,7 @@ public class AdminController {
 		mav.addObject("playerRecordDTO", playerRecordDTO);
 
 
-		mav.setViewName("adminDetailUpDelForm.jsp");
+		mav.setViewName(adminFolder+"adminDetailUpDelForm.jsp");
 
 		return mav;
 
@@ -281,7 +290,7 @@ public class AdminController {
 
 		mav.addObject("noticeBoardMap", noticeBoardMap);
 
-		mav.setViewName("adminNoticeBoardForm.jsp");
+		mav.setViewName(adminFolder+"adminNoticeBoardForm.jsp");
 
 		return mav;
 	}
@@ -313,7 +322,7 @@ public class AdminController {
 		// --------------------------------
 		mav.addObject("communityDTO", communityDTO);
 
-		mav.setViewName("adminNoticeboardDetailForm.jsp");
+		mav.setViewName(adminFolder+"adminNoticeboardDetailForm.jsp");
 
 		return mav;
 
@@ -346,7 +355,7 @@ public class AdminController {
 		// --------------------------------
 		mav.addObject("communityDTO", communityDTO);
 
-		mav.setViewName("adminNoticeboardUpDelForm.jsp");
+		mav.setViewName(adminFolder+"adminNoticeboardUpDelForm.jsp");
 
 		return mav;
 
