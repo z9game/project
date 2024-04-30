@@ -8,7 +8,7 @@
 	<!-- 모든 회원 목록을 가져오는 쿼리 정의 -->
 	<select id="getMemberList"
 		resultType="kosmo.team.project.dto.MemberDTO"
-		parameterType="kosmo.team.project.dto.MemberSearchDTO">
+		parameterType="kosmo.team.project.dto.AdminSearchDTO">
 		select * from ( select rownum RNUM, zxcvb.* from (
 
 		select
@@ -21,8 +21,19 @@
 		FROM
 		member
 		where m_no != 1
-		order by
-		m_no asc
+		<if test="sort==null or sort.length()==0">
+			order by
+
+			m_no desc
+		</if>
+
+		<if test="sort!=null and sort.length()>0">
+			order by
+
+			${sort}
+		</if>
+		
+		
     	
     <![CDATA[
     ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
@@ -195,7 +206,7 @@
 
 	<select id="getNoticeBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
-		parameterType="kosmo.team.project.dto.CommunitySearchDTO">
+		parameterType="kosmo.team.project.dto.AdminSearchDTO">
 		select * from ( select rownum RNUM, zxcvb.* from (
 
 		select
@@ -208,8 +219,18 @@
 		readcount AS "readcount"
 		FROM
 		noticeboard
-		order by
-		b_no desc
+
+		<if test="sort==null or sort.length()==0">
+			order by
+
+			b_no desc
+		</if>
+
+		<if test="sort!=null and sort.length()>0">
+			order by
+
+			${sort}
+		</if>
 		    	
 		    <![CDATA[
 			) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
@@ -303,7 +324,6 @@
 		,content
 		=
 		#{content}
-		, reg_date = SYSDATE
 
 		where b_no = #{b_no}
 
