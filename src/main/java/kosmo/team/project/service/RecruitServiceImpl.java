@@ -11,6 +11,8 @@ import kosmo.team.project.dao.RecruitDAO;
 import kosmo.team.project.dao.SampleDAO;
 import kosmo.team.project.dao.TournamentDAO;
 import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.RecruitHiredDTO;
+import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitTeamDTO;
 import kosmo.team.project.dto.SampleDTO;
 import kosmo.team.project.dto.SampleSearchDTO;
@@ -33,4 +35,20 @@ public class RecruitServiceImpl implements RecruitService {
 
 	}
 
+	public List<RecruitHiredDTO> getRecruit_HiredBoardList() {
+
+		List<RecruitHiredDTO> getRecruit_HiredBoardList = this.recruitDAO.getRecruit_HiredBoardList();
+
+		return getRecruit_HiredBoardList;
+
+	}
+	
+	
+	public List<RecruitLessonDTO> getRecruit_LessonBoardList() {
+
+		List<RecruitLessonDTO> getRecruit_LessonBoardList = this.recruitDAO.getRecruit_LessonBoardList();
+
+		return getRecruit_LessonBoardList;
+
+	}
 }

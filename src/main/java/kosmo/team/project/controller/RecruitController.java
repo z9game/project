@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.RecruitHiredDTO;
+import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitTeamDTO;
 import kosmo.team.project.service.RecruitService;
 
@@ -33,7 +35,9 @@ public class RecruitController {
     @RequestMapping(value = "/recruitHiredBoardForm.do")
     public ModelAndView recruitHiredBoardForm() {
     	
+    	List<RecruitHiredDTO> recruitHired = this.recruitService.getRecruit_HiredBoardList();
     	ModelAndView mav = new ModelAndView();
+    	mav.addObject("boardList", recruitHired);
     	mav.setViewName("recruitHiredBoardForm.jsp");
     	
         return mav;
@@ -42,7 +46,9 @@ public class RecruitController {
     @RequestMapping(value = "/recruitLessonBoardForm.do")
     public ModelAndView recruitLessonBoardForm() {
     	
+    	List<RecruitLessonDTO> recruitLesson = this.recruitService.getRecruit_LessonBoardList();
     	ModelAndView mav = new ModelAndView();
+    	mav.addObject("boardList", recruitLesson);
     	mav.setViewName("recruitLessonBoardForm.jsp");
     	
         return mav;

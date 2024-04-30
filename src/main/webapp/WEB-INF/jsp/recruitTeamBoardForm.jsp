@@ -96,6 +96,7 @@
 					<th style="width:50px;">번호</th>
 					<th style="width:300px;">제목</th>
 					<th style="width:80px;">글쓴이</th>
+					<th style="width:100px;">내용</th>
 					<th style="width:100px;">조회수</th>
 					<th style="width:100px;">등록일</th>
 					<c:forEach var="board" items="${requestScope.boardList}" varStatus="status">
@@ -103,6 +104,7 @@
 							<td align="center">${board.recruitment_no}</td>
 							<td align="center">${board.title}</td>
 							<td align="center">${board.writer}</td>
+							<td align="center">${board.content}</td>
 							<td align="center">${board.readcount}</td>
 							<td align="center">${board.reg_date}</td>
 						</tr>
