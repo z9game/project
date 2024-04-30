@@ -75,6 +75,21 @@
 
 	}
 
+	function searchWithSort(sort) {
+	    // sort 값을 form의 sort 필드에 설정합니다.
+	    var sortField = $("[name='adminSearchForm']").find("[name='sort']");
+	    sortField.val(sort);
+	    
+	    // 설정된 sort 값을 확인합니다.
+	    alert("설정된 sort 값: " + sortField.val());
+	    
+	    // 폼을 서브밋하여 결과를 업데이트합니다.
+	    search();
+	}
+
+	
+	
+	
 	function searchAll() {
 
 		//---------------------------------------------
@@ -120,9 +135,9 @@
 
 
 	<form name="adminSearchForm" onsubmit="return false">
-		<input type="hidden" name="SelectPageNo" class="SelectPageNo"
-			value="1"> <input type="hidden" name="rowCntPerPage"
-			class="rowCntPerPage">
+		<input type="hidden" name="sort" class="sort"><input
+			type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
+		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 	</form>
 
 	<div class="row admin_side_nav">
@@ -130,8 +145,8 @@
 			<li class="nav-item">관리자 메뉴</li>
 			<li class="nav-item"><a class="nav-link" href="adminForm.do">회원
 					관리</a></li>
-			<li class="nav-item"><a class="nav-link" href="adminNoticeBoardForm.do">공지사항
-			</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="adminNoticeBoardForm.do">공지사항 </a></li>
 		</ul>
 	</div>
 
@@ -149,10 +164,85 @@
 				style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
 				<tr>
 					<th style="width: 30px;">번호</th>
-					<th style="width: 50px;">아이디</th>
-					<th style="width: 50px;">이름</th>
-					<th style="width: 50px;">닉네임</th>
-					<th style="width: 100px;">등록일</th>
+
+
+					<c:if test="${param.sort!='mid asc' and param.sort!='mid desc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('mid desc')">아이디</th>
+					</c:if>
+
+					<c:if test="${param.sort=='mid desc'}">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('mid asc')">아이디▼</th>
+					</c:if>
+
+					<c:if test="${param.sort=='mid asc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('')">아이디▲</th>
+					</c:if>
+
+
+
+
+
+
+
+					<c:if test="${param.sort!='name asc' and param.sort!='name desc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('name desc')">이름</th>
+					</c:if>
+
+					<c:if test="${param.sort=='name desc'}">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('name asc')">이름▼</th>
+					</c:if>
+
+					<c:if test="${param.sort=='name asc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('')">이름▲</th>
+					</c:if>
+
+
+					<c:if
+						test="${param.sort!='nickname asc' and param.sort!='nickname desc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('nickname desc')">별명</th>
+					</c:if>
+
+					<c:if test="${param.sort=='nickname desc'}">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('nickname asc')">별명▼</th>
+					</c:if>
+
+					<c:if test="${param.sort=='nickname asc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('')">별명▲</th>
+					</c:if>
+
+
+
+
+
+
+
+
+
+					<c:if
+						test="${param.sort!='reg_date asc' and param.sort!='reg_date desc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('reg_date desc')">등록일</th>
+					</c:if>
+
+					<c:if test="${param.sort=='reg_date desc'}">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('reg_date asc')">등록일▼</th>
+					</c:if>
+
+					<c:if test="${param.sort=='reg_date asc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('')">등록일▲</th>
+					</c:if>
+
 				</tr>
 
 				<c:forEach var="admin" items="${requestScope.memberList}"

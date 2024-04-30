@@ -107,6 +107,13 @@ function search(){
 
 
 
+function searchWithSort(sort) {
+    // sort 값을 form의 sort 필드에 설정합니다.
+    $("[name='adminNoticeBoardSearchForm']").find("[name='sort']").val(sort);
+    // 폼을 서브밋하여 결과를 업데이트합니다.
+    search();
+}
+
 
 
 
@@ -177,10 +184,9 @@ function pageNoClick( clickPageNo ){
 
 
 	<form name="adminNoticeBoardSearchForm" onsubmit="return false">
-
-		<input type="hidden" name="SelectPageNo" class="SelectPageNo"
-			value="1"> <input type="hidden" name="rowCntPerPage"
-			class="rowCntPerPage">
+		<input type="hidden" name="sort" class="sort"> <input
+			type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
+		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 	</form>
 
 
@@ -212,14 +218,41 @@ function pageNoClick( clickPageNo ){
 					<th style="width: 50px;">번호</th>
 					<th style="width: 300px;">제목</th>
 					<th style="width: 80px;">글쓴이</th>
-					<th style="width: 100px;">조회수</th>
-					<th style="width: 100px;">등록일</th>
+					<c:if
+						test="${param.sort!='readcount asc' and param.sort!='readcount desc' }">
+						<th width="80px" style="cursor: pointer"
+							onclick="searchWithSort('readcount desc')">조회수</th>
+					</c:if>
+					<!--                      만약 파명 "sort" 의 파값이 'readcount desc' 면 -->
+					<!--                      즉 정렬 의지가 'readcount desc' 면 -->
+					<c:if test="${param.sort=='readcount desc'}">
+						<th width="80px" style="cursor: pointer"
+							onclick="searchWithSort('readcount asc')">조회수▼</th>
+					</c:if>
+					<!--                      만약 파명 "sort" 의 팍밧이 'readcount asc' 면 -->
+					<!--                      즉 정렬 의지가 'readcount asc' 면 -->
+					<c:if test="${ param.sort=='readcount asc' }">
+						<th width="80px" style="cursor: pointer"
+							onclick="searchWithSort('')">조회수▲</th>
+					</c:if>
+
+					<c:if
+						test="${param.sort!='reg_date asc' and param.sort!='reg_date desc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('reg_date desc')">등록일</th>
+					</c:if>
+
+					<c:if test="${param.sort=='reg_date desc'}">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('reg_date asc')">등록일▼</th>
+					</c:if>
+
+					<c:if test="${param.sort=='reg_date asc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('')">등록일▲</th>
+					</c:if>
+
 				</tr>
-
-
-
-
-
 
 				<c:forEach var="noticeboard" items="${requestScope.noticeBoardList}"
 					varStatus="status">
