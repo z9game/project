@@ -37,7 +37,26 @@
 		//---------------------------------------------
 		var boardSearchFormObj = $("[name='adminSearchForm']");
 
-
+		var keyword1Obj = boardSearchFormObj.find(".keyword1"); 
+		  
+		var keyword2Obj = boardSearchFormObj.find(".keyword2");
+		
+		var keyword1 = keyword1Obj.val();
+		  
+	    var keyword2 = keyword2Obj.val();
+		
+		
+		if(typeof(keyword1)!='string' ){keyword1=""; }
+	    
+	    if(typeof(keyword2) != 'string') { keyword2 = ""; }
+	    
+	    keyword1 = $.trim(keyword1);
+	    
+	    keyword2 = $.trim(keyword2);
+	    
+	    
+	    
+	    
 		boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
 
 		$.ajax({
@@ -81,7 +100,7 @@
 	    sortField.val(sort);
 	    
 	    // 설정된 sort 값을 확인합니다.
-	    alert("설정된 sort 값: " + sortField.val());
+	    //alert("설정된 sort 값: " + sortField.val());
 	    
 	    // 폼을 서브밋하여 결과를 업데이트합니다.
 	    search();
@@ -98,6 +117,9 @@
 		//---------------------------------------------
 		var boardSearchFormObj = $("[name='adminSearchForm']");
 
+		boardSearchFormObj.find(".keyword1").val("");
+		boardSearchFormObj.find(".keyword2").val("");
+		boardSearchFormObj.find(".sort").val("");
 		boardSearchFormObj.find(".selectPageNo").val("1")
 
 		search();
@@ -134,12 +156,6 @@
 	</div>
 
 
-	<form name="adminSearchForm" onsubmit="return false">
-		<input type="hidden" name="sort" class="sort"><input
-			type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
-		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
-	</form>
-
 	<div class="row admin_side_nav">
 		<ul class="nav nav-pills flex-column">
 			<li class="nav-item">관리자 메뉴</li>
@@ -152,11 +168,64 @@
 
 
 
+							
+	<form name="adminSearchForm" onsubmit="return false">
+
+		<table align="center">
+			<tr>
+				<td>
+					<table border="1" cellpadding="5" cellspacing="0"
+						style="border-collapse: collapse" align="center">
+						<caption>
+							<b>[검색조건]</b>
+						</caption>
+						<tr>
+							<th>키워드</th>
+
+							<td><select name="searchType">
+									<option value="all">전체</option>
+									<option value="name">이름</option>
+									<option value="mid">아이디</option>
+									<option value="nickname">별명</option>
+									<option value="phone">전화번호</option>
+									<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
+							</select> <input type="text" name="keyword1" class="keyword1"> <select
+								name="orand">
+									<option value="or">or
+									<option value="and">and
+							</select> <input type="text" name="keyword2" class="keyword2"></td>
+						</tr>
+
+					</table>
+			</tr>
+
+			<tr align="center">
+				<td><input type="button" value="검색" class="searchBtn"
+					onclick="search()"> <input type="button" value="모두 검색"
+					class="searchAllBtn" onclick="searchAll()"></td>
+			</tr>
+
+		</table>
+		<input type="hidden" name="sort" class="sort"> <input
+			type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
+		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+
+	</form>
 
 
-	<center>
-		<b>회원목록</b>
-	</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<div class="adminFormContainer">
 		<div class="adminListDiv" style="margin-bottom: 20px;">
 			<table class="adminListTable" cellpadding="7" border="1"
@@ -308,13 +377,5 @@
 			name="player">
 
 	</form>
-
-
-
-
-
-
-
-
 </body>
 </html>

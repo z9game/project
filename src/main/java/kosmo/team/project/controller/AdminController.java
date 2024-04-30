@@ -414,7 +414,7 @@ public class AdminController {
 		// [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
 		// -------------------------------------------
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(adminFolder+"adminNoticeboardRegForm.jsp");
+		mav.setViewName(adminFolder + "adminNoticeboardRegForm.jsp");
 		// ----------------------------------------------------
 		// [ModelAndView 객체] 리턴하기
 		// ----------------------------------------------------
@@ -435,9 +435,8 @@ public class AdminController {
 			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
 			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
 
-			CommunityDTO communityDTO
+			CommunityDTO communityDTO) {
 
-	) {
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		int adminNoticeboardRegCnt = this.adminService.insertNoticeBoard(communityDTO);

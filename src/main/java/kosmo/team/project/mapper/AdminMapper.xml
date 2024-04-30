@@ -5,6 +5,83 @@
 
 <mapper namespace="kosmo.team.project.dao.AdminDAO">
 
+
+
+	<sql id="boardWhere">
+		<if
+			test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+			and (
+		</if>
+		<if test="keyword1 != null and keyword1.length() > 0">
+			(
+			<if test="searchType == 'name'">
+				upper(name) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType == 'mid'">
+				upper(mid) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType == 'nickname'">
+				upper(nickname) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType == 'phone'">
+				upper(phone) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType == 'all'">
+				upper(name) like upper('%${keyword1}%')
+				or
+				upper(mid) like upper('%${keyword1}%')
+				or
+				upper(nickname) like upper('%${keyword1}%')
+				or
+				upper(email) like upper('%${keyword1}%')
+				or
+				upper(birthdate) like upper('%${keyword1}%')
+				or
+				upper(phone) like upper('%${keyword1}%')
+			</if>
+			)
+		</if>
+		<if
+			test="(keyword1 != null and keyword1.length() > 0) and (keyword2 != null and keyword2.length() > 0)">
+			${orand}
+		</if>
+		<if test="keyword2 != null and keyword2.length() > 0">
+			(
+			<if test="searchType == 'name'">
+				upper(name) like upper('%${keyword2}%')
+			</if>
+			<if test="searchType == 'mid'">
+				upper(mid) like upper('%${keyword2}%')
+			</if>
+			<if test="searchType == 'nickname'">
+				upper(nickname) like upper('%${keyword2}%')
+			</if>
+			<if test="searchType == 'phone'">
+				upper(phone) like upper('%${keyword2}%')
+			</if>
+			
+			<if test="searchType == 'all'">
+				upper(name) like upper('%${keyword2}%')
+				or
+				upper(mid) like upper('%${keyword2}%')
+				or
+				upper(nickname) like upper('%${keyword2}%')
+				or
+				upper(email) like upper('%${keyword2}%')
+				or
+				upper(birthdate) like upper('%${keyword2}%')
+				or
+				upper(phone) like upper('%${keyword2}%')
+			</if>
+			)
+		</if>
+		<if
+			test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+			)
+		</if>
+	</sql>
+
+
 	<!-- 모든 회원 목록을 가져오는 쿼리 정의 -->
 	<select id="getMemberList"
 		resultType="kosmo.team.project.dto.MemberDTO"
@@ -17,14 +94,23 @@
 		mid AS "mid",
 		name AS "name",
 		nickname as "nickname",
-		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date"
+		email as
+		"email",
+		birthdate as "birthday",
+		phone as "phone",
+		gender as "gender",
+		detail_address as "detail_address",
+
+		to_char(reg_date, 'YYYY-MM-DD') AS
+		"reg_date"
 		FROM
 		member
 		where m_no != 1
+		<include refid="boardWhere" />
 		<if test="sort==null or sort.length()==0">
 			order by
 
-			m_no desc
+			m_no asc
 		</if>
 
 		<if test="sort!=null and sort.length()>0">
@@ -47,6 +133,8 @@
 		count(*)
 		from
 		member
+		where 1=1
+		<include refid="boardWhere" />
 	</select>
 
 
@@ -56,6 +144,8 @@
 		select count(*)
 		from
 		member
+		where 1=1
+		<include refid="boardWhere" />
 	</select>
 
 
@@ -101,7 +191,11 @@
 		,
 		email = #{email}
 		,birthdate = #{birthday}
+
 		,phone = #{phone}
+
+		,gender =
+		#{gender}
 		,detail_address =
 		#{detail_address}
 
