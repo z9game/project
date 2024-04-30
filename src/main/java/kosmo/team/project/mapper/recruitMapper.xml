@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "kosmo.team.project.dao.RecruitDAO">
+
+<select id="getRecruit_TeamBoardList" resultType="kosmo.team.project.dto.RecruitTeamDTO">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        team_recruitment
+	</select>
+	
+</mapper>
