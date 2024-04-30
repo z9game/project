@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kosmo.team.project.dao.CommunityDAO;
 import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.CommunitySearchDTO;
 
 @Service
@@ -156,8 +157,6 @@ public class CommunityServiceImplements implements CommunityService {
 	}
 	
 	
-	
-	
 	public int getFreeBoardAllCnt() {
 		// --------------------------------------
 		// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
@@ -169,8 +168,7 @@ public class CommunityServiceImplements implements CommunityService {
 		// --------------------------------------
 		return freeBoardListAllCnt;
 	}
-	
-	
+		
 	
 	public CommunityDTO getFreeBoard(int b_no) {
 		
@@ -180,6 +178,67 @@ public class CommunityServiceImplements implements CommunityService {
 		return communityDTO;
 
 	}
+	
+	
+	@Override
+	public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO) {
+	
+		CommunityFreeBoardDetailDTO freeBoardDetail = communityDAO.getFreeBoardDetail(detailDTO);
+		
+		return freeBoardDetail;
+		
+	}
+	
+	
+	@Override
+	public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO) {
+
+		int freeBoardDetailCommentPageListCount = communityDAO.getFreeBoardDetailCommentPageListCount(detailDTO);
+
+		return freeBoardDetailCommentPageListCount;
+
+	}
+	
+	
+	@Override
+	public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO) {
+		
+		List<CommunityFreeBoardDetailDTO> freeBoardDetailCommentPageList = communityDAO.getFreeBoardDetailCommentPageList(detailDTO);
+
+		return freeBoardDetailCommentPageList;
+		
+	}
+	
+	
+	@Override
+	public int insertFreeBoardDetailComment(CommunityFreeBoardDetailDTO detailDTO) {
+
+		int insertFreeBoardDetailCommentCount = communityDAO.insertFreeBoardDetailComment(detailDTO);
+
+		return insertFreeBoardDetailCommentCount;
+
+	}
+	
+	
+	@Override
+	public int insertFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO) {
+
+		communityDAO.updateFreeBoardDetailCommentToComment(detailDTO);
+		
+		int insertFreeBoardDetailCommentToCommentCount = communityDAO.insertFreeBoardDetailCommentToComment(detailDTO);
+
+		return insertFreeBoardDetailCommentToCommentCount;
+
+	}
+	
+	@Override
+	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO) {
+		
+		return communityDAO.updateFreeBoardDetailReadCountPlusOne(detailDTO);
+		
+	}
+	
+	
 	
 	//-------------------------------------------------
 	
