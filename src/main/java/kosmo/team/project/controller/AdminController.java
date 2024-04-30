@@ -25,15 +25,8 @@ import kosmo.team.project.utility.Page;
 @Controller
 public class AdminController {
 
-	
-	
-	private final String adminFolder = "/admin/"; 
-	
-	
-	
-	
-	
-	
+	private final String adminFolder = "/admin/";
+
 	@Autowired
 	private AdminService adminService;
 
@@ -71,7 +64,7 @@ public class AdminController {
 		mav.addObject("memberListCnt", memberListCnt);
 		mav.addObject("memberListAllCnt", memberListAllCnt);
 		mav.addObject("memberMap", memberMap);
-		mav.setViewName(adminFolder+"adminForm.jsp");
+		mav.setViewName(adminFolder + "adminForm.jsp");
 
 		return mav;
 	}
@@ -115,9 +108,8 @@ public class AdminController {
 
 		mav.addObject("playerRecordDTO", playerRecordDTO);
 
-
 		// System.out.println(memberDTO.getGender());
-		mav.setViewName(adminFolder+"adminMemberDetailForm.jsp");
+		mav.setViewName(adminFolder + "adminMemberDetailForm.jsp");
 
 		return mav;
 
@@ -135,7 +127,7 @@ public class AdminController {
 			// --------------------------------------
 			@RequestParam(value = "m_no") int m_no
 
-			,HttpSession session
+			, HttpSession session
 
 	) {
 		String userId = (String) session.getAttribute("mid");
@@ -143,14 +135,10 @@ public class AdminController {
 		if (userId == null || !userId.equals("admin")) {
 			return new ModelAndView("redirect:/loginForm.do");
 		}
-		
-	
-		
-		
+
 		MemberDTO memberDTO = this.adminService.getMemberForUpDel(m_no);
 
 		PlayerRecordDTO playerRecordDTO = this.adminService.getRecordUpDel(m_no);
-
 
 		ModelAndView mav = new ModelAndView();
 		// --------------------------------
@@ -164,19 +152,17 @@ public class AdminController {
 
 		mav.addObject("playerRecordDTO", playerRecordDTO);
 
-
-		mav.setViewName(adminFolder+"adminDetailUpDelForm.jsp");
+		mav.setViewName(adminFolder + "adminDetailUpDelForm.jsp");
 
 		return mav;
 
 	}
-	
+
 	@RequestMapping(value = "/adminMemberUpProc.do"
 
 			, method = RequestMethod.POST
 
-			, produces = "application/json;charset=UTF-8"
-			)
+			, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public Map<String, String> adminMemberUpProc(
 			// -------------------------
@@ -185,8 +171,7 @@ public class AdminController {
 			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
 			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
 
-			MemberDTO memberDTO
-			,PlayerRecordDTO playerRecordDTO
+			MemberDTO memberDTO, PlayerRecordDTO playerRecordDTO
 
 	) {
 
@@ -228,8 +213,7 @@ public class AdminController {
 			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
 			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
 
-			MemberDTO memberDTO
-			,PlayerRecordDTO playerRecordDTO
+			MemberDTO memberDTO, PlayerRecordDTO playerRecordDTO
 
 	) {
 		Map<String, String> resultMap = new HashMap<String, String>();
@@ -242,16 +226,11 @@ public class AdminController {
 
 		return resultMap;
 	}
-	
-	
-	
-	
-	
-	//------------------------------------------------------------------
-	//공지사항
-	//------------------------------------------------------------------
-	
-	
+
+	// ------------------------------------------------------------------
+	// 공지사항
+	// ------------------------------------------------------------------
+
 	@RequestMapping("/adminNoticeBoardForm.do")
 	public ModelAndView adminNoticeBoardForm(CommunitySearchDTO communitySearchDTO, HttpSession session) {
 		// 세션에서 사용자 아이디를 가져옴
@@ -290,7 +269,7 @@ public class AdminController {
 
 		mav.addObject("noticeBoardMap", noticeBoardMap);
 
-		mav.setViewName(adminFolder+"adminNoticeBoardForm.jsp");
+		mav.setViewName(adminFolder + "adminNoticeBoardForm.jsp");
 
 		return mav;
 	}
@@ -322,7 +301,7 @@ public class AdminController {
 		// --------------------------------
 		mav.addObject("communityDTO", communityDTO);
 
-		mav.setViewName(adminFolder+"adminNoticeboardDetailForm.jsp");
+		mav.setViewName(adminFolder + "adminNoticeboardDetailForm.jsp");
 
 		return mav;
 
@@ -355,14 +334,12 @@ public class AdminController {
 		// --------------------------------
 		mav.addObject("communityDTO", communityDTO);
 
-		mav.setViewName(adminFolder+"adminNoticeboardUpDelForm.jsp");
+		mav.setViewName(adminFolder + "adminNoticeboardUpDelForm.jsp");
 
 		return mav;
 
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/adminNoticeboardUpProc.do"
 
 			, method = RequestMethod.POST
@@ -428,7 +405,47 @@ public class AdminController {
 		return resultMap;
 	}
 
-	
-	
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	// URL 주소 /boardRegForm.do 로 접근하면 호출되는 메소드 선언
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	@RequestMapping(value = "/adminNoticeboardRegForm.do")
+	public ModelAndView adminNoticeboardRegForm() {
+		// ----------------------------------------------------
+		// [ModelAndView 객체] 생성하기
+		// [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
+		// -------------------------------------------
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(adminFolder+"adminNoticeboardRegForm.jsp");
+		// ----------------------------------------------------
+		// [ModelAndView 객체] 리턴하기
+		// ----------------------------------------------------
+		return mav;
+	}
+
+	@RequestMapping(value = "/adminNoticeboardRegProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> adminNoticeboardRegProc(
+			// -------------------------
+			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
+			// -------------------------
+			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
+			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
+
+			CommunityDTO communityDTO
+
+	) {
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		int adminNoticeboardRegCnt = this.adminService.insertNoticeBoard(communityDTO);
+
+		resultMap.put("result", adminNoticeboardRegCnt + "");
+
+		return resultMap;
+	}
 
 }

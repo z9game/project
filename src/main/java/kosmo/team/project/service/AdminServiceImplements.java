@@ -89,8 +89,7 @@ public class AdminServiceImplements implements AdminService {
 		if (memberCnt == 0) {
 			return memberCnt;
 		}
-		
-		
+
 		int memberDelCnt = this.adminDAO.deleteMember(memberDTO);
 
 		// 수정 적용개수 리턴하기
@@ -129,7 +128,7 @@ public class AdminServiceImplements implements AdminService {
 		// 수정 적용개수 리턴하기
 		return playerRecordUpCnt;
 	}
-	
+
 	public int deletePlayerRecord(PlayerRecordDTO playerRecordDTO) {
 
 		// --------------------------------------
@@ -140,118 +139,117 @@ public class AdminServiceImplements implements AdminService {
 		if (PlayerRecordCnt == 0) {
 			return PlayerRecordCnt;
 		}
-		
-		
+
 		int PlayerRecordDelCnt = this.adminDAO.deletePlayerRecord(playerRecordDTO);
 
 		// 수정 적용개수 리턴하기
 		return PlayerRecordDelCnt;
 
 	}
-	
-	//--------------------------
-		//공지사항
-		//--------------------------
 
-		@Override
-		public List<CommunityDTO> getNoticeBoardList(CommunitySearchDTO communitySearchDTO) {
+	// --------------------------
+	// 공지사항
+	// --------------------------
 
-			List<CommunityDTO> noticeBoardList = this.adminDAO.getNoticeBoardList(communitySearchDTO);
+	@Override
+	public List<CommunityDTO> getNoticeBoardList(CommunitySearchDTO communitySearchDTO) {
 
-			return noticeBoardList;
+		List<CommunityDTO> noticeBoardList = this.adminDAO.getNoticeBoardList(communitySearchDTO);
 
+		return noticeBoardList;
+
+	}
+
+	@Override
+	public int getNoticeBoardListCnt(CommunitySearchDTO communitySearchDTO) {
+
+		int noticeBoardListCount = this.adminDAO.getNoticeBoardListCnt(communitySearchDTO);
+
+		return noticeBoardListCount;
+
+	}
+
+	public int getNoticeBoardAllCnt() {
+		// --------------------------------------
+		// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
+		// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
+		// --------------------------------------
+		int noticeBoardListAllCnt = this.adminDAO.getNoticeBoardAllCnt();
+		// --------------------------------------
+		// 변수 boardListAllCnt 안의 데이터를 리턴하기
+		// --------------------------------------
+		return noticeBoardListAllCnt;
+	}
+
+	public CommunityDTO getNoticeBoard(int b_no) {
+
+		int updateCnt = this.adminDAO.updateNoticeBoardReadCount(b_no);
+
+		CommunityDTO communityDTO = this.adminDAO.getNoticeBoard(b_no);
+
+		return communityDTO;
+
+	}
+
+	// 이아래쪽은 공지사항 수정,삭제
+
+	public CommunityDTO getNoticeBoardForUpDel(int b_no) {
+
+		CommunityDTO communityDTO = this.adminDAO.getNoticeBoard(b_no);
+
+		return communityDTO;
+
+	}
+
+	public int updateNoticeBoard(CommunityDTO communityDTO) {
+
+		// --------------------------------------
+		// 수정할 게시판의 존재 개수 얻기
+		// 만약 수정할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
+		// --------------------------------------
+		int boardCnt = this.adminDAO.getNoticeBoardCnt(communityDTO.getB_no());
+		if (boardCnt == 0) {
+			return boardCnt;
 		}
-		
-		
-		@Override
-		public int getNoticeBoardListCnt(CommunitySearchDTO communitySearchDTO) {
+		int boardUpCnt = this.adminDAO.updateNoticeBoard(communityDTO);
 
-			int noticeBoardListCount = this.adminDAO.getNoticeBoardListCnt(communitySearchDTO);
+		// 수정 적용개수 리턴하기
+		return boardUpCnt;
+	}
 
-			return noticeBoardListCount;
+	public int deleteNoticeBoard(CommunityDTO communityDTO) {
 
-		}
-		
-		public int getNoticeBoardAllCnt() {
-			// --------------------------------------
-			// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
-			// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
-			// --------------------------------------
-			int noticeBoardListAllCnt = this.adminDAO.getNoticeBoardAllCnt();
-			// --------------------------------------
-			// 변수 boardListAllCnt 안의 데이터를 리턴하기
-			// --------------------------------------
-			return noticeBoardListAllCnt;
-		}
-		
-		
-		
-		public CommunityDTO getNoticeBoard(int b_no) {
-			
-			int updateCnt = this.adminDAO.updateNoticeBoardReadCount(b_no);
-
-			CommunityDTO communityDTO = this.adminDAO.getNoticeBoard(b_no);
-
-			return communityDTO;
-
-		}
-		
-		
-		
-		//이아래쪽은 공지사항 수정,삭제
-		
-		public CommunityDTO getNoticeBoardForUpDel(int b_no) {
-
-			CommunityDTO communityDTO = this.adminDAO.getNoticeBoard(b_no);
-
-			return communityDTO;
-
-		}
-		
-		
-		
-		
-		public int updateNoticeBoard(CommunityDTO communityDTO) {
-
-			// --------------------------------------
-			// 수정할 게시판의 존재 개수 얻기
-			// 만약 수정할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
-			// --------------------------------------
-			int boardCnt = this.adminDAO.getNoticeBoardCnt(communityDTO.getB_no());
-			if (boardCnt == 0) {
-				return boardCnt;
-			}
-			int boardUpCnt = this.adminDAO.updateNoticeBoard(communityDTO);
-
-			// 수정 적용개수 리턴하기
-			return boardUpCnt;
+		// --------------------------------------
+		// 삭제할 게시판의 존재 개수 얻기
+		// 만약 수정할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
+		// --------------------------------------
+		int boardCnt = this.adminDAO.getNoticeBoardCnt(communityDTO.getB_no());
+		if (boardCnt == 0) {
+			return boardCnt;
 		}
 
-		public int deleteNoticeBoard(CommunityDTO communityDTO) {
+		int boardDelCnt = this.adminDAO.deleteNoticeBoard(communityDTO);
 
-			// --------------------------------------
-			// 삭제할 게시판의 존재 개수 얻기
-			// 만약 수정할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
-			// --------------------------------------
-			int boardCnt = this.adminDAO.getNoticeBoardCnt(communityDTO.getB_no());
-			if (boardCnt == 0) {
-				return boardCnt;
-			}
+		// 수정 적용개수 리턴하기
+		return boardDelCnt;
+	}
 
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	// [1개 게시판 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	public int insertNoticeBoard(CommunityDTO communityDTO) {
+		// ----------------------------------------------
+		// BoardDAOImpl 객체의
+		// insertBoard 메소드 호출하여
+		// 게시판 글 입력 후 입력 적용 행의 개수 얻기
+		// ----------------------------------------------
+		int adminNoticeboardRegCnt = this.adminDAO.insertNoticeBoard(communityDTO);
 
-
-			int boardDelCnt = this.adminDAO.deleteNoticeBoard(communityDTO);
-
-			// 수정 적용개수 리턴하기
-			return boardDelCnt;
-		}
-	
-	
-	
-	
-	
-	
-	
-	
+		// ----------------------------------------------
+		// 1개 게시판 글 입력 적용 행의 개수 리턴하기
+		// ----------------------------------------------
+		return adminNoticeboardRegCnt;
+	}
 
 }

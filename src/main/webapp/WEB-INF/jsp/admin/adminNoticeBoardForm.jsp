@@ -189,16 +189,17 @@ function pageNoClick( clickPageNo ){
 			<li class="nav-item">관리자 메뉴</li>
 			<li class="nav-item"><a class="nav-link" href="adminForm.do">회원
 					관리</a></li>
-			<li class="nav-item"><a class="nav-link" href="adminNoticeBoardForm.do">공지사항
-			</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="adminNoticeBoardForm.do">공지사항 </a></li>
 		</ul>
 	</div>
 
-
-
-
-
-
+	<table>
+		<tr align="center">
+			<td><input type="button" value="새글쓰기"
+				onclick="location.replace('/adminNoticeboardRegForm.do');"></td>
+		</tr>
+	</table>
 
 
 
@@ -216,23 +217,23 @@ function pageNoClick( clickPageNo ){
 				</tr>
 
 
-				
 
 
 
-					<c:forEach var="noticeboard"
-						items="${requestScope.noticeBoardList}" varStatus="status">
-						
+
+				<c:forEach var="noticeboard" items="${requestScope.noticeBoardList}"
+					varStatus="status">
+
 					<tr style="cursor: pointer"
-					onClick="goNadminNticeboardDetailForm(${noticeboard.b_no});">
+						onClick="goNadminNticeboardDetailForm(${noticeboard.b_no});">
 
-							<td align="center">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
-							<td>${noticeboard.subject}</td>
-							<td align="center">${noticeboard.writer}</td>
-							<td align="center">${noticeboard.readcount}</td>
-							<td align="center">${noticeboard.reg_date}</td>
-						</tr>
-					</c:forEach>
+						<td align="center">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
+						<td>${noticeboard.subject}</td>
+						<td align="center">${noticeboard.writer}</td>
+						<td align="center">${noticeboard.readcount}</td>
+						<td align="center">${noticeboard.reg_date}</td>
+					</tr>
+				</c:forEach>
 			</table>
 			<c:if test="${empty noticeBoardList}">
 				<br>
@@ -280,8 +281,8 @@ function pageNoClick( clickPageNo ){
 
 
 	<!-- 이 form 태그를 /boardDetailForm.do로 WAS로 접속하기 위해 선언한다. -->
-	<form name="adminNoticeboardDetailForm" action="/adminNoticeboardDetailForm.do"
-		method="post">
+	<form name="adminNoticeboardDetailForm"
+		action="/adminNoticeboardDetailForm.do" method="post">
 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
 		<input type="hidden" name="b_no">
 	</form>
