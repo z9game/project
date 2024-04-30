@@ -1,0 +1,282 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/common/common.jsp"%>
+
+<!DOCTYPE html><html>
+<head>
+	<meta charset="UTF-8">
+	<title>communityFreeBoardDetailForm</title>
+	<link href="/style/communityFreeBoardFormStyle.css" rel="stylesheet">
+	<script src="/js/communityFreeBoardFormScript.js"></script>
+
+	<script>
+			
+		$(function(){
+			pageNoClick(1);
+		});
+		
+		function comment() {
+			
+			var freeBoardDetailFormCommentObj = $("#freeBoardDetailFormComment");
+			var serialize = freeBoardDetailFormCommentObj.serialize( );
+			
+			$.ajax( {
+					url 	:	 "/communityFreeBoardDetailCommentList.do"
+				,	type 	:	 "post"
+				,	data 	:	 serialize
+				,	success :	 function(responseHtml) {	ajaxSuccess(responseHtml);	}
+				,	error 	: 	function() {
+						alert("검색 실패! 관리자에게 문의 바랍니다.");
+					}
+			} );
+		}
+		
+		function commentOfComment(index, comment_no) {
+			
+			var commentOfCommentFormObj = $("#commentOfCommentForm");
+			
+			var nick_name = $("#nick_name" + index);
+			var content = $("#content" + index );
+			
+			var hidden_nick_name = commentOfCommentFormObj.find(".nick_name");
+			var hidden_content = commentOfCommentFormObj.find(".content");
+			var hidden_comment_no = commentOfCommentFormObj.find(".comment_no");
+			
+			hidden_nick_name.val(nick_name.val());
+			hidden_content.val(content.val());
+			hidden_comment_no.val(comment_no);
+			
+			var serialize = commentOfCommentFormObj.serialize( );
+			
+			$.ajax( {
+					url 	:	 "/communityFreeBoardDetailCommentOfCommentList.do"
+				,	type 	:	 "post"
+				,	data 	:	 serialize
+				,	success :	 function(responseHtml) {	ajaxSuccess(responseHtml);	}
+				,	error 	: 	function() {
+						alert("검색 실패! 관리자에게 문의 바랍니다.");
+					}
+			} );				
+		}
+		
+		function pageNoClick( clickPageNo ) {
+			
+			var commentPageFormObj = $("#commentPageForm");
+			
+			commentPageFormObj.find(".selectPageNo").val( clickPageNo );
+			commentPageFormObj.find(".rowCntPerPage").val( 10 );
+			
+			
+			var commentOfCommentFormObj = $("#commentOfCommentForm");
+			commentOfCommentFormObj.find(".selectPageNo").val( clickPageNo );
+			commentOfCommentFormObj.find(".rowCntPerPage").val( 10 );
+			
+			var freeBoardDetailFormCommentObj = $("[name='freeBoardDetailFormComment']");
+			freeBoardDetailFormCommentObj.find(".selectPageNo").val( clickPageNo );
+			freeBoardDetailFormCommentObj.find(".rowCntPerPage").val( 10 );				
+			
+			var serialize = commentPageFormObj.serialize( );
+			
+			$.ajax( {
+					url 	:	 "/communityFreeBoardDetail.do"
+				,	type 	:	 "post"
+				,	data 	:	 serialize
+				,	success :	 function(responseHtml) {	ajaxSuccess(responseHtml);	}
+				,	error 	: 	function() {
+						alert("검색 실패! 관리자에게 문의 바랍니다.");
+					}
+			} );
+		}
+		
+		function ajaxSuccess(responseHtml) {
+			
+			var obj = $(responseHtml);
+			var comment_div_filter = obj.filter(".comment_div").html();							
+			$(".comment_div").html(comment_div_filter);
+			
+			var comment_page_div_filter = obj.filter(".comment_page_div").html();							
+			$(".comment_page_div").html(comment_page_div_filter);
+			
+		}
+		
+		function showCommentOfComment(trCommentOfCommentId) {
+			
+			var trClassObjects = $(".trCommentOfComment");
+			var trIdObject = $("#" + trCommentOfCommentId);
+			
+			trClassObjects.attr('style', "display:none;");
+			trIdObject.attr('style', "display:'';");
+			
+		}
+		
+	</script>
+
+</head>
+
+<body>
+
+	<%@ include file="/WEB-INF/jsp/header.jsp"%>
+	
+	<div class="communityFreeBoardFormTitle">
+		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+		<p class="titleBackgoundText">자유게시판</p>
+	</div>
+
+	<table border="1" bordercolor="gray" align="center" cellpadding="7">
+		<caption>[게시판 상세글 보기]</caption>
+		<tr>
+			<th bgColor="lightgray">이 름</th>
+			<td>${ requestScope.freeBoardDetail.writer }</td>
+		</tr>
+		<tr>
+			<th bgColor="lightgray">제 목</th>
+			<td>${ requestScope.freeBoardDetail.subject }</td>
+		</tr>
+		<tr>
+			<th bgColor="lightgray">조회수</th>
+			<td>${ requestScope.freeBoardDetail.readcount }</td>
+		</tr>
+		<tr>
+			<th bgColor="lightgray">내 용</th>
+			<td>
+				<textarea style="border:none;" name="content" class="content" rows="13" cols="40" maxlength="500" readonly>${ requestScope.freeBoardDetail.content }</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th bgColor="lightgray">댓글쓰기</th>
+			<td>
+				<form name="freeBoardDetailFormComment" id="freeBoardDetailFormComment" onsubmit="return false;">
+					별명:
+					<input type="text" name="nick_name" class="nick_name">
+					내용:
+					<input type="text" name="content" class="content">
+					<input type="button" value="댓글쓰기" onclick="comment();">
+					<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
+					<input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
+					<input type="hidden" name="rowCntPerPage" class="rowCntPerPage" value="10">
+				</form>		
+			</td>
+		</tr>
+		
+		<c:if test="${ !empty requestScope.sampleDetailCommentList }">
+			<tr>
+				<td colspan="2">[댓글]</td>
+			</tr>
+			
+			<c:forEach var="comment" items="${ requestScope.sampleDetailCommentList }" varStatus="status">
+				<tr>
+					<td>${ comment.writer } (${ comment.reg_date })</td>
+					<td>
+						<textarea style="border:none;" rows="1" cols="40" maxlength="500" readonly>${ comment.content }</textarea>
+					</td>
+				</tr>
+			</c:forEach>	
+		</c:if>
+	</table>	
+	
+	<div style="height:5px;"></div>
+	
+	
+	<div class="comment_div">
+		<c:if test="${ !empty requestScope.freeBoardDetailCommentList }">
+		
+			<table border="0" bordercolor="gray" align="center" cellpadding="7">
+				<tr>
+					<td colspan="2" width="600">[댓글]</td>
+				</tr>
+				
+				<c:forEach var="comment" items="${ requestScope.freeBoardDetailCommentList }" varStatus="status">
+					<tr>
+						<td>
+							${ comment.nick_name } (${ comment.reg_date })
+							<br>
+							<c:forEach var="n" begin="1" end="${ comment.print_level }">
+								&nbsp;&nbsp;
+							</c:forEach>
+	
+							<c:if test="${ comment.print_level > 0 }">
+								▶
+							</c:if>
+							${ comment.content }
+						</td>
+						<td>
+							<input type="button" value="입력창" onclick="showCommentOfComment('trCommentOfComment${ comment.comment_no }');">
+						</td>
+					</tr>
+					<tr id="trCommentOfComment${ comment.comment_no }" class="trCommentOfComment" style="display: none;">
+						<td>
+							<!-- value="홍길동${ status.index }" value="안녕하세요${ status.index }"-->
+							별명 : <input type="text" name="nick_name" class="nick_name" id="nick_name${ status.index }" >
+							내용 : <input type="text" name="content" class="content" id="content${ status.index }" >
+						</td>
+						<td>
+							<input type="button" value="댓글쓰기" onclick="commentOfComment('${ status.index }', '${ comment.comment_no }');">
+						</td>
+					</tr>						
+				</c:forEach>
+				
+				<c:forEach var="empty_row" begin="${ requestScope.freeBoardDetailCommentListSize + 1 }" end="${ requestScope.pageMap.rowCntPerPage }">
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+				</c:forEach>	
+			</table>
+		</c:if>		
+			
+	</div>
+	
+	<div class="comment_page_div">
+		<c:if test="${ !empty requestScope.freeBoardDetailCommentList }">		
+			<div style="height:5px;"></div>
+			<center>
+				<span class="pagingNos">
+					<span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
+					<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.selectPageNo } - 1 );">[이전]</span>
+					&nbsp;&nbsp;
+					
+					<c:forEach var="pageNo" begin="${ requestScope.pageMap.begin_pageNo }" end="${ requestScope.pageMap.end_pageNo }">
+						<c:if test="${ requestScope.pageMap.selectPageNo == pageNo }">
+							<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });"><b><u>${ pageNo }</u></b></span>
+						</c:if>
+			
+						<c:if test="${ requestScope.pageMap.selectPageNo != pageNo }">
+							<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });">[${ pageNo }]</span>
+						</c:if>
+					</c:forEach>
+					&nbsp;&nbsp;
+					
+					<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.selectPageNo } + 1 );">[다음]</span>
+					<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.last_pageNo } );">[마지막]</span>
+				</span>
+			</center>
+		</c:if>
+	</div>		
+	
+	<form name="commentOfCommentForm" id="commentOfCommentForm">
+		<input type="hidden" name="nick_name" class="nick_name">
+		<input type="hidden" name="content" class="content">
+		<input type="hidden" name="selectPageNo" class="selectPageNo">
+		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage" >
+		<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
+		<input type="hidden" name="comment_no" class="comment_no">			
+	</form>
+	
+	<form name="commentPageForm" id="commentPageForm">
+		<input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
+		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage" >
+		<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
+	</form>
+	
+	<form name="freeBoardDetailForm" id="freeBoardDetailForm">
+		<input type="hidden" name="nick_name" class="nick_name">
+		<input type="hidden" name="content" class="content">
+		<input type="hidden" name="selectPageNo" class="selectPageNo">
+		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+		<input type="hidden" name="b_no" class="b_no">
+		<input type="hidden" name="comment_no" class="comment_no">			
+	</form>
+	
+	<br><br><br><br><br><br><br>	
+
+</body>
+</html>
