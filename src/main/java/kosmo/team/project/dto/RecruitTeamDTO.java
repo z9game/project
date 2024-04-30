@@ -8,6 +8,8 @@ public class RecruitTeamDTO {
 	private String content;
 	private int readcount;
 	private String reg_date;
+	
+	
 	public int getRecruitment_no() {
 		return recruitment_no;
 	}

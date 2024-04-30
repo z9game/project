@@ -3,7 +3,7 @@
 
 <mapper namespace = "kosmo.team.project.dao.RecruitDAO">
 
-<select id="getRecruit_TeamBoardList" resultType="kosmo.team.project.dto.RecruitTeamDTO">
+	<select id="getRecruit_TeamBoardList" resultType="kosmo.team.project.dto.RecruitTeamDTO" >
 		    select 
 		        recruitment_no 
 		        ,title 
@@ -13,6 +13,18 @@
 		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
 		    from 
 		        team_recruitment
+	</select>
+	
+	<select id="getRecruit_MemBoardList" resultType="kosmo.team.project.dto.RecruitTeamDTO" >
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        team_Member_recruitment
 	</select>
 	
 </mapper>

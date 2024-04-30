@@ -14,6 +14,7 @@ import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.RecruitTeamDTO;
 import kosmo.team.project.dto.SampleDTO;
 import kosmo.team.project.dto.SampleSearchDTO;
+import kosmo.team.project.dto.TeamMemDTO;
 import kosmo.team.project.dto.TournamentDTO;
 import kosmo.team.project.dto.TournamentSearchDTO;
 
@@ -25,11 +26,28 @@ public class RecruitServiceImpl implements RecruitService {
 	private RecruitDAO recruitDAO;
 	
 	
-	public List<RecruitTeamDTO> getRecruit_TeamBoardList() {
-
-		List<RecruitTeamDTO> getRecruit_TeamBoardList = this.recruitDAO.getRecruit_TeamBoardList();
-
-		return getRecruit_TeamBoardList;
+	public List<RecruitTeamDTO> getRecruit_TeamBoardList(String choice) {
+		
+		
+		String team_mem = choice;
+			
+			
+			
+		if(team_mem == "팀")
+		{
+			List<RecruitTeamDTO> getRecruit_TeamBoardList = this.recruitDAO.getRecruit_TeamBoardList();
+			System.out.println("team=>" + getRecruit_TeamBoardList);
+			return getRecruit_TeamBoardList;
+		}
+		else if(team_mem == "팀원")
+		{
+			List<RecruitTeamDTO> getRecruit_TeamBoardList = this.recruitDAO.getRecruit_MemBoardList();
+			System.out.println("mem=>" + getRecruit_TeamBoardList);
+			return getRecruit_TeamBoardList;
+		}
+		
+		
+		return null;
 
 	}
 

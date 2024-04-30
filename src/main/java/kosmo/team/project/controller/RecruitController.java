@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.RecruitTeamDTO;
+import kosmo.team.project.dto.TeamMemDTO;
 import kosmo.team.project.service.RecruitService;
 
 @Controller
@@ -19,10 +20,12 @@ public class RecruitController {
 	
 	
     @RequestMapping(value = "/recruitTeamBoardForm.do")
-    public ModelAndView recruitTeamBoardForm() {
+    public ModelAndView recruitTeamBoardForm(@RequestParam(value="choice", required=false) String choice) {
     	
     	
-    	List<RecruitTeamDTO> recruitTeam = this.recruitService.getRecruit_TeamBoardList();
+    	List<RecruitTeamDTO> recruitTeam = this.recruitService.getRecruit_TeamBoardList(choice);
+    	
+    	System.out.println(choice);
     	ModelAndView mav = new ModelAndView();
     	mav.addObject("boardList", recruitTeam);
     	mav.setViewName("recruitTeamBoardForm.jsp");

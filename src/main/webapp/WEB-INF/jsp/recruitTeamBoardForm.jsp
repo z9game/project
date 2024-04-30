@@ -9,6 +9,94 @@
 <title>RecruitTeamBoardForm</title>
 <link href="/style/recruitTeamBoardFormStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
+<script>
+
+	
+	$(function(){team();})
+	
+	function team()
+	{
+		$(".TeamorMem").click(function(){
+			
+			$(".TeamorMem").removeClass("selected");
+			$(this).addClass("selected");
+		})
+		
+		$.ajax({
+			//----------------------------------------------------------
+			//WAS 에 접속할 URL 주소 지정
+			//----------------------------------------------------------
+			url   : "/recruitTeamBoardForm.do" 
+			//----------------------------------------------------------
+			//form 태그 안의 입력양식 데이터. 즉, 파라미터값을 보내는 방법 지정.
+			//----------------------------------------------------------
+			,type : "post"
+			//----------------------------------------------------------
+			//WAS 에 보낼 파라미터명과 파라미터값을 설정하기  ?파라미터명=파라미터값&파라미터명=파라미터값~~
+			//----------------------------------------------------------
+			,data : "choice=팀"
+				
+			,success : function(responseHtml){
+				
+				var obj = $(responseHtml);
+				
+		      /*    $("body").prepend(
+		                   
+		                    "<textarea class=xxx cols=100 rows=100>"
+		                    
+		                    + obj.filter(".recruitTeamBoardFormContainer").html()
+		                    
+		                    +"</textarea>"
+		                    ) */
+				 
+				
+				$(".recruitTeamBoardFormContainer").html(obj.filter(".recruitTeamBoardFormContainer").html()  );
+				
+			}			
+			
+			,error 	 : function(){alert("검색 실패 / 관리자에게 문의 바람");}
+			
+		}) 
+	}
+	
+	
+	function member()
+	{
+		$(".TeamorMem").click(function(){
+			
+			$(".TeamorMem").removeClass("selected");
+			$(this).addClass("selected");
+		})
+		
+		$.ajax({
+			//----------------------------------------------------------
+			//WAS 에 접속할 URL 주소 지정
+			//----------------------------------------------------------
+			url   : "/recruitTeamBoardForm.do" 
+			//----------------------------------------------------------
+			//form 태그 안의 입력양식 데이터. 즉, 파라미터값을 보내는 방법 지정.
+			//----------------------------------------------------------
+			,type : "post"
+			//----------------------------------------------------------
+			//WAS 에 보낼 파라미터명과 파라미터값을 설정하기  ?파라미터명=파라미터값&파라미터명=파라미터값~~
+			//----------------------------------------------------------
+			,data : "choice=팀원"
+				
+			,success : function(responseHtml){
+				
+				var obj = $(responseHtml);
+				
+				$(".recruitTeamBoardFormContainer").html(obj.filter(".recruitTeamBoardFormContainer").html()  );
+				
+			}			
+			
+			,error 	 : function(){alert("검색 실패 / 관리자에게 문의 바람");}
+			
+		}) 
+	}
+</script>
+
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -17,8 +105,14 @@
     	<p class="titleBackgoundText">팀 / 팀원 모집</p>
     </div>
     <div class="matchingCategory">
-    	<input type="button" class="teamCategory" value="팀" onclick="changeCategory()">
-    	<input type="button" class="teamMemberCategory" value="팀원" onclick="changeCategory()">
+   	    <center>
+	   		<table border="1" bordercolor="black" style="border-collapse:collapse; margin-top:50px; margin-left:250px;" cellpadding="7" align="center">
+	   			<tr class="ing_end">
+	   				<td width="100" class="TeamorMem selected" name="team" onClick="team()"><b>팀</b></td>
+	   				<td width="100" class="TeamorMem" name="mem" onClick="member()"><b>팀원</b></td>
+	   			</tr>
+			</table>
+    	</center>
     </div>
     <div class="recruitTeamBoardFormContainer">
     	<div class="recruitTeamBoardFormConditionalSearch">
