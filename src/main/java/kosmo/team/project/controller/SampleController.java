@@ -3,6 +3,7 @@ package kosmo.team.project.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 ///   깃 테스트
 //깃테스트 2
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ import kosmo.team.project.utility.Page;
 @Controller
 public class SampleController {
 
+	private final String FOLDER = "/sample"; 
+	
 	@Autowired
 	private SampleService sampleService;
 
@@ -56,6 +59,7 @@ public class SampleController {
 		mav.addObject("sampleMap", sampleMap);
 
 		mav.setViewName("/sample/sampleList.jsp");
+		mav.setViewName( FOLDER + "/sampleList.jsp");
 
 		return mav;
 

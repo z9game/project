@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kosmo.team.project.dao.AdminDAO;
+import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.CommunitySearchDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.MemberSearchDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
@@ -146,6 +148,108 @@ public class AdminServiceImplements implements AdminService {
 		return PlayerRecordDelCnt;
 
 	}
+	
+	//--------------------------
+		//공지사항
+		//--------------------------
+
+		@Override
+		public List<CommunityDTO> getNoticeBoardList(CommunitySearchDTO communitySearchDTO) {
+
+			List<CommunityDTO> noticeBoardList = this.adminDAO.getNoticeBoardList(communitySearchDTO);
+
+			return noticeBoardList;
+
+		}
+		
+		
+		@Override
+		public int getNoticeBoardListCnt(CommunitySearchDTO communitySearchDTO) {
+
+			int noticeBoardListCount = this.adminDAO.getNoticeBoardListCnt(communitySearchDTO);
+
+			return noticeBoardListCount;
+
+		}
+		
+		public int getNoticeBoardAllCnt() {
+			// --------------------------------------
+			// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
+			// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
+			// --------------------------------------
+			int noticeBoardListAllCnt = this.adminDAO.getNoticeBoardAllCnt();
+			// --------------------------------------
+			// 변수 boardListAllCnt 안의 데이터를 리턴하기
+			// --------------------------------------
+			return noticeBoardListAllCnt;
+		}
+		
+		
+		
+		public CommunityDTO getNoticeBoard(int b_no) {
+			
+			int updateCnt = this.adminDAO.updateNoticeBoardReadCount(b_no);
+
+			CommunityDTO communityDTO = this.adminDAO.getNoticeBoard(b_no);
+
+			return communityDTO;
+
+		}
+		
+		
+		
+		//이아래쪽은 공지사항 수정,삭제
+		
+		public CommunityDTO getNoticeBoardForUpDel(int b_no) {
+
+			CommunityDTO communityDTO = this.adminDAO.getNoticeBoard(b_no);
+
+			return communityDTO;
+
+		}
+		
+		
+		
+		
+		public int updateNoticeBoard(CommunityDTO communityDTO) {
+
+			// --------------------------------------
+			// 수정할 게시판의 존재 개수 얻기
+			// 만약 수정할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
+			// --------------------------------------
+			int boardCnt = this.adminDAO.getNoticeBoardCnt(communityDTO.getB_no());
+			if (boardCnt == 0) {
+				return boardCnt;
+			}
+			int boardUpCnt = this.adminDAO.updateNoticeBoard(communityDTO);
+
+			// 수정 적용개수 리턴하기
+			return boardUpCnt;
+		}
+
+		public int deleteNoticeBoard(CommunityDTO communityDTO) {
+
+			// --------------------------------------
+			// 삭제할 게시판의 존재 개수 얻기
+			// 만약 수정할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
+			// --------------------------------------
+			int boardCnt = this.adminDAO.getNoticeBoardCnt(communityDTO.getB_no());
+			if (boardCnt == 0) {
+				return boardCnt;
+			}
+
+
+
+			int boardDelCnt = this.adminDAO.deleteNoticeBoard(communityDTO);
+
+			// 수정 적용개수 리턴하기
+			return boardDelCnt;
+		}
+	
+	
+	
+	
+	
 	
 	
 	

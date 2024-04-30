@@ -32,6 +32,8 @@
 			<li class="nav-item">관리자 메뉴</li>
 			<li class="nav-item"><a class="nav-link" href="adminForm.do">회원
 					관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="adminNoticeBoardForm.do">공지사항
+			</a></li>
 		</ul>
 	</div>
 
@@ -106,11 +108,13 @@
 			<tr>
 				<th bgColor="lightgray">성별</th>
 				<td><input type="radio" name="gender" value="남"
-					<c:if test="${requestScope.memberDTO.gender eq '남'}">checked</c:if>>남
+					<c:if test="${requestScope.memberDTO.gender.contains ('남')}">checked</c:if>>남
 					<input type="radio" name="gender" value="여"
-					<c:if test="${requestScope.memberDTO.gender eq '여'}">checked</c:if>>여
+					<c:if test="${requestScope.memberDTO.gender.contains ('여')}">checked</c:if>>여
 				</td>
 			</tr>
+			
+			
 			<tr>
 				<th>상세주소</th>
 				<td>${requestScope.memberDTO.detail_address}</td>
