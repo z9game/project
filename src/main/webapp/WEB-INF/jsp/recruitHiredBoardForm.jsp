@@ -95,9 +95,9 @@
 					<th style="width:100px;">조회수</th>
 					<th style="width:100px;">등록일</th>
 					<c:forEach var="board" items="${requestScope.boardList}" varStatus="status">
-						<tr style="cursor:pointer" onClick="goBoardDetailForm(${board.b_no});">
-							<td align="center">${requestScope.boardMap.begin_serialNo_desc - status.count + 1}</td>
-							<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
+						<tr>
+							<td align="center">${board.recruitment_no}</td>
+							<td align="center">${board.title}</td>
 							<td align="center">${board.writer}</td>
 							<td align="center">${board.readcount}</td>
 							<td align="center">${board.reg_date}</td>
