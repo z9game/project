@@ -1,24 +1,23 @@
 html,
 body {
-  /* width: 100%;
+  width: 100%;
   height: 100%;
   margin: 0;
   box-sizing: border-box;
   scrollbar-width: none;
-  overflow: hidden; */
-  height: 100%;
+  overflow: hidden;
   margin: 0;
   padding: 0;
 }
 
-.container {
+.mainFormContainer {
     height: 100%;
     overflow: scroll;
     scroll-snap-type: y mandatory;
+    scrollbar-width: none;
 }
 
 .section {
-    height: 100vh;
     scroll-snap-align: start;
     display: flex;
     justify-content: center;
@@ -27,19 +26,14 @@ body {
     border: 1px solid #ccc;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
 #sectionMain{
 	background-color:#F5F5F5;
+	height: calc(100% - 80px);
 }
 
 #sectionMain img {
     float: right;
-    height: calc(100% - 100px);
+    height: calc(100% - 80px);
 }
 
 #sectionMain > div {
@@ -56,22 +50,82 @@ body {
 
 #sectionStatistics{
 	background-color:orange;
-	height: calc(100% - 100px);
+	height: 100%;
 }
 
 #sectionRanking{
 	background-color:yellow;
-	height: calc(100% - 100px);
+	height: 100%;
 }
+
+/*<------------------------------------------------------->*/
+/*<------------------- 대회 일정 Section ------------------->*/
+/*<------------------------------------------------------->*/
 
 #sectionSchedule{
 	background-color:green;
-	height: calc(100% - 100px);
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
+
+#sectionSchedule strong{
+	font-size: 50px;
+}
+
+.regionlist{
+	display: flex;
+	flex-direction: row;
+}
+
+.sectionScheduleChoiceTable{
+	border-collapse:collapse;
+	margin-top: 100px;
+	width: 100px;
+	height: 50px;
+}
+
+.sectionScheduleRegionTable{
+	border-collapse:collapse;
+}
+
+.sectionScheduleRegionTableSelect{
+	cursor:pointer;
+}
+
+.sectionScheduleTournamentTableList{
+	cursor:pointer;
+}
+
+#sectionSchedule .regionlist .sectionScheduleTournamentTable .sectionScheduleTournamentTableList .titleBackgroundImg{
+	width: 20px;
+	height: 10px;
+}
+
+.region {
+    cursor: pointer;
+}
+
+.selected {
+    color: red; /* 변경하고 싶은 색상으로 수정하세요 */
+    font-weight: bold;
+}
+
+.tournament {
+    cursor: pointer;
+}
+.selected2 {
+    background-color: lightgray;
+}
+
+
+/*<---------------------------------------------------->*/
+/*<------------------- 갤러리 Section ------------------->*/
+/*<---------------------------------------------------->*/
 
 #sectionMedia{
 	background-color: #F5F5F5;
-	height: calc(100% - 100px);
+	height: 100%;
 	flex-direction: column;
 }
 

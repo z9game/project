@@ -1,7 +1,7 @@
-// 스크롤 효과
+/*// 스크롤 효과
 let lastScrollTop = 0;
 
-document.querySelector('.container').addEventListener('scroll', function() {
+document.querySelector('.mainFormContainer').addEventListener('scroll', function() {
     const sections = document.querySelectorAll('.section');
     let currentSection = 0;
 
@@ -11,15 +11,18 @@ document.querySelector('.container').addEventListener('scroll', function() {
 
     sections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
-        if (direction === 'down' && rect.top >= 0 && rect.bottom <= window.innerHeight) {
-            currentSection = index;
-        } else if (direction === 'up' && rect.bottom <= window.innerHeight && rect.bottom > 0) {
+        if (
+            // 스크롤 방향이 아래로이고 섹션이 화면 안에 있는 경우
+            (direction === 'down' && rect.bottom <= window.innerHeight && rect.bottom > 0) ||
+            // 스크롤 방향이 위로이고 섹션이 화면 안에 있는 경우
+            (direction === 'up' && rect.top >= 0 && rect.top < window.innerHeight)
+        ) {
             currentSection = index;
         }
     });
     
     // 한 번에 한 페이지씩 스크롤
-    const container = document.querySelector('.container');
+    const container = document.querySelector('.mainFormContainer');
     const pageHeight = container.clientHeight;
     const scrollTo = currentSection * pageHeight;
     container.scrollTo({
@@ -27,3 +30,4 @@ document.querySelector('.container').addEventListener('scroll', function() {
         behavior: 'smooth'
     });
 });
+*/

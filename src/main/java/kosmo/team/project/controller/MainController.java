@@ -15,7 +15,7 @@ public class MainController {
 	@Autowired
 	private MainService mainService;
 
-	@RequestMapping(value = "/mainForm.do")
+	@RequestMapping(value = "/main/mainForm.do")
 	public ModelAndView mainForm(MainDTO mainDTO) {
 
 		ModelAndView mav = new ModelAndView();
@@ -27,25 +27,25 @@ public class MainController {
 
 		mav.addObject("imageBoardList", imageBoardList);
 
-		mav.setViewName("mainForm.jsp");
+		mav.setViewName("/main/mainForm.jsp");
 
 		return mav;
 	}
 
-	@RequestMapping(value = "/loginForm.do")
+	@RequestMapping(value = "/main/loginForm.do")
 	public ModelAndView loginForm() {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("loginForm.jsp");
+		mav.setViewName("/main/loginForm.jsp");
 
 		return mav;
 	}
 
-	@RequestMapping(value = "/customerServiceForm.do")
+	@RequestMapping(value = "/main/customerServiceForm.do")
 	public ModelAndView customerServiceForm() {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("customerServiceForm.jsp");
+		mav.setViewName("/main/customerServiceForm.jsp");
 
 		return mav;
 	}
