@@ -75,7 +75,7 @@ public interface AdminDAO {
 	int getNoticeBoardCnt(int b_no);
 	
 	
-	
+	int insertNoticeBoard(CommunityDTO communityDTO);
 	
 	
 	
