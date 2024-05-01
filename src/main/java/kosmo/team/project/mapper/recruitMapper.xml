@@ -15,6 +15,18 @@
 		        team_recruitment
 	</select>
 	
+	<select id="getRecruit_MemBoardList" resultType="kosmo.team.project.dto.RecruitMemDTO">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        team_member_recruitment
+	</select>
+	
 	
 	<select id="getRecruit_HiredBoardList" resultType="kosmo.team.project.dto.RecruitHiredDTO">
 		    select 

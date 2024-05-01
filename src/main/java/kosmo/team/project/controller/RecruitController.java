@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.RecruitHiredDTO;
 import kosmo.team.project.dto.RecruitLessonDTO;
+import kosmo.team.project.dto.RecruitMemDTO;
 import kosmo.team.project.dto.RecruitTeamDTO;
 import kosmo.team.project.service.RecruitService;
 
@@ -25,8 +26,10 @@ public class RecruitController {
     	
     	
     	List<RecruitTeamDTO> recruitTeam = this.recruitService.getRecruit_TeamBoardList();
+    	List<RecruitMemDTO> recruitMem = this.recruitService.getRecruit_MemBoardList();
     	ModelAndView mav = new ModelAndView();
-    	mav.addObject("boardList", recruitTeam);
+    	mav.addObject("teamList", recruitTeam);
+    	mav.addObject("memList", recruitMem);
     	mav.setViewName("recruitTeamBoardForm.jsp");
     	
         return mav;
