@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kosmo.team.project.dto.RecruitHiredDTO;
 import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitMemDTO;
+import kosmo.team.project.dto.RecruitSearchDTO;
 import kosmo.team.project.dto.RecruitTeamDTO;
 import kosmo.team.project.service.RecruitService;
 
@@ -22,11 +23,11 @@ public class RecruitController {
 	
 	
     @RequestMapping(value = "/recruitTeamBoardForm.do")
-    public ModelAndView recruitTeamBoardForm() {
+    public ModelAndView recruitTeamBoardForm(RecruitSearchDTO recruitSearchDTO) {
     	
     	
-    	List<RecruitTeamDTO> recruitTeam = this.recruitService.getRecruit_TeamBoardList();
-    	List<RecruitMemDTO> recruitMem = this.recruitService.getRecruit_MemBoardList();
+    	List<RecruitTeamDTO> recruitTeam = this.recruitService.getRecruit_TeamBoardList(recruitSearchDTO);
+    	List<RecruitMemDTO> recruitMem = this.recruitService.getRecruit_MemBoardList(recruitSearchDTO);
     	ModelAndView mav = new ModelAndView();
     	mav.addObject("teamList", recruitTeam);
     	mav.addObject("memList", recruitMem);

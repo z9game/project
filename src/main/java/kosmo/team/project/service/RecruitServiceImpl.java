@@ -10,15 +10,11 @@ import kosmo.team.project.dao.CommunityDAO;
 import kosmo.team.project.dao.RecruitDAO;
 import kosmo.team.project.dao.SampleDAO;
 import kosmo.team.project.dao.TournamentDAO;
-import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.RecruitHiredDTO;
 import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitMemDTO;
+import kosmo.team.project.dto.RecruitSearchDTO;
 import kosmo.team.project.dto.RecruitTeamDTO;
-import kosmo.team.project.dto.SampleDTO;
-import kosmo.team.project.dto.SampleSearchDTO;
-import kosmo.team.project.dto.TournamentDTO;
-import kosmo.team.project.dto.TournamentSearchDTO;
 
 @Service
 @Transactional
@@ -28,17 +24,17 @@ public class RecruitServiceImpl implements RecruitService {
 	private RecruitDAO recruitDAO;
 	
 	
-	public List<RecruitTeamDTO> getRecruit_TeamBoardList() {
+	public List<RecruitTeamDTO> getRecruit_TeamBoardList(RecruitSearchDTO recruitSearchDTO) {
 
-		List<RecruitTeamDTO> getRecruit_TeamBoardList = this.recruitDAO.getRecruit_TeamBoardList();
+		List<RecruitTeamDTO> getRecruit_TeamBoardList = this.recruitDAO.getRecruit_TeamBoardList(recruitSearchDTO);
 
 		return getRecruit_TeamBoardList;
 
 	}
 	
-	public List<RecruitMemDTO> getRecruit_MemBoardList() {
+	public List<RecruitMemDTO> getRecruit_MemBoardList(RecruitSearchDTO recruitSearchDTO) {
 
-		List<RecruitMemDTO> getRecruit_MemBoardList = this.recruitDAO.getRecruit_MemBoardList();
+		List<RecruitMemDTO> getRecruit_MemBoardList = this.recruitDAO.getRecruit_MemBoardList(recruitSearchDTO);
 
 		return getRecruit_MemBoardList;
 
