@@ -56,4 +56,39 @@ public class RecruitServiceImpl implements RecruitService {
 		return getRecruit_LessonBoardList;
 
 	}
+
+	public RecruitTeamDTO getRecruit_TeamDetail(int recruitment_no) {
+
+		RecruitTeamDTO getRecruit_TeamDetail = this.recruitDAO.getRecruit_TeamDetail(recruitment_no);
+
+		return getRecruit_TeamDetail;
+
+	}
+	
+	
+	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no) {
+
+		RecruitHiredDTO getRecruit_HiredDetail = this.recruitDAO.getRecruit_HiredDetail(recruitment_no);
+
+		return getRecruit_HiredDetail;
+
+	}
+	
+
+	public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no) {
+
+		RecruitLessonDTO getRecruit_LessonDetail = this.recruitDAO.getRecruit_LessonDetail(recruitment_no);
+
+		return getRecruit_LessonDetail;
+
+	}
+	
+
+	public RecruitMemDTO getRecruit_MemDetail(int recruitment_no) {
+
+		RecruitMemDTO getRecruit_MemDetail = this.recruitDAO.getRecruit_MemDetail(recruitment_no);
+
+		return getRecruit_MemDetail;
+
+	}
 }

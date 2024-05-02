@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.RecruitHiredDTO;
@@ -81,6 +81,50 @@ public class RecruitController {
     	
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("newRecruitLessonBoardForm.jsp");
+    	
+        return mav;
+    }
+    
+    @RequestMapping(value = "/recruitTeamBoardDetailForm.do")
+    public ModelAndView recruitTeamBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
+    	
+    	RecruitTeamDTO recruitTeamDTO = this.recruitService.getRecruit_TeamDetail(recruitment_no);
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("teamdetailList", recruitTeamDTO);
+    	mav.setViewName("recruitTeamBoardDetailForm.jsp");
+    	
+        return mav;
+    }
+    
+    @RequestMapping(value = "/recruitHiredBoardDetailForm.do")
+    public ModelAndView recruitHiredBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
+    	
+    	RecruitHiredDTO recruitHiredDTO = this.recruitService.getRecruit_HiredDetail(recruitment_no);
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("hireddetailList", recruitHiredDTO);
+    	mav.setViewName("recruitHiredBoardDetailForm.jsp");
+    	
+        return mav;
+    }
+    
+    @RequestMapping(value = "/recruitLessonBoardDetailForm.do")
+    public ModelAndView recruitLessonBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
+    	
+    	RecruitLessonDTO recruitLessonDTO = this.recruitService.getRecruit_LessonDetail(recruitment_no);
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("lessondetailList", recruitLessonDTO);
+    	mav.setViewName("recruitLessonBoardDetailForm.jsp");
+    	
+        return mav;
+    }
+    
+    @RequestMapping(value = "/recruitMemBoardDetailForm.do")
+    public ModelAndView recruitMemBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
+    	
+    	RecruitMemDTO recruitMemDTO = this.recruitService.getRecruit_MemDetail(recruitment_no);
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("memdetailList", recruitMemDTO);
+    	mav.setViewName("recruitMemBoardDetailForm.jsp");
     	
         return mav;
     }
