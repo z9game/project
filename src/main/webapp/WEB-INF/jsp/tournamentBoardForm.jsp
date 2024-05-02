@@ -16,8 +16,7 @@
 	ing_or_end = "초기";
 	
 	$(function(){ing();
-	
-	
+
 	})
 	
 
@@ -266,12 +265,10 @@
 					</tr>
 					
 					</c:forEach>
-					<c:if test="${empty requestScope.tournamentList}">
-						
-							조건에 맞는 결과물이 없습니다.
-						
-					</c:if>
 				</table>
+				<c:if test="${empty requestScope.tournamentList}">
+					조건에 맞는 결과물이 없습니다.
+				</c:if>
 			</center>
 		</div> 
     

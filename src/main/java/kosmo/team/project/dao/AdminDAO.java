@@ -4,18 +4,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
-import kosmo.team.project.dto.CommunitySearchDTO;
 import kosmo.team.project.dto.MemberDTO;
-import kosmo.team.project.dto.MemberSearchDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 
 @Mapper
 public interface AdminDAO {
 	// 모든 회원 목록을 가져오는 메서드
-	public List<MemberDTO> getMemberList(MemberSearchDTO memberSearchDTO);
+	public List<MemberDTO> getMemberList(AdminSearchDTO adminSearchDTO);
 
-	public int getMemberListCnt(MemberSearchDTO memberSearchDTO);
+	public int getMemberListCnt(AdminSearchDTO adminSearchDTO);
 
 	public int getMemberListAllCnt();
 
@@ -52,9 +51,9 @@ public interface AdminDAO {
 	// 공지사항
 	//--------------------------------------
 	
-	public List<CommunityDTO> getNoticeBoardList(CommunitySearchDTO communitySearchDTO);
+	public List<CommunityDTO> getNoticeBoardList(AdminSearchDTO adminSearchDTO);
 
-	public int getNoticeBoardListCnt(CommunitySearchDTO communitySearchDTO);
+	public int getNoticeBoardListCnt(AdminSearchDTO adminSearchDTO);
 
 	public int getNoticeBoardAllCnt();
 

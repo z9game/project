@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
-import kosmo.team.project.dto.CommunitySearchDTO;
 import kosmo.team.project.dto.MemberDTO;
-import kosmo.team.project.dto.MemberSearchDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 import kosmo.team.project.service.AdminService;
 import kosmo.team.project.utility.Page;
@@ -30,37 +29,66 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
+	
+	
+	
+	
 	@RequestMapping("/adminForm.do")
-	public ModelAndView adminForm(MemberSearchDTO memberSearchDTO, HttpSession session) {
+
+	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, HttpSession session) {
+		
+		
 		// 세션에서 사용자 아이디를 가져옴
 		String userId = (String) session.getAttribute("mid");
 		// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
 		if (userId == null || !userId.equals("admin")) {
 			return new ModelAndView("redirect:/loginForm.do");
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		// admin인 경우에만 회원 목록 조회 수행
 		int memberListAllCnt = this.adminService.getMemberListAllCnt();
 
-		int memberListCnt = this.adminService.getMemberListCnt(memberSearchDTO);
-
+		int memberListCnt = this.adminService.getMemberListCnt(adminSearchDTO);
+			
+		
 		Map<String, Integer> memberMap = Page.getPagingMap(
 
-				memberSearchDTO.getSelectPageNo()// 선택한 페이지 번호
-				, memberSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+				adminSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+				, adminSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
 				, memberListCnt // 검색 결과물 개수
 
 		);
 
-		memberSearchDTO.setSelectPageNo((int) memberMap.get("selectPageNo"));
-		memberSearchDTO.setRowCntPerPage((int) memberMap.get("rowCntPerPage"));
-		memberSearchDTO.setBegin_rowNo((int) memberMap.get("begin_rowNo"));
-		memberSearchDTO.setEnd_rowNo((int) memberMap.get("end_rowNo"));
+		adminSearchDTO.setSelectPageNo((int) memberMap.get("selectPageNo"));
+		adminSearchDTO.setRowCntPerPage((int) memberMap.get("rowCntPerPage"));
+		adminSearchDTO.setBegin_rowNo((int) memberMap.get("begin_rowNo"));
+		adminSearchDTO.setEnd_rowNo((int) memberMap.get("end_rowNo"));
+			
+		
+		//System.out.println("gender: " + adminSearchDTO.getGender());
+		//System.out.println("maxDate1: " + adminSearchDTO.getMaxDate());
+		
+		List<MemberDTO> memberList = this.adminService.getMemberList(adminSearchDTO);
+		//System.out.println("maxDate2: " + adminSearchDTO.getMaxDate());
+		
 
-		List<MemberDTO> memberList = this.adminService.getMemberList(memberSearchDTO);
+		
+		
+		//System.out.println("minDate: " + adminSearchDTO.getMinDate());
 
+		
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("memberList", memberList);
+
 		mav.addObject("memberListCnt", memberListCnt);
 		mav.addObject("memberListAllCnt", memberListAllCnt);
 		mav.addObject("memberMap", memberMap);
@@ -68,6 +96,19 @@ public class AdminController {
 
 		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "/adminMemberDetailForm.do")
 	public ModelAndView adminMemberDetailForm(
@@ -232,7 +273,7 @@ public class AdminController {
 	// ------------------------------------------------------------------
 
 	@RequestMapping("/adminNoticeBoardForm.do")
-	public ModelAndView adminNoticeBoardForm(CommunitySearchDTO communitySearchDTO, HttpSession session) {
+	public ModelAndView adminNoticeBoardForm(AdminSearchDTO adminSearchDTO, HttpSession session) {
 		// 세션에서 사용자 아이디를 가져옴
 		String userId = (String) session.getAttribute("mid");
 		// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
@@ -242,22 +283,22 @@ public class AdminController {
 		// admin인 경우에만 회원 목록 조회 수행
 		int noticeBoardListAllCnt = this.adminService.getNoticeBoardAllCnt();
 
-		int noticeBoardListCnt = this.adminService.getNoticeBoardListCnt(communitySearchDTO);
+		int noticeBoardListCnt = this.adminService.getNoticeBoardListCnt(adminSearchDTO);
 
 		Map<String, Integer> noticeBoardMap = Page.getPagingMap(
 
-				communitySearchDTO.getSelectPageNo()// 선택한 페이지 번호
-				, communitySearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+				adminSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+				, adminSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
 				, noticeBoardListCnt // 검색 결과물 개수
 
 		);
 
-		communitySearchDTO.setSelectPageNo((int) noticeBoardMap.get("selectPageNo"));
-		communitySearchDTO.setRowCntPerPage((int) noticeBoardMap.get("rowCntPerPage"));
-		communitySearchDTO.setBegin_rowNo((int) noticeBoardMap.get("begin_rowNo"));
-		communitySearchDTO.setEnd_rowNo((int) noticeBoardMap.get("end_rowNo"));
+		adminSearchDTO.setSelectPageNo((int) noticeBoardMap.get("selectPageNo"));
+		adminSearchDTO.setRowCntPerPage((int) noticeBoardMap.get("rowCntPerPage"));
+		adminSearchDTO.setBegin_rowNo((int) noticeBoardMap.get("begin_rowNo"));
+		adminSearchDTO.setEnd_rowNo((int) noticeBoardMap.get("end_rowNo"));
 
-		List<CommunityDTO> noticeBoardList = this.adminService.getNoticeBoardList(communitySearchDTO);
+		List<CommunityDTO> noticeBoardList = this.adminService.getNoticeBoardList(adminSearchDTO);
 
 		ModelAndView mav = new ModelAndView();
 
@@ -415,7 +456,7 @@ public class AdminController {
 		// [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
 		// -------------------------------------------
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(adminFolder+"adminNoticeboardRegForm.jsp");
+		mav.setViewName(adminFolder + "adminNoticeboardRegForm.jsp");
 		// ----------------------------------------------------
 		// [ModelAndView 객체] 리턴하기
 		// ----------------------------------------------------
@@ -436,9 +477,8 @@ public class AdminController {
 			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
 			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
 
-			CommunityDTO communityDTO
+			CommunityDTO communityDTO) {
 
-	) {
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		int adminNoticeboardRegCnt = this.adminService.insertNoticeBoard(communityDTO);

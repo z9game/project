@@ -133,6 +133,14 @@
 					maxlength="30" value="${requestScope.memberDTO.phone}"></td>
 			</tr>
 			<tr>
+				<th bgColor="lightgray">성별</th>
+				<td><input type="radio" name="gender" value="남"
+					<c:if test="${requestScope.memberDTO.gender.contains ('남')}">checked</c:if>>남
+					<input type="radio" name="gender" value="여"
+					<c:if test="${requestScope.memberDTO.gender.contains ('여')}">checked</c:if>>여</td>
+			</tr>
+
+			<tr>
 				<th bgColor="lightgray">상세주소</th>
 				<td><input type="text" name="detail_address"
 					class="detail_address" size="40" maxlength="30"

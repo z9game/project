@@ -5,10 +5,132 @@
 
 <mapper namespace="kosmo.team.project.dao.AdminDAO">
 
+
+
+	<sql id="boardWhere">
+		<if
+			test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+			and (
+		</if>
+		<if test="keyword1 != null and keyword1.length() > 0">
+			(
+			<if test="searchType1 == 'name'">
+				upper(name) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'mid'">
+				upper(mid) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'nickname'">
+				upper(nickname) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'phone'">
+				upper(phone) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'email'">
+				upper(email) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'all'">
+				upper(name) like upper('%${keyword1}%')
+				or
+				upper(mid) like
+				upper('%${keyword1}%')
+				or
+				upper(nickname) like upper('%${keyword1}%')
+				or
+				upper(email) like upper('%${keyword1}%')
+				or
+				upper(phone) like
+				upper('%${keyword1}%')
+			</if>
+			)
+		</if>
+		<if test="keyword2 != null and keyword2.length() > 0">
+			${orand}
+			(
+			<if test="searchType2 == 'name'">
+				upper(name) like upper('%${keyword2}%')
+			</if>
+			<if test="searchType2 == 'mid'">
+				upper(mid) like upper('%${keyword2}%')
+			</if>
+			<if test="searchType2 == 'nickname'">
+				upper(nickname) like upper('%${keyword2}%')
+			</if>
+			<if test="searchType2 == 'phone'">
+				upper(phone) like upper('%${keyword2}%')
+			</if>
+			<if test="searchType2 == 'email'">
+				upper(email) like upper('%${keyword2}%')
+			</if>
+			<if test="searchType2 == 'all'">
+				upper(name) like upper('%${keyword2}%')
+				or
+				upper(mid) like
+				upper('%${keyword2}%')
+				or
+				upper(nickname) like upper('%${keyword2}%')
+				or
+				upper(email) like upper('%${keyword2}%')
+				or
+				upper(phone) like
+				upper('%${keyword2}%')
+			</if>
+			)
+		</if>
+		<if test="gender != null ">
+			and gender =
+			<foreach item="temp"  collection="gender"
+				open=" ( " separator="," close=" ) ">
+				#{temp}
+			</foreach>
+		</if>
+
+
+		<if test="(minDate != null and minDate.length() > 0)">
+			and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
+			<if test="(maxDate != null and maxDate.length() > 0)">
+				and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
+			</if>
+		</if>
+		<if test="(maxDate != null and maxDate.length() > 0)">
+			and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
+			<if test="(minDate != null and minDate.length() > 0)">
+				and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
+			</if>
+		</if>
+		<if
+			test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+			)
+		</if>
+	</sql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- 모든 회원 목록을 가져오는 쿼리 정의 -->
 	<select id="getMemberList"
 		resultType="kosmo.team.project.dto.MemberDTO"
-		parameterType="kosmo.team.project.dto.MemberSearchDTO">
+		parameterType="kosmo.team.project.dto.AdminSearchDTO">
 		select * from ( select rownum RNUM, zxcvb.* from (
 
 		select
@@ -17,12 +139,32 @@
 		mid AS "mid",
 		name AS "name",
 		nickname as "nickname",
-		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date"
+		email as
+		"email",
+		birthdate as "birthday",
+		phone as "phone",
+		gender as "gender",
+		detail_address as "detail_address",
+
+		to_char(reg_date, 'YYYY-MM-DD') AS
+		"reg_date"
 		FROM
 		member
 		where m_no != 1
-		order by
-		m_no asc
+		<include refid="boardWhere" />
+		<if test="sort==null or sort.length()==0">
+			order by
+
+			m_no asc
+		</if>
+
+		<if test="sort!=null and sort.length()>0">
+			order by
+
+			${sort}
+		</if>
+		
+		
     	
     <![CDATA[
     ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
@@ -36,6 +178,8 @@
 		count(*)
 		from
 		member
+		where 1=1
+		<include refid="boardWhere" />
 	</select>
 
 
@@ -45,6 +189,8 @@
 		select count(*)
 		from
 		member
+		where 1=1
+		<include refid="boardWhere" />
 	</select>
 
 
@@ -90,7 +236,11 @@
 		,
 		email = #{email}
 		,birthdate = #{birthday}
+
 		,phone = #{phone}
+
+		,gender =
+		#{gender}
 		,detail_address =
 		#{detail_address}
 
@@ -195,7 +345,7 @@
 
 	<select id="getNoticeBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
-		parameterType="kosmo.team.project.dto.CommunitySearchDTO">
+		parameterType="kosmo.team.project.dto.AdminSearchDTO">
 		select * from ( select rownum RNUM, zxcvb.* from (
 
 		select
@@ -208,8 +358,18 @@
 		readcount AS "readcount"
 		FROM
 		noticeboard
-		order by
-		b_no desc
+
+		<if test="sort==null or sort.length()==0">
+			order by
+
+			b_no desc
+		</if>
+
+		<if test="sort!=null and sort.length()>0">
+			order by
+
+			${sort}
+		</if>
 		    	
 		    <![CDATA[
 			) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
@@ -303,7 +463,6 @@
 		,content
 		=
 		#{content}
-		, reg_date = SYSDATE
 
 		where b_no = #{b_no}
 
