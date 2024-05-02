@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NewCustomerServiceQnAForm</title>
+<title>CustomerServiceQnADetailForm</title>
 <link href="/style/newCustomerServiceQnAFormStyle.css" rel="stylesheet">
 <script src="/js/newCustomerServiceQnAFormScript.js"></script>
 </head>
@@ -14,7 +14,7 @@
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="newCustomerServiceQnAFormTitle">
     	<img src="/image/CommunityTitleBackgroundImage.jpg" class="titleBackgoundImg">
-    	<p class="titleBackgoundText">QnA 등록</p>
+    	<p class="titleBackgoundText">QnA</p>
     </div>
     <div class="newCustomerServiceQnAFormContainer">
 		<form name="newCustomerServiceQnAForm">
@@ -22,25 +22,21 @@
 				<tr>
 					<th>제목</th>
 					<td>
-						<input type="text" name="subject" class="subject" size="40" maxlength="30">
+						${customerServiceQnABoard.subject}
 					</td>
 				</tr>
 				<tr>
 					<th>글쓴이</th>
 					<td>
-						<input type="text" name="writer" class="writer" size="40" maxlength="15">
+						${customerServiceQnABoard.writer}
 					</td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td>
-						<input type="password" name="pwd" class="pwd" size="40" maxlength="4">
+						<textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none" readonly>
+							${customerServiceQnABoard.content}
+						</textarea>
 					</td>
 				</tr>
 			</table>

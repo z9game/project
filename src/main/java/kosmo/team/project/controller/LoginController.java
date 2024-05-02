@@ -48,8 +48,10 @@ public class LoginController {
 		
 
 
-	Map<String, String> map = new HashMap<String, String>();map.put("mid",mid);map.put("password",password);
+	Map<String, String> map = new HashMap<String, String>();
+	map.put("mid",mid);map.put("password",password);
 
+	String nickname = loginService.getNickname(mid);
 	int midpwdCnt = this.loginService.getmidpwdCnt(map);
 
 	// 로그인이 성공했다면 (즉, midpwdCnt가 1 이상이면)
@@ -57,8 +59,11 @@ public class LoginController {
 	{
 		// 세션에 사용자 아이디를 저장합니다.
 		session.setAttribute("mid", mid);
+		session.setAttribute("password", password);
+		session.setAttribute("nickname", nickname);
+		
 	}
-
+	
 	return midpwdCnt;
 	}
 	
@@ -66,7 +71,7 @@ public class LoginController {
 	@RequestMapping(value = "/logoutProc.do")
 	public String logoutProc(HttpSession session) {
 		session.invalidate(); // 세션 무효화
-		return "redirect:/loginForm.do"; // 로그인 페이지로 리다이렉트
+		return "redirect:/main/loginForm.do"; // 로그인 페이지로 리다이렉트
 	}
 
 }

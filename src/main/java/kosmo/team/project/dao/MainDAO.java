@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
 
@@ -25,4 +26,9 @@ public interface MainDAO {
 	public int getCustomerServiceQnABoardListCnt(MainSearchDTO mainSearchDTO);
 	
 	public List<MainDTO> getCustomerServiceQnABoardList(MainSearchDTO mainSearchDTO);
+	
+	public int updateCustomerServiceDetailFormReadCountPlusOne(CustomerServiceDetailDTO customerServiceDetailDTO);
+	
+	public CustomerServiceDetailDTO getCustomerServiceQnADetail(CustomerServiceDetailDTO customerServiceDetailDTO);
+	
 }

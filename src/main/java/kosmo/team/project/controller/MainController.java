@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
 import kosmo.team.project.service.MainService;
@@ -106,12 +107,26 @@ public class MainController {
         return mav;
     }
 	
+	// QnA 조회수 증가
+	
+	@RequestMapping(value = "/updateCustomerServiceDetailFormReadCountPlusOne.do")
+    public ModelAndView updateCustomerServiceDetailFormReadCountPlusOne(CustomerServiceDetailDTO customerServiceDetailDTO) {
+    	
+		mainService.updateCustomerServiceDetailFormReadCountPlusOne(customerServiceDetailDTO);
+		
+        return customerServiceDetail(customerServiceDetailDTO);
+    }
+	
 	// QnA Detail 페이지
 	
 	@RequestMapping(value = "/main/customerServiceQnADetailForm.do")
-    public ModelAndView customerServiceQnADetailForm() {
+    public ModelAndView customerServiceDetail(CustomerServiceDetailDTO customerServiceDetailDTO) {
     	
     	ModelAndView mav = new ModelAndView();
+    	
+    	CustomerServiceDetailDTO customerServiceQnADetail = mainService.getCustomerServiceQnADetail(customerServiceDetailDTO);
+    	
+    	mav.addObject("customerServiceQnADetail", customerServiceQnADetail);
     	
     	mav.setViewName("/main/customerServiceQnADetailForm.jsp");
     	

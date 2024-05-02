@@ -104,6 +104,36 @@
 
 		search();
 	}
+	
+	function submitDetailForm(b_no){
+		var formObj = $(".customerServiceDetailForm");
+		formObj.find("[name='b_no']").val(b_no);
+		document.customerServiceDetailForm.submit();
+	}
+	
+	function newCustomerServiceQnABoardBtnClick() {
+		
+	    var sessionMid = '<%= session.getAttribute("mid") %>'
+
+	    if (sessionMid === 'null') {
+	    	alert('로그인이 필요한 서비스입니다.');
+	    } else {
+	    	checkPwd();
+	    }
+	    
+	    function checkPwd(){
+	    	var pwdInput = prompt("계정 비밀번호를 입력해주세요.");
+	    	var sessionPwd = '<%= session.getAttribute("password") %>'
+	    	
+	    	if(pwdInput == sessionPwd){
+	        	location.href = '/main/newCustomerServiceQnAForm.do';
+	    	} else {
+	    		alert("비밀번호가 다릅니다.");
+	    		checkPwd();
+	    	}
+	    }
+	}
+
 </script>
 </head>
 <body>
@@ -116,7 +146,7 @@
     	<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
     	<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
     </form>
-    <form name="customerServiceDetailForm" action="#" method="post">
+    <form name="customerServiceDetailForm" class="customerServiceDetailForm" action="/updateCustomerServiceDetailFormReadCountPlusOne.do" method="post">
     	<input type="hidden" name="b_no">
     </form>
     <div class="customerServiceCategoryTab">
@@ -157,7 +187,7 @@
 				<div class="customerServiceQnAFormContainer">
 					<div class="customerServiceQnAFormBoard">
 						<div class="newCustomerServiceQnABoardBtnDiv">
-							<input type="button" class="newCustomerServiceQnABoardBtn" value="새 글 쓰기" onClick="location.href='/main/newCustomerServiceQnAForm.do'">
+							<input type="button" class="newCustomerServiceQnABoardBtn" value="새 글 쓰기" onClick="newCustomerServiceQnABoardBtnClick()">
 						</div>
 						<table class="customerServiceQnABoardListTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
 							<tr>
@@ -167,7 +197,7 @@
 								<th style="width:100px;">등록일</th>
 								<th style="width:100px;">조회수</th>
 								<c:forEach var="customerServiceQnABoard" items="${requestScope.customerServiceQnABoardList}" varStatus="status">
-									<tr style="cursor:pointer" onClick="goBoardDetailForm(${customerServiceQnABoard.b_no});">
+									<tr style="cursor:pointer" onClick="submitDetailForm(${customerServiceQnABoard.b_no});">
 										<td align="center">${requestScope.customerServiceQnABoardMap.begin_serialNo_desc - status.count + 1}</td>
 										<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
 										<td align="center">${customerServiceQnABoard.subject}</td>

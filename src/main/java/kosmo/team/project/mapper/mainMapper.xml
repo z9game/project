@@ -64,7 +64,8 @@
                     m.nickname AS "writer", 
                     q.content AS "content", 
                     to_char(q.reg_date, 'YYYY-MM-DD') AS "reg_date", 
-                    q.readcount AS "readcount" 
+                    q.readcount AS "readcount",
+                    m.password AS "password" 
                	 FROM 
                	 	qnaboard q, 
                     MEMBER m 
@@ -88,5 +89,28 @@
 	
 	<select id="getCustomerServiceQnABoardListAllCnt" resultType="int">
 		select count(*) from qnaboard
+	</select>
+	
+	<select id="getCustomerServiceQnADetail" parameterType="kosmo.team.project.dto.CustomerServiceDetailDTO" resultType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+		select
+			q.subject AS "subject", 
+            m.nickname AS "writer", 
+            q.content AS "content", 
+            to_char(q.reg_date, 'YYYY-MM-DD') AS "reg_date", 
+            q.readcount AS "readcount"
+        FROM 
+            qnaboard q, 
+            MEMBER m 
+        WHERE 
+            q.writer = m.m_no 
+	</select>
+	
+	<select id="updateCustomerServiceDetailFormReadCountPlusOne" parameterType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+		update
+			qnaboard
+		set
+			readcount = readcount + 1
+		where
+			b_no = #{b_no}
 	</select>
 </mapper>

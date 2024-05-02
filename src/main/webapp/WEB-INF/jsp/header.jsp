@@ -63,7 +63,7 @@
 					<li class="nav-item"><a href="/main/customerServiceForm.do">고객센터</a>
 					</li>
 					<c:if test="${not empty sessionScope.mid}">
-						<li class="auth-links">${sessionScope.mid}님 환영합니다!
+						<li class="auth-links">${sessionScope.nickname} 님 환영합니다!
 							&nbsp;&nbsp;&nbsp;
 						<c:if test="${sessionScope.mid!= 'admin'}">
 						<a href="#">마이페이지</a>
