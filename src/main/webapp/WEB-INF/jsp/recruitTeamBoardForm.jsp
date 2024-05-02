@@ -166,7 +166,21 @@
 
 	}
 	
+	function goRecruitTeamDetailForm(recruitment_no)
+	{
+		
+		$("[name='recruitTeamBoardDetailForm'] [name='recruitment_no']").val(recruitment_no); 
+		document.recruitTeamBoardDetailForm.submit();
+	}
 	
+	function goRecruitMemDetailForm(recruitment_no)
+	{
+		
+		alert(1);
+		
+		$("[name='recruitMemBoardDetailForm'] [name='recruitment_no']").val(recruitment_no); 
+		document.recruitMemBoardDetailForm.submit();
+	}
 	
 	
 </script>
@@ -302,7 +316,7 @@
 								<th style="width:100px;">조회수</th>
 								<th style="width:100px;">등록일</th>
 								<c:forEach var="team" items="${requestScope.teamList}" varStatus="status">
-									<tr style="cursor:pointer" onClick="goBoardDetailForm();">
+									<tr style="cursor:pointer" onClick="goRecruitTeamDetailForm(${team.recruitment_no});">
 										<td align="center">${team.recruitment_no}</td>
 										<td align="center">${team.title}</td>
 										<td align="center">${team.writer}</td>
@@ -321,6 +335,11 @@
 					</div>
 				</div>
 	      </div>
+	      
+		<form name="recruitTeamBoardDetailForm" action="/recruitTeamBoardDetailForm.do" method="post">
+			<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+			<input type="hidden" name="recruitment_no">
+		</form>
 	      
 	  <!-- ======================================================================================================================================================================================================================= -->   
 	  <!-- 밑에는 팀원 선택 --> 
@@ -436,7 +455,7 @@
 								<th style="width:100px;">조회수</th>
 								<th style="width:100px;">등록일</th>
 								<c:forEach var="mem" items="${requestScope.memList}" varStatus="status">
-									<tr style="cursor:pointer" onClick="goBoardDetailForm();">
+									<tr style="cursor:pointer" onClick="goRecruitMemDetailForm(${mem.recruitment_no});">
 										<td align="center">${mem.recruitment_no}</td>
 										<td align="center">${mem.title}</td>
 										<td align="center">${mem.writer}</td>
@@ -458,7 +477,12 @@
 	    </div>
   	</div>
   	
-  	
+ 
+	      
+		<form name="recruitMemBoardDetailForm" action="/recruitMemBoardDetailForm.do" method="post">
+			<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+			<input type="hidden" name="recruitment_no">
+		</form> 	
   	
 	   
 </body>

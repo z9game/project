@@ -115,4 +115,65 @@
 		        Lesson_recruitment
 	</select>	
 	
+	
+	<select id="getRecruit_TeamDetail" resultType="kosmo.team.project.dto.RecruitTeamDTO" parameterType="int">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        team_recruitment
+		    where
+		    	recruitment_no = #{recruitment_no}
+	</select>	
+	
+	
+	<select id="getRecruit_HiredDetail" resultType="kosmo.team.project.dto.RecruitHiredDTO" parameterType="int">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        hired_recruitment
+		    where
+		    	recruitment_no = #{recruitment_no}
+	</select>	
+	
+	
+	<select id="getRecruit_LessonDetail" resultType="kosmo.team.project.dto.RecruitLessonDTO" parameterType="int">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        lesson_recruitment
+		    where
+		    	recruitment_no = #{recruitment_no}
+	</select>
+	
+	<select id="getRecruit_MemDetail" resultType="kosmo.team.project.dto.RecruitMemDTO" parameterType="int">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        TEAM_MEMBER_RECRUITMENT
+		    where
+		    	recruitment_no = #{recruitment_no}
+	</select>
+	
+	
+	
 </mapper>

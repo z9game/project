@@ -18,5 +18,16 @@ public interface RecruitService {
 	public List<RecruitHiredDTO> getRecruit_HiredBoardList();
 	
 	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
+	
+	RecruitTeamDTO getRecruit_TeamDetail(int recruitment_no);
+
+	RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no);
+
+	RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
+
+	RecruitMemDTO getRecruit_MemDetail(int recruitment_no);
+
+
 
 }
+

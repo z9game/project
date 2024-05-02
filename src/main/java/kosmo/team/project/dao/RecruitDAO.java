@@ -20,5 +20,14 @@ public interface RecruitDAO {
 	public List<RecruitHiredDTO> getRecruit_HiredBoardList();
 	
 	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
+	
+	public RecruitTeamDTO getRecruit_TeamDetail(int recruitment_no);
+	
+	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no);
+	
+	public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
+	
+	public RecruitMemDTO getRecruit_MemDetail(int recruitment_no);
+
 
 }
