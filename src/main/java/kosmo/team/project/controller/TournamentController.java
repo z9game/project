@@ -24,7 +24,7 @@ public class TournamentController {
     	List<TournamentDTO> tournamentList = this.tournamentService.getTournamentList(tournamentSearchDTO);
         ModelAndView mav = new ModelAndView();
         mav.addObject("tournamentList", tournamentList);
-        mav.setViewName("tournamentBoardForm.jsp");
+        mav.setViewName("tournamentBoardForm2.jsp");
         
         
         return mav;

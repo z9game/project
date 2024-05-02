@@ -9,6 +9,15 @@ public class MainDTO {
 	private String reg_date;
 	private int readcount;
 	
+	private String region;
+	private String regist_start;
+	private String regist_end;
+	
+	private int customerservice_categoryno;
+	private String customerservice_categoryname;
+	private String customerservice_subject;
+	private String customerservice_content;
+	
 	public int getB_no() {
 		return b_no;
 	}
@@ -45,5 +54,46 @@ public class MainDTO {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
-
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
+	}
+	public String getRegist_start() {
+		return regist_start;
+	}
+	public void setRegist_start(String regist_start) {
+		this.regist_start = regist_start;
+	}
+	public String getRegist_end() {
+		return regist_end;
+	}
+	public void setRegist_end(String regist_end) {
+		this.regist_end = regist_end;
+	}
+	public int getCustomerservice_categoryno() {
+		return customerservice_categoryno;
+	}
+	public void setCustomerservice_categoryno(int customerservice_categoryno) {
+		this.customerservice_categoryno = customerservice_categoryno;
+	}
+	public String getCustomerservice_categoryname() {
+		return customerservice_categoryname;
+	}
+	public void setCustomerservice_categoryname(String customerservice_categoryname) {
+		this.customerservice_categoryname = customerservice_categoryname;
+	}
+	public String getCustomerservice_subject() {
+		return customerservice_subject;
+	}
+	public void setCustomerservice_subject(String customerservice_subject) {
+		this.customerservice_subject = customerservice_subject;
+	}
+	public String getCustomerservice_content() {
+		return customerservice_content;
+	}
+	public void setCustomerservice_content(String customerservice_content) {
+		this.customerservice_content = customerservice_content;
+	}
 }

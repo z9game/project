@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "kosmo.team.project.dao.RecruitDAO">
+
+	<select id="getRecruit_TeamBoardList" resultType="kosmo.team.project.dto.RecruitTeamDTO" parameterType="kosmo.team.project.dto.RecruitSearchDTO">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        team_recruitment
+		    where
+		    	1=1
+		    	<if
+					test="(keyword1 != null and keyword1.length() > 0)">
+					and (
+				</if>
+				<if test="keyword1 != null and keyword1.length() > 0">
+					(
+					<if test="searchType1 == 'writer'">
+						upper(writer) like upper('%${keyword1}%')
+					</if>
+					<if test="searchType1 == 'title'">
+						upper(title) like upper('%${keyword1}%')
+					</if>
+					<if test="searchType1== 'content'">
+						upper(content) like upper('%${keyword1}%')
+					</if>
+					<if test="searchType1 == 'all'">
+						upper(writer) like upper('%${keyword1}%')
+						or
+						upper(title) like upper('%${keyword1}%')
+						or
+						upper(content) like upper('%${keyword1}%')
+					</if>
+					)
+				</if>
+				<if
+					test="(keyword1 != null and keyword1.length() > 0)">
+					)
+				</if>
+				
+		    	
+	</select>
+	
+	<select id="getRecruit_MemBoardList" resultType="kosmo.team.project.dto.RecruitMemDTO" parameterType="kosmo.team.project.dto.RecruitSearchDTO">
+		    select 
+		        recruitment_no 
+		        ,title
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        team_member_recruitment
+		    where
+		    	1=1
+		    	<if
+					test="(keyword2 != null and keyword2.length() > 0)">
+					and (
+				</if>
+				<if test="keyword2 != null and keyword2.length() > 0">
+					(
+					<if test="searchType2 == 'writer'">
+						upper(writer) like upper('%${keyword2}%')
+					</if>
+					<if test="searchType2 == 'title'">
+						upper(title) like upper('%${keyword2}%')
+					</if>
+					<if test="searchType2 == 'content'">
+						upper(content) like upper('%${keyword2}%')
+					</if>
+					<if test="searchType2 == 'all'">
+						upper(writer) like upper('%${keyword2}%')
+						or
+						upper(title) like upper('%${keyword2}%')
+						or
+						upper(content) like upper('%${keyword2}%')
+					</if>
+					)
+				</if>
+				<if
+					test="(keyword2 != null and keyword2.length() > 0)">
+					)
+				</if>
+	</select>
+	
+	
+	<select id="getRecruit_HiredBoardList" resultType="kosmo.team.project.dto.RecruitHiredDTO">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        Hired_recruitment
+	</select>
+	
+	<select id="getRecruit_LessonBoardList" resultType="kosmo.team.project.dto.RecruitLessonDTO">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		        ,money
+		    from 
+		        Lesson_recruitment
+	</select>	
+	
+	
+	<select id="getRecruit_TeamDetail" resultType="kosmo.team.project.dto.RecruitTeamDTO" parameterType="int">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        team_recruitment
+		    where
+		    	recruitment_no = #{recruitment_no}
+	</select>	
+	
+	
+	<select id="getRecruit_HiredDetail" resultType="kosmo.team.project.dto.RecruitHiredDTO" parameterType="int">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        hired_recruitment
+		    where
+		    	recruitment_no = #{recruitment_no}
+	</select>	
+	
+	
+	<select id="getRecruit_LessonDetail" resultType="kosmo.team.project.dto.RecruitLessonDTO" parameterType="int">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        lesson_recruitment
+		    where
+		    	recruitment_no = #{recruitment_no}
+	</select>
+	
+	<select id="getRecruit_MemDetail" resultType="kosmo.team.project.dto.RecruitMemDTO" parameterType="int">
+		    select 
+		        recruitment_no 
+		        ,title 
+		        ,writer 
+		        ,content 
+		        ,readcount 
+		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+		    from 
+		        TEAM_MEMBER_RECRUITMENT
+		    where
+		    	recruitment_no = #{recruitment_no}
+	</select>
+	
+	
+	
+</mapper>
