@@ -20,10 +20,7 @@ body {
 .section {
     scroll-snap-align: start;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 3em;
-    border: 1px solid #ccc;
 }
 
 #sectionMain{
@@ -63,7 +60,7 @@ body {
 /*<------------------------------------------------------->*/
 
 #sectionSchedule{
-	background-color:green;
+	background-color:#F5F5F5;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -73,52 +70,57 @@ body {
 	font-size: 50px;
 }
 
-.regionlist{
-	display: flex;
-	flex-direction: row;
-}
-
-.sectionScheduleChoiceTable{
-	border-collapse:collapse;
+.sectionScheduleTitle{
 	margin-top: 100px;
-	width: 100px;
-	height: 50px;
 }
 
-.sectionScheduleRegionTable{
-	border-collapse:collapse;
+.sectionScheduleContainer{
+	overflow-x: auto; /* 필요할 때만 스크롤이 생기도록 설정 */
+    overflow-y: hidden; /* 세로 스크롤 제거 */
+    white-space: nowrap; /* 요소들이 한 줄에 나타나도록 설정 */
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start; /* 요소들을 왼쪽으로 정렬 */
+    align-items: flex-start; /* 요소들을 위쪽으로 정렬 */
+    margin-top: 100px;
+    padding-bottom: 20px; /* 요소들 사이의 간격 설정 */
 }
 
-.sectionScheduleRegionTableSelect{
-	cursor:pointer;
+.sectionScheduleFormBoard {
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-right: 20px;
+    white-space: nowrap;
 }
 
-.sectionScheduleTournamentTableList{
-	cursor:pointer;
+.sectionScheduleFormBoardImageDiv {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
 }
 
-#sectionSchedule .regionlist .sectionScheduleTournamentTable .sectionScheduleTournamentTableList .titleBackgroundImg{
-	width: 20px;
-	height: 10px;
+.sectionScheduleFormBoardSubject {
+	text-align: center;
+	margin-top: 25px;
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 10px;
 }
 
-.region {
-    cursor: pointer;
+.sectionScheduleFormBoardRegion{
+	margin-bottom: 5px;
 }
 
-.selected {
-    color: red; /* 변경하고 싶은 색상으로 수정하세요 */
-    font-weight: bold;
+.sectionScheduleTournamentImg {
+    max-height: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
-
-.tournament {
-    cursor: pointer;
-}
-.selected2 {
-    background-color: lightgray;
-}
-
-
 /*<---------------------------------------------------->*/
 /*<------------------- 갤러리 Section ------------------->*/
 /*<---------------------------------------------------->*/
@@ -126,11 +128,15 @@ body {
 #sectionMedia{
 	background-color: #F5F5F5;
 	height: 100%;
-	flex-direction: column;
+	flex-direction: column;;
 }
 
 #sectionMedia strong{
 	font-size: 50px;
+}
+
+.sectionMediaGallaryTitle{
+	margin-top: 100px;
 }
  
 .sectionMediaGallaryContainer::-webkit-scrollbar{
@@ -144,7 +150,7 @@ body {
     position: relative;
     box-sizing: border-box;
     display: flex;
-    justify-content: flex-start; /* 요소들을 왼쪽으로 정렬 */
+    justify-content: flex-end; /* 요소들을 왼쪽으로 정렬 */
     align-items: flex-start; /* 요소들을 위쪽으로 정렬 */
     margin-top: 100px;
     padding-bottom: 20px; /* 요소들 사이의 간격 설정 */
@@ -153,7 +159,6 @@ body {
 .sectionMediaGallaryFormBoard {
 	height: 300px;
     animation: bannermove 10s linear infinite;
-    max-width: 300px;
     border: 1px solid #ccc;
     padding: 10px;
     box-sizing: border-box;
@@ -180,10 +185,12 @@ body {
 }
 
 .sectionMediaGallarySubject {
-	margin-top: 10px;
+	text-align: center;
+	margin-top: 25px;
 }
 
 .sectionMediaGallaryImage {
     max-height: 100%;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
