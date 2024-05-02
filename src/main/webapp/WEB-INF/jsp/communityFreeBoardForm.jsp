@@ -96,6 +96,14 @@
 		search()
 
 	}
+	
+	function submitDetailForm(b_no) {
+		
+		var formObj = $("#detailForm");
+		formObj.find("[name='b_no']").val(b_no);
+		document.detailForm.submit();
+		
+	}
 </script>
 
 </head>
@@ -114,11 +122,15 @@
 			class="rowCntPerPage">
 	</form>
 
+	<form name="detailForm" id="detailForm" action="/updateFreeBoardDetailReadCountPlusOne.do" method="post">
+		<input type="hidden" name="b_no">
+	</form>
 
-
-
-
-
+<center>
+	<div style="height: 10px"></div>
+	<input type="button" value="    새 글쓰기    " onclick="location.replace('/newCommunityFreeBoardForm.do');">
+	<div style="height: 10px"></div>
+</center>
 
 <div class="communityFreeBoardFormContainer">
 
@@ -141,7 +153,7 @@
 
 			<c:forEach var="freeboard" items="${requestScope.freeBoardList}"
 				varStatus="status">
-				<tr style="cursor: pointer">
+				<tr style="cursor: pointer" onClick="submitDetailForm( ${ freeboard.b_no } );">
 					<td align="center">${requestScope.freeBoardMap.begin_serialNo_desc - status.index}</td>
 					<td>${freeboard.subject}</td>
 					<td align="center">${freeboard.writer}</td>

@@ -196,11 +196,155 @@
 
 	</select>
 
+	<select id="getFreeBoardDetail" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >
+	
+		SELECT 
+				B_NO			"b_no"
+			,	SUBJECT			"subject"
+			,	WRITER			"writer"
+			,	REG_DATE		"reg_date" 
+			,	READCOUNT		"readcount"
+			,	CONTENT			"content"
+				
+		FROM	FREEBOARD
+		        
+		WHERE	B_NO	=	#{ b_no }   
+        
+	</select>
 
+	<select id="getFreeBoardDetailCommentPageListCount" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="int" >
+	
+		SELECT COUNT(*)			
+	            
+		FROM FREEBOARD_COMMENT
 
+		WHERE   
+				1 = 1
+        		AND
+				B_NO = #{ b_no }
+		
+	</select>
 
+	<select id="getFreeBoardDetailCommentPageList" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >
+		
+			SELECT * FROM 
+			( 
+				SELECT 
+						ROWNUM RNUM
+					,	ZXCVB.* 
+					
+				FROM 
+				(	
+		
+					SELECT
+							COMMENT_NO                      AS "comment_no"
+						,	B_NO							AS "b_no" 
+						,	NICK_NAME						AS "nick_name"
+						,	CONTENT							AS "content"
+						,	PRINT_NO						AS "print_no"
+						,	PRINT_LEVEL						AS "print_level"
+						,	TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI:SS') AS "reg_date"
+									
+					FROM FREEBOARD_COMMENT
+					
+					WHERE
+							1 = 1
+							AND
+							B_NO = #{ b_no }
+									 
+					ORDER BY 
+							GROUP_NO DESC, PRINT_NO ASC
+	        	
+		
+				) ZXCVB 
+	<![CDATA[
+			
+				WHERE	ROWNUM <= ${ end_rowNo } 
+			) 
+			
+			WHERE	RNUM >= ${ begin_rowNo }
+			
+	]]>
+	
+	</select>	
 
+	<insert id="insertFreeBoardDetailComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
+	
+		INSERT	INTO	FREEBOARD_COMMENT
+		(
+				COMMENT_NO
+			,	B_NO
+			,	NICK_NAME
+			,	CONTENT
+			,	GROUP_NO
+			,	PRINT_NO
+			,	PRINT_LEVEL
+			,	REG_DATE
+		) 
+		VALUES 
+		(
+				( SELECT NVL(MAX(COMMENT_NO),0) + 1 FROM FREEBOARD_COMMENT )
+			,	#{ b_no }
+			,	#{ nick_name }
+			,	#{ content }
+			,	( SELECT NVL(MAX(COMMENT_NO),0) + 1 FROM FREEBOARD_COMMENT )	
+			,	0
+			,	0
+			,	SYSDATE
+		)
+		
+	</insert>
 
+	<update id="updateFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
+	
+		UPDATE	FREEBOARD_COMMENT
+		
+		SET
+				PRINT_NO	=	PRINT_NO + 1
+		
+        WHERE
+        		GROUP_NO	=	( SELECT GROUP_NO FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no } )
+        		AND
+        		PRINT_NO	>	( SELECT PRINT_NO FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no } )
+        		
+	</update>
+	
+	<insert id="insertFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
+	
+		INSERT	INTO	FREEBOARD_COMMENT
+		(
+				COMMENT_NO
+			,	B_NO
+			,	NICK_NAME
+			,	CONTENT
+			,	GROUP_NO
+			,	PRINT_NO
+			,	PRINT_LEVEL
+			,	REG_DATE
+		) 
+		VALUES 
+		(
+				( SELECT NVL(MAX(COMMENT_NO),0) + 1 FROM FREEBOARD_COMMENT )
+			,	#{ b_no }
+			,	#{ nick_name }
+			,	#{ content }
+			,	( SELECT GROUP_NO 			FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no })
+			,	( SELECT PRINT_NO	 + 1	FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no })
+			,	( SELECT PRINT_LEVEL + 1 	FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no })
+			,	SYSDATE
+		)
+		
+	</insert>
+	
+	<update id="updateFreeBoardDetailReadCountPlusOne" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
+	
+		UPDATE	FREEBOARD
+				
+		SET		READCOUNT	=	READCOUNT + 1
+		
+		WHERE	B_NO		=	#{ b_no }
+        
+	</update>
 
 
 
