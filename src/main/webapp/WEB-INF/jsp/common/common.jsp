@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!-- JSP 기술 Page Directive를 이용해 페이지 처리 방식 선언 -->
-    
+
 <%@ page import="java.util.List"%>
 
 <%@ page import="java.util.Map"%>
@@ -15,61 +15,66 @@
 
 <script src="/js/jquery-1.11.0.min.js"></script>
 
+
+
+
+
 <script src="/js/common.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script>
+	function setweekgroup() {
+		if ($("#workweekcdGroupA").is(":checked")) {
+			$("#day1, #day2, #day3, #day4, #day5").prop("checked", true);
+			$("#day0").prop("checked", false);
+			
+		} else {
+			$("#day1, #day2, #day3, #day4, #day5").prop("checked", false);
+		}
+		if ($("#workweekcdGroupB").is(":checked")) {
+			$("#day6, #day7").prop("checked", true);
+			$("#day0").prop("checked", false);
+		} else {
+			$("#day6, #day7").prop("checked", false);
+		}
+	};
+
+	function setweekDay() {
+
+		if ($("#day1").is(":checked") && $("#day2").is(":checked")
+				&& $("#day3").is(":checked") && $("#day4").is(":checked")
+				&& $("#day5").is(":checked")) {
+			$("#workweekcdGroupA").prop("checked", true);
+		} else if ($("#day1").is(":checked") || $("#day2").is(":checked")
+				|| $("#day3").is(":checked") || $("#day4").is(":checked")
+				|| $("#day5").is(":checked")) {
+			$("#day0").prop("checked", false);
+		} else {
+			$("#workweekcdGroupA").prop("checked", false);
+		}
+
+		if ($("#day6").is(":checked") && $("#day7").is(":checked")) {
+			$("#workweekcdGroupB").prop("checked", true);
+		} else if ($("#day6").is(":checked") || $("#day7").is(":checked")) {
+			$("#day0").prop("checked", false);
+		}
+
+		else {
+			$("#workweekcdGroupB").prop("checked", false);
+		}
+	};
+
+	function allday() {
+		if ($("#day0").is(":checked")) {
+			$(
+					"#day1, #day2, #day3, #day4, #day5, #day6, #day7, #workweekcdGroupA, #workweekcdGroupB")
+					.prop("checked", false);
+		}
+	}
+</script>
 
 
-<script >
-
-function setweekgroup() {
-      if ($("#workweekcdGroupA").is(":checked")) {
-         $("#day1, #day2, #day3, #day4, #day5").prop("checked", true);
-         $("#day0").prop("checked", false);
-      } else {
-         $("#day1, #day2, #day3, #day4, #day5").prop("checked", false);
-      }
-      if ($("#workweekcdGroupB").is(":checked")) {
-         $("#day6, #day7").prop("checked", true);
-         $("#day0").prop("checked", false);
-      } else {
-         $("#day6, #day7").prop("checked", false);
-      }
-   };
-   
-   
-   function setweekDay() {
-      
-   
-      if ($("#day1").is(":checked") && $("#day2").is(":checked") && $("#day3").is(":checked") && $("#day4").is(":checked") && $("#day5").is(":checked")) {
-         $("#workweekcdGroupA").prop("checked", true);
-      } 
-      else if($("#day1").is(":checked") || $("#day2").is(":checked") || $("#day3").is(":checked") || $("#day4").is(":checked") || $("#day5").is(":checked")) 
-      {
-    	  $("#day0").prop("checked", false);
-      }  
-      else {
-         $("#workweekcdGroupA").prop("checked", false);
-      }
-      
-      
-      if ($("#day6").is(":checked") && $("#day7").is(":checked")) {
-         $("#workweekcdGroupB").prop("checked", true);
-      } 
-      else if($("#day6").is(":checked") || $("#day7").is(":checked"))
-      {
-    	  $("#day0").prop("checked", false);
-      }
-      
-      else {
-         $("#workweekcdGroupB").prop("checked", false);
-      }
-   };
-   
-   
-   function allday()
-   {
-	  if ($("#day0").is(":checked")) {
-         $("#day1, #day2, #day3, #day4, #day5, #day6, #day7, #workweekcdGroupA, #workweekcdGroupB").prop("checked", false);
-      }
-   }
-   
-   </script>
