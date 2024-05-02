@@ -2,6 +2,7 @@ package kosmo.team.project.service;
 
 import java.util.List;
 
+import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
 
@@ -21,4 +22,8 @@ public interface MainService {
 	public int getCustomerServiceQnABoardListCnt(MainSearchDTO mainSearchDTO);
 	
 	public List<MainDTO> getCustomerServiceQnABoardList(MainSearchDTO mainSearchDTO);
+	
+	public int updateCustomerServiceDetailFormReadCountPlusOne(CustomerServiceDetailDTO customerServiceDetailDTO);
+	
+	public CustomerServiceDetailDTO getCustomerServiceQnADetail(CustomerServiceDetailDTO customerServiceDetailDTO);
 }

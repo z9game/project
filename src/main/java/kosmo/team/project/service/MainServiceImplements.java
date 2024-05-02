@@ -1,6 +1,5 @@
 package kosmo.team.project.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosmo.team.project.dao.MainDAO;
+import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
-import kosmo.team.project.dto.TournamentDTO;
-import kosmo.team.project.dto.TournamentSearchDTO;
 
 @Service
 @Transactional
@@ -87,5 +85,20 @@ public class MainServiceImplements implements MainService {
 		List<MainDTO> customerServiceQnABoardList = this.mainDAO.getCustomerServiceQnABoardList(mainSearchDTO);
 		
 		return customerServiceQnABoardList;
+	}
+	
+	@Override
+	public int updateCustomerServiceDetailFormReadCountPlusOne(CustomerServiceDetailDTO customerServiceDetailDTO) {
+		
+		return mainDAO.updateCustomerServiceDetailFormReadCountPlusOne(customerServiceDetailDTO);
+		
+	}
+	
+	@Override
+	public CustomerServiceDetailDTO getCustomerServiceQnADetail(CustomerServiceDetailDTO customerServiceDetailDTO) {
+		
+		CustomerServiceDetailDTO customerServiceQnADetail = mainDAO.getCustomerServiceQnADetail(customerServiceDetailDTO);
+		
+		return customerServiceQnADetail;
 	}
 }

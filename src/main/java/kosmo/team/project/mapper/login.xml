@@ -5,4 +5,7 @@
 	<select id="getmidpwdCnt" parameterType="java.util.HashMap" resultType="int">
 		select count(*) from member where mid=#{mid} and password=#{password}
 	</select>
+	<select id="getNickname" resultType="String">
+		select nickname from member where mid=#{mid}
+	</select>
 </mapper>
