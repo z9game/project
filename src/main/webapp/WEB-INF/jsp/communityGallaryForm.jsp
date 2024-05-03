@@ -9,6 +9,7 @@
 <title>CommunityGallaryForm</title>
 <link href="/style/communityGallaryFormStyle.css" rel="stylesheet">
 <script src="/js/communityGallaryFormScript.js"></script>
+
 </head>
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -20,7 +21,7 @@
 		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="location.replace('/newCommunityGallaryForm.do')">
 	</div>
     <div class="communityGallaryFormContainer">
-		<c:forEach var="imageboard" items="${requestScope.imageBoardList}" varStatus="status">
+		<c:forEach var="imageboard" items="${requestScope.imageGallaryBoardList}" varStatus="status">
 			<div class="communityGallaryFormBoard">
 				<div class="communityGallaryImageDiv">
 					<img src="/image/SoccerBall.jpg" class="communityGallaryImage">

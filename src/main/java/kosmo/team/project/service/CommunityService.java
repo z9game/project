@@ -41,8 +41,6 @@ public interface CommunityService {
 	//----------------------------------------
 	// 자유게시판
 	//----------------------------------------
-
-	
 	public List<CommunityDTO> getFreeBoardList(CommunitySearchDTO communitySearchDTO);
 
 	public int getFreeBoardListCnt(CommunitySearchDTO communitySearchDTO);
@@ -60,7 +58,36 @@ public interface CommunityService {
 	//----------------------------------------
 	//갤러리
 	//----------------------------------------
-	public int getImageBoardListCnt(CommunityDTO communityDTO);
+	/*public int getImageBoardListCnt(CommunityDTO communityDTO);
 
 	public List<CommunityDTO> getImageBoardList(CommunityDTO communityDTO);
+	*/
+	public int insertGallaryCommunity(CommunityDTO communityDTO);
+	
+	public int getImageGallaryBoardListCnt(CommunityDTO communityDTO);
+	
+	public List<CommunityDTO> getImageGallaryBoardList(CommunityDTO communityDTO);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//----------------------------------------
+	//장터
+	//----------------------------------------
+	public int insertCommunity(CommunityDTO communityDTO);
+	
+	public int getImageBoardListCnt(CommunityDTO communityDTO);
+	
+	public List<CommunityDTO> getImageBoardList(CommunityDTO communityDTO);
+	
+	
 }

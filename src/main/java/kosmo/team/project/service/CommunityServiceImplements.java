@@ -17,9 +17,9 @@ public class CommunityServiceImplements implements CommunityService {
 	@Autowired
 	private CommunityDAO communityDAO;
 
-	//--------------------------
-	//공지사항
-	//--------------------------
+	// --------------------------
+	// 공지사항
+	// --------------------------
 
 	@Override
 	public List<CommunityDTO> getNoticeBoardList(CommunitySearchDTO communitySearchDTO) {
@@ -29,8 +29,7 @@ public class CommunityServiceImplements implements CommunityService {
 		return noticeBoardList;
 
 	}
-	
-	
+
 	@Override
 	public int getNoticeBoardListCnt(CommunitySearchDTO communitySearchDTO) {
 
@@ -39,7 +38,7 @@ public class CommunityServiceImplements implements CommunityService {
 		return noticeBoardListCount;
 
 	}
-	
+
 	public int getNoticeBoardAllCnt() {
 		// --------------------------------------
 		// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
@@ -51,11 +50,9 @@ public class CommunityServiceImplements implements CommunityService {
 		// --------------------------------------
 		return noticeBoardListAllCnt;
 	}
-	
-	
-	
+
 	public CommunityDTO getNoticeBoard(int b_no) {
-		
+
 		int updateCnt = this.communityDAO.updateNoticeBoardReadCount(b_no);
 
 		CommunityDTO communityDTO = this.communityDAO.getNoticeBoard(b_no);
@@ -63,11 +60,9 @@ public class CommunityServiceImplements implements CommunityService {
 		return communityDTO;
 
 	}
-	
-	
-	
-	//이아래쪽은 공지사항 수정,삭제
-	
+
+	// 이아래쪽은 공지사항 수정,삭제
+
 	public CommunityDTO getNoticeBoardForUpDel(int b_no) {
 
 		CommunityDTO communityDTO = this.communityDAO.getNoticeBoard(b_no);
@@ -75,10 +70,7 @@ public class CommunityServiceImplements implements CommunityService {
 		return communityDTO;
 
 	}
-	
-	
-	
-	
+
 	public int updateNoticeBoard(CommunityDTO communityDTO) {
 
 		// --------------------------------------
@@ -106,36 +98,16 @@ public class CommunityServiceImplements implements CommunityService {
 			return boardCnt;
 		}
 
-
-
 		int boardDelCnt = this.communityDAO.deleteNoticeBoard(communityDTO);
 
 		// 수정 적용개수 리턴하기
 		return boardDelCnt;
 	}
 
+	// ---------------------------------
+	// 자유게시판
+	// ---------------------------------
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//---------------------------------
-	//자유게시판
-	//---------------------------------
-	
-	
-	
 	@Override
 	public List<CommunityDTO> getFreeBoardList(CommunitySearchDTO communitySearchDTO) {
 
@@ -144,8 +116,7 @@ public class CommunityServiceImplements implements CommunityService {
 		return freeBoardList;
 
 	}
-	
-	
+
 	@Override
 	public int getFreeBoardListCnt(CommunitySearchDTO communitySearchDTO) {
 
@@ -154,10 +125,7 @@ public class CommunityServiceImplements implements CommunityService {
 		return freeBoardListCount;
 
 	}
-	
-	
-	
-	
+
 	public int getFreeBoardAllCnt() {
 		// --------------------------------------
 		// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
@@ -169,53 +137,47 @@ public class CommunityServiceImplements implements CommunityService {
 		// --------------------------------------
 		return freeBoardListAllCnt;
 	}
-	
-	
-	
+
 	public CommunityDTO getFreeBoard(int b_no) {
-		
 
 		CommunityDTO communityDTO = this.communityDAO.getFreeBoard(b_no);
 
 		return communityDTO;
 
 	}
+
+	// -------------------------------------------------
+
+	// -----------------------------------
+	// 갤러리
+	// -----------------------------------
+	@Override
+	public int insertGallaryCommunity(CommunityDTO communityDTO) {
+		int boardGallaryRegCnt = this.communityDAO.insertGallaryCommunity(communityDTO);
+		return boardGallaryRegCnt;
+	}
 	
-	//-------------------------------------------------
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//-----------------------------------
-	//갤러리
-	//-----------------------------------
-	
+	@Override
+	public int getImageGallaryBoardListCnt(CommunityDTO communityDTO) {
+		int imageBoardGallaryListCnt = communityDAO.getImageGallaryBoardListCnt(communityDTO);
+		return imageBoardGallaryListCnt;
+	}
+
+	@Override
+	public List<CommunityDTO> getImageGallaryBoardList(CommunityDTO communityDTO) {
+		List<CommunityDTO> listGallaryBoard = communityDAO.getImageGallaryBoardList(communityDTO);
+		return listGallaryBoard;
+	}
+
+	// -----------------------------------
+	// 장터
+	// -----------------------------------
+	@Override
+	public int insertCommunity(CommunityDTO communityDTO) {
+		int boardRegCnt = this.communityDAO.insertCommunity(communityDTO);
+		return boardRegCnt;
+	}
+
 	@Override
 	public int getImageBoardListCnt(CommunityDTO communityDTO) {
 
@@ -233,4 +195,5 @@ public class CommunityServiceImplements implements CommunityService {
 		return imageBoardList;
 
 	}
+
 }
