@@ -10,4 +10,6 @@ public interface LoginDAO {
 	public int getmidpwdCnt(Map<String,String> midpwd);
 	
 	public String getNickname(String mid);
+	
+	public String getEmail(String mid);
 }

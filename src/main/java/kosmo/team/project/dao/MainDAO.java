@@ -27,8 +27,9 @@ public interface MainDAO {
 	
 	public List<MainDTO> getCustomerServiceQnABoardList(MainSearchDTO mainSearchDTO);
 	
-	public int updateCustomerServiceDetailFormReadCountPlusOne(CustomerServiceDetailDTO customerServiceDetailDTO);
+	public int updateCustomerServiceDetailFormReadCountPlusOne(int b_no);
 	
-	public CustomerServiceDetailDTO getCustomerServiceQnADetail(CustomerServiceDetailDTO customerServiceDetailDTO);
+	public CustomerServiceDetailDTO getCustomerServiceDetail(int b_no);
 	
+	public int insertQnABoard(MainDTO mainDTO);
 }

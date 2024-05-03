@@ -7,6 +7,9 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.CustomerServiceDetailDTO;
@@ -107,29 +110,37 @@ public class MainController {
         return mav;
     }
 	
-	// QnA 조회수 증가
-	
-	@RequestMapping(value = "/updateCustomerServiceDetailFormReadCountPlusOne.do")
-    public ModelAndView updateCustomerServiceDetailFormReadCountPlusOne(CustomerServiceDetailDTO customerServiceDetailDTO) {
-    	
-		mainService.updateCustomerServiceDetailFormReadCountPlusOne(customerServiceDetailDTO);
-		
-        return customerServiceDetail(customerServiceDetailDTO);
-    }
-	
 	// QnA Detail 페이지
 	
 	@RequestMapping(value = "/main/customerServiceQnADetailForm.do")
-    public ModelAndView customerServiceDetail(CustomerServiceDetailDTO customerServiceDetailDTO) {
-    	
-    	ModelAndView mav = new ModelAndView();
-    	
-    	CustomerServiceDetailDTO customerServiceQnADetail = mainService.getCustomerServiceQnADetail(customerServiceDetailDTO);
-    	
-    	mav.addObject("customerServiceQnADetail", customerServiceQnADetail);
-    	
-    	mav.setViewName("/main/customerServiceQnADetailForm.jsp");
-    	
-        return mav;
-    }
+	public ModelAndView customerServiceQnADetail(@RequestParam(value="b_no") int b_no) {
+		
+		CustomerServiceDetailDTO customerServiceDetailDTO = this.mainService.getCustomerServiceDetail(b_no);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("customerServiceDetailDTO", customerServiceDetailDTO);
+		
+		mav.setViewName("/main/customerServiceQnADetailForm.jsp");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/QnABoardRegProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,String> boardRegProc(MainDTO mainDTO) {
+	
+		Map<String,String> resultMap = new HashMap<String,String>();
+		
+		int QnABoardRegCnt = this.mainService.insertQnABoard(mainDTO);
+		
+		if(mainDTO.getWriter() == null) {
+			System.out.println(1);
+		}
+			
+		resultMap.put("result", QnABoardRegCnt + "");
+		
+		return resultMap;
+		
+	}
 }
