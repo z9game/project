@@ -54,9 +54,9 @@ $(document).ready(function() {
 	    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
 		
 		
-	alert(1);
+	
 	    
-		alert(boardSearchFormObj.serialize())
+		//alert(boardSearchFormObj.serialize());
 
 		
 		$.ajax({

@@ -8,17 +8,31 @@
 
 
 	<sql id="boardWhere">
+
 		<if
-			test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
 			and (
 		</if>
-		<if test="keyword1 != null and keyword1.length() > 0">
-			(
+
+
+		<if test="keyword1!=null and keyword1.length()>0">
+			<if test="searchType1 == 'all' ">
+				(
+				upper(mid) like upper('%${keyword1}%')
+				or
+				upper(name) like
+				upper('%${keyword1}%')
+				or
+				upper(nickname) like upper('%${keyword1}%')
+				or
+				upper(email) like upper('%${keyword1}%')
+				or
+				upper(phone) like
+				upper('%${keyword1}%')
+				)
+			</if>
 			<if test="searchType1 == 'name'">
 				upper(name) like upper('%${keyword1}%')
-			</if>
-			<if test="searchType1 == 'mid'">
-				upper(mid) like upper('%${keyword1}%')
 			</if>
 			<if test="searchType1 == 'nickname'">
 				upper(nickname) like upper('%${keyword1}%')
@@ -29,59 +43,50 @@
 			<if test="searchType1 == 'email'">
 				upper(email) like upper('%${keyword1}%')
 			</if>
-			<if test="searchType1 == 'all'">
-				upper(name) like upper('%${keyword1}%')
+
+		</if>
+
+		<if
+			test="(keyword1!=null and keyword1.length()>0) and (keyword2!=null and keyword2.length()>0)">
+			${orand}
+		</if>
+
+		<if test="keyword2!=null and keyword2.length()>0">
+			<if test="searchType1 == 'all' ">
+				(
+				upper(mid) like upper('%${keyword2}%')
 				or
-				upper(mid) like
-				upper('%${keyword1}%')
+				upper(name) like
+				upper('%${keyword2}%')
 				or
-				upper(nickname) like upper('%${keyword1}%')
+				upper(nickname) like upper('%${keyword2}%')
 				or
-				upper(email) like upper('%${keyword1}%')
+				upper(email) like upper('%${keyword2}%')
 				or
 				upper(phone) like
-				upper('%${keyword1}%')
+				upper('%${keyword2}%')
+				)
 			</if>
-			)
-		</if>
-		<if test="keyword2 != null and keyword2.length() > 0">
-			${orand}
-			(
-			<if test="searchType2 == 'name'">
+			<if test="searchType1 == 'name'">
 				upper(name) like upper('%${keyword2}%')
 			</if>
-			<if test="searchType2 == 'mid'">
-				upper(mid) like upper('%${keyword2}%')
-			</if>
-			<if test="searchType2 == 'nickname'">
+			<if test="searchType1 == 'nickname'">
 				upper(nickname) like upper('%${keyword2}%')
 			</if>
-			<if test="searchType2 == 'phone'">
+			<if test="searchType1 == 'phone'">
 				upper(phone) like upper('%${keyword2}%')
 			</if>
-			<if test="searchType2 == 'email'">
+			<if test="searchType1 == 'email'">
 				upper(email) like upper('%${keyword2}%')
 			</if>
-			<if test="searchType2 == 'all'">
-				upper(name) like upper('%${keyword2}%')
-				or
-				upper(mid) like
-				upper('%${keyword2}%')
-				or
-				upper(nickname) like upper('%${keyword2}%')
-				or
-				upper(email) like upper('%${keyword2}%')
-				or
-				upper(phone) like
-				upper('%${keyword2}%')
-			</if>
-			)
+
 		</if>
-		<if test="gender != null ">
-			and gender =
-			<foreach item="temp"  collection="gender"
-				open=" ( " separator="," close=" ) ">
-				#{temp}
+
+		<if test="gender!=null">
+			<foreach collection="gender" item="tmp" open=" and (  "  close="  ) " separator=" or "> 
+			
+			gender = '${tmp}'
+			
 			</foreach>
 		</if>
 
@@ -98,10 +103,18 @@
 				and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
 			</if>
 		</if>
+
+
+
 		<if
-			test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
 			)
 		</if>
+
+
+
+
+
 	</sql>
 
 

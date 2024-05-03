@@ -336,6 +336,8 @@
 		
 	</insert>
 	
+	
+	
 	<update id="updateFreeBoardDetailReadCountPlusOne" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
 	
 		UPDATE	FREEBOARD

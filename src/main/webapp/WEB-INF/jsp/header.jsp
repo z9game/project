@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/jsp/common/common.jsp"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 <body>
 	<header class="header">
 		<div class="headerTitle">
-			<a href="/main/mainForm.do"> <img src="#" class="headerLogo">
+			<a href="/main/mainForm.do"> 
 			</a>
 		</div>
 		<div class="headerMenu">
