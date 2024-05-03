@@ -10,6 +10,7 @@ import kosmo.team.project.dao.MainDAO;
 import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
+import kosmo.team.project.dto.MemberDTO;
 
 @Service
 @Transactional
@@ -97,10 +98,19 @@ public class MainServiceImplements implements MainService {
 		return customerServiceDetailDTO;
 	}
 	
+	@Override
 	public int insertQnABoard(MainDTO mainDTO) {
 		
 		int QnABoardRegCnt = this.mainDAO.insertQnABoard(mainDTO);
 		
 		return QnABoardRegCnt;
+	}
+	
+	@Override
+	public CustomerServiceDetailDTO getSubject(int b_no) {
+		
+		CustomerServiceDetailDTO customerServiceDetailDTO = this.mainDAO.getSubject(b_no);
+
+		return customerServiceDetailDTO;
 	}
 }

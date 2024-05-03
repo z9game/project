@@ -118,6 +118,10 @@
 			b_no = #{b_no}
 	</update>
 	
+	<select id="getSubject" parameterType="int" resultType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+		select subject from qnaboard where b_no = #{b_no}
+	</select>
+	
 	<insert id="insertQnABoard" parameterType="kosmo.team.project.dto.MainDTO">
 		insert into
 			qnaboard (
