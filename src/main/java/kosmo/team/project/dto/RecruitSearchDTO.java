@@ -4,8 +4,7 @@ public class RecruitSearchDTO {
 	
 	private String searchType1;
 	private String keyword1;
-	private String searchType2;
-	private String keyword2;
+	private String sort;
 	
 	
 	public String getSearchType1() {
@@ -20,23 +19,12 @@ public class RecruitSearchDTO {
 	public void setKeyword1(String keyword1) {
 		this.keyword1 = keyword1;
 	}
-	public String getSearchType2() {
-		return searchType2;
+	public String getSort() {
+		return sort;
 	}
-	public void setSearchType2(String searchType2) {
-		this.searchType2 = searchType2;
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
-	public String getKeyword2() {
-		return keyword2;
-	}
-	public void setKeyword2(String keyword2) {
-		this.keyword2 = keyword2;
-	}
-	
-	
-	
-	
-	
 	
 	
 }

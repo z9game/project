@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +12,7 @@
 <body>
 	<header class="header">
 		<div class="headerTitle">
-			<a href="/mainForm.do"> <img src="#" class="headerLogo">
+			<a href="/mainForm.do">
 			</a>
 		</div>
 		<div class="headerMenu">
@@ -26,7 +25,7 @@
 					<li class="nav-item"><a href="/recruitTeamBoardForm.do">모집</a>
 						<!-- 하위 카테고리 -->
 						<ul class="navInner">
-							<li class="navInner-item"><a href="/recruitTeamBoardForm.do">팀/팀원</a></li>
+							<li class="navInner-item"><a href="/recruitTeamMemBoardForm.do">팀/팀원</a></li>
 							<li class="navInner-item"><a
 								href="/recruitHiredBoardForm.do">용병</a></li>
 							<li class="navInner-item"><a
