@@ -102,6 +102,7 @@
 			<if test="(minDate != null and minDate.length() > 0)">
 				and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
 			</if>
+			
 		</if>
 
 
