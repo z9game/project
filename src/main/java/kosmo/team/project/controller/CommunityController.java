@@ -132,9 +132,7 @@ public class CommunityController {
 		return mav;
 
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/noticeboardUpProc.do"
 
 			, method = RequestMethod.POST
@@ -200,39 +198,6 @@ public class CommunityController {
 		return resultMap;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// ----------------------------------------------------------------
 
 	// ----------------------------------------------------------------
@@ -240,12 +205,11 @@ public class CommunityController {
 	// ----------------------------------------------------------------
 	@RequestMapping(value = "/communityFreeBoardForm.do")
 	public ModelAndView communityFreeBoard(CommunitySearchDTO communitySearchDTO) {
-		
-		
+
 		int freeBoardListAllCnt = this.communityService.getFreeBoardAllCnt();
 
 		int freeBoardListCnt = this.communityService.getFreeBoardListCnt(communitySearchDTO);
-		
+
 		Map<String, Integer> freeBoardMap = Page.getPagingMap(
 
 				communitySearchDTO.getSelectPageNo()// 선택한 페이지 번호
@@ -253,12 +217,11 @@ public class CommunityController {
 				, freeBoardListCnt // 검색 결과물 개수
 
 		);
-		
+
 		communitySearchDTO.setSelectPageNo((int) freeBoardMap.get("selectPageNo"));
 		communitySearchDTO.setRowCntPerPage((int) freeBoardMap.get("rowCntPerPage"));
 		communitySearchDTO.setBegin_rowNo((int) freeBoardMap.get("begin_rowNo"));
 		communitySearchDTO.setEnd_rowNo((int) freeBoardMap.get("end_rowNo"));
-		
 
 		List<CommunityDTO> freeBoardList = this.communityService.getFreeBoardList(communitySearchDTO);
 
@@ -357,44 +320,56 @@ public class CommunityController {
 	
 	// ----------------------------------------------------------------
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// ----------------------------------------------------------------
 	// 갤러리
 	// ----------------------------------------------------------------
 	@RequestMapping(value = "/communityGallaryForm.do")
 	public ModelAndView communityGallaryForm(CommunityDTO communityDTO) {
 
-		int imageBoardListCnt = this.communityService.getImageBoardListCnt(communityDTO);
+		int imageGallaryBoardListCnt = this.communityService.getImageGallaryBoardListCnt(communityDTO);
 
-		List<CommunityDTO> imageBoardList = this.communityService.getImageBoardList(communityDTO);
+		List<CommunityDTO> imageGallaryBoardList = this.communityService.getImageGallaryBoardList(communityDTO);
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("imageBoardList", imageBoardList);
+		mav.addObject("imageGallaryBoardList", imageGallaryBoardList);
 
 		mav.setViewName("communityGallaryForm.jsp");
 
 		return mav;
 	}
 
+	@RequestMapping(value = "/newCommunityGallaryForm.do")
+	public ModelAndView newCommunityGallaryForm(CommunityDTO communityDTO) {
+
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("newCommunityGallaryForm.jsp");
+
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/CommunityGallaryProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public Map<String, String> CommunityGallaryProc(CommunityDTO communityDTO) {
+		
+		int result = communityService.insertCommunity(communityDTO);
+		
+		Map<String, String> resultMap = new HashMap<String, String>();
+		resultMap.put("result", result + "");
+		
+		return resultMap;
+	}
 	// ----------------------------------------------------------------
 
+	
+	
+	
+	
+	
+	
 	// ----------------------------------------------------------------
-	// 갤러리
+	// 장터
 	// ----------------------------------------------------------------
 
 	@RequestMapping(value = "/communityMarketplaceBoardForm.do")
@@ -413,29 +388,26 @@ public class CommunityController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/newCommunityFreeBoardForm.do")
-	public ModelAndView newCommunityFreeBoardForm(CommunityDTO communityDTO) {
+	@RequestMapping(value = "/newCommunityMarketplaceForm.do")
+	public ModelAndView newCommunityMarketplaceForm(CommunityDTO communityDTO) {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("newCommunityFreeBoardForm.jsp");
+		mav.setViewName("newCommunityMarketplaceForm.jsp");
 
 		return mav;
 	}
 	
-	 @RequestMapping(value = "/newCommunityGallaryForm.do")
-	    public ModelAndView newCommunityGallaryForm(CommunityDTO communityDTO) {
-	    	
-	    	ModelAndView mav = new ModelAndView();
-	    	
-	        mav.setViewName("newCommunityGallaryForm.jsp");
-	        
-	        return mav;
-	    }
+	@ResponseBody
+	@RequestMapping(value = "/MarketplaceRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public Map<String, String> MarketplaceRegProc(CommunityDTO communityDTO) {
+		
+		int result = communityService.insertCommunity(communityDTO);
+		
+		Map<String, String> resultMap = new HashMap<String, String>();
+		resultMap.put("result", result + "");
+		
+		return resultMap;
 	}
-	
-	
-	
-	
-	
-	
+
+}

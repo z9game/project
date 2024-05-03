@@ -81,3 +81,9 @@ a{
     max-height: 100%;
     border-radius: 10px;
 }
+
+.newCommunityMarketplaceBtnDiv {
+	margin-top: 20px;
+	margin-right: 1050px;
+	text-align: center;
+}
