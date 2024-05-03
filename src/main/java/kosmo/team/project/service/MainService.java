@@ -23,7 +23,5 @@ public interface MainService {
 	
 	public List<MainDTO> getCustomerServiceQnABoardList(MainSearchDTO mainSearchDTO);
 	
-	public int updateCustomerServiceDetailFormReadCountPlusOne(CustomerServiceDetailDTO customerServiceDetailDTO);
-	
-	public CustomerServiceDetailDTO getCustomerServiceQnADetail(CustomerServiceDetailDTO customerServiceDetailDTO);
+	public CustomerServiceDetailDTO getCustomerServiceDetail(int b_no);
 }

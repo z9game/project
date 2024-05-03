@@ -8,6 +8,8 @@ public class MainDTO {
 	private String content;
 	private String reg_date;
 	private int readcount;
+	private int password;
+	private String mid;
 	
 	private String region;
 	private String regist_start;
@@ -53,6 +55,18 @@ public class MainDTO {
 	}
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
+	}
+	public int getPassword() {
+		return password;
+	}
+	public void setPassword(int password) {
+		this.password = password;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 	public String getRegion() {
 		return region;
