@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
+import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.service.MainService;
 import kosmo.team.project.utility.Page;
 
@@ -101,14 +102,33 @@ public class MainController {
 	// QnA 글쓰기 페이지
 	
 	@RequestMapping(value = "/main/newCustomerServiceQnAForm.do")
-    public ModelAndView newCustomerServiceQnAForm() {
-    	
-    	ModelAndView mav = new ModelAndView();
-    	
-    	mav.setViewName("/main/newCustomerServiceQnAForm.jsp");
-    	
-        return mav;
-    }
+	public ModelAndView newCustomerServiceQnAForm(@RequestParam(value = "b_no", required = false, defaultValue = "0") int b_no) {
+	    
+	    ModelAndView mav = new ModelAndView();
+	    
+	    if (b_no != 0) {
+	        CustomerServiceDetailDTO customerServiceDetailDTO = this.mainService.getSubject(b_no);
+	        mav.addObject("customerServiceDetailDTO", customerServiceDetailDTO);
+	    }
+	    
+	    mav.setViewName("/main/newCustomerServiceQnAForm.jsp");
+	    
+	    return mav;
+	}
+
+	@RequestMapping(value="/QnABoardRegProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,String> boardRegProc(MainDTO mainDTO) {
+	
+		Map<String,String> resultMap = new HashMap<String,String>();
+		
+		int QnABoardRegCnt = this.mainService.insertQnABoard(mainDTO);
+		
+		resultMap.put("result", QnABoardRegCnt + "");
+		
+		return resultMap;
+		
+	}
 	
 	// QnA Detail 페이지
 	
@@ -124,23 +144,5 @@ public class MainController {
 		mav.setViewName("/main/customerServiceQnADetailForm.jsp");
 		
 		return mav;
-	}
-	
-	@RequestMapping(value="/QnABoardRegProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-	@ResponseBody
-	public Map<String,String> boardRegProc(MainDTO mainDTO) {
-	
-		Map<String,String> resultMap = new HashMap<String,String>();
-		
-		int QnABoardRegCnt = this.mainService.insertQnABoard(mainDTO);
-		
-		if(mainDTO.getWriter() == null) {
-			System.out.println(1);
-		}
-			
-		resultMap.put("result", QnABoardRegCnt + "");
-		
-		return resultMap;
-		
 	}
 }

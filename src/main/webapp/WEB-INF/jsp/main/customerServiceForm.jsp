@@ -189,9 +189,11 @@
 			<div id="customerServiceCategoryTabQnA">
 				<div class="customerServiceQnAFormContainer">
 					<div class="customerServiceQnAFormBoard">
-						<div class="newCustomerServiceQnABoardBtnDiv">
-							<input type="button" class="newCustomerServiceQnABoardBtn" value="새 글 쓰기" onClick="newCustomerServiceQnABoardBtnClick()">
-						</div>
+						<c:if test="${not sessionScope.mid.equals('admin')}">
+						    <div class="newCustomerServiceQnABoardBtnDiv">
+								<input type="button" class="newCustomerServiceQnABoardBtn" value="새 글 쓰기" onClick="newCustomerServiceQnABoardBtnClick()">
+							</div>
+						</c:if>
 						<table class="customerServiceQnABoardListTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
 							<tr>
 								<th style="width:50px;">번호</th>
@@ -204,9 +206,6 @@
 										<td align="center">${requestScope.customerServiceQnABoardMap.begin_serialNo_desc - status.count + 1}</td>
 										<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
 										<td>
-											<c:if test="${customerServiceQnABoard.writer == '관리자'}">
-												&nbsp;&nbsp;&nbsp; <img src="/image/answerIcon.png" style="width: 10px; height: 10px;">
-											</c:if>
 											${customerServiceQnABoard.subject}
 										</td>
 										<td align="center">${customerServiceQnABoard.writer}</td>

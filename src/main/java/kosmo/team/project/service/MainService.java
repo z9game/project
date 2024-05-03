@@ -7,6 +7,7 @@ import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
 
 public interface MainService {
+	
 	public int getImageBoardListCnt(MainDTO mainDTO);
 
 	public List<MainDTO> getImageBoardList(MainDTO mainDTO);
@@ -26,4 +27,6 @@ public interface MainService {
 	public CustomerServiceDetailDTO getCustomerServiceDetail(int b_no);
 	
 	public int insertQnABoard(MainDTO mainDTO);
+	
+	public CustomerServiceDetailDTO getSubject(int b_no);
 }

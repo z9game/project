@@ -3,6 +3,7 @@ package kosmo.team.project.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
@@ -32,4 +33,6 @@ public interface MainDAO {
 	public CustomerServiceDetailDTO getCustomerServiceDetail(int b_no);
 	
 	public int insertQnABoard(MainDTO mainDTO);
+	
+	public CustomerServiceDetailDTO getSubject(int b_no);
 }
