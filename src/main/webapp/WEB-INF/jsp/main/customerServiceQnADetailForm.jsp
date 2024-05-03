@@ -7,49 +7,48 @@
 <head>
 <meta charset="UTF-8">
 <title>CustomerServiceQnADetailForm</title>
-<link href="/style/newCustomerServiceQnAFormStyle.css" rel="stylesheet">
-<script src="/js/newCustomerServiceQnAFormScript.js"></script>
+<link href="/style/main/customerServiceQnADetailFormStyle.css" rel="stylesheet">
+<script src="/js/main/customerServiceQnADetailFormScript.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
-    <div class="newCustomerServiceQnAFormTitle">
-    	<img src="/image/CommunityTitleBackgroundImage.jpg" class="titleBackgoundImg">
+    <div class="customerServiceQnADetailFormTitle">
+    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">QnA</p>
     </div>
-    <div class="newCustomerServiceQnAFormContainer">
-		<form name="newCustomerServiceQnAForm">
-			<table class="newCustomerServiceQnAFormRegTable" border="1" bordercolor="black">
-				<tr>
-					<th>제목</th>
-					<td>
-						${customerServiceQnABoard.subject}
-					</td>
-				</tr>
-				<tr>
-					<th>글쓴이</th>
-					<td>
-						${customerServiceQnABoard.writer}
-					</td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td>
-						<textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none" readonly>
-							${customerServiceQnABoard.content}
-						</textarea>
-					</td>
-				</tr>
-			</table>
-			<div class="newCustomerServiceQnAFormBtnDiv">
+    <div class="customerServiceQnADetailFormContainer">
+		<table class="customerServiceQnADetailFormRegTable" border="1" bordercolor="black">
+			<tr>
+				<th>제목</th>
+				<td>
+					${requestScope.customerServiceDetailDTO.subject}
+				</td>
+			</tr>
+			<tr>
+				<th>글쓴이</th>
+				<td>
+					${requestScope.customerServiceDetailDTO.writer}
+				</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>
+					<textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none" readonly>
+						${requestScope.customerServiceDetailDTO.content}
+					</textarea>
+				</td>
+			</tr>
+		</table>
+		<div class="customerServiceQnADetailFormBtnDiv">
+			<c:if test="${sessionScope.mid == 'admin'}">
 				<div class="resetBtnDiv">
-					<input type="reset" class="boardResetBtn"value="다시 작성">
+					<input type="reset" class="boardCommentBtn"value="답변 작성">
 				</div>
-				<div class="boardRegAndMoveList">
-					<input type="button" class="boardRegBtn" value="저장" onClick="checkBoardRegForm();">
-					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/customerServiceForm.do')">
-				</div>
+			</c:if>
+			<div class="moveListBtnDiv">
+				<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/main/customerServiceForm.do')">
 			</div>
-		</form>
+		</div>
 	</div>
 </body>
 </html>

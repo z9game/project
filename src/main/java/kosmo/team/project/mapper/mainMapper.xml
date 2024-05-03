@@ -60,12 +60,14 @@
 		        zxcvb.*
 		      FROM
 		        (SELECT 
+		        	q.b_no AS "b_no",
 		        	q.subject AS "subject", 
                     m.nickname AS "writer", 
                     q.content AS "content", 
                     to_char(q.reg_date, 'YYYY-MM-DD') AS "reg_date", 
                     q.readcount AS "readcount",
-                    m.password AS "password" 
+                    m.password AS "password",
+                    m.mid AS "mid" 
                	 FROM 
                	 	qnaboard q, 
                     MEMBER m 
@@ -91,26 +93,28 @@
 		select count(*) from qnaboard
 	</select>
 	
-	<select id="getCustomerServiceQnADetail" parameterType="kosmo.team.project.dto.CustomerServiceDetailDTO" resultType="kosmo.team.project.dto.CustomerServiceDetailDTO">
-		select
-			q.subject AS "subject", 
-            m.nickname AS "writer", 
-            q.content AS "content", 
-            to_char(q.reg_date, 'YYYY-MM-DD') AS "reg_date", 
-            q.readcount AS "readcount"
-        FROM 
-            qnaboard q, 
-            MEMBER m 
-        WHERE 
-            q.writer = m.m_no 
+	<select id="getCustomerServiceDetail" parameterType="int" resultType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+	    SELECT
+	    	q.b_no AS "b_no",
+	        q.subject AS "subject",
+	        m.nickname AS "writer",
+	        q.content AS "content",
+	        TO_CHAR(q.reg_date, 'YYYY-MM-DD') AS "reg_date",
+	        q.readcount AS "readcount"
+	    FROM
+	        qnaboard q,
+	        MEMBER m
+	    WHERE
+	        q.writer = m.m_no
+	        AND q.b_no = #{b_no}
 	</select>
 	
-	<select id="updateCustomerServiceDetailFormReadCountPlusOne" parameterType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+	<update id="updateCustomerServiceDetailFormReadCountPlusOne" parameterType="int">
 		update
 			qnaboard
 		set
 			readcount = readcount + 1
 		where
 			b_no = #{b_no}
-	</select>
+	</update>
 </mapper>

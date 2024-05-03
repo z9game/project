@@ -105,35 +105,49 @@
 		search();
 	}
 	
-	function submitDetailForm(b_no){
-		var formObj = $(".customerServiceDetailForm");
-		formObj.find("[name='b_no']").val(b_no);
-		document.customerServiceDetailForm.submit();
+	function submitDetailForm(b_no, mid, password) {
+	    var sessionMid = '<%= session.getAttribute("mid") %>';
+		if (sessionMid == 'admin'){
+			 $("[name='customerServiceDetailForm'] .b_no").val(b_no);
+             document.customerServiceDetailForm.action = "/main/customerServiceQnADetailForm.do";
+             document.customerServiceDetailForm.submit();
+             return;
+		}
+		
+		if (sessionMid !== null && sessionMid !== 'admin' &&mid == sessionMid) {
+	        var pwdInput = prompt("계정 비밀번호를 입력해주세요.");
+
+	        if (pwdInput !== null) {
+	            function checkPwd() {
+	                if (pwdInput == password) {
+	                    $("[name='customerServiceDetailForm'] .b_no").val(b_no);
+	                    document.customerServiceDetailForm.action = "/main/customerServiceQnADetailForm.do";
+	                    document.customerServiceDetailForm.submit();
+	                } else {
+	                    alert("비밀번호가 다릅니다.");
+	                    checkPwd();
+	                }
+	            }
+
+	            checkPwd();
+	        }
+	    } else {
+	        alert("작성할 때 로그인한 아이디와 다릅니다.");
+	    }
 	}
-	
+
+
 	function newCustomerServiceQnABoardBtnClick() {
 		
 	    var sessionMid = '<%= session.getAttribute("mid") %>'
 
 	    if (sessionMid === 'null') {
 	    	alert('로그인이 필요한 서비스입니다.');
+	    	location.href = '/main/loginForm.do';
 	    } else {
-	    	checkPwd();
-	    }
-	    
-	    function checkPwd(){
-	    	var pwdInput = prompt("계정 비밀번호를 입력해주세요.");
-	    	var sessionPwd = '<%= session.getAttribute("password") %>'
-	    	
-	    	if(pwdInput == sessionPwd){
-	        	location.href = '/main/newCustomerServiceQnAForm.do';
-	    	} else {
-	    		alert("비밀번호가 다릅니다.");
-	    		checkPwd();
-	    	}
+	    	location.href = '/main/newCustomerServiceQnAForm.do';
 	    }
 	}
-
 </script>
 </head>
 <body>
@@ -146,8 +160,8 @@
     	<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
     	<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
     </form>
-    <form name="customerServiceDetailForm" class="customerServiceDetailForm" action="/updateCustomerServiceDetailFormReadCountPlusOne.do" method="post">
-    	<input type="hidden" name="b_no">
+    <form name="customerServiceDetailForm" class="customerServiceDetailForm" action="/customerServiceQnADetailForm.do" method="POST">
+    	<input type="hidden" class="b_no" name="b_no">
     </form>
     <div class="customerServiceCategoryTab">
     	<ul class="customerServiceCategoryTabNav">
@@ -197,7 +211,7 @@
 								<th style="width:100px;">등록일</th>
 								<th style="width:100px;">조회수</th>
 								<c:forEach var="customerServiceQnABoard" items="${requestScope.customerServiceQnABoardList}" varStatus="status">
-									<tr style="cursor:pointer" onClick="submitDetailForm(${customerServiceQnABoard.b_no});">
+									<tr style="cursor:pointer" onClick="submitDetailForm(${customerServiceQnABoard.b_no},'${customerServiceQnABoard.mid}', '${customerServiceQnABoard.password}')">
 										<td align="center">${requestScope.customerServiceQnABoardMap.begin_serialNo_desc - status.count + 1}</td>
 										<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
 										<td align="center">${customerServiceQnABoard.subject}</td>
