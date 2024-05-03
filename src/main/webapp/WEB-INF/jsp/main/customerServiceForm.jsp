@@ -105,34 +105,23 @@
 		search();
 	}
 	
-	function submitDetailForm(b_no, mid, password) {
+	function submitDetailForm(b_no, mid) {
+		
 	    var sessionMid = '<%= session.getAttribute("mid") %>';
+	    
 		if (sessionMid == 'admin'){
 			 $("[name='customerServiceDetailForm'] .b_no").val(b_no);
              document.customerServiceDetailForm.action = "/main/customerServiceQnADetailForm.do";
              document.customerServiceDetailForm.submit();
              return;
-		}
+		} 
 		
 		if (sessionMid !== null && sessionMid !== 'admin' &&mid == sessionMid) {
-	        var pwdInput = prompt("계정 비밀번호를 입력해주세요.");
-
-	        if (pwdInput !== null) {
-	            function checkPwd() {
-	                if (pwdInput == password) {
-	                    $("[name='customerServiceDetailForm'] .b_no").val(b_no);
-	                    document.customerServiceDetailForm.action = "/main/customerServiceQnADetailForm.do";
-	                    document.customerServiceDetailForm.submit();
-	                } else {
-	                    alert("비밀번호가 다릅니다.");
-	                    checkPwd();
-	                }
-	            }
-
-	            checkPwd();
-	        }
-	    } else {
-	        alert("작성할 때 로그인한 아이디와 다릅니다.");
+			$("[name='customerServiceDetailForm'] .b_no").val(b_no);
+            document.customerServiceDetailForm.action = "/main/customerServiceQnADetailForm.do";
+            document.customerServiceDetailForm.submit();
+		} else {
+	        alert("작성할 때 로그인 한 아이디와 다릅니다.");
 	    }
 	}
 
@@ -211,10 +200,15 @@
 								<th style="width:100px;">등록일</th>
 								<th style="width:100px;">조회수</th>
 								<c:forEach var="customerServiceQnABoard" items="${requestScope.customerServiceQnABoardList}" varStatus="status">
-									<tr style="cursor:pointer" onClick="submitDetailForm(${customerServiceQnABoard.b_no},'${customerServiceQnABoard.mid}', '${customerServiceQnABoard.password}')">
+									<tr style="cursor:pointer" onClick="submitDetailForm(${customerServiceQnABoard.b_no},'${customerServiceQnABoard.mid}')">
 										<td align="center">${requestScope.customerServiceQnABoardMap.begin_serialNo_desc - status.count + 1}</td>
 										<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
-										<td align="center">${customerServiceQnABoard.subject}</td>
+										<td>
+											<c:if test="${customerServiceQnABoard.writer == '관리자'}">
+												&nbsp;&nbsp;&nbsp; <img src="/image/answerIcon.png" style="width: 10px; height: 10px;">
+											</c:if>
+											${customerServiceQnABoard.subject}
+										</td>
 										<td align="center">${customerServiceQnABoard.writer}</td>
 										<td align="center">${customerServiceQnABoard.reg_date}</td>
 										<td align="center">${customerServiceQnABoard.readcount}</td>

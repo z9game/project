@@ -117,4 +117,21 @@
 		where
 			b_no = #{b_no}
 	</update>
+	
+	<insert id="insertQnABoard" parameterType="kosmo.team.project.dto.MainDTO">
+		insert into
+			qnaboard (
+			b_no
+			,subject
+			,writer
+			,readcount
+			,content
+		) values (
+			(select nvl(max(b_no),0)+1 from qnaboard),
+			#{subject},
+			(select m_no from member where nickname = '${writer}'),
+			0,
+			#{content}
+		)
+	</insert>
 </mapper>

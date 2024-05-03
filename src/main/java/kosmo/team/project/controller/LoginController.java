@@ -52,6 +52,7 @@ public class LoginController {
 	map.put("mid",mid);map.put("password",password);
 
 	String nickname = loginService.getNickname(mid);
+	String email = loginService.getEmail(mid);
 	int midpwdCnt = this.loginService.getmidpwdCnt(map);
 
 	// 로그인이 성공했다면 (즉, midpwdCnt가 1 이상이면)
@@ -61,6 +62,7 @@ public class LoginController {
 		session.setAttribute("mid", mid);
 		session.setAttribute("password", password);
 		session.setAttribute("nickname", nickname);
+		session.setAttribute("email", email);
 		
 	}
 	

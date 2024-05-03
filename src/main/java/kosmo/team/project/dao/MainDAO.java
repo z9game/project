@@ -30,4 +30,6 @@ public interface MainDAO {
 	public int updateCustomerServiceDetailFormReadCountPlusOne(int b_no);
 	
 	public CustomerServiceDetailDTO getCustomerServiceDetail(int b_no);
+	
+	public int insertQnABoard(MainDTO mainDTO);
 }
