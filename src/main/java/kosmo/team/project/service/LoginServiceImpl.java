@@ -34,4 +34,9 @@ public class LoginServiceImpl implements LoginService {
 	public String getNickname(String mid) {
 		return loginDAO.getNickname(mid);
 	}
+	
+	@Override
+	public String getEmail(String mid) {
+		return loginDAO.getEmail(mid);
+	}
 }
