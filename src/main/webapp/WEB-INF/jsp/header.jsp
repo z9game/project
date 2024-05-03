@@ -11,7 +11,9 @@
 </head>
 <body>
 	<header class="header">
+    
 		<div class="headerTitle">
+
 			<a href="/main/mainForm.do"><!--  <img src="#" class="headerLogo"> -->
 			</a>
 		</div>
@@ -25,7 +27,7 @@
 					<li class="nav-item"><a href="/recruitTeamBoardForm.do">모집</a>
 						<!-- 하위 카테고리 -->
 						<ul class="navInner">
-							<li class="navInner-item"><a href="/recruitTeamBoardForm.do">팀/팀원</a></li>
+							<li class="navInner-item"><a href="/recruitTeamMemBoardForm.do">팀/팀원</a></li>
 							<li class="navInner-item"><a
 								href="/recruitHiredBoardForm.do">용병</a></li>
 							<li class="navInner-item"><a

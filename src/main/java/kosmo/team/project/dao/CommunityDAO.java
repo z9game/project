@@ -50,6 +50,17 @@ public interface CommunityDAO {
 
 	CommunityDTO getFreeBoard(int b_no);
 	
+
+	//----------------------------------------
+	//갤러리
+	//----------------------------------------
+	
+	public int insertGallaryCommunity(CommunityDTO communityDTO);
+	
+	public int getImageGallaryBoardListCnt(CommunityDTO communityDTO);
+
+	public List<CommunityDTO> getImageGallaryBoardList(CommunityDTO communityDTO);
+
 	public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO);
 	
 	public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO);
@@ -64,14 +75,23 @@ public interface CommunityDAO {
 	
 	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO);
 	
+
 	
 	
 	
 	
 	
+	//----------------------------------------
+	//장터
+	//----------------------------------------
 	
-	//갤러리
+	public int insertCommunity(CommunityDTO communityDTO);
+	
 	public int getImageBoardListCnt(CommunityDTO communityDTO);
 
 	public List<CommunityDTO> getImageBoardList(CommunityDTO communityDTO);
+	
+	
+	
+
 }

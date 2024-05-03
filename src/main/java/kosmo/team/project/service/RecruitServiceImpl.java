@@ -12,9 +12,8 @@ import kosmo.team.project.dao.SampleDAO;
 import kosmo.team.project.dao.TournamentDAO;
 import kosmo.team.project.dto.RecruitHiredDTO;
 import kosmo.team.project.dto.RecruitLessonDTO;
-import kosmo.team.project.dto.RecruitMemDTO;
 import kosmo.team.project.dto.RecruitSearchDTO;
-import kosmo.team.project.dto.RecruitTeamDTO;
+import kosmo.team.project.dto.RecruitTeamMemDTO;
 
 @Service
 @Transactional
@@ -23,20 +22,11 @@ public class RecruitServiceImpl implements RecruitService {
 	@Autowired
 	private RecruitDAO recruitDAO;
 	
-	
-	public List<RecruitTeamDTO> getRecruit_TeamBoardList(RecruitSearchDTO recruitSearchDTO) {
+	public List<RecruitTeamMemDTO> getTeam_MemList(RecruitSearchDTO recruitSearchDTO) {
 
-		List<RecruitTeamDTO> getRecruit_TeamBoardList = this.recruitDAO.getRecruit_TeamBoardList(recruitSearchDTO);
+		List<RecruitTeamMemDTO> getTeam_MemList = this.recruitDAO.getTeam_MemList(recruitSearchDTO);
 
-		return getRecruit_TeamBoardList;
-
-	}
-	
-	public List<RecruitMemDTO> getRecruit_MemBoardList(RecruitSearchDTO recruitSearchDTO) {
-
-		List<RecruitMemDTO> getRecruit_MemBoardList = this.recruitDAO.getRecruit_MemBoardList(recruitSearchDTO);
-
-		return getRecruit_MemBoardList;
+		return getTeam_MemList;
 
 	}
 
@@ -57,13 +47,6 @@ public class RecruitServiceImpl implements RecruitService {
 
 	}
 
-	public RecruitTeamDTO getRecruit_TeamDetail(int recruitment_no) {
-
-		RecruitTeamDTO getRecruit_TeamDetail = this.recruitDAO.getRecruit_TeamDetail(recruitment_no);
-
-		return getRecruit_TeamDetail;
-
-	}
 	
 	
 	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no) {
@@ -83,12 +66,4 @@ public class RecruitServiceImpl implements RecruitService {
 
 	}
 	
-
-	public RecruitMemDTO getRecruit_MemDetail(int recruitment_no) {
-
-		RecruitMemDTO getRecruit_MemDetail = this.recruitDAO.getRecruit_MemDetail(recruitment_no);
-
-		return getRecruit_MemDetail;
-
-	}
 }
