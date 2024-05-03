@@ -27,7 +27,7 @@
 				or
 				upper(email) like upper('%${keyword1}%')
 				or
-				upper(phone) like
+				upper(m.phone) like
 				upper('%${keyword1}%')
 				)
 			</if>
@@ -83,12 +83,31 @@
 		</if>
 
 		<if test="gender!=null">
-			<foreach collection="gender" item="tmp" open=" and (  "  close="  ) " separator=" or "> 
-			
-			gender = '${tmp}'
-			
+			<foreach collection="gender" item="tmp" open=" and (  "
+				close="  ) " separator=" or ">
+
+				gender = '${tmp}'
+
 			</foreach>
 		</if>
+
+		<if test="sido !=null and sido>0 ">
+			and
+			(
+				s.sido_id  = ${sido}
+			)
+			
+			<if test = "sigungu !=null and sigungu>0 ">
+			and
+			(
+				si.sigungu_id  = ${sigungu}
+			)
+			
+			</if>
+			
+		
+		</if>
+
 
 
 		<if test="(minDate != null and minDate.length() > 0)">
@@ -102,7 +121,7 @@
 			<if test="(minDate != null and minDate.length() > 0)">
 				and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
 			</if>
-			
+
 		</if>
 
 
@@ -145,44 +164,36 @@
 	<select id="getMemberList"
 		resultType="kosmo.team.project.dto.MemberDTO"
 		parameterType="kosmo.team.project.dto.AdminSearchDTO">
-		select * from ( select rownum RNUM, zxcvb.* from (
-
+		select * from (
+		select rownum RNUM, zxcvb.* from (
 		select
-		m_no AS
+		m.m_no AS
 		"m_no",
-		mid AS "mid",
-		name AS "name",
-		nickname as "nickname",
-		email as
-		"email",
-		birthdate as "birthday",
-		phone as "phone",
-		gender as "gender",
-		detail_address as "detail_address",
-
-		to_char(reg_date, 'YYYY-MM-DD') AS
-		"reg_date"
+		m.mid AS "mid",
+		m.name AS "name",
+		m.nickname as "nickname",
+		m.email as "email",
+		m.birthdate as "birthday",
+		m.phone as "phone",
+		m.gender as "gender",
+		s.sido_id AS "sido",
+		si.sigungu_id AS "sigungu",
+		m.detail_address AS "detail_address",
+		to_char(m.reg_date, 'YYYY-MM-DD')
+		AS "reg_date"
 		FROM
-		member
-		where m_no != 1
+		member m
+		LEFT JOIN sido s ON m.sido_id = s.sido_id
+		LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id
+		where m.m_no != 1
 		<include refid="boardWhere" />
 		<if test="sort==null or sort.length()==0">
-			order by
-
-			m_no asc
+			order by m.m_no asc
 		</if>
-
 		<if test="sort!=null and sort.length()>0">
-			order by
-
-			${sort}
+			order by ${sort}
 		</if>
-		
-		
-    	
-    <![CDATA[
-    ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
-    ]]>
+        <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
 	</select>
 
 
@@ -191,8 +202,10 @@
 		select
 		count(*)
 		from
-		member
-		where 1=1
+		member m
+		LEFT JOIN sido s ON m.sido_id = s.sido_id
+		LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id
+		where m.m_no != 1
 		<include refid="boardWhere" />
 	</select>
 
@@ -202,8 +215,10 @@
 	<select id="getMemberListAllCnt" resultType="int">
 		select count(*)
 		from
-		member
-		where 1=1
+		member m
+		LEFT JOIN sido s ON m.sido_id = s.sido_id
+		LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id
+		where m.m_no != 1
 		<include refid="boardWhere" />
 	</select>
 

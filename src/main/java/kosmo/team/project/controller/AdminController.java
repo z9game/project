@@ -80,7 +80,7 @@ public class AdminController {
 		//System.out.println("maxDate2: " + adminSearchDTO.getMaxDate());
 		
 
-		System.out.println("Keyword1  " + adminSearchDTO.getKeyword1());
+		System.out.println("sido  " + adminSearchDTO.getSido());
 		System.out.println("Keyword2  " + adminSearchDTO.getKeyword2());
 		
 		//System.out.println("minDate: " + adminSearchDTO.getMinDate());
