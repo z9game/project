@@ -27,9 +27,8 @@ public class CommunityController {
 	// ----------------------------------------------------------------
 	// 공지사항
 	// ----------------------------------------------------------------
-	@RequestMapping(value = "/communityNoticeBoardForm.do"
-
-	)
+	/***공지사항 페이지 ***/
+	@RequestMapping(value = "/communityNoticeBoardForm.do")
 
 	public ModelAndView communityNoticeBoard(CommunitySearchDTO communitySearchDTO) {
 
@@ -67,7 +66,7 @@ public class CommunityController {
 		return mav;
 	}
 
-	// 공지사항상세보기
+	/*** 공지사항 상세보기 ***/
 	@RequestMapping(value = "/noticeboardDetailForm.do")
 	public ModelAndView noticeboardDetailForm(
 			// --------------------------------------
@@ -100,6 +99,7 @@ public class CommunityController {
 
 	}
 
+	/*** 공지사항 수정, 삭제 페이지 ***/
 	@RequestMapping(value = "/noticeboardUpDelForm.do")
 
 	public ModelAndView noticeboardUpDelForm(
@@ -132,7 +132,8 @@ public class CommunityController {
 		return mav;
 
 	}
-
+	
+	/*** 공지사항 업데이트 ***/
 	@RequestMapping(value = "/noticeboardUpProc.do"
 
 			, method = RequestMethod.POST
@@ -171,7 +172,8 @@ public class CommunityController {
 		// -------------------------------------------
 		return resultMap;
 	}
-
+	
+	/*** 공지사항 삭제 ***/
 	@RequestMapping(value = "/noticeboardDelProc.do"
 
 			, method = RequestMethod.POST
@@ -197,12 +199,15 @@ public class CommunityController {
 
 		return resultMap;
 	}
-
-	// ----------------------------------------------------------------
-
+	
+	
+	
+	
+	
 	// ----------------------------------------------------------------
 	// 자유게시판
 	// ----------------------------------------------------------------
+	/*** 자유게시판 페이지 ***/
 	@RequestMapping(value = "/communityFreeBoardForm.do")
 	public ModelAndView communityFreeBoard(CommunitySearchDTO communitySearchDTO) {
 
@@ -240,7 +245,7 @@ public class CommunityController {
 		return mav;
 	}
 	
-	
+	/*** 자유게시판 조회수 올리는것 ***/
 	@RequestMapping(value = "/updateFreeBoardDetailReadCountPlusOne.do")
 	public ModelAndView updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO) {
 		
@@ -249,6 +254,7 @@ public class CommunityController {
 		return communityFreeBoardDetail(detailDTO);
 	}
 	
+	/*** 자유게시판 새글쓰기 ***/
 	@RequestMapping(value = "/newCommunityFreeBoardForm.do")
 	public ModelAndView newCommunityFreeBoardForm(CommunityDTO communityDTO) {
 
@@ -259,6 +265,7 @@ public class CommunityController {
 		return mav;
 	}
 	
+	/*** 자유게시판 상세보기 ***/
 	@RequestMapping(value = "/communityFreeBoardDetail.do")
 	public ModelAndView communityFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO) {
 		
@@ -293,6 +300,7 @@ public class CommunityController {
 
 	}
 	
+	/*** 자유게시판 댓글 추가, 자유게시판 상세보기 ***/
 	@RequestMapping(value = "/communityFreeBoardDetailCommentList.do")
 	public ModelAndView communityFreeBoardDetailCommentList(CommunityFreeBoardDetailDTO detailDTO) {
 		
@@ -302,6 +310,7 @@ public class CommunityController {
 
 	}
 	
+	/*** 자유게시판 대댓글, 자유게시판 상세보기 ***/
 	@RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentList.do")
 	public ModelAndView freeBoardDetailCommentOfCommentList(CommunityFreeBoardDetailDTO detailDTO) {
 		
@@ -311,6 +320,7 @@ public class CommunityController {
 
 	}
 	
+	/*** 자유게시판 수정 삭제 페이지 ***/
 	@RequestMapping(value = "/communityFreeBoardUpDelForm.do")
 	public ModelAndView communityFreeBoardUpDelForm(CommunityFreeBoardDetailDTO detailDTO) {
 
@@ -324,6 +334,7 @@ public class CommunityController {
 		
 	}
 	
+	/*** 자유게시판 상세보기, 없데이트 ***/
 	@ResponseBody
 	@RequestMapping(value = "/communityFreeBoardUpdateProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")	
 	public Map<String, String> communityFreeBoardUpdateProc(CommunityDTO communityDTO) {
@@ -337,6 +348,7 @@ public class CommunityController {
 		
 	}
 	
+	/*** 자유게시판 상세보기, 삭제 ***/
 	@ResponseBody
 	@RequestMapping(value = "/communityFreeBoardDelProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")	
 	public Map<String, String> communityFreeBoardDelProc(CommunityDTO communityDTO) {
@@ -349,6 +361,7 @@ public class CommunityController {
 		return resultMap;		
 	}
 	
+	/*** 자유게시판 글 등록 ***/
 	@ResponseBody
 	@RequestMapping(value = "/communityFreeBoardRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public Map<String, String> communityFreeBoardRegProc(CommunityDTO communityDTO) {
@@ -362,11 +375,13 @@ public class CommunityController {
 	}
 	
 	
+	
+	
+	
 	// ----------------------------------------------------------------
-
+	// 갤러리 리스트
 	// ----------------------------------------------------------------
-	// 갤러리
-	// ----------------------------------------------------------------
+	/*** 갤러리 페이지 ***/
 	@RequestMapping(value = "/communityGallaryForm.do")
 	public ModelAndView communityGallaryForm(CommunityDTO communityDTO) {
 
@@ -383,6 +398,7 @@ public class CommunityController {
 		return mav;
 	}
 
+	/*** 갤러리 등록 페이지 ***/
 	@RequestMapping(value = "/newCommunityGallaryForm.do")
 	public ModelAndView newCommunityGallaryForm(CommunityDTO communityDTO) {
 
@@ -393,6 +409,7 @@ public class CommunityController {
 		return mav;
 	}
 	
+	/*** 갤러리 새글쓰기 ***/
 	@ResponseBody
 	@RequestMapping(value = "/CommunityGallaryProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public Map<String, String> CommunityGallaryProc(CommunityDTO communityDTO) {
@@ -404,10 +421,6 @@ public class CommunityController {
 		
 		return resultMap;
 	}
-	// ----------------------------------------------------------------
-
-	
-	
 	
 	
 	
@@ -415,23 +428,24 @@ public class CommunityController {
 	// ----------------------------------------------------------------
 	// 장터
 	// ----------------------------------------------------------------
-
+	/*** 장터 페이지 ***/
 	@RequestMapping(value = "/communityMarketplaceBoardForm.do")
 	public ModelAndView communityMarketplaceBoardForm(CommunityDTO communityDTO) {
 
-		int imageBoardListCnt = this.communityService.getImageBoardListCnt(communityDTO);
+		int imageMarketBoardListCnt = this.communityService.getImageBoardListCnt(communityDTO);
 
-		List<CommunityDTO> imageBoardList = this.communityService.getImageBoardList(communityDTO);
+		List<CommunityDTO> imageMarketBoardList = this.communityService.getImageMarketBoardList(communityDTO);
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("imageBoardList", imageBoardList);
+		mav.addObject("imageMarketBoardList", imageMarketBoardList);
 
 		mav.setViewName("communityMarketplaceBoardForm.jsp");
 
 		return mav;
 	}
 
+	/*** 장터 등록 페이지 ***/
 	@RequestMapping(value = "/newCommunityMarketplaceForm.do")
 	public ModelAndView newCommunityMarketplaceForm(CommunityDTO communityDTO) {
 
@@ -442,6 +456,7 @@ public class CommunityController {
 		return mav;
 	}
 	
+	/*** 갤러리 새글쓰기 ***/
 	@ResponseBody
 	@RequestMapping(value = "/MarketplaceRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public Map<String, String> MarketplaceRegProc(CommunityDTO communityDTO) {

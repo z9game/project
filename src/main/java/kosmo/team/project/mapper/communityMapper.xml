@@ -77,9 +77,6 @@
 		noticeboard
 		set
 		readcount = readcount +1 where b_no = #{b_no}
-
-
-
 	</update>
 
 
@@ -127,12 +124,7 @@
 
 
 
-
-
 	<!-- 자유게시판 -->
-
-
-
 	<select id="getFreeBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
 		parameterType="kosmo.team.project.dto.CommunitySearchDTO">
@@ -222,7 +214,6 @@
 				1 = 1
         		AND
 				B_NO = #{ b_no }
-		
 	</select>
 
 
@@ -337,8 +328,6 @@
 		
 	</insert>
 	
-	
-	
 	<update id="updateFreeBoardDetailReadCountPlusOne" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
 	
 		UPDATE	FREEBOARD
@@ -407,19 +396,8 @@
 
 
 
-	<!-- 갤러리 -->
-	<select id="getImageBoardList"
-		resultType="kosmo.team.project.dto.CommunityDTO"
-		parameterType="kosmo.team.project.dto.CommunityDTO">
-		SELECT
-		subject AS "subject",
-		writer AS "writer",
-		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
-		readcount AS "readcount"
-		FROM
-		imageboard
-	</select>
 
+	<!-- 갤러리 -->
 	<select id="getImageGallaryBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
 		parameterType="kosmo.team.project.dto.CommunityDTO">
@@ -465,9 +443,19 @@
 
 
 
-
-
 	<!-- 장터 -->
+	<select id="getImageMarketBoardList"
+		resultType="kosmo.team.project.dto.CommunityDTO"
+		parameterType="kosmo.team.project.dto.CommunityDTO">
+		SELECT
+		subject AS "subject",
+		writer AS "writer",
+		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
+		readcount AS "readcount"
+		FROM
+		imageboard
+	</select>
+	
 	<select id="getImageBoardListCnt" resultType="int">
 		select
 		count(*)
