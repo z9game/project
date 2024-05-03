@@ -96,4 +96,11 @@ public class MainServiceImplements implements MainService {
 		
 		return customerServiceDetailDTO;
 	}
+	
+	public int insertQnABoard(MainDTO mainDTO) {
+		
+		int QnABoardRegCnt = this.mainDAO.insertQnABoard(mainDTO);
+		
+		return QnABoardRegCnt;
+	}
 }

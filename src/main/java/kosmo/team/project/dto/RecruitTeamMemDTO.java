@@ -1,18 +1,21 @@
 package kosmo.team.project.dto;
 
-public class RecruitTeamDTO {
+public class RecruitTeamMemDTO {
 	
-	private int recruitment_no;
+	private int b_no;
 	private String title;
 	private String writer;
 	private String content;
 	private int readcount;
 	private String reg_date;
-	public int getRecruitment_no() {
-		return recruitment_no;
+	private String team_mem;
+	
+	
+	public int getB_no() {
+		return b_no;
 	}
-	public void setRecruitment_no(int recruitment_no) {
-		this.recruitment_no = recruitment_no;
+	public void setB_no(int b_no) {
+		this.b_no = b_no;
 	}
 	public String getTitle() {
 		return title;
@@ -43,6 +46,12 @@ public class RecruitTeamDTO {
 	}
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
+	}
+	public String getTeam_mem() {
+		return team_mem;
+	}
+	public void setTeam_mem(String team_mem) {
+		this.team_mem = team_mem;
 	}
 	
 	

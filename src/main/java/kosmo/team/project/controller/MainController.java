@@ -7,7 +7,9 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.CustomerServiceDetailDTO;
@@ -122,5 +124,23 @@ public class MainController {
 		mav.setViewName("/main/customerServiceQnADetailForm.jsp");
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/QnABoardRegProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,String> boardRegProc(MainDTO mainDTO) {
+	
+		Map<String,String> resultMap = new HashMap<String,String>();
+		
+		int QnABoardRegCnt = this.mainService.insertQnABoard(mainDTO);
+		
+		if(mainDTO.getWriter() == null) {
+			System.out.println(1);
+		}
+			
+		resultMap.put("result", QnABoardRegCnt + "");
+		
+		return resultMap;
+		
 	}
 }

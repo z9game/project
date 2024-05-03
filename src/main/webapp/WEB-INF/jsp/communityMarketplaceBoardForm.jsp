@@ -16,6 +16,9 @@
     	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">장터</p>
     </div>
+    <div class="newCommunityMarketplaceBtnDiv">
+		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="location.replace('/newCommunityMarketplaceForm.do')">
+	</div>
     <div class="communityMarketplaceBoardFormContainer">
 		<c:forEach var="imageboard" items="${requestScope.imageBoardList}" varStatus="status">
 			<div class="communityMarketplaceBoardFormBoard">
