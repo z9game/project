@@ -80,7 +80,8 @@ public class AdminController {
 		//System.out.println("maxDate2: " + adminSearchDTO.getMaxDate());
 		
 
-		
+		System.out.println("sido  " + adminSearchDTO.getSido());
+		System.out.println("Keyword2  " + adminSearchDTO.getKeyword2());
 		
 		//System.out.println("minDate: " + adminSearchDTO.getMinDate());
 
@@ -297,9 +298,14 @@ public class AdminController {
 		adminSearchDTO.setRowCntPerPage((int) noticeBoardMap.get("rowCntPerPage"));
 		adminSearchDTO.setBegin_rowNo((int) noticeBoardMap.get("begin_rowNo"));
 		adminSearchDTO.setEnd_rowNo((int) noticeBoardMap.get("end_rowNo"));
+		
+		
 
 		List<CommunityDTO> noticeBoardList = this.adminService.getNoticeBoardList(adminSearchDTO);
 
+
+		
+		
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("noticeBoardList", noticeBoardList);

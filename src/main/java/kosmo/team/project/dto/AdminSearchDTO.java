@@ -6,6 +6,8 @@ public class AdminSearchDTO {
 
 	private String searchType1;
 	private String searchType2;
+	private int sido;
+	private int sigungu;
 	private String minDate;
 	private String maxDate;
 	private String keyword1;
@@ -30,6 +32,18 @@ public class AdminSearchDTO {
 	}
 	public void setSearchType2(String searchType2) {
 		this.searchType2 = searchType2;
+	}
+	public int getSido() {
+		return sido;
+	}
+	public void setSido(int sido) {
+		this.sido = sido;
+	}
+	public int getSigungu() {
+		return sigungu;
+	}
+	public void setSigungu(int sigungu) {
+		this.sigungu = sigungu;
 	}
 	public String getMinDate() {
 		return minDate;
@@ -97,7 +111,8 @@ public class AdminSearchDTO {
 	public void setEnd_rowNo(int end_rowNo) {
 		this.end_rowNo = end_rowNo;
 	}
-
+	
+	
 	
 	
 	
