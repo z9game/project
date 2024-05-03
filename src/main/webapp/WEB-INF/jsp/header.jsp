@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -13,14 +12,14 @@
 <body>
 	<header class="header">
 		<div class="headerTitle">
-			<a href="/mainForm.do"> <img src="#" class="headerLogo">
+			<a href="/main/mainForm.do"><!--  <img src="#" class="headerLogo"> -->
 			</a>
 		</div>
 		<div class="headerMenu">
 
 			<nav class="headerNav">
 				<ul class="headerNavList">
-					<li><a href="/mainForm.do">홈</a></li>
+					<li><a href="/main/mainForm.do">홈</a></li>
 
 					<li class="nav-item"><a href="/matchingForm.do">매칭 찾기</a></li>
 					<li class="nav-item"><a href="/recruitTeamBoardForm.do">모집</a>
@@ -60,10 +59,10 @@
 							<li class="navInner-item"><a
 								href="/recordsStatisticsForm.do">통계</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="/customerServiceForm.do">고객센터</a>
+					<li class="nav-item"><a href="/main/customerServiceForm.do">고객센터</a>
 					</li>
 					<c:if test="${not empty sessionScope.mid}">
-						<li class="auth-links">${sessionScope.mid}님 환영합니다!
+						<li class="auth-links">${sessionScope.nickname} 님 환영합니다!
 							&nbsp;&nbsp;&nbsp;
 						<c:if test="${sessionScope.mid!= 'admin'}">
 						<a href="#">마이페이지</a>
@@ -77,7 +76,7 @@
 
 
 					<c:if test="${empty sessionScope.mid}">
-						<li class="auth-links"><a href="/loginForm.do">로그인</a> | <a
+						<li class="auth-links"><a href="/main/loginForm.do">로그인</a> | <a
 							href="/memberRegForm.do">회원가입</a></li>
 					</c:if>
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.CommunitySearchDTO;
 import kosmo.team.project.service.CommunityService;
 import kosmo.team.project.utility.Page;
@@ -66,7 +67,7 @@ public class CommunityController {
 		return mav;
 	}
 
-	// 공지사항상세보기 < 여기 작업이다
+	// 공지사항상세보기
 	@RequestMapping(value = "/noticeboardDetailForm.do")
 	public ModelAndView noticeboardDetailForm(
 			// --------------------------------------
@@ -238,6 +239,85 @@ public class CommunityController {
 
 		return mav;
 	}
+	
+	
+	@RequestMapping(value = "/updateFreeBoardDetailReadCountPlusOne.do")
+	public ModelAndView updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO) {
+		
+		communityService.updateFreeBoardDetailReadCountPlusOne(detailDTO);		
+	
+		return communityFreeBoardDetail(detailDTO);
+	}
+	
+	
+	
+	@RequestMapping(value = "/communityFreeBoardDetail.do")
+	public ModelAndView communityFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO) {
+		
+		CommunityFreeBoardDetailDTO freeBoardDetail = communityService.getFreeBoardDetail(detailDTO);
+		
+		int commentListCount = communityService.getFreeBoardDetailCommentPageListCount(detailDTO);
+		
+		Map<String, Integer> pageMap = Page.getPagingMap(
+					detailDTO.getSelectPageNo()
+				,	detailDTO.getRowCntPerPage()
+				,	commentListCount
+		);
+
+		detailDTO.setSelectPageNo((int) pageMap.get("selectPageNo"));
+		detailDTO.setRowCntPerPage((int) pageMap.get("rowCntPerPage"));
+		detailDTO.setBegin_rowNo((int) pageMap.get("begin_rowNo"));
+		detailDTO.setEnd_rowNo((int) pageMap.get("end_rowNo"));
+		
+		List<CommunityFreeBoardDetailDTO> freeBoardDetailCommentPageList = communityService.getFreeBoardDetailCommentPageList(detailDTO);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("commentListCount", commentListCount);
+		mav.addObject("pageMap", pageMap);
+		mav.addObject("detailDTO", detailDTO);
+		mav.addObject("freeBoardDetail", freeBoardDetail);
+		mav.addObject("freeBoardDetailCommentList", freeBoardDetailCommentPageList);
+		mav.addObject("freeBoardDetailCommentListSize", freeBoardDetailCommentPageList.size());
+
+		mav.setViewName("/communityFreeBoardDetailForm.jsp");		
+		
+		return mav;
+
+	}
+	
+	@RequestMapping(value = "/communityFreeBoardDetailCommentList.do")
+	public ModelAndView communityFreeBoardDetailCommentList(CommunityFreeBoardDetailDTO detailDTO) {
+		
+		communityService.insertFreeBoardDetailComment(detailDTO);
+		
+		return communityFreeBoardDetail(detailDTO);
+
+	}
+	
+	@RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentList.do")
+	public ModelAndView freeBoardDetailCommentOfCommentList(CommunityFreeBoardDetailDTO detailDTO) {
+		
+		communityService.insertFreeBoardDetailCommentToComment(detailDTO);
+
+		return communityFreeBoardDetail(detailDTO);
+
+	}
+	
+	@RequestMapping(value = "/communityFreeBoardUpDelForm.do")
+	public ModelAndView communityFreeBoardUpDelForm(CommunityFreeBoardDetailDTO detailDTO) {
+
+		CommunityDTO communityDTO = communityService.getFreeBoard(detailDTO.getB_no());
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("communityDTO", communityDTO);
+		mav.setViewName("communityFreeBoardUpDelForm.jsp");
+
+		return mav;
+		
+	}
+	
+	// 자유게시판 업데이트, 삭제 작업하기
+	
 	// ----------------------------------------------------------------
 
 	// ----------------------------------------------------------------

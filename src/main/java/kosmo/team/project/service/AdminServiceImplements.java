@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kosmo.team.project.dao.AdminDAO;
+import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
-import kosmo.team.project.dto.CommunitySearchDTO;
 import kosmo.team.project.dto.MemberDTO;
-import kosmo.team.project.dto.MemberSearchDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 
 @Service
@@ -19,17 +18,17 @@ public class AdminServiceImplements implements AdminService {
 	private AdminDAO adminDAO;
 
 	@Override
-	public List<MemberDTO> getMemberList(MemberSearchDTO memberSearchDTO) {
+	public List<MemberDTO> getMemberList(AdminSearchDTO AdminSearchDTO) {
 
-		List<MemberDTO> memberList = this.adminDAO.getMemberList(memberSearchDTO);
+		List<MemberDTO> memberList = this.adminDAO.getMemberList(AdminSearchDTO);
 
 		return memberList;
 
 	}
 
-	public int getMemberListCnt(MemberSearchDTO memberSearchDTO) {
+	public int getMemberListCnt(AdminSearchDTO AdminSearchDTO) {
 
-		int memberListCnt = this.adminDAO.getMemberListCnt(memberSearchDTO);
+		int memberListCnt = this.adminDAO.getMemberListCnt(AdminSearchDTO);
 
 		return memberListCnt;
 
@@ -152,18 +151,18 @@ public class AdminServiceImplements implements AdminService {
 	// --------------------------
 
 	@Override
-	public List<CommunityDTO> getNoticeBoardList(CommunitySearchDTO communitySearchDTO) {
+	public List<CommunityDTO> getNoticeBoardList(AdminSearchDTO adminSearchDTO) {
 
-		List<CommunityDTO> noticeBoardList = this.adminDAO.getNoticeBoardList(communitySearchDTO);
+		List<CommunityDTO> noticeBoardList = this.adminDAO.getNoticeBoardList(adminSearchDTO);
 
 		return noticeBoardList;
 
 	}
 
 	@Override
-	public int getNoticeBoardListCnt(CommunitySearchDTO communitySearchDTO) {
+	public int getNoticeBoardListCnt(AdminSearchDTO adminSearchDTO) {
 
-		int noticeBoardListCount = this.adminDAO.getNoticeBoardListCnt(communitySearchDTO);
+		int noticeBoardListCount = this.adminDAO.getNoticeBoardListCnt(adminSearchDTO);
 
 		return noticeBoardListCount;
 

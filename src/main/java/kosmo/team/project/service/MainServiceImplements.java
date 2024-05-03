@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosmo.team.project.dao.MainDAO;
+import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
+import kosmo.team.project.dto.MainSearchDTO;
 
 @Service
 @Transactional
@@ -32,5 +34,73 @@ public class MainServiceImplements implements MainService {
 
 		return imageBoardList;
 
+	}
+	
+	@Override
+	public List<MainDTO> getMainTournamentList(MainDTO mainDTO) {
+
+		List<MainDTO> tournamentList = this.mainDAO.getMainTournamentList(mainDTO);
+
+		return tournamentList;
+
+	}
+	
+	@Override
+	public List<MainDTO> getCustomerServiceList(MainDTO mainDTO) {
+
+		List<MainDTO> customerServiceList = this.mainDAO.getCustomerServiceList(mainDTO);
+
+		return customerServiceList;
+
+	}
+	
+	@Override
+	public List<MainDTO> getCustomerServiceCategoryList(MainDTO mainDTO) {
+
+		List<MainDTO> customerServiceCategoryList = this.mainDAO.getCustomerServiceCategoryList(mainDTO);
+
+		return customerServiceCategoryList;
+
+	}
+	
+	@Override
+	public int getCustomerServiceQnABoardListAllCnt() {
+		
+		int customerServiceQnABoardListAllCnt = this.mainDAO.getCustomerServiceQnABoardListAllCnt();
+		
+		return customerServiceQnABoardListAllCnt;
+	}
+	
+	@Override
+	public int getCustomerServiceQnABoardListCnt(MainSearchDTO mainSearchDTO) {
+		
+		int customerServiceQnABoardListCnt = this.mainDAO.getCustomerServiceQnABoardListCnt(mainSearchDTO);
+		
+		return customerServiceQnABoardListCnt;
+	}
+	
+	@Override
+	public List<MainDTO> getCustomerServiceQnABoardList(MainSearchDTO mainSearchDTO) {
+		
+		List<MainDTO> customerServiceQnABoardList = this.mainDAO.getCustomerServiceQnABoardList(mainSearchDTO);
+		
+		return customerServiceQnABoardList;
+	}
+	
+	@Override
+	public CustomerServiceDetailDTO getCustomerServiceDetail(int b_no) {
+		
+		int updateCustomerServiceDetailFormReadCountPlusOne = this.mainDAO.updateCustomerServiceDetailFormReadCountPlusOne(b_no);
+		
+		CustomerServiceDetailDTO customerServiceDetailDTO = this.mainDAO.getCustomerServiceDetail(b_no);
+		
+		return customerServiceDetailDTO;
+	}
+	
+	public int insertQnABoard(MainDTO mainDTO) {
+		
+		int QnABoardRegCnt = this.mainDAO.insertQnABoard(mainDTO);
+		
+		return QnABoardRegCnt;
 	}
 }

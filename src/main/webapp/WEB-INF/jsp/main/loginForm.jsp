@@ -7,15 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>LoginForm</title>
-<link href="/style/loginFormStyle.css" rel="stylesheet">
-<script src="/js/loginFormScript.js"></script>
+<link href="/style/main/loginFormStyle.css" rel="stylesheet">
+<script src="/js/main/loginFormScript.js"></script>
 
 <script>
 
 	function doLogin()
 	{
 		var midobj=$(".mid");
-		var pwdobj=$(".password")
+		var pwdobj=$(".password");
 		
 		var mid = midobj.val();
 		var password = pwdobj.val();
@@ -65,14 +65,14 @@
 					//<주의> href 메소드를 호출하여
 					//WAS로 접속 할때는 get 방식으로 접속한다.
 					//--------------------------
-					location.href='/mainForm.do';
+					location.href='/main/mainForm.do';
 				}
 				else
 				{
 					alert("로그인 실패")
 				}
 			}
-			,error 	 : function(){alert("웹서버 접속 실패!")}
+			,error 	 : function(){alert("오류 발생!")}
 			
 		}) 
 	}

@@ -3,6 +3,7 @@ package kosmo.team.project.service;
 import java.util.List;
 
 import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.CommunitySearchDTO;
 
 public interface CommunityService {
@@ -48,6 +49,22 @@ public interface CommunityService {
 	public int getFreeBoardAllCnt();
 
 	CommunityDTO getFreeBoard(int b_no);
+	
+	public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public int insertFreeBoardDetailComment(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public int insertFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO);
+	
+	
+	
+	
 
 	
 	

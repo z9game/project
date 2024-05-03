@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.CommunitySearchDTO;
 
 @Mapper
@@ -49,8 +50,7 @@ public interface CommunityDAO {
 
 	CommunityDTO getFreeBoard(int b_no);
 	
-	
-	
+
 	//----------------------------------------
 	//갤러리
 	//----------------------------------------
@@ -60,6 +60,22 @@ public interface CommunityDAO {
 	public int getImageGallaryBoardListCnt(CommunityDTO communityDTO);
 
 	public List<CommunityDTO> getImageGallaryBoardList(CommunityDTO communityDTO);
+
+	public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public int insertFreeBoardDetailComment(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public int updateFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public int insertFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO);
+	
+	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO);
+	
+
 	
 	
 	

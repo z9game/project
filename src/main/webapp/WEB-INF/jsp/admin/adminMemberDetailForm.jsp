@@ -19,6 +19,8 @@
 		console.log("Gender value is empty or undefined!");
 	}
 </script>
+
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
@@ -32,8 +34,8 @@
 			<li class="nav-item">관리자 메뉴</li>
 			<li class="nav-item"><a class="nav-link" href="adminForm.do">회원
 					관리</a></li>
-			<li class="nav-item"><a class="nav-link" href="adminNoticeBoardForm.do">공지사항
-			</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="adminNoticeBoardForm.do">공지사항 </a></li>
 		</ul>
 	</div>
 
@@ -108,13 +110,14 @@
 			<tr>
 				<th bgColor="lightgray">성별</th>
 				<td><input type="radio" name="gender" value="남"
-					<c:if test="${requestScope.memberDTO.gender.contains ('남')}">checked</c:if>>남
-					<input type="radio" name="gender" value="여"
-					<c:if test="${requestScope.memberDTO.gender.contains ('여')}">checked</c:if>>여
-				</td>
+					<c:if test="${requestScope.memberDTO.gender.contains ('남')}">checked</c:if>
+					disabled>남 <input type="radio" name="gender" value="여"
+					<c:if test="${requestScope.memberDTO.gender.contains ('여')}">checked</c:if>
+					disabled>여</td>
 			</tr>
-			
-			
+
+
+
 			<tr>
 				<th>상세주소</th>
 				<td>${requestScope.memberDTO.detail_address}</td>
@@ -128,7 +131,7 @@
 		</table>
 	</c:if>
 
-<!-- ---------------------------------------------------------------------------------- -->
+	<!-- ---------------------------------------------------------------------------------- -->
 
 	<c:if test="${empty requestScope.playerRecordDTO}">
 		<script>
@@ -215,7 +218,8 @@
 			<!--------------------------------------------------- -->
 			<span style="cursor: pointer"
 				onclick="location.replace('/adminForm.do')"> [목록 화면으로] </span> <input
-				type="button" value="수정/삭제" onclick="document.adminDetailUpDelForm.submit();">
+				type="button" value="수정/삭제"
+				onclick="document.adminDetailUpDelForm.submit();">
 
 
 
@@ -236,9 +240,8 @@
 		<form name="adminDetailUpDelForm" action="/adminDetailUpDelForm.do"
 			method="post">
 			<input type="hidden" name="m_no"
-				value="${requestScope.memberDTO.m_no}">
-				<input type="hidden" name="player"
-				value="${requestScope.playerRecordDTO.player}">
+				value="${requestScope.memberDTO.m_no}"> <input type="hidden"
+				name="player" value="${requestScope.playerRecordDTO.player}">
 		</form>
 	</c:if>
 
