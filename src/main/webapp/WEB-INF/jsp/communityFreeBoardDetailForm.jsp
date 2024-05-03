@@ -9,10 +9,16 @@
 	<script src="/js/communityFreeBoardFormScript.js"></script>
 
 	<script>
-			
+
 		$(function(){
+			init();
 			pageNoClick(1);
 		});
+		
+		function init() {
+			var b_no = ${ requestScope.detailDTO.b_no };
+			$("#freeBoardDetailForm .b_no").val(b_no);
+		}
 		
 		function comment() {
 			
@@ -122,7 +128,7 @@
 	</div>
 
 	<table border="1" bordercolor="gray" align="center" cellpadding="7">
-		<caption>[게시판 상세글 보기]</caption>
+		<caption>[자유게시판 상세글 보기]</caption>
 		<tr>
 			<th bgColor="lightgray">이 름</th>
 			<td>${ requestScope.freeBoardDetail.writer }</td>
@@ -174,6 +180,15 @@
 	</table>	
 	
 	<div style="height:5px;"></div>
+	
+	<center>
+		<span style="cursor: pointer" 
+			onclick="location.replace('/communityFreeBoardForm.do')">
+			 [목록 화면으로] 
+		</span> 
+		<input type="button" value="수정/삭제"
+				onclick="document.freeBoardDetailForm.submit();" />
+	</center>
 	
 	
 	<div class="comment_div">
@@ -267,13 +282,13 @@
 		<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
 	</form>
 	
-	<form name="freeBoardDetailForm" id="freeBoardDetailForm">
+	<form name="freeBoardDetailForm" id="freeBoardDetailForm" action="/communityFreeBoardUpDelForm.do" method="post">
 		<input type="hidden" name="nick_name" class="nick_name">
 		<input type="hidden" name="content" class="content">
-		<input type="hidden" name="selectPageNo" class="selectPageNo">
-		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
-		<input type="hidden" name="b_no" class="b_no">
-		<input type="hidden" name="comment_no" class="comment_no">			
+		<input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
+		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage" value="0">
+		<input type="hidden" name="b_no" class="b_no" value="0">
+		<input type="hidden" name="comment_no" class="comment_no" value="0">			
 	</form>
 	
 	<br><br><br><br><br><br><br>	

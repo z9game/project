@@ -73,7 +73,8 @@
 
 	<update id="updateNoticeBoardReadCount" parameterType="int">
 
-		update noticeboard
+		update
+		noticeboard
 		set
 		readcount = readcount +1 where b_no = #{b_no}
 
@@ -177,7 +178,8 @@
 		select
 		b_no "b_no"
 		,subject "subject"
-		,writer "writer"
+		--,writer "writer"
+		,( select nickname from member where m_no = ${b_no}) as "writer"		
 		,reg_date
 		"reg_date"
 		,readcount "readcount"
@@ -192,8 +194,6 @@
 			select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
 			또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
 			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
-
-
 	</select>
 
 	<select id="getFreeBoardDetail" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >
@@ -224,6 +224,7 @@
 				B_NO = #{ b_no }
 		
 	</select>
+
 
 	<select id="getFreeBoardDetailCommentPageList" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >
 		
@@ -347,34 +348,6 @@
 	</update>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- 갤러리 -->
 	<select id="getImageBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
@@ -388,10 +361,80 @@
 		imageboard
 	</select>
 
+	<select id="getImageGallaryBoardList"
+		resultType="kosmo.team.project.dto.CommunityDTO"
+		parameterType="kosmo.team.project.dto.CommunityDTO">
+		SELECT
+		subject AS "subject",
+		writer AS "writer",
+		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
+		readcount AS "readcount"
+		FROM
+		imageboard
+	</select>
+
+	<select id="getImageGallaryBoardListCnt" resultType="int">
+		select
+		count(*)
+		from
+		imageboard
+	</select>
+
+	<insert id="insertGallaryCommunity"
+		parameterType="kosmo.team.project.dto.CommunityDTO">
+		insert into imageboard
+		(
+		b_no
+		, subject
+		, writer
+		, content
+		, reg_date
+		, readcount
+		)
+		values
+		(
+		( select nvl( max( sale_no ), 0 ) + 1 from sale )
+		, #{ subject }
+		, ${ writer }
+		, #{ content }
+		, 0
+		, sysdate
+		)
+	</insert>
+
+
+
+
+
+
+	<!-- 장터 -->
 	<select id="getImageBoardListCnt" resultType="int">
 		select
 		count(*)
 		from
 		imageboard
 	</select>
+
+	<insert id="insertCommunity"
+		parameterType="kosmo.team.project.dto.CommunityDTO">
+		insert into sale
+		(
+		sale_no
+		, subject
+		, writer
+		, content
+		, readcount
+		, reg_date
+		)
+		values
+		(
+			( select nvl( max( sale_no ), 0 ) + 1 from sale )
+			, #{ subject }
+			, ${ writer }
+			, #{ content }
+			, 0
+			, sysdate
+		)
+	</insert>
+
 </mapper>

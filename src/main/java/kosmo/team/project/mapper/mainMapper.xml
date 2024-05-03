@@ -18,4 +18,120 @@
 		from
 		    imageboard
 	</select>
+	
+	<select id="getMainTournamentList" resultType="kosmo.team.project.dto.MainDTO" parameterType="kosmo.team.project.dto.MainDTO">		
+		select
+			list_no 
+			,subject
+			,region
+			,to_char(regist_start,'YYYY-MM-DD') as "regist_start"
+			,to_char(regist_end,'YYYY-MM-DD') 	as "regist_end"
+		from 
+			tournament
+	</select>
+	
+	<!-- FAQ 페이지 -->
+	<select id="getCustomerServiceList" resultType="kosmo.team.project.dto.MainDTO" parameterType="kosmo.team.project.dto.MainDTO">
+	    SELECT 
+		    c.customerservice_categoryname AS "customerservice_categoryname",
+		    s.customerservice_subject AS "customerservice_subject",
+		    s.customerservice_content AS "customerservice_content"
+		FROM 
+		    customerservice s, customerservice_category c
+        WHERE 
+        	s.customerservice_categoryno = c.customerservice_categoryno    
+	</select>
+	
+	<select id="getCustomerServiceCategoryList" resultType="kosmo.team.project.dto.MainDTO" parameterType="kosmo.team.project.dto.MainDTO">
+	    SELECT 
+		    customerservice_categoryno AS "customerservice_categoryno",
+		    customerservice_categoryname AS "customerservice_categoryname"
+		FROM 
+		    customerservice_category
+	</select>
+	
+	<!-- QnA 페이지 -->
+	<select id="getCustomerServiceQnABoardList" resultType="kosmo.team.project.dto.MainDTO" parameterType="kosmo.team.project.dto.MainSearchDTO">
+	 	SELECT 
+	 		* 
+		FROM 
+		     (SELECT 
+		     	ROWNUM RNUM, 
+		        zxcvb.*
+		      FROM
+		        (SELECT 
+		        	q.b_no AS "b_no",
+		        	q.subject AS "subject", 
+                    m.nickname AS "writer", 
+                    q.content AS "content", 
+                    to_char(q.reg_date, 'YYYY-MM-DD') AS "reg_date", 
+                    q.readcount AS "readcount",
+                    m.password AS "password",
+                    m.mid AS "mid" 
+               	 FROM 
+               	 	qnaboard q, 
+                    MEMBER m 
+              	 WHERE 
+              	 	q.writer = m.m_no 
+           		 ORDER BY 
+           		 	b_no desc 
+           		 
+      <![CDATA[ ) zxcvb 
+		     ) 
+		WHERE 
+			RNUM >= #{begin_rowNo} 
+		    AND 
+		    RNUM <= #{end_rowNo}
+	  ]]>		
+	</select>
+	
+	<select id="getCustomerServiceQnABoardListCnt" resultType="int">
+		select count(*) from qnaboard
+	</select>
+	
+	<select id="getCustomerServiceQnABoardListAllCnt" resultType="int">
+		select count(*) from qnaboard
+	</select>
+	
+	<select id="getCustomerServiceDetail" parameterType="int" resultType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+	    SELECT
+	    	q.b_no AS "b_no",
+	        q.subject AS "subject",
+	        m.nickname AS "writer",
+	        q.content AS "content",
+	        TO_CHAR(q.reg_date, 'YYYY-MM-DD') AS "reg_date",
+	        q.readcount AS "readcount"
+	    FROM
+	        qnaboard q,
+	        MEMBER m
+	    WHERE
+	        q.writer = m.m_no
+	        AND q.b_no = #{b_no}
+	</select>
+	
+	<update id="updateCustomerServiceDetailFormReadCountPlusOne" parameterType="int">
+		update
+			qnaboard
+		set
+			readcount = readcount + 1
+		where
+			b_no = #{b_no}
+	</update>
+	
+	<insert id="insertQnABoard" parameterType="kosmo.team.project.dto.MainDTO">
+		insert into
+			qnaboard (
+			b_no
+			,subject
+			,writer
+			,readcount
+			,content
+		) values (
+			(select nvl(max(b_no),0)+1 from qnaboard),
+			#{subject},
+			(select m_no from member where nickname = '${writer}'),
+			0,
+			#{content}
+		)
+	</insert>
 </mapper>
