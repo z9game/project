@@ -177,7 +177,8 @@
 		select
 		b_no "b_no"
 		,subject "subject"
-		,writer "writer"
+		--,writer "writer"
+		,( select nickname from member where m_no = ${b_no}) as "writer"		
 		,reg_date
 		"reg_date"
 		,readcount "readcount"
