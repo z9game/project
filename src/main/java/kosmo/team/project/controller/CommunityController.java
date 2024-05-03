@@ -340,6 +340,21 @@ public class CommunityController {
 
 	}
 	
+	@RequestMapping(value = "/communityFreeBoardUpDelForm.do")
+	public ModelAndView communityFreeBoardUpDelForm(CommunityFreeBoardDetailDTO detailDTO) {
+
+		CommunityDTO communityDTO = communityService.getFreeBoard(detailDTO.getB_no());
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("communityDTO", communityDTO);
+		mav.setViewName("communityFreeBoardUpDelForm.jsp");
+
+		return mav;
+		
+	}
+	
+	// 자유게시판 업데이트, 삭제 작업하기
+	
 	// ----------------------------------------------------------------
 
 	
