@@ -249,7 +249,15 @@ public class CommunityController {
 		return communityFreeBoardDetail(detailDTO);
 	}
 	
-	
+	@RequestMapping(value = "/newCommunityFreeBoardForm.do")
+	public ModelAndView newCommunityFreeBoardForm(CommunityDTO communityDTO) {
+
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("newCommunityFreeBoardForm.jsp");
+
+		return mav;
+	}
 	
 	@RequestMapping(value = "/communityFreeBoardDetail.do")
 	public ModelAndView communityFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO) {
@@ -316,7 +324,43 @@ public class CommunityController {
 		
 	}
 	
-	// 자유게시판 업데이트, 삭제 작업하기
+	@ResponseBody
+	@RequestMapping(value = "/communityFreeBoardUpdateProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")	
+	public Map<String, String> communityFreeBoardUpdateProc(CommunityDTO communityDTO) {
+
+		int updateCount = communityService.updateCommunityFreeBoard(communityDTO);
+
+		Map<String, String> resultMap = new HashMap<String, String>();
+		resultMap.put("result", updateCount + "");
+
+		return resultMap;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/communityFreeBoardDelProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")	
+	public Map<String, String> communityFreeBoardDelProc(CommunityDTO communityDTO) {
+		
+		int boardDeleteCount = communityService.deleteCommunityFreeBoard(communityDTO);
+
+		Map<String, String> resultMap = new HashMap<String, String>();
+		resultMap.put("result", boardDeleteCount + "");
+
+		return resultMap;		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/communityFreeBoardRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public Map<String, String> communityFreeBoardRegProc(CommunityDTO communityDTO) {
+		
+		int result = communityService.insertCommunityFreeBoard(communityDTO);
+		
+		Map<String, String> resultMap = new HashMap<String, String>();
+		resultMap.put("result", result + "");
+		
+		return resultMap;
+	}
+	
 	
 	// ----------------------------------------------------------------
 

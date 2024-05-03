@@ -48,8 +48,15 @@ public interface CommunityDAO {
 
 	public int getFreeBoardAllCnt();
 
-	CommunityDTO getFreeBoard(int b_no);
+	public CommunityDTO getFreeBoard(int b_no);
 	
+	public int getCommunityFreeBoardCount(int b_no);
+	
+	public int updateCommunityFreeBoard(CommunityDTO communityDTO);
+	
+	public int deleteCommunityFreeBoard(CommunityDTO communityDTO);
+
+	public int insertCommunityFreeBoard(CommunityDTO communityDTO);
 
 	//----------------------------------------
 	//갤러리

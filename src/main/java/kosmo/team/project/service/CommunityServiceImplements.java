@@ -146,6 +146,43 @@ public class CommunityServiceImplements implements CommunityService {
 		return communityDTO;
 
 	}
+	
+	public int updateCommunityFreeBoard(CommunityDTO communityDTO) {
+		
+		int boardCount = communityDAO.getCommunityFreeBoardCount(communityDTO.getB_no());
+		
+		if (boardCount == 0) {
+			return boardCount;
+		}
+		
+		int boardUpdateCount = communityDAO.updateCommunityFreeBoard(communityDTO);
+
+		return boardUpdateCount;
+	}
+	
+	@Override
+	public int deleteCommunityFreeBoard(CommunityDTO communityDTO) {
+
+		int boardCount = communityDAO.getCommunityFreeBoardCount(communityDTO.getB_no());
+		
+		if (boardCount == 0) {
+			return boardCount;
+		}
+
+		int boardDeleteCount = communityDAO.deleteCommunityFreeBoard(communityDTO);
+
+		return boardDeleteCount;
+		
+	}
+	
+	@Override
+	public int insertCommunityFreeBoard(CommunityDTO communityDTO) {
+		
+		int boardRegCount = communityDAO.insertCommunityFreeBoard(communityDTO);
+		
+		return boardRegCount;
+		
+	}
 
 	// -------------------------------------------------
 

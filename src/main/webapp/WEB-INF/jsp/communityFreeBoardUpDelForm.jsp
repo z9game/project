@@ -22,13 +22,14 @@
 		var writerObj = formObj.find(".writer");
 		var subjectObj = formObj.find(".subject");
 		var contentObj = formObj.find(".content");
-
+		var serialize = formObj.serialize();
+		
 		if (confirm("정말수정하시겠습니까?") == false) {
 			return;
 		}
-
+		
 		$.ajax({
-			url : "/communityFreeBoardUpProc.do",
+			url : "/communityFreeBoardUpdateProc.do",
 			type : "post",
 			data : formObj.serialize(),
 			success : function(json) {
@@ -49,9 +50,12 @@
 
 	function checkBoardDelForm() {
 		var formObj = $("[name='communityFreeBoardUpDelForm']");
+		var serialize = formObj.serialize();
+		
 		if (confirm("정말 삭제하시겠습니까?") == false) {
 			return;
 		}
+		
 		$.ajax({
 			url : "/communityFreeBoardDelProc.do",
 			type : "post",

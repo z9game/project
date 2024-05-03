@@ -50,22 +50,32 @@ public interface CommunityService {
 
 	CommunityDTO getFreeBoard(int b_no);
 	
+	/*** 자유게시판 상세  */	
 	public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO);
 	
+	/*** 자유게시판 댓글의 전체 갯수  */	
 	public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO);
 	
+	/*** 자유게시판 댓글의 페이지  */
 	public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO);
 	
+	/*** 자유게시판 댓글  */
 	public int insertFreeBoardDetailComment(CommunityFreeBoardDetailDTO detailDTO);
 	
+	/*** 자유게시판 댓글의 댓글  */
 	public int insertFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO);
 	
+	/*** 자유게시판 조회수 1증가  */
 	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO);
 	
+	/*** 자유게시판 상세 업데이트  */
+	public int updateCommunityFreeBoard(CommunityDTO communityDTO);
 	
+	/*** 자유게시판 상세 삭제  */
+	public int deleteCommunityFreeBoard(CommunityDTO communityDTO);
 	
-	
-
+	/*** 자유게시판 입력  */
+	public int insertCommunityFreeBoard(CommunityDTO communityDTO);
 	
 	
 	
