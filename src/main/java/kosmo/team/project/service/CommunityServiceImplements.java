@@ -63,7 +63,6 @@ public class CommunityServiceImplements implements CommunityService {
 	}
 
 	// 이아래쪽은 공지사항 수정,삭제
-
 	public CommunityDTO getNoticeBoardForUpDel(int b_no) {
 
 		CommunityDTO communityDTO = this.communityDAO.getNoticeBoard(b_no);
@@ -104,7 +103,11 @@ public class CommunityServiceImplements implements CommunityService {
 		// 수정 적용개수 리턴하기
 		return boardDelCnt;
 	}
-
+	
+	
+	
+	
+	
 	// ---------------------------------
 	// 자유게시판
 	// ---------------------------------
@@ -183,9 +186,65 @@ public class CommunityServiceImplements implements CommunityService {
 		return boardRegCount;
 		
 	}
+	
+	@Override
+	public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO) {
+	
+		CommunityFreeBoardDetailDTO freeBoardDetail = communityDAO.getFreeBoardDetail(detailDTO);
+		
+		return freeBoardDetail;
+		
+	}
+	
+	@Override
+	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO) {
+		
+		return communityDAO.updateFreeBoardDetailReadCountPlusOne(detailDTO);
+		
+	}
+	
+	@Override
+	public int insertFreeBoardDetailComment(CommunityFreeBoardDetailDTO detailDTO) {
 
-	// -------------------------------------------------
+		int insertFreeBoardDetailCommentCount = communityDAO.insertFreeBoardDetailComment(detailDTO);
 
+		return insertFreeBoardDetailCommentCount;
+
+	}
+	
+	@Override
+	public int insertFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO) {
+
+		communityDAO.updateFreeBoardDetailCommentToComment(detailDTO);
+		
+		int insertFreeBoardDetailCommentToCommentCount = communityDAO.insertFreeBoardDetailCommentToComment(detailDTO);
+
+		return insertFreeBoardDetailCommentToCommentCount;
+
+	}
+	
+	@Override
+	public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO) {
+
+		int freeBoardDetailCommentPageListCount = communityDAO.getFreeBoardDetailCommentPageListCount(detailDTO);
+
+		return freeBoardDetailCommentPageListCount;
+
+	}
+	
+	
+	@Override
+	public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO) {
+		
+		List<CommunityFreeBoardDetailDTO> freeBoardDetailCommentPageList = communityDAO.getFreeBoardDetailCommentPageList(detailDTO);
+
+		return freeBoardDetailCommentPageList;
+		
+	}
+	
+	
+	
+	
 	// -----------------------------------
 	// 갤러리
 	// -----------------------------------
@@ -208,6 +267,11 @@ public class CommunityServiceImplements implements CommunityService {
 		return listGallaryBoard;
 	}
 
+	
+	
+	
+	
+
 	// -----------------------------------
 	// 장터
 	// -----------------------------------
@@ -216,104 +280,7 @@ public class CommunityServiceImplements implements CommunityService {
 		int boardRegCnt = this.communityDAO.insertCommunity(communityDTO);
 		return boardRegCnt;
 	}
-
 	
-	@Override
-	public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO) {
-	
-		CommunityFreeBoardDetailDTO freeBoardDetail = communityDAO.getFreeBoardDetail(detailDTO);
-		
-		return freeBoardDetail;
-		
-	}
-	
-	
-	@Override
-	public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO) {
-
-		int freeBoardDetailCommentPageListCount = communityDAO.getFreeBoardDetailCommentPageListCount(detailDTO);
-
-		return freeBoardDetailCommentPageListCount;
-
-	}
-	
-	
-	@Override
-	public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO) {
-		
-		List<CommunityFreeBoardDetailDTO> freeBoardDetailCommentPageList = communityDAO.getFreeBoardDetailCommentPageList(detailDTO);
-
-		return freeBoardDetailCommentPageList;
-		
-	}
-	
-	
-	@Override
-	public int insertFreeBoardDetailComment(CommunityFreeBoardDetailDTO detailDTO) {
-
-		int insertFreeBoardDetailCommentCount = communityDAO.insertFreeBoardDetailComment(detailDTO);
-
-		return insertFreeBoardDetailCommentCount;
-
-	}
-	
-	
-	@Override
-	public int insertFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO) {
-
-		communityDAO.updateFreeBoardDetailCommentToComment(detailDTO);
-		
-		int insertFreeBoardDetailCommentToCommentCount = communityDAO.insertFreeBoardDetailCommentToComment(detailDTO);
-
-		return insertFreeBoardDetailCommentToCommentCount;
-
-	}
-	
-	@Override
-	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO) {
-		
-		return communityDAO.updateFreeBoardDetailReadCountPlusOne(detailDTO);
-		
-	}
-	
-	
-	
-	//-------------------------------------------------
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//-----------------------------------
-	//갤러리
-	//-----------------------------------
-	
-
 	@Override
 	public int getImageBoardListCnt(CommunityDTO communityDTO) {
 
@@ -324,9 +291,9 @@ public class CommunityServiceImplements implements CommunityService {
 	}
 
 	@Override
-	public List<CommunityDTO> getImageBoardList(CommunityDTO communityDTO) {
+	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO) {
 
-		List<CommunityDTO> imageBoardList = communityDAO.getImageBoardList(communityDTO);
+		List<CommunityDTO> imageBoardList = communityDAO.getImageMarketBoardList(communityDTO);
 
 		return imageBoardList;
 
