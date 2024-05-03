@@ -88,17 +88,12 @@ public class MainServiceImplements implements MainService {
 	}
 	
 	@Override
-	public int updateCustomerServiceDetailFormReadCountPlusOne(CustomerServiceDetailDTO customerServiceDetailDTO) {
+	public CustomerServiceDetailDTO getCustomerServiceDetail(int b_no) {
 		
-		return mainDAO.updateCustomerServiceDetailFormReadCountPlusOne(customerServiceDetailDTO);
+		int updateCustomerServiceDetailFormReadCountPlusOne = this.mainDAO.updateCustomerServiceDetailFormReadCountPlusOne(b_no);
 		
-	}
-	
-	@Override
-	public CustomerServiceDetailDTO getCustomerServiceQnADetail(CustomerServiceDetailDTO customerServiceDetailDTO) {
+		CustomerServiceDetailDTO customerServiceDetailDTO = this.mainDAO.getCustomerServiceDetail(b_no);
 		
-		CustomerServiceDetailDTO customerServiceQnADetail = mainDAO.getCustomerServiceQnADetail(customerServiceDetailDTO);
-		
-		return customerServiceQnADetail;
+		return customerServiceDetailDTO;
 	}
 }
