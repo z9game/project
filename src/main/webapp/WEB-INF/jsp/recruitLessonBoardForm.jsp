@@ -9,6 +9,16 @@
 <title>RecruitLessonBoardForm</title>
 <link href="/style/recruitLessonBoardFormStyle.css" rel="stylesheet">
 <script src="/js/recruitLessonBoardFormScript.js"></script>
+<script>
+
+	function goRecruitLessonDetailForm(recruitment_no)
+	{
+		$("[name='recruitLessonBoardDetailForm'] [name='recruitment_no']").val(recruitment_no); 
+		document.recruitLessonBoardDetailForm.submit();
+	}
+</script>
+
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -96,7 +106,7 @@
 					<th style="width:100px;">등록일</th>
 					<th style="width:100px;">비용</th>
 					<c:forEach var="board" items="${requestScope.boardList}" varStatus="status">
-						<tr style="cursor:pointer" onClick="goBoardDetailForm();">
+						<tr style="cursor:pointer" onClick="goRecruitLessonDetailForm(${board.recruitment_no});">
 							<td align="center">${board.recruitment_no}</td>
 							<td align="center">${board.title}</td>
 							<td align="center">${board.writer}</td>
@@ -114,5 +124,11 @@
 			</c:if>
 		</div>
 	</div>
+	
+	<form name="recruitLessonBoardDetailForm" action="/recruitLessonBoardDetailForm.do" method="post">
+		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+		<input type="hidden" name="recruitment_no">
+	</form>
+	
 </body>
 </html>
