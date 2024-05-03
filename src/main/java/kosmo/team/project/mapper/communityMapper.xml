@@ -178,8 +178,8 @@
 		select
 		b_no "b_no"
 		,subject "subject"
-		--,writer "writer"
-		,( select nickname from member where m_no = ${b_no}) as "writer"		
+		,writer "writer"
+		,( select nickname from member where m_no = ${b_no} ) as "nickname"		
 		,reg_date
 		"reg_date"
 		,readcount "readcount"
@@ -346,6 +346,63 @@
 		WHERE	B_NO		=	#{ b_no }
         
 	</update>
+	
+	<select id="getCommunityFreeBoardCount" parameterType="int" resultType="int">
+		
+		SELECT 	COUNT(*) 
+		
+		FROM 	FREEBOARD 
+		
+		WHERE 	B_NO = #{ b_no }
+		
+	</select>
+	
+	<update id="updateCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+
+		UPDATE 	FREEBOARD 
+		
+		SET
+				SUBJECT = #{ subject }
+			,	WRITER = #{ writer }
+			,	CONTENT	= #{ content }
+			,	REG_DATE = SYSDATE
+
+		WHERE 	B_NO = #{ b_no }
+
+	</update>
+	
+	<delete id="deleteCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+		
+		DELETE 	FROM 	FREEBOARD
+		
+		WHERE	B_NO = #{ b_no }
+		
+	</delete>
+	
+	<insert id="insertCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+		
+		INSERT INTO FREEBOARD
+		(
+				B_NO	
+			,	SUBJECT	
+			,	WRITER	
+			,	CONTENT	
+			,	READCOUNT
+			,	REG_DATE			
+		)
+		VALUES
+		(
+				( SELECT NVL( MAX ( B_NO ), 0 ) + 1 FROM FREEBOARD )
+			, 	#{ subject }
+			, 	${ writer }
+			, 	#{ content }
+			, 	0
+			, 	SYSDATE
+		)
+		
+	</insert>
+	
+
 
 
 	<!-- 갤러리 -->
@@ -401,6 +458,7 @@
 		, sysdate
 		)
 	</insert>
+	
 
 
 
