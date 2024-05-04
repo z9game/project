@@ -22,11 +22,11 @@ public class RecruitServiceImpl implements RecruitService {
 	@Autowired
 	private RecruitDAO recruitDAO;
 	
-	public List<RecruitTeamMemDTO> getTeam_MemList(RecruitSearchDTO recruitSearchDTO) {
+	public List<RecruitTeamMemDTO> getRecruit_TeamMemList(RecruitSearchDTO recruitSearchDTO) {
 
-		List<RecruitTeamMemDTO> getTeam_MemList = this.recruitDAO.getTeam_MemList(recruitSearchDTO);
+		List<RecruitTeamMemDTO> getRecruit_TeamMemList = this.recruitDAO.getRecruit_TeamMemList(recruitSearchDTO);
 
-		return getTeam_MemList;
+		return getRecruit_TeamMemList;
 
 	}
 
@@ -46,7 +46,17 @@ public class RecruitServiceImpl implements RecruitService {
 		return getRecruit_LessonBoardList;
 
 	}
+	
+	
+	public RecruitTeamMemDTO getRecruit_TeamMemDetail(int b_no) {
 
+		int updateReadCnt = this.recruitDAO.updateTeamMemReadCnt(b_no);
+		
+		RecruitTeamMemDTO getRecruit_TeamMemDetail = this.recruitDAO.getRecruit_TeamMemDetail(b_no);
+
+		return getRecruit_TeamMemDetail;
+
+	}
 	
 	
 	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no) {
@@ -64,6 +74,14 @@ public class RecruitServiceImpl implements RecruitService {
 
 		return getRecruit_LessonDetail;
 
+	}
+	
+
+	
+	public int regTeamMemRecruit(RecruitTeamMemDTO recruitTeamMemDTO) {
+		int regTeamMemRecruit = this.recruitDAO.regTeamMemRecruit(recruitTeamMemDTO);
+		return regTeamMemRecruit; 		
+		
 	}
 	
 }

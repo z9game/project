@@ -24,7 +24,7 @@
 					<li><a href="/main/mainForm.do">홈</a></li>
 
 					<li class="nav-item"><a href="/matchingForm.do">매칭 찾기</a></li>
-					<li class="nav-item"><a href="/recruitTeamBoardForm.do">모집</a>
+					<li class="nav-item"><a href="/recruitTeamMemBoardForm.do">모집</a>
 						<!-- 하위 카테고리 -->
 						<ul class="navInner">
 							<li class="navInner-item"><a href="/recruitTeamMemBoardForm.do">팀/팀원</a></li>
