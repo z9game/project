@@ -9,6 +9,10 @@ public class RecruitTeamMemDTO {
 	private int readcount;
 	private String reg_date;
 	private String team_mem;
+	private String sido;
+	private String sigungu;
+	private String day;
+	
 	
 	
 	public int getB_no() {
@@ -53,6 +57,22 @@ public class RecruitTeamMemDTO {
 	public void setTeam_mem(String team_mem) {
 		this.team_mem = team_mem;
 	}
-	
-	
+	public String getSido() {
+		return sido;
+	}
+	public void setSido(String sido) {
+		this.sido = sido;
+	}
+	public String getSigungu() {
+		return sigungu;
+	}
+	public void setSigungu(String sigungu) {
+		this.sigungu = sigungu;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
 }

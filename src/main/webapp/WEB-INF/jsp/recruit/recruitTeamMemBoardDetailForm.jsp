@@ -73,6 +73,24 @@
 					<td>${requestScope.list.readcount}</td>
 				</tr>
 				<tr>
+					<th bgColor="lightgray">지역</th>
+					<!--------------------------------------------------- -->
+					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
+					<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
+					<!-- 상세보기할 게시판의 조회수 표현하기 -->
+					<!--------------------------------------------------- -->
+					<td>${requestScope.list.sido}-${requestScope.list.sigungu}</td>
+				</tr>
+				<tr>
+					<th bgColor="lightgray">요일</th>
+					<!--------------------------------------------------- -->
+					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
+					<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
+					<!-- 상세보기할 게시판의 조회수 표현하기 -->
+					<!--------------------------------------------------- -->
+					<td>${requestScope.list.day}</td>
+				</tr>
+				<tr>
 					<th bgColor="lightgray">내 용</th>
 					<!--------------------------------------------------- -->
 					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
