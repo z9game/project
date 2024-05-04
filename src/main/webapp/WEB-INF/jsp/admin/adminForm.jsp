@@ -101,17 +101,9 @@ $(document).ready(function() {
 	}
 
 	function searchWithSort(sort) {
-	    // sort 값을 form의 sort 필드에 설정합니다.
-	    var sortField = $("[name='adminSearchForm']").find("[name='sort']");
-	    sortField.val(sort);
-	    
-	    // 설정된 sort 값을 확인합니다.
-	    //alert("설정된 sort 값: " + sortField.val());
-	    
-	    // 폼을 서브밋하여 결과를 업데이트합니다.
-	    search();
+	    $("[name='adminSearchForm']").find("[name='sort']").val(sort);
+	    $(".searchBtn").click();
 	}
-
 	
 	
 	
@@ -129,6 +121,14 @@ $(document).ready(function() {
 		boardSearchFormObj.find("#minDate").val("");
 		boardSearchFormObj.find("#maxDate").val("");
 		boardSearchFormObj.find(".selectPageNo").val("1");
+		
+		
+		boardSearchFormObj.find(".searchType1").val("all");
+		boardSearchFormObj.find(".gender").prop("checked", false);
+		boardSearchFormObj.find(".ageRange").prop("checked", false);
+		boardSearchFormObj.find(".sido").val("0");
+		boardSearchFormObj.find(".sigungu").val("0");
+		
 
 		search();
 
@@ -254,7 +254,7 @@ $(document).ready(function() {
 						<tr>
 							<th>키워드</th>
 
-							<td><select name="searchType1">
+							<td><select name="searchType1" class ="searchType1">
 									<option value="all">전체</option>
 									<option value="name">이름</option>
 									<option value="mid">아이디</option>
@@ -275,11 +275,25 @@ $(document).ready(function() {
 								value="여" class="gender">여</td>
 						</tr>
 						<tr>
+							<th>연령대</th>
+							<td><input type="checkbox" name="ageRange" value="10대"
+								class="ageRange">10대 <input type="checkbox"
+								name="ageRange" value="20대" class="ageRange">20대 <input
+								type="checkbox" name="ageRange" value="30대" class="ageRange">30대
+								<input type="checkbox" name="ageRange" value="40대"
+								class="ageRange">40대 <input type="checkbox"
+								name="ageRange" value="50대" class="ageRange">50대 <input
+								type="checkbox" name="ageRange" value="60대" class="ageRange">60대
+								<input type="checkbox" name="ageRange" value="70대"
+								class="ageRange">70대 <input type="checkbox"
+								name="ageRange" value="80대" class="ageRange">80대</td>
+						</tr>
+
+						<tr>
 							<th>시/도</th>
-							<td colspan="5" >
-							<select name="sido" id=""
+							<td colspan="5"><select name="sido" id="" class="sido"
 								onchange="categoryChange(this)">
-									<option value ="0">시/도 선택</option>
+									<option value="0">시/도 선택</option>
 									<option value="1">강원</option>
 									<option value="2">경기</option>
 									<option value="3">경남</option>
@@ -296,9 +310,12 @@ $(document).ready(function() {
 									<option value="14">제주</option>
 									<option value="15">충남</option>
 									<option value="16">충북</option>
-							</select> <select name="sigungu" id="state">
-									<option value = "0">군/구 선택</option>
-							</select></td>
+							</select> 
+							
+							<select name="sigungu" id="state" class ="sigungu">
+									<option value="0">군/구 선택</option>
+							</select>
+							</td>
 						</tr>
 						<tr>
 							<th>날짜검색</th>
@@ -367,17 +384,18 @@ $(document).ready(function() {
 
 
 
-					<c:if test="${param.sort!='name asc' and param.sort!='name desc' }">
+					<c:if
+						test="${param.sort!='m.name asc' and param.sort!='m.name desc' }">
 						<th width="100px" style="cursor: pointer"
-							onclick="searchWithSort('name desc')">이름</th>
+							onclick="searchWithSort('m.name desc')">이름</th>
 					</c:if>
 
-					<c:if test="${param.sort=='name desc'}">
+					<c:if test="${param.sort=='m.name desc'}">
 						<th width="100px" style="cursor: pointer"
-							onclick="searchWithSort('name asc')">이름▼</th>
+							onclick="searchWithSort('m.name asc')">이름▼</th>
 					</c:if>
 
-					<c:if test="${param.sort=='name asc' }">
+					<c:if test="${param.sort=='m.name asc' }">
 						<th width="100px" style="cursor: pointer"
 							onclick="searchWithSort('')">이름▲</th>
 					</c:if>
@@ -423,7 +441,26 @@ $(document).ready(function() {
 							onclick="searchWithSort('')">등록일▲</th>
 					</c:if>
 
+
+
+					<c:if test="${param.sort!='age asc' and param.sort!='age desc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('age desc')">나이</th>
+					</c:if>
+
+					<c:if test="${param.sort=='age desc'}">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('age asc')">나이▼</th>
+					</c:if>
+
+					<c:if test="${param.sort=='age asc' }">
+						<th width="100px" style="cursor: pointer"
+							onclick="searchWithSort('')">나이▲</th>
+					</c:if>
+
 				</tr>
+
+
 
 				<c:forEach var="admin" items="${requestScope.memberList}"
 					varStatus="status">
@@ -434,6 +471,7 @@ $(document).ready(function() {
 						<td align="center">${admin.name}</td>
 						<td align="center">${admin.nickname}</td>
 						<td align="center">${admin.reg_date}</td>
+						<td align="center">${admin.age}</td>
 					</tr>
 				</c:forEach>
 			</table>

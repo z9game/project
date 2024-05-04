@@ -15,6 +15,7 @@ public class AdminSearchDTO {
 	private String orand;
 	private String sort;
 	private List<String> gender;
+	private List<String> ageRange;
 
 	
 	private int selectPageNo; // 선택한 페이지 번호 관련 파값 저장 변수
@@ -87,6 +88,12 @@ public class AdminSearchDTO {
 	public void setGender(List<String> gender) {
 		this.gender = gender;
 	}
+	public List<String> getAgeRange() {
+		return ageRange;
+	}
+	public void setAgeRange(List<String> ageRange) {
+		this.ageRange = ageRange;
+	}
 	public int getSelectPageNo() {
 		return selectPageNo;
 	}
@@ -111,6 +118,8 @@ public class AdminSearchDTO {
 	public void setEnd_rowNo(int end_rowNo) {
 		this.end_rowNo = end_rowNo;
 	}
+	
+	
 	
 	
 	
