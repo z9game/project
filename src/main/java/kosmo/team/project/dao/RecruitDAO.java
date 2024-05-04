@@ -8,6 +8,7 @@ import kosmo.team.project.dto.RecruitHiredDTO;
 import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitSearchDTO;
 import kosmo.team.project.dto.RecruitTeamMemDTO;
+
 @Mapper
 public interface RecruitDAO {
 

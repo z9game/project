@@ -84,6 +84,11 @@ a{
     font-weight: bold;
 } 
 
+.boardList{
+	border: 1px solid;
+	width: 950px;
+	height: 600px;
+}
 
 
 

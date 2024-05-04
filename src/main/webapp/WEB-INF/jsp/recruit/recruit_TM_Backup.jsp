@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>recruitTeamMemBoardForm</title>
 <link href="/style/recruitTeamBoardFormStyle.css" rel="stylesheet">
+<link href="/style/job.css" rel="stylesheet">
+<link href="/style/sub.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
 
 <script>
@@ -197,7 +199,7 @@ function search() {
     </div>
     <br>
    <div>
-   		<center>
+   		 <center>
    			<table style="border-collapse:collapse" border="1">
 				<tr>
 					<td class="teamRecruit onvalue" onclick="sort_All()">
@@ -224,7 +226,7 @@ function search() {
 					<td>
 					<table border="1" bordercolor="black" style="border-collapse:collapse; margin: 0 auto; margin-top:50px; width:1000px;" cellpadding="7" align="center">
 					
-						<tbody><tr>
+						<tr>
 							<th>
 								검&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;색
 							</th>
@@ -234,7 +236,7 @@ function search() {
 									<option value="writer">글작성자</option> 
 									<option value="title">제목</option>
 									<option value="content">내용</option>
-									<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
+									추가적인 검색 조건을 샐렉트 박스에 추가
 								</select> 
 								<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()"> 
 							</td>
@@ -335,16 +337,20 @@ function search() {
 							<td align="center">${list.reg_date}</td>
 						</tr>
 					</c:forEach>
-						
-					
 			</table>
+			<c:if test="${empty requestScope.boardList}">
+					<center>
+					<br><br><br><br>
+					<b>조건에 맞는 결과물이 없습니다.</b>
+					</center>
+			</c:if>
 			
 		</div>
-			
-			
-			
-			
 	</div>
+	
+	<form action="/newRecruitTeamBoardForm.do" method="post">
+	
+	</form>
 	   
 </body>
 </html>

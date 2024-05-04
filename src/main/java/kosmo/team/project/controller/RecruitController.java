@@ -24,14 +24,13 @@ public class RecruitController {
 	@Autowired
     private RecruitService recruitService;
 	
-	
     @RequestMapping(value = "/recruitTeamMemBoardForm.do")
     public ModelAndView recruitTeamBoardForm(RecruitSearchDTO recruitSearchDTO) {
     	List<RecruitTeamMemDTO> recruitTeamMem = this.recruitService.getTeam_MemList(recruitSearchDTO);
     	
     	ModelAndView mav = new ModelAndView();
     	mav.addObject("boardList", recruitTeamMem);
-    	mav.setViewName("/recruit/recruitTeamMemBoardForm.jsp");
+    	mav.setViewName("/recruit/test.jsp");
     	
         return mav;
     }
