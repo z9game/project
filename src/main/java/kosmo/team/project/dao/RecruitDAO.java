@@ -12,14 +12,20 @@ import kosmo.team.project.dto.RecruitTeamMemDTO;
 @Mapper
 public interface RecruitDAO {
 
-	public List<RecruitTeamMemDTO> getTeam_MemList(RecruitSearchDTO recruitSearchDTO);
+	public List<RecruitTeamMemDTO> getRecruit_TeamMemList(RecruitSearchDTO recruitSearchDTO);
 	
 	public List<RecruitHiredDTO> getRecruit_HiredBoardList();
 	
 	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
 	
-	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no);
+	public RecruitTeamMemDTO getRecruit_TeamMemDetail(int b_no);
 	
-	public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
+	public RecruitHiredDTO getRecruit_HiredDetail(int b_no);
+	
+	public RecruitLessonDTO getRecruit_LessonDetail(int b_no);
+	
+	public int regTeamMemRecruit(RecruitTeamMemDTO recruitTeamMemDTO);
+	
+	public int updateTeamMemReadCnt(int b_no);
 
 }

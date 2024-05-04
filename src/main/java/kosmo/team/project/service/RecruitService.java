@@ -10,15 +10,22 @@ import kosmo.team.project.dto.RecruitTeamMemDTO;
 
 public interface RecruitService {
 	
-	public List<RecruitTeamMemDTO> getTeam_MemList(RecruitSearchDTO recruitSearchDTO);
+	public List<RecruitTeamMemDTO> getRecruit_TeamMemList(RecruitSearchDTO recruitSearchDTO);
 	
 	public List<RecruitHiredDTO> getRecruit_HiredBoardList();
 	
 	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
+	
+	RecruitTeamMemDTO getRecruit_TeamMemDetail(int b_no);
 
 	RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no);
 
 	RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
+	
+	public int regTeamMemRecruit(RecruitTeamMemDTO recruitTeamMemDTO);
+	
+	
+	
 
 
 
