@@ -73,7 +73,7 @@ public interface CommunityDAO {
 	
 	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO);
 	
-	
+	public int getFreeBoardCommentCount(int b_no);
 	
 	
 	
