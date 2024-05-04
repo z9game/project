@@ -25,7 +25,7 @@
 			var freeBoardDetailFormCommentObj = $("#freeBoardDetailFormComment");
 			var content = freeBoardDetailFormCommentObj.find(".content").val();
 			
-			if (content.trim().length == 0 ) {
+			if (content.trim().length == 0) {
 				alert("댓글 내용을 입력해야 합니다.");
 				return;
 			}
@@ -50,7 +50,7 @@
 			var nick_name = $("#nick_name" + index).val();
 			var content = $("#content" + index ).val();
 			
-			if (content.trim().length == 0 ) {
+			if (content.trim().length == 0) {
 				alert("댓글 내용을 입력해야 합니다.");
 				return;
 			}

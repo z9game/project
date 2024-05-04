@@ -343,6 +343,14 @@
 		where 	b_no = #{ b_no }
 	</update>
 	
+	<select id="getFreeBoardCommentCount" parameterType="int" resultType="int">		
+		select 	count(*) 
+		
+		from 	freeboard_comment
+		
+		where 	b_no = #{ b_no }		
+	</select>
+	
 	<delete id="deleteCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">		
 		delete 	from 	freeboard
 		

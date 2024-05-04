@@ -22,6 +22,20 @@
 		var writerObj = formObj.find(".writer");
 		var subjectObj = formObj.find(".subject");
 		var contentObj = formObj.find(".content");
+		
+		var subject = $(".subject").val();
+		var content = $(".content").val();
+		
+		if (subject.trim().length == 0) {
+			alert("제목을 입력해야 합니다.");
+			return;
+		}
+		
+		if (content.trim().length == 0) {
+			alert("내용을 입력해야 합니다.");
+			return;
+		}
+		
 		var serialize = formObj.serialize();
 		
 		if (confirm("정말수정하시겠습니까?") == false) {
@@ -65,8 +79,12 @@
 				if (result == 0) {
 					alert("삭제된 글입니다.");
 					location.href = "/communityFreeBoardForm.do";
-				} else {
-					alert("자유게시판 수정 성공입니다.");
+				} 
+				else if (result == -1) {
+					alert("댓글이 있으면 삭제하지 못합니다.")
+				}
+				else {
+					alert("자유게시판 삭제 성공입니다.");
 					location.href = "/communityFreeBoardForm.do";
 				}
 			},

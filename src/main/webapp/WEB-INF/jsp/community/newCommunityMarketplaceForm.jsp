@@ -15,6 +15,20 @@
 	function checkMarketplaceBoardRegForm(){
 		
 		var formObj = $("[name='newCommunityMarketplaceForm']");
+		
+		var subject = $(".subject").val();
+		var content = $(".content").val();
+		
+		if (subject.trim().length == 0) {
+			alert("제목을 입력해야 합니다.");
+			return;
+		}
+		
+		if (content.trim().length == 0) {
+			alert("내용을 입력해야 합니다.");
+			return;
+		}
+		
 		var serialize = formObj.serialize();
 		
 		
