@@ -85,17 +85,26 @@
 	
 	<select id="getRecruit_TeamMemDetail" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="int">
 		    select 
-		        b_no 
-		        ,title 
-		        ,writer 
-		        ,content 
-		        ,readcount 
-		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-		        ,team_mem
+		        t.b_no 
+		        ,t.title 
+		        ,t.writer 
+		        ,t.content 
+		        ,t.readcount 
+		        ,to_char(t.reg_date, 'YYYY-MM-DD') as "reg_date"
+		        ,t.team_mem
+		        
+			    ,s.name as "sido"
+			    ,d.day_name as "day"
+			    ,si.name as "sigungu"
+		        
 		    from 
-		        recruit_teammemboard
+		        recruit_teammemboard t LEFT JOIN sido s ON t.sido = s.sido_id
+		     		 				   LEFT JOIN sigungu si ON t.sigungu = si.sigungu_id
+		      		 				   LEFT JOIN day_of_week d ON t.day = d.day_no
 		    where
 		    	b_no = #{b_no}
+			
+	      
 	</select>	
 	
 	<select id="getRecruit_HiredDetail" resultType="kosmo.team.project.dto.RecruitHiredDTO" parameterType="int">
@@ -137,9 +146,9 @@
 		,#{content}
 		,#{team_mem}
 		
-	)
+		)
+	</insert>	
 	
-	</insert>
 	
 	<update id="updateTeamMemReadCnt" parameterType="int">
 		update 
