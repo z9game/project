@@ -26,8 +26,8 @@ public class RecruitController {
 	
 	
     @RequestMapping(value = "/recruitTeamMemBoardForm.do")
-    public ModelAndView recruitTeamBoardForm(RecruitSearchDTO recruitSearchDTO) {
-    	List<RecruitTeamMemDTO> recruitTeamMem = this.recruitService.getTeam_MemList(recruitSearchDTO);
+    public ModelAndView recruitTeamMemBoardForm(RecruitSearchDTO recruitSearchDTO) {
+    	List<RecruitTeamMemDTO> recruitTeamMem = this.recruitService.getRecruit_TeamMemList(recruitSearchDTO);
     	
     	ModelAndView mav = new ModelAndView();
     	mav.addObject("boardList", recruitTeamMem);
@@ -58,11 +58,20 @@ public class RecruitController {
         return mav;
     }
     
-    @RequestMapping(value = "/newRecruitTeamBoardForm.do")
-    public ModelAndView newRecruitTeamBoardForm() {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @RequestMapping(value = "/newRecruitTeamMemBoardForm.do")
+    public ModelAndView newRecruitTeamMemBoardForm() {
     	
     	ModelAndView mav = new ModelAndView();
-    	mav.setViewName("/recruit/newRecruitTeamBoardForm.jsp");
+    	mav.setViewName("/recruit/newRecruitTeamMemBoardForm.jsp");
     	
         return mav;
     }
@@ -86,6 +95,17 @@ public class RecruitController {
     }
     
     
+    @RequestMapping(value = "/recruitTeamMemBoardDetailForm.do")
+    public ModelAndView recruitTeamBoardDetailForm(@RequestParam(value="b_no") int b_no) {
+ 
+    	RecruitTeamMemDTO recruitTeamMemDTO = this.recruitService.getRecruit_TeamMemDetail(b_no);
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("list", recruitTeamMemDTO);
+    	mav.setViewName("/recruit/recruitTeamMemBoardDetailForm.jsp");
+    	
+        return mav;
+    }
+    
     @RequestMapping(value = "/recruitHiredBoardDetailForm.do")
     public ModelAndView recruitHiredBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
     	
@@ -107,6 +127,21 @@ public class RecruitController {
     	
         return mav;
     }
+    
+	@RequestMapping( value = "/recruitTeamMemRegProc.do"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
+					)
+	@ResponseBody
+	public Map<String, String> recruitTeamMemRegProc(RecruitTeamMemDTO recruitTeamMemDTO)
+	{
+	Map<String, String> resultMap = new HashMap<String, String>();
+	int recruitTeamMemRegCnt = this.recruitService.regTeamMemRecruit(recruitTeamMemDTO);
+	resultMap.put("result", recruitTeamMemRegCnt+"");
+	
+	
+	return resultMap;
+	}
 
- 
+    
 }

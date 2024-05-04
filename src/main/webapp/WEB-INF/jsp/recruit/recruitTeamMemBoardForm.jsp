@@ -89,7 +89,7 @@ function sort_Mem()
 
 			var obj = $(responseHtml);
 
-			$(".recruitTeamMemBoard").html(obj.find(".recruitTeamMemBoard").html());
+			$(".recruitTeamMemBoard").html(obj.find(".recruitMemBoard").html());
 
 			sort="mem";
 		}
@@ -187,6 +187,11 @@ function search() {
 
 }
 
+function goRecruitTeamMemDetailForm(b_no)
+{
+	$("[name='recruitTeamMemBoardDetailForm'] [name='b_no']").val(b_no); 
+	document.recruitTeamMemBoardDetailForm.submit();
+}
 </script>
 </head>
 <body>
@@ -213,7 +218,7 @@ function search() {
 			</table>
 			<br>
 			<div class="newRecruitTeamMemBoardBtnDiv">
-				<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="location.href='/newRecruitTeamBoardForm.do'">
+				<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="location.href='/newRecruitTeamMemBoardForm.do'">
 			</div>
 		</center>
 		
@@ -327,7 +332,7 @@ function search() {
 					<th style="width:100px;">조회수</th>
 					<th style="width:100px;">등록일</th>
 					<c:forEach var="list" items="${requestScope.boardList}" varStatus="status">
-						<tr style="cursor:pointer" onClick="">
+						<tr style="cursor:pointer" onClick=" goRecruitTeamMemDetailForm(${list.b_no});">
 							<td align="center">${list.b_no}</td>
 							<td align="center">${list.title}</td>
 							<td align="center">${list.writer}</td>
@@ -338,13 +343,21 @@ function search() {
 						
 					
 			</table>
-			
+			<c:if test="${empty requestScope.boardList}">
+	               <center>
+	               <br><br><br><br>
+	               <b>조건에 맞는 결과물이 없습니다.</b>
+	               </center>
+	         </c:if>
 		</div>
-			
-			
-			
-			
 	</div>
+	
+	      
+		<form name="recruitTeamMemBoardDetailForm" action="/recruitTeamMemBoardDetailForm.do" method="post">
+			<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+			<input type="hidden" name="b_no">
+		</form> 	 	
+  	
 	   
 </body>
 </html>
