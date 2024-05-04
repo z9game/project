@@ -60,15 +60,16 @@
 		<form name="newCommunityMarketplaceForm">
 			<table class="newCommunityMarketplaceFormRegTable" border="1" bordercolor="black">
 				<tr>
+					<th>글쓴이</th>
+					<td>
+						<%= session.getAttribute("nickname") %>
+						<input type="hidden" name="writer" class="writer" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
+					</td>
+				</tr>			
+				<tr>
 					<th>제목</th>
 					<td>
 						<input type="text" name="subject" class="subject" size="40" maxlength="30">
-					</td>
-				</tr>
-				<tr>
-					<th>글쓴이</th>
-					<td>
-						<input type="text" name="writer" class="writer" size="40" maxlength="15">
 					</td>
 				</tr>
 				<tr>
@@ -80,16 +81,17 @@
 				<tr>
 					<th>파일 첨부</th>
 					<td>
-						<input type="file" name="imageFileAdd" class="imageFileAdd" accept="image/*" multiple >						
-										
+						<input type="file" name="imageFileAdd" class="imageFileAdd" accept="image/*" multiple >										
 					</td>
 				</tr>
+				<!-- 
 				<tr>
 					<th>비밀번호</th>
 					<td>
 						<input type="password" name="pwd" class="pwd" size="40" maxlength="4" >
 					</td>
 				</tr>
+				 -->
 			</table>
 			<div class="newCommunityMarketplaceFormBtnDiv">
 				<div class="resetBtnDiv">

@@ -9,6 +9,19 @@
 <title>CommunityMarketplaceBoardForm</title>
 <link href="/style/communityMarketplaceBoardFormStyle.css" rel="stylesheet">
 <script src="/js/communityMarketplaceBoardFormScript.js"></script>
+<script>
+	function newCommunityMarketplaceBoardFormBtnClick() {
+		
+	    var sessionMid = '<%= session.getAttribute("mid") %>'
+	
+	    if (sessionMid === 'null') {
+	    	alert('로그인이 필요한 서비스입니다.');
+	    	location.href = '/main/loginForm.do';
+	    } else {
+	    	location.href = '/newCommunityMarketplaceForm.do';
+	    }
+	}
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -17,7 +30,7 @@
     	<p class="titleBackgoundText">장터</p>
     </div>
     <div class="newCommunityMarketplaceBtnDiv">
-		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="location.replace('/newCommunityMarketplaceForm.do')">
+		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceBoardFormBtnClick();">
 	</div>
     <div class="communityMarketplaceBoardFormContainer">
 		<c:forEach var="imageboard" items="${requestScope.imageMarketBoardList}" varStatus="status">

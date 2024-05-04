@@ -9,7 +9,19 @@
 <title>CommunityGallaryForm</title>
 <link href="/style/communityGallaryFormStyle.css" rel="stylesheet">
 <script src="/js/communityGallaryFormScript.js"></script>
-
+<script>
+	function newCommunityGallaryFormBtnClick() {
+		
+	    var sessionMid = '<%= session.getAttribute("mid") %>'
+	
+	    if (sessionMid === 'null') {
+	    	alert('로그인이 필요한 서비스입니다.');
+	    	location.href = '/main/loginForm.do';
+	    } else {
+	    	location.href = '/newCommunityGallaryForm.do';
+	    }
+	}
+</script>
 </head>
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -18,7 +30,7 @@
     	<p class="titleBackgoundText">갤러리</p>
     </div>
     <div class="newCommunityGallaryBtnDiv">
-		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="location.replace('/newCommunityGallaryForm.do')">
+		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityGallaryFormBtnClick();">
 	</div>
     <div class="communityGallaryFormContainer">
 		<c:forEach var="imageboard" items="${requestScope.imageGallaryBoardList}" varStatus="status">

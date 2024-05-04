@@ -9,6 +9,7 @@ public class CommunityDTO {
 	private String content;
 	private String reg_date;
 	private int readcount;
+	private String nickname;
 
 	public int getB_no() {
 		return b_no;
@@ -64,6 +65,14 @@ public class CommunityDTO {
 
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 }
