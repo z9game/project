@@ -4,24 +4,42 @@ import java.util.List;
 
 public class AdminSearchDTO {
 
-	private String searchType1;
-	private String searchType2;
-	private int sido;
-	private int sigungu;
-	private String minDate;
-	private String maxDate;
-	private String keyword1;
-	private String keyword2;
-	private String orand;
-	private String sort;
-	private List<String> gender;
-	private List<String> ageRange;
-
-	
-	private int selectPageNo; // 선택한 페이지 번호 관련 파값 저장 변수
-	private int rowCntPerPage; // 페이지 당 보여줄 행의 개수 관련 파값 저장 변수
-	private int begin_rowNo; // 테이블 검색 시 시작행 번호 저장 변수 선언.
-	private int end_rowNo; // 테이블 검색 시 끝행 번호 저장 변수 선언.
+    private String searchType1;
+    private String searchType2;
+    
+    private int sido;
+    private int sigungu;
+    private String minDate;
+    private String maxDate;
+    private String keyword1;
+    private String keyword2;
+    private String orand;
+    private String sort;
+    private List<String> gender;
+    private List<String> ageRange;
+    
+    // 추가된 필드들
+    private int minGames_played;
+    private int maxGames_played;
+    private int minWin;
+    private int maxWin;
+    private int minDraws;
+    private int maxDraws;
+    private int minLoss;
+    private int maxLoss;
+    private int minGoals;
+    private int maxGoals;
+    private int minAssists;
+    private int maxAssists;
+    
+    // 선택한 페이지 번호 관련 파값 저장 변수
+    private int selectPageNo;
+    // 페이지 당 보여줄 행의 개수 관련 파값 저장 변수
+    private int rowCntPerPage;
+    // 테이블 검색 시 시작행 번호 저장 변수 선언.
+    private int begin_rowNo;
+    // 테이블 검색 시 끝행 번호 저장 변수 선언.
+    private int end_rowNo;
 	public String getSearchType1() {
 		return searchType1;
 	}
@@ -94,6 +112,78 @@ public class AdminSearchDTO {
 	public void setAgeRange(List<String> ageRange) {
 		this.ageRange = ageRange;
 	}
+	public int getMinGames_played() {
+		return minGames_played;
+	}
+	public void setMinGames_played(int minGames_played) {
+		this.minGames_played = minGames_played;
+	}
+	public int getMaxGames_played() {
+		return maxGames_played;
+	}
+	public void setMaxGames_played(int maxGames_played) {
+		this.maxGames_played = maxGames_played;
+	}
+	public int getMinWin() {
+		return minWin;
+	}
+	public void setMinWin(int minWin) {
+		this.minWin = minWin;
+	}
+	public int getMaxWin() {
+		return maxWin;
+	}
+	public void setMaxWin(int maxWin) {
+		this.maxWin = maxWin;
+	}
+	public int getMinDraws() {
+		return minDraws;
+	}
+	public void setMinDraws(int minDraws) {
+		this.minDraws = minDraws;
+	}
+	public int getMaxDraws() {
+		return maxDraws;
+	}
+	public void setMaxDraws(int maxDraws) {
+		this.maxDraws = maxDraws;
+	}
+	public int getMinLoss() {
+		return minLoss;
+	}
+	public void setMinLoss(int minLoss) {
+		this.minLoss = minLoss;
+	}
+	public int getMaxLoss() {
+		return maxLoss;
+	}
+	public void setMaxLoss(int maxLoss) {
+		this.maxLoss = maxLoss;
+	}
+	public int getMinGoals() {
+		return minGoals;
+	}
+	public void setMinGoals(int minGoals) {
+		this.minGoals = minGoals;
+	}
+	public int getMaxGoals() {
+		return maxGoals;
+	}
+	public void setMaxGoals(int maxGoals) {
+		this.maxGoals = maxGoals;
+	}
+	public int getMinAssists() {
+		return minAssists;
+	}
+	public void setMinAssists(int minAssists) {
+		this.minAssists = minAssists;
+	}
+	public int getMaxAssists() {
+		return maxAssists;
+	}
+	public void setMaxAssists(int maxAssists) {
+		this.maxAssists = maxAssists;
+	}
 	public int getSelectPageNo() {
 		return selectPageNo;
 	}
@@ -118,16 +208,27 @@ public class AdminSearchDTO {
 	public void setEnd_rowNo(int end_rowNo) {
 		this.end_rowNo = end_rowNo;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+    // 생성자, getter, setter 생략
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 }

@@ -21,7 +21,18 @@ $(document).ready(function() {
     $(".rowCntPerPage").val("10");
     search();
     checkDate();
+    
+    
+
+    
+  
 });
+
+
+
+
+
+
 
 	function goAdminMemberDetailForm(m_no) {
 	    // m_no와 함께 player_record_no 파라미터 추가
@@ -45,12 +56,24 @@ $(document).ready(function() {
 		  
 		var keyword2Obj = boardSearchFormObj.find(".keyword2");
 		
+		var minGames_playedObj = boardSearchFormObj.find(".minGames_played"); 
+		  
+		var maxGames_playedObj = boardSearchFormObj.find(".maxGames_played");
+		
+		
+		
+		
 		var keyword1 = keyword1Obj.val();
 		  
 	    var keyword2 = keyword2Obj.val();
 	    
-
-
+	    
+	    var minGames_played = minGames_playedObj.val();
+		  
+	    var maxGames_played = maxGames_playedObj.val();
+	    
+	    
+	  
 	    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
 		
 		
@@ -81,6 +104,7 @@ $(document).ready(function() {
 	
 						
 						$(".adminFormContainer").html(obj.filter(".adminFormContainer").html());
+						
 						
 
 						
@@ -211,11 +235,6 @@ $(document).ready(function() {
 
 	}
 
-	
-	
-	
-
-
 </script>
 </head>
 <body>
@@ -254,7 +273,7 @@ $(document).ready(function() {
 						<tr>
 							<th>키워드</th>
 
-							<td><select name="searchType1" class ="searchType1">
+							<td><select name="searchType1" class="searchType1">
 									<option value="all">전체</option>
 									<option value="name">이름</option>
 									<option value="mid">아이디</option>
@@ -310,12 +329,9 @@ $(document).ready(function() {
 									<option value="14">제주</option>
 									<option value="15">충남</option>
 									<option value="16">충북</option>
-							</select> 
-							
-							<select name="sigungu" id="state" class ="sigungu">
+							</select> <select name="sigungu" id="state" class="sigungu">
 									<option value="0">군/구 선택</option>
-							</select>
-							</td>
+							</select></td>
 						</tr>
 						<tr>
 							<th>날짜검색</th>
@@ -323,6 +339,12 @@ $(document).ready(function() {
 								readonly="readonly"> ~ 최대 <input type="text"
 								name="maxDate" id="maxDate" readonly="readonly"></td>
 						</tr>
+						<tr>
+							<th>경기수</th>
+							<td><input type="number" name="minGames_played"
+								class="minGames_played" value="0"> ~ <input type="number"
+								name="maxGames_played" class="maxGames_played" value="0">
+						
 
 					</table>
 			</tr>
@@ -458,7 +480,13 @@ $(document).ready(function() {
 							onclick="searchWithSort('')">나이▲</th>
 					</c:if>
 
+
+
+
+
 				</tr>
+
+
 
 
 
@@ -472,6 +500,8 @@ $(document).ready(function() {
 						<td align="center">${admin.nickname}</td>
 						<td align="center">${admin.reg_date}</td>
 						<td align="center">${admin.age}</td>
+
+
 					</tr>
 				</c:forEach>
 			</table>
