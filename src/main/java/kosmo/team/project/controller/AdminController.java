@@ -35,7 +35,7 @@ public class AdminController {
 	
 	@RequestMapping("/adminForm.do")
 
-	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, HttpSession session) {
+	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, HttpSession session  ) {
 		
 		
 		// 세션에서 사용자 아이디를 가져옴
@@ -73,7 +73,7 @@ public class AdminController {
 		adminSearchDTO.setEnd_rowNo((int) memberMap.get("end_rowNo"));
 			
 		
-		//System.out.println("gender: " + adminSearchDTO.getGender());
+	     System.out.println("gender: " + adminSearchDTO.getAgeRange());
 		//System.out.println("maxDate1: " + adminSearchDTO.getMaxDate());
 		
 		List<MemberDTO> memberList = this.adminService.getMemberList(adminSearchDTO);
