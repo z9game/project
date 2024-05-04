@@ -339,12 +339,49 @@ $(document).ready(function() {
 								readonly="readonly"> ~ 최대 <input type="text"
 								name="maxDate" id="maxDate" readonly="readonly"></td>
 						</tr>
+						
 						<tr>
 							<th>경기수</th>
 							<td><input type="number" name="minGames_played"
-								class="minGames_played" value="0"> ~ <input type="number"
-								name="maxGames_played" class="maxGames_played" value="0">
+								class="minGames_played" value="0"> ~ <input
+								type="number" name="maxGames_played" class="maxGames_played"
+								value="0"></td>
+						</tr>
 						
+						<tr>
+							<th>승리수</th>
+							<td><input type="number" name="minWin"
+								class="minWin" value="0"> ~ <input
+								type="number" name="maxWin" class="maxWin"
+								value="0"></td>
+						</tr>
+						
+						<tr>
+							<th>무승부</th>
+							<td><input type="number" name="minDraws" class="minDraws"
+								value="0"> ~ <input type="number" name="maxDraws"
+								class="maxDraws" value="0"></td>
+						</tr>
+						
+						<tr>
+							<th>패배</th>
+							<td><input type="number" name="minLoss" class="minLoss"
+								value="0"> ~ <input type="number" name="maxLoss"
+								class="maxLoss" value="0"></td>
+						</tr>
+						<tr>
+							<th>골</th>
+							<td><input type="number" name="minGoals" class="minGoals"
+								value="0"> ~ <input type="number" name="maxGoals"
+								class="maxGoals" value="0"></td>
+						</tr>
+						
+						<tr>
+							<th>어시스트</th>
+							<td><input type="number" name="minAssists"
+								class="minAssists" value="0"> ~ <input type="number"
+								name="maxAssists" class="maxAssists" value="0"></td>
+						</tr>
 
 					</table>
 			</tr>

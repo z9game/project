@@ -184,6 +184,83 @@
 
 
 
+		<if test="( minWin != null and minWin > 0)">
+			and wins &gt;= to_number(#{minWin})
+			<if test="( maxWin != null and maxWin > 0)">
+				and wins &lt;= to_number(#{maxWin})
+			</if>
+		</if>
+
+		<if test="( maxWin != null and maxWin > 0)">
+			and wins &lt; = to_number(#{maxWin})
+			<if test="( minWin != null and minWin > 0)">
+				and wins &gt; = to_number(#{minWin})
+			</if>
+		</if>
+
+
+
+
+		<if test="( minDraws != null and minDraws > 0)">
+			and wins &gt;= to_number(#{minDraws})
+			<if test="( maxDraws != null and maxDraws > 0)">
+				and wins &lt;= to_number(#{maxDraws})
+			</if>
+		</if>
+
+		<if test="( maxDraws != null and maxDraws > 0)">
+			and draws &lt; = to_number(#{maxDraws})
+			<if test="( minDraws != null and minDraws > 0)">
+				and draws &gt; = to_number(#{minDraws})
+			</if>
+		</if>
+
+
+		<if test="( minLoss != null and minLoss > 0)">
+			and wins &gt;= to_number(#{minLoss})
+			<if test="( maxLoss != null and maxLoss > 0)">
+				and wins &lt;= to_number(#{maxLoss})
+			</if>
+		</if>
+
+		<if test="( maxLoss != null and maxLoss > 0)">
+			and losses &lt; = to_number(#{maxLoss})
+			<if test="( minLoss != null and minLoss > 0)">
+				and losses &gt; = to_number(#{minLoss})
+			</if>
+		</if>
+
+
+
+		<if test="( minGoals != null and minGoals > 0)">
+			and goals_for &gt;= to_number(#{minGoals})
+			<if test="( maxGoals != null and maxGoals > 0)">
+				and goals_for &lt;= to_number(#{maxGoals})
+			</if>
+		</if>
+
+		<if test="( maxGoals != null and maxGoals > 0)">
+			and goals_for &lt; = to_number(#{maxGoals})
+			<if test="( minGoals != null and minGoals > 0)">
+				and goals_for &gt; = to_number(#{minGoals})
+			</if>
+		</if>
+
+
+		<if test="( minAssists != null and minAssists > 0)">
+			and goals_assist &gt;= to_number(#{minAssists})
+			<if test="( maxAssists != null and maxAssists > 0)">
+				and goals_assist &lt;= to_number(#{maxAssists})
+			</if>
+		</if>
+
+		<if test="( maxAssists != null and maxAssists > 0)">
+			and goals_assist &lt; = to_number(#{maxAssists})
+			<if test="( minAssists != null and minAssists > 0)">
+				and goals_assist &gt; = to_number(#{minAssists})
+			</if>
+		</if>
+
 
 
 		<if
