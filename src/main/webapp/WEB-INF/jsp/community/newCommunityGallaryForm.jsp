@@ -58,15 +58,16 @@ function checkGallaryBoardRegForm(){
 		<form name="newCommunityGallaryForm"> 
 			<table class="newCommunityGallaryFormRegTable" border="1" bordercolor="black">
 				<tr>
-					<th>제목</th>
+					<th>글쓴이</th>
 					<td>
-						<input type="text" name="subject" class="subject" size="40" maxlength="30">
+						<%= session.getAttribute("nickname") %>
+						<input type="hidden" name="writer" class="writer" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
 					</td>
 				</tr>
 				<tr>
-					<th>글쓴이</th>
+					<th>제목</th>
 					<td>
-						<input type="text" name="writer" class="writer" size="40" maxlength="15">
+						<input type="text" name="subject" class="subject" size="40" maxlength="30">
 					</td>
 				</tr>
 				<tr>
@@ -81,12 +82,14 @@ function checkGallaryBoardRegForm(){
 						<input type="file" name="imageFileAdd" class="imageFileAdd" accept="image/*" multiple>				
 					</td>
 				</tr>
+				<!-- 
 				<tr>
 					<th>비밀번호</th>
 					<td>
 						<input type="password" name="pwd" class="pwd" size="40" maxlength="4">
 					</td>
 				</tr>
+				 -->
 			</table>
 			<div class="newCommunityGallaryFormBtnDiv">
 				<div class="resetBtnDiv">
