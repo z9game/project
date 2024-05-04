@@ -72,9 +72,9 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="newCustomerServiceQnAFormTitle">
-    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-    	<p class="titleBackgoundText">QnA 등록</p>
-    </div>
+	    <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+	   	<p class="titleBackgoundText">QnA 등록</p>
+ 	</div>
     <div class="newCustomerServiceQnAFormContainer">
 		<form name="newCustomerServiceQnAForm">
 			<table class="newCustomerServiceQnAFormRegTable" border="1" bordercolor="black">
@@ -87,7 +87,7 @@
 				<tr>
 					<th>글쓴이</th>
 					<td>
-						<input type="text" name="writer" class="writer" size="40" maxlength="100" value="<%= session.getAttribute("nickname") %>" readonly>
+						<input type="text" name="writer" class="writer" size="40" maxlength="100" value="<%= session.getAttribute("nickname") %>" style="border: 0;" readonly>
 					</td>
 				</tr>
 				<tr>
@@ -100,12 +100,6 @@
 					<th>내용</th>
 					<td>
 						<textarea name="content" class="content" rows="20" cols="42" maxlength="1000" style="resize:none"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td>
-						<input type="password" name="pwd" class="pwd" size="40" maxlength="50">
 					</td>
 				</tr>
 			</table>

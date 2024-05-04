@@ -116,6 +116,14 @@
 					disabled>여</td>
 			</tr>
 
+			<tr>
+				<th>시/도</th>
+				<td>${requestScope.memberDTO.sido}-${requestScope.memberDTO.sigungu}</td>
+			</tr>
+
+
+
+
 
 
 			<tr>

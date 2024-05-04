@@ -20,7 +20,7 @@
 		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="location.replace('/newCommunityMarketplaceForm.do')">
 	</div>
     <div class="communityMarketplaceBoardFormContainer">
-		<c:forEach var="imageboard" items="${requestScope.imageBoardList}" varStatus="status">
+		<c:forEach var="imageboard" items="${requestScope.imageMarketBoardList}" varStatus="status">
 			<div class="communityMarketplaceBoardFormBoard">
 				<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 					<img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">

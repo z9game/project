@@ -38,6 +38,7 @@ public interface CommunityDAO {
 
 	
 
+	
 	//----------------------------------------
 	// 자유게시판
 	//----------------------------------------
@@ -48,21 +49,18 @@ public interface CommunityDAO {
 
 	public int getFreeBoardAllCnt();
 
-	CommunityDTO getFreeBoard(int b_no);
+	public CommunityDTO getFreeBoard(int b_no);
 	
-
-	//----------------------------------------
-	//갤러리
-	//----------------------------------------
+	public int getCommunityFreeBoardCount(int b_no);
 	
-	public int insertGallaryCommunity(CommunityDTO communityDTO);
+	public int updateCommunityFreeBoard(CommunityDTO communityDTO);
 	
-	public int getImageGallaryBoardListCnt(CommunityDTO communityDTO);
+	public int deleteCommunityFreeBoard(CommunityDTO communityDTO);
 
-	public List<CommunityDTO> getImageGallaryBoardList(CommunityDTO communityDTO);
-
+	public int insertCommunityFreeBoard(CommunityDTO communityDTO);
+	
 	public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO);
-	
+
 	public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO);
 	
 	public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO);
@@ -75,10 +73,23 @@ public interface CommunityDAO {
 	
 	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO);
 	
+	
+	
+	
+	
+	//----------------------------------------
+	//갤러리
+	//----------------------------------------
+	
+	public int insertGallaryCommunity(CommunityDTO communityDTO);
+	
+	public int getImageGallaryBoardListCnt(CommunityDTO communityDTO);
+
+	public List<CommunityDTO> getImageGallaryBoardList(CommunityDTO communityDTO);
 
 	
 	
-	
+
 	
 	
 	//----------------------------------------
@@ -89,7 +100,7 @@ public interface CommunityDAO {
 	
 	public int getImageBoardListCnt(CommunityDTO communityDTO);
 
-	public List<CommunityDTO> getImageBoardList(CommunityDTO communityDTO);
+	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO);
 	
 	
 	

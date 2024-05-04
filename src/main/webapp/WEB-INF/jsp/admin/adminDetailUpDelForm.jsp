@@ -139,7 +139,33 @@
 					<input type="radio" name="gender" value="여"
 					<c:if test="${requestScope.memberDTO.gender.contains ('여')}">checked</c:if>>여</td>
 			</tr>
-
+			<tr>
+					<th>시/도</th>
+					<td colspan="5" >${requestScope.memberDTO.sido}-${requestScope.memberDTO.sigungu}->(수정)
+			            <select name="sido_id" id="" onchange="categoryChange(this)">
+			              <option value="0">시/도 선택</option>
+			              <option value="1">강원</option>
+			              <option value="2">경기</option>
+			              <option value="3">경남</option>
+			              <option value="4">경북</option>
+			              <option value="5">광주</option>
+			              <option value="6">대구</option>
+			              <option value="7">대전</option>
+			              <option value="8">부산</option>
+			              <option value="9">서울</option>
+			              <option value="10">울산</option>
+			              <option value="11">인천</option>
+			              <option value="12">전남</option>
+			              <option value="13">전북</option>
+			              <option value="14">제주</option>
+			              <option value="15">충남</option>
+			              <option value="16">충북</option>
+			            </select>
+			            <select name="sigungu_id" id="state">
+			              <option value ="0">군/구 선택</option>
+			            </select>
+					</td>
+				</tr>
 			<tr>
 				<th bgColor="lightgray">상세주소</th>
 				<td><input type="text" name="detail_address"

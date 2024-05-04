@@ -11,10 +11,10 @@
 </head>
 <body>
 	<header class="header">
+    
 		<div class="headerTitle">
 
 			<a href="/main/mainForm.do"><!--  <img src="#" class="headerLogo"> -->
-
 			</a>
 		</div>
 		<div class="headerMenu">
