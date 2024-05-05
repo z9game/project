@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>NewCommunityFreeBoardForm</title>
-<link href="/style/newCommunityFreeBoardFormStyle.css" rel="stylesheet">
-<script src="/js/newCommunityFreeBoardFormScript.js"></script>
+<link href="/style/community/newCommunityFreeBoardFormStyle.css" rel="stylesheet">
+<script src="/js/community/newCommunityFreeBoardFormScript.js"></script>
 <script>
 	function checkCommunityFreeBoardForm() {
 

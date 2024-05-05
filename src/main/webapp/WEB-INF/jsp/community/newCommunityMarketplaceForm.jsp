@@ -7,9 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>newCommunityMarketplaceForm</title>
-<link href="/style/newCommunityMarketplaceFormStyle.css" rel="stylesheet">
 
-<script src="/js/newCommunityMarketplaceFormScript.js"></script>
+<!-- 이전 경로에 css, js 파일이 없어 주석처리. 
+	<link href="/style/community/newCommunityMarketplaceFormStyle.css" rel="stylesheet">
+	<script src="/js/community/newCommunityMarketplaceFormScript.js"></script>
+ -->
  
 <script>
 	function checkMarketplaceBoardRegForm(){
