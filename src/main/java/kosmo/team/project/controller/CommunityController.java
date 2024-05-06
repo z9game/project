@@ -370,15 +370,49 @@ public class CommunityController {
 	// ----------------------------------------------------------------
 	/*** 장터 페이지 ***/
 	@RequestMapping(value = "/communityMarketplaceBoardForm.do")
-	public ModelAndView communityMarketplaceBoardForm(CommunityDTO communityDTO) {
+	public ModelAndView communityMarketplaceBoardForm(CommunitySearchDTO communitySearchDTO) {
 
+		// 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 
+		int saleUnionFreeSharingListAllCnt = communityService.getSaleUnionFreeSharingListAllCnt();
+		
+		// 판매, 무료나눔 2개 테이블 Union All 하여 검색한 개수
+		int saleUnionFreeSharingListSearchCnt = communityService.getSaleUnionFreeSharingListSearchCnt(communitySearchDTO);
+		
+		int rowCntPerPage = communitySearchDTO.getRowCntPerPage();
+		if (rowCntPerPage == 0) {
+			rowCntPerPage = 8;
+		}
+				
+		Map<String, Integer> pageMap = Page.getPagingMap(
+				  communitySearchDTO.getSelectPageNo()	// 선택한 페이지 번호
+				, rowCntPerPage 						// 페이지 당 보여줄 검색 행의 개수
+				, saleUnionFreeSharingListSearchCnt 	// 검색 결과물 개수
+		);
+		
+		communitySearchDTO.setSelectPageNo((int) pageMap.get("selectPageNo"));
+		communitySearchDTO.setRowCntPerPage((int) pageMap.get("rowCntPerPage"));
+		communitySearchDTO.setBegin_rowNo((int) pageMap.get("begin_rowNo"));
+		communitySearchDTO.setEnd_rowNo((int) pageMap.get("end_rowNo"));
+		
+		List<CommunityDTO> saleUnionFreeSharingList = communityService.getSaleUnionFreeSharingList(communitySearchDTO);
+		
+		/*
 		int imageMarketBoardListCnt = this.communityService.getImageBoardListCnt(communityDTO);
-
 		List<CommunityDTO> imageMarketBoardList = this.communityService.getImageMarketBoardList(communityDTO);
-
+		mav.addObject("imageMarketBoardList", imageMarketBoardList);
+		*/
+		
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("imageMarketBoardList", imageMarketBoardList);
+		mav.addObject("boardList", saleUnionFreeSharingList);
+		
+		mav.addObject("boardListSize", saleUnionFreeSharingList.size());
+
+		mav.addObject("boardListCnt", saleUnionFreeSharingListSearchCnt);
+
+		mav.addObject("boardListAllCnt", saleUnionFreeSharingListAllCnt);
+
+		mav.addObject("pageMap", pageMap);
 
 		mav.setViewName("/community/communityMarketplaceBoardForm.jsp");
 

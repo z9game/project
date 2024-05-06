@@ -3,6 +3,38 @@
 
 <mapper namespace="kosmo.team.project.dao.CommunityDAO">
 
+	<sql id="marketplaceWhere">
+		<if test="keyword1 != null and keyword1.length() > 0">
+			and 
+			(
+		</if>
+		
+		<if test="keyword1 != null and keyword1.length() > 0">
+			<if test="searchType1 == 'all' ">
+				(
+					upper(writer) like upper('%${keyword1}%')
+					or
+					upper(subject) like upper('%${keyword1}%')
+					or
+					upper(content) like upper('%${keyword1}%')
+				)
+			</if>
+			<if test="searchType1 == 'writer'">
+				upper(writer) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'title'">
+				upper(subject) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'content'">
+				upper(content) like upper('%${keyword1}%')
+			</if>
+		</if>
+		
+		<if test="keyword1 != null and keyword1.length() > 0">
+			)
+		</if>
+	</sql>
+
 	<select id="getNoticeBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
 		parameterType="kosmo.team.project.dto.CommunitySearchDTO">
@@ -447,6 +479,95 @@
 		from
 		imageboard
 	</select>
+	
+	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 리턴 -->
+	<select id="getSaleUnionFreeSharingListAllCnt" resultType="int">
+		select count(*)
+		from
+		(
+			select * from sale 
+			union all
+    		select * from free_sharing
+		)
+	</select>
+	
+	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 검색 개수 리턴 -->
+	<select id="getSaleUnionFreeSharingListSearchCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
+		select count(*)
+		from
+		(
+				select *
+				from
+				(
+					select 
+						  s.sale_no		
+						, s.subject
+						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
+						, s.content		
+						, s.readcount	
+						, s.reg_date	
+				
+					from sale s
+				
+					union all
+				
+					select 
+						  f.free_sharing_no
+						, f.title			
+						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
+						, f.content			
+						, f.readcount		
+						, f.reg_date		
+				
+					from free_sharing f
+				)
+				
+				where	1 = 1
+				<include refid="marketplaceWhere" />
+		)		
+	</select>
+	
+	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 검색 리스트 리턴 -->
+	<select id="getSaleUnionFreeSharingList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">	
+		select * from ( select rownum RNUM, zxcvb.* from (
+
+				select *
+				from
+				(
+					select 
+						  s.sale_no		
+						, s.subject
+						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
+						, s.content		
+						, s.readcount	
+						, s.reg_date	
+				
+					from sale s
+				
+					union all
+				
+					select 
+						  f.free_sharing_no
+						, f.title			
+						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
+						, f.content			
+						, f.readcount		
+						, f.reg_date		
+				
+					from free_sharing f
+				)
+				
+				where	1 = 1
+				
+				<include refid="marketplaceWhere" />
+				
+				order by reg_date desc, sale_no desc
+		    	
+		<![CDATA[
+		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+		]]>
+	</select>
+	
 
 	<insert id="insertCommunity"
 		parameterType="kosmo.team.project.dto.CommunityDTO">
