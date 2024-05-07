@@ -18,6 +18,15 @@ public class MemberDTO {
 	
 	private String sido;
 	private String sigungu;
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public int getM_no() {
 		return m_no;
 	}

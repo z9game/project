@@ -7,6 +7,8 @@
 
 
 
+
+
 	<sql id="boardWhere">
 
 		<if
@@ -96,28 +98,36 @@
 			<foreach collection="ageRange" item="tmp2" open=" and ( "
 				close=" ) " separator=" or ">
 				<if test="tmp2 == '10대'  ">
-					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 10 and 19
+					to_number(to_char(sysdate, 'YYYY')) -
+					to_number(to_char(birthdate, 'YYYY')) between 10 and 19
 				</if>
 				<if test="tmp2 == '20대'  ">
-					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 20 and 29
+					to_number(to_char(sysdate, 'YYYY')) -
+					to_number(to_char(birthdate, 'YYYY')) between 20 and 29
 				</if>
 				<if test="tmp2 == '30대'  ">
-					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 30 and 39
+					to_number(to_char(sysdate, 'YYYY')) -
+					to_number(to_char(birthdate, 'YYYY')) between 30 and 39
 				</if>
 				<if test="tmp2 == '40대'  ">
-					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 40 and 49
+					to_number(to_char(sysdate, 'YYYY')) -
+					to_number(to_char(birthdate, 'YYYY')) between 40 and 49
 				</if>
 				<if test="tmp2 == '50대'  ">
-					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 50 and 59
+					to_number(to_char(sysdate, 'YYYY')) -
+					to_number(to_char(birthdate, 'YYYY')) between 50 and 59
 				</if>
 				<if test="tmp2 == '60대'  ">
-					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 60 and 69
+					to_number(to_char(sysdate, 'YYYY')) -
+					to_number(to_char(birthdate, 'YYYY')) between 60 and 69
 				</if>
 				<if test="tmp2 == '70대'  ">
-					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 70 and 79
+					to_number(to_char(sysdate, 'YYYY')) -
+					to_number(to_char(birthdate, 'YYYY')) between 70 and 79
 				</if>
 				<if test="tmp2 == '80대'  ">
-					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 80 and 89
+					to_number(to_char(sysdate, 'YYYY')) -
+					to_number(to_char(birthdate, 'YYYY')) between 80 and 89
 				</if>
 			</foreach>
 		</if>
@@ -157,13 +167,19 @@
 		</if>
 
 
+		<if test="(minGames_played != null and minGames_played > 0)">
+			and games_played &gt;= to_number(#{minGames_played})
+			<if test="(maxGames_played != null and maxGames_played > 0)">
+				and games_played &lt;= to_number(#{maxGames_played})
+			</if>
+		</if>
 
-
-
-
-
-
-
+		<if test="(maxGames_played != null and maxGames_played > 0)">
+			and games_played &lt; = to_number(#{maxGames_played})
+			<if test="(minGames_played != null and minGames_played > 0)">
+				and games_played &gt; = to_number(#{minGames_played})
+			</if>
+		</if>
 
 
 
@@ -227,13 +243,32 @@
 		AS "reg_date"
 		, to_number(to_char(sysdate, 'YYYY')) -
 		to_number(to_char(birthdate, 'YYYY')) AS age
+
+		,pr.games_played as
+		"games_played"
+		,pr.draws as "draws"
+		, pr.wins as "wins"
+		,pr.losses as
+		"losses"
+		,pr.goals_for as "goals_for"
+		,pr.goals_assist as "goals_assist"
+
+
+
 		FROM
 		member m
-		LEFT JOIN sido
-		s ON m.sido_id = s.sido_id
-		LEFT JOIN sigungu si ON m.sigungu_id =
-		si.sigungu_id
+		LEFT JOIN sido s ON m.sido_id = s.sido_id
+		LEFT JOIN sigungu
+		si
+		ON m.sigungu_id = si.sigungu_id
+		LEFT JOIN player_record pr ON m.m_no
+		=
+		pr.player
+
 		where m.m_no != 1
+
+
+
 		<include refid="boardWhere" />
 		<if test="sort==null or sort.length()==0">
 			order by m.m_no asc
@@ -260,6 +295,8 @@
 		member m
 		LEFT JOIN sido s ON m.sido_id = s.sido_id
 		LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id
+		LEFT JOIN
+		player_record pr ON m.m_no = pr.player
 		where m.m_no != 1
 		<include refid="boardWhere" />
 	</select>
@@ -273,6 +310,8 @@
 		member m
 		LEFT JOIN sido s ON m.sido_id = s.sido_id
 		LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id
+		LEFT JOIN
+		player_record pr ON m.m_no = pr.player
 		where m.m_no != 1
 		<include refid="boardWhere" />
 	</select>
@@ -289,17 +328,20 @@
 		m.name AS "name",
 		m.nickname as "nickname",
 		m.email as "email",
-		to_char(m.birthdate, 'YYYY-MM-DD') as "birthday",
+		to_char(m.birthdate,
+		'YYYY-MM-DD') as "birthday",
 		m.phone as "phone",
 		m.gender as "gender",
 		s.name AS "sido",
 		si.name AS "sigungu",
-		m.detail_address AS "detail_address",
+		m.detail_address AS
+		"detail_address",
 		to_char(m.reg_date, 'YYYY-MM-DD') AS "reg_date"
+
 		FROM
-		member m
-		LEFT JOIN sido s ON m.sido_id = s.sido_id
-		LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id
+		member m left join sido s ON m.sido_id = s.sido_id
+		LEFT JOIN sigungu si
+		ON m.sigungu_id = si.sigungu_id
 		where
 		m.m_no=#{m_no}
 	</select>
@@ -322,8 +364,9 @@
 
 		,phone = #{phone}
 
-		,gender =#{gender}
-		,sido_id  = #{sido_id}
+		,gender
+		=#{gender}
+		,sido_id = #{sido_id}
 		,sigungu_id = #{sigungu_id}
 		,detail_address = #{detail_address}
 

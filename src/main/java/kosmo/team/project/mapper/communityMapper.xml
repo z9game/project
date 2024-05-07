@@ -131,15 +131,14 @@
 		select * from ( select rownum RNUM, zxcvb.* from (
 
 		select
-		b_no AS
-		"b_no",
-		subject AS "subject",
-		writer AS "writer",
-		content AS "content",
-		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
-		readcount AS "readcount"
+		f.b_no AS	"b_no",
+		f.subject AS "subject",
+		( select nickname from member where m_no = f.writer ) as "writer",		
+		f.content AS "content",
+		to_char(f.reg_date, 'YYYY-MM-DD') AS "reg_date",
+		f.readcount AS "readcount"
 		FROM
-		freeboard
+		freeboard f
 		order by
 		b_no desc
 		    	
@@ -168,17 +167,16 @@
 		resultType="kosmo.team.project.dto.CommunityDTO">
 
 		select
-		b_no "b_no"
-		,subject "subject"
-		,writer "writer"
-		,( select nickname from member where m_no = ${b_no} ) as "nickname"		
-		,reg_date
-		"reg_date"
-		,readcount "readcount"
-		,content "content"
+		f.b_no "b_no"
+		,f.subject "subject"
+		,f.writer "writer"
+		,( select nickname from member where m_no = f.writer ) as "nickname"		
+		,f.reg_date	"reg_date"
+		,f.readcount "readcount"
+		,f.content "content"
 
 
-		from freeboard
+		from freeboard f
 
 		where
 		b_no=#{b_no}
@@ -188,209 +186,196 @@
 			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
 	</select>
 
-	<select id="getFreeBoardDetail" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >
-	
-		SELECT 
-				B_NO			"b_no"
-			,	SUBJECT			"subject"
-			,	WRITER			"writer"
-			,	REG_DATE		"reg_date" 
-			,	READCOUNT		"readcount"
-			,	CONTENT			"content"
+	<select id="getFreeBoardDetail" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >	
+		select 
+				b_no			"b_no"
+			,	subject			"subject"
+			,	( select nickname from member where m_no = ( select writer from freeboard where b_no = #{ b_no } ) ) as "writer"
+			,	content			"content"
+			,	readcount		"readcount"
+			,	reg_date		"reg_date"
+			
 				
-		FROM	FREEBOARD
+		from	freeboard
 		        
-		WHERE	B_NO	=	#{ b_no }   
-        
+		where	b_no	=	#{ b_no }           
 	</select>
 
-	<select id="getFreeBoardDetailCommentPageListCount" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="int" >
-	
-		SELECT COUNT(*)			
+	<select id="getFreeBoardDetailCommentPageListCount" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="int" >	
+		select count(*)			
 	            
-		FROM FREEBOARD_COMMENT
+		from freeboard_comment
 
-		WHERE   
+		where   
 				1 = 1
-        		AND
-				B_NO = #{ b_no }
+        		and
+				b_no = #{ b_no }
 	</select>
 
 
 	<select id="getFreeBoardDetailCommentPageList" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >
-		
-			SELECT * FROM 
+			select * from 
 			( 
-				SELECT 
-						ROWNUM RNUM
-					,	ZXCVB.* 
+				select 
+						rownum rnum
+					,	zxcvb.* 
 					
-				FROM 
+				from 
 				(	
 		
-					SELECT
-							COMMENT_NO                      AS "comment_no"
-						,	B_NO							AS "b_no" 
-						,	NICK_NAME						AS "nick_name"
-						,	CONTENT							AS "content"
-						,	PRINT_NO						AS "print_no"
-						,	PRINT_LEVEL						AS "print_level"
-						,	TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI:SS') AS "reg_date"
+					select
+							comment_no                      as "comment_no"
+						,	b_no							as "b_no" 
+						,	nick_name						as "nick_name"
+						,	content							as "content"
+						,	print_no						as "print_no"
+						,	print_level						as "print_level"
+						,	to_char(reg_date, 'yyyy-mm-dd hh24:mi:ss') as "reg_date"
 									
-					FROM FREEBOARD_COMMENT
+					from freeboard_comment
 					
-					WHERE
+					where
 							1 = 1
-							AND
-							B_NO = #{ b_no }
+							and
+							b_no = #{ b_no }
 									 
-					ORDER BY 
-							GROUP_NO DESC, PRINT_NO ASC
+					order by 
+							group_no desc, print_no asc
 	        	
 		
-				) ZXCVB 
+				) zxcvb 
 	<![CDATA[
 			
-				WHERE	ROWNUM <= ${ end_rowNo } 
+				where	rownum <= ${ end_rowNo } 
 			) 
 			
-			WHERE	RNUM >= ${ begin_rowNo }
+			where	rnum >= ${ begin_rowNo }
 			
-	]]>
-	
+	]]>	
 	</select>	
 
-	<insert id="insertFreeBoardDetailComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
-	
-		INSERT	INTO	FREEBOARD_COMMENT
+	<insert id="insertFreeBoardDetailComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">	
+		insert	into	freeboard_comment
 		(
-				COMMENT_NO
-			,	B_NO
-			,	NICK_NAME
-			,	CONTENT
-			,	GROUP_NO
-			,	PRINT_NO
-			,	PRINT_LEVEL
-			,	REG_DATE
+				comment_no
+			,	b_no
+			,	nick_name
+			,	content
+			,	group_no
+			,	print_no
+			,	print_level
+			,	reg_date
 		) 
-		VALUES 
+		values 
 		(
-				( SELECT NVL(MAX(COMMENT_NO),0) + 1 FROM FREEBOARD_COMMENT )
+				( select nvl(max(comment_no),0) + 1 from freeboard_comment )
 			,	#{ b_no }
 			,	#{ nick_name }
 			,	#{ content }
-			,	( SELECT NVL(MAX(COMMENT_NO),0) + 1 FROM FREEBOARD_COMMENT )	
+			,	( select nvl(max(comment_no),0) + 1 from freeboard_comment )	
 			,	0
 			,	0
-			,	SYSDATE
-		)
-		
+			,	sysdate
+		)		
 	</insert>
 
-	<update id="updateFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
-	
-		UPDATE	FREEBOARD_COMMENT
+	<update id="updateFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">	
+		update	freeboard_comment
 		
-		SET
-				PRINT_NO	=	PRINT_NO + 1
+		set
+				print_no	=	print_no + 1
 		
-        WHERE
-        		GROUP_NO	=	( SELECT GROUP_NO FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no } )
-        		AND
-        		PRINT_NO	>	( SELECT PRINT_NO FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no } )
-        		
+        where
+        		group_no	=	( select group_no from freeboard_comment where comment_no = #{ comment_no } )
+        		and
+        		print_no	>	( select print_no from freeboard_comment where comment_no = #{ comment_no } )        		
 	</update>
 	
-	<insert id="insertFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
-	
-		INSERT	INTO	FREEBOARD_COMMENT
+	<insert id="insertFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">	
+		insert	into	freeboard_comment
 		(
-				COMMENT_NO
-			,	B_NO
-			,	NICK_NAME
-			,	CONTENT
-			,	GROUP_NO
-			,	PRINT_NO
-			,	PRINT_LEVEL
-			,	REG_DATE
+				comment_no
+			,	b_no
+			,	nick_name
+			,	content
+			,	group_no
+			,	print_no
+			,	print_level
+			,	reg_date
 		) 
-		VALUES 
+		values 
 		(
-				( SELECT NVL(MAX(COMMENT_NO),0) + 1 FROM FREEBOARD_COMMENT )
+				( select nvl(max(comment_no),0) + 1 from freeboard_comment )
 			,	#{ b_no }
 			,	#{ nick_name }
 			,	#{ content }
-			,	( SELECT GROUP_NO 			FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no })
-			,	( SELECT PRINT_NO	 + 1	FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no })
-			,	( SELECT PRINT_LEVEL + 1 	FROM FREEBOARD_COMMENT WHERE COMMENT_NO = #{ comment_no })
-			,	SYSDATE
-		)
-		
+			,	( select group_no 			from freeboard_comment where comment_no = #{ comment_no })
+			,	( select print_no	 + 1	from freeboard_comment where comment_no = #{ comment_no })
+			,	( select print_level + 1 	from freeboard_comment where comment_no = #{ comment_no })
+			,	sysdate
+		)		
 	</insert>
 	
-	<update id="updateFreeBoardDetailReadCountPlusOne" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">
-	
-		UPDATE	FREEBOARD
+	<update id="updateFreeBoardDetailReadCountPlusOne" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">	
+		update	freeboard
 				
-		SET		READCOUNT	=	READCOUNT + 1
+		set		readcount	=	readcount + 1
 		
-		WHERE	B_NO		=	#{ b_no }
-        
+		where	b_no		=	#{ b_no }        
 	</update>
 	
-	<select id="getCommunityFreeBoardCount" parameterType="int" resultType="int">
+	<select id="getCommunityFreeBoardCount" parameterType="int" resultType="int">		
+		select 	count(*) 
 		
-		SELECT 	COUNT(*) 
+		from 	freeboard 
 		
-		FROM 	FREEBOARD 
-		
-		WHERE 	B_NO = #{ b_no }
-		
+		where 	b_no = #{ b_no }		
 	</select>
 	
 	<update id="updateCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
-
-		UPDATE 	FREEBOARD 
+		update 	freeboard 
 		
-		SET
-				SUBJECT = #{ subject }
-			,	WRITER = #{ writer }
-			,	CONTENT	= #{ content }
-			,	REG_DATE = SYSDATE
+		set
+				subject = #{ subject }			
+			,	content	= #{ content }
+			
 
-		WHERE 	B_NO = #{ b_no }
-
+		where 	b_no = #{ b_no }
 	</update>
 	
-	<delete id="deleteCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+	<select id="getFreeBoardCommentCount" parameterType="int" resultType="int">		
+		select 	count(*) 
 		
-		DELETE 	FROM 	FREEBOARD
+		from 	freeboard_comment
 		
-		WHERE	B_NO = #{ b_no }
+		where 	b_no = #{ b_no }		
+	</select>
+	
+	<delete id="deleteCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">		
+		delete 	from 	freeboard
 		
+		where	b_no = #{ b_no }		
 	</delete>
 	
-	<insert id="insertCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
-		
-		INSERT INTO FREEBOARD
+	<insert id="insertCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">		
+		insert into freeboard
 		(
-				B_NO	
-			,	SUBJECT	
-			,	WRITER	
-			,	CONTENT	
-			,	READCOUNT
-			,	REG_DATE			
+				b_no	
+			,	subject	
+			,	writer	
+			,	content	
+			,	readcount
+			,	reg_date			
 		)
-		VALUES
+		values
 		(
-				( SELECT NVL( MAX ( B_NO ), 0 ) + 1 FROM FREEBOARD )
+				( select nvl( max ( b_no ), 0 ) + 1 from freeboard )
 			, 	#{ subject }
-			, 	${ writer }
+			,	( select m_no from member where nickname = '${ writer }' )			
 			, 	#{ content }
 			, 	0
-			, 	SYSDATE
-		)
-		
+			, 	sysdate
+		)		
 	</insert>
 	
 
@@ -401,12 +386,12 @@
 	<select id="getImageGallaryBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
 		parameterType="kosmo.team.project.dto.CommunityDTO">
-		SELECT
-		subject AS "subject",
-		writer AS "writer",
-		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
-		readcount AS "readcount"
-		FROM
+		select
+		subject as "subject",
+		writer as "writer",
+		to_char(reg_date, 'yyyy-mm-dd') as "reg_date",
+		readcount as "readcount"
+		from
 		imageboard
 	</select>
 
@@ -447,12 +432,12 @@
 	<select id="getImageMarketBoardList"
 		resultType="kosmo.team.project.dto.CommunityDTO"
 		parameterType="kosmo.team.project.dto.CommunityDTO">
-		SELECT
-		subject AS "subject",
-		writer AS "writer",
-		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
-		readcount AS "readcount"
-		FROM
+		select
+		subject as "subject",
+		writer as "writer",
+		to_char(reg_date, 'yyyy-mm-dd') as "reg_date",
+		readcount as "readcount"
+		from
 		imageboard
 	</select>
 	
@@ -478,7 +463,7 @@
 		(
 			( select nvl( max( sale_no ), 0 ) + 1 from sale )
 			, #{ subject }
-			, ${ writer }
+			, ( select m_no from member where nickname = '${ writer }' )	
 			, #{ content }
 			, 0
 			, sysdate

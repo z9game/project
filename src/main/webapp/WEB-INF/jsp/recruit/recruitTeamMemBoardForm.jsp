@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp" %>
@@ -254,22 +255,22 @@ function goRecruitTeamMemDetailForm(b_no)
             
                            <select name="sido" id="" onchange="categoryChange(this)">
                              <option value="0">시/도 선택</option>
-								<option value="1">강원</option>
-								<option value="2">경기</option>
-								<option value="3">경남</option>
-								<option value="4">경북</option>
-								<option value="5">광주</option>
-								<option value="6">대구</option>
-								<option value="7">대전</option>
-								<option value="8">부산</option>
-								<option value="9">서울</option>
-								<option value="10">울산</option>
-								<option value="11">인천</option>
-								<option value="12">전남</option>
-								<option value="13">전북</option>
-								<option value="14">제주</option>
-								<option value="15">충남</option>
-								<option value="16">충북</option>
+                        <option value="1">강원</option>
+                        <option value="2">경기</option>
+                        <option value="3">경남</option>
+                        <option value="4">경북</option>
+                        <option value="5">광주</option>
+                        <option value="6">대구</option>
+                        <option value="7">대전</option>
+                        <option value="8">부산</option>
+                        <option value="9">서울</option>
+                        <option value="10">울산</option>
+                        <option value="11">인천</option>
+                        <option value="12">전남</option>
+                        <option value="13">전북</option>
+                        <option value="14">제주</option>
+                        <option value="15">충남</option>
+                        <option value="16">충북</option>
                            </select>
             
                            <select name="gungu" id="state">

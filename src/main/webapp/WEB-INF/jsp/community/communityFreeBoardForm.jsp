@@ -104,6 +104,19 @@
 		document.detailForm.submit();
 		
 	}
+	
+	function newCommunityFreeBoardFormBtnClick() {
+	    
+		var sessionMid = '<%= session.getAttribute("mid") %>'
+	    
+	    if (sessionMid === 'null') {
+	    	alert('로그인이 필요한 서비스입니다.');
+	    	location.href = '/main/loginForm.do';
+	    } else {
+	    	location.href = '/newCommunityFreeBoardForm.do';
+	    }
+	    
+	}
 </script>
 
 </head>
@@ -128,7 +141,7 @@
 
 <center>
 	<div style="height: 10px"></div>
-	<input type="button" value="    새 글쓰기    " onclick="location.replace('/newCommunityFreeBoardForm.do');">
+	<input type="button" value="    새 글쓰기    " onclick="newCommunityFreeBoardFormBtnClick()">
 	<div style="height: 10px"></div>
 </center>
 
