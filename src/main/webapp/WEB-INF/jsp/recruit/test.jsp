@@ -20,10 +20,19 @@ $(document).ready(function(){
 		$(this).addClass("onvalue");
 	});
 	
-	sort_All();
+	$('.detail_Search').hide(); // 초기에 list id를 가진 div를 보이지 않게 숨긴다.
+    $('.detailBtn').click(function(){ // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
+        $('.detail_Search').slideToggle(); // list 라는 id를 가진 div를 slideDown
+    });
+	
+    $(".rowCntPerPage").val("10");
+	search();
+	
 })
 
 sort = "all";
+
+
 
 function enterkey()
 {
@@ -59,6 +68,8 @@ function sort_Team()
 			$(".recruitTeamMemBoard").html(obj.find(".recruitTeamMemBoard").html());
 
 			sort="team";
+			
+			search();
 		}
 
 		,
@@ -94,6 +105,10 @@ function sort_Mem()
 			$(".recruitTeamMemBoard").html(obj.find(".recruitTeamMemBoard").html());
 
 			sort="mem";
+			
+			
+			
+			search();
 		}
 
 		,
@@ -129,6 +144,10 @@ function sort_All()
 			$(".recruitTeamMemBoard").html(obj.find(".recruitTeamMemBoard").html());
 			
 			sort="all";
+			
+			
+			
+			search();
 		}
 
 		,
@@ -146,7 +165,7 @@ function search() {
 	// 변수 boardSearchFormObj 선언하고 
 	// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
 	//---------------------------------------------
-	var boardSearchFormObj = $("[name='recruitTeamMemSearchForm']");
+	var boardSearchFormObj = $("[name='recruit_Team_mem']");
 
 	var keyword1Obj = boardSearchFormObj.find(".keyword1"); 
 
@@ -155,6 +174,8 @@ function search() {
 	if(typeof(keyword1)!='string' ){keyword1=""; }
     
     keyword1 = $.trim(keyword1);
+    
+    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val());
     
 	$.ajax({
 		//-------------------------------
@@ -176,6 +197,8 @@ function search() {
 			var obj = $(responseHtml);
 
 			$(".recruitTeamMemBoard").html(obj.find(".recruitTeamMemBoard").html());
+			
+			$(".pagingNos").html(obj.find(".pagingNos").html());
 
 		}
 
@@ -200,6 +223,15 @@ function toggleText() {
     }
 }
 
+
+function pageNoClick(clickPageNo) {
+	
+	$("[name='recruit_Team_mem']").find(".selectPageNo").val(clickPageNo);
+
+	search();
+
+}
+
 </script>
 </head>
 <body>
@@ -210,6 +242,7 @@ function toggleText() {
     </div>
     <br>
    <div>
+   
    		<center>
    		<br><br><br>
 	 	<table style="border-collapse:collapse" border="1">
@@ -227,162 +260,164 @@ function toggleText() {
 		</table>
 		<br>
 		</center>
-				<!-- =================================================================================================================== -->
-			<fieldset>
-				<form name="recruitTeamMemSearchForm" onsubmit="return false">
-		  			<div class="top">
-		  				<dl class="search">
-		  					<dt class="item">검 색</dt>
-		 						<dd  class="content">
-		 							<select name="searchType1">
-										<option value="all">전체</option>
-										<option value="writer">글작성자</option> 
-										<option value="title">제목</option>
-										<option value="content">내용</option>
-									</select> 
-									<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()"> 
-									
-		 						</dd>
-		  				</dl>
-		  				<dl class="area">
-		  					<dt class="item">지 역</dt>
-		  					<dd  class="content">	
-		  						<select name="sido" id="" onchange="categoryChange(this)">
-					              	<option value="0">시/도 선택</option>
-									<option value="1">강원</option>
-									<option value="2">경기</option>
-									<option value="3">경남</option>
-									<option value="4">경북</option>
-									<option value="5">광주</option>
-									<option value="6">대구</option>
-									<option value="7">대전</option>
-									<option value="8">부산</option>
-									<option value="9">서울</option>
-									<option value="10">울산</option>
-									<option value="11">인천</option>
-									<option value="12">전남</option>
-									<option value="13">전북</option>
-									<option value="14">제주</option>
-									<option value="15">충남</option>
-									<option value="16">충북</option>
-					            </select>
-			
+	
+	<!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
+		<form name="recruit_Team_mem" onsubmit="return false">
+			<div class="top">
+				<dl class="search">
+	 				<dt class="item">검 색</dt>
+						<dd  class="content">
+							<select name="searchType1">
+								<option value="all">전체</option>
+								<option value="writer">글작성자</option> 
+								<option value="title">제목</option>
+								<option value="content">내용</option>
+							</select> 
+							<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()"> 
+						</dd>
+	 			</dl>
+	 			<dl class="area">
+	 				<dt class="item">지 역</dt>
+	 					<dd class="content">	
+	 						<select name="sido" id="" onchange="categoryChange(this)">
+				              	<option value="0">시/도 선택</option>
+								<option value="1">강원</option>
+								<option value="2">경기</option>
+								<option value="3">경남</option>
+								<option value="4">경북</option>
+								<option value="5">광주</option>
+								<option value="6">대구</option>
+								<option value="7">대전</option>
+								<option value="8">부산</option>
+								<option value="9">서울</option>
+								<option value="10">울산</option>
+								<option value="11">인천</option>
+								<option value="12">전남</option>
+								<option value="13">전북</option>
+								<option value="14">제주</option>
+								<option value="15">충남</option>
+								<option value="16">충북</option>
+			            	</select>
+	
 				            <select name="gungu" id="state">
 				              <option>군/구 선택</option>
 				            </select>
-		  					</dd>
-		  				</dl>
-		  			</div>
-		  			<!-- =================================================================================================================== -->
-		  			<div class="middle">
-		  				<dl class="day">
-		  					<dt class="item">요 일</dt>
-		  					<dd class="content">
-		  					<ul>
-								<input type="checkbox" id="workweekcdGroupA" name="allweekday" onclick="setweekgroup()">평일(월,화,수,목,금)&nbsp;&nbsp;
-								<input type="checkbox" id="workweekcdGroupB" name="allweekend" onclick="setweekgroup()">주말(토,일)<br>
-								<input type="checkbox" id="day1" name="day" onclick="setweekDay()" value="mon">월&nbsp;&nbsp;
-								<input type="checkbox" id="day2" name="day" onclick="setweekDay()" value="tue">화&nbsp;&nbsp;
-								<input type="checkbox" id="day3" name="day" onclick="setweekDay()" value="wed">수&nbsp;&nbsp;
-								<input type="checkbox" id="day4" name="day" onclick="setweekDay()" value="thr">목&nbsp;&nbsp;
-								<input type="checkbox" id="day5" name="day" onclick="setweekDay()" value="fri">금<br>
-								<input type="checkbox" id="day6" name="day" onclick="setweekDay()" value="sat">토&nbsp;&nbsp;
-								<input type="checkbox" id="day7" name="day" onclick="setweekDay()" value="sun">일<br>
-								<input type="checkbox" id="day0" name="day" value="everyday" onclick="allday()">상관없음
-		  					</ul>
-		  					</dd>
-		  				</dl>
-		  				
-		  				<dl class="time">
-		 					<dt class="item">시 간</dt>
-		  					<dd  class="content">
-		  						<input type="checkbox" id="morning" name="time" onclick="timeset()" value="morning">새벽&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" id="am" name="time" onclick="timeset()" value="am">오전&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" id="pm" name="time" onclick="timeset()" value="pm">오후&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" id="night" name="time" onclick="timeset()" value="night">야간&nbsp;&nbsp;
-								<input type="checkbox" id="everytime" name="time" onclick="everyset()" value="everytime">상관없음&nbsp;&nbsp;
-		  					</dd>
-		  				</dl>
-		  				
-		  				<dl class="pos">
-		  					<dt class="item">포 지 션</dt>
-		  					<dd  class="content">
-		  						<input type="checkbox" id="st" name="pos" onclick="" value="morning">ST&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" id="cm" name="pos" onclick="" value="am">CM&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" id="cb" name="pos" onclick="" value="pm">CB&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" id="gk" name="pos" onclick="" value="night">GK&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" id="allPos" name="pos" onclick="" value="everytime">상관없음
-		  					</dd>
-		  				</dl>
-		  			</div>
-		  			<!-- =================================================================================================================== -->
-		  			<div class="detail_Search">
-		  				<div class="detail_1">
-		  					<dl class="age">
-			  					<dt class="item">연 령</dt>
-			  					<dd>
-			  						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="age" onclick="" value="10">10대&nbsp;&nbsp;
-									<input type="radio" name="age" onclick="" value="20">20대&nbsp;&nbsp;
-									<input type="radio" name="age" onclick="" value="30">30대&nbsp;&nbsp;
-									<input type="radio" name="age" onclick="" value="40">40대&nbsp;&nbsp;
-									<input type="radio" name="age" onclick="" value="50">50대 이상&nbsp;&nbsp;
-			  					</dd>
-			  				</dl>
-			  				
-			  				<dl class="career">
-			  					<dt class="item">경 력</dt>
-			  					<dd>
-			  						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="career" value="newbie">1년 미만(초보)&nbsp;&nbsp;
-									<input type="radio" name="career" value="1to3">1년 이상~3년 미만&nbsp;&nbsp;
-									<input type="radio" name="career" value="3to5">3년 이상~5년 미만&nbsp;&nbsp;
-									<input type="radio" name="career" value="up5">5년 이상&nbsp;&nbsp;
-									<input type="radio" name="career" value="dirtyWater">선수 출신&nbsp;&nbsp;
-			  					</dd>
-			  				</dl>
-		  				</div>
-		  				<!-- =================================================================================================================== -->
-		  				<div class="detail_2">
-		  					<dl class="enterFee">
-			  					<dt class="item">가 입 비</dt>
-			  					<dd>
-			  						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="enterFee" value="yesFee">있음&nbsp;&nbsp;
-									<input type="radio" name="enterFee" value="noFee">없음&nbsp;&nbsp;		
-			  					</dd>
-			  				</dl>
-			  				<dl class="leg">
-			  					<dt class="item">주로쓰는 발</dt>
-			  					<dd>
-			  						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="mainbal" value="rightLeg">오른발
-									<input type="radio" name="mainbal" value="leftLeg">왼발
-			  						<input type="radio" name="mainbal" value="bothLeg">양발	
-			  					</dd>
-			  				</dl>
-		  				</div>
-			  			<!-- =================================================================================================================== -->	
-		  			</div>	
-		  			
-		  			<!-- <div class="detailSpace">
-		  				<dl>
-		  					<dt class="detailBtn" onclick="toggleText()">상세검색 열기</dt>
-		  				</dl>
-		  			</div> -->
-		  		</form>
-		  	</fieldset>
-  			
-  			
-			<script type="text/javascript">
-				$('.detail_Search').hide(); // 초기에 list id를 가진 div를 보이지 않게 숨긴다.
-			    $('.detailBtn').click(function(){ // html 내에서 open이라는 id를 가진 요소를 클릭할 시 발생하는 이벤트 함수
-			        $('.detail_Search').slideToggle(); // list 라는 id를 가진 div를 slideDown
-			    });
-			</script>	
+	 					</dd>
+	 			</dl>
+			</div>		
+			
+			<div class="middle">
+				<dl class="day">
+	  				<dt class="item">요 일</dt>
+	  					<dd class="content">
+							<input type="checkbox" id="workweekcdGroupA" name="allweekday" onclick="setweekgroup()">평일(월,화,수,목,금)&nbsp;&nbsp;
+							<input type="checkbox" id="workweekcdGroupB" name="allweekend" onclick="setweekgroup()">주말(토,일)<br>
+							<input type="checkbox" id="day1" name="day" onclick="setweekDay()" value="mon">월&nbsp;&nbsp;
+							<input type="checkbox" id="day2" name="day" onclick="setweekDay()" value="tue">화&nbsp;&nbsp;
+							<input type="checkbox" id="day3" name="day" onclick="setweekDay()" value="wed">수&nbsp;&nbsp;
+							<input type="checkbox" id="day4" name="day" onclick="setweekDay()" value="thr">목&nbsp;&nbsp;
+							<input type="checkbox" id="day5" name="day" onclick="setweekDay()" value="fri">금<br>
+							<input type="checkbox" id="day6" name="day" onclick="setweekDay()" value="sat">토&nbsp;&nbsp;
+							<input type="checkbox" id="day7" name="day" onclick="setweekDay()" value="sun">일<br>
+							<input type="checkbox" id="day0" name="day" value="everyday" onclick="allday()">상관없음
+	  					</dd>
+	  				</dl>
+	  				
+	  			<dl class="time">
+	 				<dt class="item">시 간</dt>
+	  					<dd  class="content">
+	  						<input type="checkbox" id="morning" name="time" onclick="timeset()" value="morning">새벽&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="am" name="time" onclick="timeset()" value="am">오전&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="pm" name="time" onclick="timeset()" value="pm">오후&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="night" name="time" onclick="timeset()" value="night">야간&nbsp;&nbsp;<br>
+							<input type="checkbox" id="everytime" name="time" onclick="everyset()" value="everytime">상관없음&nbsp;&nbsp;
+	  					</dd>
+	  			</dl>
+	  				
+	  			<dl class="pos">
+	  				<dt class="item">포 지 션</dt>
+	  					<dd  class="content">
+	  						<input type="checkbox" id="st" name="pos" onclick="" value="morning">ST&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="cm" name="pos" onclick="" value="am">CM&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="cb" name="pos" onclick="" value="pm">CB&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="gk" name="pos" onclick="" value="night">GK&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="allPos" name="pos" onclick="" value="everytime">상관없음
+	  					</dd>
+	  			</dl>
+			</div>	
+			
+			<div class="detail_Search">
+	 			<dl class="age">
+	  				<dt class="item">연 령</dt>
+	  					<dd>
+	  						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="age" onclick="" value="10">10대&nbsp;&nbsp;
+							<input type="radio" name="age" onclick="" value="20">20대&nbsp;&nbsp;
+							<input type="radio" name="age" onclick="" value="30">30대&nbsp;&nbsp;
+							<input type="radio" name="age" onclick="" value="40">40대&nbsp;&nbsp;
+							<input type="radio" name="age" onclick="" value="50">50대 이상&nbsp;&nbsp;
+	  					</dd>
+	  				</dl>
+	  				
+	  			<dl class="career">
+	  				<dt class="item">경 력</dt>
+	  					<dd>
+	  						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="career" value="newbie">1년 미만(초보)&nbsp;&nbsp;
+							<input type="radio" name="career" value="1to3">1년 이상~3년 미만&nbsp;&nbsp;
+							<input type="radio" name="career" value="3to5">3년 이상~5년 미만&nbsp;&nbsp;
+							<input type="radio" name="career" value="up5">5년 이상&nbsp;&nbsp;
+							<input type="radio" name="career" value="dirtyWater">선수 출신&nbsp;&nbsp;
+	  					</dd>
+	  			</dl>
+	  				
+	  			<dl class="leg">
+	  				<dt class="item">주로쓰는 발</dt>
+	  					<dd>
+	  						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="mainLeg" value="rightLeg">오른발&nbsp;&nbsp;
+							<input type="radio" name="mainLeg" value="leftLeg">왼발&nbsp;&nbsp;
+	  						<input type="radio" name="mainLeg" value="bothLeg">양발	
+	  					</dd>
+	  			</dl>
+	  			
+	  			<dl class="enterFee">
+	 				<dt class="item">가 입 비</dt>
+	 					<dd>
+	 						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="enterFee" value="yesEnterFee">있음&nbsp;&nbsp;
+							<input type="radio" name="enterFee" value="noEnterFee">없음&nbsp;&nbsp;		
+	 					</dd>
+	 			</dl>
+	 			<dl class="monthFee">
+	 				<dt class="item">월 회 비</dt>
+	 					<dd>
+	 						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="monthFee" value="yesMonthFee">있음&nbsp;&nbsp;
+						<input type="radio" name="monthFee" value="noMonthFee">없음&nbsp;&nbsp;		
+	 					</dd>
+	 			</dl>
+			</div>
+			
+				
+			<div class="detailSpace">
+	 			<dl class="detailBtn" >
+	 				<dt class="item" onclick="toggleText()" style="cursor:pointer">상세검색 열기</dt>
+	 			</dl>
+	 		</div>
+	 		
+	 		<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
+			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+	 	</form>
+		
+  <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->			
 			
 			
    		 <center>
+   		 <br><br>
+   		 	<div class="searchBtn">
+				<dl class="searchBtn" >
+	 				<dt class="item" onclick="search()" style="cursor:pointer">검색</dt>
+	 			</dl>
+			</div>
    		 <br><br><br>
 			<div class="newRecruitTeamMemBoardBtnDiv">
-				<input type="button" value="검색" onclick="search()">
-				<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="location.href='/newRecruitTeamBoardForm.do'">
+				<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="location.href='/newRecruitTeamMemBoardForm.do'">
 			</div>
 		</center>
 		
@@ -392,15 +427,17 @@ function toggleText() {
 			<table class="boardListTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin: 0 auto; margin-top:10px; width:1000px;">
 				<tr>
 					<th style="width:50px;">번호</th>
-					<th style="width:300px;">제목</th>
+					<th style="width:250px;">제목</th>
 					<th style="width:80px;">글쓴이</th>
-					<th style="width:100px;">조회수</th>
+					<th style="width:30px;">종류</th>
+					<th style="width:40px;">조회수</th>
 					<th style="width:100px;">등록일</th>
 					<c:forEach var="list" items="${requestScope.boardList}" varStatus="status">
 						<tr style="cursor:pointer" onClick="">
-							<td align="center">${list.b_no}</td>
+							<td align="center">${requestScope.recruitMap.begin_serialNo_desc - status.index}</td>
 							<td align="center">${list.title}</td>
 							<td align="center">${list.writer}</td>
+							<td align="center">${list.team_mem}</td>
 							<td align="center">${list.readcount}</td>
 							<td align="center">${list.reg_date}</td>
 						</tr>
@@ -408,14 +445,44 @@ function toggleText() {
 			</table>
 			<c:if test="${empty requestScope.boardList}">
 					<center>
-					<br><br><br><br>
+					<br><br>
 					<b>조건에 맞는 결과물이 없습니다.</b>
 					</center>
+					<div style="height:10px;"></div>
 			</c:if>
-			
 		</div>
-			
 	</div>
+	<center>
+
+		<span class="pagingNos"> <span style="cursor: pointer"
+			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.recruitMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+
+
+			<c:forEach var="pageNo"
+				begin="${requestScope.recruitMap.begin_pageNo}"
+				end="${requestScope.recruitMap.end_pageNo}">
+
+				<c:if test="${requestScope.recruitMap.selectPageNo==pageNo}">
+            ${pageNo}
+         </c:if>
+
+				<c:if test="${requestScope.recruitMap.selectPageNo!=pageNo}">
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+				</c:if>
+			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.recruitMap.selectPageNo}+1)">[다음]</span>
+			<span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.recruitMap.last_pageNo})">[마지막]</span>
+		</span> <select name="rowCntPerPage" class="rowCntPerPage"
+			onChange="search()">
+			<option value="10">10
+			<option value="15">15
+			<option value="20">20
+		</select>행보기 &nbsp;&nbsp;&nbsp;
+		
+	</center>
+	<div style="height:30px;"></div>
 	   
 </body>
 </html>

@@ -28,4 +28,5 @@ public interface RecruitDAO {
 	
 	public int updateTeamMemReadCnt(int b_no);
 
+	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO);	
 }

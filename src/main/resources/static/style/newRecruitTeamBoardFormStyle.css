@@ -38,7 +38,7 @@ a{
 	text-decoration:none;
 }
 
-.newRecruitTeamBoardFormTitle{
+.newRecruitTeamMemBoardFormTitle{
 	position: relative;
 }
 
@@ -57,7 +57,7 @@ a{
 	transform: translate( -50%, -50% );
 }
 
-.newRecruitTeamBoardFormRegTable{
+.newRecruitTeamMemBoardFormRegTable{
 	margin: 0 auto;
 	margin-top: 10px;
 }
@@ -75,7 +75,7 @@ a{
 	margin-top: 20px;
 }
 
-.newRecruitTeamBoardFormBtnDiv{
+.newRecruitTeamMemBoardFormBtnDiv{
 	text-align: center;
 }
 
