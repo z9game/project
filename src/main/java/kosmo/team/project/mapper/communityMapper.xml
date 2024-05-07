@@ -22,7 +22,7 @@
 			<if test="searchType1 == 'writer'">
 				upper(writer) like upper('%${keyword1}%')
 			</if>
-			<if test="searchType1 == 'title'">
+			<if test="searchType1 == 'subject'">
 				upper(subject) like upper('%${keyword1}%')
 			</if>
 			<if test="searchType1 == 'content'">
@@ -513,7 +513,7 @@
 				
 					select 
 						  f.free_sharing_no
-						, f.title			
+						, f.subject			
 						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
 						, f.content			
 						, f.readcount		
@@ -548,7 +548,7 @@
 				
 					select 
 						  f.free_sharing_no
-						, f.title			
+						, f.subject			
 						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
 						, f.content			
 						, f.readcount		
