@@ -18,6 +18,7 @@ import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
+import kosmo.team.project.dto.Stadim2DTO;
 import kosmo.team.project.service.AdminService;
 import kosmo.team.project.utility.Page;
 
@@ -494,4 +495,95 @@ public class AdminController {
 		return resultMap;
 	}
 
+	
+	
+	//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+	//경기장
+	//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	
+	
+	
+	
+	@RequestMapping("/adminStadiumForm.do")
+
+	public ModelAndView adminStadiumForm(AdminSearchDTO adminSearchDTO, HttpSession session  ) {
+		
+		
+		// 세션에서 사용자 아이디를 가져옴
+		String userId = (String) session.getAttribute("mid");
+		// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+		if (userId == null || !userId.equals("admin")) {
+			return new ModelAndView("redirect:/loginForm.do");
+		}
+		
+
+		
+		
+		// admin인 경우에만 회원 목록 조회 수행
+		int StadiumListAllCnt = this.adminService.getStadiumListAllCnt();
+
+		int StadiumListCnt = this.adminService.geStadiumListCnt(adminSearchDTO);
+			
+		
+		Map<String, Integer> StadiumMap = Page.getPagingMap(
+
+				adminSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+				, adminSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+				, StadiumListCnt // 검색 결과물 개수
+
+		);
+
+		adminSearchDTO.setSelectPageNo((int) StadiumMap.get("selectPageNo"));
+		adminSearchDTO.setRowCntPerPage((int) StadiumMap.get("rowCntPerPage"));
+		adminSearchDTO.setBegin_rowNo((int) StadiumMap.get("begin_rowNo"));
+		adminSearchDTO.setEnd_rowNo((int) StadiumMap.get("end_rowNo"));
+			
+		
+
+		
+		List<Stadim2DTO> stadiumList = this.adminService.geStadiumList(adminSearchDTO);
+
+		
+		//System.out.println("minDate: " + adminSearchDTO.getMinDate());
+
+		
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("stadiumList", stadiumList);
+
+		mav.addObject("StadiumListCnt", StadiumListCnt);
+		mav.addObject("StadiumListAllCnt", StadiumListAllCnt);
+		mav.addObject("StadiumMap", StadiumMap);
+		mav.setViewName(adminFolder + "adminStadiumForm.jsp");
+
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -268,6 +268,10 @@ function checkDate() {
 	</div>
 
 
+	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+
+
+
 	<form name="adminNoticeBoardSearchForm" onsubmit="return false">
 
 		<table align="center">
@@ -302,9 +306,8 @@ function checkDate() {
 			</tr>
 
 			<tr align="center">
-				<td><input type="button" value="검색" class="searchBtn"
-					> <input type="button" value="모두 검색"
-					class="searchAllBtn"></td>
+				<td><input type="button" value="검색" class="searchBtn">
+					<input type="button" value="모두 검색" class="searchAllBtn"></td>
 			</tr>
 
 
@@ -312,147 +315,130 @@ function checkDate() {
 			<input type="hidden" name="SelectPageNo" class="SelectPageNo"
 				value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
-	</form>
-
-
-	<div class="row admin_side_nav">
-		<ul class="nav nav-pills flex-column">
-			<li class="nav-item">관리자 메뉴</li>
-			<li class="nav-item"><a class="nav-link" href="adminForm.do">회원
-					관리</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="adminNoticeBoardForm.do">공지사항 </a></li>
-		</ul>
-	</div>
-
-	<table>
-		<tr align="center">
-			<td><input type="button" value="새글쓰기"
-				onclick="location.replace('/adminNoticeboardRegForm.do');"></td>
-		</tr>
-	</table>
+			</form>
 
 
 
-	<div class="communityNoticeBoardFormContainer">
 
-		<div class="noticeboardListDiv" style="margin-bottom: 20px;">
-			<table class="noticeboardListTable" cellpadding="7" border="1"
-				bordercolor="gray" align="center" style="border-collapse: collapse">
-				<tr>
-					<th style="width: 50px;">번호</th>
-					<th style="width: 300px;">제목</th>
-					<th style="width: 80px;">글쓴이</th>
-					<c:if
-						test="${param.sort!='readcount asc' and param.sort!='readcount desc' }">
-						<th width="80px" style="cursor: pointer"
-							onclick="searchWithSort('readcount desc')">조회수</th>
-					</c:if>
-					<!--                      만약 파명 "sort" 의 파값이 'readcount desc' 면 -->
-					<!--                      즉 정렬 의지가 'readcount desc' 면 -->
-					<c:if test="${param.sort=='readcount desc'}">
-						<th width="80px" style="cursor: pointer"
-							onclick="searchWithSort('readcount asc')">조회수▼</th>
-					</c:if>
-					<!--                      만약 파명 "sort" 의 팍밧이 'readcount asc' 면 -->
-					<!--                      즉 정렬 의지가 'readcount asc' 면 -->
-					<c:if test="${ param.sort=='readcount asc' }">
-						<th width="80px" style="cursor: pointer"
-							onclick="searchWithSort('')">조회수▲</th>
-					</c:if>
-
-					<c:if
-						test="${param.sort!='reg_date asc' and param.sort!='reg_date desc' }">
-						<th width="100px" style="cursor: pointer"
-							onclick="searchWithSort('reg_date desc')">등록일</th>
-					</c:if>
-
-					<c:if test="${param.sort=='reg_date desc'}">
-						<th width="100px" style="cursor: pointer"
-							onclick="searchWithSort('reg_date asc')">등록일▼</th>
-					</c:if>
-
-					<c:if test="${param.sort=='reg_date asc' }">
-						<th width="100px" style="cursor: pointer"
-							onclick="searchWithSort('')">등록일▲</th>
-					</c:if>
-
+			<table>
+				<tr align="center">
+					<td><input type="button" value="새글쓰기"
+						onclick="location.replace('/adminNoticeboardRegForm.do');"></td>
 				</tr>
-
-				<c:forEach var="noticeboard" items="${requestScope.noticeBoardList}"
-					varStatus="status">
-
-					<tr style="cursor: pointer"
-						onClick="goNadminNticeboardDetailForm(${noticeboard.b_no});">
-
-						<td align="center">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
-						<td>${noticeboard.subject}</td>
-						<td align="center">${noticeboard.writer}</td>
-						<td align="center">${noticeboard.readcount}</td>
-						<td align="center">${noticeboard.reg_date}</td>
-					</tr>
-				</c:forEach>
 			</table>
-			<c:if test="${empty noticeBoardList}">
-				<br>
-				<center>조건에 맞는 검색 결과가 없습니다.</center>
-			</c:if>
-		</div>
-	</div>
+
+
+
+			<div class="communityNoticeBoardFormContainer">
+
+				<div class="noticeboardListDiv" style="margin-bottom: 20px;">
+					<table class="noticeboardListTable" cellpadding="7" border="1"
+						bordercolor="gray" align="center"
+						style="border-collapse: collapse">
+						<tr>
+							<th style="width: 50px;">번호</th>
+							<th style="width: 300px;">제목</th>
+							<th style="width: 80px;">글쓴이</th>
+							<c:if
+								test="${param.sort!='readcount asc' and param.sort!='readcount desc' }">
+								<th width="80px" style="cursor: pointer"
+									onclick="searchWithSort('readcount desc')">조회수</th>
+							</c:if>
+							<!--                      만약 파명 "sort" 의 파값이 'readcount desc' 면 -->
+							<!--                      즉 정렬 의지가 'readcount desc' 면 -->
+							<c:if test="${param.sort=='readcount desc'}">
+								<th width="80px" style="cursor: pointer"
+									onclick="searchWithSort('readcount asc')">조회수▼</th>
+							</c:if>
+							<!--                      만약 파명 "sort" 의 팍밧이 'readcount asc' 면 -->
+							<!--                      즉 정렬 의지가 'readcount asc' 면 -->
+							<c:if test="${ param.sort=='readcount asc' }">
+								<th width="80px" style="cursor: pointer"
+									onclick="searchWithSort('')">조회수▲</th>
+							</c:if>
+
+							<c:if
+								test="${param.sort!='reg_date asc' and param.sort!='reg_date desc' }">
+								<th width="100px" style="cursor: pointer"
+									onclick="searchWithSort('reg_date desc')">등록일</th>
+							</c:if>
+
+							<c:if test="${param.sort=='reg_date desc'}">
+								<th width="100px" style="cursor: pointer"
+									onclick="searchWithSort('reg_date asc')">등록일▼</th>
+							</c:if>
+
+							<c:if test="${param.sort=='reg_date asc' }">
+								<th width="100px" style="cursor: pointer"
+									onclick="searchWithSort('')">등록일▲</th>
+							</c:if>
+
+						</tr>
+
+						<c:forEach var="noticeboard"
+							items="${requestScope.noticeBoardList}" varStatus="status">
+
+							<tr style="cursor: pointer"
+								onClick="goNadminNticeboardDetailForm(${noticeboard.b_no});">
+
+								<td align="center">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
+								<td>${noticeboard.subject}</td>
+								<td align="center">${noticeboard.writer}</td>
+								<td align="center">${noticeboard.readcount}</td>
+								<td align="center">${noticeboard.reg_date}</td>
+							</tr>
+						</c:forEach>
+					</table>
+					<c:if test="${empty noticeBoardList}">
+						<br>
+						<center>조건에 맞는 검색 결과가 없습니다.</center>
+					</c:if>
+				</div>
+			</div>
 
 
 
 
-	<center>
+			<center>
 
-		<span class="pagingNos"> <span style="cursor: pointer"
-			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+				<span class="pagingNos"> <span style="cursor: pointer"
+					onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
+					onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
 
 
-			<c:forEach var="pageNo"
-				begin="${requestScope.noticeBoardMap.begin_pageNo}"
-				end="${requestScope.noticeBoardMap.end_pageNo}">
+					<c:forEach var="pageNo"
+						begin="${requestScope.noticeBoardMap.begin_pageNo}"
+						end="${requestScope.noticeBoardMap.end_pageNo}">
 
-				<c:if test="${requestScope.noticeBoardMap.selectPageNo==pageNo}">
+						<c:if test="${requestScope.noticeBoardMap.selectPageNo==pageNo}">
             ${pageNo}
          </c:if>
 
-				<c:if test="${requestScope.noticeBoardMap.selectPageNo!=pageNo}">
-					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
-				</c:if>
-			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}+1)">[다음]</span>
-			<span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.noticeBoardMap.last_pageNo})">[마지막]</span>
-			&nbsp;&nbsp;&nbsp;
-			[${requestScope.noticeBoardListCnt}/${requestScope.noticeBoardListAllCnt}]개
-			&nbsp;&nbsp;
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
-	</center>
+						<c:if test="${requestScope.noticeBoardMap.selectPageNo!=pageNo}">
+							<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+						</c:if>
+					</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
+					onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}+1)">[다음]</span>
+					<span style="cursor: pointer"
+					onClick="pageNoClick(${requestScope.noticeBoardMap.last_pageNo})">[마지막]</span>
+					&nbsp;&nbsp;&nbsp;
+					[${requestScope.noticeBoardListCnt}/${requestScope.noticeBoardListAllCnt}]개
+					&nbsp;&nbsp;
+				</span> <select name="rowCntPerPage" class="rowCntPerPage"
+					onChange="search()">
+					<option value="10">10
+					<option value="15">15
+					<option value="20">20
+				</select>행보기 &nbsp;&nbsp;&nbsp;
+			</center>
 
 
 
-	<!-- 이 form 태그를 /boardDetailForm.do로 WAS로 접속하기 위해 선언한다. -->
-	<form name="adminNoticeboardDetailForm"
-		action="/adminNoticeboardDetailForm.do" method="post">
-		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
-		<input type="hidden" name="b_no">
-	</form>
-
-
-
-
-
-
-
-
-
-
+			<!-- 이 form 태그를 /boardDetailForm.do로 WAS로 접속하기 위해 선언한다. -->
+			<form name="adminNoticeboardDetailForm"
+				action="/adminNoticeboardDetailForm.do" method="post">
+				<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+				<input type="hidden" name="b_no">
+			</form>
 </body>
 </html>

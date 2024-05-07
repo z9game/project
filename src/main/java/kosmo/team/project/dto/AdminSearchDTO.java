@@ -18,7 +18,7 @@ public class AdminSearchDTO {
     private List<String> gender;
     private List<String> ageRange;
     
-    // 추가된 필드들
+    // 추가된 필드들(기록검색)
     private int minGames_played;
     private int maxGames_played;
     private int minWin;

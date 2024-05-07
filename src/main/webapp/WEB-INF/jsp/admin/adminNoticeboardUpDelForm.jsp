@@ -18,7 +18,6 @@
 <script>
 	function checkNoticeBoardUpForm() {
 
-		
 		var formObj = $("[name='adminNoticeboardUpDelForm']");
 		var writerObj = formObj.find(".writer");
 		var subjectObj = formObj.find(".subject");
@@ -82,15 +81,7 @@
 		<p class="titleBackgoundText">공지사항</p>
 	</div>
 
-<div class="row admin_side_nav">
-		<ul class="nav nav-pills flex-column">
-			<li class="nav-item">관리자 메뉴</li>
-			<li class="nav-item"><a class="nav-link" href="adminForm.do">회원
-					관리</a></li>
-			<li class="nav-item"><a class="nav-link" href="adminNoticeBoardForm.do">공지사항
-			</a></li>
-		</ul>
-	</div>
+	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 
 
 	<form name="adminNoticeboardUpDelForm">

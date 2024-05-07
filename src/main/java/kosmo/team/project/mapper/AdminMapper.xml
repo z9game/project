@@ -693,5 +693,110 @@
 			b_no 안의 데이터를 표현하기 즉 게시판 번호를 표현하기 =============== # 의미 =============== 표현할 
 			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
 	</delete>
+	
+	
+	
+	
+	
+	<!-- 경기장 -->
+	
+		<select id="geStadiumList"
+		resultType="kosmo.team.project.dto.Stadim2DTO"
+		parameterType="kosmo.team.project.dto.AdminSearchDTO">
+		select * from (
+		select rownum RNUM, zxcvb.* from (
+		select
+		st.stadium_no AS "stadium_no",
+		st.stadium_name AS "stadium_name",
+		s.name AS "sido_name",
+		si.name as "sigungu_name",
+		st.detailed_address as "detail_address",
+		to_char(st.reg_date, 'YYYY-MM-DD')
+
+
+		FROM
+		stadium st
+		LEFT JOIN sido s ON st.sido_name = s.sido_id
+		LEFT JOIN sigungu si ON st.sigungu_name = si.sigungu_id
+
+
+
+		<if test="sort==null or sort.length()==0">
+			order by st.stadium_no asc
+		</if>
+		<if test="sort!=null and sort.length()>0">
+			order by ${sort}
+		</if>
+        <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
+	</select>
+
+
+
+
+	<select id="geStadiumListCnt" resultType="int">
+		select
+		count(*)
+		FROM
+		stadium st
+		LEFT JOIN sido s ON st.sido_name = s.sido_id
+		LEFT JOIN sigungu si ON st.sigungu_name = si.sigungu_id
+
+		
+	</select>
+
+
+
+	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
+	<select id="getStadiumListAllCnt" resultType="int">
+		select
+		count(*)
+		FROM
+		stadium st
+		LEFT JOIN sido s ON st.sido_name = s.sido_id
+		LEFT JOIN sigungu si ON st.sigungu_name = si.sigungu_id
+
+
+	</select>
+
+
+
+
+
+	<select id="getStadium" parameterType="int"
+		resultType="kosmo.team.project.dto.Stadim2DTO">
+		select
+		st.stadium_no AS "stadium_no",
+		st.stadium_name AS "stadium_name",
+		s.name AS "sido_name",
+		si.name as "sigungu_name",
+		st.detail_address as "detail_address",
+		to_char(st.reg_date, 'YYYY-MM-DD')
+
+
+		FROM
+		stadium st
+		LEFT JOIN sido s ON st.sido_name = s.sido_id
+		LEFT JOIN sigungu si ON st.sigungu_name = si.sigungu_id
+
+	where
+		st.stadium_no=#{stadium_no}
+
+	</select>
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

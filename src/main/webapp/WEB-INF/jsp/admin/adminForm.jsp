@@ -246,16 +246,7 @@ $(document).ready(function() {
 
 	</div>
 
-
-	<div class="row admin_side_nav">
-		<ul class="nav nav-pills flex-column">
-			<li class="nav-item">관리자 메뉴</li>
-			<li class="nav-item"><a class="nav-link" href="adminForm.do">회원
-					관리</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="adminNoticeBoardForm.do">공지사항 </a></li>
-		</ul>
-	</div>
+	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 
 
 
@@ -339,7 +330,7 @@ $(document).ready(function() {
 								readonly="readonly"> ~ 최대 <input type="text"
 								name="maxDate" id="maxDate" readonly="readonly"></td>
 						</tr>
-						
+
 						<tr>
 							<th>경기수</th>
 							<td><input type="number" name="minGames_played"
@@ -347,22 +338,21 @@ $(document).ready(function() {
 								type="number" name="maxGames_played" class="maxGames_played"
 								value="0"></td>
 						</tr>
-						
+
 						<tr>
 							<th>승리수</th>
-							<td><input type="number" name="minWin"
-								class="minWin" value="0"> ~ <input
-								type="number" name="maxWin" class="maxWin"
-								value="0"></td>
+							<td><input type="number" name="minWin" class="minWin"
+								value="0"> ~ <input type="number" name="maxWin"
+								class="maxWin" value="0"></td>
 						</tr>
-						
+
 						<tr>
 							<th>무승부</th>
 							<td><input type="number" name="minDraws" class="minDraws"
 								value="0"> ~ <input type="number" name="maxDraws"
 								class="maxDraws" value="0"></td>
 						</tr>
-						
+
 						<tr>
 							<th>패배</th>
 							<td><input type="number" name="minLoss" class="minLoss"
@@ -375,7 +365,7 @@ $(document).ready(function() {
 								value="0"> ~ <input type="number" name="maxGoals"
 								class="maxGoals" value="0"></td>
 						</tr>
-						
+
 						<tr>
 							<th>어시스트</th>
 							<td><input type="number" name="minAssists"
