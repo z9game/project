@@ -110,7 +110,49 @@ public class MainServiceImplements implements MainService {
 	public CustomerServiceDetailDTO getSubject(int b_no) {
 		
 		CustomerServiceDetailDTO customerServiceDetailDTO = this.mainDAO.getSubject(b_no);
-
+		
 		return customerServiceDetailDTO;
+	}
+	
+	@Override
+	public int insertQnAComment(MainDTO mainDTO) {
+		
+		int QnACommentRegCnt = this.mainDAO.insertQnAComment(mainDTO);
+		
+		return QnACommentRegCnt;
+	}
+	
+	@Override
+	public List<CustomerServiceDetailDTO> getCustomerServiceQnADetailComment(CustomerServiceDetailDTO customerServiceDetailDTO){
+		
+		List<CustomerServiceDetailDTO> getCustomerServiceQnADetailComment = this.mainDAO.getCustomerServiceQnADetailComment(customerServiceDetailDTO);
+		
+		return getCustomerServiceQnADetailComment;
+	}
+	
+	@Override
+	public CustomerServiceDetailDTO customerServiceQnAUpdateForm(int b_no) {
+		
+		CustomerServiceDetailDTO customerServiceDetailDTO = this.mainDAO.customerServiceQnAUpdateForm(b_no);
+		
+		return customerServiceDetailDTO;
+	}
+	
+	@Override
+	public int customerServiceQnAUpdate(CustomerServiceDetailDTO customerServiceDetailDTO){
+		
+		int customerServiceQnAUpdateCnt = this.mainDAO.customerServiceQnAUpdate(customerServiceDetailDTO);
+		// 삭제를 실행하고 삭제 적용 행의 개수를 리턴
+		
+		return customerServiceQnAUpdateCnt;
+	}
+	
+	@Override
+	public int customerServiceQnADelete(CustomerServiceDetailDTO customerServiceDetailDTO){
+		
+		int customerServiceQnADeleteCnt = this.mainDAO.customerServiceQnADelete(customerServiceDetailDTO);
+		// 삭제를 실행하고 삭제 적용 행의 개수를 리턴
+		
+		return customerServiceQnADeleteCnt;
 	}
 }
