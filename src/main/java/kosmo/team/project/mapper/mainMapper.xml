@@ -138,4 +138,67 @@
 			#{content}
 		)
 	</insert>
+	
+	<insert id="insertQnAComment" parameterType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+		insert into
+			qnaboard_comment (
+			bc_no
+			,writer
+			,content
+			,reg_date
+			,subject
+		) values (
+			(select b_no from qnaboard where b_no = #{b_no}),
+			'관리자',
+			#{content},
+			sysdate,
+			(select subject || '(답변)' from qnaboard where b_no = #{b_no})
+		)
+	</insert>
+	
+	<select id="getCustomerServiceQnADetailComment" parameterType="kosmo.team.project.dto.CustomerServiceDetailDTO" resultType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+	    SELECT
+	    	bc_no AS "bc_no",
+	        writer AS "writer",
+	        content AS "content",
+	        TO_CHAR(reg_date, 'YYYY-MM-DD') AS "reg_date",
+	        subject AS "subject"
+	    FROM
+	        qnaboard_comment
+	    WHERE
+	        #{b_no} = bc_no
+	</select>
+	
+	<select id="customerServiceQnAUpdateForm" parameterType="int" resultType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+	    SELECT
+	    	q.b_no AS "b_no",
+	        q.subject AS "subject",
+	        m.nickname AS "writer",
+	        q.content AS "content",
+	        TO_CHAR(q.reg_date, 'YYYY-MM-DD') AS "reg_date",
+	        q.readcount AS "readcount"
+	    FROM
+	        qnaboard q,
+	        MEMBER m
+	    WHERE
+	        q.writer = m.m_no
+	        AND q.b_no = #{b_no}
+	</select>
+	
+	<update id="customerServiceQnAUpdate" parameterType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+		update
+			qnaboard
+		set
+			content = #{content}
+		where 
+			b_no = #{b_no}
+	</update>
+	
+	<delete id="customerServiceQnADelete" parameterType="int">
+		delete
+		from
+			qnaboard
+		where
+			b_no=#{b_no}
+	</delete>
 </mapper>
