@@ -16,6 +16,7 @@
 <script src="/js/jquery-1.11.0.min.js"></script>
 
 <script src="/js/common.js"></script>
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 

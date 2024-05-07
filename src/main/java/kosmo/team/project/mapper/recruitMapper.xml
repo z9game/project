@@ -4,58 +4,120 @@
 <mapper namespace = "kosmo.team.project.dao.RecruitDAO">
 
 	<select id="getRecruit_TeamMemList" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="kosmo.team.project.dto.RecruitSearchDTO">
-		    select 
-		        b_no 
-		        ,title
-		        ,writer 
-		        ,content 
-		        ,readcount 
-		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-		    from 
-		        recruit_TeamMemBoard
-		    where
-		    	1=1
-		    <if test="sort == 'all'">
-		    and
-		    	2=2
-		    </if>	
-		    <if test="sort == 'team'">
-		    and
-		    	team_mem = '팀'
-		    </if>
-		    <if test="sort == 'mem'">
-		    and
-		    	team_mem = '팀원'
-		    </if>
-		    <if
-				test="(keyword1 != null and keyword1.length() > 0)">
-				and (
-			</if>
-			<if test="keyword1 != null and keyword1.length() > 0">
-				(
-				<if test="searchType1 == 'writer'">
-					upper(writer) like upper('%${keyword1}%')
+			 select * from ( select rownum RNUM, zxcvb.* from( 
+			    select 
+			        b_no 
+			        ,title
+			        ,writer 
+			        ,content 
+			        ,readcount 
+			        ,team_mem
+			        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+			    from 
+			        recruit_TeamMemBoard
+			    where
+			    	1=1
+			    <if test="sort == 'all'">
+			    and
+			    	2=2
+			    </if>	
+			    <if test="sort == 'team'">
+			    and
+			    	team_mem = '팀'
+			    </if>
+			    <if test="sort == 'mem'">
+			    and
+			    	team_mem = '팀원'
+			    </if>
+			    <if
+					test="(keyword1 != null and keyword1.length() > 0)">
+					and (
 				</if>
-				<if test="searchType1 == 'title'">
-					upper(title) like upper('%${keyword1}%')
+				<if test="keyword1 != null and keyword1.length() > 0">
+					(
+					<if test="searchType1 == 'writer'">
+						upper(writer) like upper('%${keyword1}%')
+					</if>
+					<if test="searchType1 == 'title'">
+						upper(title) like upper('%${keyword1}%')
+					</if>
+					<if test="searchType1== 'content'">
+						upper(content) like upper('%${keyword1}%')
+					</if>
+					<if test="searchType1 == 'all'">
+						upper(writer) like upper('%${keyword1}%')
+						or
+						upper(title) like upper('%${keyword1}%')
+						or
+						upper(content) like upper('%${keyword1}%')
+					</if>
+					)
 				</if>
-				<if test="searchType1== 'content'">
-					upper(content) like upper('%${keyword1}%')
+				<if
+					test="(keyword1 != null and keyword1.length() > 0)">
+					)
 				</if>
-				<if test="searchType1 == 'all'">
-					upper(writer) like upper('%${keyword1}%')
-					or
-					upper(title) like upper('%${keyword1}%')
-					or
-					upper(content) like upper('%${keyword1}%')
-				</if>
-				)
-			</if>
-			<if
-				test="(keyword1 != null and keyword1.length() > 0)">
-				)
-			</if>
+			<![CDATA[
+			) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+		]]>
 	</select>
+	
+	
+	
+	<select id="getBoardListCnt" parameterType="kosmo.team.project.dto.RecruitSearchDTO"   resultType="int">
+		select
+			count(*)
+		from
+			recruit_TeamMemBoard 
+	 	where
+	    	1=1
+	    <if test="sort == 'all'">
+	    and
+	    	2=2
+	    </if>	
+	    <if test="sort == 'team'">
+	    and
+	    	team_mem = '팀'
+	    </if>
+	    <if test="sort == 'mem'">
+	    and
+	    	team_mem = '팀원'
+	    </if>
+	    <if
+			test="(keyword1 != null and keyword1.length() > 0)">
+			and (
+		</if>
+		<if test="keyword1 != null and keyword1.length() > 0">
+			(
+			<if test="searchType1 == 'writer'">
+				upper(writer) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'title'">
+				upper(title) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1== 'content'">
+				upper(content) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'all'">
+				upper(writer) like upper('%${keyword1}%')
+				or
+				upper(title) like upper('%${keyword1}%')
+				or
+				upper(content) like upper('%${keyword1}%')
+			</if>
+			)
+		</if>
+		<if
+			test="(keyword1 != null and keyword1.length() > 0)">
+			)
+		</if>
+		
+	    
+	
+	</select>
+	
+	
+	
 	
 	<select id="getRecruit_HiredBoardList" resultType="kosmo.team.project.dto.RecruitHiredDTO">
 		    select 

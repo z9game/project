@@ -8,6 +8,7 @@ import kosmo.team.project.dto.RecruitHiredDTO;
 import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitSearchDTO;
 import kosmo.team.project.dto.RecruitTeamMemDTO;
+
 @Mapper
 public interface RecruitDAO {
 
@@ -27,4 +28,5 @@ public interface RecruitDAO {
 	
 	public int updateTeamMemReadCnt(int b_no);
 
+	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO);	
 }

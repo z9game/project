@@ -24,10 +24,10 @@ public interface RecruitService {
 	
 	public int regTeamMemRecruit(RecruitTeamMemDTO recruitTeamMemDTO);
 	
+	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO);
 	
 	
-
-
+	
 
 }
 

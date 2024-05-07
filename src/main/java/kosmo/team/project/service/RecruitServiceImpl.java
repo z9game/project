@@ -47,6 +47,12 @@ public class RecruitServiceImpl implements RecruitService {
 
 	}
 	
+	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO) {
+		
+		int boardListCnt = this.recruitDAO.getBoardListCnt(recruitSearchDTO);
+
+		return boardListCnt;
+	}
 	
 	public RecruitTeamMemDTO getRecruit_TeamMemDetail(int b_no) {
 
