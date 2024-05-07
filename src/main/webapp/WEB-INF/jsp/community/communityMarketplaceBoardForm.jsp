@@ -148,13 +148,8 @@
 		var formSearchType1 = searchForm.find(".searchType1");
 		
 		if (tabType == TAB_ALL) {
-			//$("#tabAll").html( obj.find("#tabSale").html() );
-			
 			$("#allBoardDiv").html(obj.find("#allBoardDiv").html());
 			$("#allPaingsDiv").html(obj.find("#allPaingsDiv").html());
-			
-			// aaaa yyyy 2024.05.06. TAB_SALE, FREE_SHARING 해야한다.....
-			
 			
 			// 검색 조건 초기화 되어 hidden 값을 이용해 설정
 			var tagTab = $("#tabAll");			
@@ -162,7 +157,8 @@
 			tagTab.find("[name='keyword1']").val( formKeyword1.val() );
 		}
 		else if (tabType == TAB_SALE) {
-			$("#tabSale").html( obj.find("#tabSale").html() );
+			$("#saleBoardDiv").html(obj.find("#saleBoardDiv").html());
+			$("#salePaingsDiv").html(obj.find("#salePaingsDiv").html());
 
 			// 검색 조건 초기화 되어 hidden 값을 이용해 설정
 			var tagTab = $("#tabSale");			
@@ -170,7 +166,8 @@
 			tagTab.find("[name='keyword1']").val( formKeyword1.val() );		
 		}
 		else if (tabType == TAB_FREE_SHARING) {
-			$("#tabFreeSharing").html( obj.find("#tabFreeSharing").html() );
+			$("#freeSharingBoardDiv").html(obj.find("#freeSharingBoardDiv").html());
+			$("#freeSharingPaingsDiv").html(obj.find("#freeSharingPaingsDiv").html());
 
 			// 검색 조건 초기화 되어 hidden 값을 이용해 설정
 			var tagTab = $("#tabFreeSharing");			
@@ -293,13 +290,7 @@
 							[${ requestScope.boardListCnt } / ${ requestScope.boardListAllCnt }] 개
 							<!-- Total. ${ requestScope.boardListAllCnt }개  -->
 						</span>
-					</div>
-					
-					
-						
-					
-
-					
+					</div>					
 		        	<!-- end. container -->
 		        	
 		    	</div>
@@ -335,7 +326,7 @@
 						</table>					
 					</div>
 					
-		        	<div class="communityMarketplaceBoardFormContainer">
+		        	<div id="saleBoardDiv" class="communityMarketplaceBoardFormContainer">
 						<c:forEach var="board" items="${requestScope.boardList}" varStatus="status">
 							<div class="communityMarketplaceBoardFormBoard">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
@@ -360,7 +351,7 @@
 							</div>
 						</c:forEach>
 						
-						<span class="pagingNos">
+						<span id="salePaingsDiv" class="pagingNos">
 							<span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
 							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.selectPageNo } - 1 );">[이전]</span>
 							&nbsp;&nbsp;
@@ -380,8 +371,8 @@
 							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.last_pageNo } );">[마지막]</span>
 							
 							&nbsp;&nbsp;&nbsp;
-							<!-- [${ requestScope.boardListCnt } / ${ requestScope.boardListAllCnt }] 개  -->
-							Total. ${ requestScope.boardListAllCnt }개
+							[${ requestScope.boardListCnt } / ${ requestScope.boardListAllCnt }] 개
+							<!-- Total. ${ requestScope.boardListAllCnt }개 -->
 						</span>						
 					</div>
 		        	<!-- end. container -->
@@ -419,7 +410,7 @@
 						</table>					
 					</div>
 					
-		        	<div class="communityMarketplaceBoardFormContainer">
+		        	<div id="freeSharingBoardDiv" class="communityMarketplaceBoardFormContainer">
 						<c:forEach var="board" items="${requestScope.boardList}" varStatus="status">
 							<div class="communityMarketplaceBoardFormBoard">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
@@ -444,7 +435,7 @@
 							</div>
 						</c:forEach>
 						
-						<span class="pagingNos">
+						<span id="freeSharingPaingsDiv" class="pagingNos">
 							<span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
 							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.selectPageNo } - 1 );">[이전]</span>
 							&nbsp;&nbsp;
@@ -464,8 +455,8 @@
 							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.last_pageNo } );">[마지막]</span>
 							
 							&nbsp;&nbsp;&nbsp;
-							<!-- [${ requestScope.boardListCnt } / ${ requestScope.boardListAllCnt }] 개  -->
-							Total. ${ requestScope.boardListAllCnt }개
+							[${ requestScope.boardListCnt } / ${ requestScope.boardListAllCnt }] 개
+							<!-- Total. ${ requestScope.boardListAllCnt }개  -->
 						</span>						
 					</div>
 		        	<!-- end. container -->

@@ -371,6 +371,13 @@ public class CommunityController {
 	/*** 장터 페이지 ***/
 	@RequestMapping(value = "/communityMarketplaceBoardForm.do")
 	public ModelAndView communityMarketplaceBoardForm(CommunitySearchDTO communitySearchDTO) {
+		
+		String tabType = communitySearchDTO.getTabType();
+		
+		// tabType 은 처음 접속시 null 이고 검색, 페이지 선택시 null 이 아닌 값으로 전달한다.
+		if (tabType == null) {
+			// 여기부터 작업해야 함.
+		}
 
 		// 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 
 		int saleUnionFreeSharingListAllCnt = communityService.getSaleUnionFreeSharingListAllCnt();
