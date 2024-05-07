@@ -127,6 +127,7 @@ function thisYear( ) {
 }
 
 // 지역 검색
+
 function categoryChange(e) {
     const state = document.getElementById("state");
 

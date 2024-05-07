@@ -296,6 +296,22 @@ public class CommunityServiceImplements implements CommunityService {
 		return imageBoardListCnt;
 
 	}
+	
+	@Override
+	public int getSaleUnionFreeSharingListAllCnt() {
+		return communityDAO.getSaleUnionFreeSharingListAllCnt();
+	}
+	
+	@Override
+	public int getSaleUnionFreeSharingListSearchCnt(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getSaleUnionFreeSharingListSearchCnt(communitySearchDTO);
+	}
+	
+	@Override
+	public List<CommunityDTO> getSaleUnionFreeSharingList(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getSaleUnionFreeSharingList(communitySearchDTO);
+	}
+
 
 	@Override
 	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO) {

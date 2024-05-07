@@ -5,8 +5,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>communityFreeBoardDetailForm</title>
-	<link href="/style/communityFreeBoardFormStyle.css" rel="stylesheet">
-	<script src="/js/communityFreeBoardFormScript.js"></script>
+	<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+	<script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 	<script>
 

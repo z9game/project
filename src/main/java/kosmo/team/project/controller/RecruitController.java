@@ -17,6 +17,7 @@ import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitSearchDTO;
 import kosmo.team.project.dto.RecruitTeamMemDTO;
 import kosmo.team.project.service.RecruitService;
+import kosmo.team.project.utility.Page;
 
 @Controller
 public class RecruitController {
@@ -24,14 +25,28 @@ public class RecruitController {
 	@Autowired
     private RecruitService recruitService;
 	
-	
     @RequestMapping(value = "/recruitTeamMemBoardForm.do")
     public ModelAndView recruitTeamMemBoardForm(RecruitSearchDTO recruitSearchDTO) {
+    	
+    	int boardListCnt = this.recruitService.getBoardListCnt(recruitSearchDTO);
+    	
+    	Map<String, Integer> recruitMap = Page.getPagingMap(
+    		recruitSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+			, recruitSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+			, boardListCnt // 검색 결과물 개수
+		);
+    	
+    	recruitSearchDTO.setSelectPageNo((int) recruitMap.get("selectPageNo"));
+    	recruitSearchDTO.setRowCntPerPage((int) recruitMap.get("rowCntPerPage"));
+    	recruitSearchDTO.setBegin_rowNo((int) recruitMap.get("begin_rowNo"));
+    	recruitSearchDTO.setEnd_rowNo((int) recruitMap.get("end_rowNo"));
+    	
     	List<RecruitTeamMemDTO> recruitTeamMem = this.recruitService.getRecruit_TeamMemList(recruitSearchDTO);
     	
     	ModelAndView mav = new ModelAndView();
     	mav.addObject("boardList", recruitTeamMem);
-    	mav.setViewName("/recruit/recruitTeamMemBoardForm.jsp");
+    	mav.addObject("recruitMap", recruitMap);
+    	mav.setViewName("/recruit/test.jsp");
     	
         return mav;
     }

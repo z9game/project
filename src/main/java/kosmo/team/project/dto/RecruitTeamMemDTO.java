@@ -1,5 +1,7 @@
 package kosmo.team.project.dto;
 
+import java.util.List;
+
 public class RecruitTeamMemDTO {
 	
 	private int b_no;
@@ -57,6 +59,7 @@ public class RecruitTeamMemDTO {
 	public void setTeam_mem(String team_mem) {
 		this.team_mem = team_mem;
 	}
+
 	public String getSido() {
 		return sido;
 	}
@@ -75,4 +78,5 @@ public class RecruitTeamMemDTO {
 	public void setDay(String day) {
 		this.day = day;
 	}
+
 }

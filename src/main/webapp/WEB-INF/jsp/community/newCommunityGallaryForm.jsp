@@ -7,10 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>NewCommunityGallaryForm</title>
-<link href="/style/newCommunityGallaryFormStyle.css" rel="stylesheet">
-<!--  
-<script src="/js/newCommunityGallaryFormScript.js"></script>
+
+<link href="/style/community/newCommunityGallaryFormStyle.css" rel="stylesheet">
+<!-- 이전 경로에 js 파일이 없어 주석처리. 
+<script src="/js/community/newCommunityGallaryFormScript.js"></script>
 -->
+
 <script>
 function checkGallaryBoardRegForm(){
 	

@@ -9,6 +9,7 @@
 <title>updateTeamMemReadCnt</title>
 <link href="/style/newRecruitTeamBoardFormStyle.css" rel="stylesheet">
 <script src="/js/newRecruitTeamBoardFormScript.js"></script>
+<script src="/js/common.js"></script>
 
 <script>
 
@@ -16,6 +17,7 @@
 	{
 		var formObj = $("[name='newRecruitTeamMemBoardForm']")
 		
+		alert(formObj.serialize());
 		$.ajax({
 			//-------------------------------
 			// WAS 로 접속할 주소 설정
@@ -82,6 +84,65 @@
 					<td>
 						<input type="text" name="writer" class="writer" size="40" maxlength="15">
 					</td>
+				</tr>
+				<tr>
+					<th>지역</th>
+					<td>
+						<select name="sido" id="" onchange="categoryChange(this)">
+			              	<option value="0">시/도 선택</option>
+							<option value="1">강원</option>
+							<option value="2">경기</option>
+							<option value="3">경남</option>
+							<option value="4">경북</option>
+							<option value="5">광주</option>
+							<option value="6">대구</option>
+							<option value="7">대전</option>
+							<option value="8">부산</option>
+							<option value="9">서울</option>
+							<option value="10">울산</option>
+							<option value="11">인천</option>
+							<option value="12">전남</option>
+							<option value="13">전북</option>
+							<option value="14">제주</option>
+							<option value="15">충남</option>
+							<option value="16">충북</option>
+		            	</select>
+
+			            <select name="gungu" id="state">
+			              <option>군/구 선택</option>
+			            </select>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>요일</th>
+					<td>
+						<input type="checkbox" name="day" value="1">월
+						<input type="checkbox" name="day" value="2">화
+						<input type="checkbox" name="day" value="3">수
+						<input type="checkbox" name="day" value="4">목
+						<input type="checkbox" name="day" value="5">금
+						<input type="checkbox" name="day" value="6">토
+						<input type="checkbox" name="day" value="7">일
+					</td>
+				</tr>
+				<tr>
+					<th>시간</th>
+					<td>
+						<input type="checkbox" name="time" value="새벽">새벽
+						<input type="checkbox" name="time" value="오전">오전
+						<input type="checkbox" name="time" value="오후">오후
+						<input type="checkbox" name="time" value="야간">야간
+					</td>
+				</tr>
+				
+				<tr>
+					<th>종류</th>
+					<td>
+						<input type="radio" name="team_mem" value="팀">팀
+						<input type="radio" name="team_mem" value="팀원">팀원
+					</td>
+				</tr>
 				
 				<tr>
 					<th>내용</th>
@@ -89,13 +150,6 @@
 						<textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none"></textarea>
 					</td>
 				</tr>
-				<tr>
-					<th>팀/팀원</th>
-					<td>
-						<input type="radio" name="team_mem" value="팀">팀
-						<input type="radio" name="team_mem" value="팀원">팀원
-					</td>
-				<tr>
 				
 			</table>
 			<div class="newRecruitTeamMemBoardFormBtnDiv">

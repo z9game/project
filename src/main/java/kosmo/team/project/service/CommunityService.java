@@ -115,5 +115,13 @@ public interface CommunityService {
 	/*** 장터 리스트 가져오기  ***/
 	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO);
 	
+	/*** 장터 sale, free_sharing 테이블 리스트 총 개수 가져오기  ***/
+	public int getSaleUnionFreeSharingListAllCnt();
+	
+	/*** 장터 sale, free_sharing 테이블 리스트 개수 가져오기 ***/
+	public int getSaleUnionFreeSharingListSearchCnt(CommunitySearchDTO communitySearchDTO);
+	
+	/*** 장터 sale, free_sharing 테이블 리스트 가져오기 ***/
+	public List<CommunityDTO> getSaleUnionFreeSharingList(CommunitySearchDTO communitySearchDTO);
 
 }

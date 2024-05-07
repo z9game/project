@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>CommunityGallaryForm</title>
-<link href="/style/communityGallaryFormStyle.css" rel="stylesheet">
-<script src="/js/communityGallaryFormScript.js"></script>
+<link href="/style/community/communityGallaryFormStyle.css" rel="stylesheet">
+<script src="/js/community/communityGallaryFormScript.js"></script>
 <script>
 	function newCommunityGallaryFormBtnClick() {
 		

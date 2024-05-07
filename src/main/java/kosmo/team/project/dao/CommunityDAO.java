@@ -102,6 +102,12 @@ public interface CommunityDAO {
 
 	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO);
 	
+	public int getSaleUnionFreeSharingListAllCnt();
+	
+	public int getSaleUnionFreeSharingListSearchCnt(CommunitySearchDTO communitySearchDTO);
+	
+	public List<CommunityDTO> getSaleUnionFreeSharingList(CommunitySearchDTO communitySearchDTO);
+	
 	
 	
 
