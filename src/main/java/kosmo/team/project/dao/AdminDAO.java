@@ -8,6 +8,7 @@ import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
+import kosmo.team.project.dto.Stadim2DTO;
 
 @Mapper
 public interface AdminDAO {
@@ -80,9 +81,23 @@ public interface AdminDAO {
 	
 	
 	
+	// ----------------------------------------
+	// 경기장
+	// ----------------------------------------
+	public List<Stadim2DTO> getStadiumList(AdminSearchDTO adminSearchDTO);
+
+	public int getStadiumListCnt(AdminSearchDTO adminSearchDTO);
+
+	public int getStadiumListAllCnt();
+
+	Stadim2DTO getStadium(int stadium_no);
+
+	
+	int getStadiumCnt(int stadium_no);
 	
 	
 	
+
 	
 	
 	

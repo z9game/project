@@ -237,7 +237,7 @@
 							<td>
 								<b>${gameList.subject}</b>
 							</td>
-						</tr>
+						</tr>	
 						
 						<tr>
 							<td>

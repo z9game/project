@@ -184,6 +184,83 @@
 
 
 
+		<if test="( minWin != null and minWin > 0)">
+			and wins &gt;= to_number(#{minWin})
+			<if test="( maxWin != null and maxWin > 0)">
+				and wins &lt;= to_number(#{maxWin})
+			</if>
+		</if>
+
+		<if test="( maxWin != null and maxWin > 0)">
+			and wins &lt; = to_number(#{maxWin})
+			<if test="( minWin != null and minWin > 0)">
+				and wins &gt; = to_number(#{minWin})
+			</if>
+		</if>
+
+
+
+
+		<if test="( minDraws != null and minDraws > 0)">
+			and wins &gt;= to_number(#{minDraws})
+			<if test="( maxDraws != null and maxDraws > 0)">
+				and wins &lt;= to_number(#{maxDraws})
+			</if>
+		</if>
+
+		<if test="( maxDraws != null and maxDraws > 0)">
+			and draws &lt; = to_number(#{maxDraws})
+			<if test="( minDraws != null and minDraws > 0)">
+				and draws &gt; = to_number(#{minDraws})
+			</if>
+		</if>
+
+
+		<if test="( minLoss != null and minLoss > 0)">
+			and wins &gt;= to_number(#{minLoss})
+			<if test="( maxLoss != null and maxLoss > 0)">
+				and wins &lt;= to_number(#{maxLoss})
+			</if>
+		</if>
+
+		<if test="( maxLoss != null and maxLoss > 0)">
+			and losses &lt; = to_number(#{maxLoss})
+			<if test="( minLoss != null and minLoss > 0)">
+				and losses &gt; = to_number(#{minLoss})
+			</if>
+		</if>
+
+
+
+		<if test="( minGoals != null and minGoals > 0)">
+			and goals_for &gt;= to_number(#{minGoals})
+			<if test="( maxGoals != null and maxGoals > 0)">
+				and goals_for &lt;= to_number(#{maxGoals})
+			</if>
+		</if>
+
+		<if test="( maxGoals != null and maxGoals > 0)">
+			and goals_for &lt; = to_number(#{maxGoals})
+			<if test="( minGoals != null and minGoals > 0)">
+				and goals_for &gt; = to_number(#{minGoals})
+			</if>
+		</if>
+
+
+		<if test="( minAssists != null and minAssists > 0)">
+			and goals_assist &gt;= to_number(#{minAssists})
+			<if test="( maxAssists != null and maxAssists > 0)">
+				and goals_assist &lt;= to_number(#{maxAssists})
+			</if>
+		</if>
+
+		<if test="( maxAssists != null and maxAssists > 0)">
+			and goals_assist &lt; = to_number(#{maxAssists})
+			<if test="( minAssists != null and minAssists > 0)">
+				and goals_assist &gt; = to_number(#{minAssists})
+			</if>
+		</if>
+
 
 
 		<if
@@ -292,11 +369,7 @@
 		select
 		count(*)
 		from
-		member m
-		LEFT JOIN sido s ON m.sido_id = s.sido_id
-		LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id
-		LEFT JOIN
-		player_record pr ON m.m_no = pr.player
+		member m LEFT JOIN sido s ON m.sido_id = s.sido_id  LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id LEFT JOIN player_record pr ON m.m_no = pr.player
 		where m.m_no != 1
 		<include refid="boardWhere" />
 	</select>
@@ -485,6 +558,9 @@
 		FROM
 		noticeboard
 
+
+
+
 		<if test="sort==null or sort.length()==0">
 			order by
 
@@ -616,5 +692,157 @@
 			b_no 안의 데이터를 표현하기 즉 게시판 번호를 표현하기 =============== # 의미 =============== 표현할 
 			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
 	</delete>
+
+
+
+
+
+	<!-- 경기장 -->
+
+	<select id="getStadiumList"
+		resultType="kosmo.team.project.dto.Stadim2DTO"
+		parameterType="kosmo.team.project.dto.AdminSearchDTO">
+		select * from (
+		select rownum RNUM, zxcvb.* from (
+		select
+		st.stadium_no AS "stadium_no",
+		st.stadium_name AS "stadium_name",
+		s.name AS "sido_name",
+		si.name as "sigungu_name",
+		st.detailed_address as "detail_address"
+		,st.content as "content"
+		,to_char(st.reg_date, 'YYYY-MM-DD') AS "reg_date"
+
+
+		FROM
+		stadium st
+		LEFT
+		JOIN sido s ON st.sido_name = s.sido_id
+		LEFT JOIN sigungu si ON
+		st.sigungu_name = si.sigungu_id
+		where 1=1
+		
+		<if test="sido !=null and sido>0 ">
+			and
+			(
+			st.sido_name = ${sido}
+			)
+
+			<if test="sigungu !=null and sigungu>0 ">
+				and
+				(
+				st.sigungu_name = ${sigungu}
+				)
+
+			</if>
+		</if>
+
+
+		<if test="sort==null or sort.length()==0">
+			order by st.stadium_no asc
+		</if>
+		<if test="sort!=null and sort.length()>0">
+			order by ${sort}
+		</if>
+        <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
+	</select>
+
+
+
+
+	<select id="getStadiumListCnt" resultType="int">
+		select
+		count(*)
+		FROM
+		stadium st
+		LEFT JOIN sido s ON st.sido_name = s.sido_id
+		LEFT JOIN
+		sigungu si ON st.sigungu_name = si.sigungu_id
+		where 1=1
+		<if test="sido !=null and sido>0 ">
+			and
+			(
+			st.sido_name = ${sido}
+			)
+
+			<if test="sigungu !=null and sigungu>0 ">
+				and
+				(
+				st.sigungu_name = ${sigungu}
+				)
+
+			</if>
+		</if>
+		
+
+	</select>
+
+
+
+	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
+	<select id="getStadiumListAllCnt" resultType="int">
+		select
+		count(*)
+		FROM
+		stadium st
+		LEFT JOIN sido s ON st.sido_name = s.sido_id
+		LEFT JOIN
+		sigungu si ON st.sigungu_name = si.sigungu_id
+		where 1=1 
+		<if test="sido !=null and sido>0 ">
+			and
+			(
+			st.sido_name = ${sido}
+			)
+
+			<if test="sigungu !=null and sigungu>0 ">
+				and
+				(
+				st.sigungu_name = ${sigungu}
+				)
+
+			</if>
+		</if>
+		
+
+	</select>
+
+
+		<select id="getStadium" parameterType="int"
+		resultType="kosmo.team.project.dto.Stadim2DTO">
+
+		select
+		stadium_no as "stadium_no"
+		,stadium_name as "stadium_name"
+		,sido_name as "sido_name"
+		,sigungu_name as "sigungu_name"
+		,detailed_address as "detailed_address"
+		,reg_date as "reg_date"
+		,content as "content"
+		
+		from stadium
+
+		where
+		stadium_no=#{stadium_no}
+		<!-- ========================================== #{b_no} 뜻 ========================================== 
+			select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
+			또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
+			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
+
+
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

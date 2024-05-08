@@ -10,6 +10,7 @@ import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
+import kosmo.team.project.dto.Stadim2DTO;
 
 @Service
 public class AdminServiceImplements implements AdminService {
@@ -250,5 +251,62 @@ public class AdminServiceImplements implements AdminService {
 		// ----------------------------------------------
 		return adminNoticeboardRegCnt;
 	}
+	
+	
+	
+	
+	
+	//------------------------------------------------------
+	//경기장
+	//------------------------------------------------------
+	
+	
+
+	@Override
+	public List<Stadim2DTO> getStadiumList(AdminSearchDTO adminSearchDTO) {
+
+		List<Stadim2DTO> stadiumList = this.adminDAO.getStadiumList(adminSearchDTO);
+
+		return stadiumList;
+
+	}
+
+	
+	@Override
+	public int getStadiumListCnt(AdminSearchDTO adminSearchDTO) {
+
+		int StadiumListCnt = this.adminDAO.getStadiumListCnt(adminSearchDTO);
+
+		return StadiumListCnt;
+
+	}
+
+	public int getStadiumListAllCnt() {
+		// --------------------------------------
+		// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
+		// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
+		// --------------------------------------
+		int StadiumListAllCnt = this.adminDAO.getStadiumListAllCnt();
+		// --------------------------------------
+		// 변수 boardListAllCnt 안의 데이터를 리턴하기
+		// --------------------------------------
+		return StadiumListAllCnt;
+	}
+
+	public Stadim2DTO getStadium(int stadium_no) {
+
+	
+		Stadim2DTO stadim2DTO = this.adminDAO.getStadium(stadium_no);
+
+		return stadim2DTO;
+
+	}
+
+	
+	
+	
+	
+	
+	
 
 }
