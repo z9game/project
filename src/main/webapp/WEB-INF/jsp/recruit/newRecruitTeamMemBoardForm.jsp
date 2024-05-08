@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>updateTeamMemReadCnt</title>
+<title>새 글쓰기</title>
 <link href="/style/newRecruitTeamBoardFormStyle.css" rel="stylesheet">
 <script src="/js/newRecruitTeamBoardFormScript.js"></script>
 <script src="/js/common.js"></script>
@@ -17,7 +17,6 @@
 	{
 		var formObj = $("[name='newRecruitTeamMemBoardForm']")
 		
-		alert(formObj.serialize());
 		$.ajax({
 			//-------------------------------
 			// WAS 로 접속할 주소 설정
@@ -108,7 +107,7 @@
 							<option value="16">충북</option>
 		            	</select>
 
-			            <select name="gungu" id="state">
+			            <select name="sigungu" id="state">
 			              <option>군/구 선택</option>
 			            </select>
 					</td>
@@ -133,6 +132,17 @@
 						<input type="checkbox" name="time" value="오전">오전
 						<input type="checkbox" name="time" value="오후">오후
 						<input type="checkbox" name="time" value="야간">야간
+					</td>
+				</tr>
+				
+				<tr>
+					<th>포지션</th>
+					<td>
+						<input type="radio" name="pos" value="ST">ST
+						<input type="radio" name="pos" value="CM">CM
+						<input type="radio" name="pos" value="CB">CB
+						<input type="radio" name="pos" value="GK">GK
+						<input type="radio" name="pos" value="All">All
 					</td>
 				</tr>
 				

@@ -11,6 +11,14 @@ public class RecruitTeamMemDTO {
 	private int readcount;
 	private String reg_date;
 	private String team_mem;
+	private int sido;
+	private int sigungu;
+	private String sido_c;
+	private String sigungu_c;
+	private List<String> day;
+	private List<String> time;
+	private String pos;
+	
 	
 	
 	public int getB_no() {
@@ -55,6 +63,52 @@ public class RecruitTeamMemDTO {
 	public void setTeam_mem(String team_mem) {
 		this.team_mem = team_mem;
 	}
+	public int getSido() {
+		return sido;
+	}
+	public void setSido(int sido) {
+		this.sido = sido;
+	}
+	public int getSigungu() {
+		return sigungu;
+	}
+	public void setSigungu(int sigungu) {
+		this.sigungu = sigungu;
+	}
+	public String getSido_c() {
+		return sido_c;
+	}
+	public void setSido_c(String sido_c) {
+		this.sido_c = sido_c;
+	}
+	public String getSigungu_c() {
+		return sigungu_c;
+	}
+	public void setSigungu_c(String sigungu_c) {
+		this.sigungu_c = sigungu_c;
+	}
+	public List<String> getDay() {
+		return day;
+	}
+	public void setDay(List<String> day) {
+		this.day = day;
+	}
+	public List<String> getTime() {
+		return time;
+	}
+	public void setTime(List<String> time) {
+		this.time = time;
+	}
+	public String getPos() {
+		return pos;
+	}
+	public void setPos(String pos) {
+		this.pos = pos;
+	}
+	
+	
+	
+	
 	
 	
 	

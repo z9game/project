@@ -113,9 +113,17 @@ public class RecruitController {
     @RequestMapping(value = "/recruitTeamMemBoardDetailForm.do")
     public ModelAndView recruitTeamBoardDetailForm(@RequestParam(value="b_no") int b_no) {
  
+    	
+    	
     	RecruitTeamMemDTO recruitTeamMemDTO = this.recruitService.getRecruit_TeamMemDetail(b_no);
+    	
+    	List<String> day = this.recruitService.getRecruit_day(b_no);
+    	List<String> time = this.recruitService.getRecruit_time(b_no);
+    	
     	ModelAndView mav = new ModelAndView();
     	mav.addObject("list", recruitTeamMemDTO);
+    	mav.addObject("day", day);
+    	mav.addObject("time", time);
     	mav.setViewName("/recruit/recruitTeamMemBoardDetailForm.jsp");
     	
         return mav;
