@@ -142,7 +142,7 @@ public class MainServiceImplements implements MainService {
 	public int customerServiceQnAUpdate(CustomerServiceDetailDTO customerServiceDetailDTO){
 		
 		int customerServiceQnAUpdateCnt = this.mainDAO.customerServiceQnAUpdate(customerServiceDetailDTO);
-		// 삭제를 실행하고 삭제 적용 행의 개수를 리턴
+		// 수정을 실행하고 수정 적용 행의 개수를 리턴
 		
 		return customerServiceQnAUpdateCnt;
 	}
@@ -154,5 +154,14 @@ public class MainServiceImplements implements MainService {
 		// 삭제를 실행하고 삭제 적용 행의 개수를 리턴
 		
 		return customerServiceQnADeleteCnt;
+	}
+	
+	@Override
+	public int customerServiceQnACommentDelete(CustomerServiceDetailDTO customerServiceDetailDTO){
+		
+		int customerServiceQnACommentDeleteCnt = this.mainDAO.customerServiceQnACommentDelete(customerServiceDetailDTO);
+		// 삭제를 실행하고 삭제 적용 행의 개수를 리턴
+		
+		return customerServiceQnACommentDeleteCnt;
 	}
 }
