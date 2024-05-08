@@ -8,10 +8,10 @@ public class CustomerServiceDetailDTO {
 	private String content;
 	private String reg_date;
 	private int readcount;
-	private int mid;
-	private int pwd;
-
-	private int bc_no;
+	private String mid;
+	private String password;
+	
+	private int c_no;
 
 	public int getB_no() {
 		return b_no;
@@ -61,27 +61,27 @@ public class CustomerServiceDetailDTO {
 		this.readcount = readcount;
 	}
 
-	public int getMid() {
+	public String getMid() {
 		return mid;
 	}
 
-	public void setMid(int mid) {
+	public void setMid(String mid) {
 		this.mid = mid;
 	}
 
-	public int getPwd() {
-		return pwd;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPwd(int pwd) {
-		this.pwd = pwd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public int getBc_no() {
-		return bc_no;
+	public int getC_no() {
+		return c_no;
 	}
 
-	public void setBc_no(int bc_no) {
-		this.bc_no = bc_no;
+	public void setC_no(int c_no) {
+		this.c_no = c_no;
 	}
 }
