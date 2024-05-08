@@ -19,7 +19,7 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">공지사항</p>
+		<p class="titleBackgoundText">경기장 상세보기</p>
 	</div>
 
 	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
@@ -50,6 +50,16 @@
 			style="border-collapse: collapse">
 			<caption>[경기장 상세글 보기]</caption>
 			<tr>
+				<th bgColor="lightgray">사진</th>
+				<!--------------------------------------------------- -->
+				<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 저장된 boardDTO 객체의 -->
+				<!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
+				<!-- 상세보기할 게시판의 이름 표현하기 -->
+				<!--------------------------------------------------- -->
+				<td><img src="/image/st.jpg" ></td>
+			</tr>
+			<tr>
+			
 				<th bgColor="lightgray">경기장이름</th>
 				<!--------------------------------------------------- -->
 				<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 저장된 boardDTO 객체의 -->
@@ -77,14 +87,24 @@
 				<td>${requestScope.stadim2DTO.reg_date}</td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">내 용</th>
+				<th bgColor="lightgray">상태</th>
+				<!--------------------------------------------------- -->
+				<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
+				<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
+				<!-- 상세보기할 게시판의 조회수 표현하기 -->
+				<!--------------------------------------------------- -->
+				<td>${requestScope.stadim2DTO.stadium_status}</td>
+			</tr>
+			
+			<tr>
+				<th bgColor="lightgray">비 고</th>
 				<!--------------------------------------------------- -->
 				<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
 				<!-- content 라는 멤버변수 안의 데이터를 표현하기 -->
 				<!-- 상세보기할 게시판의 내용 표현하기 -->
 				<!--------------------------------------------------- -->
 				<td><textarea name="content" class="content" rows="13"
-						cols="40" maxlength="500" readonly>${requestScope.stadim2DTO.content}</textarea></td>
+						cols="20" maxlength="50" readonly>${requestScope.stadim2DTO.content}</textarea></td>
 			</tr>
 		</table>
 
@@ -93,9 +113,9 @@
 			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 			<!--------------------------------------------------- -->
 			<span style="cursor: pointer"
-				onclick="location.replace('/adminNoticeBoardForm.do')"> [목록
+				onclick="location.replace('/adminStadiumForm.do')"> [목록
 				화면으로] </span> <input type="button" value="수정/삭제"
-				onclick="document.adminNoticeboardUpDelForm.submit();">
+				onclick="document.adminStadiumUpDelForm.submit();">
 
 
 
@@ -113,10 +133,10 @@
 		<!-- [수정/삭제] 버튼 클릭하면 <form name="boardUpDelForm" ~> 태그에 설정한
 					정보를 이용하여 WAS 에 접속하기 -->
 		<!--------------------------------------------------- -->
-		<form name="adminNoticeboardUpDelForm"
-			action="/adminNoticeboardUpDelForm.do" method="post">
-			<input type="hidden" name="b_no"
-				value="${requestScope.communityDTO.b_no}">
+		<form name="adminStadiumUpDelForm"
+			action="/adminStadiumUpDelForm.do" method="post">
+			<input type="hidden" name="stadium_no"
+				value="${requestScope.stadim2DTO.stadium_no}">
 		</form>
 
 
