@@ -7,9 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>CommunityNoticeBoardForm</title>
-<link href="/style/communityNoticeBoardFormStyle.css" rel="stylesheet">
+<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
 
-
+<script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 <script>
 

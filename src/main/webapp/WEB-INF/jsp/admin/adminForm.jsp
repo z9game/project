@@ -7,9 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>adminFormTitle</title>
-<link href="/style/communityFreeBoardFormStyle.css" rel="stylesheet">
+<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
 
-<script src="/js/communityFreeBoardFormScript.js"></script>
+<script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 
 
@@ -79,7 +79,7 @@ $(document).ready(function() {
 		
 	
 	    
-		alert(boardSearchFormObj.serialize());
+
 
 		
 		$.ajax({

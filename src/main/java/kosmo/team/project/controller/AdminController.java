@@ -81,7 +81,7 @@ public class AdminController {
 		//System.out.println("maxDate2: " + adminSearchDTO.getMaxDate());
 		
 
-		System.out.println("sido  " + adminSearchDTO.getSido());
+		System.out.println("Sigungu  " + adminSearchDTO.getSigungu());
 		System.out.println("Keyword2  " + adminSearchDTO.getKeyword2());
 		
 		//System.out.println("minDate: " + adminSearchDTO.getMinDate());
@@ -522,7 +522,7 @@ public class AdminController {
 		// admin인 경우에만 회원 목록 조회 수행
 		int StadiumListAllCnt = this.adminService.getStadiumListAllCnt();
 
-		int StadiumListCnt = this.adminService.geStadiumListCnt(adminSearchDTO);
+		int StadiumListCnt = this.adminService.getStadiumListCnt(adminSearchDTO);
 			
 		
 		Map<String, Integer> StadiumMap = Page.getPagingMap(
@@ -541,9 +541,9 @@ public class AdminController {
 		
 
 		
-		List<Stadim2DTO> stadiumList = this.adminService.geStadiumList(adminSearchDTO);
+		List<Stadim2DTO> stadiumList = this.adminService.getStadiumList(adminSearchDTO);
 
-		
+	
 		//System.out.println("minDate: " + adminSearchDTO.getMinDate());
 
 		
@@ -561,10 +561,37 @@ public class AdminController {
 	
 	
 	
-	
-	
-	
-	
+	@RequestMapping(value = "/adminStadiumDetailForm.do")
+	public ModelAndView adminStadiumDetailForm(
+			// --------------------------------------
+			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
+			// 매개변수 b_no 에 저장하고 들어온다.
+			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
+			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
+			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
+			// --------------------------------------
+			@RequestParam(value = "stadium_no") int stadium_no
+
+	) {
+
+		// BoardDTO boardDTO = this.boardService.getBoard(b_no, true);
+		Stadim2DTO stadim2DTO = this.adminService.getStadium(stadium_no);
+
+		ModelAndView mav = new ModelAndView();
+		// --------------------------------
+		// [ModelAndView 객체]에
+		// 키값 "boardDTO" 에
+		// 1행m열의 검색 데이터가 저장된 BoardDTO 객체 붙여 저장하기
+		// ModelAndView 객체에 저장된 객체는
+		// HttpServletRequest 객체에도 저장된다.
+		// --------------------------------
+		mav.addObject("stadim2DTO", stadim2DTO);
+
+		mav.setViewName(adminFolder + "adminStadiumDetailForm.jsp");
+
+		return mav;
+
+	}
 	
 	
 	

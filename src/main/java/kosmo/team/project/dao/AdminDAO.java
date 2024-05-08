@@ -84,35 +84,20 @@ public interface AdminDAO {
 	// ----------------------------------------
 	// 경기장
 	// ----------------------------------------
-	public List<Stadim2DTO> geStadiumList(AdminSearchDTO adminSearchDTO);
+	public List<Stadim2DTO> getStadiumList(AdminSearchDTO adminSearchDTO);
 
-	public int geStadiumListCnt(AdminSearchDTO adminSearchDTO);
+	public int getStadiumListCnt(AdminSearchDTO adminSearchDTO);
 
 	public int getStadiumListAllCnt();
 
 	Stadim2DTO getStadium(int stadium_no);
 
-	Stadim2DTO getStadiumForUpDel(int stadium_no);
 	
-	int geStadiumCnt(int stadium_no);
+	int getStadiumCnt(int stadium_no);
 	
 	
-	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	// [1개 공지사항] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
-	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	int updateStadium(Stadim2DTO stadim2DTO);
+	
 
-	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	// [1개 공지사항] 삭제 실행하고 삭제 적용행의 개수를 리턴하는 메소드 선언
-	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	int deleteStadium(Stadim2DTO stadim2DTO);
-
-	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	// [1개 공지사항 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
-	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	int insertStadium(Stadim2DTO stadim2DTO);
-	
-	
 	
 	
 	

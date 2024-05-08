@@ -261,19 +261,21 @@ public class AdminServiceImplements implements AdminService {
 	//------------------------------------------------------
 	
 	
+
 	@Override
-	public List<Stadim2DTO> geStadiumList(AdminSearchDTO adminSearchDTO) {
+	public List<Stadim2DTO> getStadiumList(AdminSearchDTO adminSearchDTO) {
 
-		List<Stadim2DTO> StadiumListCnt = this.adminDAO.geStadiumList(adminSearchDTO);
+		List<Stadim2DTO> stadiumList = this.adminDAO.getStadiumList(adminSearchDTO);
 
-		return StadiumListCnt;
+		return stadiumList;
 
 	}
 
+	
 	@Override
-	public int geStadiumListCnt(AdminSearchDTO adminSearchDTO) {
+	public int getStadiumListCnt(AdminSearchDTO adminSearchDTO) {
 
-		int StadiumListCnt = this.adminDAO.geStadiumListCnt(adminSearchDTO);
+		int StadiumListCnt = this.adminDAO.getStadiumListCnt(adminSearchDTO);
 
 		return StadiumListCnt;
 
@@ -293,88 +295,13 @@ public class AdminServiceImplements implements AdminService {
 
 	public Stadim2DTO getStadium(int stadium_no) {
 
-		
-
+	
 		Stadim2DTO stadim2DTO = this.adminDAO.getStadium(stadium_no);
 
 		return stadim2DTO;
 
 	}
 
-	// 이아래쪽은 공지사항 수정,삭제
-	public Stadim2DTO getStadiumForUpDel(int stadium_no) {
-
-		Stadim2DTO stadim2DTO = this.adminDAO.getStadium(stadium_no);
-
-		return stadim2DTO;
-
-	}
-
-	public int updateStadium(Stadim2DTO stadim2DTO) {
-
-		// --------------------------------------
-		// 수정할 게시판의 존재 개수 얻기
-		// 만약 수정할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
-		// --------------------------------------
-		int stadiumCnt = this.adminDAO.geStadiumCnt(stadim2DTO.getStadium_no());
-		if (stadiumCnt == 0) {
-			return stadiumCnt;
-		}
-		int stadiumUpCnt = this.adminDAO.updateStadium(stadim2DTO);
-
-		// 수정 적용개수 리턴하기
-		return stadiumUpCnt;
-	}
-
-	public int deleteStadium(Stadim2DTO stadim2DTO) {
-
-		// --------------------------------------
-		// 삭제할 게시판의 존재 개수 얻기
-		// 만약 수정할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
-		// --------------------------------------
-		int stadiumCnt = this.adminDAO.geStadiumCnt(stadim2DTO.getStadium_no());
-		if (stadiumCnt == 0) {
-			return stadiumCnt;
-		}
-
-		int stadiumDelCnt = this.adminDAO.deleteStadium(stadim2DTO);
-
-		// 수정 적용개수 리턴하기
-		return stadiumDelCnt;
-	}
-
-	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	// [1개 게시판 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
-	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-	public int insertStadium(Stadim2DTO stadim2DTO) {
-		// ----------------------------------------------
-		// BoardDAOImpl 객체의
-		// insertBoard 메소드 호출하여
-		// 게시판 글 입력 후 입력 적용 행의 개수 얻기
-		// ----------------------------------------------
-		int adminStadiumRegCnt = this.adminDAO.insertStadium(stadim2DTO);
-
-		// ----------------------------------------------
-		// 1개 게시판 글 입력 적용 행의 개수 리턴하기
-		// ----------------------------------------------
-		return adminStadiumRegCnt;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

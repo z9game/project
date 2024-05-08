@@ -10,8 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>memberDetailForm</title>
-<link href="/style/communityNoticeBoardFormStyle.css" rel="stylesheet">
-<script src="/js/communityNoticeBoardFormScript.js"></script>
+<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+
+<script src="/js/community/communityFreeBoardFormScript.js"></script>
 <script>
 	var gender = "${requestScope.memberDTO.gender}";
 	console.log("Gender value: " + gender);

@@ -8,6 +8,7 @@ public class Stadim2DTO {
 	private String sigungu_name;
 	private String detail_address;
 	private String reg_date;
+	private String content;
 	public int getStadium_no() {
 		return stadium_no;
 	}
@@ -44,7 +45,16 @@ public class Stadim2DTO {
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
-
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	
+	
+	
 
 
 
