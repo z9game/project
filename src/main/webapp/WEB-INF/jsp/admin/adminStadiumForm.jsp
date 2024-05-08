@@ -261,13 +261,10 @@
 						<tr>
 							<th>키워드</th>
 
-							<td><select name="searchType1" class="searchType1">
+							<td><select name="searchTypeStadium" class="searchType1">
 									<option value="all">전체</option>
-									<option value="name">이름</option>
-									<option value="mid">아이디</option>
-									<option value="nickname">별명</option>
-									<option value="phone">전화번호</option>
-									<option value="email">이메일</option>
+									<option value="stadium_name">경기장이름</option>
+									<option value="content">비고</option>
 
 									<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
 							</select> <input type="text" name="keyword1" class="keyword1"> <select
@@ -299,7 +296,16 @@
 							</select> <select name="sigungu" id="state" class="sigungu">
 									<option value="0">군/구 선택</option>
 							</select></td>
+						<tr>
+							<th>경기장상태</th>
+							<td><input type="checkbox" name="stadium_status" value="양호"
+								class="stadium_status">양호 <input type="checkbox"
+								name="stadium_status" value="안좋음" class="stadium_status">안좋음
+								<input type="checkbox" name="stadium_status" value="이용불가"
+								class="stadium_status">이용불가</td>
 						</tr>
+
+
 
 
 
@@ -320,7 +326,9 @@
 			<tr align="center">
 				<td><input type="button" value="검색" class="searchBtn"
 					onclick="search()"> <input type="button" value="모두 검색"
-					class="searchAllBtn" onclick="searchAll()"></td>
+					class="searchAllBtn" onclick="searchAll()">&nbsp;&nbsp;&nbsp;
+					<input type="button" value="새글쓰기"
+					onclick="location.replace('/adminStadiumRegForm.do');"></td>
 			</tr>
 
 		</table>
@@ -348,7 +356,7 @@
 				bordercolor="gray" align="center"
 				style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
 				<tr>
-					<th style="width: 30px;">번호</th>
+					<th style="width: 50px;">번호</th>
 
 					<th style="width: 500px;">경기장이름</th>
 
@@ -356,7 +364,9 @@
 
 					<th style="width: 200px;">시/군/구</th>
 
+					<th style="width: 200px;">상태</th>
 
+					<th style="width: 200px;">비고</th>
 
 				</tr>
 
@@ -372,6 +382,8 @@
 						<td align="center">${stadium.stadium_name}</td>
 						<td align="center">${stadium.sido_name}</td>
 						<td align="center">${stadium.sigungu_name}</td>
+						<td align="center">${stadium.stadium_status}</td>
+						<td align="center">${stadium.content}</td>
 					</tr>
 				</c:forEach>
 
