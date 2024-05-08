@@ -10,9 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>CommunityNoticeBoardDetailForm</title>
-<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+<link href="/style/community/communityNoticeBoardFormStyle.css" rel="stylesheet">
+<script src="/js/community/communityNoticeBoardFormScript.js"></script>
 
-<script src="/js/community/communityFreeBoardFormScript.js"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
@@ -21,7 +21,8 @@
 		<p class="titleBackgoundText">공지사항</p>
 	</div>
 
-	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+
+
 
 
 	<!-- 만약에 1개의 게시판 데이터가 없으면-->
@@ -33,7 +34,7 @@
 	<c:if test="${empty requestScope.communityDTO}">
 		<script>
 			alert("공지사항이 삭제되었습니다.");
-			location.replace("/adminNoticeBoardForm.do");
+			location.replace("/communityNoticeBoardForm.do");
 		</script>
 	</c:if>
 
@@ -76,10 +77,6 @@
 				<td>${requestScope.communityDTO.readcount}</td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">등록일</th>
-				<td>${requestScope.communityDTO.reg_date}</td>
-			</tr>
-			<tr>
 				<th bgColor="lightgray">내 용</th>
 				<!--------------------------------------------------- -->
 				<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
@@ -96,9 +93,9 @@
 			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 			<!--------------------------------------------------- -->
 			<span style="cursor: pointer"
-				onclick="location.replace('/adminNoticeBoardForm.do')"> [목록
-				화면으로] </span> <input type="button" value="수정/삭제"
-				onclick="document.adminNoticeboardUpDelForm.submit();">
+				onclick="location.replace('/communityNoticeBoardForm.do')">
+				[목록 화면으로] </span> <input type="button" value="수정/삭제"
+				onclick="document.noticeboardUpDelForm.submit();">
 
 
 
@@ -116,8 +113,7 @@
 		<!-- [수정/삭제] 버튼 클릭하면 <form name="boardUpDelForm" ~> 태그에 설정한
 					정보를 이용하여 WAS 에 접속하기 -->
 		<!--------------------------------------------------- -->
-		<form name="adminNoticeboardUpDelForm"
-			action="/adminNoticeboardUpDelForm.do" method="post">
+		<form name="noticeboardUpDelForm" action="/noticeboardUpDelForm.do" method="post">
 			<input type="hidden" name="b_no"
 				value="${requestScope.communityDTO.b_no}">
 		</form>

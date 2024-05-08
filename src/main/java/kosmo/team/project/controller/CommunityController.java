@@ -61,95 +61,49 @@ public class CommunityController {
 
 		mav.addObject("noticeBoardMap", noticeBoardMap);
 
-		mav.setViewName("communityNoticeBoardForm.jsp");
+		mav.setViewName("/community/communityNoticeBoardForm.jsp");
 
 		return mav;
 	}
 
 	/*** 공지사항 상세보기 ***/
 	@RequestMapping(value = "/noticeboardDetailForm.do")
-	public ModelAndView noticeboardDetailForm(
-			// --------------------------------------
-			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
-			// 매개변수 b_no 에 저장하고 들어온다.
-			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
-			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
-			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
-			// --------------------------------------
-			@RequestParam(value = "b_no") int b_no
+	public ModelAndView noticeboardDetailForm(@RequestParam(value = "b_no") int b_no) {
 
-	) {
-
-		// BoardDTO boardDTO = this.boardService.getBoard(b_no, true);
 		CommunityDTO communityDTO = this.communityService.getNoticeBoard(b_no);
 
 		ModelAndView mav = new ModelAndView();
-		// --------------------------------
-		// [ModelAndView 객체]에
-		// 키값 "boardDTO" 에
-		// 1행m열의 검색 데이터가 저장된 BoardDTO 객체 붙여 저장하기
-		// ModelAndView 객체에 저장된 객체는
-		// HttpServletRequest 객체에도 저장된다.
-		// --------------------------------
+
 		mav.addObject("communityDTO", communityDTO);
 
-		mav.setViewName("noticeboardDetailForm.jsp");
+		mav.setViewName("/community/noticeboardDetailForm.jsp");
 
 		return mav;
-
 	}
 
 	/*** 공지사항 수정, 삭제 페이지 ***/
 	@RequestMapping(value = "/noticeboardUpDelForm.do")
+	public ModelAndView noticeboardUpDelForm(@RequestParam(value = "b_no") int b_no) {
 
-	public ModelAndView noticeboardUpDelForm(
-			// --------------------------------------
-			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
-			// 매개변수 b_no 에 저장하고 들어온다.
-			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
-			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
-			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
-			// --------------------------------------
-			@RequestParam(value = "b_no") int b_no
-
-	) {
-
-		// BoardDTO boardDTO = this.boardService.getBoard(b_no,false);
 		CommunityDTO communityDTO = this.communityService.getNoticeBoardForUpDel(b_no);
 
 		ModelAndView mav = new ModelAndView();
-		// --------------------------------
-		// [ModelAndView 객체]에
-		// 키값 "boardDTO" 에
-		// 1행m열의 검색 데이터가 저장된 BoardDTO 객체 붙여 저장하기
-		// ModelAndView 객체에 저장된 객체는
-		// HttpServletRequest 객체에도 저장된다.
-		// --------------------------------
+
 		mav.addObject("communityDTO", communityDTO);
 
-		mav.setViewName("noticeboardUpDelForm.jsp");
+		mav.setViewName("/community/noticeboardUpDelForm.jsp");
 
 		return mav;
-
 	}
 	
 	/*** 공지사항 업데이트 ***/
+	@ResponseBody
 	@RequestMapping(value = "/noticeboardUpProc.do"
 
 			, method = RequestMethod.POST
 
-			, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public Map<String, String> noticeboardUpProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
-
-			CommunityDTO communityDTO
-
-	) {
+			, produces = "application/json;charset=UTF-8")	
+	public Map<String, String> noticeboardUpProc(CommunityDTO communityDTO) {
 
 		// ------------------------------------------------
 		// 게시판 수정 결과물을 저장할 HashMap 객체 생성하기.
@@ -174,23 +128,14 @@ public class CommunityController {
 	}
 	
 	/*** 공지사항 삭제 ***/
+	@ResponseBody
 	@RequestMapping(value = "/noticeboardDelProc.do"
 
 			, method = RequestMethod.POST
 
-			, produces = "application/json;charset=UTF-8")
-
-	@ResponseBody
-	public Map<String, String> noticeboardDelProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
-
-			CommunityDTO communityDTO
-
-	) {
+			, produces = "application/json;charset=UTF-8")	
+	public Map<String, String> noticeboardDelProc(CommunityDTO communityDTO) {
+		
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		int boardDelCnt = this.communityService.deleteNoticeBoard(communityDTO);
@@ -240,7 +185,7 @@ public class CommunityController {
 
 		mav.addObject("freeBoardMap", freeBoardMap);
 
-		mav.setViewName("communityFreeBoardForm.jsp");
+		mav.setViewName("/community/communityFreeBoardForm.jsp");
 
 		return mav;
 	}
@@ -260,7 +205,7 @@ public class CommunityController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("newCommunityFreeBoardForm.jsp");
+		mav.setViewName("/community/newCommunityFreeBoardForm.jsp");
 
 		return mav;
 	}
@@ -294,10 +239,9 @@ public class CommunityController {
 		mav.addObject("freeBoardDetailCommentList", freeBoardDetailCommentPageList);
 		mav.addObject("freeBoardDetailCommentListSize", freeBoardDetailCommentPageList.size());
 
-		mav.setViewName("/communityFreeBoardDetailForm.jsp");		
+		mav.setViewName("/community/communityFreeBoardDetailForm.jsp");		
 		
 		return mav;
-
 	}
 	
 	/*** 자유게시판 댓글 추가, 자유게시판 상세보기 ***/
@@ -307,7 +251,6 @@ public class CommunityController {
 		communityService.insertFreeBoardDetailComment(detailDTO);
 		
 		return communityFreeBoardDetail(detailDTO);
-
 	}
 	
 	/*** 자유게시판 대댓글, 자유게시판 상세보기 ***/
@@ -317,7 +260,6 @@ public class CommunityController {
 		communityService.insertFreeBoardDetailCommentToComment(detailDTO);
 
 		return communityFreeBoardDetail(detailDTO);
-
 	}
 	
 	/*** 자유게시판 수정 삭제 페이지 ***/
@@ -328,10 +270,9 @@ public class CommunityController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("communityDTO", communityDTO);
-		mav.setViewName("communityFreeBoardUpDelForm.jsp");
+		mav.setViewName("/community/communityFreeBoardUpDelForm.jsp");
 
-		return mav;
-		
+		return mav;		
 	}
 	
 	/*** 자유게시판 상세보기, 없데이트 ***/
@@ -344,8 +285,7 @@ public class CommunityController {
 		Map<String, String> resultMap = new HashMap<String, String>();
 		resultMap.put("result", updateCount + "");
 
-		return resultMap;
-		
+		return resultMap;		
 	}
 	
 	/*** 자유게시판 상세보기, 삭제 ***/
@@ -393,7 +333,7 @@ public class CommunityController {
 
 		mav.addObject("imageGallaryBoardList", imageGallaryBoardList);
 
-		mav.setViewName("communityGallaryForm.jsp");
+		mav.setViewName("/community/communityGallaryForm.jsp");
 
 		return mav;
 	}
@@ -404,7 +344,7 @@ public class CommunityController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("newCommunityGallaryForm.jsp");
+		mav.setViewName("/community/newCommunityGallaryForm.jsp");
 
 		return mav;
 	}
@@ -430,17 +370,74 @@ public class CommunityController {
 	// ----------------------------------------------------------------
 	/*** 장터 페이지 ***/
 	@RequestMapping(value = "/communityMarketplaceBoardForm.do")
-	public ModelAndView communityMarketplaceBoardForm(CommunityDTO communityDTO) {
-
-		int imageMarketBoardListCnt = this.communityService.getImageBoardListCnt(communityDTO);
-
-		List<CommunityDTO> imageMarketBoardList = this.communityService.getImageMarketBoardList(communityDTO);
-
+	public ModelAndView communityMarketplaceBoardForm(CommunitySearchDTO communitySearchDTO) {
+		
 		ModelAndView mav = new ModelAndView();
+		
+		// tabType 은 처음 접속시 null 이고 검색, 페이지 선택시 null 이 아닌 값으로 전달한다.
+		String tabType = communitySearchDTO.getTabType();
+		
+		if (tabType == null) {
+			// 여기부터 작업해야 함.
+		}
 
-		mav.addObject("imageMarketBoardList", imageMarketBoardList);
+		// 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 
+		int allBoardListAllCnt = communityService.getSaleUnionFreeSharingListAllCnt();
+		
+		// 판매, 무료나눔 2개 테이블 Union All 하여 검색한 개수
+		int allBoardListCnt = communityService.getSaleUnionFreeSharingListSearchCnt(communitySearchDTO);
+		
+		Map<String, Integer> allPageMap = Page.getPagingMap(
+				  communitySearchDTO.getSelectPageNo()	// 선택한 페이지 번호
+				, 8 									// 페이지 당 보여줄 검색 행의 개수
+				, allBoardListCnt 						// 검색 결과물 개수
+		);
+		
+		communitySearchDTO.setSelectPageNo((int) allPageMap.get("selectPageNo"));
+		communitySearchDTO.setRowCntPerPage((int) allPageMap.get("rowCntPerPage"));
+		communitySearchDTO.setBegin_rowNo((int) allPageMap.get("begin_rowNo"));
+		communitySearchDTO.setEnd_rowNo((int) allPageMap.get("end_rowNo"));
+		
+		List<CommunityDTO> allBoardList = communityService.getSaleUnionFreeSharingList(communitySearchDTO);
+		
+		mav.addObject("allBoardList", allBoardList);
+		mav.addObject("allBoardListSize", allBoardList.size());
+		mav.addObject("allBoardListCnt", allBoardListCnt);
+		mav.addObject("allBoardListAllCnt", allBoardListAllCnt);
+		mav.addObject("allPageMap", allPageMap);
+		
+		/*  
+		tabAllMarketplaceBoardListAllCnt
+		
+		장터 페이지 처음 접속시 DTO 값		/communityMarketplaceBoardForm.do
+		begin_rowNo	0	
+		end_rowNo	0	
+		keyword1	null	
+		rowCntPerPage	0	
+		searchType1	null	
+		selectPageNo	0	
+		tabType	null	
+		
+		tabType 은 처음 접속시 null 이고 
+		검색, 페이지 선택시 null 이 아닌 값으로 전달한다.
+		---------------------------------------
+		추가 해야 할 것들 ... 아래는 작업해야 한다.
+		---------------------------------------
+		
+		mav.addObject("saleBoardList", saleBoardList);		
+		mav.addObject("saleBoardListSize", saleBoardList.size());
+		mav.addObject("saleBoardListCnt", saleBoardListCnt);
+		mav.addObject("saleBoardListAllCnt", saleBoardListAllCnt);
+		mav.addObject("salePageMap", salePageMap);
+		
+		mav.addObject("freeSharingBoardList", freeSharingBoardList);		
+		mav.addObject("freeSharingBoardListSize", freeSharingBoardList.size());
+		mav.addObject("freeSharingBoardListCnt", freeSharingBoardListCnt);
+		mav.addObject("freeSharingBoardListAllCnt", freeSharingBoardListAllCnt);
+		mav.addObject("freeSharingPageMap", freeSharingPageMap);
+		 */
 
-		mav.setViewName("communityMarketplaceBoardForm.jsp");
+		mav.setViewName("/community/communityMarketplaceBoardForm.jsp");
 
 		return mav;
 	}
@@ -451,7 +448,7 @@ public class CommunityController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("newCommunityMarketplaceForm.jsp");
+		mav.setViewName("/community/newCommunityMarketplaceForm.jsp");
 
 		return mav;
 	}

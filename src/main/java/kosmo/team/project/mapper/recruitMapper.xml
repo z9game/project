@@ -3,113 +3,113 @@
 
 <mapper namespace = "kosmo.team.project.dao.RecruitDAO">
 
-	<sql id="boardWhere">
-		<if test="sort == 'all'">
-	    and
-	    	2=2
-	    </if>	
-	    <if test="sort == 'team'">
-	    and
-	    	r.team_mem = '팀'
-	    </if>
-	    <if test="sort == 'mem'">
-	    and
-	    	r.team_mem = '팀원'
-	    </if>
-	    <if test="(keyword1 != null and keyword1.length() > 0)">
-		and (
-		</if>
-			<if test="keyword1 != null and keyword1.length() > 0">
-				(
-				<if test="searchType1 == 'writer'">
-					upper(writer) like upper('%${keyword1}%')
-				</if>
-				<if test="searchType1 == 'title'">
-					upper(title) like upper('%${keyword1}%')
-				</if>
-				<if test="searchType1== 'content'">
-					upper(content) like upper('%${keyword1}%')
-				</if>
-				<if test="searchType1 == 'all'">
-					upper(writer) like upper('%${keyword1}%')
-					or
-					upper(title) like upper('%${keyword1}%')
-					or
-					upper(content) like upper('%${keyword1}%')
-				</if>
-				)
-			</if>
-		<if test="(keyword1 != null and keyword1.length() > 0)">
-			)
-		</if>
-		<if test="sido != null and sido>0">
-		and
-		(
-			r.sido = ${sido}
-		)
-			<if test="sigungu !=null and sigungu>0 ">
-			and
-			(
-				r.sigungu = ${sigungu}
-			)
-			</if>
-		</if>
-	</sql>
-	
-	
-	
-	<sql id="boardWhere1">
-		<if test="sort == 'all'">
-	    and
-	    	2=2
-	    </if>	
-	    <if test="sort == 'team'">
-	    and
-	    	team_mem = '팀'
-	    </if>
-	    <if test="sort == 'mem'">
-	    and
-	    	team_mem = '팀원'
-	    </if>
-	    <if test="(keyword1 != null and keyword1.length() > 0)">
-		and (
-		</if>
-			<if test="keyword1 != null and keyword1.length() > 0">
-				(
-				<if test="searchType1 == 'writer'">
-					upper(writer) like upper('%${keyword1}%')
-				</if>
-				<if test="searchType1 == 'title'">
-					upper(title) like upper('%${keyword1}%')
-				</if>
-				<if test="searchType1== 'content'">
-					upper(content) like upper('%${keyword1}%')
-				</if>
-				<if test="searchType1 == 'all'">
-					upper(writer) like upper('%${keyword1}%')
-					or
-					upper(title) like upper('%${keyword1}%')
-					or
-					upper(content) like upper('%${keyword1}%')
-				</if>
-				)
-			</if>
-		<if test="(keyword1 != null and keyword1.length() > 0)">
-			)
-		</if>
-		<if test="sido != null and sido>0">
-		and
-		(
-			sido = ${sido}
-		)
-			<if test="sigungu !=null and sigungu>0 ">
-			and
-			(
-				sigungu = ${sigungu}
-			)
-			</if>
-		</if>
-	</sql>
+   <sql id="boardWhere">
+      <if test="sort == 'all'">
+       and
+          2=2
+       </if>   
+       <if test="sort == 'team'">
+       and
+          r.team_mem = '팀'
+       </if>
+       <if test="sort == 'mem'">
+       and
+          r.team_mem = '팀원'
+       </if>
+       <if test="(keyword1 != null and keyword1.length() > 0)">
+      and (
+      </if>
+         <if test="keyword1 != null and keyword1.length() > 0">
+            (
+            <if test="searchType1 == 'writer'">
+               upper(writer) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'title'">
+               upper(title) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1== 'content'">
+               upper(content) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'all'">
+               upper(writer) like upper('%${keyword1}%')
+               or
+               upper(title) like upper('%${keyword1}%')
+               or
+               upper(content) like upper('%${keyword1}%')
+            </if>
+            )
+         </if>
+      <if test="(keyword1 != null and keyword1.length() > 0)">
+         )
+      </if>
+      <if test="sido != null and sido>0">
+      and
+      (
+         r.sido = ${sido}
+      )
+         <if test="sigungu !=null and sigungu>0 ">
+         and
+         (
+            r.sigungu = ${sigungu}
+         )
+         </if>
+      </if>
+   </sql>
+   
+   
+   
+   <sql id="boardWhere1">
+      <if test="sort == 'all'">
+       and
+          2=2
+       </if>   
+       <if test="sort == 'team'">
+       and
+          team_mem = '팀'
+       </if>
+       <if test="sort == 'mem'">
+       and
+          team_mem = '팀원'
+       </if>
+       <if test="(keyword1 != null and keyword1.length() > 0)">
+      and (
+      </if>
+         <if test="keyword1 != null and keyword1.length() > 0">
+            (
+            <if test="searchType1 == 'writer'">
+               upper(writer) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'title'">
+               upper(title) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1== 'content'">
+               upper(content) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'all'">
+               upper(writer) like upper('%${keyword1}%')
+               or
+               upper(title) like upper('%${keyword1}%')
+               or
+               upper(content) like upper('%${keyword1}%')
+            </if>
+            )
+         </if>
+      <if test="(keyword1 != null and keyword1.length() > 0)">
+         )
+      </if>
+      <if test="sido != null and sido>0">
+      and
+      (
+         sido = ${sido}
+      )
+         <if test="sigungu !=null and sigungu>0 ">
+         and
+         (
+            sigungu = ${sigungu}
+         )
+         </if>
+      </if>
+   </sql>
 
 
 
@@ -118,99 +118,99 @@
 
 
 
-	<select id="getRecruit_TeamMemList" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="kosmo.team.project.dto.RecruitSearchDTO">
-			 select * from ( select rownum RNUM, zxcvb.* from( 
-			    select 
-			        distinct(r.b_no) 
-			        ,r.title
-			        ,r.writer 
-			        ,r.content 
-			        ,r.readcount 
-			        ,r.team_mem
-			        ,to_char(r.reg_date, 'YYYY-MM-DD') as "reg_date"
-			    from 
-			        recruit_TeamMemBoard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
-			        					   LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
-			    where
-			    	1=1
-			    <include refid="boardWhere"/>
-			    	
-			    
-			    <if test="sort_date==null or sort_date.length()==0">
-				order by
-					r.b_no desc
-				</if>
-				<if test="sort_date!=null and sort_date.length() > 0">
-					order by
-						${sort_date}
-				</if>
-			    
-			    
-			<![CDATA[
-			) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
-		]]>
-		
-	</select>
-	
-	
-	
-	<select id="getBoardListCnt" parameterType="kosmo.team.project.dto.RecruitSearchDTO"   resultType="int">
-		select
-			count(*)
-		from
-			recruit_TeamMemBoard 
-	 	where
-	    	1=1
-	    <include refid="boardWhere1"/>
-		
-	</select>
-	
-	
-	
-	
-	<select id="getRecruit_HiredBoardList" resultType="kosmo.team.project.dto.RecruitHiredDTO">
-		    select 
-		        recruitment_no 
-		        ,title 
-		        ,writer 
-		        ,content 
-		        ,readcount 
-		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-		    from 
-		        Hired_recruitment
-	</select>
-	
-	<select id="getRecruit_LessonBoardList" resultType="kosmo.team.project.dto.RecruitLessonDTO">
-		    select 
-		        recruitment_no 
-		        ,title 
-		        ,writer 
-		        ,content 
-		        ,readcount 
-		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-		        ,money
-		    from 
-		        Lesson_recruitment
-	</select>		
-	
-	
-	<select id="getRecruit_TeamMemDetail_ex" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="int">
-		    select 
-		        b_no 
-		        ,title 
-		        ,writer 
-		        ,content 
-		        ,readcount 
-		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-		        ,team_mem
-		    from 
-		        recruit_teammemboard
-		    where
-		    	b_no = #{b_no}
-	</select>	
-	
-	
-	<select id="getRecruit_TeamMemDetail" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="int">
+   <select id="getRecruit_TeamMemList" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="kosmo.team.project.dto.RecruitSearchDTO">
+          select * from ( select rownum RNUM, zxcvb.* from( 
+             select 
+                 distinct(r.b_no) 
+                 ,r.title
+                 ,r.writer 
+                 ,r.content 
+                 ,r.readcount 
+                 ,r.team_mem
+                 ,to_char(r.reg_date, 'YYYY-MM-DD') as "reg_date"
+             from 
+                 recruit_TeamMemBoard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
+                                   LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
+             where
+                1=1
+             <include refid="boardWhere"/>
+                
+             
+             <if test="sort_date==null or sort_date.length()==0">
+            order by
+               r.b_no desc
+            </if>
+            <if test="sort_date!=null and sort_date.length() > 0">
+               order by
+                  ${sort_date}
+            </if>
+             
+             
+         <![CDATA[
+         ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+      ]]>
+      
+   </select>
+   
+   
+   
+   <select id="getBoardListCnt" parameterType="kosmo.team.project.dto.RecruitSearchDTO"   resultType="int">
+      select
+         count(*)
+      from
+         recruit_TeamMemBoard 
+       where
+          1=1
+       <include refid="boardWhere1"/>
+      
+   </select>
+   
+   
+   
+   
+   <select id="getRecruit_HiredBoardList" resultType="kosmo.team.project.dto.RecruitHiredDTO">
+          select 
+              recruitment_no 
+              ,title 
+              ,writer 
+              ,content 
+              ,readcount 
+              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+          from 
+              Hired_recruitment
+   </select>
+   
+   <select id="getRecruit_LessonBoardList" resultType="kosmo.team.project.dto.RecruitLessonDTO">
+          select 
+              recruitment_no 
+              ,title 
+              ,writer 
+              ,content 
+              ,readcount 
+              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+              ,money
+          from 
+              Lesson_recruitment
+   </select>      
+   
+   
+   <select id="getRecruit_TeamMemDetail_ex" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="int">
+          select 
+              b_no 
+              ,title 
+              ,writer 
+              ,content 
+              ,readcount 
+              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+              ,team_mem
+          from 
+              recruit_teammemboard
+          where
+             b_no = #{b_no}
+   </select>   
+   
+   
+   <select id="getRecruit_TeamMemDetail" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="int">
           select 
               t.b_no 
               ,t.title 
@@ -230,54 +230,54 @@
          
          
    </select>
-	
-	<select id="getRecruit_HiredDetail" resultType="kosmo.team.project.dto.RecruitHiredDTO" parameterType="int">
-		    select 
-		        recruitment_no 
-		        ,title 
-		        ,writer 
-		        ,content 
-		        ,readcount 
-		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-		    from 
-		        hired_recruitment
-		    where
-		    	recruitment_no = #{recruitment_no}
-	</select>	
-	
-	
-	<select id="getRecruit_LessonDetail" resultType="kosmo.team.project.dto.RecruitLessonDTO" parameterType="int">
-		    select 
-		        recruitment_no 
-		        ,title 
-		        ,writer 
-		        ,content 
-		        ,readcount 
-		        ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-		    from 
-		        lesson_recruitment
-		    where
-		    	recruitment_no = #{recruitment_no}
-	</select>  
-	
-	
-	<insert id="regTeamMemRecruit" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO" >
-	insert into recruit_teammemboard (b_no, title, writer, content, team_mem,sido,sigungu,pos)
-	values(
-		(select nvl(max(b_no),0)+1 from recruit_teammemboard)
-		,#{title}
-		,#{writer}
-		,#{content}
-		,#{team_mem}
-		,#{sido}
-		,#{sigungu}
-		,#{pos}
-	)
-	</insert>
-	
-	
-	 <!-- day 테이블에 날짜 삽입 쿼리 -->
-	<insert id="insertDay" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+   
+   <select id="getRecruit_HiredDetail" resultType="kosmo.team.project.dto.RecruitHiredDTO" parameterType="int">
+          select 
+              recruitment_no 
+              ,title 
+              ,writer 
+              ,content 
+              ,readcount 
+              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+          from 
+              hired_recruitment
+          where
+             recruitment_no = #{recruitment_no}
+   </select>   
+   
+   
+   <select id="getRecruit_LessonDetail" resultType="kosmo.team.project.dto.RecruitLessonDTO" parameterType="int">
+          select 
+              recruitment_no 
+              ,title 
+              ,writer 
+              ,content 
+              ,readcount 
+              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+          from 
+              lesson_recruitment
+          where
+             recruitment_no = #{recruitment_no}
+   </select>  
+   
+   
+   <insert id="regTeamMemRecruit" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO" >
+   insert into recruit_teammemboard (b_no, title, writer, content, team_mem,sido,sigungu,pos)
+   values(
+      (select nvl(max(b_no),0)+1 from recruit_teammemboard)
+      ,#{title}
+      ,#{writer}
+      ,#{content}
+      ,#{team_mem}
+      ,#{sido}
+      ,#{sigungu}
+      ,#{pos}
+   )
+   </insert>
+   
+   
+    <!-- day 테이블에 날짜 삽입 쿼리 -->
+   <insert id="insertDay" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
          insert into teammemboard_day
       <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
          select  (select max(b_no)from recruit_teammemboard), #{day} from dual
@@ -293,33 +293,33 @@
    </insert> 
    
    
-	<update id="updateTeamMemReadCnt" parameterType="int">
-		update 
-			recruit_teammemboard
-		set
-			readcount=readcount+1
-		where
-			b_no=#{b_no}
-	</update>
+   <update id="updateTeamMemReadCnt" parameterType="int">
+      update 
+         recruit_teammemboard
+      set
+         readcount=readcount+1
+      where
+         b_no=#{b_no}
+   </update>
 
 
-	<select id="getRecruit_day" parameterType="int" resultType="String">	 
-		select
-		   dof.day_name as "day"
-		from
-		    recruit_teammemboard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
-		                           LEFT JOIN day_of_week dof ON d.day = dof.day_no             
-		                           where r.b_no = #{b_no} 
-	</select>
-	
-	<select id="getRecruit_time" parameterType="int" resultType="String">	 
-		select
-		   t.time as "time"
-		from
-		    recruit_teammemboard r LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
-		    					   where r.b_no = #{b_no}       
-	</select>
-	
-	
-	
+   <select id="getRecruit_day" parameterType="int" resultType="String">    
+      select
+         dof.day_name as "day"
+      from
+          recruit_teammemboard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
+                                 LEFT JOIN day_of_week dof ON d.day = dof.day_no             
+                                 where r.b_no = #{b_no} 
+   </select>
+   
+   <select id="getRecruit_time" parameterType="int" resultType="String">    
+      select
+         t.time as "time"
+      from
+          recruit_teammemboard r LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
+                            where r.b_no = #{b_no}       
+   </select>
+   
+   
+   
 </mapper>

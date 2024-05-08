@@ -116,7 +116,7 @@
              return;
 		} 
 		
-		if (sessionMid !== null && sessionMid !== 'admin' &&mid == sessionMid) {
+		if (sessionMid !== null && sessionMid !== 'admin' && mid == sessionMid) {
 			$("[name='customerServiceDetailForm'] .b_no").val(b_no);
             document.customerServiceDetailForm.action = "/main/customerServiceQnADetailForm.do";
             document.customerServiceDetailForm.submit();

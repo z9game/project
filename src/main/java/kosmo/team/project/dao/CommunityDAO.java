@@ -73,7 +73,7 @@ public interface CommunityDAO {
 	
 	public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO);
 	
-	
+	public int getFreeBoardCommentCount(int b_no);
 	
 	
 	
@@ -101,6 +101,12 @@ public interface CommunityDAO {
 	public int getImageBoardListCnt(CommunityDTO communityDTO);
 
 	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO);
+	
+	public int getSaleUnionFreeSharingListAllCnt();
+	
+	public int getSaleUnionFreeSharingListSearchCnt(CommunitySearchDTO communitySearchDTO);
+	
+	public List<CommunityDTO> getSaleUnionFreeSharingList(CommunitySearchDTO communitySearchDTO);
 	
 	
 	

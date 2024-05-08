@@ -5,8 +5,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>communityFreeBoardDetailForm</title>
-	<link href="/style/communityFreeBoardFormStyle.css" rel="stylesheet">
-	<script src="/js/communityFreeBoardFormScript.js"></script>
+	<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+	<script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 	<script>
 
@@ -23,6 +23,13 @@
 		function comment() {
 			
 			var freeBoardDetailFormCommentObj = $("#freeBoardDetailFormComment");
+			var content = freeBoardDetailFormCommentObj.find(".content").val();
+			
+			if (content.trim().length == 0) {
+				alert("댓글 내용을 입력해야 합니다.");
+				return;
+			}
+			
 			var serialize = freeBoardDetailFormCommentObj.serialize( );
 			
 			$.ajax( {
@@ -40,16 +47,22 @@
 			
 			var commentOfCommentFormObj = $("#commentOfCommentForm");
 			
-			var nick_name = $("#nick_name" + index);
-			var content = $("#content" + index );
+			var nick_name = $("#nick_name" + index).val();
+			var content = $("#content" + index ).val();
+			
+			if (content.trim().length == 0) {
+				alert("댓글 내용을 입력해야 합니다.");
+				return;
+			}
+			
 			
 			var hidden_nick_name = commentOfCommentFormObj.find(".nick_name");
 			var hidden_content = commentOfCommentFormObj.find(".content");
 			var hidden_comment_no = commentOfCommentFormObj.find(".comment_no");
 			
-			hidden_nick_name.val(nick_name.val());
-			hidden_content.val(content.val());
-			hidden_comment_no.val(comment_no);
+			hidden_nick_name.val( nick_name );
+			hidden_content.val( content );
+			hidden_comment_no.val( comment_no );
 			
 			var serialize = commentOfCommentFormObj.serialize( );
 			
@@ -130,7 +143,7 @@
 	<table border="1" bordercolor="gray" align="center" cellpadding="7">
 		<caption>[자유게시판 상세글 보기]</caption>
 		<tr>
-			<th bgColor="lightgray">이 름</th>
+			<th bgColor="lightgray">글쓴이</th>
 			<td>${ requestScope.freeBoardDetail.writer }</td>
 		</tr>
 		<tr>
@@ -151,9 +164,8 @@
 			<th bgColor="lightgray">댓글쓰기</th>
 			<td>
 				<form name="freeBoardDetailFormComment" id="freeBoardDetailFormComment" onsubmit="return false;">
-					별명:
-					<input type="text" name="nick_name" class="nick_name">
-					내용:
+					<%= session.getAttribute("nickname") %>
+					<input type="hidden" name="nick_name" class="nick_name" value="<%= session.getAttribute("nickname") %>">
 					<input type="text" name="content" class="content">
 					<input type="button" value="댓글쓰기" onclick="comment();">
 					<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
@@ -220,8 +232,8 @@
 					<tr id="trCommentOfComment${ comment.comment_no }" class="trCommentOfComment" style="display: none;">
 						<td>
 							<!-- value="홍길동${ status.index }" value="안녕하세요${ status.index }"-->
-							별명 : <input type="text" name="nick_name" class="nick_name" id="nick_name${ status.index }" >
-							내용 : <input type="text" name="content" class="content" id="content${ status.index }" >
+							↘<input type="hidden" name="nick_name" class="nick_name" id="nick_name${ status.index }" value="<%= session.getAttribute("nickname") %>">
+							<input type="text" name="content" class="content" id="content${ status.index }" >
 						</td>
 						<td>
 							<input type="button" value="댓글쓰기" onclick="commentOfComment('${ status.index }', '${ comment.comment_no }');">

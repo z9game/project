@@ -7,12 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>NewCommunityFreeBoardForm</title>
-<link href="/style/newCommunityFreeBoardFormStyle.css" rel="stylesheet">
-<script src="/js/newCommunityFreeBoardFormScript.js"></script>
+<link href="/style/community/newCommunityFreeBoardFormStyle.css" rel="stylesheet">
+<script src="/js/community/newCommunityFreeBoardFormScript.js"></script>
 <script>
 	function checkCommunityFreeBoardForm() {
 
 		var formObj = $("[name='newCommunityFreeBoardForm']");
+		
+		var subject = $(".subject").val();
+		var content = $(".content").val();
+		
+		if (subject.trim().length == 0) {
+			alert("제목을 입력해야 합니다.");
+			return;
+		}
+		
+		if (content.trim().length == 0) {
+			alert("내용을 입력해야 합니다.");
+			return;
+		}
+		
 		var serialize = formObj.serialize();
 
 		$.ajax({
@@ -49,25 +63,29 @@
 			<table class="newCommunityFreeBoardFormRegTable" border="1"
 				bordercolor="black">
 				<tr>
+					<th>글쓴이</th>
+					<td>
+						<%= session.getAttribute("nickname") %>
+						<input type="hidden" name="writer" class="writer" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
+					</td>
+				</tr>				
+				<tr>
 					<th>제목</th>
 					<td><input type="text" name="subject" class="subject"
 						size="40" maxlength="30"></td>
-				</tr>
-				<tr>
-					<th>글쓴이</th>
-					<td><input type="text" name="writer" class="writer" size="40"
-						maxlength="15"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td><textarea name="content" class="content" rows="20"
 							cols="40" maxlength="500" style="resize: none"></textarea></td>
 				</tr>
+				<!-- 
 				<tr>
 					<th>비밀번호</th>
 					<td><input type="password" name="pwd" class="pwd" size="40"
 						maxlength="4"></td>
 				</tr>
+				 -->
 			</table>
 			<div class="newCommunityFreeBoardFormBtnDiv">
 				<div class="resetBtnDiv">

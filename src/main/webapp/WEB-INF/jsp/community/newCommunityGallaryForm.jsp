@@ -7,14 +7,30 @@
 <head>
 <meta charset="UTF-8">
 <title>NewCommunityGallaryForm</title>
-<link href="/style/newCommunityGallaryFormStyle.css" rel="stylesheet">
-<!--  
-<script src="/js/newCommunityGallaryFormScript.js"></script>
+
+<link href="/style/community/newCommunityGallaryFormStyle.css" rel="stylesheet">
+<!-- 이전 경로에 js 파일이 없어 주석처리. 
+<script src="/js/community/newCommunityGallaryFormScript.js"></script>
 -->
+
 <script>
 function checkGallaryBoardRegForm(){
 	
 	var formObj = $("[name='newCommunityGallaryForm']");
+	
+	var subject = $(".subject").val();
+	var content = $(".content").val();
+	
+	if (subject.trim().length == 0) {
+		alert("제목을 입력해야 합니다.");
+		return;
+	}
+	
+	if (content.trim().length == 0) {
+		alert("내용을 입력해야 합니다.");
+		return;
+	}
+	
 	var serialize = formObj.serialize();
 	
 	
@@ -58,15 +74,16 @@ function checkGallaryBoardRegForm(){
 		<form name="newCommunityGallaryForm"> 
 			<table class="newCommunityGallaryFormRegTable" border="1" bordercolor="black">
 				<tr>
-					<th>제목</th>
+					<th>글쓴이</th>
 					<td>
-						<input type="text" name="subject" class="subject" size="40" maxlength="30">
+						<%= session.getAttribute("nickname") %>
+						<input type="hidden" name="writer" class="writer" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
 					</td>
 				</tr>
 				<tr>
-					<th>글쓴이</th>
+					<th>제목</th>
 					<td>
-						<input type="text" name="writer" class="writer" size="40" maxlength="15">
+						<input type="text" name="subject" class="subject" size="40" maxlength="30">
 					</td>
 				</tr>
 				<tr>
@@ -81,12 +98,14 @@ function checkGallaryBoardRegForm(){
 						<input type="file" name="imageFileAdd" class="imageFileAdd" accept="image/*" multiple>				
 					</td>
 				</tr>
+				<!-- 
 				<tr>
 					<th>비밀번호</th>
 					<td>
 						<input type="password" name="pwd" class="pwd" size="40" maxlength="4">
 					</td>
 				</tr>
+				 -->
 			</table>
 			<div class="newCommunityGallaryFormBtnDiv">
 				<div class="resetBtnDiv">

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>MemberRegForm</title>
 <link href="/style/memberRegFormStyle.css" rel="stylesheet">
-<script src="/js/memberRegFormScript.js"></script>
+
 
 <script>
 

@@ -166,10 +166,17 @@ public class CommunityServiceImplements implements CommunityService {
 	@Override
 	public int deleteCommunityFreeBoard(CommunityDTO communityDTO) {
 
-		int boardCount = communityDAO.getCommunityFreeBoardCount(communityDTO.getB_no());
+		int b_no = communityDTO.getB_no();
+		int boardCount = communityDAO.getCommunityFreeBoardCount(b_no);
 		
 		if (boardCount == 0) {
 			return boardCount;
+		}
+		
+		int commentCount = communityDAO.getFreeBoardCommentCount(b_no);
+		
+		if (commentCount > 0) {
+			return -1;
 		}
 
 		int boardDeleteCount = communityDAO.deleteCommunityFreeBoard(communityDTO);
@@ -289,6 +296,22 @@ public class CommunityServiceImplements implements CommunityService {
 		return imageBoardListCnt;
 
 	}
+	
+	@Override
+	public int getSaleUnionFreeSharingListAllCnt() {
+		return communityDAO.getSaleUnionFreeSharingListAllCnt();
+	}
+	
+	@Override
+	public int getSaleUnionFreeSharingListSearchCnt(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getSaleUnionFreeSharingListSearchCnt(communitySearchDTO);
+	}
+	
+	@Override
+	public List<CommunityDTO> getSaleUnionFreeSharingList(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getSaleUnionFreeSharingList(communitySearchDTO);
+	}
+
 
 	@Override
 	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO) {

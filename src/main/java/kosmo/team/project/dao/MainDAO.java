@@ -35,4 +35,14 @@ public interface MainDAO {
 	public int insertQnABoard(MainDTO mainDTO);
 	
 	public CustomerServiceDetailDTO getSubject(int b_no);
+	
+	public int insertQnAComment(MainDTO mainDTO);
+	
+	public List<CustomerServiceDetailDTO> getCustomerServiceQnADetailComment(CustomerServiceDetailDTO customerServiceDetailDTO);
+	
+	public CustomerServiceDetailDTO customerServiceQnAUpdateForm(int b_no);
+	
+	public int customerServiceQnAUpdate(CustomerServiceDetailDTO customerServiceDetailDTO);
+	
+	public int customerServiceQnADelete(CustomerServiceDetailDTO customerServiceDetailDTO);
 }
