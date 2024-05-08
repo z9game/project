@@ -26,7 +26,10 @@ public interface RecruitService {
 	
 	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO);
 	
+	public List<String> getRecruit_day(int b_no);
 	
+	public List<String> getRecruit_time(int b_no);
+
 	
 
 }

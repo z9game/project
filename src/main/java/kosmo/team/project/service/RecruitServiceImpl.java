@@ -86,8 +86,30 @@ public class RecruitServiceImpl implements RecruitService {
 	
 	public int regTeamMemRecruit(RecruitTeamMemDTO recruitTeamMemDTO) {
 		int regTeamMemRecruit = this.recruitDAO.regTeamMemRecruit(recruitTeamMemDTO);
+		
+		if(recruitTeamMemDTO.getDay() != null)
+		{
+			int insertDay = this.recruitDAO.insertDay(recruitTeamMemDTO);
+		}
+		
+		if(recruitTeamMemDTO.getTime() != null)
+		{
+			int insertTime = this.recruitDAO.insertTime(recruitTeamMemDTO); 
+		}
 		return regTeamMemRecruit; 		
 		
 	}
+	
+	public List<String> getRecruit_day(int b_no){
+		List<String> getRecruit_day = this.recruitDAO.getRecruit_day(b_no); 
+		return getRecruit_day; 	
+	}
+	
+	public List<String> getRecruit_time(int b_no){
+		List<String> getRecruit_time = this.recruitDAO.getRecruit_time(b_no);
+		return getRecruit_time; 
+	}
+	
+	
 	
 }
