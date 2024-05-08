@@ -371,48 +371,71 @@ public class CommunityController {
 	/*** 장터 페이지 ***/
 	@RequestMapping(value = "/communityMarketplaceBoardForm.do")
 	public ModelAndView communityMarketplaceBoardForm(CommunitySearchDTO communitySearchDTO) {
-
-		// 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 
-		int saleUnionFreeSharingListAllCnt = communityService.getSaleUnionFreeSharingListAllCnt();
-		
-		// 판매, 무료나눔 2개 테이블 Union All 하여 검색한 개수
-		int saleUnionFreeSharingListSearchCnt = communityService.getSaleUnionFreeSharingListSearchCnt(communitySearchDTO);
-		
-		int rowCntPerPage = communitySearchDTO.getRowCntPerPage();
-		if (rowCntPerPage == 0) {
-			rowCntPerPage = 8;
-		}
-				
-		Map<String, Integer> pageMap = Page.getPagingMap(
-				  communitySearchDTO.getSelectPageNo()	// 선택한 페이지 번호
-				, rowCntPerPage 						// 페이지 당 보여줄 검색 행의 개수
-				, saleUnionFreeSharingListSearchCnt 	// 검색 결과물 개수
-		);
-		
-		communitySearchDTO.setSelectPageNo((int) pageMap.get("selectPageNo"));
-		communitySearchDTO.setRowCntPerPage((int) pageMap.get("rowCntPerPage"));
-		communitySearchDTO.setBegin_rowNo((int) pageMap.get("begin_rowNo"));
-		communitySearchDTO.setEnd_rowNo((int) pageMap.get("end_rowNo"));
-		
-		List<CommunityDTO> saleUnionFreeSharingList = communityService.getSaleUnionFreeSharingList(communitySearchDTO);
-		
-		/*
-		int imageMarketBoardListCnt = this.communityService.getImageBoardListCnt(communityDTO);
-		List<CommunityDTO> imageMarketBoardList = this.communityService.getImageMarketBoardList(communityDTO);
-		mav.addObject("imageMarketBoardList", imageMarketBoardList);
-		*/
 		
 		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("boardList", saleUnionFreeSharingList);
 		
-		mav.addObject("boardListSize", saleUnionFreeSharingList.size());
+		// tabType 은 처음 접속시 null 이고 검색, 페이지 선택시 null 이 아닌 값으로 전달한다.
+		String tabType = communitySearchDTO.getTabType();
+		
+		if (tabType == null) {
+			// 여기부터 작업해야 함.
+		}
 
-		mav.addObject("boardListCnt", saleUnionFreeSharingListSearchCnt);
-
-		mav.addObject("boardListAllCnt", saleUnionFreeSharingListAllCnt);
-
-		mav.addObject("pageMap", pageMap);
+		// 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 
+		int allBoardListAllCnt = communityService.getSaleUnionFreeSharingListAllCnt();
+		
+		// 판매, 무료나눔 2개 테이블 Union All 하여 검색한 개수
+		int allBoardListCnt = communityService.getSaleUnionFreeSharingListSearchCnt(communitySearchDTO);
+		
+		Map<String, Integer> allPageMap = Page.getPagingMap(
+				  communitySearchDTO.getSelectPageNo()	// 선택한 페이지 번호
+				, 8 									// 페이지 당 보여줄 검색 행의 개수
+				, allBoardListCnt 						// 검색 결과물 개수
+		);
+		
+		communitySearchDTO.setSelectPageNo((int) allPageMap.get("selectPageNo"));
+		communitySearchDTO.setRowCntPerPage((int) allPageMap.get("rowCntPerPage"));
+		communitySearchDTO.setBegin_rowNo((int) allPageMap.get("begin_rowNo"));
+		communitySearchDTO.setEnd_rowNo((int) allPageMap.get("end_rowNo"));
+		
+		List<CommunityDTO> allBoardList = communityService.getSaleUnionFreeSharingList(communitySearchDTO);
+		
+		mav.addObject("allBoardList", allBoardList);
+		mav.addObject("allBoardListSize", allBoardList.size());
+		mav.addObject("allBoardListCnt", allBoardListCnt);
+		mav.addObject("allBoardListAllCnt", allBoardListAllCnt);
+		mav.addObject("allPageMap", allPageMap);
+		
+		/*  
+		tabAllMarketplaceBoardListAllCnt
+		
+		장터 페이지 처음 접속시 DTO 값		/communityMarketplaceBoardForm.do
+		begin_rowNo	0	
+		end_rowNo	0	
+		keyword1	null	
+		rowCntPerPage	0	
+		searchType1	null	
+		selectPageNo	0	
+		tabType	null	
+		
+		tabType 은 처음 접속시 null 이고 
+		검색, 페이지 선택시 null 이 아닌 값으로 전달한다.
+		---------------------------------------
+		추가 해야 할 것들 ... 아래는 작업해야 한다.
+		---------------------------------------
+		
+		mav.addObject("saleBoardList", saleBoardList);		
+		mav.addObject("saleBoardListSize", saleBoardList.size());
+		mav.addObject("saleBoardListCnt", saleBoardListCnt);
+		mav.addObject("saleBoardListAllCnt", saleBoardListAllCnt);
+		mav.addObject("salePageMap", salePageMap);
+		
+		mav.addObject("freeSharingBoardList", freeSharingBoardList);		
+		mav.addObject("freeSharingBoardListSize", freeSharingBoardList.size());
+		mav.addObject("freeSharingBoardListCnt", freeSharingBoardListCnt);
+		mav.addObject("freeSharingBoardListAllCnt", freeSharingBoardListAllCnt);
+		mav.addObject("freeSharingPageMap", freeSharingPageMap);
+		 */
 
 		mav.setViewName("/community/communityMarketplaceBoardForm.jsp");
 
