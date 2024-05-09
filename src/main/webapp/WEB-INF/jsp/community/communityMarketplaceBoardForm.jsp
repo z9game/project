@@ -115,7 +115,7 @@
 	function search() {
 		
 		insertHiddenValue();
-	
+		
 		$.ajax({				
 				  url 		: "/communityMarketplaceBoardForm.do"
 				, type 		: "post"
@@ -212,14 +212,6 @@
    			<div id="tabAll">
 		    	<div class="communityMarketplaceFAQContainer">
 		        	
-		        	<!-- container1 -->
-		        	container1
-		        	<!-- 
-		        	<div class="newCommunityMarketplaceBtnDiv">
-						<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceBoardFormBtnClick();">
-					</div>
-					 -->
-
 					<div class="communityMarketplaceSearch">
 						<table border="1" bordercolor="black" style="border-collapse:collapse; margin: 0 auto; margin-top:25px; width:1000px;" cellpadding="7" align="center">
 							<tr>
@@ -242,7 +234,7 @@
 					</div>
 					
 		        	<div id="allBoardDiv" class="communityMarketplaceBoardFormContainer">
-						<c:forEach var="board" items="${requestScope.allBoardList}" varStatus="status">
+						<c:forEach var="board" items="${requestScope.tabAllMarketplaceBoardList}" varStatus="status">
 							<div class="communityMarketplaceBoardFormBoard">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 									<img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
@@ -254,7 +246,7 @@
 							</div>
 						</c:forEach>
 						
-						<c:forEach var="empty_row" begin="${ requestScope.allBoardListSize + 1 }" end="${ requestScope.allPageMap.rowCntPerPage }">
+						<c:forEach var="empty_row" begin="${ requestScope.tabAllMarketplaceBoardListSize + 1 }" end="${ requestScope.tabAllMarketplaceBoardPageMap.rowCntPerPage }">
 							<div class="communityMarketplaceBoardFormBoard">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 									<!-- <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">  -->
@@ -268,25 +260,25 @@
 						
 						<span id="allPaingsDiv" class="pagingNos">
 							<span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
-							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.allPageMap.selectPageNo } - 1 );">[이전]</span>
+							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabAllMarketplaceBoardPageMap.selectPageNo } - 1 );">[이전]</span>
 							&nbsp;&nbsp;
 							
-							<c:forEach var="pageNo" begin="${ requestScope.allPageMap.begin_pageNo }" end="${ requestScope.allPageMap.end_pageNo }">
-								<c:if test="${ requestScope.allPageMap.selectPageNo == pageNo }">
+							<c:forEach var="pageNo" begin="${ requestScope.tabAllMarketplaceBoardPageMap.begin_pageNo }" end="${ requestScope.tabAllMarketplaceBoardPageMap.end_pageNo }">
+								<c:if test="${ requestScope.tabAllMarketplaceBoardPageMap.selectPageNo == pageNo }">
 									<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });"><b><u>${ pageNo }</u></b></span>
 								</c:if>
 					
-								<c:if test="${ requestScope.allPageMap.selectPageNo != pageNo }">
+								<c:if test="${ requestScope.tabAllMarketplaceBoardPageMap.selectPageNo != pageNo }">
 									<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });">[${ pageNo }]</span>
 								</c:if>
 							</c:forEach>
 							&nbsp;&nbsp;
 							
-							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.allPageMap.selectPageNo } + 1 );">[다음]</span>
-							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.allPageMap.last_pageNo } );">[마지막]</span>
+							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabAllMarketplaceBoardPageMap.selectPageNo } + 1 );">[다음]</span>
+							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabAllMarketplaceBoardPageMap.last_pageNo } );">[마지막]</span>
 							
 							&nbsp;&nbsp;&nbsp;
-							[${ requestScope.allBoardListCnt } / ${ requestScope.allBoardListAllCnt }] 개
+							[${ requestScope.tabAllMarketplaceBoardListCnt } / ${ requestScope.tabAllMarketplaceBoardListAllCnt }] 개
 						</span>
 					</div>					
 		        	<!-- end. container -->
@@ -297,8 +289,6 @@
 			<div id="tabSale">
 				<div class="communityMarketplaceQnAFormContainer">
 			
-					<!-- container2 -->
-		        	container2
 		        	<div class="newCommunityMarketplaceBtnDiv">
 						<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceBoardFormBtnClick();">
 					</div>
@@ -325,7 +315,7 @@
 					</div>
 					
 		        	<div id="saleBoardDiv" class="communityMarketplaceBoardFormContainer">
-						<c:forEach var="board" items="${requestScope.saleBoardList}" varStatus="status">
+						<c:forEach var="board" items="${requestScope.tabSaleMarketplaceBoardList}" varStatus="status">
 							<div class="communityMarketplaceBoardFormBoard">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 									<img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
@@ -337,7 +327,7 @@
 							</div>
 						</c:forEach>
 						
-						<c:forEach var="empty_row" begin="${ requestScope.saleBoardListSize + 1 }" end="${ requestScope.salePageMap.rowCntPerPage }">
+						<c:forEach var="empty_row" begin="${ requestScope.tabSaleMarketplaceBoardListSize + 1 }" end="${ requestScope.tabSaleMarketplaceBoardPageMap.rowCntPerPage }">
 							<div class="communityMarketplaceBoardFormBoard">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 									<!-- <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">  -->
@@ -351,25 +341,25 @@
 						
 						<span id="salePaingsDiv" class="pagingNos">
 							<span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
-							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.salePageMap.selectPageNo } - 1 );">[이전]</span>
+							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo } - 1 );">[이전]</span>
 							&nbsp;&nbsp;
 							
-							<c:forEach var="pageNo" begin="${ requestScope.salePageMap.begin_pageNo }" end="${ requestScope.salePageMap.end_pageNo }">
-								<c:if test="${ requestScope.salePageMap.selectPageNo == pageNo }">
+							<c:forEach var="pageNo" begin="${ requestScope.tabSaleMarketplaceBoardPageMap.begin_pageNo }" end="${ requestScope.tabSaleMarketplaceBoardPageMap.end_pageNo }">
+								<c:if test="${ requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo == pageNo }">
 									<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });"><b><u>${ pageNo }</u></b></span>
 								</c:if>
 					
-								<c:if test="${ requestScope.salePageMap.selectPageNo != pageNo }">
+								<c:if test="${ requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo != pageNo }">
 									<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });">[${ pageNo }]</span>
 								</c:if>
 							</c:forEach>
 							&nbsp;&nbsp;
 							
-							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.salePageMap.selectPageNo } + 1 );">[다음]</span>
-							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.salePageMap.last_pageNo } );">[마지막]</span>
+							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo } + 1 );">[다음]</span>
+							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabSaleMarketplaceBoardPageMap.last_pageNo } );">[마지막]</span>
 							
 							&nbsp;&nbsp;&nbsp;
-							[${ requestScope.saleBoardListCnt } / ${ requestScope.saleBoardListAllCnt }] 개
+							[${ requestScope.tabSaleMarketplaceBoardListCnt } / ${ requestScope.tabSaleMarketplaceBoardListAllCnt }] 개
 						</span>						
 					</div>
 		        	<!-- end. container -->
@@ -380,8 +370,6 @@
 			<div id="tabFreeSharing">
 				<div class="communityMarketplaceQnAFormContainer">
 			
-					<!-- container3 -->
-		        	container3
 		        	<div class="newCommunityMarketplaceBtnDiv">
 						<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceBoardFormBtnClick();">
 					</div>
@@ -408,7 +396,7 @@
 					</div>
 					
 		        	<div id="freeSharingBoardDiv" class="communityMarketplaceBoardFormContainer">
-						<c:forEach var="board" items="${requestScope.freeSharingBoardList}" varStatus="status">
+						<c:forEach var="board" items="${requestScope.tabFreeSharingMarketplaceBoardList}" varStatus="status">
 							<div class="communityMarketplaceBoardFormBoard">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 									<img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
@@ -420,7 +408,7 @@
 							</div>
 						</c:forEach>
 						
-						<c:forEach var="empty_row" begin="${ requestScope.freeSharingBoardListSize + 1 }" end="${ requestScope.freeSharingPageMap.rowCntPerPage }">
+						<c:forEach var="empty_row" begin="${ requestScope.tabFreeSharingMarketplaceBoardListSize + 1 }" end="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.rowCntPerPage }">
 							<div class="communityMarketplaceBoardFormBoard">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 									<!-- <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">  -->
@@ -434,25 +422,25 @@
 						
 						<span id="freeSharingPaingsDiv" class="pagingNos">
 							<span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
-							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.freeSharingPageMap.selectPageNo } - 1 );">[이전]</span>
+							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo } - 1 );">[이전]</span>
 							&nbsp;&nbsp;
 							
-							<c:forEach var="pageNo" begin="${ requestScope.freeSharingPageMap.begin_pageNo }" end="${ requestScope.freeSharingPageMap.end_pageNo }">
-								<c:if test="${ requestScope.freeSharingPageMap.selectPageNo == pageNo }">
+							<c:forEach var="pageNo" begin="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.begin_pageNo }" end="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.end_pageNo }">
+								<c:if test="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo == pageNo }">
 									<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });"><b><u>${ pageNo }</u></b></span>
 								</c:if>
 					
-								<c:if test="${ requestScope.freeSharingPageMap.selectPageNo != pageNo }">
+								<c:if test="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo != pageNo }">
 									<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });">[${ pageNo }]</span>
 								</c:if>
 							</c:forEach>
 							&nbsp;&nbsp;
 							
-							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.freeSharingPageMap.selectPageNo } + 1 );">[다음]</span>
-							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.freeSharingPageMap.last_pageNo } );">[마지막]</span>
+							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo } + 1 );">[다음]</span>
+							<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabFreeSharingMarketplaceBoardPageMap.last_pageNo } );">[마지막]</span>
 							
 							&nbsp;&nbsp;&nbsp;
-							[${ requestScope.freeSharingBoardListCnt } / ${ requestScope.freeSharingBoardListAllCnt }] 개
+							[${ requestScope.tabFreeSharingMarketplaceBoardListCnt } / ${ requestScope.tabFreeSharingMarketplaceBoardListAllCnt }] 개
 						</span>						
 					</div>
 		        	<!-- end. container -->
