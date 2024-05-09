@@ -95,20 +95,45 @@ public interface CommunityDAO {
 	//----------------------------------------
 	//장터
 	//----------------------------------------
-	
+	/*** 장터 등록  ***/
 	public int insertCommunity(CommunityDTO communityDTO);
 	
+	/*** 장터 리스트 개수 가져오기  ***/
 	public int getImageBoardListCnt(CommunityDTO communityDTO);
 
+	/*** 장터 리스트 가져오기  ***/
 	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO);
 	
-	public int getSaleUnionFreeSharingListAllCnt();
+	//--All
+	/*** 장터 sale, free_sharing 테이블 리스트 총 개수 가져오기  ***/
+	public int getTabAllMarketplaceBoardListAllCnt();
 	
-	public int getSaleUnionFreeSharingListSearchCnt(CommunitySearchDTO communitySearchDTO);
+	/*** 장터 sale, free_sharing 테이블 리스트 개수 가져오기 ***/
+	public int getTabAllMarketplaceBoardListCnt(CommunitySearchDTO communitySearchDTO);
 	
-	public List<CommunityDTO> getSaleUnionFreeSharingList(CommunitySearchDTO communitySearchDTO);
+	/*** 장터 sale, free_sharing 테이블 리스트 가져오기 ***/
+	public List<CommunityDTO> getTabAllMarketplaceBoardList(CommunitySearchDTO communitySearchDTO);
 	
+	//--Sale
+	/*** 장터 sale 테이블 리스트 총 개수 가져오기  ***/
+	public int getTabSaleMarketplaceBoardListAllCnt(); 
 	
+	/*** 장터 sale 테이블 리스트 개수 가져오기  ***/
+	public int getTabSaleMarketplaceBoardListCnt(CommunitySearchDTO communitySearchDTO);
+	
+	/*** 장터 sale 테이블 리스트 가져오기 ***/
+	public List<CommunityDTO> getTabSaleMarketplaceBoardList(CommunitySearchDTO communitySearchDTO); 
+	
+	//--FreeSharing
+	/*** 장터 Free_Sharing 테이블 리스트 총 개수 가져오기  ***/
+	public int getTabFreeSharingMarketplaceBoardListAllCnt(); 
+	
+	/*** 장터 Free_Sharing 테이블 리스트 개수 가져오기  ***/
+	public int getTabFreeSharingMarketplaceBoardListCnt(CommunitySearchDTO communitySearchDTO);
+	
+	/*** 장터 Free_Sharing 테이블 리스트 가져오기 ***/
+	public List<CommunityDTO> getTabFreeSharingMarketplaceBoardList(CommunitySearchDTO communitySearchDTO);
+
 	
 
 }

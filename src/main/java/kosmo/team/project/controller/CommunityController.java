@@ -369,60 +369,85 @@ public class CommunityController {
 	// 장터
 	// ----------------------------------------------------------------
 	/*** 장터 페이지 ***/
+	
 	@RequestMapping(value = "/communityMarketplaceBoardForm.do")
 	public ModelAndView communityMarketplaceBoardForm(CommunitySearchDTO communitySearchDTO) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		// tabType 은 처음 접속시 null 이고 검색, 페이지 선택시 null 이 아닌 값으로 전달한다.
-		String tabType = communitySearchDTO.getTabType();
+		// All-------------------------------------------------------------------------------
+		int tabAllMarketplaceBoardListAllCnt = communityService.getTabAllMarketplaceBoardListAllCnt();
+		int tabAllMarketplaceBoardListCnt = communityService.getTabAllMarketplaceBoardListCnt(communitySearchDTO);
 		
-		if (tabType == null) {
-			// 여기부터 작업해야 함.
-		}
-
-		// 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 
-		int allBoardListAllCnt = communityService.getSaleUnionFreeSharingListAllCnt();
-		
-		// 판매, 무료나눔 2개 테이블 Union All 하여 검색한 개수
-		int allBoardListCnt = communityService.getSaleUnionFreeSharingListSearchCnt(communitySearchDTO);
-		
-		Map<String, Integer> allPageMap = Page.getPagingMap(
+		Map<String, Integer> tabAllMarketplaceBoardPageMap = Page.getPagingMap(
 				  communitySearchDTO.getSelectPageNo()	// 선택한 페이지 번호
 				, 8 									// 페이지 당 보여줄 검색 행의 개수
-				, allBoardListCnt 						// 검색 결과물 개수
+				, tabAllMarketplaceBoardListCnt 		// 검색 결과물 개수
 		);
 		
-		communitySearchDTO.setSelectPageNo((int) allPageMap.get("selectPageNo"));
-		communitySearchDTO.setRowCntPerPage((int) allPageMap.get("rowCntPerPage"));
-		communitySearchDTO.setBegin_rowNo((int) allPageMap.get("begin_rowNo"));
-		communitySearchDTO.setEnd_rowNo((int) allPageMap.get("end_rowNo"));
+		communitySearchDTO.setSelectPageNo((int) tabAllMarketplaceBoardPageMap.get("selectPageNo"));
+		communitySearchDTO.setRowCntPerPage((int) tabAllMarketplaceBoardPageMap.get("rowCntPerPage"));
+		communitySearchDTO.setBegin_rowNo((int) tabAllMarketplaceBoardPageMap.get("begin_rowNo"));
+		communitySearchDTO.setEnd_rowNo((int) tabAllMarketplaceBoardPageMap.get("end_rowNo"));
 		
-		List<CommunityDTO> allBoardList = communityService.getSaleUnionFreeSharingList(communitySearchDTO);
+		List<CommunityDTO> tabAllMarketplaceBoardList = communityService.getTabAllMarketplaceBoardList(communitySearchDTO);
 		
-		mav.addObject("allBoardList", allBoardList);
-		mav.addObject("allBoardListSize", allBoardList.size());
-		mav.addObject("allBoardListCnt", allBoardListCnt);
-		mav.addObject("allBoardListAllCnt", allBoardListAllCnt);
-		mav.addObject("allPageMap", allPageMap);
+		mav.addObject("tabAllMarketplaceBoardList", tabAllMarketplaceBoardList);
+		mav.addObject("tabAllMarketplaceBoardListSize", tabAllMarketplaceBoardList.size());
+		mav.addObject("tabAllMarketplaceBoardListCnt", tabAllMarketplaceBoardListCnt);
+		mav.addObject("tabAllMarketplaceBoardListAllCnt", tabAllMarketplaceBoardListAllCnt);
+		mav.addObject("tabAllMarketplaceBoardPageMap", tabAllMarketplaceBoardPageMap);
 		
-		/*  
-		tabAllMarketplaceBoardListAllCnt
+		// Sale-------------------------------------------------------------------------------
+		int tabSaleMarketplaceBoardListAllCnt = communityService.getTabSaleMarketplaceBoardListAllCnt();
+		int tabSaleMarketplaceBoardListCnt = communityService.getTabSaleMarketplaceBoardListCnt(communitySearchDTO);
 		
-		장터 페이지 처음 접속시 DTO 값		/communityMarketplaceBoardForm.do
-		begin_rowNo	0	
-		end_rowNo	0	
-		keyword1	null	
-		rowCntPerPage	0	
-		searchType1	null	
-		selectPageNo	0	
-		tabType	null	
+		Map<String, Integer> tabSaleMarketplaceBoardPageMap = Page.getPagingMap(
+				  communitySearchDTO.getSelectPageNo()	// 선택한 페이지 번호
+				, 8 									// 페이지 당 보여줄 검색 행의 개수
+				, tabSaleMarketplaceBoardListCnt 		// 검색 결과물 개수
+		);
 		
-		tabType 은 처음 접속시 null 이고 
-		검색, 페이지 선택시 null 이 아닌 값으로 전달한다.
-		---------------------------------------
-		추가 해야 할 것들 ... 아래는 작업해야 한다.
-		---------------------------------------
+		communitySearchDTO.setSelectPageNo((int) tabSaleMarketplaceBoardPageMap.get("selectPageNo"));
+		communitySearchDTO.setRowCntPerPage((int) tabSaleMarketplaceBoardPageMap.get("rowCntPerPage"));
+		communitySearchDTO.setBegin_rowNo((int) tabSaleMarketplaceBoardPageMap.get("begin_rowNo"));
+		communitySearchDTO.setEnd_rowNo((int) tabSaleMarketplaceBoardPageMap.get("end_rowNo"));
+		
+		List<CommunityDTO> tabSaleMarketplaceBoardList = communityService.getTabSaleMarketplaceBoardList(communitySearchDTO);
+		
+		mav.addObject("tabSaleMarketplaceBoardList", tabSaleMarketplaceBoardList);
+		mav.addObject("tabSaleMarketplaceBoardListSize", tabSaleMarketplaceBoardList.size());
+		mav.addObject("tabSaleMarketplaceBoardListCnt", tabSaleMarketplaceBoardListCnt);
+		mav.addObject("tabSaleMarketplaceBoardListAllCnt", tabSaleMarketplaceBoardListAllCnt);
+		mav.addObject("tabSaleMarketplaceBoardPageMap", tabSaleMarketplaceBoardPageMap);
+		
+		// -------------------------------------------------------------------------------
+		
+		// FreeSharing-------------------------------------------------------------------------------
+		int tabFreeSharingMarketplaceBoardListAllCnt = communityService.getTabFreeSharingMarketplaceBoardListAllCnt();
+		int tabFreeSharingMarketplaceBoardListCnt = communityService.getTabFreeSharingMarketplaceBoardListCnt(communitySearchDTO);
+		
+		Map<String, Integer> tabFreeSharingMarketplaceBoardPageMap = Page.getPagingMap(
+				  communitySearchDTO.getSelectPageNo()	// 선택한 페이지 번호
+				, 8 									// 페이지 당 보여줄 검색 행의 개수
+				, tabFreeSharingMarketplaceBoardListCnt // 검색 결과물 개수
+		);
+		
+		communitySearchDTO.setSelectPageNo((int) tabFreeSharingMarketplaceBoardPageMap.get("selectPageNo"));
+		communitySearchDTO.setRowCntPerPage((int) tabFreeSharingMarketplaceBoardPageMap.get("rowCntPerPage"));
+		communitySearchDTO.setBegin_rowNo((int) tabFreeSharingMarketplaceBoardPageMap.get("begin_rowNo"));
+		communitySearchDTO.setEnd_rowNo((int) tabFreeSharingMarketplaceBoardPageMap.get("end_rowNo"));
+		
+		List<CommunityDTO> tabFreeSharingMarketplaceBoardList = communityService.getTabFreeSharingMarketplaceBoardList(communitySearchDTO);
+		
+		mav.addObject("tabFreeSharingMarketplaceBoardList", tabFreeSharingMarketplaceBoardList);
+		mav.addObject("tabFreeSharingMarketplaceBoardListSize", tabFreeSharingMarketplaceBoardList.size());
+		mav.addObject("tabFreeSharingMarketplaceBoardListCnt", tabFreeSharingMarketplaceBoardListCnt);
+		mav.addObject("tabFreeSharingMarketplaceBoardListAllCnt", tabFreeSharingMarketplaceBoardListAllCnt);
+		mav.addObject("tabFreeSharingMarketplaceBoardPageMap", tabFreeSharingMarketplaceBoardPageMap);
+		
+		// -------------------------------------------------------------------------------
+		/* 
 		
 		mav.addObject("saleBoardList", saleBoardList);		
 		mav.addObject("saleBoardListSize", saleBoardList.size());

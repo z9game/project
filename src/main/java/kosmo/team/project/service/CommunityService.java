@@ -116,12 +116,30 @@ public interface CommunityService {
 	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO);
 	
 	/*** 장터 sale, free_sharing 테이블 리스트 총 개수 가져오기  ***/
-	public int getSaleUnionFreeSharingListAllCnt();
+	public int getTabAllMarketplaceBoardListAllCnt();
 	
 	/*** 장터 sale, free_sharing 테이블 리스트 개수 가져오기 ***/
-	public int getSaleUnionFreeSharingListSearchCnt(CommunitySearchDTO communitySearchDTO);
+	public int getTabAllMarketplaceBoardListCnt(CommunitySearchDTO communitySearchDTO);
 	
 	/*** 장터 sale, free_sharing 테이블 리스트 가져오기 ***/
-	public List<CommunityDTO> getSaleUnionFreeSharingList(CommunitySearchDTO communitySearchDTO);
+	public List<CommunityDTO> getTabAllMarketplaceBoardList(CommunitySearchDTO communitySearchDTO);
+	
+	/*** 장터 sale 테이블 리스트 총 개수 가져오기  ***/
+	public int getTabSaleMarketplaceBoardListAllCnt();
+	
+	/*** 장터 sale 테이블 리스트 개수 가져오기  ***/
+	public int getTabSaleMarketplaceBoardListCnt(CommunitySearchDTO communitySearchDTO);
+	
+	/*** 장터 sale 테이블 리스트 가져오기 ***/
+	public List<CommunityDTO> getTabSaleMarketplaceBoardList(CommunitySearchDTO communitySearchDTO); 
+	
+	/*** 장터 Free_Sharing 테이블 리스트 총 개수 가져오기  ***/
+	public int getTabFreeSharingMarketplaceBoardListAllCnt(); 
+	
+	/*** 장터 Free_Sharing 테이블 리스트 개수 가져오기  ***/
+	public int getTabFreeSharingMarketplaceBoardListCnt(CommunitySearchDTO communitySearchDTO);
+	
+	/*** 장터 Free_Sharing 테이블 리스트 가져오기 ***/
+	public List<CommunityDTO> getTabFreeSharingMarketplaceBoardList(CommunitySearchDTO communitySearchDTO);
 
 }

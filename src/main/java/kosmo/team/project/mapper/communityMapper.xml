@@ -473,6 +473,7 @@
 		imageboard
 	</select>
 	
+	<!-- ImageBoard 개수 리턴 -->
 	<select id="getImageBoardListCnt" resultType="int">
 		select
 		count(*)
@@ -481,7 +482,7 @@
 	</select>
 	
 	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 리턴 -->
-	<select id="getSaleUnionFreeSharingListAllCnt" resultType="int">
+	<select id="getTabAllMarketplaceBoardListAllCnt" resultType="int">
 		select count(*)
 		from
 		(
@@ -491,8 +492,26 @@
 		)
 	</select>
 	
+	<!-- 판매 테이블 총 개수 리턴 -->
+	<select id="getTabSaleMarketplaceBoardListAllCnt" resultType="int">
+		select count(*)
+		from
+		(
+			select * from sale 
+		)
+	</select>
+	
+	<!-- 무료나눔 테이블 총 개수 리턴 -->
+	<select id="getTabFreeSharingMarketplaceBoardListAllCnt" resultType="int">
+		select count(*)
+		from
+		(
+			select * from free_sharing 
+		)
+	</select>
+	
 	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 검색 개수 리턴 -->
-	<select id="getSaleUnionFreeSharingListSearchCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
+	<select id="getTabAllMarketplaceBoardListCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
 		select count(*)
 		from
 		(
@@ -527,10 +546,11 @@
 		)		
 	</select>
 	
-	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 검색 리스트 리턴 -->
-	<select id="getSaleUnionFreeSharingList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">	
-		select * from ( select rownum RNUM, zxcvb.* from (
-
+	<!-- 판매 검색 개수 리턴 -->
+	<select id="getTabSaleMarketplaceBoardListCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
+		select count(*)
+		from
+		(
 				select *
 				from
 				(
@@ -544,6 +564,57 @@
 				
 					from sale s
 				
+				)
+				
+				where	1 = 1
+				<include refid="marketplaceWhere" />
+		)		
+	</select>
+	
+	<!-- 무료나눔 검색 개수 리턴 -->
+	<select id="getTabFreeSharingMarketplaceBoardListCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
+		select count(*)
+		from
+		(
+				select *
+				from
+				(
+					select 
+						  f.free_sharing_no
+						, f.subject			
+						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
+						, f.content			
+						, f.readcount		
+						, f.reg_date
+						, 'free_sharing'   as "table_name"		
+				
+					from free_sharing f
+				
+				)
+				
+				where	1 = 1
+				<include refid="marketplaceWhere" />
+		)		
+	</select>
+	
+	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 검색 리스트 리턴 -->
+	<select id="getTabAllMarketplaceBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">	
+		select * from ( select rownum RNUM, zxcvb.* from (
+
+				select *
+				from
+				(
+					select 
+						  s.sale_no		
+						, s.subject
+						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
+						, s.content		
+						, s.readcount	
+						, s.reg_date
+						, 'sale'   as "table_name"	
+				
+					from sale s
+				
 					union all
 				
 					select 
@@ -552,7 +623,8 @@
 						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
 						, f.content			
 						, f.readcount		
-						, f.reg_date		
+						, f.reg_date
+						, 'free_sharing'   as "table_name"		
 				
 					from free_sharing f
 				)
@@ -567,6 +639,68 @@
 		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
 		]]>
 	</select>
+	
+	<!-- 판매 검색 리스트 리턴 -->
+	<select id="getTabSaleMarketplaceBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">	
+		select * from ( select rownum RNUM, zxcvb.* from (
+
+				select *
+				from
+				(
+					select 
+						  s.sale_no		
+						, s.subject
+						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
+						, s.content		
+						, s.readcount	
+						, s.reg_date
+						, 'sale'   as "table_name"	
+				
+					from sale s
+	
+				)
+				
+				where	1 = 1
+				
+				<include refid="marketplaceWhere" />
+				
+				order by reg_date desc, sale_no desc
+		    	
+		<![CDATA[
+		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+		]]>
+	</select>
+	
+	<!-- 무료나눔 검색 리스트 리턴 -->
+	<select id="getTabFreeSharingMarketplaceBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">	
+		select * from ( select rownum RNUM, zxcvb.* from (
+
+				select *
+				from
+				(
+					select 
+						  f.free_sharing_no
+						, f.subject			
+						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
+						, f.content			
+						, f.readcount		
+						, f.reg_date		
+				
+					from free_sharing f
+	
+				)
+				
+				where	1 = 1
+				
+				<include refid="marketplaceWhere" />
+				
+				order by reg_date desc, free_sharing_no desc
+		    	
+		<![CDATA[
+		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+		]]>
+	</select>
+	
 	
 
 	<insert id="insertCommunity"
