@@ -80,6 +80,36 @@
 		stadium_no=#{stadium_no}
 	</select>
 	
+	<!-- 시간테이블 -->
+	
+	<select id="getTime" parameterType="int"
+		resultType="kosmo.team.project.dto.TimeDTO">
+
+		select
+			time_no as "time_no"
+			,time_range as "time_range"
+			from time_table
+	</select>
+	
+	
+	<insert id="insertStadiumRent"
+		parameterType="kosmo.team.project.dto.RentStadiumDTO">
+		insert into booking(
+		booking_no
+		,stadium_no
+		,booking_date
+		,time_slot
+		)
+		values ( (select
+		nvl(max(booking_no),0)+1
+		from booking)
+		,#{stadium_no}
+		,#{date}
+		,#{time_slot}
+		)
+	</insert>
+	
+	
 	
 	
 	
