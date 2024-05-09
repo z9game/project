@@ -8,20 +8,20 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RecordsController {
 	
-    @RequestMapping(value = "/recordsRankingForm.do")
+    @RequestMapping(value = "/records/recordsRankingForm.do")
     public ModelAndView recordsRankingForm() {
     	
     	ModelAndView mav = new ModelAndView();
-    	mav.setViewName("recordsRankingForm.jsp");
+    	mav.setViewName("/records/recordsRankingForm.jsp");
     	
         return mav;
     }
     
-    @RequestMapping(value = "/recordsStatisticsForm.do")
+    @RequestMapping(value = "/records/recordsStatisticsForm.do")
     public ModelAndView recordsStatisticsForm() {
     	
     	ModelAndView mav = new ModelAndView();
-    	mav.setViewName("recordsStatisticsForm.jsp");
+    	mav.setViewName("/records/recordsStatisticsForm.jsp");
     	
         return mav;
     }
