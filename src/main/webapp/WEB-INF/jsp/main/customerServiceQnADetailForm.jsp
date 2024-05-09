@@ -155,9 +155,6 @@
 			return;
 		}
 		
-		alert(c_no);
-		alert(contentObj.val());
-		
 		$.ajax({
 			
 			url:"/customerServiceQnACommentUpdateProc.do",
