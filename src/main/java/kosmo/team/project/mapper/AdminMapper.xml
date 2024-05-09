@@ -20,30 +20,34 @@
 		<if test="keyword1!=null and keyword1.length()>0">
 			<if test="searchType1 == 'all' ">
 				(
-				upper(mid) like upper('%${keyword1}%')
+				upper(m.mid) like upper('%${keyword1}%')
 				or
-				upper(name) like
+				upper(m.name)
+				like upper('%${keyword1}%')
+				or
+				upper(m.nickname) like
 				upper('%${keyword1}%')
 				or
-				upper(nickname) like upper('%${keyword1}%')
-				or
-				upper(email) like upper('%${keyword1}%')
+				upper(m.email) like upper('%${keyword1}%')
 				or
 				upper(m.phone) like
 				upper('%${keyword1}%')
 				)
 			</if>
+			<if test="searchType1 == 'mid'">
+				upper(m.mid) like upper('%${keyword1}%')
+			</if>
 			<if test="searchType1 == 'name'">
-				upper(name) like upper('%${keyword1}%')
+				upper(m.name) like upper('%${keyword1}%')
 			</if>
 			<if test="searchType1 == 'nickname'">
-				upper(nickname) like upper('%${keyword1}%')
+				upper(m.nickname) like upper('%${keyword1}%')
 			</if>
 			<if test="searchType1 == 'phone'">
-				upper(phone) like upper('%${keyword1}%')
+				upper(m.phone) like upper('%${keyword1}%')
 			</if>
 			<if test="searchType1 == 'email'">
-				upper(email) like upper('%${keyword1}%')
+				upper(m.email) like upper('%${keyword1}%')
 			</if>
 
 		</if>
@@ -56,35 +60,40 @@
 		<if test="keyword2!=null and keyword2.length()>0">
 			<if test="searchType1 == 'all' ">
 				(
-				upper(mid) like upper('%${keyword2}%')
+				upper(m.mid) like upper('%${keyword2}%')
 				or
-				upper(name) like
+				upper(m.name)
+				like
 				upper('%${keyword2}%')
 				or
-				upper(nickname) like upper('%${keyword2}%')
+				upper(m.nickname) like
+				upper('%${keyword2}%')
 				or
-				upper(email) like upper('%${keyword2}%')
+				upper(m.email) like upper('%${keyword2}%')
 				or
-				upper(phone) like
+				upper(m.phone) like
 				upper('%${keyword2}%')
 				)
 			</if>
+			<if test="searchType1 == 'mid'">
+				upper(m.mid) like upper('%${keyword2}%')
+			</if>
 			<if test="searchType1 == 'name'">
-				upper(name) like upper('%${keyword2}%')
+				upper(m.name) like upper('%${keyword2}%')
 			</if>
 			<if test="searchType1 == 'nickname'">
-				upper(nickname) like upper('%${keyword2}%')
+				upper(m.nickname) like upper('%${keyword2}%')
 			</if>
 			<if test="searchType1 == 'phone'">
-				upper(phone) like upper('%${keyword2}%')
+				upper(m.phone) like upper('%${keyword2}%')
 			</if>
 			<if test="searchType1 == 'email'">
-				upper(email) like upper('%${keyword2}%')
+				upper(m.email) like upper('%${keyword2}%')
 			</if>
 
 		</if>
 
-		<if test="gender!=null and gender!=null">
+		<if test="gender!=null and gender.size()>0">
 			<foreach collection="gender" item="tmp" open=" and (  "
 				close="  ) " separator=" or ">
 
@@ -268,15 +277,186 @@
 			)
 		</if>
 
+	</sql>
 
 
+
+	<!-- 공지사항 where -->
+
+
+
+	<sql id="noticeWhere">
+		<if
+			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
+			and (
+		</if>
+
+		<if test="keyword1!=null and keyword1.length()>0">
+			<if test="searchType1 == 'all' ">
+				(
+				upper(content) like upper('%${keyword1}%')
+				or
+				upper(subject) like upper('%${keyword1}%')
+				)
+			</if>
+			<if test="searchType1 == 'content'">
+				upper(content) like upper('%${keyword1}%')
+			</if>
+			<if test="searchType1 == 'subject'">
+				upper(subject) like upper('%${keyword1}%')
+			</if>
+
+
+		</if>
+
+		<if
+			test="(keyword1!=null and keyword1.length()>0) and (keyword2!=null and keyword2.length()>0)">
+			${orand}
+		</if>
+
+		<if test="keyword2!=null and keyword2.length()>0">
+			<if test="searchType1 == 'all' ">
+				(
+				upper(content) like upper('%${keyword2}%')
+				or
+				upper(subject) like upper('%${keyword2}%')
+
+				)
+			</if>
+			<if test="searchType1 == 'content'">
+				upper(content) like upper('%${keyword2}%')
+			</if>
+			<if test="searchType1 == 'subject'">
+				upper(subject) like upper('%${keyword2}%')
+			</if>
+
+		</if>
+
+		<if test="(minDate != null and minDate.length() > 0)">
+			and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
+			<if test="(maxDate != null and maxDate.length() > 0)">
+				and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
+			</if>
+		</if>
+		<if test="(maxDate != null and maxDate.length() > 0)">
+			and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
+			<if test="(minDate != null and minDate.length() > 0)">
+				and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
+			</if>
+
+		</if>
+
+
+
+
+
+
+		<if
+			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
+			)
+		</if>
 
 
 	</sql>
 
 
+	<!-- -->
 
 
+	<!-- 경기장where -->
+
+
+
+
+	<sql id="stadiumWhere">
+
+		<if
+			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
+			and (
+		</if>
+
+
+		<if test="keyword1!=null and keyword1.length()>0">
+
+			<if test="searchTypeStadium == 'all' ">
+				(
+				upper(st.stadium_name) like upper('%${keyword1}%')
+				or
+				upper(st.content) like upper('%${keyword1}%')
+
+				)
+			</if>
+			<if test="searchTypeStadium == 'stadium_name'">
+				upper(st.stadium_name) like upper('%${keyword1}%')
+			</if>
+			<if test="searchTypeStadium == 'content'">
+				upper(st.content) like upper('%${keyword1}%')
+			</if>
+
+		</if>
+
+		<if
+			test="(keyword1!=null and keyword1.length()>0) and (keyword2!=null and keyword2.length()>0)">
+			${orand}
+		</if>
+
+		<if test="keyword2!=null and keyword2.length()>0">
+			<if test="searchTypeStadium == 'all' ">
+				(
+				upper(st.stadium_name) like upper('%${keyword2}%')
+				or
+				upper(st.content)
+				like
+				upper('%${keyword2}%')
+
+				)
+			</if>
+			<if test="searchTypeStadium == 'stadium_name'">
+				upper(st.stadium_name) like upper('%${keyword2}%')
+			</if>
+			<if test="searchTypeStadium == 'content'">
+				upper(st.content) like upper('%${keyword2}%')
+			</if>
+
+
+		</if>
+
+		<if test="stadium_status!=null and stadium_status.size()>0">
+			<foreach collection="stadium_status" item="tmp"
+				open=" and (  " close="  ) " separator=" or ">
+
+				st.stadium_status = '${tmp}'
+
+			</foreach>
+		</if>
+
+
+		<if test="sido !=null and sido>0 ">
+			and
+			(
+			st.sido_name = ${sido}
+			)
+
+			<if test="sigungu !=null and sigungu>0 ">
+				and
+				(
+				st.sigungu_name = ${sigungu}
+				)
+
+
+			</if>
+
+
+		</if>
+
+
+		<if
+			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
+			)
+		</if>
+
+
+	</sql>
 
 
 
@@ -369,7 +549,9 @@
 		select
 		count(*)
 		from
-		member m LEFT JOIN sido s ON m.sido_id = s.sido_id  LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id LEFT JOIN player_record pr ON m.m_no = pr.player
+		member m LEFT JOIN sido s ON m.sido_id = s.sido_id
+		LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id LEFT JOIN
+		player_record pr ON m.m_no = pr.player
 		where m.m_no != 1
 		<include refid="boardWhere" />
 	</select>
@@ -439,8 +621,13 @@
 
 		,gender
 		=#{gender}
-		,sido_id = #{sido_id}
-		,sigungu_id = #{sigungu_id}
+		<if test="sido_id !=null and sido_id !=''">
+			,sido_id = #{sido_id}
+		</if>
+		<if test="sigungu_id !=null and sigungu_id !=''">
+			,sigungu_id = #{sigungu_id}
+		</if>
+
 		,detail_address = #{detail_address}
 
 		where m_no = #{m_no}
@@ -558,8 +745,8 @@
 		FROM
 		noticeboard
 
-
-
+		where 1=1
+		<include refid="noticeWhere" />
 
 		<if test="sort==null or sort.length()==0">
 			order by
@@ -585,6 +772,8 @@
 		count(*)
 		from
 		noticeboard
+		where 1=1
+		<include refid="noticeWhere" />
 	</select>
 
 
@@ -593,6 +782,8 @@
 		select count(*)
 		from
 		noticeboard
+		where 1=1
+		<include refid="noticeWhere" />
 	</select>
 
 
@@ -614,11 +805,6 @@
 
 		where
 		b_no=#{b_no}
-		<!-- ========================================== #{b_no} 뜻 ========================================== 
-			select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
-			또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
-			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
-
 
 	</select>
 
@@ -705,38 +891,28 @@
 		select * from (
 		select rownum RNUM, zxcvb.* from (
 		select
-		st.stadium_no AS "stadium_no",
-		st.stadium_name AS "stadium_name",
-		s.name AS "sido_name",
-		si.name as "sigungu_name",
-		st.detailed_address as "detail_address"
-		,st.content as "content"
+		st.stadium_no
+		AS "stadium_no"
+		,st.stadium_name AS "stadium_name"
+		,s.name AS
+		"sido_name"
+		,si.name as "sigungu_name"
+		,st.detailed_address as
+		"detailed_address"
 		,to_char(st.reg_date, 'YYYY-MM-DD') AS "reg_date"
-
+		,st.content as "content"
+		,st.stadium_status as "stadium_status"
 
 		FROM
 		stadium st
 		LEFT
 		JOIN sido s ON st.sido_name = s.sido_id
-		LEFT JOIN sigungu si ON
+		LEFT JOIN sigungu
+		si ON
 		st.sigungu_name = si.sigungu_id
 		where 1=1
-		
-		<if test="sido !=null and sido>0 ">
-			and
-			(
-			st.sido_name = ${sido}
-			)
 
-			<if test="sigungu !=null and sigungu>0 ">
-				and
-				(
-				st.sigungu_name = ${sigungu}
-				)
-
-			</if>
-		</if>
-
+		<include refid="stadiumWhere" />
 
 		<if test="sort==null or sort.length()==0">
 			order by st.stadium_no asc
@@ -755,25 +931,14 @@
 		count(*)
 		FROM
 		stadium st
-		LEFT JOIN sido s ON st.sido_name = s.sido_id
+		LEFT JOIN sido s ON st.sido_name =
+		s.sido_id
 		LEFT JOIN
 		sigungu si ON st.sigungu_name = si.sigungu_id
-		where 1=1
-		<if test="sido !=null and sido>0 ">
-			and
-			(
-			st.sido_name = ${sido}
-			)
+		where
+		1=1
+		<include refid="stadiumWhere" />
 
-			<if test="sigungu !=null and sigungu>0 ">
-				and
-				(
-				st.sigungu_name = ${sigungu}
-				)
-
-			</if>
-		</if>
-		
 
 	</select>
 
@@ -785,42 +950,40 @@
 		count(*)
 		FROM
 		stadium st
-		LEFT JOIN sido s ON st.sido_name = s.sido_id
+		LEFT JOIN sido s ON st.sido_name =
+		s.sido_id
 		LEFT JOIN
 		sigungu si ON st.sigungu_name = si.sigungu_id
-		where 1=1 
-		<if test="sido !=null and sido>0 ">
-			and
-			(
-			st.sido_name = ${sido}
-			)
+		where
+		1=1
+		<include refid="stadiumWhere" />
 
-			<if test="sigungu !=null and sigungu>0 ">
-				and
-				(
-				st.sigungu_name = ${sigungu}
-				)
-
-			</if>
-		</if>
-		
 
 	</select>
 
 
-		<select id="getStadium" parameterType="int"
+	<select id="getStadium" parameterType="int"
 		resultType="kosmo.team.project.dto.Stadim2DTO">
 
 		select
-		stadium_no as "stadium_no"
-		,stadium_name as "stadium_name"
-		,sido_name as "sido_name"
-		,sigungu_name as "sigungu_name"
-		,detailed_address as "detailed_address"
-		,reg_date as "reg_date"
-		,content as "content"
-		
-		from stadium
+		st.stadium_no AS "stadium_no"
+		,st.stadium_name AS "stadium_name"
+		,s.name AS "sido_name"
+		,si.name as "sigungu_name"
+		,st.detailed_address
+		as
+		"detail_address"
+		,to_char(st.reg_date, 'YYYY-MM-DD') AS "reg_date"
+		,st.content as "content"
+		,st.stadium_status as "stadium_status"
+
+		FROM
+		stadium st
+		LEFT JOIN sido s ON st.sido_name =
+		s.sido_id
+		LEFT JOIN
+		sigungu
+		si ON st.sigungu_name = si.sigungu_id
 
 		where
 		stadium_no=#{stadium_no}
@@ -832,8 +995,67 @@
 
 	</select>
 
+	<update id="updateStadium"
+		parameterType="kosmo.team.project.dto.Stadim2DTO">
+
+		update stadium set
+		stadium_name = #{stadium_name}
+		<if test="sido_id !=null and sido_id !=''">
+			,sido_name = #{sido_id}
+		</if>
+		<if test="sigungu_id !=null and sigungu_id !=''">
+			,sigungu_name = #{sigungu_id}
+		</if>
+		,detailed_address = #{detail_address}
+		,content = #{content}
+		,stadium_status = #{stadium_status}
+
+		where
+		stadium_no=#{stadium_no}
 
 
+	</update>
+
+	<select id="getStadiumCnt" parameterType="int" resultType="int">
+		select
+		count(*) from stadium where stadium_no=#{stadium_no}
+	</select>
+
+
+	<delete id="deleteStadium"
+		parameterType="kosmo.team.project.dto.Stadim2DTO">
+		delete from
+		stadium
+		where
+		stadium_no=#{stadium_no}
+		<!-- ========================================== #{b_no} 뜻 ========================================== 
+			=============== {b_no} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
+			b_no 안의 데이터를 표현하기 즉 게시판 번호를 표현하기 =============== # 의미 =============== 표현할 
+			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
+	</delete>
+
+	<insert id="insertStadium"
+		parameterType="kosmo.team.project.dto.Stadim2DTO">
+		insert into stadium(
+		stadium_no
+		,stadium_name
+		,sido_name
+		,sigungu_name
+		,detailed_address
+		,content
+		,stadium_status
+		)
+		values ( (select
+		nvl(max(stadium_no),0)+1
+		from stadium)
+		,#{stadium_name}
+		,#{sido_id}
+		,#{sigungu_id}
+		,#{detail_address}
+		,#{content}
+		,#{stadium_status}
+		)
+	</insert>
 
 
 

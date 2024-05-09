@@ -24,26 +24,22 @@
 // FAQ 페이지
 	$(document).ready(function() {
 		
-	    // 페이지가 로드될 때 전체 카테고리를 활성화 상태로 설정
 	    $(".customerServiceCategory").eq(0).addClass("active");
 	
-	    // 카테고리 클릭 시 이벤트 핸들러
 	    $(document).on("click", ".customerServiceCategory", function() {
 	        $(".customerServiceCategory").removeClass("active");
 	        $(this).addClass("active");
 	
-	        var category = $(this).text().trim(); // 클릭한 카테고리의 값을 가져옴
+	        var category = $(this).text().trim();
 	
-	        // AJAX를 통해 해당 카테고리의 내용을 가져옴
 	        $.ajax({
 	            url: "/main/customerServiceForm.do",
 	            type: "post",
-	            data: { category: category }, // 클릭한 카테고리의 값을 전달
+	            data: { category: category },
 	            success: function(responseHtml) {
 	                var obj = $(responseHtml);
 	                var filteredHtml = "";
 	
-	                // 가져온 내용 중 카테고리에 해당하는 것만 필터링하여 리스트에 삽입
 	                obj.find(".customerServiceitem").each(function() {
 	                    var itemCategory = $(this).find("span").text().trim();
 	                    if (category === "전체" || itemCategory === category) {
@@ -52,7 +48,6 @@
 	                });
 	                $("#list-area").html(filteredHtml);
 	
-	                // 클릭된 아이템에만 활성화 클래스를 추가하고 나머지 아이템의 활성화 클래스를 제거
 	                $(".customerServiceitem").removeClass("active");
 	                $(".customerServiceitem").eq(0).addClass("active");
 	            },

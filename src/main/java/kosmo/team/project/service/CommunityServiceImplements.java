@@ -282,44 +282,84 @@ public class CommunityServiceImplements implements CommunityService {
 	// -----------------------------------
 	// 장터
 	// -----------------------------------
+	/*** 장터 등록  ***/
 	@Override
 	public int insertCommunity(CommunityDTO communityDTO) {
 		int boardRegCnt = this.communityDAO.insertCommunity(communityDTO);
 		return boardRegCnt;
 	}
 	
+	/*** 장터 리스트 개수 가져오기  ***/
 	@Override
 	public int getImageBoardListCnt(CommunityDTO communityDTO) {
 
 		int imageBoardListCnt = communityDAO.getImageBoardListCnt(communityDTO);
 
 		return imageBoardListCnt;
-
 	}
-	
-	@Override
-	public int getSaleUnionFreeSharingListAllCnt() {
-		return communityDAO.getSaleUnionFreeSharingListAllCnt();
-	}
-	
-	@Override
-	public int getSaleUnionFreeSharingListSearchCnt(CommunitySearchDTO communitySearchDTO) {
-		return communityDAO.getSaleUnionFreeSharingListSearchCnt(communitySearchDTO);
-	}
-	
-	@Override
-	public List<CommunityDTO> getSaleUnionFreeSharingList(CommunitySearchDTO communitySearchDTO) {
-		return communityDAO.getSaleUnionFreeSharingList(communitySearchDTO);
-	}
-
-
+	//Image-----------------------------------------------------------------------------------------------
+	/*** 장터 리스트 가져오기  ***/
 	@Override
 	public List<CommunityDTO> getImageMarketBoardList(CommunityDTO communityDTO) {
-
 		List<CommunityDTO> imageBoardList = communityDAO.getImageMarketBoardList(communityDTO);
-
 		return imageBoardList;
-
+	}
+	
+	//-All----------------------------------------------------------------------------------------------
+	/*** 장터 sale, free_sharing 테이블 리스트 총 개수 가져오기  ***/
+	@Override
+	public int getTabAllMarketplaceBoardListAllCnt() {
+		return communityDAO.getTabAllMarketplaceBoardListAllCnt();
+	}
+	
+	/*** 장터 sale, free_sharing 테이블 리스트 개수 가져오기 ***/
+	@Override
+	public int getTabAllMarketplaceBoardListCnt(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getTabAllMarketplaceBoardListCnt(communitySearchDTO);
+	}
+	
+	/*** 장터 sale, free_sharing 테이블 리스트 가져오기 ***/
+	@Override
+	public List<CommunityDTO> getTabAllMarketplaceBoardList(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getTabAllMarketplaceBoardList(communitySearchDTO);
+	}
+	
+	//-Sale----------------------------------------------------------------------------------------------
+	/*** 장터 sale 테이블 리스트 총 개수 가져오기  ***/
+	@Override
+	public int getTabSaleMarketplaceBoardListAllCnt() {
+		return communityDAO.getTabSaleMarketplaceBoardListAllCnt();
+	}
+	
+	/*** 장터 sale 테이블 리스트 개수 가져오기  ***/
+	@Override
+	public int getTabSaleMarketplaceBoardListCnt(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getTabSaleMarketplaceBoardListCnt(communitySearchDTO);
+	}
+	
+	/*** 장터 sale 테이블 리스트 가져오기 ***/
+	@Override
+	public List<CommunityDTO> getTabSaleMarketplaceBoardList(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getTabSaleMarketplaceBoardList(communitySearchDTO);
+	}
+	
+	//FreeSharing-----------------------------------------------------------------------------------------------
+	/*** 장터 Free_Sharing 테이블 리스트 총 개수 가져오기  ***/
+	@Override
+	public int getTabFreeSharingMarketplaceBoardListAllCnt() {
+		return communityDAO.getTabFreeSharingMarketplaceBoardListAllCnt();
+	}
+	
+	/*** 장터 Free_Sharing 테이블 리스트 개수 가져오기  ***/
+	@Override
+	public int getTabFreeSharingMarketplaceBoardListCnt(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getTabFreeSharingMarketplaceBoardListCnt(communitySearchDTO);
+	}
+	
+	/*** 장터 Free_Sharing 테이블 리스트 가져오기 ***/
+	@Override
+	public List<CommunityDTO> getTabFreeSharingMarketplaceBoardList(CommunitySearchDTO communitySearchDTO) {
+		return communityDAO.getTabFreeSharingMarketplaceBoardList(communitySearchDTO);
 	}
 
 }

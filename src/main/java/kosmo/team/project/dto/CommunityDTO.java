@@ -10,6 +10,7 @@ public class CommunityDTO {
 	private String reg_date;
 	private int readcount;
 	private String nickname;
+	private String table_name;
 
 	public int getB_no() {
 		return b_no;
@@ -73,6 +74,14 @@ public class CommunityDTO {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getTable_name() {
+		return table_name;
+	}
+
+	public void setTable_name(String table_name) {
+		this.table_name = table_name;
 	}
 
 }

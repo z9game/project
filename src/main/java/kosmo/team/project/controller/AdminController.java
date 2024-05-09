@@ -595,14 +595,149 @@ public class AdminController {
 	
 	
 	
+	@RequestMapping(value = "/adminStadiumUpDelForm.do")
+
+	public ModelAndView adminStadiumUpDelForm(
+			// --------------------------------------
+			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
+			// 매개변수 b_no 에 저장하고 들어온다.
+			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
+			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
+			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
+			// --------------------------------------
+			@RequestParam(value = "stadium_no") int stadium_no
+
+	) {
+
+		// BoardDTO boardDTO = this.boardService.getBoard(b_no,false);
+		Stadim2DTO stadim2DTO = this.adminService.getStadiumForUpDel(stadium_no);
+
+		ModelAndView mav = new ModelAndView();
+		// --------------------------------
+		// [ModelAndView 객체]에
+		// 키값 "boardDTO" 에
+		// 1행m열의 검색 데이터가 저장된 BoardDTO 객체 붙여 저장하기
+		// ModelAndView 객체에 저장된 객체는
+		// HttpServletRequest 객체에도 저장된다.
+		// --------------------------------
+		mav.addObject("stadim2DTO", stadim2DTO);
+
+		mav.setViewName(adminFolder + "adminStadiumUpDelForm.jsp");
+
+		return mav;
+
+	}
+	
+
+	@RequestMapping(value = "/adminStadiumUpProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, String> adminStadiumUpProc(
+			// -------------------------
+			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
+			// -------------------------
+			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
+			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
+
+			Stadim2DTO stadim2DTO
+
+	) {
+
+		// ------------------------------------------------
+		// 게시판 수정 결과물을 저장할 HashMap 객체 생성하기.
+		// ------------------------------------------------
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		// -------------------------------------------
+		// [BoardServiceImpl 객체]의 updateBoard 메소드 호출로
+		// 게시판 글 수정하고 [수정 적용행의 개수] 얻기
+		// -------------------------------------------
+		int stadiumUpCnt = this.adminService.updateStadium(stadim2DTO);
+
+		// -------------------------------------------
+		// HashMap 객체에 게시판 수정 행의 개수 저장하기
+		// -------------------------------------------
+		resultMap.put("result", stadiumUpCnt + "");
+
+		// -------------------------------------------
+		// HashMap 객체의 메위주 리턴하기
+		// -------------------------------------------
+		return resultMap;
+	}
+
+	@RequestMapping(value = "/adminStadiumDelProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> adminStadiumDelProc(
+			// -------------------------
+			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
+			// -------------------------
+			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
+			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
+
+			Stadim2DTO stadim2DTO
+
+	) {
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		int boardDelCnt = this.adminService.deleteStadium(stadim2DTO);
+
+		resultMap.put("result", boardDelCnt + "");
+
+		return resultMap;
+	}
+	
+	
+	@RequestMapping(value = "/adminStadiumRegForm.do")
+	public ModelAndView adminStadiumRegForm() {
+		// ----------------------------------------------------
+		// [ModelAndView 객체] 생성하기
+		// [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
+		// -------------------------------------------
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(adminFolder + "adminStadiumRegForm.jsp");
+		// ----------------------------------------------------
+		// [ModelAndView 객체] 리턴하기
+		// ----------------------------------------------------
+		return mav;
+	}
+
 	
 	
 	
 	
-	
-	
-	
-	
+	@RequestMapping(value = "/adminStadiumRegProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> adminStadiumRegProc(
+			// -------------------------
+			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
+			// -------------------------
+			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
+			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
+
+			Stadim2DTO stadim2DTO) {
+
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		int adminStadiumRegCnt = this.adminService.insertStadium(stadim2DTO);
+
+		resultMap.put("result", adminStadiumRegCnt + "");
+
+		return resultMap;
+	}
+
 	
 	
 	

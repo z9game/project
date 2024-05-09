@@ -3,7 +3,6 @@ package kosmo.team.project.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
@@ -45,4 +44,6 @@ public interface MainDAO {
 	public int customerServiceQnAUpdate(CustomerServiceDetailDTO customerServiceDetailDTO);
 	
 	public int customerServiceQnADelete(CustomerServiceDetailDTO customerServiceDetailDTO);
+	
+	public int customerServiceQnACommentDelete(CustomerServiceDetailDTO customerServiceDetailDTO);
 }

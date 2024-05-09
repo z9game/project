@@ -1,51 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-
-
+    pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>adminStadiumDetailForm</title>
-<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>스타디움 예약 시스템</title>
+    <link href="/style/community/communityNoticeBoardFormStyle.css" rel="stylesheet">
+    <script src="/js/community/communityNoticeBoardFormScript.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#date").datepicker({
+                dateFormat : "yy-mm-dd"
+            });
 
-<script src="/js/community/communityFreeBoardFormScript.js"></script>
+            $('form').on('submit', function(e) {
+                var confirmSubmit = confirm('예약을 완료하시겠습니까?');
+                if (!confirmSubmit) {
+                    e.preventDefault(); // 사용자가 취소를 선택하면 폼 제출 중지
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-
-	<%@ include file="/WEB-INF/jsp/header.jsp"%>
-	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">경기장 상세보기</p>
-	</div>
-
-	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+    <%@ include file="/WEB-INF/jsp/header.jsp"%>
+    <div class="communityNoticeBoardFormTitle">
+        <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+        <p class="titleBackgoundText">스타디움 예약</p>
+    </div>
 
 
-	<!-- 만약에 1개의 게시판 데이터가 없으면-->
-	<!-- 만약에 HttpServletRequest 객체  "boardDTO" 라는 키값으로 저장된 놈이  null 이면 -->
-	<!-- <참고> ModelAndView 객체의 addObject 메소드로 저장된 놈은
-			HttpServletRequest 객체에도 저장된다.  -->
-
-	<!-- 만약에 상세보기할 게시판 이 삭제가 되었으면-->
-	<c:if test="${empty requestScope.stadim2DTO}">
+<c:if test="${empty requestScope.stadiumDTO}">
 		<script>
 			alert("경기장이 삭제됨.");
-			location.replace("/adminStadiumDetailForm.do");
+			location.replace("/stadiumRentForm.do");
 		</script>
 	</c:if>
 
 
 
-	<!-- 만약에 1개의 게시판 데이터가 있으면-->
-	<!-- 만약에 HttpServletRequest 객체  "boardDTO" 라는 키값으로 저장된 놈이  null 이아니면 -->
-	<!-- <참고> ModelAndView 객체의 addObject 메소드로 저장된 놈은
-			HttpServletRequest 객체에도 저장된다.  -->
-	<!-- 만약에 상세보기할 게시판이 있으면-->
-	<c:if test="${!empty requestScope.stadim2DTO}">
+	<c:if test="${!empty requestScope.stadiumDTO}">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7
 			style="border-collapse: collapse">
 			<caption>[경기장 상세글 보기]</caption>
@@ -66,7 +62,7 @@
 				<!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
 				<!-- 상세보기할 게시판의 이름 표현하기 -->
 				<!--------------------------------------------------- -->
-				<td>${requestScope.stadim2DTO.stadium_name}</td>
+				<td>${requestScope.stadiumDTO.stadium_name}</td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">지역</th>
@@ -75,7 +71,7 @@
 				<!-- subject 라는 멤버변수 안의 데이터를 표현하기 -->
 				<!-- 상세보기할 게시판의 제목 표현하기 -->
 				<!--------------------------------------------------- -->
-				<td>${requestScope.stadim2DTO.sido_name}-${requestScope.stadim2DTO.sigungu_name}</td>
+				<td>${requestScope.stadiumDTO.sido_name}-${requestScope.stadiumDTO.sigungu_name}</td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">등록일</th>
@@ -84,7 +80,7 @@
 				<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
 				<!-- 상세보기할 게시판의 조회수 표현하기 -->
 				<!--------------------------------------------------- -->
-				<td>${requestScope.stadim2DTO.reg_date}</td>
+				<td>${requestScope.stadiumDTO.reg_date}</td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">상태</th>
@@ -93,7 +89,7 @@
 				<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
 				<!-- 상세보기할 게시판의 조회수 표현하기 -->
 				<!--------------------------------------------------- -->
-				<td>${requestScope.stadim2DTO.stadium_status}</td>
+				<td>${requestScope.stadiumDTO.stadium_status}</td>
 			</tr>
 			
 			<tr>
@@ -104,45 +100,51 @@
 				<!-- 상세보기할 게시판의 내용 표현하기 -->
 				<!--------------------------------------------------- -->
 				<td><textarea name="content" class="content" rows="13"
-						cols="20" maxlength="50" readonly>${requestScope.stadim2DTO.content}</textarea></td>
+						cols="20" maxlength="50" readonly>${requestScope.stadiumDTO.content}</textarea></td>
 			</tr>
 		</table>
-
-		<center>
-			<!--------------------------------------------------- -->
-			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
-			<!--------------------------------------------------- -->
-			<span style="cursor: pointer"
-				onclick="location.replace('/adminStadiumForm.do')"> [목록
-				화면으로] </span> <input type="button" value="수정/삭제"
-				onclick="document.adminStadiumUpDelForm.submit();">
-
-
-
-
-
-
-
-
-			<!-- Form 에 설정된  액션 값 URL 주소로 이동 -->
-
-
-			<!-- <input type="button" value="댓글쓰기"  onclick="document.boardUpDelForm.submit();">-->
-		</center>
-		<!--------------------------------------------------- -->
-		<!-- [수정/삭제] 버튼 클릭하면 <form name="boardUpDelForm" ~> 태그에 설정한
-					정보를 이용하여 WAS 에 접속하기 -->
-		<!--------------------------------------------------- -->
-		<form name="adminStadiumUpDelForm"
-			action="/adminStadiumUpDelForm.do" method="post">
-			<input type="hidden" name="stadium_no"
-				value="${requestScope.stadim2DTO.stadium_no}">
-		</form>
-
 
 
 	</c:if>
 
 
+
+
+
+
+
+
+
+
+    <table align="center" border="1" bordercolor="gray" cellpadding="7" style="border-collapse: collapse">
+        <form action="/reserve" method="post">
+            <caption>[스타디움 예약 상세]</caption>
+            <tr>
+                <th bgColor="lightgray">날짜</th>
+                <td><input type="text" id="date" name="date" required="required"></td>
+            </tr>
+            <tr>
+                <th bgColor="lightgray">시작 시간</th>
+                <td><input type="time" id="startTime" name="startTime" required="required"></td>
+            </tr>
+            <tr>
+                <th bgColor="lightgray">종료 시간</th>
+                <td><input type="time" id="endTime" name="endTime" required="required"></td>
+            </tr>
+            <tr>
+                <th bgColor="lightgray">사용자 ID</th>
+                <td><input type="text" id="userId" name="userId" required="required"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input type="submit" value="예약하기">
+                </td>
+            </tr>
+        </form>
+    </table>
+
+    <center>
+        <span style="cursor: pointer" onclick="location.replace('/stadiumRentForm.do')">[목록 화면으로]</span>
+    </center>
 </body>
 </html>

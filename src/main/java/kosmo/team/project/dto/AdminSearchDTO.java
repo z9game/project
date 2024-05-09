@@ -6,6 +6,7 @@ public class AdminSearchDTO {
 
     private String searchType1;
     private String searchType2;
+    private String searchTypeStadium;
     
     private int sido;
     private int sigungu;
@@ -17,6 +18,9 @@ public class AdminSearchDTO {
     private String sort;
     private List<String> gender;
     private List<String> ageRange;
+    
+    //경기장 상태 검색
+    private List<String> stadium_status;
     
     // 추가된 필드들(기록검색)
     private int minGames_played;
@@ -51,6 +55,12 @@ public class AdminSearchDTO {
 	}
 	public void setSearchType2(String searchType2) {
 		this.searchType2 = searchType2;
+	}
+	public String getSearchTypeStadium() {
+		return searchTypeStadium;
+	}
+	public void setSearchTypeStadium(String searchTypeStadium) {
+		this.searchTypeStadium = searchTypeStadium;
 	}
 	public int getSido() {
 		return sido;
@@ -111,6 +121,12 @@ public class AdminSearchDTO {
 	}
 	public void setAgeRange(List<String> ageRange) {
 		this.ageRange = ageRange;
+	}
+	public List<String> getStadium_status() {
+		return stadium_status;
+	}
+	public void setStadium_status(List<String> stadium_status) {
+		this.stadium_status = stadium_status;
 	}
 	public int getMinGames_played() {
 		return minGames_played;
@@ -208,10 +224,7 @@ public class AdminSearchDTO {
 	public void setEnd_rowNo(int end_rowNo) {
 		this.end_rowNo = end_rowNo;
 	}
-
-    // 생성자, getter, setter 생략
-    
-    
+	
     
     
     
