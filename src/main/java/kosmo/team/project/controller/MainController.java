@@ -168,10 +168,9 @@ public class MainController {
 	
 	// QnA Detail Update
 	
-	@RequestMapping(value="/customerServiceQnAUpdateForm.do")
-	// 상세 보기 페이지에서 수정/삭제 버튼을 눌렀을 때 호출되는 메소드
+	@RequestMapping(value="/main/customerServiceQnAUpdateForm.do")
 	
-	public ModelAndView boardUpDelForm(@RequestParam(value="b_no") int b_no) {
+	public ModelAndView customerServiceQnAUpdateForm(@RequestParam(value="b_no") int b_no) {
 	
 		CustomerServiceDetailDTO customerServiceDetailDTO = this.mainService.customerServiceQnAUpdateForm(b_no);
 		
@@ -179,7 +178,7 @@ public class MainController {
 		
 		mav.addObject("customerServiceDetailDTO", customerServiceDetailDTO);
 		
-		mav.setViewName("/main/customerServiceQnADetailForm.jsp");
+		mav.setViewName("/main/customerServiceQnAUpdateForm.jsp");
 		
 		return mav;
 	}
@@ -187,18 +186,12 @@ public class MainController {
 	@RequestMapping(value="/customerServiceQnAUpdateProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public Map<String,String> customerServiceQnAUpdateProc(CustomerServiceDetailDTO customerServiceDetailDTO) {
-	// 파라미터값이 저장된 BoardDTO 객체가 들어올 매개변수 선언
-	// 파라미터명과 BoardDTO 객체의 맴버변수명이 같으면 setter 메소드가 작동되어 파라미터값이 맴버변수에 저장
 		
 		Map<String,String> resultMap = new HashMap<String,String>();
-		// HashMap으로 데이터를 전송하면 JavaScript에서는 JSON으로 데이터를 받음
 		
 		int customerServiceQnAUpdateCnt = this.mainService.customerServiceQnAUpdate(customerServiceDetailDTO);
-		// BoardServiceImpl 객체의 updateBoard 메소드를 호출해서 게시판 글을 수정하고 수정 적용 행의 개수 리턴
 		
 		resultMap.put("result", customerServiceQnAUpdateCnt + "");
-		// HashMap 객체에 게시판 수정 행의 개수 저장
-		// boardUpCnt + "" : 숫자를 숫자 문자화 시킴
 		
 		return resultMap;
 	}
@@ -208,11 +201,8 @@ public class MainController {
 	@RequestMapping(value="/customerServiceQnADeleteProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public Map<String,String> customerServiceQnADeleteProc(CustomerServiceDetailDTO customerServiceDetailDTO) {
-	// 파라미터값이 저장된 BoardDTO 객체가 들어올 매개변수 선언
-	// 파라미터명과 BoardDTO 객체의 맴버변수명이 같으면 setter 메소드가 작동되어 파라미터값이 맴버변수에 저장
 		
 		Map<String,String> resultMap = new HashMap<String,String>();
-		// HashMap으로 데이터를 전송하면 JavaScript에서는 JSON으로 데이터를 받음
 		
 		int customerServiceQnADeleteCnt = this.mainService.customerServiceQnADelete(customerServiceDetailDTO);
 		
@@ -221,5 +211,18 @@ public class MainController {
 		return resultMap;
 	}
 	
+	// QnA Detail Comment Delete
 	
+	@RequestMapping(value="/customerServiceCommentDeleteProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,String> customerServiceCommentDeleteProc(CustomerServiceDetailDTO customerServiceDetailDTO) {
+		
+		Map<String,String> resultMap = new HashMap<String,String>();
+		
+		int customerServiceQnACommentDeleteCnt = this.mainService.customerServiceQnACommentDelete(customerServiceDetailDTO);
+		
+		resultMap.put("result", customerServiceQnACommentDeleteCnt + "");
+		
+		return resultMap;
+	}
 }

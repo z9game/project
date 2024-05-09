@@ -15,8 +15,8 @@
 		var formObj = $("[name='newCustomerServiceQnAForm']");
 		var subjectObj = formObj.find(".subject");
 		var contentObj = formObj.find(".content");
-		var pwdObj = formObj.find(".pwd");
-		var password = "<%= session.getAttribute("password") %>";
+		
+		var sessionPwd = "<%= session.getAttribute("password") %>";
 		
 		if(new RegExp(/^.{2,100}$/).test(subjectObj.val())==false){
 			alert("제목은 2~100자 한글입니다.");
@@ -30,42 +30,47 @@
 			return;
 		}
 		
-		if(pwdObj.val().trim().length > 50){
-			alert("계정 비밀번호를 정확히 입력해주세요.");
-			pwdObj.val("");
-			return;
-		}
-		
-		if (pwdObj.val() !== password) {
-			alert("계정 비밀번호와 다릅니다.");
-			return;
-		}
-		
-		if(confirm("작성하시겠습니까?") == false){
-			return;
-		}
-		
-		$.ajax({
+	    function checkPwd() {
+	    	var pwdInsert = prompt("계정 비밀번호를 입력해주세요.");
 			
-				url:"/QnABoardRegProc.do",
-					
-				type:"post",
-					
-				data:formObj.serialize(),
-					
-				success:function(json){
-					var result = json["result"];
-					
-					if(result == 1){
-						alert("작성 성공");
-						location.href = '/main/customerServiceForm.do';
-					} else {
-						alert("작성 실패");
-					}
-				},
-				
-				error:function(){"작성 실패"}
-			})
+			if (pwdInsert == null) { 
+		        return;
+		    }
+			
+	        if (sessionPwd != pwdInsert) {
+	        	
+	            alert("계정 비밀번호를 정확히 입력해주세요.");
+	            
+	            checkQnABoardRegForm();
+	            
+	        } else {
+	            if(confirm("작성하시겠습니까?") == true){
+	            	$.ajax({
+	        			
+	    				url:"/QnABoardRegProc.do",
+	    					
+	    				type:"post",
+	    					
+	    				data:formObj.serialize(),
+	    					
+	    				success:function(json){
+	    					var result = json["result"];
+	    					
+	    					if(result == 1){
+	    						alert("작성 성공");
+	    						location.href = '/main/customerServiceForm.do';
+	    					} else {
+	    						alert("작성 실패");
+	    					}
+	    				},
+	    				
+	    				error:function(){"작성 실패"}
+	    			})
+	            }
+	        }
+		}
+
+	    checkPwd();
 	}
 </script>
 </head>

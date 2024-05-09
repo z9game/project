@@ -147,12 +147,14 @@
 			,content
 			,reg_date
 			,subject
+			,c_no
 		) values (
 			(select b_no from qnaboard where b_no = #{b_no}),
 			'관리자',
 			#{content},
 			sysdate,
-			(select subject || '(답변)' from qnaboard where b_no = #{b_no})
+			(select subject || '(답변)' from qnaboard where b_no = #{b_no}),
+			(select nvl(max(c_no),0)+1 from qnaboard_comment)
 		)
 	</insert>
 	
@@ -162,7 +164,8 @@
 	        writer AS "writer",
 	        content AS "content",
 	        TO_CHAR(reg_date, 'YYYY-MM-DD') AS "reg_date",
-	        subject AS "subject"
+	        subject AS "subject",
+	        c_no AS "c_no"
 	    FROM
 	        qnaboard_comment
 	    WHERE
@@ -189,16 +192,17 @@
 		update
 			qnaboard
 		set
+			subject = #{subject},
 			content = #{content}
 		where 
 			b_no = #{b_no}
 	</update>
 	
 	<delete id="customerServiceQnADelete" parameterType="int">
-		delete
-		from
-			qnaboard
-		where
-			b_no=#{b_no}
+		DELETE FROM qnaboard WHERE b_no = #{b_no}
+	</delete>
+	
+	<delete id="customerServiceQnACommentDelete" parameterType="int">
+		DELETE FROM qnaboard_comment WHERE c_no = #{c_no}
 	</delete>
 </mapper>
