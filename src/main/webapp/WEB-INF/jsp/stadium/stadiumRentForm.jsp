@@ -118,7 +118,7 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="stadiumRentFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">경기장 대관</p>
+		<p class="titleBackgoundText">경기장 대관</p>	
 	</div>
 
 	<div class="stadiumRentFormContainer">

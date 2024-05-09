@@ -24,8 +24,7 @@
 		stadium st
 		LEFT
 		JOIN sido s ON st.sido_name = s.sido_id
-		LEFT JOIN sigungu
-		si ON
+		LEFT JOIN sigungu si ON
 		st.sigungu_name = si.sigungu_id
 
         <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
@@ -75,9 +74,8 @@
 		LEFT JOIN sido s ON st.sido_name =
 		s.sido_id
 		LEFT JOIN
-		sigungu
-		si ON st.sigungu_name = si.sigungu_id
-
+		sigungu si ON st.sigungu_name = si.sigungu_id
+		
 		where
 		stadium_no=#{stadium_no}
 	</select>
