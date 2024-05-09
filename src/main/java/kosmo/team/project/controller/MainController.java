@@ -211,6 +211,21 @@ public class MainController {
 		return resultMap;
 	}
 	
+	// QnA Detail Comment Update
+	
+	@RequestMapping(value="/customerServiceQnACommentUpdateProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,String> customerServiceQnACommentUpdateProc(CustomerServiceDetailDTO customerServiceDetailDTO) {
+		
+		Map<String,String> resultMap = new HashMap<String,String>();
+		
+		int customerServiceQnACommentUpdateCnt = this.mainService.customerServiceQnACommentUpdate(customerServiceDetailDTO);
+		
+		resultMap.put("result", customerServiceQnACommentUpdateCnt + "");
+		
+		return resultMap;
+	}
+	
 	// QnA Detail Comment Delete
 	
 	@RequestMapping(value="/customerServiceCommentDeleteProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
