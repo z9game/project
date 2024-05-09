@@ -29,6 +29,8 @@ public interface RecruitService {
 	public List<String> getRecruit_day(int b_no);
 	
 	public List<String> getRecruit_time(int b_no);
+	
+	RecruitTeamMemDTO getRecruit_TeamMemUpDel(int b_no);
 
 	
 

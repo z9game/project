@@ -6,9 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RecruitTeamBoardDetailForm</title>
+<title>RecruitTeamMemBoardDetailForm</title>
 <link href="/style/recruitTeamBoardDetailFormStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -24,7 +25,7 @@
 	<!-- <참고> ModelAndView 객체의 addObject 메소드로 저장된 놈은
 			HttpServletRequest 객체에도 저장된다.  -->
 
-	<!-- 만약에 상세보기할 게시판 이 삭제가 되었으면-->
+	<!-- 만약에 상세보기할 게시판이 삭제가 되었으면-->
 	<c:if test="${empty requestScope.list}">
 		<script>
 			alert("게시글이 삭제되었습니다.");
@@ -112,25 +113,6 @@
 	               <!--------------------------------------------------- -->
 	               <td>${requestScope.list.pos}</td>
 	            </tr>
-				
-				<tr>
-					<th bgColor="lightgray">지역</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 조회수 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.list.sido}-${requestScope.list.sigungu}</td>
-				</tr>
-				<tr>
-					<th bgColor="lightgray">요일</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 조회수 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.list.day}</td>
-				</tr>
 				<tr>
 					<th bgColor="lightgray">내 용</th>
 					<!--------------------------------------------------- -->
@@ -151,11 +133,13 @@
 			<span style="cursor: pointer"
 				onclick="location.href='/recruitTeamMemBoardForm.do'">
 				[목록 화면으로] </span>
-			<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.BoardUpDelForm.submit()" >
+			<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.recruitTeamMemBoardUpDelForm.submit()">
     
     	</c:if>
     	</center>
-    
+  <form action = "/recruitTeamMemBoardUpDelForm.do" method = "post" name = recruitTeamMemBoardUpDelForm>
+  	<input type="hidden" name = "b_no" value = "${requestScope.list.b_no}">
+  </form>
     
 </body>
 </html>

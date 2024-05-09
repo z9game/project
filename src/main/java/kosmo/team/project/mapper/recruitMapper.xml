@@ -157,8 +157,9 @@
    <select id="getBoardListCnt" parameterType="kosmo.team.project.dto.RecruitSearchDTO"   resultType="int">
       select
          count(*)
-      from
-         recruit_TeamMemBoard 
+       from 
+         recruit_TeamMemBoard r  LEFT JOIN (SELECT DISTINCT b_no FROM teammemboard_day) d ON r.b_no = d.b_no  
+                            LEFT JOIN (SELECT DISTINCT b_no FROM teammemboard_time) t ON r.b_no = t.b_no 
        where
           1=1
        <include refid="boardWhere1"/>
@@ -319,6 +320,28 @@
           recruit_teammemboard r LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
                             where r.b_no = #{b_no}       
    </select>
+   
+   <select id="getRecruit_TeamMemUpDel" parameterType="int" resultType="String">     
+	    select
+	        r.writer as "writer",
+	        r.title as "title",
+	        s.name as "sido_c",
+	        si.name as "sigungu_c",
+	        dof.day_name as "day_name",
+	        t.time as "time",
+	        r.pos as "pos",
+	        r.content as "content"
+	    from
+	        recruit_teammemboard r 
+	        LEFT JOIN teammemboard_day d ON r.b_no = d.b_no
+	        LEFT JOIN day_of_week dof ON d.day = dof.day_no
+	        LEFT JOIN teammemboard_time t ON r.b_no = t.b_no
+	        LEFT JOIN sido s ON r.sido = s.sido_id
+	        LEFT JOIN sigungu si ON r.sigungu = si.sigungu_id
+	    where
+	        r.b_no = 23
+</select>
+   
    
    
    

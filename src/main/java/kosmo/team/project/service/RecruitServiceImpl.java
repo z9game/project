@@ -110,6 +110,11 @@ public class RecruitServiceImpl implements RecruitService {
 		return getRecruit_time; 
 	}
 	
+
 	
+	public RecruitTeamMemDTO getRecruit_TeamMemUpDel(int b_no) {
+		RecruitTeamMemDTO recruitTeamMemDTO = this.recruitDAO.getRecruit_TeamMemUpDel(b_no);
+		return recruitTeamMemDTO;
+	}
 	
 }
