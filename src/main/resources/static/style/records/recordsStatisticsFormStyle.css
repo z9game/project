@@ -2,6 +2,22 @@
 	font-size: 15px;
 }
 
+table {
+	border-collapse: collapse;
+	border-color: gray;
+	margin: 0 auto;
+	margin-top:20px;
+}
+
+th, td {
+	padding: 10px 15px 10px 15px;
+	border-color: gray;
+}
+
+th {
+	background-color: lightgray;
+}
+
 html,
 body {
   /* width: 100%;
