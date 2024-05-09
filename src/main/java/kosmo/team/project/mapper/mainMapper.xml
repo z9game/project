@@ -170,6 +170,8 @@
 	        qnaboard_comment
 	    WHERE
 	        #{b_no} = bc_no
+	    order by
+	    	reg_date desc
 	</select>
 	
 	<select id="customerServiceQnAUpdateForm" parameterType="int" resultType="kosmo.team.project.dto.CustomerServiceDetailDTO">
@@ -201,6 +203,15 @@
 	<delete id="customerServiceQnADelete" parameterType="int">
 		DELETE FROM qnaboard WHERE b_no = #{b_no}
 	</delete>
+	
+	<update id="customerServiceQnACommentUpdate" parameterType="kosmo.team.project.dto.CustomerServiceDetailDTO">
+		update
+			qnaboard_comment
+		set
+			content = #{content}
+		where 
+			c_no = #{c_no}
+	</update>
 	
 	<delete id="customerServiceQnACommentDelete" parameterType="int">
 		DELETE FROM qnaboard_comment WHERE c_no = #{c_no}
