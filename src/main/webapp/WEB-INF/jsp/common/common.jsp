@@ -50,26 +50,28 @@ function setweekgroup() {
    
       if ($("#day1").is(":checked") && $("#day2").is(":checked") && $("#day3").is(":checked") && $("#day4").is(":checked") && $("#day5").is(":checked")) {
          $("#workweekcdGroupA").prop("checked", true);
-      } 
-      else if($("#day1").is(":checked") || $("#day2").is(":checked") || $("#day3").is(":checked") || $("#day4").is(":checked") || $("#day5").is(":checked")) 
-      {
-         $("#day0").prop("checked", false);
       }  
       else {
          $("#workweekcdGroupA").prop("checked", false);
       }
       
+      if($("#day1").is(":checked") || $("#day2").is(":checked") || $("#day3").is(":checked") || $("#day4").is(":checked") || $("#day5").is(":checked")) 
+      {
+         $("#day0").prop("checked", false);
+      } 
+      
+      
       
       if ($("#day6").is(":checked") && $("#day7").is(":checked")) {
          $("#workweekcdGroupB").prop("checked", true);
       } 
-      else if($("#day6").is(":checked") || $("#day7").is(":checked"))
-      {
-         $("#day0").prop("checked", false);
-      }
-      
       else {
          $("#workweekcdGroupB").prop("checked", false);
+      }
+      
+      if($("#day6").is(":checked") || $("#day7").is(":checked"))
+      {
+         $("#day0").prop("checked", false);
       }
    };
    

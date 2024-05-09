@@ -187,6 +187,13 @@
 	} 
 	
 	
+	function goTournamentBoardDetail(list_no)
+	{
+	   $("[name='tournamentBoardDetail'] [name='list_no']").val(list_no); 
+	   document.tournamentBoardDetail.submit();
+	}
+	
+	
 </script>
 
 </head>
@@ -227,9 +234,9 @@
 				</table>
 			
 				<div class="boardList">
-					<table>
-						<c:forEach var="gameList" items="${requestScope.tournamentList}">
-						<tr style="cursor:pointer" onClick="">
+				<c:forEach var="gameList" items="${requestScope.tournamentList}">
+					<table style="border: 1px solid">
+						<tr style="cursor:pointer" onClick="goTournamentBoardDetail(${gameList.list_no});">
 							<td rowspan="3">
 								<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 							</td>
@@ -262,8 +269,11 @@
 				</div>
 					
 			</div>	
-	
 		</div>
     </center>
+    
+    <form action="/tournamentBoardDetail.do" method="post" name="tournamentBoardDetail">
+    	<input type="hidden" name="list_no">
+    </form>
 </body>
 </html>
