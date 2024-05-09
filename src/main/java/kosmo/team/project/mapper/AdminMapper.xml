@@ -898,7 +898,7 @@
 		"sido_name"
 		,si.name as "sigungu_name"
 		,st.detailed_address as
-		"detail_address"
+		"detailed_address"
 		,to_char(st.reg_date, 'YYYY-MM-DD') AS "reg_date"
 		,st.content as "content"
 		,st.stadium_status as "stadium_status"
