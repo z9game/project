@@ -12,4 +12,6 @@ public interface StadiumService {
 	public List<StadiumDTO> getStadiumList(StadiumSearchDTO stadiumSearchDTO);
 	
 	public int getStadiumListAllCnt();
+	
+	StadiumDTO getStadium(int stadium_no);
 }

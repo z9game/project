@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.StadiumDTO;
@@ -58,6 +59,50 @@ public class StadiumController {
 		return mav;
 	}
 
+	
+	@RequestMapping(value = "/stadiumDetailForm.do")
+	public ModelAndView stadiumDetailForm(
+			// --------------------------------------
+			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
+			// 매개변수 b_no 에 저장하고 들어온다.
+			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
+			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
+			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
+			// --------------------------------------
+			@RequestParam(value = "stadium_no") int stadium_no
+
+	) {
+
+		// BoardDTO boardDTO = this.boardService.getBoard(b_no, true);
+		StadiumDTO stadiumDTO = this.stadiumService.getStadium(stadium_no);
+
+		ModelAndView mav = new ModelAndView();
+		// --------------------------------
+		// [ModelAndView 객체]에
+		// 키값 "boardDTO" 에
+		// 1행m열의 검색 데이터가 저장된 BoardDTO 객체 붙여 저장하기
+		// ModelAndView 객체에 저장된 객체는
+		// HttpServletRequest 객체에도 저장된다.
+		// --------------------------------
+		mav.addObject("stadiumDTO", stadiumDTO);
+
+		mav.setViewName(stadiumFolder + "stadiumDetailForm.jsp");
+
+		return mav;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/stadiumTransferForm.do")
 	public ModelAndView StadiumTransferForm() {
 

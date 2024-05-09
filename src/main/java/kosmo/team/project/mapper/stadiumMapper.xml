@@ -8,8 +8,7 @@
 		select * from (
 		select rownum RNUM, zxcvb.* from (
 		select
-		st.stadium_no
-		AS "stadium_no"
+		st.stadium_no AS "stadium_no"
 		,st.stadium_name AS "stadium_name"
 		,s.name
 		AS
@@ -53,6 +52,37 @@
 
 
 	</select>
+	
+	
+	
+	<select id="getStadium" parameterType="int"
+		resultType="kosmo.team.project.dto.StadiumDTO">
+
+		select
+		st.stadium_no AS "stadium_no"
+		,st.stadium_name AS "stadium_name"
+		,s.name AS "sido_name"
+		,si.name as "sigungu_name"
+		,st.detailed_address
+		as
+		"detail_address"
+		,to_char(st.reg_date, 'YYYY-MM-DD') AS "reg_date"
+		,st.content as "content"
+		,st.stadium_status as "stadium_status"
+
+		FROM
+		stadium st
+		LEFT JOIN sido s ON st.sido_name =
+		s.sido_id
+		LEFT JOIN
+		sigungu
+		si ON st.sigungu_name = si.sigungu_id
+
+		where
+		stadium_no=#{stadium_no}
+	</select>
+	
+	
 	
 	
 	

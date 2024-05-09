@@ -19,6 +19,30 @@
 	  
 	});
 	
+	function goStadiumDetailForm(stadium_no) {
+	    // m_no와 함께 player_record_no 파라미터 추가
+	    $("[name='stadiumDetailForm'] [name='stadium_no']").val(stadium_no);
+	    //$("[name='memberDetailForm'] [name='player_record_no']").val(player_record_no);
+	    
+    // memberDetailForm 폼 submit
+    alert(stadium_no);
+    document.stadiumDetailForm.submit();
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	function search() {
 		//---------------------------------------------
 		// 변수 boardSearchFormObj 선언하고 
@@ -117,8 +141,9 @@
 	<div id="stadiumDiv" class="stadiumRentFormImageContainer">
 		<c:forEach var="stadiumList" items="${requestScope.stadiumList}"
 			varStatus="status">
-
-			<div class="stadiumRentFormBoard">
+			
+			<div class="stadiumRentFormBoard" style="cursor: pointer;"
+			onclick="goStadiumDetailForm(${stadiumList.stadium_no});">
 				<div class="stadiumRentImageDiv">
 					<img src="/image/SoccerBall.jpg" class="stadiumRentImage">
 				</div>
@@ -172,6 +197,12 @@
 		</select>행보기 &nbsp;&nbsp;&nbsp;
 	</center>
 
+
+	<form name="stadiumDetailForm" action="/stadiumDetailForm.do"
+		method="post">
+		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+		<input type="hidden" name="stadium_no">
+	</form>
 
 
 </body>

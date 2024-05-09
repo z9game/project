@@ -18,6 +18,7 @@ public interface StadiumDAO {
 	
 	public int getStadiumListAllCnt();
 	
+	StadiumDTO getStadium(int stadium_no);
 	
 	
 	

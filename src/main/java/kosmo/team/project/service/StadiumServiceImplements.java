@@ -47,7 +47,16 @@ public class StadiumServiceImplements implements StadiumService {
 		// --------------------------------------
 		return StadiumListAllCnt;
 	}
+	
+	
+	public StadiumDTO getStadium(int stadium_no) {
 
+		
+		StadiumDTO stadiumDTO = this.stadiumDAO.getStadium(stadium_no);
+
+		return stadiumDTO;
+
+	}
 
 	
 	
