@@ -9,4 +9,6 @@ import kosmo.team.project.dto.TournamentSearchDTO;
 public interface TournamentService {
 	
 	public List<TournamentDTO> getTournamentList(TournamentSearchDTO tournamentSearchDTO);
+	
+	public TournamentDTO recruitTeamBoardDetailForm(int b_no);
 }

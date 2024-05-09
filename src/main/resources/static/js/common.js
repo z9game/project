@@ -149,66 +149,107 @@ function categoryChange(e) {
     const chungnam = ["천안시","공주시","보령시","아산시","서산시","논산시","계룡시","당진시","금산군","부여군","서천군","청양군","홍성군","예산군","태안군"];
 
     let add;
+    let startValue;
 
     switch (e.value) {
         case "1":
             add = gangwon;
+            startValue = 1;
             break;
+            
         case "2":
             add = gyeonggi;
+            startValue = 19;
             break;
+            
         case "3":
             add = gyeongsangnam;
+            startValue = 50;
             break;
+            
         case "4":
             add = gyeongsangbuk;
+            startValue = 70;
             break;
+            
+            
         case "5":
             add = gwangju;
+            startValue = 93;
             break;
+            
         case "6":
             add = daegu;
+            startValue = 98;
             break;
+            
         case "7":
             add = daejeon;
+             startValue = 106;
             break;
+            
         case "8":
             add = busan;
+             startValue = 111;
             break;
+            
         case "9":
             add = seoul;
+            startValue = 127;
             break;
+            
         case "10":
             add = ulsan;
+            startValue = 152;
             break;
+            
         case "11":
             add = incheon;
+            startValue = 157;
             break;
+            
         case "12":
             add = jeonnam;
+            startValue = 167;
             break;
+            
         case "13":
             add = jeonbuk;
+            startValue = 189;
             break;
+            
         case "14":
             add = jeju;
+            startValue = 203;
             break;
+            
         case "15":
             add = chungnam;
+            startValue = 207;
             break;
+            
         case "16":
             add = chungbuk;
+            startValue = 219;
             break;
+            
         default:
             add = [];
     }
 
     state.options.length = 1;
 
-    for (let i = 0; i < add.length; i++) {
+	 for (let i = 0; i < add.length; i++) {
         let opt = document.createElement("option");
-        opt.value = i + 1; // 각각의 군/구에 숫자 할당
+        opt.value = startValue + i; // 각각의 군/구에 숫자 할당
         opt.innerHTML = add[i];
         state.appendChild(opt);
     }
+	
+    /*for (let i = 0; i < add.length; i++) {
+        let opt = document.createElement("option");
+        opt.value = startValue  + 1; // 각각의 군/구에 숫자 할당
+        opt.innerHTML = add[i];
+        state.appendChild(opt);
+    }*/
 }

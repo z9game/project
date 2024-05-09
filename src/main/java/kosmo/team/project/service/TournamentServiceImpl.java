@@ -10,6 +10,7 @@ import kosmo.team.project.dao.CommunityDAO;
 import kosmo.team.project.dao.SampleDAO;
 import kosmo.team.project.dao.TournamentDAO;
 import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.RecruitTeamMemDTO;
 import kosmo.team.project.dto.SampleDTO;
 import kosmo.team.project.dto.SampleSearchDTO;
 import kosmo.team.project.dto.TournamentDTO;
@@ -29,6 +30,14 @@ public class TournamentServiceImpl implements TournamentService {
 
 		return tournamentList;
 
+	}
+	
+	
+	public TournamentDTO recruitTeamBoardDetailForm(int b_no) {
+		
+		TournamentDTO recruitTeamBoardDetailForm= this.tournamentDAO.recruitTeamBoardDetailForm(b_no);
+
+		return recruitTeamBoardDetailForm;
 	}
 
 }

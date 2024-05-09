@@ -10,11 +10,14 @@
 <link href="/style/recruitTeamBoardDetailFormStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
 </head>
+
+
+
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recruitTeamBoardDetailFormTitle">
     	<img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
-    	<p class="titleBackgoundText">팀 / 팀원 모집</p>
+    	<p class="titleBackgoundText">대회 일정</p>
     </div>
     
     
@@ -44,7 +47,7 @@
 		<center>
 			<table align="center" bordercolor="gray" border=1 cellpadding=7
 				style="border-collapse: collapse">
-				<caption>[팀/팀원 모집 상세글 보기]</caption>
+				<caption>[대회 일정 상세글 보기]</caption>
 				
 				<tr>
 					<th bgColor="lightgray">제목</th>
@@ -53,18 +56,9 @@
 					<!-- subject 라는 멤버변수 안의 데이터를 표현하기 -->
 					<!-- 상세보기할 게시판의 제목 표현하기 -->
 					<!--------------------------------------------------- -->
-					<td>${requestScope.list.title}</td>
+					<td>${requestScope.list.subject}</td>
 				</tr>
-				<tr>
-					<th bgColor="lightgray">조회수</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 조회수 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.list.readcount}</td>
-				</tr>
-				
+
 				<tr>
 	               <th bgColor="lightgray">지역</th>
 	               <!--------------------------------------------------- -->
@@ -72,7 +66,7 @@
 	               <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
 	               <!-- 상세보기할 게시판의 조회수 표현하기 -->
 	               <!--------------------------------------------------- -->
-	               <td></td>
+	               <td>${requestScope.list.region}</td>
 	            </tr>
 	            
 	            <tr>
@@ -82,7 +76,7 @@
 	               <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
 	               <!-- 상세보기할 게시판의 조회수 표현하기 -->
 	               <!--------------------------------------------------- -->
-	               <td></td>
+	               <td>${requestScope.list.regist_start} ~ ${requestScope.list.regist_end}</td>
 	            </tr>
 	            
 				
@@ -94,7 +88,7 @@
 					<!-- 상세보기할 게시판의 내용 표현하기 -->
 					<!--------------------------------------------------- -->
 					<td><textarea name="content" class="content" rows="13"
-							cols="40" maxlength="500" readonly></textarea></td>
+							cols="40" maxlength="500" readonly>${requestScope.list.content}</textarea></td>
 				</tr>
 			</table>
 		</center>
