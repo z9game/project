@@ -177,6 +177,8 @@ function search() {
     
     boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val());
     
+    
+    
 	$.ajax({
 		//-------------------------------
 		// WAS 로 접속할 주소 설정
@@ -230,6 +232,19 @@ function pageNoClick(clickPageNo) {
 
 	search();
 
+}
+
+function goRecruitTeamMemDetailForm(b_no)
+{
+   $("[name='recruitTeamMemBoardDetailForm'] [name='b_no']").val(b_no); 
+   document.recruitTeamMemBoardDetailForm.submit();
+}
+
+function searchWithSort(sort)
+{
+	$("[name='recruit_Team_mem']").find("[name='sort_date']").val(sort);
+	search();
+	
 }
 
 </script>
@@ -299,8 +314,8 @@ function pageNoClick(clickPageNo) {
 								<option value="16">충북</option>
 			            	</select>
 	
-				            <select name="gungu" id="state">
-				              <option>군/구 선택</option>
+				            <select name="sigungu" id="state">
+				              <option value="0">군/구 선택</option>
 				            </select>
 	 					</dd>
 	 			</dl>
@@ -312,36 +327,36 @@ function pageNoClick(clickPageNo) {
 	  					<dd class="content">
 							<input type="checkbox" id="workweekcdGroupA" name="allweekday" onclick="setweekgroup()">평일(월,화,수,목,금)&nbsp;&nbsp;
 							<input type="checkbox" id="workweekcdGroupB" name="allweekend" onclick="setweekgroup()">주말(토,일)<br>
-							<input type="checkbox" id="day1" name="day" onclick="setweekDay()" value="mon">월&nbsp;&nbsp;
-							<input type="checkbox" id="day2" name="day" onclick="setweekDay()" value="tue">화&nbsp;&nbsp;
-							<input type="checkbox" id="day3" name="day" onclick="setweekDay()" value="wed">수&nbsp;&nbsp;
-							<input type="checkbox" id="day4" name="day" onclick="setweekDay()" value="thr">목&nbsp;&nbsp;
-							<input type="checkbox" id="day5" name="day" onclick="setweekDay()" value="fri">금<br>
-							<input type="checkbox" id="day6" name="day" onclick="setweekDay()" value="sat">토&nbsp;&nbsp;
-							<input type="checkbox" id="day7" name="day" onclick="setweekDay()" value="sun">일<br>
-							<input type="checkbox" id="day0" name="day" value="everyday" onclick="allday()">상관없음
+							<input type="checkbox" id="day1" name="day" onclick="setweekDay()" value="1">월&nbsp;&nbsp;
+							<input type="checkbox" id="day2" name="day" onclick="setweekDay()" value="2">화&nbsp;&nbsp;
+							<input type="checkbox" id="day3" name="day" onclick="setweekDay()" value="3">수&nbsp;&nbsp;
+							<input type="checkbox" id="day4" name="day" onclick="setweekDay()" value="4">목&nbsp;&nbsp;
+							<input type="checkbox" id="day5" name="day" onclick="setweekDay()" value="5">금<br>
+							<input type="checkbox" id="day6" name="day" onclick="setweekDay()" value="6">토&nbsp;&nbsp;
+							<input type="checkbox" id="day7" name="day" onclick="setweekDay()" value="7">일<br>
+							<input type="checkbox" id="day0" name="day" value="0" onclick="allday()">상관없음
 	  					</dd>
 	  				</dl>
 	  				
 	  			<dl class="time">
 	 				<dt class="item">시 간</dt>
 	  					<dd  class="content">
-	  						<input type="checkbox" id="morning" name="time" onclick="timeset()" value="morning">새벽&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="am" name="time" onclick="timeset()" value="am">오전&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="pm" name="time" onclick="timeset()" value="pm">오후&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="night" name="time" onclick="timeset()" value="night">야간&nbsp;&nbsp;<br>
-							<input type="checkbox" id="everytime" name="time" onclick="everyset()" value="everytime">상관없음&nbsp;&nbsp;
+	  						<input type="checkbox" id="morning" name="time" onclick="timeset()" value="새벽">새벽&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="am" name="time" onclick="timeset()" value="오전">오전&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="pm" name="time" onclick="timeset()" value="오후">오후&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="night" name="time" onclick="timeset()" value="야간">야간&nbsp;&nbsp;<br>
+							<input type="checkbox" id="everytime" name="time" onclick="everyset()" value="alltime">상관없음&nbsp;&nbsp;
 	  					</dd>
 	  			</dl>
 	  				
 	  			<dl class="pos">
 	  				<dt class="item">포 지 션</dt>
 	  					<dd  class="content">
-	  						<input type="checkbox" id="st" name="pos" onclick="" value="morning">ST&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="cm" name="pos" onclick="" value="am">CM&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="cb" name="pos" onclick="" value="pm">CB&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="gk" name="pos" onclick="" value="night">GK&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="allPos" name="pos" onclick="" value="everytime">상관없음
+	  						<input type="checkbox" id="st" name="pos" onclick="" value="ST">ST&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="cm" name="pos" onclick="" value="CM">CM&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="cb" name="pos" onclick="" value="CB">CB&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="gk" name="pos" onclick="" value="GK">GK&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="allPos" name="pos" onclick="" value="allpos">상관없음
 	  					</dd>
 	  			</dl>
 			</div>	
@@ -401,6 +416,7 @@ function pageNoClick(clickPageNo) {
 	 			</dl>
 	 		</div>
 	 		
+	 		<input type="hidden" name="sort_date">
 	 		<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 	 	</form>
@@ -412,7 +428,7 @@ function pageNoClick(clickPageNo) {
    		 <br><br>
    		 	<div class="searchBtn">
 				<dl class="searchBtn" >
-	 				<dt class="item" onclick="search()" style="cursor:pointer">검색</dt>
+	 				<dt class="item" onclick="search()" class="searchBtn" style="cursor:pointer">검색</dt>
 	 			</dl>
 			</div>
    		 <br><br><br>
@@ -431,9 +447,27 @@ function pageNoClick(clickPageNo) {
 					<th style="width:80px;">글쓴이</th>
 					<th style="width:30px;">종류</th>
 					<th style="width:40px;">조회수</th>
-					<th style="width:100px;">등록일</th>
+					
+					<c:if test="${param.sort_date!='reg_date asc' and param.sort_date!='reg_date desc'}">
+					<th width="100" onClick="searchWithSort('reg_date desc')" style="cursor:pointer">등록일</th>
+					</c:if>
+					<!--============================================================= -->
+					<!-- 만약 파명 "sort" 의 파값이 'reg_date desc' 면 -->
+					<!-- 즉 정렬 의지가 'reg_date desc' 면             -->
+					<!--============================================================= -->
+					<c:if test="${param.sort_date=='reg_date desc'}">
+						<th width="100" onClick="searchWithSort('reg_date asc')" style="cursor:pointer">등록일▼</th>
+					</c:if>	
+					<!--============================================================= -->
+					<!-- 만약 파명 "sort" 의 파값이 'reg_date asc' 면 -->
+					<!-- 즉 정렬 의지가 'reg_date asc' 면             -->
+					<!--============================================================= -->
+					<c:if test="${param.sort_date=='reg_date asc'}">	
+						<th width="100" onClick="searchWithSort('')" style="cursor:pointer">등록일▲</th>
+					</c:if>
+				</tr>
 					<c:forEach var="list" items="${requestScope.boardList}" varStatus="status">
-						<tr style="cursor:pointer" onClick="">
+						<tr style="cursor:pointer" onClick=" goRecruitTeamMemDetailForm(${list.b_no});">
 							<td align="center">${requestScope.recruitMap.begin_serialNo_desc - status.index}</td>
 							<td align="center">${list.title}</td>
 							<td align="center">${list.writer}</td>
@@ -483,6 +517,11 @@ function pageNoClick(clickPageNo) {
 		
 	</center>
 	<div style="height:30px;"></div>
+	
+	<form name="recruitTeamMemBoardDetailForm" action="/recruitTeamMemBoardDetailForm.do" method="post">
+         <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+         <input type="hidden" name="b_no">
+      </form> 
 	   
 </body>
 </html>

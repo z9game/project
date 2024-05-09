@@ -20,7 +20,7 @@ public interface AdminDAO {
 	public int getMemberListAllCnt();
 
 	MemberDTO getMember(int m_no);
-	
+
 	int getMemberCnt(int m_no);
 
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -34,7 +34,7 @@ public interface AdminDAO {
 	int deleteMember(MemberDTO memberDTO);
 
 	PlayerRecordDTO getPlayerRecord(int m_no);
-	
+
 	int getPlayerRecordCnt(int m_no);
 
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -47,11 +47,10 @@ public interface AdminDAO {
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 	int deletePlayerRecord(PlayerRecordDTO playerRecordDTO);
 
-	
-	//---------------------------------------
+	// ---------------------------------------
 	// 공지사항
-	//--------------------------------------
-	
+	// --------------------------------------
+
 	public List<CommunityDTO> getNoticeBoardList(AdminSearchDTO adminSearchDTO);
 
 	public int getNoticeBoardListCnt(AdminSearchDTO adminSearchDTO);
@@ -73,14 +72,9 @@ public interface AdminDAO {
 	int deleteNoticeBoard(CommunityDTO communityDTO);
 
 	int getNoticeBoardCnt(int b_no);
-	
-	
+
 	int insertNoticeBoard(CommunityDTO communityDTO);
-	
-	
-	
-	
-	
+
 	// ----------------------------------------
 	// 경기장
 	// ----------------------------------------
@@ -92,20 +86,21 @@ public interface AdminDAO {
 
 	Stadim2DTO getStadium(int stadium_no);
 
-	
 	int getStadiumCnt(int stadium_no);
-	
-	
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	// [1개 경기장] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	int updateStadium(Stadim2DTO stadim2DTO);
+
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	// [1개 경기장] 삭제 실행하고 삭제 적용행의 개수를 리턴하는 메소드 선언
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	int deleteStadium(Stadim2DTO stadim2DTO);
+
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	// [1개 경기장 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
+	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	int insertStadium(Stadim2DTO stadim2DTO);
+
 }

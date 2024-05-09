@@ -10,10 +10,8 @@
 <link href="/style/main/customerServiceQnADetailFormStyle.css" rel="stylesheet">
 <script src="/js/main/customerServiceQnADetailFormScript.js"></script>
 <script>
-	function checkMid(){
-		var mid = ${requestScope.customerServiceDetailDTO.mid};
-		alert(mid);
-	}
+
+// QnA 댓글 보이기 - user
 
 	function submitDetailFormComment(b_no){
 		if(b_no == ''){
@@ -25,18 +23,20 @@
 		}
 	}
 	
+	
+// QnA 댓글 등록 - admin
+
 	function checkQnACommentRegForm(){
-		
 		var formObj = $("[name='customerServiceQnADetailFormCommentInsertForm']");
 		
 		$.ajax({
 			
 			url:"/QnACommentRegProc.do",
-				
+			
 			type:"post",
-				
+			
 			data:formObj.serialize(),
-				
+			
 			success:function(json){
 				var result = json["result"];
 				
@@ -44,34 +44,100 @@
 					alert("작성 성공");
 					window.location.reload();
 				} else {
-					alert("작성 실패");
+					alert("작성 실패")
 				}
 			},
 			
-			error:function(){"작성 실패(다른 오류)"}
+			error:function(){alert("작성 실패(에러)")}
 		})
 	}
 	
-	function customerServiceQnAUpdateForm(){
-		
+// QnA 수정
+
+	function customerServiceQnAUpdate(b_no){
+		$("[name='customerServiceQnAUpdateForm'] .b_no").val(b_no);
+		document.customerServiceQnAUpdateForm.action="/main/customerServiceQnAUpdateForm.do";
+		document.customerServiceQnAUpdateForm.submit();
 	}
 	
-	function customerServiceQnADeleteForm() {
-        var formObj = $("[name='customerServiceQnADeleteForm']");
-        var pwdInsert = prompt("계정 비밀번호를 입력해주세요.");
+	
+// QnA 삭제
+	
+	function customerServiceQnADelete(b_no) {
+	    var sessionPwd = "<%= session.getAttribute("password") %>";
+	    var pwdInsert = prompt("계정 비밀번호를 입력해주세요.");
 
-        function checkPwd() {
-            if (sessionPwd !== pwdInsert) {
-                alert("계정 비밀번호를 정확히 입력해주세요.");
-                checkPwd();
+	    if (pwdInsert == null) { 
+	        return;
+	    }
+
+        if (sessionPwd != pwdInsert) {
+            alert("계정 비밀번호를 정확히 입력해주세요.");
+            
+            customerServiceQnADelete(b_no);
+            
+        } else {
+            if(confirm("삭제하시겠습니까?") == true){
+            	
+                $.ajax({
+                	
+                    url: "/customerServiceQnADeleteProc.do",
+                    
+                    method: "POST",
+                    
+                    data: {b_no: b_no},
+                    
+                    success: function(json) {
+                    	var result = json["result"];
+                    	
+                    	if(result > 0){
+                    		alert("삭제 성공");
+                            location.href="/main/customerServiceForm.do";
+                    	}
+                    },
+                    
+                    error: function() {alert("삭제에 실패했습니다.(에러)");}
+                });
             }
         }
+	}
+	
+// QnA Comment 수정
 
-        if(confirm("삭제하시겠습니까?") == false){
-        	formObj.submit();
-			return;
-		}
-    }
+	function customerServiceCommentUpdate(c_no){
+		var formObj = $("[name='customerServiceQnADetailFormCommentInsertForm']");
+		
+		$.ajax({})
+	}
+	
+// QnA Comment 삭제
+	
+	function customerServiceCommentDelete(c_no){
+		if(confirm("삭제하시겠습니까?") == true){
+        	
+            $.ajax({
+            	
+                url: "/customerServiceCommentDeleteProc.do",
+                
+                method: "POST",
+                
+                data: {c_no: c_no},
+                
+                success: function(json) {
+                	var result = json["result"];
+                	
+                	if(result > 0){
+                		
+                		alert("삭제 성공");
+                		window.location.reload();
+                		
+                	} else {alert("c_no 없음");}
+                },
+                
+                error: function() {alert("삭제에 실패했습니다.(에러)");}
+            });
+        }
+	}
 </script>
 </head>
 <body>
@@ -81,15 +147,8 @@
             <input type="hidden" class="b_no" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
         </c:if>
     </form>
-    <form name="customerServiceQnAUpdateForm" action="/main/customerServiceQnAUpdateForm.do" method="POST">
-        <c:if test="${not empty requestScope.customerServiceDetailDTO.b_no}">
-            <input type="hidden" class="b_no" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
-        </c:if>
-    </form>
-    <form name="customerServiceQnADeleteForm" action="/customerServiceQnADeleteProc.do" method="POST">
-        <c:if test="${not empty requestScope.customerServiceDetailDTO.b_no}">
-            <input type="hidden" class="b_no" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
-        </c:if>
+    <form name="customerServiceQnAUpdateForm" action="/customerServiceQnAUpdateForm.do" method="POST">
+    	<input type="hidden" class="b_no" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
     </form>
     <div class="customerServiceQnADetailFormTitle">
         <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
@@ -121,11 +180,12 @@
                 </td>
             </tr>
         </table>
-        <input type="button" class="checkbutton" value="확인" onClick="checkMid();">
-        <c:if test="${requestScope.customerServiceDetailDTO.mid.equals(session.getAttribute('mid'))}">
+        <c:if test="${sessionScope.mid != 'admin'}">
 	        <div class="upDelBoardBtnDiv">
-		        <input type="button" class="updateBoardBtn" value="수정" onClick="customerServiceQnAUpdateForm();">
-		        <input type="button" class="deleteBoardBtn" value="삭제" onClick="customerServiceQnADeleteForm();">
+		        <input type="button" class="updateBoardBtn" value="수정" onClick="customerServiceQnAUpdate(${requestScope.customerServiceDetailDTO.b_no});">
+		        <c:if test="${not empty requestScope.customerServiceDetailDTO.b_no}">
+   					<button class="deleteBoardBtn" onclick="customerServiceQnADelete(${requestScope.customerServiceDetailDTO.b_no})">삭제</button>
+				</c:if>
 		    </div>
 		</c:if>
         <div class="customerServiceQnADetailFormCommentInsertDiv">
@@ -140,9 +200,23 @@
 		                        <td>${customerServiceQnADetailComment.reg_date}</td>
 		                    </tr>
 		                    <tr>
+		                        <th>제목</th>
+		                        <td colspan="3" style="width:490px;">${customerServiceQnADetailComment.subject}</td>
+		                    </tr>
+		                    <tr>
 		                        <th>내용</th>
 		                        <td colspan="3" style="width:490px; height:100px;">${customerServiceQnADetailComment.content}</td>
 		                    </tr>
+		                    <tr>
+		                    	<td colspan="4" style="text-align: right;">
+				                    <c:if test="${sessionScope.mid == 'admin'}">
+					                	<div class="adminUpDelBtnDiv">
+					                		<input type="button" class="adminUpdateBtn" value="수정" onClick="customerServiceCommentUpdate(${customerServiceQnADetailComment.c_no})">
+					                		<button class="adminDeleteBtn" onclick="customerServiceCommentDelete(${customerServiceQnADetailComment.c_no})">삭제</button>
+					                	</div>
+					                </c:if>
+					        	</td>
+				        	</tr>
 		             	</c:forEach>
 	                </table>
 	            </div>

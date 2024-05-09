@@ -29,4 +29,14 @@ public interface RecruitDAO {
 	public int updateTeamMemReadCnt(int b_no);
 
 	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO);	
+	
+	public int insertDay(RecruitTeamMemDTO recruitTeamMemDTO);	
+	
+	public int insertTime(RecruitTeamMemDTO recruitTeamMemDTO);	
+	
+	public List<String> getRecruit_day(int b_no);
+	
+	public List<String> getRecruit_time(int b_no);
+	
+	
 }

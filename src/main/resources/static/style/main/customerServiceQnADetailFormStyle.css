@@ -40,8 +40,9 @@ a{
 }
 
 .moveListBtnDiv{
+	text-align: center;
 	margin-top: 10px;
-	margin-left: 380px;
+	margin-right: 530px;
 }
 .moveListBtn{
 	width: 70px;
@@ -76,4 +77,9 @@ a{
 .updateBoardBtn, .deleteBoardBtn{
 	width: 70px;
 	height: 35px;
+}
+
+.adminUpdateBtn, .adminDeleteBtn, .commentRegBtn{
+	width: 50px;
+	height: 25px;
 }
