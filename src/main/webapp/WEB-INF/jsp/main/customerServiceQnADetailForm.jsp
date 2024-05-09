@@ -147,13 +147,16 @@
 		
 		var formObj = $("[name='customerServiceQnADetailFormCommentUpdateForm']");
 		
-		var contentObj = formObj.find(".content");
+		 var contentObj = formObj.find('textarea[name="content"][data-c_no="' + c_no + '"]');
 		
 		if (contentObj.val().trim().length==0||contentObj.val().trim().length>1000){
 			alert("내용은 1~1000자 입력해야 합니다.");
 			contentObj.val("");
 			return;
 		}
+		
+		alert(c_no);
+		alert(contentObj.val());
 		
 		$.ajax({
 			
@@ -265,6 +268,7 @@
 		            	<input type="hidden" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
 		                <table class="customerServiceQnADetailFormCommentTable" border="1" bordercolor="black">
 		                	<c:forEach var="customerServiceQnADetailComment" items="${requestScope.customerServiceQnADetailComment}" varStatus="status">
+		            			<input type="hidden" name="c_no" value="${customerServiceQnADetailComment.c_no}">
 			                    <tr>
 			                        <th>글쓴이</th>
 			                        <td>${customerServiceQnADetailComment.writer}</td>
@@ -279,7 +283,7 @@
 			                    	<c:if test="${sessionScope.mid == 'admin'}">
 			                    		<th>내용</th>
 				                        <td colspan="3" class="customerServiceQnADetailCommentContent" style="width:490px; height:100px;">
-				                        	<textarea name="content" class="content" rows="10" cols="40" maxlength="1000" style="resize:none; border: 0;">${customerServiceQnADetailComment.content}</textarea>
+				                        	<textarea name="content" class="content${customerServiceQnADetailComment.c_no}" rows="10" cols="40" maxlength="1000" style="resize:none; border: 0;" data-c_no="${customerServiceQnADetailComment.c_no}">${customerServiceQnADetailComment.content}</textarea>
 				                        </td>
 			                    	</c:if>
 			                    	<c:if test="${sessionScope.mid != 'admin'}">
