@@ -142,7 +142,6 @@
 						<input type="radio" name="pos" value="CM">CM
 						<input type="radio" name="pos" value="CB">CB
 						<input type="radio" name="pos" value="GK">GK
-						<input type="radio" name="pos" value="All">All
 					</td>
 				</tr>
 				

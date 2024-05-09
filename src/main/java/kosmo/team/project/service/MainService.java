@@ -39,4 +39,6 @@ public interface MainService {
 	public int customerServiceQnAUpdate(CustomerServiceDetailDTO customerServiceDetailDTO);
 	
 	public int customerServiceQnADelete(CustomerServiceDetailDTO customerServiceDetailDTO);
+	
+	public int customerServiceQnACommentDelete(CustomerServiceDetailDTO customerServiceDetailDTO);
 }

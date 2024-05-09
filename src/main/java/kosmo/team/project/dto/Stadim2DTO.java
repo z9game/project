@@ -9,6 +9,10 @@ public class Stadim2DTO {
 	private String detail_address;
 	private String reg_date;
 	private String content;
+	private String stadium_status;
+	private int sido_id;
+	private int sigungu_id;
+	
 	public int getStadium_no() {
 		return stadium_no;
 	}
@@ -51,7 +55,27 @@ public class Stadim2DTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getStadium_status() {
+		return stadium_status;
+	}
+	public void setStadium_status(String stadium_status) {
+		this.stadium_status = stadium_status;
+	}
+	public int getSido_id() {
+		return sido_id;
+	}
+	public void setSido_id(int sido_id) {
+		this.sido_id = sido_id;
+	}
+	public int getSigungu_id() {
+		return sigungu_id;
+	}
+	public void setSigungu_id(int sigungu_id) {
+		this.sigungu_id = sigungu_id;
+	}
 	
+	
+
 	
 	
 	
