@@ -327,25 +327,25 @@ function searchWithSort(sort)
 	  					<dd class="content">
 							<input type="checkbox" id="workweekcdGroupA" name="allweekday" onclick="setweekgroup()">평일(월,화,수,목,금)&nbsp;&nbsp;
 							<input type="checkbox" id="workweekcdGroupB" name="allweekend" onclick="setweekgroup()">주말(토,일)<br>
-							<input type="checkbox" id="day1" name="day" onclick="setweekDay()" value="mon">월&nbsp;&nbsp;
-							<input type="checkbox" id="day2" name="day" onclick="setweekDay()" value="tue">화&nbsp;&nbsp;
-							<input type="checkbox" id="day3" name="day" onclick="setweekDay()" value="wed">수&nbsp;&nbsp;
-							<input type="checkbox" id="day4" name="day" onclick="setweekDay()" value="thr">목&nbsp;&nbsp;
-							<input type="checkbox" id="day5" name="day" onclick="setweekDay()" value="fri">금<br>
-							<input type="checkbox" id="day6" name="day" onclick="setweekDay()" value="sat">토&nbsp;&nbsp;
-							<input type="checkbox" id="day7" name="day" onclick="setweekDay()" value="sun">일<br>
-							<input type="checkbox" id="day0" name="day" value="everyday" onclick="allday()">상관없음
+							<input type="checkbox" id="day1" name="day" onclick="setweekDay()" value="1">월&nbsp;&nbsp;
+							<input type="checkbox" id="day2" name="day" onclick="setweekDay()" value="2">화&nbsp;&nbsp;
+							<input type="checkbox" id="day3" name="day" onclick="setweekDay()" value="3">수&nbsp;&nbsp;
+							<input type="checkbox" id="day4" name="day" onclick="setweekDay()" value="4">목&nbsp;&nbsp;
+							<input type="checkbox" id="day5" name="day" onclick="setweekDay()" value="5">금<br>
+							<input type="checkbox" id="day6" name="day" onclick="setweekDay()" value="6">토&nbsp;&nbsp;
+							<input type="checkbox" id="day7" name="day" onclick="setweekDay()" value="7">일<br>
+							<input type="checkbox" id="day0" name="day" value="0" onclick="allday()">상관없음
 	  					</dd>
 	  				</dl>
 	  				
 	  			<dl class="time">
 	 				<dt class="item">시 간</dt>
 	  					<dd  class="content">
-	  						<input type="checkbox" id="morning" name="time" onclick="timeset()" value="morning">새벽&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="am" name="time" onclick="timeset()" value="am">오전&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="pm" name="time" onclick="timeset()" value="pm">오후&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="night" name="time" onclick="timeset()" value="night">야간&nbsp;&nbsp;<br>
-							<input type="checkbox" id="everytime" name="time" onclick="everyset()" value="everytime">상관없음&nbsp;&nbsp;
+	  						<input type="checkbox" id="morning" name="time" onclick="timeset()" value="새벽">새벽&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="am" name="time" onclick="timeset()" value="오전">오전&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="pm" name="time" onclick="timeset()" value="오후">오후&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="night" name="time" onclick="timeset()" value="야간">야간&nbsp;&nbsp;<br>
+							<input type="checkbox" id="everytime" name="time" onclick="everyset()" value="alltime">상관없음&nbsp;&nbsp;
 	  					</dd>
 	  			</dl>
 	  				
@@ -356,7 +356,7 @@ function searchWithSort(sort)
 							<input type="checkbox" id="cm" name="pos" onclick="" value="CM">CM&nbsp;&nbsp;&nbsp;&nbsp;<br>
 							<input type="checkbox" id="cb" name="pos" onclick="" value="CB">CB&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="checkbox" id="gk" name="pos" onclick="" value="GK">GK&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="allPos" name="pos" onclick="" value="everypos">상관없음
+							<input type="checkbox" id="allPos" name="pos" onclick="" value="allpos">상관없음
 	  					</dd>
 	  			</dl>
 			</div>	
