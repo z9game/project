@@ -605,13 +605,13 @@
 				from
 				(
 					select 
-						  s.sale_no		
+						  s.sale_no	 as "b_no"	
 						, s.subject
 						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
 						, s.content		
 						, s.readcount	
 						, s.reg_date
-						, 'sale'   as "table_name"	
+						, 'sale'     as "table_name"	
 				
 					from sale s
 				
@@ -633,7 +633,7 @@
 				
 				<include refid="marketplaceWhere" />
 				
-				order by reg_date desc, sale_no desc
+				order by reg_date desc, "b_no" desc
 		    	
 		<![CDATA[
 		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
@@ -648,7 +648,7 @@
 				from
 				(
 					select 
-						  s.sale_no		
+						  s.sale_no	 as "b_no"
 						, s.subject
 						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
 						, s.content		
@@ -664,7 +664,7 @@
 				
 				<include refid="marketplaceWhere" />
 				
-				order by reg_date desc, sale_no desc
+				order by reg_date desc, "b_no" desc
 		    	
 		<![CDATA[
 		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
@@ -679,12 +679,14 @@
 				from
 				(
 					select 
-						  f.free_sharing_no
+						  f.free_sharing_no  as "b_no"
 						, f.subject			
 						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
 						, f.content			
 						, f.readcount		
-						, f.reg_date		
+						, f.reg_date
+						, 'free_sharing'   as "table_name"
+							
 				
 					from free_sharing f
 	
@@ -694,7 +696,7 @@
 				
 				<include refid="marketplaceWhere" />
 				
-				order by reg_date desc, free_sharing_no desc
+				order by reg_date desc, "b_no" desc
 		    	
 		<![CDATA[
 		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
@@ -724,5 +726,51 @@
 			, sysdate
 		)
 	</insert>
+	
+	
+	<select id="getCommunityMarketplaceSaleDetailForm" parameterType="int"
+		resultType="kosmo.team.project.dto.CommunityDTO">
+
+		select
+	        s.sale_no "b_no"
+	        ,s.subject "subject"
+	        ,s.writer "writer" 
+	        ,m.nickname as "nickname"
+	        ,s.content "content"
+	        ,s.readcount "readcount"
+	        ,s.reg_date "reg_date"
+	        , 'sale'   as "table_name"
+	        
+	        
+	        from sale s, member m 
+				
+	        where
+	        s.sale_no=#{b_no}
+	        and
+	        s.writer = m.m_no 
+		
+	</select>
+	
+	<select id="getCommunityMarketplaceFreeSharingDetailForm" parameterType="int"
+		resultType="kosmo.team.project.dto.CommunityDTO">
+
+		select
+            f.free_sharing_no "b_no"
+            ,f.subject "subject"
+            ,f.writer "writer"
+            ,m.nickname as "nickname"
+            ,f.content "content"
+            ,f.readcount "readcount"
+            ,f.reg_date "reg_date"
+            ,'free_sharing'   as "table_name"
+            
+            from free_sharing f, member m 
+    
+            where
+            f.free_sharing_no=#{b_no}
+             and
+	        f.writer = m.m_no 
+		
+	</select>
 
 </mapper>

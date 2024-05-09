@@ -61,6 +61,7 @@ public class CommunityServiceImplements implements CommunityService {
 		return communityDTO;
 
 	}
+	
 
 	// 이아래쪽은 공지사항 수정,삭제
 	public CommunityDTO getNoticeBoardForUpDel(int b_no) {
@@ -360,6 +361,28 @@ public class CommunityServiceImplements implements CommunityService {
 	@Override
 	public List<CommunityDTO> getTabFreeSharingMarketplaceBoardList(CommunitySearchDTO communitySearchDTO) {
 		return communityDAO.getTabFreeSharingMarketplaceBoardList(communitySearchDTO);
+	}
+	
+	@Override
+	public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no) {
+
+		//int updateCnt = this.communityDAO.updateNoticeBoardReadCount(b_no);
+
+		CommunityDTO communityDTO = this.communityDAO.getCommunityMarketplaceSaleDetailForm(b_no);
+
+		return communityDTO;
+
+	}
+	
+	@Override
+	public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no) {
+
+		//int updateCnt = this.communityDAO.updateNoticeBoardReadCount(b_no);
+
+		CommunityDTO communityDTO = this.communityDAO.getCommunityMarketplaceFreeSharingDetailForm(b_no);
+
+		return communityDTO;
+
 	}
 
 }

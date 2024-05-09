@@ -179,6 +179,14 @@
 		alert("ajaxError : " + searchForm.serialize());
 	}
 	
+	function submitMarketplaceDetailForm(b_no, table_name) {
+		
+		$("[name='marketplaceDetailForm']").find("[name='b_no']").val( b_no );
+		$("[name='marketplaceDetailForm']").find("[name='table_name']").val( table_name );
+		document.marketplaceDetailForm.submit();
+	}
+	
+	
 </script>
 </head>
 <body>
@@ -195,6 +203,11 @@
 		
 		<input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
 		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage" value="8" >
+	</form>
+	
+	<form name="marketplaceDetailForm" action="/communityMarketplaceDetailForm.do" method="post">
+		<input type="hidden" name="b_no" value="12345" >
+		<input type="hidden" name="table_name" >
 	</form>
 	
 	<!-- [카테고리] 탭 -->
@@ -235,7 +248,7 @@
 					
 		        	<div id="allBoardDiv" class="communityMarketplaceBoardFormContainer">
 						<c:forEach var="board" items="${requestScope.tabAllMarketplaceBoardList}" varStatus="status">
-							<div class="communityMarketplaceBoardFormBoard">
+							<div style="cursor: pointer;" class="communityMarketplaceBoardFormBoard" onClick="submitMarketplaceDetailForm('${ board.b_no }', '${ board.table_name }');">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 									<img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
 								</div>
@@ -316,7 +329,8 @@
 					
 		        	<div id="saleBoardDiv" class="communityMarketplaceBoardFormContainer">
 						<c:forEach var="board" items="${requestScope.tabSaleMarketplaceBoardList}" varStatus="status">
-							<div class="communityMarketplaceBoardFormBoard">
+							
+							<div style="cursor: pointer;" class="communityMarketplaceBoardFormBoard" onClick="submitMarketplaceDetailForm('${ board.b_no }', '${ board.table_name }');">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 									<img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
 								</div>
@@ -397,7 +411,7 @@
 					
 		        	<div id="freeSharingBoardDiv" class="communityMarketplaceBoardFormContainer">
 						<c:forEach var="board" items="${requestScope.tabFreeSharingMarketplaceBoardList}" varStatus="status">
-							<div class="communityMarketplaceBoardFormBoard">
+							<div style="cursor: pointer;" class="communityMarketplaceBoardFormBoard" onClick="submitMarketplaceDetailForm('${ board.b_no }', '${ board.table_name }');">
 								<div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
 									<img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
 								</div>

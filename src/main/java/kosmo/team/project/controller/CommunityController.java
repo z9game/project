@@ -446,27 +446,30 @@ public class CommunityController {
 		mav.addObject("tabFreeSharingMarketplaceBoardListAllCnt", tabFreeSharingMarketplaceBoardListAllCnt);
 		mav.addObject("tabFreeSharingMarketplaceBoardPageMap", tabFreeSharingMarketplaceBoardPageMap);
 		
-		// -------------------------------------------------------------------------------
-		/* 
-		
-		mav.addObject("saleBoardList", saleBoardList);		
-		mav.addObject("saleBoardListSize", saleBoardList.size());
-		mav.addObject("saleBoardListCnt", saleBoardListCnt);
-		mav.addObject("saleBoardListAllCnt", saleBoardListAllCnt);
-		mav.addObject("salePageMap", salePageMap);
-		
-		mav.addObject("freeSharingBoardList", freeSharingBoardList);		
-		mav.addObject("freeSharingBoardListSize", freeSharingBoardList.size());
-		mav.addObject("freeSharingBoardListCnt", freeSharingBoardListCnt);
-		mav.addObject("freeSharingBoardListAllCnt", freeSharingBoardListAllCnt);
-		mav.addObject("freeSharingPageMap", freeSharingPageMap);
-		 */
-
 		mav.setViewName("/community/communityMarketplaceBoardForm.jsp");
 
 		return mav;
 	}
 
+	@RequestMapping(value = "/communityMarketplaceDetailForm.do")
+	public ModelAndView communityMarketplaceDetailForm(@RequestParam(value = "b_no") int b_no, @RequestParam(value = "table_name") String table_name) {
+
+		ModelAndView mav = new ModelAndView();
+		
+		if (table_name.equals("sale")) {
+			CommunityDTO sale = this.communityService.getCommunityMarketplaceSaleDetailForm(b_no);
+			mav.addObject("communityDTO", sale);
+		}
+		else {
+			CommunityDTO freeSharing = this.communityService.getCommunityMarketplaceFreeSharingDetailForm(b_no);
+			mav.addObject("communityDTO", freeSharing);
+		}
+
+		mav.setViewName("/community/marketplaceDetailForm.jsp");
+
+		return mav;
+	}
+	
 	/*** 장터 등록 페이지 ***/
 	@RequestMapping(value = "/newCommunityMarketplaceForm.do")
 	public ModelAndView newCommunityMarketplaceForm(CommunityDTO communityDTO) {
