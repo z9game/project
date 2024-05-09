@@ -54,66 +54,89 @@
          )
          </if>
       </if>
+      
+      <!-- 
+      	<if test="day!=null and day.size()>0">
+			<foreach collection="day" item="tmp" open=" and (  " close="  ) " separator=" or ">
+				day = #{tmp}
+			</foreach>
+		</if>
+		
+		<if test="time!=null and time.size()>0">
+			<foreach collection="time" item="tmp" open=" and (  " close="  ) " separator=" or ">
+				time = #{tmp}
+			</foreach>
+		</if>
+		
+		
+		 <if test="day != null and day.size()>0">
+		    and (
+		    <if test="day.size() == 1 and day[0] == 0">
+		        d.day IN (1, 2, 3, 4, 5, 6, 7)
+		    </if>
+		    <if test="day.size() != 1 or day[0] != 0">
+		        <foreach collection="day" item="tmp" separator=" OR ">
+		            d.day = #{tmp}
+		        </foreach>
+		    </if>
+		    )
+		</if>
+		
+		
+		<if test="pos != null and pos.size()>0">
+		    and (
+		    <if test="pos.size() == 1 and pos[0] == 'allpos'">
+		        r.pos IN ('ST','CM','CB','GK')
+		    </if>
+		    <if test="pos.size() != 1 and pos[0] != 'allpos'">
+		        <foreach collection="pos" item="tmp" separator=" OR ">
+		            r.pos = #{tmp}
+		        </foreach>
+		    </if>
+		    )
+		</if>
+       -->
+       
+      <if test="day != null and day.size()>0">
+		    and (
+		    <if test="day.size() == 1 and day[0] == 0">
+		        d.day IN (1, 2, 3, 4, 5, 6, 7)
+		    </if>
+		    <if test="day.size() != 0 and day[0] != 0">
+		        <foreach collection="day" item="tmp" separator=" OR ">
+		            d.day = #{tmp}
+		        </foreach>
+		    </if>
+		    )
+		</if>
+		
+		<if test="time != null and time.size()>0">
+		    and (
+		    <if test="time.size() == 1 and time[0] == 'alltime'">
+		        t.time IN ('새벽','오전','오후','야간')
+		    </if>
+		    <if test="time.size() != 0 and time[0] != 'alltime'">
+		        <foreach collection="time" item="tmp" separator=" OR ">
+		            t.time = #{tmp}
+		        </foreach>
+		    </if>
+		    )
+		</if>
+		
+		<if test="pos != null and pos.size()>0">
+		    and (
+		    <if test="pos.size() == 1 and pos[0] == 'allpos'">
+		        r.pos IN ('ST','CM','CB','GK')
+		    </if>
+		    <if test="pos.size() != 0 and pos[0] != 'allpos'">
+		        <foreach collection="pos" item="tmp" separator=" OR ">
+		            r.pos = #{tmp}
+		        </foreach>
+		    </if>
+		    )
+		</if>
    </sql>
    
-   
-   
-   <sql id="boardWhere1">
-      <if test="sort == 'all'">
-       and
-          2=2
-       </if>   
-       <if test="sort == 'team'">
-       and
-          team_mem = '팀'
-       </if>
-       <if test="sort == 'mem'">
-       and
-          team_mem = '팀원'
-       </if>
-       <if test="(keyword1 != null and keyword1.length() > 0)">
-      and (
-      </if>
-         <if test="keyword1 != null and keyword1.length() > 0">
-            (
-            <if test="searchType1 == 'writer'">
-               upper(writer) like upper('%${keyword1}%')
-            </if>
-            <if test="searchType1 == 'title'">
-               upper(title) like upper('%${keyword1}%')
-            </if>
-            <if test="searchType1== 'content'">
-               upper(content) like upper('%${keyword1}%')
-            </if>
-            <if test="searchType1 == 'all'">
-               upper(writer) like upper('%${keyword1}%')
-               or
-               upper(title) like upper('%${keyword1}%')
-               or
-               upper(content) like upper('%${keyword1}%')
-            </if>
-            )
-         </if>
-      <if test="(keyword1 != null and keyword1.length() > 0)">
-         )
-      </if>
-      <if test="sido != null and sido>0">
-      and
-      (
-         sido = ${sido}
-      )
-         <if test="sigungu !=null and sigungu>0 ">
-         and
-         (
-            sigungu = ${sigungu}
-         )
-         </if>
-      </if>
-   </sql>
-
-
-
-
 
 
 
@@ -130,7 +153,7 @@
                  ,to_char(r.reg_date, 'YYYY-MM-DD') as "reg_date"
              from 
                  recruit_TeamMemBoard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
-                                   LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
+                                   		LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
              where
                 1=1
              <include refid="boardWhere"/>
@@ -156,12 +179,13 @@
    
    <select id="getBoardListCnt" parameterType="kosmo.team.project.dto.RecruitSearchDTO"   resultType="int">
       select
-         count(*)
-      from
-         recruit_TeamMemBoard 
+          count(distinct r.b_no)
+      from 
+         recruit_TeamMemBoard r  LEFT JOIN (SELECT DISTINCT b_no, day FROM teammemboard_day) d ON r.b_no = d.b_no  
+         						 LEFT JOIN (SELECT DISTINCT b_no, time FROM teammemboard_time) t ON r.b_no = t.b_no
        where
           1=1
-       <include refid="boardWhere1"/>
+       <include refid="boardWhere"/>
       
    </select>
    

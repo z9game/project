@@ -13,51 +13,6 @@
 
 <script>
 
-	function checkBoardRegForm()
-	{
-		var formObj = $("[name='newRecruitTeamMemBoardForm']")
-		
-		$.ajax({
-			//-------------------------------
-			// WAS 로 접속할 주소 설정
-			//-------------------------------
-			url : "/recruitTeamMemRegProc.do"
-			//-------------------------------
-			// WAS 로 접속하는 방법 설정. get 또는 post
-			//-------------------------------
-			,
-			type : "post"
-
-			,
-			data : formObj.serialize()
-
-			,
-			success : function(json) {
-
-				var result = json["result"];
-				
-				if(result == 1)
-				{
-					alert("게시물 입력 성공!");
-					location.href='/recruitTeamMemBoardForm.do';
-				}
-				else
-				{
-					alert("게시물 입력 실패!")
-				}
-
-				
-
-			}
-
-			,
-			error : function() {
-
-				alert("입력 실패! 관리자에게 문의 바랍니다.");
-			}
-
-		});	
-	}
 
 </script>
 
@@ -66,7 +21,7 @@
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="newRecruitTeamMemBoardFormTitle">
     	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-    	<p class="titleBackgoundText">팀 / 팀원 모집 등록</p>
+    	<p class="titleBackgoundText">팀 / 팀원 모집 수정</p>
     </div>
     <div class="newRecruitTeamMemBoardFormContainer">
     
@@ -142,6 +97,7 @@
 						<input type="radio" name="pos" value="CM">CM
 						<input type="radio" name="pos" value="CB">CB
 						<input type="radio" name="pos" value="GK">GK
+						<input type="radio" name="pos" value="All">All
 					</td>
 				</tr>
 				
@@ -161,15 +117,12 @@
 				</tr>
 				
 			</table>
-			<div class="newRecruitTeamMemBoardFormBtnDiv">
-				<div class="resetBtnDiv">
-					<input type="reset" class="boardResetBtn"value="다시 작성">
-				</div>
-				<div class="boardRegAndMoveList">
-					<input type="button" class="boardRegBtn" value="저장" onClick="checkBoardRegForm();">
-					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/recruitTeamMemBoardForm.do')">
-				</div>
+			<div>
+				<input type="button" class="boardRegBtn" value="수정" onClick="">
+				<input type="button" class="boardRegBtn" value="삭제" onClick="">
+				<span class="moveListBtn" value="목록으로" onClick="location.replace('/recruitTeamMemBoardForm.do')"></span>
 			</div>
+				
 		</form>
 		
 	</div>
