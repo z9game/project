@@ -227,8 +227,8 @@
 				</table>
 			
 				<div class="boardList">
-					<table>
-						<c:forEach var="gameList" items="${requestScope.tournamentList}">
+				<c:forEach var="gameList" items="${requestScope.tournamentList}">
+					<table style="border: 1px solid">
 						<tr style="cursor:pointer" onClick="">
 							<td rowspan="3">
 								<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
@@ -262,8 +262,11 @@
 				</div>
 					
 			</div>	
-	
 		</div>
     </center>
+    
+    <form action="/tournamentBoardDetail.do" method="post" name="tournamentBoardDetail">
+    	<input type="hidden" name="">
+    </form>
 </body>
 </html>

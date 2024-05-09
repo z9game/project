@@ -25,7 +25,7 @@ public class TournamentController {
         ModelAndView mav = new ModelAndView();
        
         mav.addObject("tournamentList", tournamentList);
-        mav.setViewName("tournamentBoardForm.jsp");
+        mav.setViewName("/tournament/tournamentBoardForm.jsp");
         
         
         return mav;
