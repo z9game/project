@@ -11,9 +11,30 @@
 <!-- <script src="/js/recordsStatisticsFormScript.js"></script> -->
 <script>
 	function clickToSort(sort){
-		alert(sort);
+		
+		var formObj = $("[name='recordsStatisticsForm']")
+		
 		$("[name='recordsStatisticsForm']").find("[name='sort']").val(sort);
 		$(".recordsStatisticsForm").submit();
+		
+		$.ajax({
+			
+			url:"/records/recordsStatisticsForm.do",
+			
+			type:"post",
+			
+			data:formObj.serialize(),
+			
+			success: function(responseHtml){
+				var obj = $(responseHtml);
+				
+				$("[name = recordsStatisticsForm]").html(
+					obj.filter("[name = recordsStatisticsForm]").html()	
+				);
+			},
+			
+			error: function(){alert("Sort 실패")}
+		})
 	}
 </script>
 </head>
