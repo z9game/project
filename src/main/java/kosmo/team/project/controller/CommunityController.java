@@ -470,6 +470,25 @@ public class CommunityController {
       return mav;
    }
    
+   @RequestMapping(value = "/marketplaceboardUpDelForm.do")
+   public ModelAndView marketplaceboardUpDelForm(@RequestParam(value = "b_no") int b_no, @RequestParam(value = "table_name") String table_name) {
+
+      ModelAndView mav = new ModelAndView();
+      
+      if (table_name.equals("sale")) {
+         CommunityDTO sale = this.communityService.getCommunityMarketplaceSaleDetailForm(b_no);
+         mav.addObject("communityDTO", sale);
+      }
+      else {
+         CommunityDTO freeSharing = this.communityService.getCommunityMarketplaceFreeSharingDetailForm(b_no);
+         mav.addObject("communityDTO", freeSharing);
+      }
+
+      mav.setViewName("/community/marketplaceboardUpDelForm.jsp");
+
+      return mav;
+   }
+   
    /*** 장터 등록 페이지 ***/
    @RequestMapping(value = "/newCommunityMarketplaceForm.do")
    public ModelAndView newCommunityMarketplaceForm(CommunityDTO communityDTO) {
@@ -481,7 +500,7 @@ public class CommunityController {
       return mav;
    }
    
-   /*** 갤러리 새글쓰기 ***/
+   /*** 장터 새글쓰기 ***/
    @ResponseBody
    @RequestMapping(value = "/MarketplaceRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
    public Map<String, String> MarketplaceRegProc(CommunityDTO communityDTO) {
@@ -493,5 +512,50 @@ public class CommunityController {
       
       return resultMap;
    }
+   
+   /*** 장터 업데이트 ***/
+	@ResponseBody
+	@RequestMapping(value = "/marketplaceboardUpProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	
+	public Map<String, String> marketplaceboardUpProc(CommunityDTO communityDTO) {
+
+		int marketplaceboardUpCnt = 0;
+		
+		String table_name = communityDTO.getTable_name();
+		
+		if (table_name.equals("sale")) {
+			marketplaceboardUpCnt = this.communityService.updateMarketplaceSaleBoard(communityDTO);
+		} else {
+			marketplaceboardUpCnt = this.communityService.updateMarketplaceFreeSharingBoard(communityDTO);
+		}
+
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		resultMap.put("result", marketplaceboardUpCnt + "");
+		
+		return resultMap;
+	}
+	
+	   /*** 장터 삭제 ***/
+	   @ResponseBody
+	   @RequestMapping(value = "/marketplaceBoardDelProc.do", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")   
+	   public Map<String, String> marketplaceBoardDelProc(CommunityDTO communityDTO) {
+	      
+		  int marketplaceboardDelCnt = 0; 
+		  
+		  String table_name = communityDTO.getTable_name();
+		  
+		  if (table_name.equals("sale")) {
+				marketplaceboardDelCnt = this.communityService.deleteMarketplaceSaleBoard(communityDTO);
+			} else {
+				marketplaceboardDelCnt = this.communityService.deleteMarketplaceFreeSharingBoard(communityDTO);
+			}
+	      
+	      Map<String, String> resultMap = new HashMap<String, String>();
+
+	      resultMap.put("result", marketplaceboardDelCnt + "");
+
+	      return resultMap;
+	   }
 
 }

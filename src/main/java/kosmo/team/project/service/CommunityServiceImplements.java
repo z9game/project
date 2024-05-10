@@ -385,4 +385,52 @@ public class CommunityServiceImplements implements CommunityService {
 
    }
 
+	@Override
+	public int updateMarketplaceSaleBoard(CommunityDTO communityDTO) {
+
+		int boardCnt = this.communityDAO.getMarketplaceSaleBoardCnt(communityDTO.getB_no());
+		if (boardCnt == 0) {
+			return boardCnt;
+		}
+		int boardUpCnt = this.communityDAO.updateMarketplaceSaleBoard(communityDTO);
+
+		return boardUpCnt;
+	}
+	
+	@Override
+	public int updateMarketplaceFreeSharingBoard(CommunityDTO communityDTO) {
+
+		int boardCnt = this.communityDAO.getMarketplaceFreeSharingBoardCnt(communityDTO.getB_no());
+		if (boardCnt == 0) {
+			return boardCnt;
+		}
+		int boardUpCnt = this.communityDAO.updateMarketplaceFreeSharingBoard(communityDTO);
+
+		return boardUpCnt;
+	}
+	
+	@Override
+	public int deleteMarketplaceSaleBoard(CommunityDTO communityDTO) {
+
+		int boardCnt = this.communityDAO.getMarketplaceSaleBoardCnt(communityDTO.getB_no());
+		if (boardCnt == 0) {
+			return boardCnt;
+		}
+		int boardDelCnt = this.communityDAO.deleteMarketplaceSaleBoard(communityDTO);
+
+		return boardDelCnt;
+	}
+	
+	@Override
+	public int deleteMarketplaceFreeSharingBoard(CommunityDTO communityDTO) {
+
+		int boardCnt = this.communityDAO.getMarketplaceFreeSharingBoardCnt(communityDTO.getB_no());
+		if (boardCnt == 0) {
+			return boardCnt;
+		}
+		int boardDelCnt = this.communityDAO.deleteMarketplaceFreeSharingBoard(communityDTO);
+
+		return boardDelCnt;
+	}
+
 }

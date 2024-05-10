@@ -772,5 +772,54 @@
            f.writer = m.m_no 
       
    </select>
+   	
+   	
+	<select id="getMarketplaceSaleBoardCnt" parameterType="int" resultType="int">
+      select
+      count(*) from sale where sale_no = #{b_no}
+	</select>
+	
+	<update id="updateMarketplaceSaleBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+
+      update sale set
+
+      subject = #{subject}
+      ,content= #{content}
+      ,reg_date = SYSDATE
+
+      where sale_no = #{b_no}
+
+   </update>
+   
+   <select id="getMarketplaceFreeSharingBoardCnt" parameterType="int" resultType="int">
+      select
+      count(*) from free_sharing where free_sharing_no = #{b_no}
+	</select>
+	
+	<update id="updateMarketplaceFreeSharingBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+
+      update free_sharing set
+
+      subject = #{subject}
+      ,content= #{content}
+      ,reg_date = sysdate
+
+      where free_sharing_no = #{b_no}
+
+   </update>
+
+	<delete id="deleteMarketplaceSaleBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+		delete from
+		sale
+		where
+		sale_no=#{b_no}
+	</delete>
+	
+	<delete id="deleteMarketplaceFreeSharingBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+		delete from
+		free_sharing
+		where
+		free_sharing_no=#{b_no}
+	</delete>
 
 </mapper>

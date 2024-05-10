@@ -102,7 +102,7 @@
 	
 	<div class="communityFreeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">자유게시판</p>
+		<p class="titleBackgoundText">장터</p>
 	</div>
 
 
@@ -110,7 +110,7 @@
 	<form name="communityFreeBoardUpDelForm">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7
 			style="border-collpase: collpase">
-			<caption>[자유게시판 수정/삭제]</caption>
+			<caption>[장터 수정/삭제]</caption>
 			<tr>
 				<th bgColor="lightgray">글쓴이</th>
 				<td>
