@@ -68,20 +68,33 @@
 	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
 	        showTime: false,
 	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	        minDate: 0 // 오늘 이전 날짜 선택 불가능
+	        minDate: 0, // 오늘 이전 날짜 선택 불가능
+	        beforeShowDay: function(date) {
+	            // `date`는 현재 검사 중인 날짜 객체입니다.
+	          var disabledDates = ${requestScope.fullRent};
+
+     
+	            
+	            var dateString = $.datepicker.formatDate('yy-mm-dd', date);
+	            
+	            // 배열 `disabledDates`에 `dateString`이 포함되면 `false`를 반환하여 날짜를 비활성화합니다.
+	            if (disabledDates.includes(dateString)) {
+	                return [false];
+	            }
+	            
+	            // 그 외 날짜는 기본적으로 활성화된 상태로 반환합니다.
+	            return [true];
+	        }
 	    });
-	    
-	    
-	    
-	    
-	    
+
 	    $('form').on('submit', function(e) {
-				var confirmSubmit = confirm('예약을 완료하시겠습니까?');
-					if (!confirmSubmit) {
-							e.preventDefault();
-							}
-						});
-					});
+	        var confirmSubmit = confirm('예약을 완료하시겠습니까?');
+	        if (!confirmSubmit) {
+	            e.preventDefault();
+	        }
+	    });
+	});
+
 </script>
 </head>
 <body>

@@ -83,8 +83,14 @@ public class StadiumController {
 
 		List<TimeDTO> timeDTO = this.stadiumService.getTime(stadium_no);
 		
+		List<String> fullRent = this.stadiumService.getFullRent(stadium_no);
+		
+
 		
 		
+		
+		
+ 		
 		ModelAndView mav = new ModelAndView();
 		// --------------------------------
 		// [ModelAndView 객체]에
@@ -96,6 +102,16 @@ public class StadiumController {
 		mav.addObject("stadiumDTO", stadiumDTO);
 		
 		mav.addObject("timeDTO", timeDTO);
+		
+		for (int i = 0; i < fullRent.size(); i++) {
+		    fullRent.set(i, "'" + fullRent.get(i) + "'");
+		}
+
+		
+		
+		mav.addObject("fullRent", fullRent);
+		
+		System.out.println("fullRent 날" + fullRent);
 
 		mav.setViewName(stadiumFolder + "stadiumDetailForm.jsp");
 
@@ -134,9 +150,9 @@ public class StadiumController {
 		// -------------------------------------------
 		int StadiumRentCnt = this.stadiumService.insertStadiumRent(rentStadiumDTO);
 		
+		
 
-
-		System.out.println("StadiumRentCnt 개수" + StadiumRentCnt);
+		
 		
 		
 		

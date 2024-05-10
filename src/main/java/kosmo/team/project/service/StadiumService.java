@@ -21,6 +21,8 @@ public interface StadiumService {
 
 	public int insertStadiumRent(RentStadiumDTO rentStadiumDTO);
 
+	public List<String> getFullRent(int stadium_no);
+
 
 
 }

@@ -119,15 +119,35 @@
 	</insert>
 
 
-	<select id="getRentTimeCnt" parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
+	<select id="getRentTimeCnt"
+		parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
 		select count(*) from booking
-		where stadium_no = #{stadium_no} and time_slot = #{time_slot} and booking_date = #{date}
+		where stadium_no = #{stadium_no} and
+		time_slot = #{time_slot} and booking_date = #{date}
 	</select>
 
 
 
 
 
+
+	<!-- <select id="getRentTimeSlotCnt"
+		parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
+		select count(time_slot)
+		from booking
+		where stadium_no = #{stadium_no}
+		group by booking_date
+		having count(time_slot) = 11
+	</select> -->
+
+
+	<select id="getFullRent" parameterType="int" resultType="String">
+    select to_char(booking_date, 'yyyy-mm-dd') as booking_date
+    from booking
+    where stadium_no = #{stadium_no}
+    group by booking_date
+    having count(time_slot) = 11
+</select>
 
 
 
