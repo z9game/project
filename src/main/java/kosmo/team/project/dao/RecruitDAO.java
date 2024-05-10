@@ -38,5 +38,11 @@ public interface RecruitDAO {
 	
 	public List<String> getRecruit_time(int b_no);
 	
+	public RecruitTeamMemDTO getRecruit_TeamMemUpDel(int b_no);
 	
+	public List<String> getRecruit_TeamMemUpDel_day(int b_no);
+	
+	public List<String> getRecruit_TeamMemUpDel_time(int b_no);
+	
+	public RecruitTeamMemDTO getRecruit_TeamMemUpDel_sidosigungu(int b_no);
 }

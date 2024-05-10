@@ -54,12 +54,12 @@
 						<ul class="navInner">
 							<li class="navInner-item"><a href="/tournamentBoardForm.do">대회일정</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="/recordsRankingForm.do">기록실</a>
+					<li class="nav-item"><a href="/records/recordsRankingForm.do">기록실</a>
 						<!-- 하위 카테고리 -->
 						<ul class="navInner">
-							<li class="navInner-item"><a href="/recordsRankingForm.do">랭킹</a></li>
+							<li class="navInner-item"><a href="/records/recordsRankingForm.do">랭킹</a></li>
 							<li class="navInner-item"><a
-								href="/recordsStatisticsForm.do">통계</a></li>
+								href="/records/recordsStatisticsForm.do">통계</a></li>
 						</ul></li>
 					<li class="nav-item"><a href="/main/customerServiceForm.do">고객센터</a>
 					</li>

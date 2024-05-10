@@ -142,4 +142,8 @@ public interface CommunityService {
 	/*** 장터 Free_Sharing 테이블 리스트 가져오기 ***/
 	public List<CommunityDTO> getTabFreeSharingMarketplaceBoardList(CommunitySearchDTO communitySearchDTO);
 
+	
+	public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no);
+	
+	public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no);
 }

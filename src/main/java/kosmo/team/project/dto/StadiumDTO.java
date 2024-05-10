@@ -1,5 +1,7 @@
 package kosmo.team.project.dto;
 
+import java.util.List;
+
 public class StadiumDTO {
 	
 	private int stadium_no;
@@ -10,6 +12,7 @@ public class StadiumDTO {
 	private String reg_date;
 	private String content;
 	private String stadium_status;
+	private List<String> time_range;
 	public int getStadium_no() {
 		return stadium_no;
 	}
@@ -58,6 +61,13 @@ public class StadiumDTO {
 	public void setStadium_status(String stadium_status) {
 		this.stadium_status = stadium_status;
 	}
+	public List<String> getTime_range() {
+		return time_range;
+	}
+	public void setTime_range(List<String> time_range) {
+		this.time_range = time_range;
+	}
+	
 	
 	
 

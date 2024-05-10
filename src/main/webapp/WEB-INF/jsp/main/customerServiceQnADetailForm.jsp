@@ -103,11 +103,81 @@
 	}
 	
 // QnA Comment 수정
+/* 
+	function customerServiceCommentUpdateBtn(button) {
+	
+		var c_no = parseInt($(button).data('c_no'));
 
+	    var b_no = parseInt($(button).data('b_no'));
+	    
+	    alert(c_no);
+	    alert(b_no);
+	    
+	    $.ajax({
+	    	
+	        url: "/main/customerServiceQnADetailForm.do",
+	        
+	        method: "POST",
+	        
+	        data: {c_no: c_no, b_no: b_no},
+	        
+	        success: function(responseHtml) {
+	        	
+	            var obj = $(responseHtml);
+	            
+	            
+		            $(".customerServiceQnADetailCommentContent").html(
+		            		
+		                '<textarea class="customerServiceQnADetailCommentContent" rows="5" cols="50" style="resize:none;"></textarea><br><button onclick="customerServiceCommentUpdate()">저장</button>'
+		            	 
+		            );
+		            
+
+	            	$(".adminUpDelBtnDiv").remove();
+	        },
+	        
+	        error: function() {
+	            alert("수정할 수 없습니다.(에러)");
+	        }
+	    });
+	}
+
+ */
 	function customerServiceCommentUpdate(c_no){
-		var formObj = $("[name='customerServiceQnADetailFormCommentInsertForm']");
 		
-		$.ajax({})
+		var formObj = $("[name='customerServiceQnADetailFormCommentUpdateForm']");
+		
+		 var contentObj = formObj.find('textarea[name="content"][data-c_no="' + c_no + '"]');
+		
+		if (contentObj.val().trim().length==0||contentObj.val().trim().length>1000){
+			alert("내용은 1~1000자 입력해야 합니다.");
+			contentObj.val("");
+			return;
+		}
+		
+		$.ajax({
+			
+			url:"/customerServiceQnACommentUpdateProc.do",
+				
+			type:"post",
+				
+			data:{c_no: c_no, content: contentObj.val()},
+				
+			success:function(json){
+				
+				var result = json["result"];
+				
+				if(result > 0){
+					
+            		alert("수정 성공");
+					
+            		window.location.reload();
+				}
+            		
+			},
+			
+			error:function(){"수정 실패(에러)"}
+		})
 	}
 	
 // QnA Comment 삭제
@@ -190,36 +260,50 @@
 		</c:if>
         <div class="customerServiceQnADetailFormCommentInsertDiv">
         	<c:if test="${!empty requestScope.customerServiceQnADetailComment}">
-	            <div class="customerServiceQnADetailFormComment">
-	                <table class="customerServiceQnADetailFormCommentTable" border="1" bordercolor="black">
-	                	<c:forEach var="customerServiceQnADetailComment" items="${requestScope.customerServiceQnADetailComment}" varStatus="status">
-		                    <tr>
-		                        <th>글쓴이</th>
-		                        <td>${customerServiceQnADetailComment.writer}</td>
-		                        <th>작성일</th>
-		                        <td>${customerServiceQnADetailComment.reg_date}</td>
-		                    </tr>
-		                    <tr>
-		                        <th>제목</th>
-		                        <td colspan="3" style="width:490px;">${customerServiceQnADetailComment.subject}</td>
-		                    </tr>
-		                    <tr>
-		                        <th>내용</th>
-		                        <td colspan="3" style="width:490px; height:100px;">${customerServiceQnADetailComment.content}</td>
-		                    </tr>
-		                    <tr>
-		                    	<td colspan="4" style="text-align: right;">
-				                    <c:if test="${sessionScope.mid == 'admin'}">
-					                	<div class="adminUpDelBtnDiv">
-					                		<input type="button" class="adminUpdateBtn" value="수정" onClick="customerServiceCommentUpdate(${customerServiceQnADetailComment.c_no})">
-					                		<button class="adminDeleteBtn" onclick="customerServiceCommentDelete(${customerServiceQnADetailComment.c_no})">삭제</button>
-					                	</div>
-					                </c:if>
-					        	</td>
-				        	</tr>
-		             	</c:forEach>
-	                </table>
-	            </div>
+        		<form name="customerServiceQnADetailFormCommentUpdateForm">
+		            <div class="customerServiceQnADetailFormComment">
+		            	<input type="hidden" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
+		                <table class="customerServiceQnADetailFormCommentTable" border="1" bordercolor="black">
+		                	<c:forEach var="customerServiceQnADetailComment" items="${requestScope.customerServiceQnADetailComment}" varStatus="status">
+		            			<input type="hidden" name="c_no" value="${customerServiceQnADetailComment.c_no}">
+			                    <tr>
+			                        <th>글쓴이</th>
+			                        <td>${customerServiceQnADetailComment.writer}</td>
+			                        <th>작성일</th>
+			                        <td>${customerServiceQnADetailComment.reg_date}</td>
+			                    </tr>
+			                    <tr>
+			                        <th>제목</th>
+			                        <td colspan="3" class="customerServiceQnADetailCommentSubject" style="width:490px;">${customerServiceQnADetailComment.subject}</td>
+			                    </tr>
+			                    <tr>
+			                    	<c:if test="${sessionScope.mid == 'admin'}">
+			                    		<th>내용</th>
+				                        <td colspan="3" class="customerServiceQnADetailCommentContent" style="width:490px; height:100px;">
+				                        	<textarea name="content" class="content${customerServiceQnADetailComment.c_no}" rows="10" cols="40" maxlength="1000" style="resize:none; border: 0;" data-c_no="${customerServiceQnADetailComment.c_no}">${customerServiceQnADetailComment.content}</textarea>
+				                        </td>
+			                    	</c:if>
+			                    	<c:if test="${sessionScope.mid != 'admin'}">
+				                        <th>내용</th>
+				                        <td colspan="3" class="customerServiceQnADetailCommentContent" style="width:490px; height:100px;">
+				                        	${customerServiceQnADetailComment.content}
+				                        </td>
+				                	</c:if>
+			                    </tr>
+			                    <tr>
+			                    	<td colspan="4" style="text-align: right;">
+					                    <c:if test="${sessionScope.mid == 'admin'}">
+						                	<div class="adminUpDelBtnDiv">
+						                		<button type="button" class="adminUpdateBtn" onclick="customerServiceCommentUpdate(${customerServiceQnADetailComment.c_no})">수정</button>
+						                		<button class="adminDeleteBtn" onclick="customerServiceCommentDelete(${customerServiceQnADetailComment.c_no})">삭제</button>
+						                	</div>
+						                </c:if>
+						        	</td>
+					        	</tr>
+			             	</c:forEach>
+		                </table>
+		            </div>
+		   		</form>
 	        </c:if>
             <c:if test="${sessionScope.mid == 'admin'}">
             	<form name="customerServiceQnADetailFormCommentInsertForm">

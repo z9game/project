@@ -1,16 +1,21 @@
 package kosmo.team.project.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
+import kosmo.team.project.dto.TimeDTO;
 import kosmo.team.project.service.StadiumService;
 import kosmo.team.project.utility.Page;
 
@@ -76,6 +81,16 @@ public class StadiumController {
 		// BoardDTO boardDTO = this.boardService.getBoard(b_no, true);
 		StadiumDTO stadiumDTO = this.stadiumService.getStadium(stadium_no);
 
+		List<TimeDTO> timeDTO = this.stadiumService.getTime(stadium_no);
+		
+		List<String> fullRent = this.stadiumService.getFullRent(stadium_no);
+		
+
+		
+		
+		
+		
+ 		
 		ModelAndView mav = new ModelAndView();
 		// --------------------------------
 		// [ModelAndView 객체]에
@@ -85,6 +100,18 @@ public class StadiumController {
 		// HttpServletRequest 객체에도 저장된다.
 		// --------------------------------
 		mav.addObject("stadiumDTO", stadiumDTO);
+		
+		mav.addObject("timeDTO", timeDTO);
+		
+		for (int i = 0; i < fullRent.size(); i++) {
+		    fullRent.set(i, "'" + fullRent.get(i) + "'");
+		}
+
+		
+		
+		mav.addObject("fullRent", fullRent);
+		
+		System.out.println("fullRent 날" + fullRent);
 
 		mav.setViewName(stadiumFolder + "stadiumDetailForm.jsp");
 
@@ -92,11 +119,55 @@ public class StadiumController {
 
 	}
 	
+	@RequestMapping(value = "/rentStadiumProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, String> rentStadiumProc(
+			// -------------------------
+			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
+			// -------------------------
+			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
+			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
+
+			RentStadiumDTO rentStadiumDTO
+
+	) {
+
+		// ------------------------------------------------
+		// 게시판 수정 결과물을 저장할 HashMap 객체 생성하기.
+		// ------------------------------------------------
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		// -------------------------------------------
+		// [BoardServiceImpl 객체]의 updateBoard 메소드 호출로
+		// 게시판 글 수정하고 [수정 적용행의 개수] 얻기
+		
+		 
+		
+		// -------------------------------------------
+		int StadiumRentCnt = this.stadiumService.insertStadiumRent(rentStadiumDTO);
+		
+		
+
+		
+		
+		
+		
+		// -------------------------------------------
+		// HashMap 객체에 게시판 수정 행의 개수 저장하기기
+		// -------------------------------------------
+		resultMap.put("result", StadiumRentCnt + "");
+
+		// -------------------------------------------
+		// HashMap 객체의 메위주 리턴하기
+		// -------------------------------------------
+		return resultMap;
+	}
 	
-	
-	
-	
-	
+
 	
 	
 	

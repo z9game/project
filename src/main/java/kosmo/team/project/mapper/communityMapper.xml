@@ -3,726 +3,774 @@
 
 <mapper namespace="kosmo.team.project.dao.CommunityDAO">
 
-	<sql id="marketplaceWhere">
-		<if test="keyword1 != null and keyword1.length() > 0">
-			and 
-			(
-		</if>
-		
-		<if test="keyword1 != null and keyword1.length() > 0">
-			<if test="searchType1 == 'all' ">
-				(
-					upper(writer) like upper('%${keyword1}%')
-					or
-					upper(subject) like upper('%${keyword1}%')
-					or
-					upper(content) like upper('%${keyword1}%')
-				)
-			</if>
-			<if test="searchType1 == 'writer'">
-				upper(writer) like upper('%${keyword1}%')
-			</if>
-			<if test="searchType1 == 'subject'">
-				upper(subject) like upper('%${keyword1}%')
-			</if>
-			<if test="searchType1 == 'content'">
-				upper(content) like upper('%${keyword1}%')
-			</if>
-		</if>
-		
-		<if test="keyword1 != null and keyword1.length() > 0">
-			)
-		</if>
-	</sql>
+   <sql id="marketplaceWhere">
+      <if test="keyword1 != null and keyword1.length() > 0">
+         and 
+         (
+      </if>
+      
+      <if test="keyword1 != null and keyword1.length() > 0">
+         <if test="searchType1 == 'all' ">
+            (
+               upper(writer) like upper('%${keyword1}%')
+               or
+               upper(subject) like upper('%${keyword1}%')
+               or
+               upper(content) like upper('%${keyword1}%')
+            )
+         </if>
+         <if test="searchType1 == 'writer'">
+            upper(writer) like upper('%${keyword1}%')
+         </if>
+         <if test="searchType1 == 'subject'">
+            upper(subject) like upper('%${keyword1}%')
+         </if>
+         <if test="searchType1 == 'content'">
+            upper(content) like upper('%${keyword1}%')
+         </if>
+      </if>
+      
+      <if test="keyword1 != null and keyword1.length() > 0">
+         )
+      </if>
+   </sql>
 
-	<select id="getNoticeBoardList"
-		resultType="kosmo.team.project.dto.CommunityDTO"
-		parameterType="kosmo.team.project.dto.CommunitySearchDTO">
-		select * from ( select rownum RNUM, zxcvb.* from (
+   <select id="getNoticeBoardList"
+      resultType="kosmo.team.project.dto.CommunityDTO"
+      parameterType="kosmo.team.project.dto.CommunitySearchDTO">
+      select * from ( select rownum RNUM, zxcvb.* from (
 
-		select
-		b_no AS
-		"b_no",
-		subject AS "subject",
-		writer AS "writer",
-		content AS "content",
-		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
-		readcount AS "readcount"
-		FROM
-		noticeboard
-		order by
-		b_no desc
-		    	
-		    <![CDATA[
-			) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
-		]]>
-	</select>
-
-
-
-	<select id="getNoticeBoardListCnt" resultType="int">
-		select
-		count(*)
-		from
-		noticeboard
-	</select>
-
-
-	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
-	<select id="getNoticeBoardAllCnt" resultType="int">
-		select count(*)
-		from
-		noticeboard
-	</select>
+      select
+      b_no AS
+      "b_no",
+      subject AS "subject",
+      writer AS "writer",
+      content AS "content",
+      to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
+      readcount AS "readcount"
+      FROM
+      noticeboard
+      order by
+      b_no desc
+             
+          <![CDATA[
+         ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+      ]]>
+   </select>
 
 
 
-	<select id="getNoticeBoard" parameterType="int"
-		resultType="kosmo.team.project.dto.CommunityDTO">
-
-		select
-		b_no "b_no"
-		,subject "subject"
-		,writer "writer"
-		,reg_date
-		"reg_date"
-		,readcount "readcount"
-		,content "content"
+   <select id="getNoticeBoardListCnt" resultType="int">
+      select
+      count(*)
+      from
+      noticeboard
+   </select>
 
 
-		from noticeboard
-
-		where
-		b_no=#{b_no}
-		<!-- ========================================== #{b_no} 뜻 ========================================== 
-			select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
-			또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
-			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
+   <!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
+   <select id="getNoticeBoardAllCnt" resultType="int">
+      select count(*)
+      from
+      noticeboard
+   </select>
 
 
-	</select>
+
+   <select id="getNoticeBoard" parameterType="int"
+      resultType="kosmo.team.project.dto.CommunityDTO">
+
+      select
+      b_no "b_no"
+      ,subject "subject"
+      ,writer "writer"
+      ,reg_date
+      "reg_date"
+      ,readcount "readcount"
+      ,content "content"
 
 
-	<update id="updateNoticeBoardReadCount" parameterType="int">
+      from noticeboard
 
-		update
-		noticeboard
-		set
-		readcount = readcount +1 where b_no = #{b_no}
-	</update>
-
-
-	<update id="updateNoticeBoard"
-		parameterType="kosmo.team.project.dto.CommunityDTO">
-
-		update noticeboard set
-
-		subject = #{subject}
-		,writer = #{writer}
-		,content
-		=
-		#{content}
-		, reg_date = SYSDATE
-
-		where b_no = #{b_no}
-
-		<!-- ========================================== #{subject} 뜻 ========================================== 
-			=============== {subject} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
-			subject 안의 데이터를 표현하기 즉 제목을 표현하기 =============== # 의미 =============== 표현할 
-			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
-	</update>
-
-	<select id="getNoticeBoardCnt" parameterType="int"
-		resultType="int">
-		select
-		count(*) from noticeboard where b_no=#{b_no}
-	</select>
+      where
+      b_no=#{b_no}
+      <!-- ========================================== #{b_no} 뜻 ========================================== 
+         select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
+         또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
+         앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
 
 
-	<delete id="deleteNoticeBoard"
-		parameterType="kosmo.team.project.dto.CommunityDTO">
-		delete from
-		noticeboard
-		where
-		b_no=#{b_no}
-		<!-- ========================================== #{b_no} 뜻 ========================================== 
-			=============== {b_no} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
-			b_no 안의 데이터를 표현하기 즉 게시판 번호를 표현하기 =============== # 의미 =============== 표현할 
-			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
-	</delete>
+   </select>
 
 
+   <update id="updateNoticeBoardReadCount" parameterType="int">
+
+      update
+      noticeboard
+      set
+      readcount = readcount +1 where b_no = #{b_no}
+   </update>
+
+
+   <update id="updateNoticeBoard"
+      parameterType="kosmo.team.project.dto.CommunityDTO">
+
+      update noticeboard set
+
+      subject = #{subject}
+      ,writer = #{writer}
+      ,content
+      =
+      #{content}
+      , reg_date = SYSDATE
+
+      where b_no = #{b_no}
+
+      <!-- ========================================== #{subject} 뜻 ========================================== 
+         =============== {subject} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
+         subject 안의 데이터를 표현하기 즉 제목을 표현하기 =============== # 의미 =============== 표현할 
+         데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
+   </update>
+
+   <select id="getNoticeBoardCnt" parameterType="int"
+      resultType="int">
+      select
+      count(*) from noticeboard where b_no=#{b_no}
+   </select>
+
+
+   <delete id="deleteNoticeBoard"
+      parameterType="kosmo.team.project.dto.CommunityDTO">
+      delete from
+      noticeboard
+      where
+      b_no=#{b_no}
+      <!-- ========================================== #{b_no} 뜻 ========================================== 
+         =============== {b_no} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
+         b_no 안의 데이터를 표현하기 즉 게시판 번호를 표현하기 =============== # 의미 =============== 표현할 
+         데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
+   </delete>
 
 
 
 
-	<!-- 자유게시판 -->
-	<select id="getFreeBoardList"
-		resultType="kosmo.team.project.dto.CommunityDTO"
-		parameterType="kosmo.team.project.dto.CommunitySearchDTO">
-		select * from ( select rownum RNUM, zxcvb.* from (
-
-		select
-		f.b_no AS	"b_no",
-		f.subject AS "subject",
-		( select nickname from member where m_no = f.writer ) as "writer",		
-		f.content AS "content",
-		to_char(f.reg_date, 'YYYY-MM-DD') AS "reg_date",
-		f.readcount AS "readcount"
-		FROM
-		freeboard f
-		order by
-		b_no desc
-		    	
-		    <![CDATA[
-			) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
-		]]>
-	</select>
-
-	<select id="getFreeBoardListCnt" resultType="int">
-		select
-		count(*)
-		from
-		freeboard
-	</select>
-
-	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
-	<select id="getFreeBoardAllCnt" resultType="int">
-		select count(*)
-		from
-		freeboard
-	</select>
 
 
+   <!-- 자유게시판 -->
+   <select id="getFreeBoardList"
+      resultType="kosmo.team.project.dto.CommunityDTO"
+      parameterType="kosmo.team.project.dto.CommunitySearchDTO">
+      select * from ( select rownum RNUM, zxcvb.* from (
 
-	<select id="getFreeBoard" parameterType="int"
-		resultType="kosmo.team.project.dto.CommunityDTO">
+      select
+      f.b_no AS   "b_no",
+      f.subject AS "subject",
+      ( select nickname from member where m_no = f.writer ) as "writer",      
+      f.content AS "content",
+      to_char(f.reg_date, 'YYYY-MM-DD') AS "reg_date",
+      f.readcount AS "readcount"
+      FROM
+      freeboard f
+      order by
+      b_no desc
+             
+          <![CDATA[
+         ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+      ]]>
+   </select>
 
-		select
-		f.b_no "b_no"
-		,f.subject "subject"
-		,f.writer "writer"
-		,( select nickname from member where m_no = f.writer ) as "nickname"		
-		,f.reg_date	"reg_date"
-		,f.readcount "readcount"
-		,f.content "content"
+   <select id="getFreeBoardListCnt" resultType="int">
+      select
+      count(*)
+      from
+      freeboard
+   </select>
 
-
-		from freeboard f
-
-		where
-		b_no=#{b_no}
-		<!-- ========================================== #{b_no} 뜻 ========================================== 
-			select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
-			또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
-			앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
-	</select>
-
-	<select id="getFreeBoardDetail" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >	
-		select 
-				b_no			"b_no"
-			,	subject			"subject"
-			,	( select nickname from member where m_no = ( select writer from freeboard where b_no = #{ b_no } ) ) as "writer"
-			,	content			"content"
-			,	readcount		"readcount"
-			,	reg_date		"reg_date"
-			
-				
-		from	freeboard
-		        
-		where	b_no	=	#{ b_no }           
-	</select>
-
-	<select id="getFreeBoardDetailCommentPageListCount" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="int" >	
-		select count(*)			
-	            
-		from freeboard_comment
-
-		where   
-				1 = 1
-        		and
-				b_no = #{ b_no }
-	</select>
+   <!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
+   <select id="getFreeBoardAllCnt" resultType="int">
+      select count(*)
+      from
+      freeboard
+   </select>
 
 
-	<select id="getFreeBoardDetailCommentPageList" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >
-			select * from 
-			( 
-				select 
-						rownum rnum
-					,	zxcvb.* 
-					
-				from 
-				(	
-		
-					select
-							comment_no                      as "comment_no"
-						,	b_no							as "b_no" 
-						,	nick_name						as "nick_name"
-						,	content							as "content"
-						,	print_no						as "print_no"
-						,	print_level						as "print_level"
-						,	to_char(reg_date, 'yyyy-mm-dd hh24:mi:ss') as "reg_date"
-									
-					from freeboard_comment
-					
-					where
-							1 = 1
-							and
-							b_no = #{ b_no }
-									 
-					order by 
-							group_no desc, print_no asc
-	        	
-		
-				) zxcvb 
-	<![CDATA[
-			
-				where	rownum <= ${ end_rowNo } 
-			) 
-			
-			where	rnum >= ${ begin_rowNo }
-			
-	]]>	
-	</select>	
 
-	<insert id="insertFreeBoardDetailComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">	
-		insert	into	freeboard_comment
-		(
-				comment_no
-			,	b_no
-			,	nick_name
-			,	content
-			,	group_no
-			,	print_no
-			,	print_level
-			,	reg_date
-		) 
-		values 
-		(
-				( select nvl(max(comment_no),0) + 1 from freeboard_comment )
-			,	#{ b_no }
-			,	#{ nick_name }
-			,	#{ content }
-			,	( select nvl(max(comment_no),0) + 1 from freeboard_comment )	
-			,	0
-			,	0
-			,	sysdate
-		)		
-	</insert>
+   <select id="getFreeBoard" parameterType="int"
+      resultType="kosmo.team.project.dto.CommunityDTO">
 
-	<update id="updateFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">	
-		update	freeboard_comment
-		
-		set
-				print_no	=	print_no + 1
-		
+      select
+      f.b_no "b_no"
+      ,f.subject "subject"
+      ,f.writer "writer"
+      ,( select nickname from member where m_no = f.writer ) as "nickname"      
+      ,f.reg_date   "reg_date"
+      ,f.readcount "readcount"
+      ,f.content "content"
+
+
+      from freeboard f
+
+      where
+      b_no=#{b_no}
+      <!-- ========================================== #{b_no} 뜻 ========================================== 
+         select SQL 문에 참여할 외부 데이터중에 int 또는 double 또는 String 을 표현하기. 참여하는 외부 데이터가 int 
+         또는 double 또는 String 이라면 b_no 라는 영문 대신에 영문 아무거나 써도 된다. 외부 데이터가 문자라면 표현할 때 
+         앞뒤에 ' 가 붙는다. 숫자라면 표현할 때 앞뒤에 ' 없이 그냥 표현된다. -->
+   </select>
+
+   <select id="getFreeBoardDetail" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >   
+      select 
+            b_no         "b_no"
+         ,   subject         "subject"
+         ,   ( select nickname from member where m_no = ( select writer from freeboard where b_no = #{ b_no } ) ) as "writer"
+         ,   content         "content"
+         ,   readcount      "readcount"
+         ,   reg_date      "reg_date"
+         
+            
+      from   freeboard
+              
+      where   b_no   =   #{ b_no }           
+   </select>
+
+   <select id="getFreeBoardDetailCommentPageListCount" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="int" >   
+      select count(*)         
+               
+      from freeboard_comment
+
+      where   
+            1 = 1
+              and
+            b_no = #{ b_no }
+   </select>
+
+
+   <select id="getFreeBoardDetailCommentPageList" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" resultType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO" >
+         select * from 
+         ( 
+            select 
+                  rownum rnum
+               ,   zxcvb.* 
+               
+            from 
+            (   
+      
+               select
+                     comment_no                      as "comment_no"
+                  ,   b_no                     as "b_no" 
+                  ,   nick_name                  as "nick_name"
+                  ,   content                     as "content"
+                  ,   print_no                  as "print_no"
+                  ,   print_level                  as "print_level"
+                  ,   to_char(reg_date, 'yyyy-mm-dd hh24:mi:ss') as "reg_date"
+                           
+               from freeboard_comment
+               
+               where
+                     1 = 1
+                     and
+                     b_no = #{ b_no }
+                            
+               order by 
+                     group_no desc, print_no asc
+              
+      
+            ) zxcvb 
+   <![CDATA[
+         
+            where   rownum <= ${ end_rowNo } 
+         ) 
+         
+         where   rnum >= ${ begin_rowNo }
+         
+   ]]>   
+   </select>   
+
+   <insert id="insertFreeBoardDetailComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">   
+      insert   into   freeboard_comment
+      (
+            comment_no
+         ,   b_no
+         ,   nick_name
+         ,   content
+         ,   group_no
+         ,   print_no
+         ,   print_level
+         ,   reg_date
+      ) 
+      values 
+      (
+            ( select nvl(max(comment_no),0) + 1 from freeboard_comment )
+         ,   #{ b_no }
+         ,   #{ nick_name }
+         ,   #{ content }
+         ,   ( select nvl(max(comment_no),0) + 1 from freeboard_comment )   
+         ,   0
+         ,   0
+         ,   sysdate
+      )      
+   </insert>
+
+   <update id="updateFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">   
+      update   freeboard_comment
+      
+      set
+            print_no   =   print_no + 1
+      
         where
-        		group_no	=	( select group_no from freeboard_comment where comment_no = #{ comment_no } )
-        		and
-        		print_no	>	( select print_no from freeboard_comment where comment_no = #{ comment_no } )        		
-	</update>
-	
-	<insert id="insertFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">	
-		insert	into	freeboard_comment
-		(
-				comment_no
-			,	b_no
-			,	nick_name
-			,	content
-			,	group_no
-			,	print_no
-			,	print_level
-			,	reg_date
-		) 
-		values 
-		(
-				( select nvl(max(comment_no),0) + 1 from freeboard_comment )
-			,	#{ b_no }
-			,	#{ nick_name }
-			,	#{ content }
-			,	( select group_no 			from freeboard_comment where comment_no = #{ comment_no })
-			,	( select print_no	 + 1	from freeboard_comment where comment_no = #{ comment_no })
-			,	( select print_level + 1 	from freeboard_comment where comment_no = #{ comment_no })
-			,	sysdate
-		)		
-	</insert>
-	
-	<update id="updateFreeBoardDetailReadCountPlusOne" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">	
-		update	freeboard
-				
-		set		readcount	=	readcount + 1
-		
-		where	b_no		=	#{ b_no }        
-	</update>
-	
-	<select id="getCommunityFreeBoardCount" parameterType="int" resultType="int">		
-		select 	count(*) 
-		
-		from 	freeboard 
-		
-		where 	b_no = #{ b_no }		
-	</select>
-	
-	<update id="updateCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
-		update 	freeboard 
-		
-		set
-				subject = #{ subject }			
-			,	content	= #{ content }
-			
+              group_no   =   ( select group_no from freeboard_comment where comment_no = #{ comment_no } )
+              and
+              print_no   >   ( select print_no from freeboard_comment where comment_no = #{ comment_no } )              
+   </update>
+   
+   <insert id="insertFreeBoardDetailCommentToComment" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">   
+      insert   into   freeboard_comment
+      (
+            comment_no
+         ,   b_no
+         ,   nick_name
+         ,   content
+         ,   group_no
+         ,   print_no
+         ,   print_level
+         ,   reg_date
+      ) 
+      values 
+      (
+            ( select nvl(max(comment_no),0) + 1 from freeboard_comment )
+         ,   #{ b_no }
+         ,   #{ nick_name }
+         ,   #{ content }
+         ,   ( select group_no          from freeboard_comment where comment_no = #{ comment_no })
+         ,   ( select print_no    + 1   from freeboard_comment where comment_no = #{ comment_no })
+         ,   ( select print_level + 1    from freeboard_comment where comment_no = #{ comment_no })
+         ,   sysdate
+      )      
+   </insert>
+   
+   <update id="updateFreeBoardDetailReadCountPlusOne" parameterType="kosmo.team.project.dto.CommunityFreeBoardDetailDTO">   
+      update   freeboard
+            
+      set      readcount   =   readcount + 1
+      
+      where   b_no      =   #{ b_no }        
+   </update>
+   
+   <select id="getCommunityFreeBoardCount" parameterType="int" resultType="int">      
+      select    count(*) 
+      
+      from    freeboard 
+      
+      where    b_no = #{ b_no }      
+   </select>
+   
+   <update id="updateCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">
+      update    freeboard 
+      
+      set
+            subject = #{ subject }         
+         ,   content   = #{ content }
+         
 
-		where 	b_no = #{ b_no }
-	</update>
-	
-	<select id="getFreeBoardCommentCount" parameterType="int" resultType="int">		
-		select 	count(*) 
-		
-		from 	freeboard_comment
-		
-		where 	b_no = #{ b_no }		
-	</select>
-	
-	<delete id="deleteCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">		
-		delete 	from 	freeboard
-		
-		where	b_no = #{ b_no }		
-	</delete>
-	
-	<insert id="insertCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">		
-		insert into freeboard
-		(
-				b_no	
-			,	subject	
-			,	writer	
-			,	content	
-			,	readcount
-			,	reg_date			
-		)
-		values
-		(
-				( select nvl( max ( b_no ), 0 ) + 1 from freeboard )
-			, 	#{ subject }
-			,	( select m_no from member where nickname = '${ writer }' )			
-			, 	#{ content }
-			, 	0
-			, 	sysdate
-		)		
-	</insert>
-	
-
-
-
-
-	<!-- 갤러리 -->
-	<select id="getImageGallaryBoardList"
-		resultType="kosmo.team.project.dto.CommunityDTO"
-		parameterType="kosmo.team.project.dto.CommunityDTO">
-		select
-		subject as "subject",
-		writer as "writer",
-		to_char(reg_date, 'yyyy-mm-dd') as "reg_date",
-		readcount as "readcount"
-		from
-		imageboard
-	</select>
-
-	<select id="getImageGallaryBoardListCnt" resultType="int">
-		select
-		count(*)
-		from
-		imageboard
-	</select>
-
-	<insert id="insertGallaryCommunity"
-		parameterType="kosmo.team.project.dto.CommunityDTO">
-		insert into imageboard
-		(
-		b_no
-		, subject
-		, writer
-		, content
-		, reg_date
-		, readcount
-		)
-		values
-		(
-		( select nvl( max( sale_no ), 0 ) + 1 from sale )
-		, #{ subject }
-		, ${ writer }
-		, #{ content }
-		, 0
-		, sysdate
-		)
-	</insert>
-	
+      where    b_no = #{ b_no }
+   </update>
+   
+   <select id="getFreeBoardCommentCount" parameterType="int" resultType="int">      
+      select    count(*) 
+      
+      from    freeboard_comment
+      
+      where    b_no = #{ b_no }      
+   </select>
+   
+   <delete id="deleteCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">      
+      delete    from    freeboard
+      
+      where   b_no = #{ b_no }      
+   </delete>
+   
+   <insert id="insertCommunityFreeBoard" parameterType="kosmo.team.project.dto.CommunityDTO">      
+      insert into freeboard
+      (
+            b_no   
+         ,   subject   
+         ,   writer   
+         ,   content   
+         ,   readcount
+         ,   reg_date         
+      )
+      values
+      (
+            ( select nvl( max ( b_no ), 0 ) + 1 from freeboard )
+         ,    #{ subject }
+         ,   ( select m_no from member where nickname = '${ writer }' )         
+         ,    #{ content }
+         ,    0
+         ,    sysdate
+      )      
+   </insert>
+   
 
 
 
 
-	<!-- 장터 -->
-	<select id="getImageMarketBoardList"
-		resultType="kosmo.team.project.dto.CommunityDTO"
-		parameterType="kosmo.team.project.dto.CommunityDTO">
-		select
-		subject as "subject",
-		writer as "writer",
-		to_char(reg_date, 'yyyy-mm-dd') as "reg_date",
-		readcount as "readcount"
-		from
-		imageboard
-	</select>
-	
-	<!-- ImageBoard 개수 리턴 -->
-	<select id="getImageBoardListCnt" resultType="int">
-		select
-		count(*)
-		from
-		imageboard
-	</select>
-	
-	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 리턴 -->
-	<select id="getTabAllMarketplaceBoardListAllCnt" resultType="int">
-		select count(*)
-		from
-		(
-			select * from sale 
-			union all
-    		select * from free_sharing
-		)
-	</select>
-	
-	<!-- 판매 테이블 총 개수 리턴 -->
-	<select id="getTabSaleMarketplaceBoardListAllCnt" resultType="int">
-		select count(*)
-		from
-		(
-			select * from sale 
-		)
-	</select>
-	
-	<!-- 무료나눔 테이블 총 개수 리턴 -->
-	<select id="getTabFreeSharingMarketplaceBoardListAllCnt" resultType="int">
-		select count(*)
-		from
-		(
-			select * from free_sharing 
-		)
-	</select>
-	
-	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 검색 개수 리턴 -->
-	<select id="getTabAllMarketplaceBoardListCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
-		select count(*)
-		from
-		(
-				select *
-				from
-				(
-					select 
-						  s.sale_no		
-						, s.subject
-						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
-						, s.content		
-						, s.readcount	
-						, s.reg_date	
-				
-					from sale s
-				
-					union all
-				
-					select 
-						  f.free_sharing_no
-						, f.subject			
-						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
-						, f.content			
-						, f.readcount		
-						, f.reg_date		
-				
-					from free_sharing f
-				)
-				
-				where	1 = 1
-				<include refid="marketplaceWhere" />
-		)		
-	</select>
-	
-	<!-- 판매 검색 개수 리턴 -->
-	<select id="getTabSaleMarketplaceBoardListCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
-		select count(*)
-		from
-		(
-				select *
-				from
-				(
-					select 
-						  s.sale_no		
-						, s.subject
-						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
-						, s.content		
-						, s.readcount	
-						, s.reg_date	
-				
-					from sale s
-				
-				)
-				
-				where	1 = 1
-				<include refid="marketplaceWhere" />
-		)		
-	</select>
-	
-	<!-- 무료나눔 검색 개수 리턴 -->
-	<select id="getTabFreeSharingMarketplaceBoardListCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
-		select count(*)
-		from
-		(
-				select *
-				from
-				(
-					select 
-						  f.free_sharing_no
-						, f.subject			
-						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
-						, f.content			
-						, f.readcount		
-						, f.reg_date
-						, 'free_sharing'   as "table_name"		
-				
-					from free_sharing f
-				
-				)
-				
-				where	1 = 1
-				<include refid="marketplaceWhere" />
-		)		
-	</select>
-	
-	<!-- 판매, 무료나눔 2개 테이블 Union All 하여 검색 리스트 리턴 -->
-	<select id="getTabAllMarketplaceBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">	
-		select * from ( select rownum RNUM, zxcvb.* from (
+   <!-- 갤러리 -->
+   <select id="getImageGallaryBoardList"
+      resultType="kosmo.team.project.dto.CommunityDTO"
+      parameterType="kosmo.team.project.dto.CommunityDTO">
+      select
+      subject as "subject",
+      writer as "writer",
+      to_char(reg_date, 'yyyy-mm-dd') as "reg_date",
+      readcount as "readcount"
+      from
+      imageboard
+   </select>
 
-				select *
-				from
-				(
-					select 
-						  s.sale_no		
-						, s.subject
-						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
-						, s.content		
-						, s.readcount	
-						, s.reg_date
-						, 'sale'   as "table_name"	
-				
-					from sale s
-				
-					union all
-				
-					select 
-						  f.free_sharing_no
-						, f.subject			
-						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
-						, f.content			
-						, f.readcount		
-						, f.reg_date
-						, 'free_sharing'   as "table_name"		
-				
-					from free_sharing f
-				)
-				
-				where	1 = 1
-				
-				<include refid="marketplaceWhere" />
-				
-				order by reg_date desc, sale_no desc
-		    	
-		<![CDATA[
-		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
-		]]>
-	</select>
-	
-	<!-- 판매 검색 리스트 리턴 -->
-	<select id="getTabSaleMarketplaceBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">	
-		select * from ( select rownum RNUM, zxcvb.* from (
+   <select id="getImageGallaryBoardListCnt" resultType="int">
+      select
+      count(*)
+      from
+      imageboard
+   </select>
 
-				select *
-				from
-				(
-					select 
-						  s.sale_no		
-						, s.subject
-						, ( select nickname from member where m_no = s.writer ) as "WRITER"			
-						, s.content		
-						, s.readcount	
-						, s.reg_date
-						, 'sale'   as "table_name"	
-				
-					from sale s
-	
-				)
-				
-				where	1 = 1
-				
-				<include refid="marketplaceWhere" />
-				
-				order by reg_date desc, sale_no desc
-		    	
-		<![CDATA[
-		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
-		]]>
-	</select>
-	
-	<!-- 무료나눔 검색 리스트 리턴 -->
-	<select id="getTabFreeSharingMarketplaceBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">	
-		select * from ( select rownum RNUM, zxcvb.* from (
+   <insert id="insertGallaryCommunity"
+      parameterType="kosmo.team.project.dto.CommunityDTO">
+      insert into imageboard
+      (
+      b_no
+      , subject
+      , writer
+      , content
+      , reg_date
+      , readcount
+      )
+      values
+      (
+      ( select nvl( max( sale_no ), 0 ) + 1 from sale )
+      , #{ subject }
+      , ${ writer }
+      , #{ content }
+      , 0
+      , sysdate
+      )
+   </insert>
+   
 
-				select *
-				from
-				(
-					select 
-						  f.free_sharing_no
-						, f.subject			
-						, ( select nickname from member where m_no = f.writer ) as "WRITER"			
-						, f.content			
-						, f.readcount		
-						, f.reg_date		
-				
-					from free_sharing f
-	
-				)
-				
-				where	1 = 1
-				
-				<include refid="marketplaceWhere" />
-				
-				order by reg_date desc, free_sharing_no desc
-		    	
-		<![CDATA[
-		) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
-		]]>
-	</select>
-	
-	
 
-	<insert id="insertCommunity"
-		parameterType="kosmo.team.project.dto.CommunityDTO">
-		insert into sale
-		(
-		sale_no
-		, subject
-		, writer
-		, content
-		, readcount
-		, reg_date
-		)
-		values
-		(
-			( select nvl( max( sale_no ), 0 ) + 1 from sale )
-			, #{ subject }
-			, ( select m_no from member where nickname = '${ writer }' )	
-			, #{ content }
-			, 0
-			, sysdate
-		)
-	</insert>
+
+
+   <!-- 장터 -->
+   <select id="getImageMarketBoardList"
+      resultType="kosmo.team.project.dto.CommunityDTO"
+      parameterType="kosmo.team.project.dto.CommunityDTO">
+      select
+      subject as "subject",
+      writer as "writer",
+      to_char(reg_date, 'yyyy-mm-dd') as "reg_date",
+      readcount as "readcount"
+      from
+      imageboard
+   </select>
+   
+   <!-- ImageBoard 개수 리턴 -->
+   <select id="getImageBoardListCnt" resultType="int">
+      select
+      count(*)
+      from
+      imageboard
+   </select>
+   
+   <!-- 판매, 무료나눔 2개 테이블 Union All 하여 총 개수 리턴 -->
+   <select id="getTabAllMarketplaceBoardListAllCnt" resultType="int">
+      select count(*)
+      from
+      (
+         select * from sale 
+         union all
+          select * from free_sharing
+      )
+   </select>
+   
+   <!-- 판매 테이블 총 개수 리턴 -->
+   <select id="getTabSaleMarketplaceBoardListAllCnt" resultType="int">
+      select count(*)
+      from
+      (
+         select * from sale 
+      )
+   </select>
+   
+   <!-- 무료나눔 테이블 총 개수 리턴 -->
+   <select id="getTabFreeSharingMarketplaceBoardListAllCnt" resultType="int">
+      select count(*)
+      from
+      (
+         select * from free_sharing 
+      )
+   </select>
+   
+   <!-- 판매, 무료나눔 2개 테이블 Union All 하여 검색 개수 리턴 -->
+   <select id="getTabAllMarketplaceBoardListCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
+      select count(*)
+      from
+      (
+            select *
+            from
+            (
+               select 
+                    s.sale_no      
+                  , s.subject
+                  , ( select nickname from member where m_no = s.writer ) as "WRITER"         
+                  , s.content      
+                  , s.readcount   
+                  , s.reg_date   
+            
+               from sale s
+            
+               union all
+            
+               select 
+                    f.free_sharing_no
+                  , f.subject         
+                  , ( select nickname from member where m_no = f.writer ) as "WRITER"         
+                  , f.content         
+                  , f.readcount      
+                  , f.reg_date      
+            
+               from free_sharing f
+            )
+            
+            where   1 = 1
+            <include refid="marketplaceWhere" />
+      )      
+   </select>
+   
+   <!-- 판매 검색 개수 리턴 -->
+   <select id="getTabSaleMarketplaceBoardListCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
+      select count(*)
+      from
+      (
+            select *
+            from
+            (
+               select 
+                    s.sale_no      
+                  , s.subject
+                  , ( select nickname from member where m_no = s.writer ) as "WRITER"         
+                  , s.content      
+                  , s.readcount   
+                  , s.reg_date   
+            
+               from sale s
+            
+            )
+            
+            where   1 = 1
+            <include refid="marketplaceWhere" />
+      )      
+   </select>
+   
+   <!-- 무료나눔 검색 개수 리턴 -->
+   <select id="getTabFreeSharingMarketplaceBoardListCnt" parameterType="kosmo.team.project.dto.CommunitySearchDTO" resultType="int">
+      select count(*)
+      from
+      (
+            select *
+            from
+            (
+               select 
+                    f.free_sharing_no
+                  , f.subject         
+                  , ( select nickname from member where m_no = f.writer ) as "WRITER"         
+                  , f.content         
+                  , f.readcount      
+                  , f.reg_date
+                  , 'free_sharing'   as "table_name"      
+            
+               from free_sharing f
+            
+            )
+            
+            where   1 = 1
+            <include refid="marketplaceWhere" />
+      )      
+   </select>
+   
+   <!-- 판매, 무료나눔 2개 테이블 Union All 하여 검색 리스트 리턴 -->
+   <select id="getTabAllMarketplaceBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">   
+      select * from ( select rownum RNUM, zxcvb.* from (
+
+            select *
+            from
+            (
+               select 
+                    s.sale_no    as "b_no"   
+                  , s.subject
+                  , ( select nickname from member where m_no = s.writer ) as "WRITER"         
+                  , s.content      
+                  , s.readcount   
+                  , s.reg_date
+                  , 'sale'     as "table_name"   
+            
+               from sale s
+            
+               union all
+            
+               select 
+                    f.free_sharing_no
+                  , f.subject         
+                  , ( select nickname from member where m_no = f.writer ) as "WRITER"         
+                  , f.content         
+                  , f.readcount      
+                  , f.reg_date
+                  , 'free_sharing'   as "table_name"      
+            
+               from free_sharing f
+            )
+            
+            where   1 = 1
+            
+            <include refid="marketplaceWhere" />
+            
+            order by reg_date desc, "b_no" desc
+             
+      <![CDATA[
+      ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+      ]]>
+   </select>
+   
+   <!-- 판매 검색 리스트 리턴 -->
+   <select id="getTabSaleMarketplaceBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">   
+      select * from ( select rownum RNUM, zxcvb.* from (
+
+            select *
+            from
+            (
+               select 
+                    s.sale_no    as "b_no"
+                  , s.subject
+                  , ( select nickname from member where m_no = s.writer ) as "WRITER"         
+                  , s.content      
+                  , s.readcount   
+                  , s.reg_date
+                  , 'sale'   as "table_name"   
+            
+               from sale s
+   
+            )
+            
+            where   1 = 1
+            
+            <include refid="marketplaceWhere" />
+            
+            order by reg_date desc, "b_no" desc
+             
+      <![CDATA[
+      ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+      ]]>
+   </select>
+   
+   <!-- 무료나눔 검색 리스트 리턴 -->
+   <select id="getTabFreeSharingMarketplaceBoardList" resultType="kosmo.team.project.dto.CommunityDTO" parameterType="kosmo.team.project.dto.CommunitySearchDTO">   
+      select * from ( select rownum RNUM, zxcvb.* from (
+
+            select *
+            from
+            (
+               select 
+                    f.free_sharing_no  as "b_no"
+                  , f.subject         
+                  , ( select nickname from member where m_no = f.writer ) as "WRITER"         
+                  , f.content         
+                  , f.readcount      
+                  , f.reg_date
+                  , 'free_sharing'   as "table_name"
+                     
+            
+               from free_sharing f
+   
+            )
+            
+            where   1 = 1
+            
+            <include refid="marketplaceWhere" />
+            
+            order by reg_date desc, "b_no" desc
+             
+      <![CDATA[
+      ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+      ]]>
+   </select>
+   
+   
+
+   <insert id="insertCommunity"
+      parameterType="kosmo.team.project.dto.CommunityDTO">
+      insert into sale
+      (
+      sale_no
+      , subject
+      , writer
+      , content
+      , readcount
+      , reg_date
+      )
+      values
+      (
+         ( select nvl( max( sale_no ), 0 ) + 1 from sale )
+         , #{ subject }
+         , ( select m_no from member where nickname = '${ writer }' )   
+         , #{ content }
+         , 0
+         , sysdate
+      )
+   </insert>
+   
+   
+   <select id="getCommunityMarketplaceSaleDetailForm" parameterType="int"
+      resultType="kosmo.team.project.dto.CommunityDTO">
+
+      select
+           s.sale_no "b_no"
+           ,s.subject "subject"
+           ,s.writer "writer" 
+           ,m.nickname as "nickname"
+           ,s.content "content"
+           ,s.readcount "readcount"
+           ,s.reg_date "reg_date"
+           , 'sale'   as "table_name"
+           
+           
+           from sale s, member m 
+            
+           where
+           s.sale_no=#{b_no}
+           and
+           s.writer = m.m_no 
+      
+   </select>
+   
+   <select id="getCommunityMarketplaceFreeSharingDetailForm" parameterType="int"
+      resultType="kosmo.team.project.dto.CommunityDTO">
+
+      select
+            f.free_sharing_no "b_no"
+            ,f.subject "subject"
+            ,f.writer "writer"
+            ,m.nickname as "nickname"
+            ,f.content "content"
+            ,f.readcount "readcount"
+            ,f.reg_date "reg_date"
+            ,'free_sharing'   as "table_name"
+            
+            from free_sharing f, member m 
+    
+            where
+            f.free_sharing_no=#{b_no}
+             and
+           f.writer = m.m_no 
+      
+   </select>
 
 </mapper>
