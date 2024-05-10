@@ -128,6 +128,8 @@ function thisYear( ) {
 
 // 지역 검색
 
+
+
 function categoryChange(e) {
     const state = document.getElementById("state");
 
@@ -246,10 +248,5 @@ function categoryChange(e) {
         state.appendChild(opt);
     }
 	
-    /*for (let i = 0; i < add.length; i++) {
-        let opt = document.createElement("option");
-        opt.value = startValue  + 1; // 각각의 군/구에 숫자 할당
-        opt.innerHTML = add[i];
-        state.appendChild(opt);
-    }*/
+    
 }

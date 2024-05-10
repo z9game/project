@@ -384,7 +384,9 @@
   
 	 select
 		    s.sido_id as "sido"
+		    ,s.name		as "sido_c"
 		    ,si.sigungu_id as "sigungu"
+		    ,si.name		as "sigungu_c"
 	 from
 		    recruit_teammemboard r LEFT JOIN sido s on r.sido=s.sido_id
 		                           LEFT JOIN sigungu si on r.sigungu=sigungu_id
