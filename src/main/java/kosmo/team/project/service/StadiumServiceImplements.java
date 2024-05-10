@@ -12,7 +12,6 @@ import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
 import kosmo.team.project.dto.TimeDTO;
 
-
 @Service
 @Transactional
 public class StadiumServiceImplements implements StadiumService {
@@ -37,7 +36,7 @@ public class StadiumServiceImplements implements StadiumService {
 		return stadiumList;
 
 	}
-	
+
 	public int getStadiumListAllCnt() {
 		// --------------------------------------
 		// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
@@ -49,18 +48,15 @@ public class StadiumServiceImplements implements StadiumService {
 		// --------------------------------------
 		return StadiumListAllCnt;
 	}
-	
-	
+
 	public StadiumDTO getStadium(int stadium_no) {
 
-		
 		StadiumDTO stadiumDTO = this.stadiumDAO.getStadium(stadium_no);
 
 		return stadiumDTO;
 
 	}
 
-	
 	@Override
 	public List<TimeDTO> getTime(int stadium_no) {
 
@@ -72,16 +68,14 @@ public class StadiumServiceImplements implements StadiumService {
 
 	@Override
 	public int insertStadiumRent(RentStadiumDTO rentStadiumDTO) {
-		
+
 		int rentCnt = this.stadiumDAO.getRentTimeCnt(rentStadiumDTO);
-		
-		
+
 		if (rentCnt > 0) {
-			
-			 return 3;
+
+			return 3;
 		}
-		
-		
+
 		int StadiumRentCnt = this.stadiumDAO.insertStadiumRent(rentStadiumDTO);
 
 		// ----------------------------------------------
@@ -90,10 +84,17 @@ public class StadiumServiceImplements implements StadiumService {
 		return StadiumRentCnt;
 	}
 
+	
+	
+	
+	@Override
+	public List<String> getFullRent(int stadium_no) {
+		
 
-	
-	
-	
-	
-	
+		List<String> fullRent = this.stadiumDAO.getFullRent(stadium_no);
+
+
+		return fullRent;
+	}
+
 }
