@@ -153,10 +153,42 @@
 </select>
 
 <select id="getM_no"
-		parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
-		select count(*) from booking
-		where m_no = #{m_no}
+        parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
+    select count(*)
+    from booking
+    where m_no = #{m_no}
+      and booking_date >= CURRENT_DATE
+</select>
+
+
+
+
+
+	<select id="getMyStadiumList"
+		resultType="kosmo.team.project.dto.RentStadiumDTO"
+		parameterType="kosmo.team.project.dto.RentStadiumDTO">
+		select * from (
+		select rownum RNUM, zxcvb.* from (
+		select
+		 b.booking_no AS "booking_no",
+                b.m_no AS "m_no",
+                s.stadium_no AS "stadium_no",
+                s.stadium_name as     "stadium_name",
+                sid.name AS "sido_name",
+                sig.name as "sigungu_name",
+                s.detailed_address as "detail_address"
+            from
+                booking b
+                join stadium s on b.stadium_no = s.stadium_no
+                join sido sid on s.sido_name = sid.sido_id
+                join sigungu sig on s.sigungu_name = sig.sigungu_id
+                join member m on b.m_no = m.m_no
+               WHERE b.m_no = #{m_no}
+
+        <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
 	</select>
+
+
 
 
 

@@ -49,6 +49,11 @@ public class StadiumController {
 		
 		List<StadiumDTO> stadiumList = this.stadiumService.getStadiumList(stadiumSearchDTO);
 
+		List<RentStadiumDTO> myStadiumList = this.stadiumService.getMyStadiumList(stadiumSearchDTO);
+		
+		for (RentStadiumDTO stadium : myStadiumList) {
+		    System.out.println("m_no: " + stadium.getM_no());
+		}
 		
 		
 
@@ -57,6 +62,7 @@ public class StadiumController {
 		mav.addObject("stadiumList", stadiumList);
 		mav.addObject("StadiumListCnt", StadiumListCnt);
 		mav.addObject("StadiumListAllCnt", StadiumListAllCnt);
+		mav.addObject("myStadiumList", myStadiumList);
 		mav.addObject("StadiumMap", StadiumMap);
 
 		mav.setViewName(stadiumFolder + "stadiumRentForm.jsp");

@@ -23,6 +23,8 @@ public interface StadiumService {
 
 	public List<String> getFullRent(int stadium_no);
 
+	public List<RentStadiumDTO> getMyStadiumList(StadiumSearchDTO stadiumSearchDTO);
+
 
 
 }

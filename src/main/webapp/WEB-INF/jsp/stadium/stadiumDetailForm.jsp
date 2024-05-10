@@ -39,16 +39,12 @@
 					location.href = "#";
 					
 					
-				} 
-				
-				else if (result == 1) {
-					alert("이미 예약한 경기장이있습니다.");
+				} 	else if (result == 4) {
+					alert("예약은 최대 3개까지만 예약할수있습니다.");
 					location.href = "/stadiumRentForm.do";
 					
 					
-				}
-				
-				else {
+				}else {
 					alert("예약 성공입니다.");
 					location.href = "/stadiumRentForm.do";
 				}
@@ -119,6 +115,8 @@
 
 
 
+    
+    
 
 	<c:if test="${!empty requestScope.stadiumDTO}">
 
