@@ -21,4 +21,6 @@ public interface StadiumService {
 
 	public int insertStadiumRent(RentStadiumDTO rentStadiumDTO);
 
+
+
 }

@@ -4,11 +4,13 @@
 <mapper namespace="kosmo.team.project.dao.StadiumDAO">
 
 	<select id="getStadiumList"
-		resultType="kosmo.team.project.dto.StadiumDTO" parameterType="kosmo.team.project.dto.StadiumDTO">
+		resultType="kosmo.team.project.dto.StadiumDTO"
+		parameterType="kosmo.team.project.dto.StadiumDTO">
 		select * from (
 		select rownum RNUM, zxcvb.* from (
 		select
-		st.stadium_no AS "stadium_no"
+		st.stadium_no
+		AS "stadium_no"
 		,st.stadium_name AS "stadium_name"
 		,s.name
 		AS
@@ -17,13 +19,15 @@
 		,st.detailed_address as
 		"detail_address"
 		,to_char(st.reg_date, 'YYYY-MM-DD') AS "reg_date"
-		,st.content as "content"
+		,st.content as
+		"content"
 		,st.stadium_status as "stadium_status"
 
 		FROM
 		stadium st
 		LEFT
-		JOIN sido s ON st.sido_name = s.sido_id
+		JOIN
+		sido s ON st.sido_name = s.sido_id
 		LEFT JOIN sigungu si ON
 		st.sigungu_name = si.sigungu_id
 
@@ -35,9 +39,9 @@
 		count(*)
 		from
 		stadium
-	</select>	
-	
-	
+	</select>
+
+
 	<select id="getStadiumListAllCnt" resultType="int">
 		select
 		count(*)
@@ -46,28 +50,32 @@
 		LEFT JOIN sido s ON st.sido_name =
 		s.sido_id
 		LEFT JOIN
-		sigungu si ON st.sigungu_name = si.sigungu_id
+		sigungu
+		si ON st.sigungu_name = si.sigungu_id
 
 
 
 	</select>
-	
-	
-	
+
+
+
 	<select id="getStadium" parameterType="int"
 		resultType="kosmo.team.project.dto.StadiumDTO">
 
 		select
 		st.stadium_no AS "stadium_no"
-		,st.stadium_name AS "stadium_name"
+		,st.stadium_name AS
+		"stadium_name"
 		,s.name AS "sido_name"
 		,si.name as "sigungu_name"
 		,st.detailed_address
 		as
 		"detail_address"
-		,to_char(st.reg_date, 'YYYY-MM-DD') AS "reg_date"
+		,to_char(st.reg_date,
+		'YYYY-MM-DD') AS "reg_date"
 		,st.content as "content"
-		,st.stadium_status as "stadium_status"
+		,st.stadium_status
+		as "stadium_status"
 
 		FROM
 		stadium st
@@ -75,23 +83,24 @@
 		s.sido_id
 		LEFT JOIN
 		sigungu si ON st.sigungu_name = si.sigungu_id
-		
+
 		where
 		stadium_no=#{stadium_no}
 	</select>
-	
+
 	<!-- 시간테이블 -->
-	
+
 	<select id="getTime" parameterType="int"
 		resultType="kosmo.team.project.dto.TimeDTO">
 
 		select
-			time_no as "time_no"
-			,time_range as "time_range"
-			from time_table
+		time_no as "time_no"
+		,time_range as "time_range"
+		from
+		time_table
 	</select>
-	
-	
+
+
 	<insert id="insertStadiumRent"
 		parameterType="kosmo.team.project.dto.RentStadiumDTO">
 		insert into booking(
@@ -108,11 +117,21 @@
 		,#{time_slot}
 		)
 	</insert>
-	
-	
-	
-	
-	
-	
-	
+
+
+	<select id="getRentTimeCnt" parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
+		select count(*) from booking
+		where stadium_no = #{stadium_no} and time_slot = #{time_slot} and booking_date = #{date}
+	</select>
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

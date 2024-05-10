@@ -73,6 +73,15 @@ public class StadiumServiceImplements implements StadiumService {
 	@Override
 	public int insertStadiumRent(RentStadiumDTO rentStadiumDTO) {
 		
+		int rentCnt = this.stadiumDAO.getRentTimeCnt(rentStadiumDTO);
+		
+		
+		if (rentCnt > 0) {
+			
+			 return 3;
+		}
+		
+		
 		int StadiumRentCnt = this.stadiumDAO.insertStadiumRent(rentStadiumDTO);
 
 		// ----------------------------------------------
@@ -80,6 +89,8 @@ public class StadiumServiceImplements implements StadiumService {
 		// ----------------------------------------------
 		return StadiumRentCnt;
 	}
+
+
 	
 	
 	

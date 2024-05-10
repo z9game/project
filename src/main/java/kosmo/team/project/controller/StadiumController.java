@@ -133,8 +133,13 @@ public class StadiumController {
 		
 		// -------------------------------------------
 		int StadiumRentCnt = this.stadiumService.insertStadiumRent(rentStadiumDTO);
-	
+		
 
+
+		System.out.println("StadiumRentCnt 개수" + StadiumRentCnt);
+		
+		
+		
 		// -------------------------------------------
 		// HashMap 객체에 게시판 수정 행의 개수 저장하기기
 		// -------------------------------------------
@@ -146,9 +151,7 @@ public class StadiumController {
 		return resultMap;
 	}
 	
-	
-	
-	
+
 	
 	
 	

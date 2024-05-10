@@ -26,6 +26,10 @@ public interface StadiumDAO {
 
 	public int insertStadiumRent(RentStadiumDTO rentStadiumDTO);
 
+	public int getRentTimeCnt(RentStadiumDTO rentStadiumDTO);
+
+	
+
 	
 	
 	

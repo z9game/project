@@ -25,10 +25,24 @@
 			data : formObj.serialize(),
 			success : function(json) {
 				var result = json["result"];
-				if (result == 0) {
+				
+				
+				if(result ==3){
+					
+					alert("이미 예약되어있는 시간대입니다.");
+					location.href = "#";
+					
+					
+				} 
+				
+				else if (result == 0) {
 					alert("예약에 실패하였습니다.");
 					location.href = "/stadiumRentForm.do";
-				} else {
+					
+					
+				}
+				
+				else {
 					alert("예약 성공입니다.");
 					location.href = "/stadiumRentForm.do";
 				}
@@ -39,33 +53,32 @@
 		});
 	}
 
-	$(document)
-			.ready(
-					function() {
-						$("#date")
-								.datepicker(
-										{
-											dateFormat : 'yy-mm-dd',
-											showOtherMonths : true,
-											showMonthAfterYear : true,
-											changeYear : true,
-											changeMonth : true,
-											showOn : "both",
-											buttonImage : "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-											buttonImageOnly : true,
-											buttonText : "날짜 선택",
-											yearSuffix : "년",
-											monthNamesShort : [ '1월', '2월',
-													'3월', '4월', '5월', '6월',
-													'7월', '8월', '9월', '10월',
-													'11월', '12월' ],
-											dayNamesMin : [ '일', '월', '화', '수',
-													'목', '금', '토' ],
-										});
-						$('form').on('submit', function(e) {
-							var confirmSubmit = confirm('예약을 완료하시겠습니까?');
-							if (!confirmSubmit) {
-								e.preventDefault();
+	$(document).ready(function() {
+	    $("#date").datepicker({
+	        dateFormat: 'yy-mm-dd',
+	        showOtherMonths: true,
+	        showMonthAfterYear: true,
+	        changeYear: true,
+	        changeMonth: true,
+	        showOn: "both",
+	        buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+	        buttonImageOnly: true,
+	        buttonText: "날짜 선택",
+	        yearSuffix: "년",
+	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        showTime: false,
+	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	        minDate: 0 // 오늘 이전 날짜 선택 불가능
+	    });
+	    
+	    
+	    
+	    
+	    
+	    $('form').on('submit', function(e) {
+				var confirmSubmit = confirm('예약을 완료하시겠습니까?');
+					if (!confirmSubmit) {
+							e.preventDefault();
 							}
 						});
 					});
