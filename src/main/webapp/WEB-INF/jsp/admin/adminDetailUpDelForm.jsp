@@ -131,6 +131,8 @@
 					<input type="radio" name="gender" value="여"
 					<c:if test="${requestScope.memberDTO.gender.contains ('여')}">checked</c:if>>여</td>
 			</tr>
+			
+
 			<tr>
 					<th>시/도</th>
 					<td colspan="5" >${requestScope.memberDTO.sido}-${requestScope.memberDTO.sigungu}->(수정)

@@ -70,6 +70,17 @@ public class StadiumServiceImplements implements StadiumService {
 	public int insertStadiumRent(RentStadiumDTO rentStadiumDTO) {
 
 		int rentCnt = this.stadiumDAO.getRentTimeCnt(rentStadiumDTO);
+		
+		int m_noCnt = this.stadiumDAO.getM_no(rentStadiumDTO);
+		
+		if(m_noCnt>0) {
+			
+			
+			return 1;
+		}
+		
+		
+		
 
 		if (rentCnt > 0) {
 
