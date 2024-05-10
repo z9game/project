@@ -33,6 +33,8 @@ public interface StadiumDAO {
 	 * public int getRentTimeSlotCnt(int stadium_no);
 	 */
 	public List<String> getFullRent(int stadium_no);
+
+	public int getM_no(RentStadiumDTO rentStadiumDTO);
 	
 
 	

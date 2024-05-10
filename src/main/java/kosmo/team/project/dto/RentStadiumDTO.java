@@ -5,11 +5,17 @@ import java.util.List;
 public class RentStadiumDTO {
 	
 	
-	
+	private int m_no; 
 	private int stadium_no; 
 	private int time_slot;
 	private String date;
 	private List<String> checkDate;
+	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
+	}
 	public int getStadium_no() {
 		return stadium_no;
 	}
@@ -34,10 +40,13 @@ public class RentStadiumDTO {
 	public void setCheckDate(List<String> checkDate) {
 		this.checkDate = checkDate;
 	}
-	
-	
+
+
 	
 
+	
+	
+	
 	
 	
 	

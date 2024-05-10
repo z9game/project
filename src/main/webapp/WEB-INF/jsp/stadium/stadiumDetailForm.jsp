@@ -17,7 +17,13 @@
 
 		var formObj = $("[name='rentStadiumForm']");
 
-		alert(formObj.serialize());
+		var sessionMid = '<%= session.getAttribute("mid") %>';
+		
+		 if (sessionMid == null || sessionMid.trim() === "") {
+				alert('로그인이 필요한 서비스입니다.');
+				location.href = '/main/loginForm.do';
+				return;
+			}
 
 		$.ajax({
 			url : "/rentStadiumProc.do",
@@ -35,8 +41,8 @@
 					
 				} 
 				
-				else if (result == 0) {
-					alert("예약에 실패하였습니다.");
+				else if (result == 1) {
+					alert("이미 예약한 경기장이있습니다.");
 					location.href = "/stadiumRentForm.do";
 					
 					
@@ -160,12 +166,17 @@
 			</tr>
 			<tr>
 				<th bgColor="lightgray">시간대</th>
-				<td><select name="time_slot" required="required">
+				<td>
+
+				<select name="time_slot" required="required">
+				<option value="선택">선택</option>
 						<c:forEach var="time" items="${timeDTO}">
 							<option value="${time.time_no}">${time.time_range}</option>
 						</c:forEach>
 
-				</select></td>
+				</select>
+
+				</td>
 			</tr>
 
 			<tr>
@@ -175,7 +186,9 @@
 		</table>
 		<input type="hidden" name="stadium_no"
 			value="${requestScope.stadiumDTO.stadium_no}">
-
+		
+		<input type="hidden" name="m_no" value="<%= request.getSession().getAttribute("m_no") %>">
+		
 	</form>
 	<center>
 		<span style="cursor: pointer"
