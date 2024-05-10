@@ -117,4 +117,22 @@ public class RecruitServiceImpl implements RecruitService {
 		return recruitTeamMemDTO;
 	}
 	
+	public List<String> getRecruit_TeamMemUpDel_day(int b_no) {
+		List<String> recruitTeamMemDTO_day = this.recruitDAO.getRecruit_TeamMemUpDel_day(b_no);
+		return recruitTeamMemDTO_day;
+	}
+	
+	public List<String> getRecruit_TeamMemUpDel_time(int b_no) {
+		List<String> recruitTeamMemDTO_time = this.recruitDAO.getRecruit_TeamMemUpDel_time(b_no);
+		return recruitTeamMemDTO_time;
+	}
+	
+	
+	 public RecruitTeamMemDTO getRecruit_TeamMemUpDel_sidosigungu(int b_no) {
+		 RecruitTeamMemDTO recruitTeamMemDTO_sidosigungu = this.recruitDAO.getRecruit_TeamMemUpDel_sidosigungu(b_no);
+		 return recruitTeamMemDTO_sidosigungu;
+	 }
+	 
+	
+	
 }

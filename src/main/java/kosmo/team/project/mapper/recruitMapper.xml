@@ -344,28 +344,53 @@
                             where r.b_no = #{b_no}       
    </select>
    
-   <select id="getRecruit_TeamMemUpDel" parameterType="int" resultType="String">     
+   <select id="getRecruit_TeamMemUpDel" parameterType="int" resultType="kosmo.team.project.dto.RecruitTeamMemDTO">     
 	    select
-	        r.writer as "writer",
-	        r.title as "title",
-	        s.name as "sido_c",
-	        si.name as "sigungu_c",
-	        dof.day_name as "day_name",
-	        t.time as "time",
-	        r.pos as "pos",
-	        r.content as "content"
-	    from
-	        recruit_teammemboard r 
-	        LEFT JOIN teammemboard_day d ON r.b_no = d.b_no
-	        LEFT JOIN day_of_week dof ON d.day = dof.day_no
-	        LEFT JOIN teammemboard_time t ON r.b_no = t.b_no
-	        LEFT JOIN sido s ON r.sido = s.sido_id
-	        LEFT JOIN sigungu si ON r.sigungu = si.sigungu_id
-	    where
-	        r.b_no = 23
-</select>
+			  writer
+			  ,title
+			  ,pos
+			  ,team_mem
+			  ,content
+			  ,b_no
+		from
+		       recruit_teammemboard
+		where 
+			   b_no=#{b_no}
+	</select>
    
+    <select id="getRecruit_TeamMemUpDel_day" parameterType="int" resultType="String">     
+  
+	   select
+	 		 dof.day_name as "day"
+		from
+	    	  recruit_teammemboard r LEFT JOIN teammemboard_day d on r.b_no=d.b_no
+	                          		 LEFT JOIN day_of_week dof on d.day=dof.day_no
+		where
+			  r.b_no=#{b_no}
+   	</select>
    
+    <select id="getRecruit_TeamMemUpDel_time" parameterType="int" resultType="String">     
+  
+	  select
+	      t.time as "time"
+	  from
+	       recruit_teammemboard r LEFT JOIN teammemboard_time t on r.b_no=t.b_no
+	  where
+	  	   r.b_no=#{b_no}
+	  	   
+   	</select>
    
-   
+	<select id="getRecruit_TeamMemUpDel_sidosigungu" parameterType="int" resultType="kosmo.team.project.dto.RecruitTeamMemDTO">     
+  
+	 select
+		    s.sido_id as "sido"
+		    ,si.sigungu_id as "sigungu"
+	 from
+		    recruit_teammemboard r LEFT JOIN sido s on r.sido=s.sido_id
+		                           LEFT JOIN sigungu si on r.sigungu=sigungu_id
+	 where
+	 		 r.b_no=#{b_no}
+	  	   
+   	</select> 
+   	 
 </mapper>

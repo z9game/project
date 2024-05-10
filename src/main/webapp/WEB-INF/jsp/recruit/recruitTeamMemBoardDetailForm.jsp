@@ -133,11 +133,20 @@
          <span style="cursor: pointer"
             onclick="location.href='/recruitTeamMemBoardForm.do'">
             [목록 화면으로] </span>
-         <input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.BoardUpDelForm.submit()" >
+         <input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.boardUpDelForm.submit()" >
     
        </c:if>
        </center>
-    
+       
+       <<!--------------------------------------------------------------------------->
+		<!-- WAS에 "/recruitTeamMemBoardUpDelForm.do" 주소로 접속하기 위한 form 태그 선언하기 -->
+		<!--------------------------------------------------------------------------->
+		<form name="boardUpDelForm" action="/recruitTeamMemBoardUpDelForm.do" method="post">
+		<!------------------------------------------------------------------------>
+		<!-- 게시판 고유번호가 저장된 hidden 태그 선언하기 -->
+		<!------------------------------------------------------------------------>
+		<input type="hidden" name="b_no"value="${requestScope.list.b_no}">
+		</form>
     
 </body>
 </html>

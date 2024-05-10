@@ -167,22 +167,45 @@ public class RecruitController {
 	}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 	
-	
-	
-	
-	
-	
-	
-	
+    
     @RequestMapping(value = "/recruitTeamMemBoardUpDelForm.do")
-    public ModelAndView recruitTeamMemBoardUpDelForm(@RequestParam(value = "b_no") int b_no ) {
-    	
+    public ModelAndView recruitTeamMemBoardUpDelForm(@RequestParam(value="b_no") int b_no) {
+    	// getRecruit_TeamMemUpDel 는 수정/삭제를 위해 데이터를 가져오는 메소드명
     	RecruitTeamMemDTO recruitTeamMemDTO = this.recruitService.getRecruit_TeamMemUpDel(b_no);
+    	List<String> recruitTeamMemDTO_day = this.recruitService.getRecruit_TeamMemUpDel_day(b_no);
+    	List<String> recruitTeamMemDTO_time = this.recruitService.getRecruit_TeamMemUpDel_time(b_no);
+    	RecruitTeamMemDTO recruitTeamMemDTO_sidosigungu = this.recruitService.getRecruit_TeamMemUpDel_sidosigungu(b_no);
+    	
     	ModelAndView mav = new ModelAndView();
+    	mav.addObject("detail", recruitTeamMemDTO);
+    	mav.addObject("updel_day", recruitTeamMemDTO_day);
+    	mav.addObject("updel_time", recruitTeamMemDTO_time);
+    	mav.addObject("updel_sidosigungu", recruitTeamMemDTO_sidosigungu);
+    	mav.addObject("updel_time", recruitTeamMemDTO_time);
     	mav.setViewName("/recruit/recruitTeamMemBoardUpDelForm.jsp");
     	
         return mav;
     }  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }
