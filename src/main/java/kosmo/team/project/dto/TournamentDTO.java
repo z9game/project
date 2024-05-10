@@ -2,12 +2,20 @@ package kosmo.team.project.dto;
 
 public class TournamentDTO {
 	
+	private int list_no;
 	private String subject;
 	private String region;
 	private String content;
 	private String regist_start;
 	private String regist_end;
 	
+	
+	public int getList_no() {
+		return list_no;
+	}
+	public void setList_no(int list_no) {
+		this.list_no = list_no;
+	}
 	public String getSubject() {
 		return subject;
 	}
@@ -38,5 +46,7 @@ public class TournamentDTO {
 	public void setRegist_end(String regist_end) {
 		this.regist_end = regist_end;
 	}
+	
+	
 
 }

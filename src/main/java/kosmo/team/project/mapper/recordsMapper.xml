@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosmo.team.project.dao.RecordsDAO">
+	<select id="getRecordsStatistics" resultType="kosmo.team.project.dto.RecordsDTO" parameterType="kosmo.team.project.dto.RecordsDTO">
+		select
+		    m.nickname AS "nickname",
+		    p.games_played as "games_played",
+		    p.wins as "wins",
+		    p.draws as "draws",
+		    p.losses as "losses",
+		    p.goals_for as "goals_for",
+		    p.goals_assist as "goals_assist"  
+		from
+		    member m, player_record p
+		where
+		    p.player = m.m_no
+		<if test="sort == null or sort.isEmpty()">
+		    order by games_played asc
+		</if>
+		<if test="sort != null and !sort.isEmpty()">
+		    order by ${sort}
+		</if>
+	</select>
+	
+	<select id="getRecordsStatisticsListCnt" resultType="int">
+		select 
+			count(*) 
+		from
+		    player_record
+	</select>
+</mapper>

@@ -297,10 +297,6 @@ function checkDate() {
 					<input type="button" value="새글쓰기" 
 					onclick="location.replace('/adminNoticeboardRegForm.do');">
 
-
-
-
-
 				</td>
 			</tr>
 		</table>

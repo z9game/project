@@ -42,4 +42,19 @@
 
 	</select>
 	
+	
+	<select id="recruitTeamBoardDetailForm" resultType="kosmo.team.project.dto.TournamentDTO" parameterType="int">
+          select 
+              list_no
+              ,subject
+              ,region
+              ,content
+              ,to_char(regist_start,'YYYY-MM-DD') as "regist_start"
+              ,to_char(regist_end,'YYYY-MM-DD') 	as "regist_end"
+          from 
+              tournament
+          where
+             list_no = #{list_no}
+   </select>
+	
 </mapper>

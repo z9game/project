@@ -45,5 +45,7 @@ public interface MainDAO {
 	
 	public int customerServiceQnADelete(CustomerServiceDetailDTO customerServiceDetailDTO);
 	
+	public int customerServiceQnACommentUpdate(CustomerServiceDetailDTO customerServiceDetailDTO);
+	
 	public int customerServiceQnACommentDelete(CustomerServiceDetailDTO customerServiceDetailDTO);
 }
