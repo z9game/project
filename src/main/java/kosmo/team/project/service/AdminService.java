@@ -6,7 +6,10 @@ import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
+import kosmo.team.project.dto.RecruitSearchDTO;
 import kosmo.team.project.dto.Stadim2DTO;
+import kosmo.team.project.dto.TournamentDTO;
+import kosmo.team.project.dto.TournamentSearchDTO;
 
 public interface AdminService {
 	// 모든 회원 목록을 불러오는 메서드
@@ -99,5 +102,9 @@ public interface AdminService {
 	// [1개 경기장 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 	int insertStadium(Stadim2DTO stadim2DTO);
+	
+	public List<TournamentDTO> getTournamentList(TournamentSearchDTO tournamentSearchDTO);
+	
+	public int getTournamentListCnt(TournamentSearchDTO tournamentSearchDTO);
 
 }

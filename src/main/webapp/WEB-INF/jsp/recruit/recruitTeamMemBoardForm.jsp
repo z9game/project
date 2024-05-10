@@ -252,31 +252,31 @@ function goRecruitTeamMemDetailForm(b_no)
                      </th>
                      <td colspan="5" align="center">
                      <div class="search_boxes">
-            
-                           <select name="sido" id="" onchange="categoryChange(this)">
-                             <option value="0">시/도 선택</option>
-                        <option value="1">강원</option>
-                        <option value="2">경기</option>
-                        <option value="3">경남</option>
-                        <option value="4">경북</option>
-                        <option value="5">광주</option>
-                        <option value="6">대구</option>
-                        <option value="7">대전</option>
-                        <option value="8">부산</option>
-                        <option value="9">서울</option>
-                        <option value="10">울산</option>
-                        <option value="11">인천</option>
-                        <option value="12">전남</option>
-                        <option value="13">전북</option>
-                        <option value="14">제주</option>
-                        <option value="15">충남</option>
-                        <option value="16">충북</option>
-                           </select>
-            
-                           <select name="gungu" id="state">
-                             <option>군/구 선택</option>
-                           </select>
-                        </div>
+           
+                          <select name="sido" id="" onchange="categoryChange(this)">
+                            <option value="0">시/도 선택</option>
+	                        <option value="1">강원</option>
+	                        <option value="2">경기</option>
+	                        <option value="3">경남</option>
+	                        <option value="4">경북</option>
+	                        <option value="5">광주</option>
+	                        <option value="6">대구</option>
+	                        <option value="7">대전</option>
+	                        <option value="8">부산</option>
+	                        <option value="9">서울</option>
+	                        <option value="10">울산</option>
+	                        <option value="11">인천</option>
+	                        <option value="12">전남</option>
+	                        <option value="13">전북</option>
+	                        <option value="14">제주</option>
+	                        <option value="15">충남</option>
+	                        <option value="16">충북</option>
+                          </select>
+           
+                          <select name="gungu" id="state">
+                            <option>군/구 선택</option>
+                          </select>
+                       </div>
                         </td>
                   </tr>
                   

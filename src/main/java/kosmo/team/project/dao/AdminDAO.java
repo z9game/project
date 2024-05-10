@@ -9,6 +9,8 @@ import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 import kosmo.team.project.dto.Stadim2DTO;
+import kosmo.team.project.dto.TournamentDTO;
+import kosmo.team.project.dto.TournamentSearchDTO;
 
 @Mapper
 public interface AdminDAO {
@@ -102,5 +104,9 @@ public interface AdminDAO {
 	// [1개 경기장 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 	int insertStadium(Stadim2DTO stadim2DTO);
+	
+	public List<TournamentDTO> getTournamentList(TournamentSearchDTO tournamentSearchDTO);
+	
+	public int getTournamentListCnt(TournamentSearchDTO tournamentSearchDTO);
 
 }

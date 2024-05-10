@@ -1,5 +1,7 @@
 package kosmo.team.project.dto;
 
+import java.util.List;
+
 public class RentStadiumDTO {
 	
 	
@@ -7,6 +9,7 @@ public class RentStadiumDTO {
 	private int stadium_no; 
 	private int time_slot;
 	private String date;
+	private List<String> checkDate;
 	public int getStadium_no() {
 		return stadium_no;
 	}
@@ -25,8 +28,16 @@ public class RentStadiumDTO {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	public List<String> getCheckDate() {
+		return checkDate;
+	}
+	public void setCheckDate(List<String> checkDate) {
+		this.checkDate = checkDate;
+	}
 	
 	
+	
+
 	
 	
 	

@@ -29,6 +29,11 @@ public interface StadiumDAO {
 	public int getRentTimeCnt(RentStadiumDTO rentStadiumDTO);
 
 	
+	/*
+	 * public int getRentTimeSlotCnt(int stadium_no);
+	 */
+	public List<String> getFullRent(int stadium_no);
+	
 
 	
 	

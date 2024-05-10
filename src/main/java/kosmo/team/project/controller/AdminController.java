@@ -19,6 +19,8 @@ import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 import kosmo.team.project.dto.Stadim2DTO;
+import kosmo.team.project.dto.TournamentDTO;
+import kosmo.team.project.dto.TournamentSearchDTO;
 import kosmo.team.project.service.AdminService;
 import kosmo.team.project.utility.Page;
 
@@ -739,6 +741,36 @@ public class AdminController {
 	}
 
 	
+	
+	 @RequestMapping(value = "/adminTournamentBoardForm.do")
+	    public ModelAndView tournamentBoardForm(TournamentSearchDTO tournamentSearchDTO) {
+	    	
+	 		int getTournamentListCnt = this.adminService.getTournamentListCnt(tournamentSearchDTO);
+	 
+	 		Map<String, Integer> tournamentMap = Page.getPagingMap(
+	 			tournamentSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+				, tournamentSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+				, getTournamentListCnt // 검색 결과물 개수
+			);
+	    	
+	 		tournamentSearchDTO.setSelectPageNo((int) tournamentMap.get("selectPageNo"));
+	 		tournamentSearchDTO.setRowCntPerPage((int) tournamentMap.get("rowCntPerPage"));
+	 		tournamentSearchDTO.setBegin_rowNo((int) tournamentMap.get("begin_rowNo"));
+	 		tournamentSearchDTO.setEnd_rowNo((int) tournamentMap.get("end_rowNo"));
+		 
+	    	List<TournamentDTO> tournamentList = this.adminService.getTournamentList(tournamentSearchDTO);
+	        ModelAndView mav = new ModelAndView();
+	       
+	        mav.addObject("tournamentList", tournamentList);
+	        mav.addObject("tournamentMap", tournamentMap);
+	        mav.setViewName("/admin/adminTournamentBoardForm.jsp");
+	        
+	        
+	        return mav;
+	        
+	        
+	        
+	    }
 	
 	
 	

@@ -10,7 +10,10 @@ import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
+import kosmo.team.project.dto.RecruitSearchDTO;
 import kosmo.team.project.dto.Stadim2DTO;
+import kosmo.team.project.dto.TournamentDTO;
+import kosmo.team.project.dto.TournamentSearchDTO;
 
 @Service
 public class AdminServiceImplements implements AdminService {
@@ -366,7 +369,20 @@ public class AdminServiceImplements implements AdminService {
 	}
 	
 	
+	public List<TournamentDTO> getTournamentList(TournamentSearchDTO tournamentSearchDTO) {
+
+		List<TournamentDTO> tournamentList = this.adminDAO.getTournamentList(tournamentSearchDTO);
+
+		return tournamentList;
+
+	}
 	
+	public int getTournamentListCnt(TournamentSearchDTO tournamentSearchDTO) {
+		
+		int getTournamentListCnt = this.adminDAO.getTournamentListCnt(tournamentSearchDTO);
+
+		return getTournamentListCnt;
+	}
 	
 	
 	
