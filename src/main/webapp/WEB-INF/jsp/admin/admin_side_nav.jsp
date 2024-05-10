@@ -12,5 +12,10 @@
 				href="adminNoticeBoardForm.do">공지사항 </a></li>
 				<li class="nav-item"><a class="nav-link"
 				href="adminStadiumForm.do">경기장 </a></li>
+				
+				
+			<li class="nav-item">
+				<a class="nav-link" href="/adminTournamentBoardForm.do">대회일정</a>
+			</li>
 		</ul>
 	</div>

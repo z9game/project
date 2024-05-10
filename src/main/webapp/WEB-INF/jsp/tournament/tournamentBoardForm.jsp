@@ -24,13 +24,13 @@
 		});
 		
 		ing();
-	})
+	}) 
 	
 	ing_or_end = "초기";
 	
 	function ing()
 	{
-		
+		search("전체");
 		var now = new Date();
 		var year = now.getFullYear();
 		var month = now.getMonth()+1;
@@ -73,9 +73,6 @@
 	
 	function end()
 	{
-		$(".region2").removeClass("selected2");
-		$(".all2").addClass("selected2");
-		
 		var now = new Date();
 		var year = now.getFullYear();
 		var month = now.getMonth()+1;
@@ -116,6 +113,10 @@
 	
 	function search(text)
 	{	
+		$(".region1").click(function(){
+			$(".region1").removeClass("selected1");
+			$(this).addClass("selected1");
+		});
 		var now = new Date();
 		var year = now.getFullYear();
 		var month = now.getMonth()+1;
