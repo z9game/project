@@ -4,6 +4,9 @@ import java.util.List;
 
 public class StadiumDTO {
 	
+	
+	
+	
 	private int stadium_no;
 	private String stadium_name;
 	private String sido_name;
@@ -13,6 +16,7 @@ public class StadiumDTO {
 	private String content;
 	private String stadium_status;
 	private List<String> time_range;
+	 private int m_no;
 	public int getStadium_no() {
 		return stadium_no;
 	}
@@ -67,7 +71,12 @@ public class StadiumDTO {
 	public void setTime_range(List<String> time_range) {
 		this.time_range = time_range;
 	}
-	
+	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
+	}
 	
 	
 

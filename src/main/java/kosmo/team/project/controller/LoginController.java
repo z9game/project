@@ -70,7 +70,7 @@ public class LoginController {
 		
 	}
 	
-	System.out.println("m_no:"+ m_no);
+	
 	
 	
 	return midpwdCnt;

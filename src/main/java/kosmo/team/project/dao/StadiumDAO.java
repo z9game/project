@@ -35,6 +35,8 @@ public interface StadiumDAO {
 	public List<String> getFullRent(int stadium_no);
 
 	public int getM_no(RentStadiumDTO rentStadiumDTO);
+
+	public List<RentStadiumDTO> getMyStadiumList(StadiumSearchDTO stadiumSearchDTO);
 	
 
 	
