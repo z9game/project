@@ -12,11 +12,7 @@
 <script src="/js/recruitTeamBoardFormScript.js"></script>
 
 
-<script>
-	$(document).ready(function(){
-		categoryChange(${requestScope.updel_sidosigungu.sido})
-	});
-</script>
+
 
 
 <!-- <script>

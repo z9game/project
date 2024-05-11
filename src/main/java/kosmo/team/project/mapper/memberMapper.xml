@@ -34,6 +34,29 @@
 		)
 	</insert>
 	
+	
+	
+	<insert id="insertDetail" parameterType="kosmo.team.project.dto.MemberDTO">
+		insert into member_detail(
+			member
+		)
+		values(
+			(select max(m_no) from member)
+		)
+		
+	</insert>
+	
+	<insert id="insertRecoed" parameterType="kosmo.team.project.dto.MemberDTO">
+		insert into player_record(
+			player
+		)
+		values(
+			(select max(m_no) from member)
+		)
+		
+	</insert>
+	
+	
 	<select id="getmid" parameterType="kosmo.team.project.dto.MemberDTO" resultType="int">
 		select count(*)
 		from
@@ -41,5 +64,52 @@
 		where
 			mid = #{mid}
 	</select>
+	
+	<select id="updateMem" parameterType="String" resultType="kosmo.team.project.dto.MemberDTO">
+		select
+		    m.name
+		    ,m.mid
+		    ,m.password
+		    ,m.nickname
+		    ,m.email
+		    ,m.phone
+		    ,s.name AS "sido"
+    		,si.name AS "sigungu"
+		    ,m.detail_address
+		from
+		     member m left join sido s ON m.sido_id = s.sido_id
+             		  LEFT JOIN sigungu si ON m.sigungu_id = si.sigungu_id
+		where
+			mid = #{mid}
+	</select>
+	
+	
+	<!-- 마이페이지에 있는 내정보 가져오기 -->
+	<select id="getMyInfo" parameterType="String" resultType="kosmo.team.project.dto.MemberDTO">
+		select
+		    m.name    
+		    ,md.team           
+		from
+		    member m left join member_detail md on m.m_no = md.member 
+		where
+			m.mid = #{mid}
+	</select>
+	
+	<!-- 마이페이지에 있는 내기록 가져오기 -->
+	<select id="getMyStat" parameterType="String" resultType="kosmo.team.project.dto.MemberDTO">
+		select
+		    r.games_played
+		    ,r.wins
+		    ,r.draws
+		    ,r.losses
+		    ,r.goals_for
+		    ,r.goals_assist
+		from 
+		    member m left join player_record r on m.m_no = r.player
+		where
+		    m.mid = #{mid}
+	</select>
+	
+	
 	
 </mapper>
