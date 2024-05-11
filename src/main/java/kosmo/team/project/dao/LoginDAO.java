@@ -12,4 +12,6 @@ public interface LoginDAO {
 	public String getNickname(String mid);
 	
 	public String getEmail(String mid);
+
+	public int getM_no(String mid);
 }

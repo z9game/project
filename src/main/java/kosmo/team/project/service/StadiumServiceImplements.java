@@ -69,6 +69,19 @@ public class StadiumServiceImplements implements StadiumService {
 	@Override
 	public int insertStadiumRent(RentStadiumDTO rentStadiumDTO) {
 
+		
+		
+		int m_noCnt = this.stadiumDAO.getM_no(rentStadiumDTO);
+		
+		//System.out.print(m_noCnt);
+		
+		if(m_noCnt >= 3) {
+			
+			
+			return 4;
+		}
+		
+		
 		int rentCnt = this.stadiumDAO.getRentTimeCnt(rentStadiumDTO);
 
 		if (rentCnt > 0) {
@@ -95,6 +108,13 @@ public class StadiumServiceImplements implements StadiumService {
 
 
 		return fullRent;
+	}
+
+	@Override
+	public List<RentStadiumDTO> getMyStadiumList(StadiumSearchDTO stadiumSearchDTO) {
+		List<RentStadiumDTO> getMyStadiumList = stadiumDAO.getMyStadiumList(stadiumSearchDTO);
+
+		return getMyStadiumList;
 	}
 
 }

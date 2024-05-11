@@ -201,6 +201,9 @@
 	<form name="stadiumDetailForm" action="/stadiumDetailForm.do"
 		method="post">
 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+		
+
+		
 		<input type="hidden" name="stadium_no">
 	</form>
 

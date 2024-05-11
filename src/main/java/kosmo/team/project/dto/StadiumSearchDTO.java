@@ -1,8 +1,11 @@
 package kosmo.team.project.dto;
 
 public class StadiumSearchDTO {
-
+	
    
+	
+	
+
     
     // 선택한 페이지 번호 관련 파값 저장 변수
     private int selectPageNo;
@@ -12,6 +15,9 @@ public class StadiumSearchDTO {
     private int begin_rowNo;
     // 테이블 검색 시 끝행 번호 저장 변수 선언.
     private int end_rowNo;
+    
+	 private int m_no;
+	 
 	public int getSelectPageNo() {
 		return selectPageNo;
 	}
@@ -35,6 +41,12 @@ public class StadiumSearchDTO {
 	}
 	public void setEnd_rowNo(int end_rowNo) {
 		this.end_rowNo = end_rowNo;
+	}
+	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
 	}
 	
     

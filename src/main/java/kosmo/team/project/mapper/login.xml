@@ -13,4 +13,9 @@
 	<select id="getEmail" resultType="String">
 		select email from member where mid=#{mid}
 	</select>
+	
+	<select id="getM_no" resultType="int">
+		select m_no from member where mid=#{mid}
+	</select>
+		
 </mapper>

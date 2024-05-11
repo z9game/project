@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosmo.team.project.dao.LoginDAO;
-import kosmo.team.project.dao.MemberDAO;
 
 @Service
 @Transactional
@@ -38,5 +37,11 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public String getEmail(String mid) {
 		return loginDAO.getEmail(mid);
+	}
+
+	@Override
+	public int getM_no(String mid) {
+		return loginDAO.getM_no(mid);
+
 	}
 }

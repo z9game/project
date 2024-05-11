@@ -146,4 +146,12 @@ public interface CommunityService {
 	public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no);
 	
 	public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no);
+	
+	public int updateMarketplaceSaleBoard(CommunityDTO communityDTO);
+	
+	public int updateMarketplaceFreeSharingBoard(CommunityDTO communityDTO);
+	
+	public int deleteMarketplaceSaleBoard(CommunityDTO communityDTO);
+	
+	public int deleteMarketplaceFreeSharingBoard(CommunityDTO communityDTO);
 }

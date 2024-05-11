@@ -21,8 +21,7 @@
 		<p class="titleBackgoundText">장터 상세보기</p>
 	</div>
 
-	출력
-	${requestScope.communityDTO.b_no}
+
 
 	<c:if test="${!empty requestScope.communityDTO}">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7
@@ -73,8 +72,8 @@
 			<!--------------------------------------------------- -->
 			<span style="cursor: pointer"
 				onclick="location.replace('/communityMarketplaceBoardForm.do')">
-				[목록 화면으로] </span> <input type="button" value="수정/삭제"
-				onclick="document.noticeboardUpDelForm.submit();">
+				[목록 화면으로] 
+			</span> <input type="button" value="수정/삭제" onclick="document.marketplaceUpDelForm.submit();">
 
 
 
@@ -92,9 +91,9 @@
 		<!-- [수정/삭제] 버튼 클릭하면 <form name="boardUpDelForm" ~> 태그에 설정한
 					정보를 이용하여 WAS 에 접속하기 -->
 		<!--------------------------------------------------- -->
-		<form name="noticeboardUpDelForm" action="/noticeboardUpDelForm.do" method="post">
-			<input type="hidden" name="b_no" value="${requestScope.communityDTO.b_no}">
-			<input type="hidden" name="table_name" value="${requestScope.communityDTO.table_name}">
+		<form name="marketplaceUpDelForm" action="/marketplaceboardUpDelForm.do" method="post">
+			<input type="hidden" name="b_no" 		value="${requestScope.communityDTO.b_no}">
+			<input type="hidden" name="table_name" 	value="${requestScope.communityDTO.table_name}">
 		</form>
 
 
