@@ -38,7 +38,7 @@ function checkGallaryBoardRegForm(){
 	$.ajax(
 			{ 
 				
-				url    : "/CommunityGallaryProc.do"
+				url    : "/communityGallaryProc.do"
 					
 				,type  : "post"
 				
@@ -78,6 +78,7 @@ function checkGallaryBoardRegForm(){
 					<td>
 						<%= session.getAttribute("nickname") %>
 						<input type="hidden" name="writer" class="writer" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
+						<input type="hidden" name="nickname" class="nickname" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
 					</td>
 				</tr>
 				<tr>

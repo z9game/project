@@ -87,14 +87,34 @@ public interface CommunityDAO {
 
    public List<CommunityDTO> getImageGallaryBoardList(CommunityDTO communityDTO);
 
-   
-   
+   public int getCommunityGallaryBoardListAllCnt();
 
+   public int getCommunityGallaryBoardListCnt(CommunitySearchDTO communitySearchDTO);
+
+   public List<CommunityDTO> getCommunityGallaryBoardList(CommunitySearchDTO communitySearchDTO);
+   
+   public int insertCommunityGallaryProc(CommunityDTO communityDTO);
+   
+   public int updateCommunityGallaryReadCount(int b_no);
+   
+   public CommunityDTO getCommunityGallaryDetailForm(int b_no);
+   
+   public int getCommunityGallaryBoardCnt(int b_no);
+   
+   public int updateCommunityGallaryUpProc(CommunityDTO communityDTO);
+   
+   public int deleteCommunityGallaryDelProc(CommunityDTO communityDTO);
+   
+   
+   
+   
+   
    
    
    //----------------------------------------
    //장터
    //----------------------------------------
+   
    /*** 장터 등록  ***/
    public int insertCommunity(CommunityDTO communityDTO);
    

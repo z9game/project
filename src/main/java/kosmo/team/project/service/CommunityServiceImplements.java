@@ -256,12 +256,13 @@ public class CommunityServiceImplements implements CommunityService {
    // -----------------------------------
    // 갤러리
    // -----------------------------------
+   
+   
    @Override
    public int insertGallaryCommunity(CommunityDTO communityDTO) {
       int boardGallaryRegCnt = this.communityDAO.insertGallaryCommunity(communityDTO);
       return boardGallaryRegCnt;
-   }
-   
+   }   
 
    @Override
    public int getImageGallaryBoardListCnt(CommunityDTO communityDTO) {
@@ -274,8 +275,68 @@ public class CommunityServiceImplements implements CommunityService {
       List<CommunityDTO> listGallaryBoard = communityDAO.getImageGallaryBoardList(communityDTO);
       return listGallaryBoard;
    }
-
    
+   // -------
+   
+   @Override
+   public int getCommunityGallaryBoardListAllCnt() {
+      return communityDAO.getCommunityGallaryBoardListAllCnt();
+   }
+      
+   @Override
+   public int getCommunityGallaryBoardListCnt(CommunitySearchDTO communitySearchDTO) {
+      return communityDAO.getCommunityGallaryBoardListCnt(communitySearchDTO);
+   }
+   
+   @Override
+   public List<CommunityDTO> getCommunityGallaryBoardList(CommunitySearchDTO communitySearchDTO) {
+      return communityDAO.getCommunityGallaryBoardList(communitySearchDTO);
+   }
+   
+   @Override
+   public int insertCommunityGallaryProc(CommunityDTO communityDTO) {
+      int boardRegCnt = this.communityDAO.insertCommunityGallaryProc(communityDTO);
+      return boardRegCnt;
+   }
+   
+   @Override
+   public CommunityDTO getCommunityGallaryDetailForm(int b_no, boolean isUpdateReadCount) {
+
+	   if (isUpdateReadCount) {
+		   this.communityDAO.updateCommunityGallaryReadCount(b_no);
+	   }      
+
+	   CommunityDTO communityDTO = this.communityDAO.getCommunityGallaryDetailForm(b_no);
+
+	   return communityDTO;
+   }
+   
+	@Override
+	public int updateCommunityGallaryUpProc(CommunityDTO communityDTO) {
+
+		int boardCnt = this.communityDAO.getCommunityGallaryBoardCnt(communityDTO.getB_no());
+		if (boardCnt == 0) {
+			return boardCnt;
+		}
+		int boardUpCnt = this.communityDAO.updateCommunityGallaryUpProc(communityDTO);
+
+		return boardUpCnt;
+	}
+	
+	@Override
+	public int deleteCommunityGallaryDelProc(CommunityDTO communityDTO) {
+
+		int boardCnt = this.communityDAO.getCommunityGallaryBoardCnt(communityDTO.getB_no());
+		if (boardCnt == 0) {
+			return boardCnt;
+		}
+		int boardDelCnt = this.communityDAO.deleteCommunityGallaryDelProc(communityDTO);
+
+		return boardDelCnt;
+	}
+	
+	
+	
    
    
    
