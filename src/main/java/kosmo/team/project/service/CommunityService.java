@@ -98,6 +98,27 @@ public interface CommunityService {
 	/*** 갤러리 리스트 가져오기  ***/
 	public List<CommunityDTO> getImageGallaryBoardList(CommunityDTO communityDTO);
 	
+	/*** 갤러리 리스트 전체 개수 ***/
+	public int getCommunityGallaryBoardListAllCnt();
+	
+	/*** 갤러리 리스트 검색한 개수 ***/
+	public int getCommunityGallaryBoardListCnt(CommunitySearchDTO communitySearchDTO);
+	
+	/*** 갤러리 검색 리스트 ***/
+	public List<CommunityDTO> getCommunityGallaryBoardList(CommunitySearchDTO communitySearchDTO);
+	
+	/*** 갤러리 입력 ***/
+	public int insertCommunityGallaryProc(CommunityDTO communityDTO);
+	
+	/*** 갤러리 상세보기 ***/
+	public CommunityDTO getCommunityGallaryDetailForm(int b_no, boolean isUpdateReadCount);
+	
+	/*** 갤러리 업데이트 ***/
+	public int updateCommunityGallaryUpProc(CommunityDTO communityDTO);
+	
+	/*** 갤러리 삭제 ***/
+	public int deleteCommunityGallaryDelProc(CommunityDTO communityDTO);
+	
 	
 	
 	

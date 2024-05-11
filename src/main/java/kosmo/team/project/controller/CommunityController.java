@@ -318,25 +318,43 @@ public class CommunityController {
    
    
    
-   // ----------------------------------------------------------------
-   // 갤러리 리스트
-   // ----------------------------------------------------------------
-   /*** 갤러리 페이지 ***/
-   @RequestMapping(value = "/communityGallaryForm.do")
-   public ModelAndView communityGallaryForm(CommunityDTO communityDTO) {
+	// ----------------------------------------------------------------
+	// 갤러리 리스트
+	// ----------------------------------------------------------------
+	/*** 갤러리 페이지 ***/
+	@RequestMapping(value = "/communityGallaryForm.do")
+	public ModelAndView communityGallaryForm(CommunitySearchDTO communitySearchDTO) {
 
-      int imageGallaryBoardListCnt = this.communityService.getImageGallaryBoardListCnt(communityDTO);
+		// IMAGEBOARD TABLE 에서 WRITER 컬럼 VARCHAR2 -> NUMBER 바꿔야 하는데 커뮤니티 말고 다른 곳에서도 이테이블 사용하여 컬럼 NUMBER로 변경 보류(갤러리 테이블도 없다)
+		// 로그인 하여 닉네임으로 보여주는 것도 작업할 수 없어 '이미지보드 테이블' as "WRITER" 하여 채웠다.
+		
+		int communityGallaryBoardListAllCnt = communityService.getCommunityGallaryBoardListAllCnt();
+		int communityGallaryBoardListCnt = communityService.getCommunityGallaryBoardListCnt(communitySearchDTO);
 
-      List<CommunityDTO> imageGallaryBoardList = this.communityService.getImageGallaryBoardList(communityDTO);
+		Map<String, Integer> communityGallaryBoardPageMap = Page.getPagingMap(
+					communitySearchDTO.getSelectPageNo() // 선택한 페이지 번호
+				, 8 									// 페이지 당 보여줄 검색 행의 개수
+				, communityGallaryBoardListCnt 			// 검색 결과물 개수
+		);
 
-      ModelAndView mav = new ModelAndView();
+		communitySearchDTO.setSelectPageNo((int) communityGallaryBoardPageMap.get("selectPageNo"));
+		communitySearchDTO.setRowCntPerPage((int) communityGallaryBoardPageMap.get("rowCntPerPage"));
+		communitySearchDTO.setBegin_rowNo((int) communityGallaryBoardPageMap.get("begin_rowNo"));
+		communitySearchDTO.setEnd_rowNo((int) communityGallaryBoardPageMap.get("end_rowNo"));
 
-      mav.addObject("imageGallaryBoardList", imageGallaryBoardList);
+		List<CommunityDTO> communityGallaryBoardList = communityService.getCommunityGallaryBoardList(communitySearchDTO);
 
-      mav.setViewName("/community/communityGallaryForm.jsp");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("communityGallaryBoardList", communityGallaryBoardList);
+		mav.addObject("communityGallaryBoardListSize", communityGallaryBoardList.size());
+		mav.addObject("communityGallaryBoardListCnt", communityGallaryBoardListCnt);
+		mav.addObject("communityGallaryBoardListAllCnt", communityGallaryBoardListAllCnt);
+		mav.addObject("communityGallaryBoardPageMap", communityGallaryBoardPageMap);
+		
+		mav.setViewName("/community/communityGallaryForm.jsp");
 
-      return mav;
-   }
+		return mav;
+	}
 
    /*** 갤러리 등록 페이지 ***/
    @RequestMapping(value = "/newCommunityGallaryForm.do")
@@ -351,16 +369,77 @@ public class CommunityController {
    
    /*** 갤러리 새글쓰기 ***/
    @ResponseBody
-   @RequestMapping(value = "/CommunityGallaryProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-   public Map<String, String> CommunityGallaryProc(CommunityDTO communityDTO) {
+   @RequestMapping(value = "/communityGallaryProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+   public Map<String, String> communityGallaryProc(CommunityDTO communityDTO) {
       
-      int result = communityService.insertCommunity(communityDTO);
+      int result = communityService.insertCommunityGallaryProc(communityDTO);
       
       Map<String, String> resultMap = new HashMap<String, String>();
       resultMap.put("result", result + "");
       
       return resultMap;
    }
+   
+   /*** 갤러리 상세보기 ***/
+   @RequestMapping(value = "/communityGallaryDetailForm.do")
+   public ModelAndView communityGallaryDetailForm(@RequestParam(value = "b_no") int b_no) {
+
+	   ModelAndView mav = new ModelAndView();
+      
+	   CommunityDTO dto = this.communityService.getCommunityGallaryDetailForm(b_no, true);
+	   
+	   mav.addObject("communityDTO", dto);      
+
+	   mav.setViewName("/community/communityGallaryDetailForm.jsp");
+
+	   return mav;
+   }
+   
+   /*** 갤러리 업데이트/삭제 보기 ***/
+   @RequestMapping(value = "/communityGallaryUpDelForm.do")
+   public ModelAndView communityGallaryUpDelForm(@RequestParam(value = "b_no") int b_no) {
+
+	   ModelAndView mav = new ModelAndView();
+      
+	   CommunityDTO dto = this.communityService.getCommunityGallaryDetailForm(b_no, false);
+	   
+	   mav.addObject("communityDTO", dto); 
+
+	   mav.setViewName("/community/communityGallaryUpDelForm.jsp");
+
+	   return mav;
+   }
+   
+	/*** 갤러리 업데이트 처리 ***/
+	@ResponseBody
+	@RequestMapping(value = "/communityGallaryUpProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public Map<String, String> communityGallaryUpProc(CommunityDTO communityDTO) {
+
+		int marketplaceboardUpCnt = this.communityService.updateCommunityGallaryUpProc(communityDTO);
+		
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		resultMap.put("result", marketplaceboardUpCnt + "");
+		
+		return resultMap;
+	}
+	
+	/*** 갤러리 삭제 처리 ***/
+	@ResponseBody
+	@RequestMapping(value = "/communityGallaryDelProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public Map<String, String> communityGallaryDelProc(CommunityDTO communityDTO) {
+
+		int marketplaceboardDelCnt = this.communityService.deleteCommunityGallaryDelProc(communityDTO);
+		
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		resultMap.put("result", marketplaceboardDelCnt + "");
+
+		return resultMap;
+	}
+
+   
+   
    
    
    
