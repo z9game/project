@@ -136,19 +136,13 @@
 							<b>[검색조건]</b>
 						</caption>
 						<tr>
-							<th>키워드</th>
-
-							<td><select name="searchTypeStadium" class="searchType1">
-									<option value="all">전체</option>
-									<option value="stadium_name">경기장이름</option>
-									<option value="content">비고</option>
-
-									<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
-							</select> <input type="text" name="keyword1" class="keyword1"> <select
-								name="orand">
+							<th>경기장이름</th>
+							<td><input type="text" name="Stadiumkeyword1" class="Stadiumkeyword1">
+								<select name="orand">
 									<option value="or">or
 									<option value="and">and
-							</select> <input type="text" name="keyword2" class="keyword2"></td>
+							</select> <input type="text" name="Stadiumkeyword2" class="Stadiumkeyword2"></td>
+						</tr>
 						<tr>
 							<th>시/도</th>
 							<td colspan="5"><select name="sido" id="" class="sido"
@@ -173,12 +167,6 @@
 							</select> <select name="sigungu" id="state" class="sigungu">
 									<option value="0">군/구 선택</option>
 							</select></td>
-						<tr>
-							<th>경기장상태</th>
-							<td><input type="checkbox" name="stadium_status" value="사용가능"
-								class="stadium_status">사용가능 
-								<input type="checkbox" name="stadium_status" value="이용불가"
-								class="stadium_status">이용불가</td>
 						</tr>
 					</table>
 			</tr>

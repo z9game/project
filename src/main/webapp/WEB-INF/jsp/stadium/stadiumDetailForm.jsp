@@ -17,8 +17,13 @@
 
 		var formObj = $("[name='rentStadiumForm']");
 
-		
+		var dateObj = formObj.find("#date");
+	    var timeSlotObj = formObj.find("[name='time_slot']"); // 수정된 부분
 
+	    var selectedDate = dateObj.val();
+	    var selectedTimeSlot = timeSlotObj.val(); // 수정된 부분
+		
+		
 		var sessionMid = '<%=session.getAttribute("mid")%>';
 
 		if (sessionMid == "" || sessionMid == 'null') {
@@ -26,10 +31,18 @@
 		    location.href = '/main/loginForm.do';
 		    return;
 		}
-		
-		
-		
 
+		
+		if (selectedDate == "" || selectedDate == null) { // 수정된 부분
+	        alert('날짜를 선택해주세요.'); // 수정된 부분
+	        return;
+	    }
+
+		 if (selectedTimeSlot == "선택") { // 수정된 부분
+		        alert('시간대를 선택해주세요.'); // 수정된 부분
+		        return; // 수정된 부분
+		    }
+		
 		$.ajax({
 			url : "/rentStadiumProc.do",
 			type : "post",
