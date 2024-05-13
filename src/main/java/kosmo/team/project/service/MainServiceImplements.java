@@ -19,23 +19,23 @@ public class MainServiceImplements implements MainService {
 	@Autowired
 	private MainDAO mainDAO;
 
-	@Override
-	public int getImageBoardListCnt(MainDTO mainDTO) {
-
-		int imageBoardListCnt = mainDAO.getImageBoardListCnt(mainDTO);
-
-		return imageBoardListCnt;
-
-	}
-
-	@Override
-	public List<MainDTO> getImageBoardList(MainDTO mainDTO) {
-
-		List<MainDTO> imageBoardList = mainDAO.getImageBoardList(mainDTO);
-
-		return imageBoardList;
-
-	}
+	/*
+	 * @Override public int getImageBoardListCnt(MainDTO mainDTO) {
+	 * 
+	 * int imageBoardListCnt = mainDAO.getImageBoardListCnt(mainDTO);
+	 * 
+	 * return imageBoardListCnt;
+	 * 
+	 * }
+	 * 
+	 * @Override public List<MainDTO> getImageBoardList(MainDTO mainDTO) {
+	 * 
+	 * List<MainDTO> imageBoardList = mainDAO.getImageBoardList(mainDTO);
+	 * 
+	 * return imageBoardList;
+	 * 
+	 * }
+	 */
 	
 	@Override
 	public List<MainDTO> getMainTournamentList(MainDTO mainDTO) {

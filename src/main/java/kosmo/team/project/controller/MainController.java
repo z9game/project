@@ -24,15 +24,17 @@ public class MainController {
 	@Autowired
 	private MainService mainService;
 
-	@RequestMapping(value = "/main/mainForm.do")
+	@RequestMapping(value = "/mainForm.do")
 	public ModelAndView mainForm(MainDTO mainDTO, MainSearchDTO mainSearchDTO) {
 
 	    ModelAndView mav = new ModelAndView();
 
-	    // 갤러리 section
-	    int imageBoardListCnt = this.mainService.getImageBoardListCnt(mainDTO);
-	    List<MainDTO> imageBoardList = this.mainService.getImageBoardList(mainDTO);
-	    mav.addObject("imageBoardList", imageBoardList);
+		/*
+		 * // 갤러리 section int imageBoardListCnt =
+		 * this.mainService.getImageBoardListCnt(mainDTO); List<MainDTO> imageBoardList
+		 * = this.mainService.getImageBoardList(mainDTO);
+		 * mav.addObject("imageBoardList", imageBoardList);
+		 */
 
 	    // 대회 일정 section
 	    List<MainDTO> mainTournamentList = this.mainService.getMainTournamentList(mainDTO);
@@ -44,7 +46,7 @@ public class MainController {
 	}
 
 
-	@RequestMapping(value = "/main/loginForm.do")
+	@RequestMapping(value = "/loginForm.do")
 	public ModelAndView loginForm() {
 
 		ModelAndView mav = new ModelAndView();
@@ -53,7 +55,7 @@ public class MainController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/main/customerServiceForm.do")
+	@RequestMapping(value = "/customerServiceForm.do")
 	public ModelAndView customerServiceForm(MainDTO mainDTO, MainSearchDTO mainSearchDTO) {
 
 		int customerServiceQnABoardListAllCnt = this.mainService.getCustomerServiceQnABoardListAllCnt();
@@ -101,7 +103,7 @@ public class MainController {
 
 	// QnA 글쓰기 페이지
 	
-	@RequestMapping(value = "/main/newCustomerServiceQnAForm.do")
+	@RequestMapping(value = "/newCustomerServiceQnAForm.do")
 	public ModelAndView newCustomerServiceQnAForm(@RequestParam(value = "b_no", required = false, defaultValue = "0") int b_no) {
 	    
 	    ModelAndView mav = new ModelAndView();
@@ -132,7 +134,7 @@ public class MainController {
 	
 	// QnA Detail 페이지
 	
-	@RequestMapping(value = "/main/customerServiceQnADetailForm.do")
+	@RequestMapping(value = "/customerServiceQnADetailForm.do")
 	public ModelAndView customerServiceQnADetail(@RequestParam(value="b_no") int b_no) {
 		
 		CustomerServiceDetailDTO customerServiceDetailDTO = this.mainService.getCustomerServiceDetail(b_no);
@@ -168,7 +170,7 @@ public class MainController {
 	
 	// QnA Detail Update
 	
-	@RequestMapping(value="/main/customerServiceQnAUpdateForm.do")
+	@RequestMapping(value="/customerServiceQnAUpdateForm.do")
 	
 	public ModelAndView customerServiceQnAUpdateForm(@RequestParam(value="b_no") int b_no) {
 	

@@ -42,7 +42,7 @@
 				</div>
 			</div> 
 		</div>
-		<div class="section" id="sectionMedia">
+		<%-- <div class="section" id="sectionMedia">
 			<div class="sectionMediaGallaryTitle">
 				<strong>Gallary</strong>
 			</div>
@@ -56,7 +56,7 @@
 					</div>
 				</c:forEach>
 			</div>
-		</div>
+		</div> --%>
 	</div>
 </body>
 </html>

@@ -33,7 +33,7 @@
 	        var category = $(this).text().trim();
 	
 	        $.ajax({
-	            url: "/main/customerServiceForm.do",
+	            url: "/customerServiceForm.do",
 	            type: "post",
 	            data: { category: category },
 	            success: function(responseHtml) {
@@ -68,7 +68,7 @@
 	
 		$.ajax({
 				
-			url : "/main/customerServiceForm.do",
+			url : "/customerServiceForm.do",
 			
 			type : "post",
 			
@@ -106,14 +106,14 @@
 	    
 		if (sessionMid == 'admin'){
 			 $("[name='customerServiceDetailForm'] .b_no").val(b_no);
-             document.customerServiceDetailForm.action = "/main/customerServiceQnADetailForm.do";
+             document.customerServiceDetailForm.action = "/customerServiceQnADetailForm.do";
              document.customerServiceDetailForm.submit();
              return;
 		} 
 		
 		if (sessionMid !== null && sessionMid !== 'admin' && mid == sessionMid) {
 			$("[name='customerServiceDetailForm'] .b_no").val(b_no);
-            document.customerServiceDetailForm.action = "/main/customerServiceQnADetailForm.do";
+            document.customerServiceDetailForm.action = "/customerServiceQnADetailForm.do";
             document.customerServiceDetailForm.submit();
 		} else {
 	        alert("작성할 때 로그인 한 아이디와 다릅니다.");
@@ -127,9 +127,9 @@
 
 	    if (sessionMid === 'null') {
 	    	alert('로그인이 필요한 서비스입니다.');
-	    	location.href = '/main/loginForm.do';
+	    	location.href = '/loginForm.do';
 	    } else {
-	    	location.href = '/main/newCustomerServiceQnAForm.do';
+	    	location.href = '/newCustomerServiceQnAForm.do';
 	    }
 	}
 </script>

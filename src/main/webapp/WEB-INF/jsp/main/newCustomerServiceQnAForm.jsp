@@ -58,7 +58,7 @@
 	    					
 	    					if(result == 1){
 	    						alert("작성 성공");
-	    						location.href = '/main/customerServiceForm.do';
+	    						location.href = '/customerServiceForm.do';
 	    					} else {
 	    						alert("작성 실패");
 	    					}
@@ -114,7 +114,7 @@
 				</div>
 				<div class="boardRegAndMoveList">
 					<input type="button" class="boardRegBtn" value="저장" onClick="checkQnABoardRegForm();">
-					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/main/customerServiceForm.do')">
+					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/customerServiceForm.do')">
 				</div>
 			</div>
 		</form>
