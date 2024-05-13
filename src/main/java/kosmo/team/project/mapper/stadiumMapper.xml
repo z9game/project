@@ -3,6 +3,79 @@
 
 <mapper namespace="kosmo.team.project.dao.StadiumDAO">
 
+
+
+
+	<sql id="stadiumWhere">
+
+		<if
+			test="( Stadiumkeyword1 !=null and Stadiumkeyword1.length()>0) or (Stadiumkeyword2!=null and Stadiumkeyword2.length()>0)">
+			and (
+		</if>
+		<if test="Stadiumkeyword1 !=null and Stadiumkeyword1.length()>0">
+			(
+			upper(st.stadium_name) like upper('%${Stadiumkeyword1}%')
+			)
+		</if>
+		<if
+			test="( Stadiumkeyword1 !=null and Stadiumkeyword1.length()>0) and ( Stadiumkeyword2 !=null and Stadiumkeyword2.length()>0)">
+			${orand}
+		</if>
+		<if test="Stadiumkeyword2!=null and Stadiumkeyword2	.length()>0">
+			(
+				upper(st.stadium_name) like upper('%${Stadiumkeyword2}%')
+			)
+		</if>
+		<if test="sido !=null and sido>0 ">
+			and
+			(
+			st.sido_name = ${sido}
+			)
+
+			<if test="sigungu !=null and sigungu>0 ">
+				and
+				(
+				st.sigungu_name = ${sigungu}
+				)
+
+
+			</if>
+
+
+		</if>
+
+
+		<if
+			test="( Stadiumkeyword1 !=null and Stadiumkeyword1.length()>0) or (Stadiumkeyword2!=null and Stadiumkeyword2.length()>0)">
+			)
+		</if>
+
+
+	</sql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<select id="getStadiumList"
 		resultType="kosmo.team.project.dto.StadiumDTO"
 		parameterType="kosmo.team.project.dto.StadiumDTO">
@@ -30,6 +103,8 @@
 		sido s ON st.sido_name = s.sido_id
 		LEFT JOIN sigungu si ON
 		st.sigungu_name = si.sigungu_id
+		where st.stadium_status != '이용불가'
+		<include refid="stadiumWhere" />
 
         <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
 	</select>
@@ -37,8 +112,16 @@
 	<select id="getStadiumListCnt" resultType="int">
 		select
 		count(*)
-		from
-		stadium
+		FROM
+		stadium st
+		LEFT
+		JOIN
+		sido s ON st.sido_name = s.sido_id
+		LEFT JOIN sigungu si ON
+		st.sigungu_name = si.sigungu_id
+		where st.stadium_status != '이용불가'
+
+		<include refid="stadiumWhere" />
 	</select>
 
 
@@ -47,13 +130,13 @@
 		count(*)
 		FROM
 		stadium st
-		LEFT JOIN sido s ON st.sido_name =
-		s.sido_id
-		LEFT JOIN
-		sigungu
-		si ON st.sigungu_name = si.sigungu_id
-
-
+		LEFT
+		JOIN
+		sido s ON st.sido_name = s.sido_id
+		LEFT JOIN sigungu si ON
+		st.sigungu_name = si.sigungu_id
+		where st.stadium_status != '이용불가'
+		<include refid="stadiumWhere" />
 
 	</select>
 
@@ -104,7 +187,7 @@
 	<insert id="insertStadiumRent"
 		parameterType="kosmo.team.project.dto.RentStadiumDTO">
 		insert into booking(
-		
+
 		booking_no
 		,stadium_no
 		,booking_date
@@ -134,31 +217,26 @@
 
 
 
-	<!-- <select id="getRentTimeSlotCnt"
-		parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
-		select count(time_slot)
+	<!-- <select id="getRentTimeSlotCnt" parameterType="kosmo.team.project.dto.RentStadiumDTO" 
+		resultType="int"> select count(time_slot) from booking where stadium_no = 
+		#{stadium_no} group by booking_date having count(time_slot) = 11 </select> -->
+
+
+	<select id="getFullRent" parameterType="int" resultType="String">
+		select to_char(booking_date, 'yyyy-mm-dd') as booking_date
 		from booking
 		where stadium_no = #{stadium_no}
 		group by booking_date
 		having count(time_slot) = 11
-	</select> -->
+	</select>
 
-
-	<select id="getFullRent" parameterType="int" resultType="String">
-    select to_char(booking_date, 'yyyy-mm-dd') as booking_date
-    from booking
-    where stadium_no = #{stadium_no}
-    group by booking_date
-    having count(time_slot) = 11
-</select>
-
-<select id="getM_no"
-        parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
-    select count(*)
-    from booking
-    where m_no = #{m_no}
-      and booking_date >= CURRENT_DATE
-</select>
+	<select id="getM_no"
+		parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
+		select count(*)
+		from booking
+		where m_no = #{m_no}
+		and booking_date >= CURRENT_DATE
+	</select>
 
 
 
@@ -170,20 +248,20 @@
 		select * from (
 		select rownum RNUM, zxcvb.* from (
 		select
-		 b.booking_no AS "booking_no",
-                b.m_no AS "m_no",
-                s.stadium_no AS "stadium_no",
-                s.stadium_name as     "stadium_name",
-                sid.name AS "sido_name",
-                sig.name as "sigungu_name",
-                s.detailed_address as "detail_address"
-            from
-                booking b
-                join stadium s on b.stadium_no = s.stadium_no
-                join sido sid on s.sido_name = sid.sido_id
-                join sigungu sig on s.sigungu_name = sig.sigungu_id
-                join member m on b.m_no = m.m_no
-               WHERE b.m_no = #{m_no}
+		b.booking_no AS "booking_no",
+		b.m_no AS "m_no",
+		s.stadium_no AS "stadium_no",
+		s.stadium_name as "stadium_name",
+		sid.name AS "sido_name",
+		sig.name as "sigungu_name",
+		s.detailed_address as "detail_address"
+		from
+		booking b
+		join stadium s on b.stadium_no = s.stadium_no
+		join sido sid on s.sido_name = sid.sido_id
+		join sigungu sig on s.sigungu_name = sig.sigungu_id
+		join member m on b.m_no = m.m_no
+		WHERE b.m_no = #{m_no}
 
         <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
 	</select>
