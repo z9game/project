@@ -38,7 +38,10 @@ public interface RecruitService {
 	
 	RecruitTeamMemDTO getRecruit_TeamMemUpDel_sidosigungu(int b_no);
 
-
+	//팀/팀원 게시물 수정을 위한 메소드 이름만 정의
+	public int recruitUpdateTeamMem(RecruitTeamMemDTO recruitTeamMemDTO);
+	//팀/팀원 게시물 삭제를 위한 메소드 이름만 정의
+	public int recruitDeleteTeamMem(RecruitTeamMemDTO recruitTeamMemDTO);
 	
 
 }

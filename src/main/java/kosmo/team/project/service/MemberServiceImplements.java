@@ -24,6 +24,10 @@ public class MemberServiceImplements implements MemberService {
 
 		int memberCnt = this.memberDAO.insertMember(memberDTO);
 		
+		int mem_detail = this.memberDAO.insertDetail(memberDTO);
+		
+		int mem_record = this.memberDAO.insertRecoed(memberDTO);
+		
 		return memberCnt;
 	}
 	
@@ -34,5 +38,28 @@ public class MemberServiceImplements implements MemberService {
 		
 		
 		return memberCnt;
+	}
+	
+	public MemberDTO updateMem(String mid)
+	{
+		MemberDTO updateMem = this.memberDAO.updateMem(mid);
+		
+		return updateMem;
+	}
+	
+	//마이페이지에 있는 내 정보 가져오기
+	public MemberDTO getMyInfo(String mid)
+	 {
+		 MemberDTO getMyInfo = this.memberDAO.getMyInfo(mid);
+		 
+		 return getMyInfo;
+		 
+	 }
+	//마이페이지에 있는 내 기록 가져오기
+	public MemberDTO getMyStat(String mid)
+	{
+		 MemberDTO getMyStat = this.memberDAO.getMyStat(mid);
+		 
+		 return getMyStat;
 	}
 }

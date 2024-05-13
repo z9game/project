@@ -45,6 +45,7 @@ public class MemberController {
 			return resultMap;
 		}
 		
+		
 		@RequestMapping( value="/midFindProc.do"
 				,method=RequestMethod.POST
 				,produces="application/json;charset=UTF-8"
@@ -60,4 +61,43 @@ public class MemberController {
 	
 		return memberCnt;
 		}
+		
+		
+		@RequestMapping(value = "/memUpdateForm.do")
+		  public ModelAndView memUpdateForm(@RequestParam(value="mid")String mid ) {
+
+			 MemberDTO memberDTO = this.memberService.updateMem(mid);
+		     ModelAndView mav = new ModelAndView();
+
+		     mav.setViewName("/myPage/memUpdateForm.jsp");
+		     mav.addObject("memberDTO", memberDTO);
+
+		     return mav;
+		  }
+		
+		//마이페이지 관련 컨트롤러
+		@RequestMapping(value = "/myPageForm.do")
+		  public ModelAndView myPageForm(@RequestParam(value="mid")String mid) {
+			
+			//마이페이지에 있는 내 정보 가져오기, 오라클 실행결과물을 myInfo라는 변수에 저장
+			 MemberDTO myInfo = this.memberService.getMyInfo(mid);
+			//마이페이지에 있는 내 기록 가져오기, 오라클 실행결과물을 myStat라는 변수에 저장
+			 MemberDTO myStat = this.memberService.getMyStat(mid);
+		     ModelAndView mav = new ModelAndView();
+
+		     mav.setViewName("/myPage/myPageForm.jsp");
+		     //myInfo에 저장한 결과물을 페이지에서 requestScope를 사용해 얻어낼수 있게 설정
+		     mav.addObject("myInfo", myInfo);
+		     //myStat에 저장한 결과물을 페이지에서 requestScope를 사용해 얻어낼수 있게 설정
+		     mav.addObject("myStat", myStat);
+
+		     return mav;
+		  }
+		
+		
+		
+		
+		
+	
+		
 }

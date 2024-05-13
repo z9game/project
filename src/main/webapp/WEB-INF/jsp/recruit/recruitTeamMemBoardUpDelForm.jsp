@@ -12,22 +12,19 @@
 <script src="/js/recruitTeamBoardFormScript.js"></script>
 
 
+
+
+
 <script>
-	$(document).ready(function(){
-		categoryChange(${requestScope.updel_sidosigungu.sido})
-	});
-</script>
-
-
-<!-- <script>
 	function checkBoardUpForm() {
 		
 		var formObj = $("[name='recruitTeamMemBoardUpDelForm']");
 		var writerObj = formObj.find(".writer");
 		var titleObj = formObj.find(".title");
 		var contentObj = formObj.find(".content");
+		
 
-		if (confirm("정말수정하시겠습니까?") == false) {
+		if (confirm("정말 수정하시겠습니까?") == false) {
 			return;
 		}
 
@@ -40,7 +37,8 @@
 				if (result == 0) {
 					alert("삭제된 글입니다.");
 					location.href = "/recruitTeamMemBoardForm.do";
-				} else {
+				} 
+				else {
 					alert("자유게시판 수정 성공입니다.");
 					location.href = "/recruitTeamMemBoardForm.do";
 				}
@@ -51,6 +49,7 @@
 		});
 	}
 
+	
 	function checkBoardDelForm() {
 		var formObj = $("[name='recruitTeamMemBoardUpDelForm']");
 		if (confirm("정말 삭제하시겠습니까?") == false) {
@@ -63,10 +62,10 @@
 			success : function(json) {
 				var result = json["result"];
 				if (result == 0) {
-					alert("삭제된 글입니다.");
+					alert("이미 삭제된 글입니다.");
 					location.href = "/recruitTeamMemBoardForm.do";
 				} else {
-					alert("자유게시판 수정 성공입니다.");
+					alert("게시물 삭제 성공!");
 					location.href = "/recruitTeamMemBoardForm.do";
 				}
 			},
@@ -75,7 +74,8 @@
 			}
 		});
 	}
-</script> -->
+	
+</script>
 
 </head>
 <body>
@@ -193,8 +193,8 @@
 		<input type="button" value="삭제" onclick="checkBoardDelForm();">
 	</center>
 				
-		</form>
 		
 	</div>
+	<div style="height: 20px"></div>
 </body>
 </html>

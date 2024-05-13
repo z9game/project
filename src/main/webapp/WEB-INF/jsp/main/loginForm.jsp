@@ -77,13 +77,22 @@
 		}) 
 	}
 	
+	function enterkey()
+	{
+	   
+	   if(window.event.keyCode == 13)
+	   {
+		   doLogin();
+	   }
+	}
+	
 </script>
 
 </head>
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="loginFormContainer">
-		<form name="loginForm">
+		<form name="loginForm" onsubmit="return false">
 			<table border="1" align="center" style="margin-top:20px;">
 				<caption style="margin-bottom:10px;"><b>[로그인]</b></caption>
 				<tr>
@@ -97,7 +106,7 @@
 				<tr>
 					<th bgcolor="lightgray">암&nbsp;&nbsp;&nbsp;호</th>
 					<td>
-						<input type="password" name="password" class="password">
+						<input type="password" name="password" class="password" onkeyup="enterkey()">
 					</td>
 				</tr>
 			</table>

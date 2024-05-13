@@ -247,6 +247,23 @@ function searchWithSort(sort)
 	
 }
 
+function checkReserveForm() 
+{
+   
+   var sessionMid = '<%=session.getAttribute("mid")%>';
+
+   if (sessionMid == "" || sessionMid == 'null') {
+       alert('로그인이 필요한 서비스입니다.');
+       location.href = '/main/loginForm.do';
+       return;
+   }
+	else
+	{
+		location.href='/newRecruitTeamMemBoardForm.do'
+	}
+	   
+}
+
 </script>
 </head>
 <body>
@@ -433,7 +450,7 @@ function searchWithSort(sort)
 			</div>
    		 <br><br><br>
 			<div class="newRecruitTeamMemBoardBtnDiv">
-				<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="location.href='/newRecruitTeamMemBoardForm.do'">
+				<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkReserveForm()">
 			</div>
 		</center>
 		

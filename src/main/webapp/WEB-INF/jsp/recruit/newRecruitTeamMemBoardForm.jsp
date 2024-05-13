@@ -81,7 +81,7 @@
 				<tr>
 					<th>글쓴이</th>
 					<td>
-						<input type="text" name="writer" class="writer" size="40" maxlength="15">
+						${sessionScope.nickname}
 					</td>
 				</tr>
 				<tr>

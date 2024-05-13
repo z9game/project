@@ -8,6 +8,7 @@
 <title>Header</title>
 <link href="/style/headerStyle.css" rel="stylesheet">
 <script src="/js/headerScript.js"></script>
+
 </head>
 <body>
 	<header class="header">
@@ -64,15 +65,15 @@
 					<li class="nav-item"><a href="/main/customerServiceForm.do">고객센터</a>
 					</li>
 					<c:if test="${not empty sessionScope.mid}">
-						<li class="auth-links">${sessionScope.nickname} 님 환영합니다!
+						<li class="auth-links" onClick="document.myPageForm.submit()" style="cursor: pointer">${sessionScope.nickname} 님 환영합니다!
 							&nbsp;&nbsp;&nbsp;
 						<c:if test="${sessionScope.mid!= 'admin'}">
-						<a href="#">마이페이지</a>
+						<li class="auth-links" onclick="document.memUpdateForm.submit()" style="cursor: pointer">[회원정보 수정]
 						</c:if>
 						<c:if test="${sessionScope.mid== 'admin'}">
 						<a href="/adminForm.do">관리자페이지</a>
 						</c:if>		 
-							 <a href="/logoutProc.do">로그아웃</a>
+							 <a href="/logoutProc.do">[로그아웃]</a>
 						</li>
 					</c:if>
 
@@ -87,5 +88,15 @@
 		</div>
 		<div class="hd_bg"></div>
 	</header>
+	
+	<form name="memUpdateForm" action="/memUpdateForm.do" method="post">
+		<input type="hidden" name="mid" value="${sessionScope.mid}">
+	</form>
+	
+	<form name="myPageForm" action="/myPageForm.do" method="post">
+		<input type="hidden" name="mid" value="${sessionScope.mid}">
+	</form>
+		
+		
 </body>
 </html>

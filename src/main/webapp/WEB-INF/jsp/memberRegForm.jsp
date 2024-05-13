@@ -132,7 +132,6 @@ function regMember()
 		loginCheckCnt--;
 	}
 	
-	alert(formobj.serialize());
 	
 	//-----------------------------------------------------
 	// JQuery 객체의 [ajax 메소드]를 호출하여
@@ -171,7 +170,7 @@ function regMember()
 			if(result == 1)
 			{
 				alert("회원가입 성공.");
-				location.href='loginForm.do';
+				location.href='/main/loginForm.do';
 			}
 
 			else
@@ -285,7 +284,7 @@ function regMember()
 			</table>
 			<div class="regConfirmBtnDiv">
 				<input type="button" class="regConfirmBtn" value="회원가입" onclick="regMember()">
-				<input type="button" class="moveLoginPage" value="로그인 화면" onClick="location.replace('/loginForm.do')">
+				<input type="button" class="moveLoginPage" value="로그인 화면" onClick="location.replace('/main/loginForm.do')">
 			</div>
 		</form>
 	</div>

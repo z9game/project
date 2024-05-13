@@ -45,4 +45,12 @@ public interface RecruitDAO {
 	public List<String> getRecruit_TeamMemUpDel_time(int b_no);
 	
 	public RecruitTeamMemDTO getRecruit_TeamMemUpDel_sidosigungu(int b_no);
+	
+	public int recruitUpdateTeamMem(RecruitTeamMemDTO recruitTeamMemDTO);
+	
+	public int deleteDay(RecruitTeamMemDTO recruitTeamMemDTO);
+	
+	public int deleteTime(RecruitTeamMemDTO recruitTeamMemDTO);
+	
+	public int recruitDeleteTeamMem(RecruitTeamMemDTO recruitTeamMemDTO);
 }

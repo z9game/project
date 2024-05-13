@@ -133,6 +133,29 @@ public class RecruitServiceImpl implements RecruitService {
 		 return recruitTeamMemDTO_sidosigungu;
 	 }
 	 
-	
+	 //service(인터페이스 공간)에 이름만 정의해준 메소드의 기능을 이 안에서 정의, 게시물 수정
+	 public int recruitUpdateTeamMem(RecruitTeamMemDTO recruitTeamMemDTO){
+		 int deleteDay = this.recruitDAO.deleteDay(recruitTeamMemDTO);
+		 int deleteTime = this.recruitDAO.deleteTime(recruitTeamMemDTO);
+		 if(recruitTeamMemDTO.getDay() != null)
+		 {
+			int insertDay = this.recruitDAO.insertDay(recruitTeamMemDTO);
+		 }
+		
+		 if(recruitTeamMemDTO.getTime() != null)
+		 {
+			int insertTime = this.recruitDAO.insertTime(recruitTeamMemDTO); 
+		 }
+		 int recruitUpdateTeamMem = this.recruitDAO.recruitUpdateTeamMem(recruitTeamMemDTO);
+		 
+		 return recruitUpdateTeamMem;
+	 }
+	 
+	 
+	//service(인터페이스 공간)에 이름만 정의해준 메소드의 기능을 이 안에서 정의, 게시물 삭제
+	 public int recruitDeleteTeamMem(RecruitTeamMemDTO recruitTeamMemDTO) {
+		 int recruitDeleteTeamMem = this.recruitDAO.recruitDeleteTeamMem(recruitTeamMemDTO);
+		 return recruitDeleteTeamMem;
+	 }
 	
 }

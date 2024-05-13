@@ -18,6 +18,8 @@ public class RecruitTeamMemDTO {
    private List<String> day;
    private List<String> time;
    private String pos;
+   private int sido_id;
+   private int sigungu_id;
    
    
 public int getB_no() {
@@ -103,6 +105,18 @@ public String getPos() {
 }
 public void setPos(String pos) {
 	this.pos = pos;
+}
+public int getSido_id() {
+	return sido_id;
+}
+public void setSido_id(int sido_id) {
+	this.sido_id = sido_id;
+}
+public int getSigungu_id() {
+	return sigungu_id;
+}
+public void setSigungu_id(int sigungu_id) {
+	this.sigungu_id = sigungu_id;
 }
 
    
