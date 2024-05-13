@@ -140,10 +140,9 @@
 			</tr>
 			<tr>
 				<th bgColor="lightgray">상태</th>
-				<td><input type="radio" name="stadium_status" value="양호"
-					<c:if test="${requestScope.stadim2DTO.stadium_status.contains ('양호')}">checked</c:if>>양호
-					<input type="radio" name="stadium_status" value="안좋음"
-					<c:if test="${requestScope.stadim2DTO.stadium_status.contains ('안좋음')}">checked</c:if>>안좋음
+				<td><input type="radio" name="stadium_status" value="사용가능"
+					<c:if test="${requestScope.stadim2DTO.stadium_status.contains ('사용가능')}">checked</c:if>>사용가능
+
 					<input type="radio" name="stadium_status" value="이용불가"
 					<c:if test="${requestScope.stadim2DTO.stadium_status.contains ('이용불가')}">checked</c:if>>이용불가</td>
 			</tr>

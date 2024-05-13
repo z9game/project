@@ -17,13 +17,18 @@
 
 		var formObj = $("[name='rentStadiumForm']");
 
-		var sessionMid = '<%= session.getAttribute("mid") %>';
 		
-		 if (sessionMid == null || sessionMid.trim() === "") {
-				alert('로그인이 필요한 서비스입니다.');
-				location.href = '/main/loginForm.do';
-				return;
-			}
+
+		var sessionMid = '<%=session.getAttribute("mid")%>';
+
+		if (sessionMid == "" || sessionMid == 'null') {
+		    alert('로그인이 필요한 서비스입니다.');
+		    location.href = '/main/loginForm.do';
+		    return;
+		}
+		
+		
+		
 
 		$.ajax({
 			url : "/rentStadiumProc.do",
