@@ -63,7 +63,7 @@
       
    });   
 
-   function newCommunityMarketplaceBoardFormBtnClick() {
+   function newCommunityMarketplaceSaleBoardFormBtnClick() {
       
        var sessionMid = '<%= session.getAttribute("mid") %>'
    
@@ -71,7 +71,19 @@
           alert('로그인이 필요한 서비스입니다.');
           location.href = '/main/loginForm.do';
        } else {
-          location.href = '/newCommunityMarketplaceForm.do';
+          location.href = '/newCommunityMarketplaceSaleBoardForm.do';
+       }
+   }
+   
+   function newCommunityMarketplaceFreeSharingBoardFormBtnClick() {
+	      
+       var sessionMid = '<%= session.getAttribute("mid") %>'
+   
+       if (sessionMid === 'null') {
+          alert('로그인이 필요한 서비스입니다.');
+          location.href = '/main/loginForm.do';
+       } else {
+          location.href = '/newCommunityMarketplaceFreeSharingBoarForm.do';
        }
    }
    
@@ -303,7 +315,7 @@
             <div class="communityMarketplaceQnAFormContainer">
          
                  <div class="newCommunityMarketplaceBtnDiv">
-                  <input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceBoardFormBtnClick();">
+                  <input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceSaleBoardFormBtnClick();">
                </div>
 
                <div class="communityMarketplaceSearch">
@@ -385,7 +397,7 @@
             <div class="communityMarketplaceQnAFormContainer">
          
                  <div class="newCommunityMarketplaceBtnDiv">
-                  <input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceBoardFormBtnClick();">
+                  <input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceFreeSharingBoardFormBtnClick();">
                </div>
 
                <div class="communityMarketplaceSearch">

@@ -460,8 +460,8 @@ public class CommunityController {
       
       Map<String, Integer> tabAllMarketplaceBoardPageMap = Page.getPagingMap(
               communitySearchDTO.getSelectPageNo()   // 선택한 페이지 번호
-            , 8                            // 페이지 당 보여줄 검색 행의 개수
-            , tabAllMarketplaceBoardListCnt       // 검색 결과물 개수
+            , 8                            			 // 페이지 당 보여줄 검색 행의 개수
+            , tabAllMarketplaceBoardListCnt       	 // 검색 결과물 개수
       );
       
       communitySearchDTO.setSelectPageNo((int) tabAllMarketplaceBoardPageMap.get("selectPageNo"));
@@ -483,8 +483,8 @@ public class CommunityController {
       
       Map<String, Integer> tabSaleMarketplaceBoardPageMap = Page.getPagingMap(
               communitySearchDTO.getSelectPageNo()   // 선택한 페이지 번호
-            , 8                            // 페이지 당 보여줄 검색 행의 개수
-            , tabSaleMarketplaceBoardListCnt       // 검색 결과물 개수
+            , 8                            			 // 페이지 당 보여줄 검색 행의 개수
+            , tabSaleMarketplaceBoardListCnt         // 검색 결과물 개수
       );
       
       communitySearchDTO.setSelectPageNo((int) tabSaleMarketplaceBoardPageMap.get("selectPageNo"));
@@ -508,8 +508,8 @@ public class CommunityController {
       
       Map<String, Integer> tabFreeSharingMarketplaceBoardPageMap = Page.getPagingMap(
               communitySearchDTO.getSelectPageNo()   // 선택한 페이지 번호
-            , 8                            // 페이지 당 보여줄 검색 행의 개수
-            , tabFreeSharingMarketplaceBoardListCnt // 검색 결과물 개수
+            , 8                             		 // 페이지 당 보여줄 검색 행의 개수
+            , tabFreeSharingMarketplaceBoardListCnt  // 검색 결과물 개수
       );
       
       communitySearchDTO.setSelectPageNo((int) tabFreeSharingMarketplaceBoardPageMap.get("selectPageNo"));
@@ -568,29 +568,54 @@ public class CommunityController {
       return mav;
    }
    
-   /*** 장터 등록 페이지 ***/
-   @RequestMapping(value = "/newCommunityMarketplaceForm.do")
-   public ModelAndView newCommunityMarketplaceForm(CommunityDTO communityDTO) {
+   /*** 장터 Sale 등록 페이지(화면) ***/
+   @RequestMapping(value = "/newCommunityMarketplaceSaleBoardForm.do")
+   public ModelAndView newCommunityMarketplaceSaleBoardForm(CommunityDTO communityDTO) {
 
       ModelAndView mav = new ModelAndView();
 
-      mav.setViewName("/community/newCommunityMarketplaceForm.jsp");
+      mav.setViewName("community/newCommunityMarketplaceSaleForm.jsp");
 
       return mav;
    }
    
-   /*** 장터 새글쓰기 ***/
+   /*** 장터 Sale 새글쓰기 ***/
    @ResponseBody
-   @RequestMapping(value = "/MarketplaceRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-   public Map<String, String> MarketplaceRegProc(CommunityDTO communityDTO) {
+   @RequestMapping(value = "/communityMarketplaceSaleBoardRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+   public Map<String, String> communityMarketplaceSaleBoardRegProc(CommunityDTO communityDTO) {
       
-      int result = communityService.insertCommunity(communityDTO);
+      int result = communityService.insertMarketplaceSaleCommunity(communityDTO);
       
       Map<String, String> resultMap = new HashMap<String, String>();
       resultMap.put("result", result + "");
       
       return resultMap;
    }
+   
+   /*** 장터 FreeSharing 등록 페이지(화면) ***/
+   @RequestMapping(value = "/newCommunityMarketplaceFreeSharingBoarForm.do")
+   public ModelAndView newCommunityMarketplaceFreeSharingBoarForm(CommunityDTO communityDTO) {
+
+      ModelAndView mav = new ModelAndView();
+
+      mav.setViewName("/community/newCommunityMarketplaceFreeSharingForm.jsp");
+
+      return mav;
+   }
+   
+   /*** 장터 FreeSharing 새글쓰기 ***/
+   @ResponseBody
+   @RequestMapping(value = "/communityMarketplaceFreeSharingBoardRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+   public Map<String, String> communityMarketplaceFreeSharingBoardRegProc(CommunityDTO communityDTO) {
+      
+      int result = communityService.insertMarketplaceFreeSharingCommunity(communityDTO);
+      
+      Map<String, String> resultMap = new HashMap<String, String>();
+      resultMap.put("result", result + "");
+      
+      return resultMap;
+   }
+
    
    /*** 장터 업데이트 ***/
 	@ResponseBody

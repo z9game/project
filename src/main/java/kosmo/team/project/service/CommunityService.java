@@ -127,8 +127,11 @@ public interface CommunityService {
 	//장터
 	//----------------------------------------
 	
-	/*** 장터 등록  ***/
-	public int insertCommunity(CommunityDTO communityDTO);
+	/*** 장터 Sale 등록  ***/
+	public int insertMarketplaceSaleCommunity(CommunityDTO communityDTO);
+	
+	/*** 장터 FreeSharing 등록  ***/
+	public int insertMarketplaceFreeSharingCommunity(CommunityDTO communityDTO);
 	
 	/*** 장터 리스트 개수 가져오기  ***/
 	public int getImageBoardListCnt(CommunityDTO communityDTO);

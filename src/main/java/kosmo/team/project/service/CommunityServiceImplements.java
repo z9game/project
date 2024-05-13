@@ -344,10 +344,17 @@ public class CommunityServiceImplements implements CommunityService {
    // -----------------------------------
    // 장터
    // -----------------------------------
-   /*** 장터 등록  ***/
+   /*** 장터 Sale 등록  ***/
    @Override
-   public int insertCommunity(CommunityDTO communityDTO) {
-      int boardRegCnt = this.communityDAO.insertCommunity(communityDTO);
+   public int insertMarketplaceSaleCommunity(CommunityDTO communityDTO) {
+      int boardRegCnt = this.communityDAO.insertMarketplaceSaleCommunity(communityDTO);
+      return boardRegCnt;
+   }
+   
+   /*** 장터 FreeSharing 등록  ***/
+   @Override
+   public int insertMarketplaceFreeSharingCommunity(CommunityDTO communityDTO) {
+      int boardRegCnt = this.communityDAO.insertMarketplaceFreeSharingCommunity(communityDTO);
       return boardRegCnt;
    }
    
