@@ -9,6 +9,75 @@
 <title>adminFormTitle</title>
 <link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
+
+<script>
+function memUpdate()
+{
+	
+	var formobj = $("[name='memRegForm']");
+	var pwdobj = $(".pwd");
+	var checkpwdobj = $(".checkpwd");
+	
+	if(new RegExp(/^[a-zA-Z0-9]{5,20}$/).test(pwdobj.val()) == false)
+	{
+		alert("암호는 영어 대/소문자 와 숫자로만 입력 가능/5~20자 이내")
+		pwdobj.val("");
+		return;		
+	}
+	
+	
+	if(pwdobj.val() != checkpwdobj.val())
+	{
+		alert("암호와 암호확인 문자가 동일하지 않습니다.")
+		return;		
+	}
+	
+	
+	$.ajax({
+		//----------------------------------------------------------
+		//WAS 에 접속할 URL 주소 지정
+		//----------------------------------------------------------
+		url   : "/memUpdateProc.do" 
+		//----------------------------------------------------------
+		//form 태그 안의 입력양식 데이터. 즉, 파라미터값을 보내는 방법 지정.
+		//----------------------------------------------------------
+		,type : "post"
+		//----------------------------------------------------------
+		//WAS 에 보낼 파라미터명과 파라미터값을 설정하기  ?파라미터명=파라미터값&파라미터명=파라미터값~~
+		//----------------------------------------------------------
+		,data : formobj.serialize()
+		//----------------------------------------------------------
+		//WAS 의 응답을 성공적으로 받았을 경우 실행할 익명함수 설정.
+		//이때, 익명함수의 매개변수로 WAS 의 응답물이 들어 온다.
+		//----------------------------------------------------------
+			//--------------------------
+			//WAS 의 응답물이
+			//1행1열의 데이터라면 숫자 or 문자로 들어오고
+			//1행n열의 데이터라면 JSON 으로 들어오고
+			//n행1열의 데이터라면 Array 으로 들어오고
+			//n행m열의 데이터라면 다량의 JSON 이 저장된 Array 객체로 들어온다.
+			//--------------------------
+			
+		,success : function(json){
+			var result = json["result"];
+			if(result == 1)
+			{
+				alert("정보 수정 성공. 다시 로그인 해주세요");
+				location.href='loginForm.do';
+			}
+
+			else
+			{
+				alert("정보 수정 실패, 관리자에게 문의 바람");
+				
+			}
+			
+		}			
+		,error 	 : function(){alert("수정 실패 / 관리자에게 문의 바람");}
+		
+	}) 
+}
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>

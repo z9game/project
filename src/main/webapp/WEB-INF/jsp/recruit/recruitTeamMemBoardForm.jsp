@@ -185,6 +185,27 @@ function search() {
       }
 
    });
+   
+   function checkReserveForm() {
+
+	   alert(1);
+	   
+	   var sessionMid = '<%=session.getAttribute("mid")%>';
+
+	   if (sessionMid == "" || sessionMid == 'null') {
+	       alert('로그인이 필요한 서비스입니다.');
+	       location.href = '/main/loginForm.do';
+	       return;
+	   }
+		else
+		{
+			location.href='/newRecruitTeamMemBoardForm.do'
+		}
+	   
+   }
+   
+   
+  
 
 }
 
@@ -219,7 +240,7 @@ function goRecruitTeamMemDetailForm(b_no)
          </table>
          <br>
          <div class="newRecruitTeamMemBoardBtnDiv">
-            <input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="location.href='/newRecruitTeamMemBoardForm.do'">
+            <input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkReserveForm()">
          </div>
       </center>
       

@@ -304,7 +304,7 @@
    <insert id="insertDay" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
          insert into teammemboard_day
       <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
-         select  (select max(b_no)from recruit_teammemboard), #{day} from dual
+         select  (select b_no from recruit_teammemboard where b_no = #{b_no}), #{day} from dual 
       </foreach>
    </insert> 
    
@@ -312,7 +312,7 @@
    <insert id="insertTime" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
          insert into teammemboard_time
       <foreach collection="time" item="time"  open= " ( "  close = " ) "   separator=" union " >
-         select  (select max(b_no)from recruit_teammemboard), #{time} from dual
+         select  (select b_no from recruit_teammemboard where b_no = #{b_no}), #{time} from dual
       </foreach>
    </insert> 
    
@@ -394,5 +394,48 @@
 	 		 r.b_no=#{b_no}
 	  	   
    	</select> 
+   	
+   	<update id="recruitUpdateTeamMem" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+	update
+		recruit_teammemboard
+	set
+		title=#{title},
+		writer=#{writer},
+		sido=#{sido_id},
+		sigungu=#{sigungu_id},
+		pos=#{pos},
+		team_mem=#{team_mem}
+	where 
+		b_no = #{b_no}
+	</update>
+	
+	<delete id="deleteDay" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+		delete
+		from
+			teammemboard_day
+		where
+			b_no = #{b_no}
+	</delete>
+	
+	<delete id="deleteTime" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+		delete
+		from
+			teammemboard_time
+		where
+			b_no = #{b_no}
+	</delete>
+	
+	<delete id="recruitDeleteTeamMem" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+		delete
+		from
+			recruit_teammemboard
+		where
+			b_no = #{b_no}
+	</delete>
+   	
+   	
+   	
+   	
+   	
    	 
 </mapper>

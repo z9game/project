@@ -188,7 +188,46 @@ public class RecruitController {
     }  
     
     
+    //팀/팀원 게시물 수정
+    @RequestMapping( value = "/recruitTeamMemBoardUpProc.do"
+			,method = RequestMethod.POST
+			, produces = "application/json; charset=UTF-8"
+			)
+	@ResponseBody
+	// map을 사용한 이유? -> JSON 형식을 사용하기 위해
+	public Map<String, String> recruitTeamMemBoardUpProc(RecruitTeamMemDTO recruitTeamMemDTO)
+	{
+    //resultMap 이라는 변수 선언(자료형은 map) 
+	Map<String, String> resultMap = new HashMap<String, String>();
+	//recruitTeamMemUpCnt 이라는 변수 선언 (자료형은 int)
+	//업데이트가 성공했는지 안했는지의 결과가 변수에 저장될것임 -> 성공했으면 '1'이 들어오고 실패하면 '0'이 들어올것임.
+	int recruitTeamMemUpCnt = this.recruitService.recruitUpdateTeamMem(recruitTeamMemDTO);
+	//recruitTeamMemUpCnt에 저장된 결과를 map 형식으로 만들어준 변수 resultMap에 저장
+	//어떻게? -> map 사용법은 키값명을 호출하면 그 키값명에 저장한 데이터가 나옴
+	//여기서는 "result"라는 키값명에 recruitTeamMemUpCnt를 저장.
+	//즉, "result"를 호출하면 recruitTeamMemUpCnt가 나오는 것임.
+	resultMap.put("result", recruitTeamMemUpCnt+"");
+	
+	
+	return resultMap;
+	}
     
+    
+    //팀/팀원 게시물 삭제
+    @RequestMapping( value = "/recruitTeamMemBoardDelProc.do"
+			,method = RequestMethod.POST
+			, produces = "application/json; charset=UTF-8"
+			)
+	@ResponseBody
+	public Map<String, String> recruitTeamMemBoardDelProc(RecruitTeamMemDTO recruitTeamMemDTO)
+	{
+	Map<String, String> resultMap = new HashMap<String, String>();
+	int recruitTeamMemDelCnt = this.recruitService.recruitDeleteTeamMem(recruitTeamMemDTO);
+	resultMap.put("result", recruitTeamMemDelCnt+"");
+	
+	
+	return resultMap;
+	}
     
     
     
