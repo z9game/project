@@ -892,7 +892,7 @@
    
    
 
-   <insert id="insertCommunity"
+   <insert id="insertMarketplaceSaleCommunity"
       parameterType="kosmo.team.project.dto.CommunityDTO">
       insert into sale
       (
@@ -907,7 +907,29 @@
       (
          ( select nvl( max( sale_no ), 0 ) + 1 from sale )
          , #{ subject }
-         , ( select m_no from member where nickname = '${ writer }' )   
+         , ( select m_no from member where nickname = '${ nickname }' )   
+         , #{ content }
+         , 0
+         , sysdate
+      )
+   </insert>
+   
+      <insert id="insertMarketplaceFreeSharingCommunity"
+      parameterType="kosmo.team.project.dto.CommunityDTO">
+      insert into  free_sharing
+      (
+      free_sharing_no
+      , subject
+      , writer
+      , content
+      , readcount
+      , reg_date
+      )
+      values
+      (
+         ( select nvl( max( free_sharing_no ), 0 ) + 1 from free_sharing )
+         , #{ subject }
+         , ( select m_no from member where nickname = '${ nickname }' )   
          , #{ content }
          , 0
          , sysdate
