@@ -1,5 +1,6 @@
 package kosmo.team.project.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kosmo.team.project.dao.MemberDAO;
 
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.bookingDTO;
 
 @Service
 @Transactional
@@ -42,7 +44,7 @@ public class MemberServiceImplements implements MemberService {
 	
 	public MemberDTO updateMem(String mid)
 	{
-		MemberDTO updateMem = this.memberDAO.updateMem(mid);
+		MemberDTO updateMem = this.memberDAO.updateMemForm(mid);
 		
 		return updateMem;
 	}
@@ -61,5 +63,19 @@ public class MemberServiceImplements implements MemberService {
 		 MemberDTO getMyStat = this.memberDAO.getMyStat(mid);
 		 
 		 return getMyStat;
+	}
+	
+	public int updateMem(MemberDTO memberDTO)
+	{
+		int updateMem = this.memberDAO.updateMem(memberDTO);
+		
+		return updateMem;
+	}
+	
+	public List<bookingDTO> getBookedStadium(int m_no) {
+		
+		List<bookingDTO> getBookedStadium = this.memberDAO.getBookedStadium(m_no);
+		
+		return getBookedStadium;
 	}
 }

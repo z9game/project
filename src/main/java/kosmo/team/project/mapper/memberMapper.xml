@@ -65,7 +65,7 @@
 			mid = #{mid}
 	</select>
 	
-	<select id="updateMem" parameterType="String" resultType="kosmo.team.project.dto.MemberDTO">
+	<select id="updateMemForm" parameterType="kosmo.team.project.dto.MemberDTO" resultType="kosmo.team.project.dto.MemberDTO">
 		select
 		    m.name
 		    ,m.mid
@@ -82,6 +82,21 @@
 		where
 			mid = #{mid}
 	</select>
+	
+	<update id="updateMem" parameterType="kosmo.team.project.dto.MemberDTO">
+		update
+			member
+		set
+			password = #{password}
+			,email = #{email}
+			,phone = #{phone}
+			,sido_id = #{sido_id}
+			,sigungu_id = #{sigungu_id}
+			,detail_address = #{detail_address}
+			,nickname = #{nickname}
+		where
+			mid = #{mid}
+	</update>
 	
 	
 	<!-- 마이페이지에 있는 내정보 가져오기 -->
@@ -109,6 +124,23 @@
 		where
 		    m.mid = #{mid}
 	</select>
+	
+	<!-- 예약한 경기장 가져오기 -->
+	<select id="getBookedStadium" parameterType="int" resultType="kosmo.team.project.dto.bookingDTO">
+		select
+		    s.stadium_name
+		    ,to_char(b.booking_date, 'YYYY-MM-DD') as "booking_date"
+		    ,t.time_range
+		from
+		    booking b left join stadium s on b.stadium_no = s.stadium_no
+		              left join time_table t on b.time_slot = t.time_no
+		where
+			b.m_no = #{m_no}
+			and 
+			(sysdate - booking_date) <![CDATA[ <0 ]]>
+	</select>
+	
+	
 	
 	
 	

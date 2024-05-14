@@ -218,21 +218,7 @@
    </select>      
    
    
-   <select id="getRecruit_TeamMemDetail_ex" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="int">
-          select 
-              b_no 
-              ,title 
-              ,writer 
-              ,content 
-              ,readcount 
-              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-              ,team_mem
-          from 
-              recruit_teammemboard
-          where
-             b_no = #{b_no}
-   </select>   
-   
+  
    
    <select id="getRecruit_TeamMemDetail" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="int">
           select 

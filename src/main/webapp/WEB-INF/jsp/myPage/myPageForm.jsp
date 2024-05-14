@@ -59,18 +59,25 @@
 	<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
 	<caption><b>예약한 경기장</b></caption>
 		<tr>
-			<th>지역</th>
 			<th>경기장명</th>
 			<th>날짜</th>
 			<th>시간</th>
 		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+		<c:forEach var="list" items="${requestScope.bookedStadium}" varStatus="status">
+			<tr>
+				<td align="center">${list.stadium_name}</td>
+				<td align="center">${list.booking_date}</td>
+				<td align="center">${list.time_range}</td>
+			</tr>
+		</c:forEach>
 	</table>
+	<c:if test="${empty requestScope.bookedStadium}">
+			<center>
+			<br><br>
+			<b>예약한 경기장이 없습니다.</b>
+			</center>
+			<div style="height:10px;"></div>
+	</c:if>
 	
 	
 	

@@ -377,6 +377,7 @@ public class AdminServiceImplements implements AdminService {
 
 	}
 	
+	//페이징 처리를 위한 게시물 개수 가져오기
 	public int getTournamentListCnt(TournamentSearchDTO tournamentSearchDTO) {
 		
 		int getTournamentListCnt = this.adminDAO.getTournamentListCnt(tournamentSearchDTO);
