@@ -69,6 +69,48 @@ public class RecordsController {
 		
 		// 성별 순위
 		
+		List<RecordsDTO> recordsRankingTabGender = this.recordsService.getRecordsRankingTabGender(recordsDTO);
+		
+		mav.addObject("recordsRankingTabGender", recordsRankingTabGender);
+		
+		int recordsRankingTabGenderListCnt = this.recordsService.getRecordsRankingTabGenderListCnt(recordsDTO);
+		
+		mav.addObject("recordsRankingTabGenderListCnt", recordsRankingTabGenderListCnt);
+		
+		List<RecordsDTO> recordsGoalRatingTabGender = this.recordsService.getRecordsGoalRatingTabGender(recordsDTO);
+		
+		mav.addObject("recordsGoalRatingTabGender", recordsGoalRatingTabGender);
+
+		List<RecordsDTO> recordsWinRatingTabGender = this.recordsService.getRecordsWinRatingTabGender(recordsDTO);
+		
+		mav.addObject("recordsWinRatingTabGender", recordsWinRatingTabGender);
+		
+		List<RecordsDTO> recordsAssistRatingTabGender = this.recordsService.getRecordsAssistRatingTabGender(recordsDTO);
+		
+		mav.addObject("recordsAssistRatingTabGender", recordsAssistRatingTabGender);
+		
+		// 연령대별 순위
+		
+		List<RecordsDTO> recordsRankingTabAge = this.recordsService.getRecordsRankingTabAge(recordsDTO);
+		
+		mav.addObject("recordsRankingTabAge", recordsRankingTabAge);
+		
+		int recordsRankingTabAgeListCnt = this.recordsService.getRecordsRankingTabAgeListCnt(recordsDTO);
+		
+		mav.addObject("recordsRankingTabAgeListCnt", recordsRankingTabAgeListCnt);
+		
+		List<RecordsDTO> recordsGoalRatingTabAge = this.recordsService.getRecordsGoalRatingTabAge(recordsDTO);
+		
+		mav.addObject("recordsGoalRatingTabAge", recordsGoalRatingTabAge);
+
+		List<RecordsDTO> recordsWinRatingTabAge = this.recordsService.getRecordsWinRatingTabAge(recordsDTO);
+		
+		mav.addObject("recordsWinRatingTabAge", recordsWinRatingTabAge);
+		
+		List<RecordsDTO> recordsAssistRatingTabAge = this.recordsService.getRecordsAssistRatingTabAge(recordsDTO);
+		
+		mav.addObject("recordsAssistRatingTabAge", recordsAssistRatingTabAge);
+		
     	mav.setViewName("/records/recordsRankingForm.jsp");
     	
         return mav;
