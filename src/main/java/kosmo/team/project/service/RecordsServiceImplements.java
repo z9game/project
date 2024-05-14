@@ -105,4 +105,96 @@ public class RecordsServiceImplements implements RecordsService {
 		return recordsAssistRatingTabRegion;
 
 	}
+	
+	// 성별 순위
+	
+	@Override
+	public List<RecordsDTO> getRecordsRankingTabGender(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsRankingTabGender = this.recordsDAO.getRecordsRankingTabGender(recordsDTO);
+
+		return recordsRankingTabGender;
+
+	}
+	
+	@Override
+	public int getRecordsRankingTabGenderListCnt(RecordsDTO recordsDTO) {
+		
+		int recordsRankingTabGenderListCnt = this.recordsDAO.getRecordsRankingTabGenderListCnt(recordsDTO);
+		
+		return recordsRankingTabGenderListCnt;
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsGoalRatingTabGender(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsGoalRatingTabGender = this.recordsDAO.getRecordsGoalRatingTabGender(recordsDTO);
+
+		return recordsGoalRatingTabGender;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsWinRatingTabGender(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsWinRatingTabGender = this.recordsDAO.getRecordsWinRatingTabGender(recordsDTO);
+
+		return recordsWinRatingTabGender;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsAssistRatingTabGender(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsAssistRatingTabGender = this.recordsDAO.getRecordsAssistRatingTabGender(recordsDTO);
+
+		return recordsAssistRatingTabGender;
+
+	}
+	
+	// 연령대별 순위
+	
+	@Override
+	public List<RecordsDTO> getRecordsRankingTabAge(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsRankingTabAge = this.recordsDAO.getRecordsRankingTabAge(recordsDTO);
+
+		return recordsRankingTabAge;
+
+	}
+	
+	@Override
+	public int getRecordsRankingTabAgeListCnt(RecordsDTO recordsDTO) {
+		
+		int recordsRankingTabAgeListCnt = this.recordsDAO.getRecordsRankingTabAgeListCnt(recordsDTO);
+		
+		return recordsRankingTabAgeListCnt;
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsGoalRatingTabAge(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsGoalRatingTabAge = this.recordsDAO.getRecordsGoalRatingTabAge(recordsDTO);
+
+		return recordsGoalRatingTabAge;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsWinRatingTabAge(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsWinRatingTabAge = this.recordsDAO.getRecordsWinRatingTabAge(recordsDTO);
+
+		return recordsWinRatingTabAge;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsAssistRatingTabAge(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsAssistRatingTabAge = this.recordsDAO.getRecordsAssistRatingTabAge(recordsDTO);
+
+		return recordsAssistRatingTabAge;
+
+	}
 }

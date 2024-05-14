@@ -12,11 +12,18 @@ public class RecordsDTO {
 	
 	private int player;
 	
-	private String sort;
+	private String sortTabAll;
+	private String sortTabRegion;
+	private String sortTabGender;
+	private String sortTabAge;
+	
 	
 	private int sido_id;
-	
 	private String name;
+	private String gender;
+	private String age;
+	
+	private String birthdate;
 
 	public String getNickname() {
 		return nickname;
@@ -82,12 +89,36 @@ public class RecordsDTO {
 		this.player = player;
 	}
 
-	public String getSort() {
-		return sort;
+	public String getSortTabAll() {
+		return sortTabAll;
 	}
 
-	public void setSort(String sort) {
-		this.sort = sort;
+	public void setSortTabAll(String sortTabAll) {
+		this.sortTabAll = sortTabAll;
+	}
+
+	public String getSortTabRegion() {
+		return sortTabRegion;
+	}
+
+	public void setSortTabRegion(String sortTabRegion) {
+		this.sortTabRegion = sortTabRegion;
+	}
+
+	public String getSortTabGender() {
+		return sortTabGender;
+	}
+
+	public void setSortTabGender(String sortTabGender) {
+		this.sortTabGender = sortTabGender;
+	}
+
+	public String getSortTabAge() {
+		return sortTabAge;
+	}
+
+	public void setSortTabAge(String sortTabAge) {
+		this.sortTabAge = sortTabAge;
 	}
 
 	public int getSido_id() {
@@ -104,5 +135,29 @@ public class RecordsDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
 }
