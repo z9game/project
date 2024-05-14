@@ -18,6 +18,7 @@
 		var formObj = $("[name='rentStadiumForm']");
 
 		var dateObj = formObj.find("#date");
+		
 	    var timeSlotObj = formObj.find("[name='time_slot']"); // 수정된 부분
 
 	    var selectedDate = dateObj.val();

@@ -11,6 +11,7 @@ import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
 import kosmo.team.project.dto.TimeDTO;
+import kosmo.team.project.dto.myRentStadiumDTO;
 
 @Service
 @Transactional
@@ -110,9 +111,10 @@ public class StadiumServiceImplements implements StadiumService {
 		return fullRent;
 	}
 
+
 	@Override
-	public List<RentStadiumDTO> getMyStadiumList(StadiumSearchDTO stadiumSearchDTO) {
-		List<RentStadiumDTO> getMyStadiumList = stadiumDAO.getMyStadiumList(stadiumSearchDTO);
+	public List<myRentStadiumDTO> getMyStadiumList(int m_no) {
+		List<myRentStadiumDTO> getMyStadiumList = stadiumDAO.getMyStadiumList(m_no);
 
 		return getMyStadiumList;
 	}

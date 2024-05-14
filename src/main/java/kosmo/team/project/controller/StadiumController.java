@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
 import kosmo.team.project.dto.TimeDTO;
+import kosmo.team.project.dto.myRentStadiumDTO;
 import kosmo.team.project.service.StadiumService;
 import kosmo.team.project.utility.Page;
 
@@ -49,20 +52,14 @@ public class StadiumController {
 		
 		List<StadiumDTO> stadiumList = this.stadiumService.getStadiumList(stadiumSearchDTO);
 
-		List<RentStadiumDTO> myStadiumList = this.stadiumService.getMyStadiumList(stadiumSearchDTO);
-		
-		for (RentStadiumDTO stadium : myStadiumList) {
-		    System.out.println("m_no: " + stadium.getM_no());
-		}
-		
-		
+
+
 
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("stadiumList", stadiumList);
 		mav.addObject("StadiumListCnt", StadiumListCnt);
-		mav.addObject("StadiumListAllCnt", StadiumListAllCnt);
-		mav.addObject("myStadiumList", myStadiumList);
+
 		mav.addObject("StadiumMap", StadiumMap);
 
 		mav.setViewName(stadiumFolder + "stadiumRentForm.jsp");
@@ -189,12 +186,103 @@ public class StadiumController {
 		return mav;
 	}
 
+	
+	
+	
+
+	//새글쓰기 페이지
+	
 	@RequestMapping(value = "/newStadiumTransferForm.do")
-	public ModelAndView NewStadiumTransferForm() {
+	
+	public ModelAndView newStadiumTransferForm(HttpSession session) {
+	    // 세션에서 m_no 가져오기
+	    int m_no = (int) session.getAttribute("m_no");
+	    
+	    
 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(stadiumFolder + "newStadiumTransferForm.jsp");
+	    // m_no를 사용하여 경기장 리스트 가져오는 로직 구현
+	    List<myRentStadiumDTO> myStadiumList = stadiumService.getMyStadiumList(m_no);
 
-		return mav;
+
+
+	    
+	    ModelAndView mav = new ModelAndView();
+	    mav.addObject("myStadiumList", myStadiumList);
+	    	    mav.setViewName(stadiumFolder + "newStadiumTransferForm.jsp");
+
+	    return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//새글쓰기에서 호출
+	
+	@RequestMapping(value = "/stadiumTransferProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, String> stadiumTransferProc(
+			// -------------------------
+			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
+			// -------------------------
+			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
+			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
+
+			RentStadiumDTO rentStadiumDTO
+
+	) {
+
+		// ------------------------------------------------
+		// 게시판 수정 결과물을 저장할 HashMap 객체 생성하기.
+		// ------------------------------------------------
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		int StadiumRentCnt = this.stadiumService.insertStadiumRent(rentStadiumDTO);
+		
+		
+
+		
+		
+		
+		
+		// -------------------------------------------
+		// HashMap 객체에 게시판 수정 행의 개수 저장하기기
+		// -------------------------------------------
+		resultMap.put("result", StadiumRentCnt + "");
+
+		// -------------------------------------------
+		// HashMap 객체의 메위주 리턴하기
+		// -------------------------------------------
+		return resultMap;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

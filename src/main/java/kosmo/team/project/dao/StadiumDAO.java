@@ -8,6 +8,7 @@ import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
 import kosmo.team.project.dto.TimeDTO;
+import kosmo.team.project.dto.myRentStadiumDTO;
 
 @Mapper
 public interface StadiumDAO {
@@ -36,7 +37,9 @@ public interface StadiumDAO {
 
 	public int getM_no(RentStadiumDTO rentStadiumDTO);
 
-	public List<RentStadiumDTO> getMyStadiumList(StadiumSearchDTO stadiumSearchDTO);
+
+
+	public List<myRentStadiumDTO> getMyStadiumList(int m_no);
 	
 
 	
