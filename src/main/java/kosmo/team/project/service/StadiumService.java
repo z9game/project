@@ -2,6 +2,7 @@ package kosmo.team.project.service;
 
 import java.util.List;
 
+import kosmo.team.project.dto.MyRentStaidumTimeDTO;
 import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
@@ -25,6 +26,10 @@ public interface StadiumService {
 	public List<String> getFullRent(int stadium_no);
 
 	public List<myRentStadiumDTO> getMyStadiumList(int m_no);
+
+	public List<MyRentStaidumTimeDTO> getTimeRanges(MyRentStaidumTimeDTO myRentStaidumTimeDTO);
+
+	public List<MyRentStaidumTimeDTO> getDate(MyRentStaidumTimeDTO myRentStaidumTimeDTO);
 
 
 

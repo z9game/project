@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosmo.team.project.dao.StadiumDAO;
+import kosmo.team.project.dto.MyRentStaidumTimeDTO;
 import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
@@ -117,6 +118,24 @@ public class StadiumServiceImplements implements StadiumService {
 		List<myRentStadiumDTO> getMyStadiumList = stadiumDAO.getMyStadiumList(m_no);
 
 		return getMyStadiumList;
+	}
+
+	
+	
+	
+	@Override
+	public List<MyRentStaidumTimeDTO> getTimeRanges(MyRentStaidumTimeDTO myRentStaidumTimeDTO) {
+		
+		List<MyRentStaidumTimeDTO> timeRanges = stadiumDAO.getTimeRanges(myRentStaidumTimeDTO);
+		
+		return timeRanges;
+	}
+
+	@Override
+	public List<MyRentStaidumTimeDTO> getDate(MyRentStaidumTimeDTO myRentStaidumTimeDTO) {
+		List<MyRentStaidumTimeDTO> RentDate = stadiumDAO.getDate(myRentStaidumTimeDTO);
+				
+		return RentDate;
 	}
 
 }

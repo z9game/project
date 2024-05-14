@@ -11,6 +11,87 @@
 <script src="/js/newStadiumTransferFormScript.js"></script>
 <script>
 
+function loadDate() {
+    var stadiumId = $("select[name='MyStadium']").val();
+    var m_no = $("input[name='m_no']").val(); // m_no의 값을 가져옵니다
+    
+    // 확인을 위해 alert으로 m_no 값 출력
+   // alert("m_no 값: " + m_no);
+
+    if (stadiumId === "선택") {
+        $("select[name='MyDate']").html('<option value="선택">날짜</option>');
+        return;
+    }
+
+    $.ajax({
+        url: '/myStadiumRentDate.do',
+        method: 'POST',
+        data: {
+            stadium_no: stadiumId,
+            m_no: m_no // 데이터 객체에 m_no 추가
+        },
+        success: function(json) {
+            var RentDate = json; // 시간 범위를 JSON으로 받음
+            
+            var dateOptions = '<option value="선택">날짜</option>';
+            
+            for (var i = 0; i < RentDate.length; i++) {
+            	dateOptions += '<option value="' + RentDate[i].booking_date + '">' + RentDate[i].booking_date + '</option>';
+            }
+            
+            $("select[name='MyDate']").html(dateOptions); // 시간 범위를 select 요소에 추가
+        },
+
+        
+        error: function(xhr, status, error) {
+            console.error("에러 발생: " + error);
+        }
+    });
+}
+
+
+
+function loadTimeRanges() {
+    var bookingDate = $("select[name='MyDate']").val();
+    var stadiumId = $("select[name='MyStadium']").val();
+    var m_no = $("input[name='m_no']").val(); // m_no의 값을 가져옵니다
+    
+    if (bookingDate === "선택") {
+        $("select[name='MyTimeRange']").html('<option value="선택">시간</option>');
+        return;
+    }
+
+    // 정규식을 사용하여 날짜 부분 추출
+    var Date = bookingDate.replace(/^([0-9]{4}-[0-9]{2}-[0-9]{2})((\s?).*)$/, "$1");
+    alert(Date); 
+
+    $.ajax({
+        url: '/myStadiumRentTime.do',
+        method: 'POST',
+        data: {
+            stadium_no: stadiumId,
+            booking_date: Date, // 추출된 날짜를 전송
+            m_no: m_no
+        },
+        success: function(json) {
+            var timeRanges = json;
+            var timeOptions = '<option value="선택">시간</option>';
+            for (var i = 0; i < timeRanges.length; i++) {
+                timeOptions += '<option value="' + timeRanges[i].time_slot + '">' + timeRanges[i].time_range + '</option>';
+            }
+            $("select[name='MyTimeRange']").html(timeOptions);
+        },
+        error: function(xhr, status, error) {
+            console.error("에러 발생: " + error);
+        }
+    });
+}
+
+
+
+
+
+
 
 
 
@@ -130,18 +211,23 @@ function TransferForm(){
 					<th>글쓴이</th>
 					<td>
 						<input type="text" name="writer" class="writer" size="40" maxlength="100" value="<%= session.getAttribute("nickname") %>" style="border: 0;" readonly>
+			
 					</td>
+
 			<tr>
 				<th bgColor="lightgray">경기장</th>
 				<td>
-				    <select name="MyStadium" class="MyStadium">
-				        <option value="선택">경기장선택</option>
-				        <c:forEach var="myStadium" items="${requestScope.myStadiumList}" varStatus="status">
+				    <select name="MyStadium" class="MyStadium" onchange="loadDate()">
+				        <option value="선택" >경기장선택</option>
+				        <c:forEach var="myStadium" items="${requestScope.myStadiumList}" varStatus="status" >
 				        	<option value="${myStadium.stadium_no}">${myStadium.stadium_name}</option>
 				        </c:forEach>
 				       
 				    </select>
-				    
+				    <select name="MyDate" class="MyDate"onchange="loadTimeRanges()">
+				        <option value="선택">날짜</option>
+				       
+				    </select>
 				    <select name="MyTimeRange" class="MyTimeRange">
 				        <option value="선택">시간</option>
 				       
@@ -149,7 +235,6 @@ function TransferForm(){
 				</td>
 
 			</tr>
-				
 				<tr>
 					<th>내용</th>
 					<td>
@@ -167,7 +252,7 @@ function TransferForm(){
 					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/stadiumTransferForm.do')">
 				</div>
 			</div>
-			<input type="text" name="m_no" value="<%= request.getSession().getAttribute("m_no") %>">
+			<input type="hidden" name="m_no" value="<%= request.getSession().getAttribute("m_no") %>">
 		</form>
 	</div>
 </body>

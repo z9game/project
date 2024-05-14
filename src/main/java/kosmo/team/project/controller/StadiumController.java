@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.MyRentStaidumTimeDTO;
 import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
@@ -48,12 +49,8 @@ public class StadiumController {
 		stadiumSearchDTO.setRowCntPerPage((int) StadiumMap.get("rowCntPerPage"));
 		stadiumSearchDTO.setBegin_rowNo((int) StadiumMap.get("begin_rowNo"));
 		stadiumSearchDTO.setEnd_rowNo((int) StadiumMap.get("end_rowNo"));
-		
-		
+
 		List<StadiumDTO> stadiumList = this.stadiumService.getStadiumList(stadiumSearchDTO);
-
-
-
 
 		ModelAndView mav = new ModelAndView();
 
@@ -67,7 +64,6 @@ public class StadiumController {
 		return mav;
 	}
 
-	
 	@RequestMapping(value = "/stadiumDetailForm.do")
 	public ModelAndView stadiumDetailForm(
 			// --------------------------------------
@@ -85,15 +81,9 @@ public class StadiumController {
 		StadiumDTO stadiumDTO = this.stadiumService.getStadium(stadium_no);
 
 		List<TimeDTO> timeDTO = this.stadiumService.getTime(stadium_no);
-		
-		List<String> fullRent = this.stadiumService.getFullRent(stadium_no);
-		
 
-		
-		
-		
-		
- 		
+		List<String> fullRent = this.stadiumService.getFullRent(stadium_no);
+
 		ModelAndView mav = new ModelAndView();
 		// --------------------------------
 		// [ModelAndView 객체]에
@@ -103,17 +93,15 @@ public class StadiumController {
 		// HttpServletRequest 객체에도 저장된다.
 		// --------------------------------
 		mav.addObject("stadiumDTO", stadiumDTO);
-		
+
 		mav.addObject("timeDTO", timeDTO);
-		
+
 		for (int i = 0; i < fullRent.size(); i++) {
-		    fullRent.set(i, "'" + fullRent.get(i) + "'");
+			fullRent.set(i, "'" + fullRent.get(i) + "'");
 		}
 
-		
-		
 		mav.addObject("fullRent", fullRent);
-		
+
 		System.out.println("fullRent 날" + fullRent);
 
 		mav.setViewName(stadiumFolder + "stadiumDetailForm.jsp");
@@ -121,7 +109,7 @@ public class StadiumController {
 		return mav;
 
 	}
-	
+
 	@RequestMapping(value = "/rentStadiumProc.do"
 
 			, method = RequestMethod.POST
@@ -147,18 +135,10 @@ public class StadiumController {
 		// -------------------------------------------
 		// [BoardServiceImpl 객체]의 updateBoard 메소드 호출로
 		// 게시판 글 수정하고 [수정 적용행의 개수] 얻기
-		
-		 
-		
+
 		// -------------------------------------------
 		int StadiumRentCnt = this.stadiumService.insertStadiumRent(rentStadiumDTO);
-		
-		
 
-		
-		
-		
-		
 		// -------------------------------------------
 		// HashMap 객체에 게시판 수정 행의 개수 저장하기기
 		// -------------------------------------------
@@ -169,14 +149,7 @@ public class StadiumController {
 		// -------------------------------------------
 		return resultMap;
 	}
-	
 
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/stadiumTransferForm.do")
 	public ModelAndView StadiumTransferForm() {
 
@@ -186,32 +159,75 @@ public class StadiumController {
 		return mav;
 	}
 
-	
-	
-	
+	// 새글쓰기 페이지
 
-	//새글쓰기 페이지
-	
 	@RequestMapping(value = "/newStadiumTransferForm.do")
-	
+
 	public ModelAndView newStadiumTransferForm(HttpSession session) {
-	    // 세션에서 m_no 가져오기
-	    int m_no = (int) session.getAttribute("m_no");
-	    
-	    
+		// 세션에서 m_no 가져오기
+		int m_no = (int) session.getAttribute("m_no");
 
-	    // m_no를 사용하여 경기장 리스트 가져오는 로직 구현
-	    List<myRentStadiumDTO> myStadiumList = stadiumService.getMyStadiumList(m_no);
+		// m_no를 사용하여 경기장 리스트 가져오는 로직 구현
+		List<myRentStadiumDTO> myStadiumList = stadiumService.getMyStadiumList(m_no);
 
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("myStadiumList", myStadiumList);
+		mav.setViewName(stadiumFolder + "newStadiumTransferForm.jsp");
 
-
-	    
-	    ModelAndView mav = new ModelAndView();
-	    mav.addObject("myStadiumList", myStadiumList);
-	    	    mav.setViewName(stadiumFolder + "newStadiumTransferForm.jsp");
-
-	    return mav;
+		return mav;
 	}
+
+	@RequestMapping(value = "/myStadiumRentDate.do", method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<MyRentStaidumTimeDTO> myStadiumRentDate(MyRentStaidumTimeDTO myRentStaidumTimeDTO) {
+
+
+
+
+		
+		
+		
+        List<MyRentStaidumTimeDTO> RentDate = stadiumService.getDate(myRentStaidumTimeDTO);
+        	
+        System.out.println("RentDate: " + RentDate);
+
+
+
+            
+        	return RentDate;
+    }
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/myStadiumRentTime.do", method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<MyRentStaidumTimeDTO> myStadiumRentTime(MyRentStaidumTimeDTO myRentStaidumTimeDTO) {
+
+
+
+
+		
+		
+		
+        List<MyRentStaidumTimeDTO> timeRanges = stadiumService.getTimeRanges(myRentStaidumTimeDTO);
+        	
+        System.out.println("TimeList: " + timeRanges);
+
+        for (MyRentStaidumTimeDTO timeRange : timeRanges) {
+            System.out.println("Time Range: " + timeRange.getTime_range());
+        }
+        
+
+
+            
+        	return timeRanges;
+    }
 	
 	
 	
@@ -221,8 +237,19 @@ public class StadiumController {
 	
 	
 	
-	//새글쓰기에서 호출
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	// 새글쓰기에서 호출
+
 	@RequestMapping(value = "/stadiumTransferProc.do"
 
 			, method = RequestMethod.POST
@@ -246,13 +273,7 @@ public class StadiumController {
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		int StadiumRentCnt = this.stadiumService.insertStadiumRent(rentStadiumDTO);
-		
-		
 
-		
-		
-		
-		
 		// -------------------------------------------
 		// HashMap 객체에 게시판 수정 행의 개수 저장하기기
 		// -------------------------------------------
@@ -263,26 +284,5 @@ public class StadiumController {
 		// -------------------------------------------
 		return resultMap;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
