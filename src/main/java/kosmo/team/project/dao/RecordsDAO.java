@@ -8,7 +8,28 @@ import kosmo.team.project.dto.RecordsDTO;
 @Mapper
 public interface RecordsDAO {
 	
-	public List<RecordsDTO> getRecordsStatistics(RecordsDTO recordsDTO);
+	// 전체 순위
 	
-	public int getRecordsStatisticsListCnt(RecordsDTO recordsDTO);
+	public List<RecordsDTO> getRecordsRankingTabAll(RecordsDTO recordsDTO);
+	
+	public int getRecordsRankingTabAllListCnt(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getRecordsGoalRatingTabAll(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getRecordsWinRatingTabAll(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getRecordsAssistRatingTabAll(RecordsDTO recordsDTO);
+	
+	
+	// 지역 순위
+	
+	public List<RecordsDTO> getRecordsRankingTabRegion(RecordsDTO recordsDTO);
+	
+	public int getRecordsRankingTabRegionListCnt(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getRecordsGoalRatingTabRegion(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getRecordsWinRatingTabRegion(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getRecordsAssistRatingTabRegion(RecordsDTO recordsDTO);
 }

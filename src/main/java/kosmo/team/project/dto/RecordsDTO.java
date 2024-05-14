@@ -13,6 +13,10 @@ public class RecordsDTO {
 	private int player;
 	
 	private String sort;
+	
+	private int sido_id;
+	
+	private String name;
 
 	public String getNickname() {
 		return nickname;
@@ -84,5 +88,21 @@ public class RecordsDTO {
 
 	public void setSort(String sort) {
 		this.sort = sort;
+	}
+
+	public int getSido_id() {
+		return sido_id;
+	}
+
+	public void setSido_id(int sido_id) {
+		this.sido_id = sido_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

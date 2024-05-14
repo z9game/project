@@ -2,16 +2,34 @@
 	font-size: 15px;
 }
 
+table {
+	border-collapse: collapse;
+	border-color: gray;
+	margin: 0 auto;
+	margin-top:20px;
+}
+
+th, td {
+	padding: 10px 15px 10px 15px;
+	border-color: gray;
+}
+
+th {
+	background-color: lightgray;
+}
+
 html,
 body {
-  /* width: 100%;
+  width: 100%;
   height: 100%;
   margin: 0;
   box-sizing: border-box;
   scrollbar-width: none;
-  overflow: hidden; */
-  margin: 0;
-  padding: 0;
+}
+
+li{
+	list-style-type: none;
+	cursor: pointer;
 }
 
 ul, ol{
@@ -26,17 +44,90 @@ a{
 	position: relative;
 }
 
-.titleBackgoundImg{
+.titleBackgoundImg {
 	opacity: 0.5;
 	width: 100%;
 	height: 100px;
 }
 
-.titleBackgoundText{
+.titleBackgoundText {
 	font-size: 40px;
 	position: absolute;
 	text-align: center;
 	top: 50%;
 	left: 50%;
 	transform: translate( -50%, -50% );
+}
+
+/* tab CSS */
+
+.recordsRankingFormCategoryTab{
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+.recordsRankingFormCategoryTabNav{
+	font-size: 0;
+	text-align: center;
+}
+
+.recordsRankingFormCategoryTabNav li{
+	display: inline-block;
+	height: 46px;
+	width: 300px;
+	text-align: center;
+	border: 1px solid #ddd;
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-top: 30px;
+}
+
+.recordsRankingFormCategoryTabNav li a:before{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 3px;
+}
+
+.recordsRankingFormCategoryTabNav li a.active:before{
+	background: #333;
+}
+
+.recordsRankingFormCategoryTabNav li a{
+	position: relative;
+	display: block;
+	background: #f8f8f8;
+	color: #000;
+	padding: 0 30px;
+	line-height: 46px;
+	text-decoration: none;
+	font-size: 16px;
+}
+
+.recordsRankingFormCategoryTabNav li a:hover, .recordsRankingFormCategoryTabNav li a.active{
+	background: #fff;
+	color: #333;
+}
+
+.recordsRankingFormCategoryTabContent{
+	padding: 20px;
+	height: 244px;
+}
+
+.selected {
+    color: red; /* 변경하고 싶은 색상으로 수정하세요 */
+    font-weight: bold;
+}
+
+/* Category All CSS */
+
+.recordsRankingFormTabAllRating{
+	margin: 0 auto;
+	margin-top: 130px;
+	display: flex;
+	margin-bottom: 50px;
+	width: 1000px;
 }
