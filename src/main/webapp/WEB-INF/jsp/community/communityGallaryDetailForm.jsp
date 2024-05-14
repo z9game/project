@@ -54,9 +54,9 @@
 			<span style="cursor: pointer" onclick="location.replace('/communityGallaryForm.do')">
 				[목록 화면으로] 
 			</span> 
-			
-			<input type="button" value="수정/삭제" onclick="document.communityGallaryUpDelForm.submit();">
-
+			<c:if test="${requestScope.communityDTO.writer == sessionScope.m_no}">
+				<input type="button" value="수정/삭제" onclick="document.communityGallaryUpDelForm.submit();">
+			</c:if>
 			<!-- Form 에 설정된  액션 값 URL 주소로 이동 -->
 			<!-- <input type="button" value="댓글쓰기"  onclick="document.boardUpDelForm.submit();">-->
 			

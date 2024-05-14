@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
 <c:if test="${empty sessionScope.mid}">
 	<script>
@@ -8,7 +9,6 @@
 	</script>
 </c:if>
 
-<%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -28,10 +28,11 @@
 
 
 
+
 	<c:if test="${!empty requestScope.communityDTO}">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7
 			style="border-collapse: collapse">
-			<caption>[공지사항 상세글 보기]</caption>
+			<caption>[장터 상세글 보기]</caption>
 			<tr>
 				<th bgColor="lightgray">이름</th>
 				<!--------------------------------------------------- -->
@@ -78,7 +79,11 @@
 			<span style="cursor: pointer"
 				onclick="location.replace('/communityMarketplaceBoardForm.do')">
 				[목록 화면으로] 
-			</span> <input type="button" value="수정/삭제" onclick="document.marketplaceUpDelForm.submit();">
+			</span>
+			<c:if test="${requestScope.communityDTO.writer == sessionScope.m_no}">
+				<input type="button" value="수정/삭제" onclick="document.marketplaceUpDelForm.submit();">
+			</c:if>
+		
 
 
 

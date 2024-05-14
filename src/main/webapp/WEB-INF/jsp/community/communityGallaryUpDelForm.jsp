@@ -8,6 +8,13 @@
 	</script>
 </c:if>
 
+<c:if test="${requestScope.communityDTO.writer != sessionScope.m_no}">
+	<script>
+		alert("작성한 사용자가 아닙니다");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
+
 <!DOCTYPE html><html>
 <head>
 	<meta charset="UTF-8">
