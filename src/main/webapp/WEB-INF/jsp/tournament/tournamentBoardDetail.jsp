@@ -98,12 +98,13 @@
 			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 			<!--------------------------------------------------- -->
 			<span style="cursor: pointer"
-				onclick="location.href='/recruitTeamMemBoardForm.do'">
+				onclick="location.href='/tournamentBoardForm.do'">
 				[목록 화면으로] </span>
-			<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.BoardUpDelForm.submit()" >
     
     	</c:if>
     	</center>
+    	
+	<div style="height:30px;"></div>
     
     
 </body>

@@ -194,6 +194,13 @@
 	   document.tournamentBoardDetail.submit();
 	}
 	
+	function pageNoClick(clickPageNo) {
+		
+		$("[name='recruit_Team_mem']").find(".selectPageNo").val(clickPageNo);
+
+		search_detail();
+
+	}
 	
 </script>
 
@@ -232,7 +239,8 @@
 						<td class="region1" onClick="search('경상')">&middot;경상</td>
 						<td class="region1" onClick="search('제주')">&middot;제주</td>
 					</tr>
-				</table>
+				</table> 
+			
 			
 				<div class="boardList">
 				<c:forEach var="gameList" items="${requestScope.tournamentList}">
@@ -273,6 +281,38 @@
 		</div>
     </center>
     
+    
+    <div style="height:10px;"></div>
+		<center>
+			<span class="pagingNos"> <span style="cursor: pointer"
+				onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
+				onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+	
+	
+				<c:forEach var="pageNo"
+					begin="${requestScope.tournamentMap.begin_pageNo}"
+					end="${requestScope.tournamentMap.end_pageNo}">
+	
+					<c:if test="${requestScope.tournamentMap.selectPageNo==pageNo}">
+	            ${pageNo}
+	         </c:if>
+	
+					<c:if test="${requestScope.tournamentMap.selectPageNo!=pageNo}">
+						<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+					</c:if>
+				</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
+				onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}+1)">[다음]</span>
+				<span style="cursor: pointer"
+				onClick="pageNoClick(${requestScope.tournamentMap.last_pageNo})">[마지막]</span>
+			</span> <select name="rowCntPerPage" class="rowCntPerPage"
+				onChange="search()">
+				<option value="10">10
+				<option value="15">15
+				<option value="20">20
+			</select>행보기 &nbsp;&nbsp;&nbsp;
+		</center>
+		
+    </center>
     <form action="/tournamentBoardDetail.do" method="post" name="tournamentBoardDetail">
     	<input type="hidden" name="list_no">
     </form>

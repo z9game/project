@@ -75,6 +75,7 @@ public class TournamentSearchDTO {
 	public void setKeyword1(String keyword1) {
 		this.keyword1 = keyword1;
 	}
+
 	
 	
 }

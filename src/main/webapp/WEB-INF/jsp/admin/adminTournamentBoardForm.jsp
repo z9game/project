@@ -374,41 +374,6 @@
 				</table>
 			
 				
-			
-				<%-- <div class="boardList">
-				<c:forEach var="gameList" items="${requestScope.tournamentList}">
-					<table style="border: 1px solid">
-						<tr style="cursor:pointer" onClick="goTournamentBoardDetail(${gameList.list_no});">
-							<td rowspan="3">
-								<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-							</td>
-							
-							<td>
-								<b>${gameList.subject}</b>
-							</td>
-						</tr>	
-						
-						<tr>
-							<td>
-								대회지역 = ${gameList.region}
-							</td>
-						</tr>
-						
-						<tr>
-							<td>
-								신청기간 = ${gameList.regist_start} ~ ${gameList.regist_end}
-							</td>
-						</tr>
-						
-						</c:forEach>
-					</table>
-					<c:if test="${empty requestScope.tournamentList}">
-						
-							<br><br><br><br>
-							<b>조건에 맞는 결과물이 없습니다.</b>
-						
-					</c:if>
-				</div> --%>
 				<!-- ================================================================================================================================ -->
 				<div class="tournamentBoard">
 			         <table class="tournamentTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin: 0 auto; margin-top:10px; width:1000px;">
