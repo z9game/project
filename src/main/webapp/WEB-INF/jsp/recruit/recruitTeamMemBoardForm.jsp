@@ -194,7 +194,7 @@ function search() {
 
 	   if (sessionMid == "" || sessionMid == 'null') {
 	       alert('로그인이 필요한 서비스입니다.');
-	       location.href = '/main/loginForm.do';
+	       location.href = '/loginForm.do';
 	       return;
 	   }
 		else

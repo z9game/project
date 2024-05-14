@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosmo.team.project.dao.MatchingDAO">
+
+ <sql id="boardWhere">
+ 	<if test="(keyword1 != null and keyword1.length() > 0)">
+      and (
+      </if>
+         <if test="keyword1 != null and keyword1.length() > 0">
+            (
+            <if test="searchType1 == 'writer'">
+               upper(writer) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'title'">
+               upper(title) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1== 'content'">
+               upper(content) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'all'">
+               upper(writer) like upper('%${keyword1}%')
+               or
+               upper(title) like upper('%${keyword1}%')
+               or
+               upper(content) like upper('%${keyword1}%')
+            </if>
+            )
+         </if>
+      <if test="(keyword1 != null and keyword1.length() > 0)">
+         )
+      </if>
+   </sql>
+
+
+<!-- 
+	resultType?? 오라클의 실행결과물을 어디에 저장할것인가 설정해주는것
+	parameterType?? 밖에서 들어노는값의 자료형이 무엇인지 설정 
+	
+	무조건 DTO가 들어오고 DTO가 결과값을 다받는것은 아님. 
+	'select count(*) from 테이블명' 처럼 개수가 결과물이면 이것을 DTO에 저장하지는 않음 -> 그럼 어디에? -> 개수면 정수형 즉, int 라는 자료형에 담아서 값을 받아올수 있음. 그러면 결과물을 받는놈의 자료형도 int 겟지요?
+-->
+
+
+<!-- 
+	이 오라클 실행구문이 실행되면 그 결과물을을 MatchingDTO에 담아서 보여준다. 
+	이 결과물은 n행 m열의 결과물이 나올것이기 때문에 앞에서 List<MatchingDTO>로 자료형을 설정해 둠.
+	
+	**주의**
+	오라클의 실행결과물을 MatchingDTO에 담아둔다고 설정했음. 
+	그러면 해당 DTO에는 오라클 실행결과를 저장할 변수명들이 선언이 되어 있어야함. 
+	
+	여기서 parameterType가 그냥 오라클에 있는 테이블값만 어떠한 조건 없이 가져오기 때문. 
+-->
+<select id="getMatchingList" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="kosmo.team.project.dto.MatchingSearchDTO">
+	select
+	    m.match_no
+	    ,m.title
+	    ,mb.nickname
+	    ,m.readcount
+	    ,to_char(m.reg_date,'YYYY-MM-DD') as "reg_date"
+	from
+	    match m left join member mb on m.writer = mb.m_no
+	where
+        1=1
+     <include refid="boardWhere"/>   
+</select>
+
+</mapper>
