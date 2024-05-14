@@ -15,10 +15,10 @@
 
 	function submitDetailFormComment(b_no){
 		if(b_no == ''){
-			location.href="/main/newCustomerServiceQnAForm.do";
+			location.href="/newCustomerServiceQnAForm.do";
 		} else {
 			$("[name='newCustomerServiceQnACommentForm'] .b_no").val(b_no);
-	        document.newCustomerServiceQnAForm.action = "/main/newCustomerServiceQnAForm.do";
+	        document.newCustomerServiceQnAForm.action = "/newCustomerServiceQnAForm.do";
 	        document.newCustomerServiceQnAForm.submit();
 		}
 	}
@@ -56,7 +56,7 @@
 
 	function customerServiceQnAUpdate(b_no){
 		$("[name='customerServiceQnAUpdateForm'] .b_no").val(b_no);
-		document.customerServiceQnAUpdateForm.action="/main/customerServiceQnAUpdateForm.do";
+		document.customerServiceQnAUpdateForm.action="/customerServiceQnAUpdateForm.do";
 		document.customerServiceQnAUpdateForm.submit();
 	}
 	
@@ -92,7 +92,7 @@
                     	
                     	if(result > 0){
                     		alert("삭제 성공");
-                            location.href="/main/customerServiceForm.do";
+                            location.href="/customerServiceForm.do";
                     	}
                     },
                     
@@ -115,7 +115,7 @@
 	    
 	    $.ajax({
 	    	
-	        url: "/main/customerServiceQnADetailForm.do",
+	        url: "/customerServiceQnADetailForm.do",
 	        
 	        method: "POST",
 	        
@@ -212,7 +212,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
-    <form name="newCustomerServiceQnACommentForm" action="/main/newCustomerServiceQnAForm.do" method="POST">
+    <form name="newCustomerServiceQnACommentForm" action="/newCustomerServiceQnAForm.do" method="POST">
         <c:if test="${not empty requestScope.customerServiceDetailDTO.b_no}">
             <input type="hidden" class="b_no" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
         </c:if>
@@ -225,7 +225,7 @@
         <p class="titleBackgoundText">QnA</p>
     </div>
     <div class="moveListBtnDiv">
-        <input type="button" class="moveListBtn" value="목록" onClick="location.href = '/main/customerServiceForm.do'">
+        <input type="button" class="moveListBtn" value="목록" onClick="location.href = '/customerServiceForm.do'">
     </div>
     <div class="customerServiceQnADetailFormContainer">
         <table class="customerServiceQnADetailFormRegTable" border="1" bordercolor="black" style="width:600px;">

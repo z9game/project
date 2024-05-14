@@ -18,28 +18,67 @@ public class RecordsController {
 	@Autowired
 	private RecordsService recordsService;
 	
-    @RequestMapping(value = "/records/recordsRankingForm.do")
-    public ModelAndView recordsRankingForm() {
+    @RequestMapping(value = "/recordsRankingForm.do")
+    public ModelAndView recordsRankingForm(RecordsDTO recordsDTO) {
     	
     	ModelAndView mav = new ModelAndView();
+
+    	// 전체 순위
+    	
+    	List<RecordsDTO> recordsRankingTabAll = this.recordsService.getRecordsRankingTabAll(recordsDTO);
+		
+		mav.addObject("recordsRankingTabAll", recordsRankingTabAll);
+		
+		int recordsRankingTabAllListCnt = this.recordsService.getRecordsRankingTabAllListCnt(recordsDTO);
+		
+		mav.addObject("recordsRankingTabAllListCnt", recordsRankingTabAllListCnt);
+		
+		List<RecordsDTO> recordsGoalRatingTabAll = this.recordsService.getRecordsGoalRatingTabAll(recordsDTO);
+		
+		mav.addObject("recordsGoalRatingTabAll", recordsGoalRatingTabAll);
+
+		List<RecordsDTO> recordsWinRatingTabAll = this.recordsService.getRecordsWinRatingTabAll(recordsDTO);
+		
+		mav.addObject("recordsWinRatingTabAll", recordsWinRatingTabAll);
+		
+		List<RecordsDTO> recordsAssistRatingTabAll = this.recordsService.getRecordsAssistRatingTabAll(recordsDTO);
+		
+		mav.addObject("recordsAssistRatingTabAll", recordsAssistRatingTabAll);
+		
+		// 지역별 순위
+		
+		List<RecordsDTO> recordsRankingTabRegion = this.recordsService.getRecordsRankingTabRegion(recordsDTO);
+		
+		mav.addObject("recordsRankingTabRegion", recordsRankingTabRegion);
+		
+		int recordsRankingTabRegionListCnt = this.recordsService.getRecordsRankingTabRegionListCnt(recordsDTO);
+		
+		mav.addObject("recordsRankingTabRegionListCnt", recordsRankingTabRegionListCnt);
+		
+		List<RecordsDTO> recordsGoalRatingTabRegion = this.recordsService.getRecordsGoalRatingTabRegion(recordsDTO);
+		
+		mav.addObject("recordsGoalRatingTabRegion", recordsGoalRatingTabRegion);
+
+		List<RecordsDTO> recordsWinRatingTabRegion = this.recordsService.getRecordsWinRatingTabRegion(recordsDTO);
+		
+		mav.addObject("recordsWinRatingTabRegion", recordsWinRatingTabRegion);
+		
+		List<RecordsDTO> recordsAssistRatingTabRegion = this.recordsService.getRecordsAssistRatingTabRegion(recordsDTO);
+		
+		mav.addObject("recordsAssistRatingTabRegion", recordsAssistRatingTabRegion);
+		
+		// 성별 순위
+		
     	mav.setViewName("/records/recordsRankingForm.jsp");
     	
         return mav;
     }
     
-    @RequestMapping(value = "/records/recordsStatisticsForm.do")
-    public ModelAndView recordsStatisticsForm(RecordsDTO recordsDTO) {
+    @RequestMapping(value = "/recordsStatisticsForm.do")
+    public ModelAndView recordsStatisticsForm() {
     	
     	ModelAndView mav = new ModelAndView();
     	
-    	List<RecordsDTO> recordsStatistics = this.recordsService.getRecordsStatistics(recordsDTO);
-		
-		mav.addObject("recordsStatistics", recordsStatistics);
-		
-		int recordsStatisticsListCnt = this.recordsService.getRecordsStatisticsListCnt(recordsDTO);
-		
-		mav.addObject("recordsStatisticsListCnt", recordsStatisticsListCnt);
-		
     	mav.setViewName("/records/recordsStatisticsForm.jsp");
     	
         return mav;

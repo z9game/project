@@ -80,7 +80,7 @@ public class LoginController {
 	@RequestMapping(value = "/logoutProc.do")
 	public String logoutProc(HttpSession session) {
 		session.invalidate(); // 세션 무효화
-		return "redirect:/main/loginForm.do"; // 로그인 페이지로 리다이렉트
+		return "redirect:/loginForm.do"; // 로그인 페이지로 리다이렉트
 	}
 
 }

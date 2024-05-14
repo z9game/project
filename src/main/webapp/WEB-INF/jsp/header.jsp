@@ -15,14 +15,14 @@
     
 		<div class="headerTitle">
 
-			<a href="/main/mainForm.do"><!--  <img src="#" class="headerLogo"> -->
+			<a href="/mainForm.do"><!--  <img src="#" class="headerLogo"> -->
 			</a>
 		</div>
 		<div class="headerMenu">
 
 			<nav class="headerNav">
 				<ul class="headerNavList">
-					<li><a href="/main/mainForm.do">홈</a></li>
+					<li><a href="/mainForm.do">홈</a></li>
 
 					<li class="nav-item"><a href="/matchingForm.do">매칭 찾기</a></li>
 					<li class="nav-item"><a href="/recruitTeamMemBoardForm.do">모집</a>
@@ -55,14 +55,14 @@
 						<ul class="navInner">
 							<li class="navInner-item"><a href="/tournamentBoardForm.do">대회일정</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="/records/recordsRankingForm.do">기록실</a>
+					<li class="nav-item"><a href="/recordsRankingForm.do">기록실</a>
 						<!-- 하위 카테고리 -->
 						<ul class="navInner">
-							<li class="navInner-item"><a href="/records/recordsRankingForm.do">랭킹</a></li>
+							<li class="navInner-item"><a href="/recordsRankingForm.do">랭킹</a></li>
 							<li class="navInner-item"><a
-								href="/records/recordsStatisticsForm.do">통계</a></li>
+								href="/recordsStatisticsForm.do">통계</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="/main/customerServiceForm.do">고객센터</a>
+					<li class="nav-item"><a href="/customerServiceForm.do">고객센터</a>
 					</li>
 					<c:if test="${not empty sessionScope.mid}">
 						<li class="auth-links" onClick="document.myPageForm.submit()" style="cursor: pointer">${sessionScope.nickname} 님 환영합니다!
@@ -79,7 +79,7 @@
 
 
 					<c:if test="${empty sessionScope.mid}">
-						<li class="auth-links"><a href="/main/loginForm.do">로그인</a> | <a
+						<li class="auth-links"><a href="/loginForm.do">로그인</a> | <a
 							href="/memberRegForm.do">회원가입</a></li>
 					</c:if>
 

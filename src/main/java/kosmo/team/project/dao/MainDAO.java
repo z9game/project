@@ -11,9 +11,11 @@ import kosmo.team.project.dto.MainSearchDTO;
 @Mapper
 public interface MainDAO {
 
-	public int getImageBoardListCnt(MainDTO mainDTO);
-	
-	public List<MainDTO> getImageBoardList(MainDTO mainDTO);
+	/*
+	 * public int getImageBoardListCnt(MainDTO mainDTO);
+	 * 
+	 * public List<MainDTO> getImageBoardList(MainDTO mainDTO);
+	 */
 	
 	public List<MainDTO> getMainTournamentList(MainDTO mainDTO);
 	

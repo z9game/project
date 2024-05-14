@@ -62,7 +62,7 @@
 	                    		alert("수정 성공");
 	                    		
                     			$("[name='returnCustomerServiceQnADetailForm'] .b_no").val(b_no);
-                    			document.returnCustomerServiceQnADetailForm.action="/main/customerServiceQnADetailForm.do";
+                    			document.returnCustomerServiceQnADetailForm.action="/customerServiceQnADetailForm.do";
                     			document.returnCustomerServiceQnADetailForm.submit();
 	    					}
 	                    		
@@ -122,7 +122,7 @@
 				</div>
 				<div class="boardRegAndMoveList">
 					<input type="button" class="boardRegBtn" value="저장" onClick="checkQnABoardUpdateForm(${requestScope.customerServiceDetailDTO.b_no});">
-					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/main/customerServiceForm.do')">
+					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/customerServiceForm.do')">
 				</div>
 			</div>
 		</form>
