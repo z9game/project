@@ -2,12 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp" %>
 
-<c:if test="${empty sessionScope.mid}">
-	<script>
-		alert("로그인이 필요한 서비스입니다.");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
+
 
 <!DOCTYPE html>
 <html>
@@ -76,7 +71,7 @@
    
        if (sessionMid === 'null') {
           alert('로그인이 필요한 서비스입니다.');
-          location.href = '/main/loginForm.do';
+          location.href = '/loginForm.do';
        } else {
           location.href = '/newCommunityMarketplaceSaleBoardForm.do';
        }
@@ -88,7 +83,7 @@
    
        if (sessionMid === 'null') {
           alert('로그인이 필요한 서비스입니다.');
-          location.href = '/main/loginForm.do';
+          location.href = '/loginForm.do';
        } else {
           location.href = '/newCommunityMarketplaceFreeSharingBoarForm.do';
        }
