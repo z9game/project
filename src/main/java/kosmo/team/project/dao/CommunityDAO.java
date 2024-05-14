@@ -174,5 +174,9 @@ public interface CommunityDAO {
    public int deleteMarketplaceSaleBoard(CommunityDTO communityDTO);
    
    public int deleteMarketplaceFreeSharingBoard(CommunityDTO communityDTO);
+   
+   public int updateMarketplaceSaleBoardReadCount(int b_no);
+   
+   public int updateMarketplaceFreeSharingBoardReadCount(int b_no);
 
 }

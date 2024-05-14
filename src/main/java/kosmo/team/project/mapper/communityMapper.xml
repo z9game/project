@@ -148,6 +148,8 @@
       set
       readcount = readcount +1 where b_no = #{b_no}
    </update>
+   
+   
 
 
    <update id="updateNoticeBoard"
@@ -610,8 +612,8 @@
 			,	#{ subject }
 			
 			-- ** 테이블 IMAGEBOARD 테이블 변경시 nickname 부분 수정해야함.
-			--,	( select m_no from member where nickname = '${ nickname }' )
-			,	'${ nickname }'
+			,	( select m_no from member where nickname = '${ nickname }' )
+			--,	'${ nickname }'
 			   
 			,	#{ content }
 			,	0
@@ -1030,5 +1032,17 @@
 		where
 		free_sharing_no=#{b_no}
 	</delete>
+	
+	<update id="updateMarketplaceSaleBoardReadCount" parameterType="int">
+		update sale 
+		       set readcount = readcount +1 
+		 where sale_no = #{b_no}
+   </update>
+   
+   	<update id="updateMarketplaceFreeSharingBoardReadCount" parameterType="int">
+		update free_sharing 
+		       set readcount = readcount +1 
+		 where free_sharing_no = #{b_no}
+   </update>
 
 </mapper>
