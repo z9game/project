@@ -9,6 +9,26 @@
 <title>StadiumTransferForm</title>
 <link href="/style/stadiumTransferFormStyle.css" rel="stylesheet">
 <script src="/js/stadiumTransferFormScript.js"></script>
+<script>
+
+
+
+function stadiumTransferForm(){
+    var sessionMid = '<%= session.getAttribute("mid") %>';
+
+    if (sessionMid == "" || sessionMid == 'null') {
+        alert('로그인이 필요한 서비스입니다.');
+        location.href = '/main/loginForm.do';
+        return;
+    } else {
+        // 로그인 상태라면 새 글 쓰기 페이지로 이동하는 코드를 추가할 수 있습니다.
+        location.href = '/newStadiumTransferForm.do'; // 이동할 페이지 URL을 수정해야 합니다.
+    }
+}
+
+
+
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
@@ -82,7 +102,7 @@
 			<div class="newStadiumTransferBoardBtnDiv">
 				<input type="button" class="newStadiumTransferBoardBtn"
 					value="새 글 쓰기"
-					onClick="location.replace('/newStadiumTransferForm.do')">
+					onClick="stadiumTransferForm();">
 			</div>
 			<table class="boardListTable" cellpadding="7" border="1"
 				bordercolor="gray" align="center"

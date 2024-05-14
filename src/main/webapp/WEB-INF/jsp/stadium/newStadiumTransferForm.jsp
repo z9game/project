@@ -13,11 +13,24 @@
 
 
 
+
+
 function TransferForm(){
+	
+	
+	
+	
 	
 	var formObj = $("[name='newStadiumTransferForm']");
 	var subjectObj = formObj.find(".title");
 	var contentObj = formObj.find(".content");
+	
+	
+	alert(formObj.serialize())
+	
+	
+	
+	
 	
 	var sessionPwd = "<%= session.getAttribute("password") %>";
 	
@@ -50,7 +63,7 @@ function TransferForm(){
             if(confirm("작성하시겠습니까?") == true){
             	$.ajax({
         			
-    				url:"/QnABoardRegProc.do",
+    				url:"/stadiumTransferProc.do",
     					
     				type:"post",
     					
@@ -61,7 +74,7 @@ function TransferForm(){
     					
     					if(result == 1){
     						alert("작성 성공");
-    						location.href = '/main/customerServiceForm.do';
+    						location.href = '/stadiumTransferForm.do';
     					} else {
     						alert("작성 실패");
     					}
@@ -118,11 +131,24 @@ function TransferForm(){
 					<td>
 						<input type="text" name="writer" class="writer" size="40" maxlength="100" value="<%= session.getAttribute("nickname") %>" style="border: 0;" readonly>
 					</td>
-				<tr>
-				<th bgColor="lightgray">경기장이름</th>
-				<td>${requestScope.stadiumDTO.stadium_name}</td>
-			</tr>
+			<tr>
+				<th bgColor="lightgray">경기장</th>
+				<td>
+				    <select name="MyStadium" class="MyStadium">
+				        <option value="선택">경기장선택</option>
+				        <c:forEach var="myStadium" items="${requestScope.myStadiumList}" varStatus="status">
+				        	<option value="${myStadium.stadium_no}">${myStadium.stadium_name}</option>
+				        </c:forEach>
+				       
+				    </select>
+				    
+				    <select name="MyTimeRange" class="MyTimeRange">
+				        <option value="선택">시간</option>
+				       
+				    </select>
+				</td>
 
+			</tr>
 				
 				<tr>
 					<th>내용</th>
@@ -141,6 +167,7 @@ function TransferForm(){
 					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/stadiumTransferForm.do')">
 				</div>
 			</div>
+			<input type="text" name="m_no" value="<%= request.getSession().getAttribute("m_no") %>">
 		</form>
 	</div>
 </body>

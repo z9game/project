@@ -23,7 +23,7 @@
 		</if>
 		<if test="Stadiumkeyword2!=null and Stadiumkeyword2	.length()>0">
 			(
-				upper(st.stadium_name) like upper('%${Stadiumkeyword2}%')
+			upper(st.stadium_name) like upper('%${Stadiumkeyword2}%')
 			)
 		</if>
 		<if test="sido !=null and sido>0 ">
@@ -119,7 +119,8 @@
 		sido s ON st.sido_name = s.sido_id
 		LEFT JOIN sigungu si ON
 		st.sigungu_name = si.sigungu_id
-		where st.stadium_status != '이용불가'
+		where
+		st.stadium_status != '이용불가'
 
 		<include refid="stadiumWhere" />
 	</select>
@@ -135,7 +136,8 @@
 		sido s ON st.sido_name = s.sido_id
 		LEFT JOIN sigungu si ON
 		st.sigungu_name = si.sigungu_id
-		where st.stadium_status != '이용불가'
+		where
+		st.stadium_status != '이용불가'
 		<include refid="stadiumWhere" />
 
 	</select>
@@ -223,11 +225,14 @@
 
 
 	<select id="getFullRent" parameterType="int" resultType="String">
-		select to_char(booking_date, 'yyyy-mm-dd') as booking_date
+		select
+		to_char(booking_date, 'yyyy-mm-dd') as booking_date
 		from booking
-		where stadium_no = #{stadium_no}
+		where
+		stadium_no = #{stadium_no}
 		group by booking_date
-		having count(time_slot) = 11
+		having count(time_slot)
+		= 11
 	</select>
 
 	<select id="getM_no"
@@ -235,7 +240,8 @@
 		select count(*)
 		from booking
 		where m_no = #{m_no}
-		and booking_date >= CURRENT_DATE
+		and booking_date >=
+		CURRENT_DATE
 	</select>
 
 
@@ -243,27 +249,34 @@
 
 
 	<select id="getMyStadiumList"
-		resultType="kosmo.team.project.dto.RentStadiumDTO"
-		parameterType="kosmo.team.project.dto.RentStadiumDTO">
-		select * from (
-		select rownum RNUM, zxcvb.* from (
-		select
-		b.booking_no AS "booking_no",
-		b.m_no AS "m_no",
-		s.stadium_no AS "stadium_no",
-		s.stadium_name as "stadium_name",
-		sid.name AS "sido_name",
-		sig.name as "sigungu_name",
-		s.detailed_address as "detail_address"
-		from
-		booking b
-		join stadium s on b.stadium_no = s.stadium_no
-		join sido sid on s.sido_name = sid.sido_id
-		join sigungu sig on s.sigungu_name = sig.sigungu_id
-		join member m on b.m_no = m.m_no
-		WHERE b.m_no = #{m_no}
+		resultType="kosmo.team.project.dto.myRentStadiumDTO"
+		parameterType="kosmo.team.project.dto.myRentStadiumDTO">
 
-        <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
+		select
+			b.m_no as "m_no",
+			s.stadium_no as "stadium_no",
+			s.stadium_name as "stadium_name",
+			sid.name as "sido_name",
+			sig.name as "sigungu_name",
+			s.detailed_address as "detail_address"
+		from
+			booking b
+			join stadium s on b.stadium_no = s.stadium_no
+			join sido sid on s.sido_name = sid.sido_id
+			join sigungu sig on s.sigungu_name = sig.sigungu_id
+			join member m on b.m_no = #{m_no}
+
+		where
+			b.m_no = 2
+		group by
+			b.m_no,
+			s.stadium_no,
+			s.stadium_name,
+			sid.name,
+			sig.name,
+			s.detailed_address
+
+
 	</select>
 
 

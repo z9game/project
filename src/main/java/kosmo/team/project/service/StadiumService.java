@@ -6,6 +6,7 @@ import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
 import kosmo.team.project.dto.TimeDTO;
+import kosmo.team.project.dto.myRentStadiumDTO;
 
 public interface StadiumService {
 
@@ -23,7 +24,7 @@ public interface StadiumService {
 
 	public List<String> getFullRent(int stadium_no);
 
-	public List<RentStadiumDTO> getMyStadiumList(StadiumSearchDTO stadiumSearchDTO);
+	public List<myRentStadiumDTO> getMyStadiumList(int m_no);
 
 
 

@@ -323,7 +323,9 @@
 			<tr align="center">
 				<td><input type="button" value="검색" class="searchBtn"
 					onclick="search()"> <input type="button" value="모두 검색"
-					class="searchAllBtn" onclick="searchAll()"></td>
+					class="searchAllBtn" onclick="searchAll()">&nbsp;&nbsp;&nbsp;
+					<input type="button" value="새글쓰기"
+					onclick="location.replace('/adminStadiumRegForm.do');"></td>
 			</tr>
 
 		</table>
