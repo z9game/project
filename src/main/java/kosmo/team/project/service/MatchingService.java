@@ -17,5 +17,15 @@ public interface MatchingService {
 	//매칭 상세보기 
 	MatchingDTO getMatchingDetail(int match_no);
 	
+	//새글쓰기
 	int regMatchingBoard(MatchingDTO matchingDTO);
+	
+	//수정,삭제를 위한 게시물 가져오기
+	MatchingDTO getUpdelBoard(int match_no);
+	
+	//게시물 수정
+	int updateMatching(MatchingDTO matchingDTO);
+	
+	//게시물 삭제
+	int deleteMatching(MatchingDTO matchingDTO);
 }

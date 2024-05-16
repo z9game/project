@@ -86,6 +86,7 @@
 
 	}
 	
+	//엔터기로 검색 가능하게
 	function enterkey()
 	{
 		
@@ -95,6 +96,7 @@
 		}
 	}
 	
+	//게시물 상세보기페이지 넘어가기
 	function goMatchDetail(match_no)
 	{
 		$("[name='matchingDetail'] [name='match_no']").val(match_no); 
@@ -112,6 +114,7 @@
     	<p class="titleBackgoundText">매칭 찾기</p>
     </div>
    
+   <div style="height:30px;"></div>
    		<form name="matching_table" onsubmit="return false">
 			<div class="top">
 				<dl class="search">
@@ -166,7 +169,7 @@
 	  			<dl class="time">
 	  				<dt class="item">시 간</dt>
 	  					<dd class="content">
-							<select name="matchingTime" id="" onchange="categoryChange(this)">
+							<select name="matchingTime" id="" >
 				              	<option value="0">시간 선택</option>
 								<option value="1">AM06시~AM08시</option>
 								<option value="2">AM08시~AM10시</option>
