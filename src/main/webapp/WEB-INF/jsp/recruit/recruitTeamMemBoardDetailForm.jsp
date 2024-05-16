@@ -52,7 +52,7 @@
                <!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
                <!-- 상세보기할 게시판의 이름 표현하기 -->
                <!--------------------------------------------------- -->
-               <td>${requestScope.list.writer}</td>
+               <td>${requestScope.list.nickname}</td>
             </tr>
             <tr>
                <th bgColor="lightgray">제목</th>
@@ -133,7 +133,10 @@
          <span style="cursor: pointer"
             onclick="location.href='/recruitTeamMemBoardForm.do'">
             [목록 화면으로] </span>
-         <input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.boardUpDelForm.submit()" >
+        <c:if test="${sessionScope.nickname eq requestScope.list.nickname}">
+    		<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.boardUpDelForm.submit()" >
+		</c:if>
+         
     
        </c:if>
        </center>

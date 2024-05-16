@@ -22,7 +22,7 @@
          <if test="keyword1 != null and keyword1.length() > 0">
             (
             <if test="searchType1 == 'writer'">
-               upper(writer) like upper('%${keyword1}%')
+               upper(m.nickname) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'title'">
                upper(title) like upper('%${keyword1}%')
@@ -31,7 +31,7 @@
                upper(content) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'all'">
-               upper(writer) like upper('%${keyword1}%')
+               upper(m.nickname) like upper('%${keyword1}%')
                or
                upper(title) like upper('%${keyword1}%')
                or
@@ -140,20 +140,21 @@
 
 
 
-
+	<!-- 팀/팀원 모집 게시물 가져오기 + 검색조건까지 추가 -->
    <select id="getRecruit_TeamMemList" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="kosmo.team.project.dto.RecruitSearchDTO">
           select * from ( select rownum RNUM, zxcvb.* from( 
              select 
                  distinct(r.b_no) 
                  ,r.title
-                 ,r.writer 
+                 ,m.nickname 
                  ,r.content 
                  ,r.readcount 
                  ,r.team_mem
                  ,to_char(r.reg_date, 'YYYY-MM-DD') as "reg_date"
              from 
                  recruit_TeamMemBoard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
-                                   		LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
+                                   		LEFT JOIN teammemboard_time t ON r.b_no = t.b_no
+                                   		LEFT JOIN member m ON r.writer = m.m_no 
              where
                 1=1
              <include refid="boardWhere"/>
@@ -176,13 +177,14 @@
    </select>
    
    
-   
+   <!-- 팀/팀원 모집 게시물의 개수 구하기 + 검색한 후의 개수도 포함 -->
    <select id="getBoardListCnt" parameterType="kosmo.team.project.dto.RecruitSearchDTO"   resultType="int">
       select
           count(distinct r.b_no)
       from 
          recruit_TeamMemBoard r  LEFT JOIN (SELECT DISTINCT b_no, day FROM teammemboard_day) d ON r.b_no = d.b_no  
          						 LEFT JOIN (SELECT DISTINCT b_no, time FROM teammemboard_time) t ON r.b_no = t.b_no
+         						 LEFT JOIN member m ON r.writer = m.m_no 
        where
           1=1
        <include refid="boardWhere"/>
@@ -224,7 +226,7 @@
           select 
               t.b_no 
               ,t.title 
-              ,t.writer 
+              ,m.nickname
               ,t.content 
               ,t.readcount 
               ,to_char(t.reg_date, 'YYYY-MM-DD') as "reg_date"
@@ -235,6 +237,7 @@
           from 
               recruit_teammemboard t LEFT JOIN sido s ON t.sido = s.sido_id
                                  LEFT JOIN sigungu si ON t.sigungu = si.sigungu_id
+                                 LEFT JOIN member m ON t.writer = m.m_no 
           where
              b_no = #{b_no}
          
@@ -303,6 +306,22 @@
    </insert> 
    
    
+   <insert id="newInsertDay" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+         insert into teammemboard_day
+      <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select max(b_no) from recruit_teammemboard), #{day} from dual 
+      </foreach>
+   </insert> 
+   
+   <!-- time 테이블에 시간 삽입 쿼리 -->
+   <insert id="newInsertTime" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+         insert into teammemboard_time
+      <foreach collection="time" item="time"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select max(b_no) from recruit_teammemboard), #{time} from dual
+      </foreach>
+   </insert> 
+   
+   
    <update id="updateTeamMemReadCnt" parameterType="int">
       update 
          recruit_teammemboard
@@ -332,16 +351,16 @@
    
    <select id="getRecruit_TeamMemUpDel" parameterType="int" resultType="kosmo.team.project.dto.RecruitTeamMemDTO">     
 	    select
-			  writer
-			  ,title
-			  ,pos
-			  ,team_mem
-			  ,content
-			  ,b_no
+			  m.nickname
+			  ,r.title
+			  ,r.pos
+			  ,r.team_mem
+			  ,r.content
+			  ,r.b_no
 		from
-		       recruit_teammemboard
+	        recruit_teammemboard r LEFT JOIN member m ON r.writer = m.m_no 
 		where 
-			   b_no=#{b_no}
+			   r.b_no=#{b_no}
 	</select>
    
     <select id="getRecruit_TeamMemUpDel_day" parameterType="int" resultType="String">     
@@ -386,7 +405,6 @@
 		recruit_teammemboard
 	set
 		title=#{title},
-		writer=#{writer},
 		sido=#{sido_id},
 		sigungu=#{sigungu_id},
 		pos=#{pos},

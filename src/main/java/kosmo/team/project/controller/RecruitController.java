@@ -51,6 +51,10 @@ public class RecruitController {
         return mav;
     }
     
+    
+    
+    
+    
     @RequestMapping(value = "/recruitHiredBoardForm.do")
     public ModelAndView recruitHiredBoardForm() {
     	

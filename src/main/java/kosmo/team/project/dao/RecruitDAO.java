@@ -34,6 +34,10 @@ public interface RecruitDAO {
 	
 	public int insertTime(RecruitTeamMemDTO recruitTeamMemDTO);	
 	
+	public int newInsertDay(RecruitTeamMemDTO recruitTeamMemDTO);	
+	
+	public int newInsertTime(RecruitTeamMemDTO recruitTeamMemDTO);
+	
 	public List<String> getRecruit_day(int b_no);
 	
 	public List<String> getRecruit_time(int b_no);
