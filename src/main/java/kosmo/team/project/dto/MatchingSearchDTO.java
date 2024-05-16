@@ -6,8 +6,10 @@ public class MatchingSearchDTO {
 	
 	private String searchType1;
 	private String keyword1;
+	private int sido;
+	private int sigungu;
 	private String date;
-	private String matchingTime;
+	private int matchingTime;
 	
 	
 	public String getSearchType1() {
@@ -28,11 +30,24 @@ public class MatchingSearchDTO {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getMatchingTime() {
+	
+	public int getMatchingTime() {
 		return matchingTime;
 	}
-	public void setMatchingTime(String matchingTime) {
+	public void setMatchingTime(int matchingTime) {
 		this.matchingTime = matchingTime;
+	}
+	public int getSido() {
+		return sido;
+	}
+	public void setSido(int sido) {
+		this.sido = sido;
+	}
+	public int getSigungu() {
+		return sigungu;
+	}
+	public void setSigungu(int sigungu) {
+		this.sigungu = sigungu;
 	}
 	
 	

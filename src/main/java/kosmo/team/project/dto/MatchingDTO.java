@@ -7,12 +7,16 @@ public class MatchingDTO {
 	private int writer;
 	private String nickname;
 	private String content;
-	private int sido_name;
-	private int sigungu_name;
+	private String sido_c;
+	private String sigungu_c;
+	private int sido;
+	private int sigungu;
 	private int readcount;
+	private int matchingTime;
 	private String reg_date;
-	private int time_no;
+	private String time_range;
 	private String day;
+	
 	
 	
 	public int getMatch_no() {
@@ -39,18 +43,7 @@ public class MatchingDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getSido_name() {
-		return sido_name;
-	}
-	public void setSido_name(int sido_name) {
-		this.sido_name = sido_name;
-	}
-	public int getSigungu_name() {
-		return sigungu_name;
-	}
-	public void setSigungu_name(int sigungu_name) {
-		this.sigungu_name = sigungu_name;
-	}
+	
 	public int getReadcount() {
 		return readcount;
 	}
@@ -63,12 +56,6 @@ public class MatchingDTO {
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
-	public int getTime_no() {
-		return time_no;
-	}
-	public void setTime_no(int time_no) {
-		this.time_no = time_no;
-	}
 	public String getDay() {
 		return day;
 	}
@@ -80,6 +67,42 @@ public class MatchingDTO {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public String getSido_c() {
+		return sido_c;
+	}
+	public void setSido_c(String sido_c) {
+		this.sido_c = sido_c;
+	}
+	public String getSigungu_c() {
+		return sigungu_c;
+	}
+	public void setSigungu_c(String sigungu_c) {
+		this.sigungu_c = sigungu_c;
+	}
+	public int getMatchingTime() {
+		return matchingTime;
+	}
+	public void setMatchingTime(int matchingTime) {
+		this.matchingTime = matchingTime;
+	}
+	public String getTime_range() {
+		return time_range;
+	}
+	public void setTime_range(String time_range) {
+		this.time_range = time_range;
+	}
+	public int getSido() {
+		return sido;
+	}
+	public void setSido(int sido) {
+		this.sido = sido;
+	}
+	public int getSigungu() {
+		return sigungu;
+	}
+	public void setSigungu(int sigungu) {
+		this.sigungu = sigungu;
 	}
 	
 	

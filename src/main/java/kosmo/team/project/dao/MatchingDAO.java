@@ -15,6 +15,11 @@ import kosmo.team.project.dto.MatchingSearchDTO;
 @Mapper
 public interface MatchingDAO {
 
-	
+	//매칭 게시물 가져오기
 	List<MatchingDTO> getMatchingList(MatchingSearchDTO matchingSearchDTO);
+	
+	//매칭 상세보기
+	MatchingDTO getMatchingDetail(int match_no);
+	
+	int regMatchingBoard(MatchingDTO matchingDTO);
 }

@@ -3,6 +3,8 @@
 
 <mapper namespace="kosmo.team.project.dao.MatchingDAO">
 
+
+<!-- 이 쿼리를 사용하는 부분이 많다면 <sql></sql> 을 이용해서 만들어둠. 즉, 필요한 부분에 이 전체를 쓰지 않고 id 값만 호출해서 불러옴 -->
  <sql id="boardWhere">
  	<if test="(keyword1 != null and keyword1.length() > 0)">
       and (
@@ -10,7 +12,7 @@
          <if test="keyword1 != null and keyword1.length() > 0">
             (
             <if test="searchType1 == 'writer'">
-               upper(writer) like upper('%${keyword1}%')
+               upper(mb.nickname) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'title'">
                upper(title) like upper('%${keyword1}%')
@@ -19,7 +21,7 @@
                upper(content) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'all'">
-               upper(writer) like upper('%${keyword1}%')
+               upper(mb.nickname) like upper('%${keyword1}%')
                or
                upper(title) like upper('%${keyword1}%')
                or
@@ -30,6 +32,30 @@
       <if test="(keyword1 != null and keyword1.length() > 0)">
          )
       </if>
+      
+      <if test="sido != null and sido>0">
+	      and
+	      (
+	         sido = ${sido}
+	      )
+         <if test="sigungu !=null and sigungu>0 ">
+	         and
+	         (
+	            sigungu = ${sigungu}
+	         )
+         </if>
+      </if>
+      
+      <if test="(date != null and date.length() > 0)">
+      	and
+      	day = #{date}
+      </if>
+      
+      <if test="(matchingTime != null and matchingTime>0)">
+      	and
+      	time_no = #{matchingTime}
+      </if>
+      
    </sql>
 
 
@@ -43,6 +69,7 @@
 
 
 <!-- 
+	//매칭 게시물 가져오기 + 검색포함
 	이 오라클 실행구문이 실행되면 그 결과물을을 MatchingDTO에 담아서 보여준다. 
 	이 결과물은 n행 m열의 결과물이 나올것이기 때문에 앞에서 List<MatchingDTO>로 자료형을 설정해 둠.
 	
@@ -65,5 +92,44 @@
         1=1
      <include refid="boardWhere"/>   
 </select>
+
+
+
+<!-- 
+	//매칭 상세보기 가져오기
+-->
+<select id="getMatchingDetail" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="int">
+	select
+	   m.title
+	   ,mb.nickname
+	   ,m.readcount
+	   ,s.name      as "sido_c"
+	   ,si.name     as "sigungu_c"
+	   ,tt.time_range
+	   ,m.day
+	   ,m.content
+	from
+	    match m left join member mb on m.writer = mb.m_no    
+	            left join sido s on m.sido_name = s.sido_id
+	            left join sigungu si on m.sigungu_name = si.sigungu_id 
+	            left join time_table tt on m.time_no = tt.time_no
+	where
+		match_no = #{match_no}
+</select>
+
+<insert id="regMatchingBoard" parameterType="kosmo.team.project.dto.MatchingDTO" >
+ insert into match (match_no, title, writer, content, sido_name, sigungu_name, time_no, day)
+ values(
+    (select nvl(max(match_no),0)+1 from match)
+    ,#{title}
+    ,#{writer}
+    ,#{content}
+    ,#{sido}
+    ,#{sigungu}
+    ,#{matchingTime}
+    ,#{day}
+ )
+ </insert>
+
 
 </mapper>
