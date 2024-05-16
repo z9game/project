@@ -63,7 +63,7 @@ function loadTimeRanges() {
 
     // 정규식을 사용하여 날짜 부분 추출
     var Date = bookingDate.replace(/^([0-9]{4}-[0-9]{2}-[0-9]{2})((\s?).*)$/, "$1");
-    alert(Date); 
+    //alert(Date); 
 
     $.ajax({
         url: '/myStadiumRentTime.do',
@@ -99,15 +99,27 @@ function loadTimeRanges() {
 function TransferForm(){
 	
 	
-	
-	
-	
 	var formObj = $("[name='newStadiumTransferForm']");
-	var subjectObj = formObj.find(".title");
-	var contentObj = formObj.find(".content");
+    var subjectObj = formObj.find(".title");
+    var contentObj = formObj.find(".content");
+
+    var bookingDate = $("select[name='MyDate']").val();
+    var extractedDate = bookingDate.match(/^([0-9]{4}-[0-9]{2}-[0-9]{2})/)[0];
+    
+    
+    var formData = {
+        title: formObj.find("input[name='title']").val(),
+        writer: formObj.find("input[name='writer']").val(),
+        MyStadium: formObj.find("select[name='MyStadium']").val(),
+        MyDate: extractedDate,
+        MyTimeRange: formObj.find("select[name='MyTimeRange']").val(),
+        content: formObj.find("textarea[name='content']").val(),
+        m_no: formObj.find("input[name='m_no']").val()
+    };
+    
+    
 	
 	
-	alert(formObj.serialize())
 	
 	
 	
@@ -142,13 +154,22 @@ function TransferForm(){
             
         } else {
             if(confirm("작성하시겠습니까?") == true){
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+       
+                 
             	$.ajax({
         			
     				url:"/stadiumTransferProc.do",
     					
     				type:"post",
     					
-    				data:formObj.serialize(),
+    				data:formData ,
     					
     				success:function(json){
     					var result = json["result"];
@@ -156,7 +177,14 @@ function TransferForm(){
     					if(result == 1){
     						alert("작성 성공");
     						location.href = '/stadiumTransferForm.do';
-    					} else {
+    						
+    					}else if(result == 2){
+    						
+    						alert("이미 같은날과 시간에 양도신청한 경기장이있습니다.");
+
+
+    					}
+    					else {
     						alert("작성 실패");
     					}
     				},
@@ -210,7 +238,7 @@ function TransferForm(){
 				<tr>
 					<th>글쓴이</th>
 					<td>
-						<input type="text" name="writer" class="writer" size="40" maxlength="100" value="<%= session.getAttribute("nickname") %>" style="border: 0;" readonly>
+						<%= session.getAttribute("nickname") %>
 			
 					</td>
 

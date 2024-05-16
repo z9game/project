@@ -12,6 +12,8 @@ import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
 import kosmo.team.project.dto.TimeDTO;
+import kosmo.team.project.dto.YangdoDTO;
+import kosmo.team.project.dto.YangdoSearchDTO;
 import kosmo.team.project.dto.myRentStadiumDTO;
 
 @Service
@@ -71,19 +73,15 @@ public class StadiumServiceImplements implements StadiumService {
 	@Override
 	public int insertStadiumRent(RentStadiumDTO rentStadiumDTO) {
 
-		
-		
 		int m_noCnt = this.stadiumDAO.getM_no(rentStadiumDTO);
-		
-		//System.out.print(m_noCnt);
-		
-		if(m_noCnt >= 3) {
-			
-			
+
+		// System.out.print(m_noCnt);
+
+		if (m_noCnt >= 3) {
+
 			return 4;
 		}
-		
-		
+
 		int rentCnt = this.stadiumDAO.getRentTimeCnt(rentStadiumDTO);
 
 		if (rentCnt > 0) {
@@ -99,19 +97,13 @@ public class StadiumServiceImplements implements StadiumService {
 		return StadiumRentCnt;
 	}
 
-	
-	
-	
 	@Override
 	public List<String> getFullRent(int stadium_no) {
-		
 
 		List<String> fullRent = this.stadiumDAO.getFullRent(stadium_no);
 
-
 		return fullRent;
 	}
-
 
 	@Override
 	public List<myRentStadiumDTO> getMyStadiumList(int m_no) {
@@ -120,22 +112,65 @@ public class StadiumServiceImplements implements StadiumService {
 		return getMyStadiumList;
 	}
 
-	
-	
-	
 	@Override
 	public List<MyRentStaidumTimeDTO> getTimeRanges(MyRentStaidumTimeDTO myRentStaidumTimeDTO) {
-		
+
 		List<MyRentStaidumTimeDTO> timeRanges = stadiumDAO.getTimeRanges(myRentStaidumTimeDTO);
-		
+
 		return timeRanges;
 	}
 
 	@Override
 	public List<MyRentStaidumTimeDTO> getDate(MyRentStaidumTimeDTO myRentStaidumTimeDTO) {
 		List<MyRentStaidumTimeDTO> RentDate = stadiumDAO.getDate(myRentStaidumTimeDTO);
-				
+
 		return RentDate;
+	}
+
+	@Override
+	public int insertStadiumYangdo(YangdoDTO yangdoDTO) {
+
+		int yangdoCnt = this.stadiumDAO.getYangdoCnt(yangdoDTO);
+
+		// System.out.print(m_noCnt);
+
+		if (yangdoCnt > 0) {
+
+			return 2;
+		}
+
+		int StadiumYangdoCnt = this.stadiumDAO.insertStadiumYangdo(yangdoDTO);
+
+		// ----------------------------------------------
+		// 1개 게시판 글 입력 적용 행의 개수 리턴하기
+		// ----------------------------------------------
+		return StadiumYangdoCnt;
+	}
+
+	// 양도 게시판 리스트 가져오기
+
+	@Override
+	public int getStadiumYangdoListAllCnt() {
+		
+		int StadiumYangdoListAllCnt = this.stadiumDAO.getMemberListAllCnt();
+	
+		return StadiumYangdoListAllCnt;
+	}
+
+	@Override
+	public int getStadiumYangdoListCnt(YangdoSearchDTO yangdoSearchDTO) {
+
+		int StadiumYangdoListCnt = this.stadiumDAO.getStadiumYangdoListCnt(yangdoSearchDTO);
+
+		return StadiumYangdoListCnt;
+	}
+
+	@Override
+	public List<YangdoDTO> getStadiumYangdoList(YangdoSearchDTO yangdoSearchDTO) {
+
+		List<YangdoDTO> stadiumYangdoList = this.stadiumDAO.getStadiumYangdoList(yangdoSearchDTO);
+
+		return stadiumYangdoList;
 	}
 
 }

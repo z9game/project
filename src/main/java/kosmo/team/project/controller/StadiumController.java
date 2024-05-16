@@ -19,6 +19,8 @@ import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
 import kosmo.team.project.dto.TimeDTO;
+import kosmo.team.project.dto.YangdoDTO;
+import kosmo.team.project.dto.YangdoSearchDTO;
 import kosmo.team.project.dto.myRentStadiumDTO;
 import kosmo.team.project.service.StadiumService;
 import kosmo.team.project.utility.Page;
@@ -56,6 +58,7 @@ public class StadiumController {
 
 		mav.addObject("stadiumList", stadiumList);
 		mav.addObject("StadiumListCnt", StadiumListCnt);
+		mav.addObject("StadiumListAllCnt", StadiumListAllCnt);
 
 		mav.addObject("StadiumMap", StadiumMap);
 
@@ -150,15 +153,62 @@ public class StadiumController {
 		return resultMap;
 	}
 
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/stadiumTransferForm.do")
-	public ModelAndView StadiumTransferForm() {
+	public ModelAndView StadiumTransferForm(YangdoSearchDTO yangdoSearchDTO) {
+			
+		
+		int StadiumYangdoListAllCnt = this.stadiumService.getStadiumYangdoListAllCnt();
 
+		int StadiumYangdoListCnt = this.stadiumService.getStadiumYangdoListCnt(yangdoSearchDTO);
+
+		Map<String, Integer> StadiumYangdoMap = Page.getPagingMap(
+
+				yangdoSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+				, yangdoSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+				, StadiumYangdoListCnt // 검색 결과물 개수
+
+		);
+		yangdoSearchDTO.setSelectPageNo((int) StadiumYangdoMap.get("selectPageNo"));
+		yangdoSearchDTO.setRowCntPerPage((int) StadiumYangdoMap.get("rowCntPerPage"));
+		yangdoSearchDTO.setBegin_rowNo((int) StadiumYangdoMap.get("begin_rowNo"));
+		yangdoSearchDTO.setEnd_rowNo((int) StadiumYangdoMap.get("end_rowNo"));
+		
+		List<YangdoDTO> stadiumYangdoList = this.stadiumService.getStadiumYangdoList(yangdoSearchDTO);
+		
+
+		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("stadiumYangdoList", stadiumYangdoList);
+		
+
+		mav.addObject("StadiumYangdoListCnt", StadiumYangdoListCnt);
+
+		mav.addObject("StadiumYangdoListAllCnt", StadiumYangdoListAllCnt);
+		
+		
+		mav.addObject("StadiumYangdoMap", StadiumYangdoMap);
+
 		mav.setViewName(stadiumFolder + "stadiumTransferForm.jsp");
 
 		return mav;
-	}
+		
+		
 
+	}
+		
+
+	
+	
+	
+	
+	
+	
+	
 	// 새글쓰기 페이지
 
 	@RequestMapping(value = "/newStadiumTransferForm.do")
@@ -176,6 +226,10 @@ public class StadiumController {
 
 		return mav;
 	}
+	
+	
+	
+	
 
 	@RequestMapping(value = "/myStadiumRentDate.do", method = RequestMethod.POST
 
@@ -231,22 +285,6 @@ public class StadiumController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	// 새글쓰기에서 호출
 
@@ -263,7 +301,7 @@ public class StadiumController {
 			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
 			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
 
-			RentStadiumDTO rentStadiumDTO
+			YangdoDTO yangdoDTO
 
 	) {
 
@@ -272,12 +310,12 @@ public class StadiumController {
 		// ------------------------------------------------
 		Map<String, String> resultMap = new HashMap<String, String>();
 
-		int StadiumRentCnt = this.stadiumService.insertStadiumRent(rentStadiumDTO);
+		int StadiumYangdoCnt = this.stadiumService.insertStadiumYangdo(yangdoDTO);
 
 		// -------------------------------------------
 		// HashMap 객체에 게시판 수정 행의 개수 저장하기기
 		// -------------------------------------------
-		resultMap.put("result", StadiumRentCnt + "");
+		resultMap.put("result", StadiumYangdoCnt + "");
 
 		// -------------------------------------------
 		// HashMap 객체의 메위주 리턴하기

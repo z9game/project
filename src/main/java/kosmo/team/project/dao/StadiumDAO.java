@@ -9,6 +9,8 @@ import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
 import kosmo.team.project.dto.TimeDTO;
+import kosmo.team.project.dto.YangdoDTO;
+import kosmo.team.project.dto.YangdoSearchDTO;
 import kosmo.team.project.dto.myRentStadiumDTO;
 
 @Mapper
@@ -45,6 +47,16 @@ public interface StadiumDAO {
 	public List<MyRentStaidumTimeDTO> getTimeRanges(MyRentStaidumTimeDTO myRentStaidumTimeDTO);
 
 	public List<MyRentStaidumTimeDTO> getDate(MyRentStaidumTimeDTO myRentStaidumTimeDTO);
+
+	public int insertStadiumYangdo(YangdoDTO yangdoDTO);
+
+	public int getYangdoCnt(YangdoDTO yangdoDTO);
+
+	public int getMemberListAllCnt();
+
+	public int getStadiumYangdoListCnt(YangdoSearchDTO yangdoSearchDTO);
+
+	public List<YangdoDTO> getStadiumYangdoList(YangdoSearchDTO yangdoSearchDTO);
 	
 
 	
