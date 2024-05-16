@@ -36,12 +36,12 @@
       <if test="sido != null and sido>0">
 	      and
 	      (
-	         sido = ${sido}
+	         m.sido_name = ${sido}
 	      )
          <if test="sigungu !=null and sigungu>0 ">
 	         and
 	         (
-	            sigungu = ${sigungu}
+	            m.sigungu_name = ${sigungu}
 	         )
          </if>
       </if>

@@ -40,6 +40,8 @@ public class MatchingServiceImpl implements MatchingService {
 		return getMatchingDetail;
 	}
 	
+	
+	
 	public int regMatchingBoard(MatchingDTO matchingDTO) {
 		int regMatchingBoard = this.matchingDAO.regMatchingBoard(matchingDTO);
 		return regMatchingBoard;
