@@ -197,4 +197,38 @@ public class RecordsServiceImplements implements RecordsService {
 		return recordsAssistRatingTabAge;
 
 	}
+	
+	// 통계
+	
+	@Override
+	public List<RecordsDTO> getAnnualRegisteredMember(RecordsDTO recordsDTO) {
+		
+		List<RecordsDTO> annualRegisteredMember = this.recordsDAO.getAnnualRegisteredMember(recordsDTO);
+		
+		return annualRegisteredMember;
+	}
+	
+	@Override
+	public List<RecordsDTO> getRegionRatio(RecordsDTO recordsDTO) {
+		
+		List<RecordsDTO> regionRatio = this.recordsDAO.getRegionRatio(recordsDTO);
+		
+		return regionRatio;
+	}
+	
+	@Override
+	public List<RecordsDTO> getGenderRatio(RecordsDTO recordsDTO) {
+		
+		List<RecordsDTO> genderRatio = this.recordsDAO.getGenderRatio(recordsDTO);
+		
+		return genderRatio;
+	}
+	
+	@Override
+	public List<RecordsDTO> getAgeRatio(RecordsDTO recordsDTO) {
+		
+		List<RecordsDTO> ageRatio = this.recordsDAO.getAgeRatio(recordsDTO);
+		
+		return ageRatio;
+	}
 }

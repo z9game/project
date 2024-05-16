@@ -117,9 +117,25 @@ public class RecordsController {
     }
     
     @RequestMapping(value = "/recordsStatisticsForm.do")
-    public ModelAndView recordsStatisticsForm() {
+    public ModelAndView recordsStatisticsForm(RecordsDTO recordsDTO) {
     	
     	ModelAndView mav = new ModelAndView();
+    	
+    	List<RecordsDTO> annualRegisteredMember = this.recordsService.getAnnualRegisteredMember(recordsDTO);
+		
+		mav.addObject("annualRegisteredMember", annualRegisteredMember);
+		
+		List<RecordsDTO> regionRatio = this.recordsService.getRegionRatio(recordsDTO);
+		
+		mav.addObject("regionRatio", regionRatio);
+		
+		List<RecordsDTO> genderRatio = this.recordsService.getGenderRatio(recordsDTO);
+		
+		mav.addObject("genderRatio", genderRatio);
+		
+		List<RecordsDTO> ageRatio = this.recordsService.getAgeRatio(recordsDTO);
+		
+		mav.addObject("ageRatio", ageRatio);
     	
     	mav.setViewName("/records/recordsStatisticsForm.jsp");
     	

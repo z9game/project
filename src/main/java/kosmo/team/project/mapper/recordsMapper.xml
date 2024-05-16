@@ -87,15 +87,32 @@
 		    p.player = m.m_no
 		    and
 		    m.sido_id = s.sido_id
-		    <if test="sido_id != null">
-		    	and
-		    	m.sido_id=#{sido_id}
-		    </if>
+		    <if test="sido_id != null and sido_id == 9">
+			    AND m.sido_id = 9
+			</if>
+			<if test="sido_id != null and sido_id == 2">
+			    AND (m.sido_id = 2 or m.sido_id = 11)
+			</if>
+			<if test="sido_id != null and sido_id == 1">
+			    AND m.sido_id = 1
+			</if>
+			<if test="sido_id != null and sido_id == 7">
+			    AND (m.sido_id = 7 or m.sido_id = 15 or m.sido_id = 16)
+			</if>
+			<if test="sido_id != null and sido_id == 5">
+			    AND (m.sido_id = 5 or m.sido_id = 12 or m.sido_id = 13)
+			</if>
+			<if test="sido_id != null and sido_id == 3">
+			    AND (m.sido_id = 3 or m.sido_id = 4 or m.sido_id = 6 or m.sido_id = 8 or m.sido_id = 10)
+			</if>
+			<if test="sido_id != null and sido_id == 14">
+			    AND m.sido_id = 14
+			</if>
 		<if test="sortTabRegion == null or sortTabRegion.isEmpty()">
-		    order by games_played desc
+		    ORDER BY games_played DESC
 		</if>
 		<if test="sortTabRegion != null and !sortTabRegion.isEmpty()">
-		    order by ${sortTabRegion}
+		    ORDER BY ${sortTabRegion}
 		</if>
 	</select>
 	
@@ -114,10 +131,29 @@
 			member m, player_record p
 		where
 		    p.player = m.m_no
-		    <if test="sido_id != null">
-		    	and
-		    	m.sido_id=#{sido_id}
-		    </if>
+		     <choose>
+	        	<when test="sido_id != null and sido_id == 9">
+			   		AND m.sido_id = 9
+			    </when>
+			    <when test="sido_id != null and sido_id == 2">
+			   		AND (m.sido_id = 9 or m.sido_id = 11)
+			    </when>
+			    <when test="sido_id != null and sido_id == 1">
+			   		AND m.sido_id = 1
+			    </when>
+			    <when test="sido_id != null and sido_id == 7">
+			   		AND (m.sido_id = 7 or m.sido_id = 15 or m.sido_id = 16)
+			    </when>
+			    <when test="sido_id != null and sido_id == 5">
+			   		AND (m.sido_id = 5 or m.sido_id = 12 or m.sido_id = 13)
+			    </when>
+			    <when test="sido_id != null and sido_id == 3">
+			   		AND (m.sido_id = 3 or m.sido_id = 4 or m.sido_id = 6 or m.sido_id = 8 or m.sido_id = 10)
+			    </when>
+			    <when test="sido_id != null and sido_id == 14">
+			   		AND m.sido_id = 14
+			    </when>
+	        </choose>
 		ORDER BY 
 			p.goals_for DESC
 	</select>
@@ -130,10 +166,29 @@
 			member m, player_record p
 		where
 		    p.player = m.m_no
-		    <if test="sido_id != null">
-		    	and
-		    	sido_id=#{sido_id}
-		    </if>
+		     <choose>
+	        	<when test="sido_id != null and sido_id == 9">
+			   		AND m.sido_id = 9
+			    </when>
+			    <when test="sido_id != null and sido_id == 2">
+			   		AND (m.sido_id = 9 or m.sido_id = 11)
+			    </when>
+			    <when test="sido_id != null and sido_id == 1">
+			   		AND m.sido_id = 1
+			    </when>
+			    <when test="sido_id != null and sido_id == 7">
+			   		AND (m.sido_id = 7 or m.sido_id = 15 or m.sido_id = 16)
+			    </when>
+			    <when test="sido_id != null and sido_id == 5">
+			   		AND (m.sido_id = 5 or m.sido_id = 12 or m.sido_id = 13)
+			    </when>
+			    <when test="sido_id != null and sido_id == 3">
+			   		AND (m.sido_id = 3 or m.sido_id = 4 or m.sido_id = 6 or m.sido_id = 8 or m.sido_id = 10)
+			    </when>
+			    <when test="sido_id != null and sido_id == 14">
+			   		AND m.sido_id = 14
+			    </when>
+	        </choose>
 		ORDER BY 
 			p.wins DESC
 	</select>
@@ -146,10 +201,29 @@
 			member m, player_record p
 		where
 		    p.player = m.m_no
-		    <if test="sido_id != null">
-		    	and
-		    	sido_id=#{sido_id}
-		    </if>
+		     <choose>
+	        	<when test="sido_id != null and sido_id == 9">
+			   		AND m.sido_id = 9
+			    </when>
+			    <when test="sido_id != null and sido_id == 2">
+			   		AND (m.sido_id = 2 or m.sido_id = 11)
+			    </when>
+			    <when test="sido_id != null and sido_id == 1">
+			   		AND m.sido_id = 1
+			    </when>
+			    <when test="sido_id != null and sido_id == 7">
+			   		AND (m.sido_id = 7 or m.sido_id = 15 or m.sido_id = 16)
+			    </when>
+			    <when test="sido_id != null and sido_id == 5">
+			   		AND (m.sido_id = 5 or m.sido_id = 12 or m.sido_id = 13)
+			    </when>
+			    <when test="sido_id != null and sido_id == 3">
+			   		AND (m.sido_id = 3 or m.sido_id = 4 or m.sido_id = 6 or m.sido_id = 8 or m.sido_id = 10)
+			    </when>
+			    <when test="sido_id != null and sido_id == 14">
+			   		AND m.sido_id = 14
+			    </when>
+	        </choose>
 		ORDER BY 
 			p.goals_assist DESC
 	</select>
@@ -176,12 +250,12 @@
 		    	and
 		    	m.gender='${gender}'
 		    </if>
-		<if test="sortTabGender == null or sortTabGender.isEmpty()">
-		    order by games_played desc
-		</if>
-		<if test="sortTabGender != null and !sortTabGender.isEmpty()">
-		    order by ${sortTabGender}
-		</if>
+		    <if test="sortTabGender == null or sortTabGender.isEmpty()">
+			    order by games_played desc
+			</if>
+			<if test="sortTabGender != null and !sortTabGender.isEmpty()">
+			    order by ${sortTabGender}
+			</if>
 	</select>
 	
 	<select id="getRecordsRankingTabGenderListCnt" resultType="int">
@@ -410,5 +484,52 @@
 	        </choose>
 		ORDER BY 
 			p.goals_assist DESC
+	</select>
+	
+	<select id="getAnnualRegisteredMember" resultType="kosmo.team.project.dto.RecordsDTO" parameterType="kosmo.team.project.dto.RecordsDTO">
+		SELECT
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2000' THEN 1 ELSE 0 END) AS "count_2000",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2005' THEN 1 ELSE 0 END) AS "count_2005",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2010' THEN 1 ELSE 0 END) AS "count_2010",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2015' THEN 1 ELSE 0 END) AS "count_2015",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2020' THEN 1 ELSE 0 END) AS "count_2020",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2024' THEN 1 ELSE 0 END) AS "count_2024"
+		FROM
+    		member
+	</select>
+	
+	<select id="getRegionRatio" resultType="kosmo.team.project.dto.RecordsDTO" parameterType="kosmo.team.project.dto.RecordsDTO">
+		SELECT
+		    SUM(CASE WHEN sido_id = 1 THEN 1 ELSE 0 END) AS "count_gangwondo",
+		    SUM(CASE WHEN sido_id = 2 or sido_id = 11 THEN 1 ELSE 0 END) AS "count_gyeonggido",
+		    SUM(CASE WHEN sido_id = 3 or sido_id = 4 or sido_id = 6 or sido_id = 8 or sido_id = 10 THEN 1 ELSE 0 END) AS "count_gyeongsangdo",
+		    SUM(CASE WHEN sido_id = 5 or sido_id = 12 or sido_id = 13 THEN 1 ELSE 0 END) AS "count_gyeongsangdo",
+		    SUM(CASE WHEN sido_id = 7 or sido_id = 15 or sido_id = 16 THEN 1 ELSE 0 END) AS "count_chungcheongdo",
+		    SUM(CASE WHEN sido_id = 9 THEN 1 ELSE 0 END) AS "count_seoul",
+		    SUM(CASE WHEN sido_id = 14 THEN 1 ELSE 0 END) AS "count_jejudo"
+		FROM
+		    member
+	</select>
+	
+	<select id="getGenderRatio" resultType="kosmo.team.project.dto.RecordsDTO" parameterType="kosmo.team.project.dto.RecordsDTO">
+		SELECT
+		    SUM(CASE WHEN gender = '남' THEN 1 ELSE 0 END) AS "count_men",
+		    SUM(CASE WHEN gender = '여' THEN 1 ELSE 0 END) AS "count_women"
+		FROM
+		    member
+	</select>
+	
+	<select id="getAgeRatio" resultType="kosmo.team.project.dto.RecordsDTO" parameterType="kosmo.team.project.dto.RecordsDTO">
+		SELECT
+		    SUM(CASE WHEN ((TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(birthdate, 'YYYY'))) BETWEEN 10 AND 19) THEN 1 ELSE 0 END) AS "count_10",
+		    SUM(CASE WHEN ((TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(birthdate, 'YYYY'))) BETWEEN 20 AND 29) THEN 1 ELSE 0 END) AS "count_20",
+		    SUM(CASE WHEN ((TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(birthdate, 'YYYY'))) BETWEEN 30 AND 39) THEN 1 ELSE 0 END) AS "count_30",
+		    SUM(CASE WHEN ((TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(birthdate, 'YYYY'))) BETWEEN 40 AND 49) THEN 1 ELSE 0 END) AS "count_40",
+		    SUM(CASE WHEN ((TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(birthdate, 'YYYY'))) BETWEEN 50 AND 59) THEN 1 ELSE 0 END) AS "count_50",
+		    SUM(CASE WHEN ((TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(birthdate, 'YYYY'))) BETWEEN 60 AND 69) THEN 1 ELSE 0 END) AS "count_60",
+		    SUM(CASE WHEN ((TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(birthdate, 'YYYY'))) BETWEEN 70 AND 79) THEN 1 ELSE 0 END) AS "count_70",
+		    SUM(CASE WHEN ((TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(birthdate, 'YYYY'))) BETWEEN 80 AND 89) THEN 1 ELSE 0 END) AS "count_80"
+		FROM
+		    member
 	</select>
 </mapper>

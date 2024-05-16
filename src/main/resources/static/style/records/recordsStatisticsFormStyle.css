@@ -53,3 +53,9 @@ a{
 	left: 50%;
 	transform: translate( -50%, -50% );
 }
+
+.recordsStatisticsMatchingSuccessRateContainer, .recordsStatisticsAnnualRegisteredMemberRatioContainer, .recordsStatisticsRegionRatioContainer, .recordsStatisticsGenderRatioContainer, .recordsStatisticsAgeRatioContainer, .recordsStatisticsNumberOfTeamMemberContainer{
+	margin: 0 auto;
+	text-align: center;
+	justify-content: center;
+}
