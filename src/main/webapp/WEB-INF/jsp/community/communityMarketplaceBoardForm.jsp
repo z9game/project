@@ -267,7 +267,7 @@
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
                         <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.writer}</div>
+                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
                         <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
                      </div>
@@ -349,7 +349,7 @@
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
                         <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.writer}</div>
+                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
                         <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
                      </div>
@@ -430,7 +430,7 @@
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
                         <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.writer}</div>
+                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
                         <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
                      </div>

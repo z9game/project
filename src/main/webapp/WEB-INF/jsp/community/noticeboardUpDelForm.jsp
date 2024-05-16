@@ -9,6 +9,13 @@
 	</script>
 </c:if>
 
+<c:if test="${requestScope.communityDTO.writer != sessionScope.nickname}">
+	<script>
+		alert("작성한 사용자가 아닙니다");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +103,7 @@
 			<caption>[공지사항 수정/삭제]</caption>
 			<tr>
 				<th bgColor="lightgray">이 름</th>
-				<td><input type="text" name="writer" class="writer" size="10"
+				<td>${requestScope.communityDTO.writer}<input type="hidden" name="writer" class="writer" size="10"
 					maxlength="15" value="${requestScope.communityDTO.writer}"></td>
 			</tr>
 			<tr>
@@ -125,8 +132,8 @@
 	<div style="height: 5px"></div>
 	<center>
 		<span style="cursor: pointer"
-			onclick="location.replace('/communityNoticeBoardForm.do')">[목록
-			화면으로]</span>
+			onclick="location.replace('/communityNoticeBoardForm.do')">[목록 화면으로]
+		</span>
 	</center>
 	<center>
 		<input type="button" value="수정" onclick="checkBoardUpForm();">

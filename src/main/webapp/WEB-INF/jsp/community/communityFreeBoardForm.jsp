@@ -170,7 +170,7 @@
 				<tr style="cursor: pointer" onClick="submitDetailForm( ${ freeboard.b_no } );">
 					<td align="center">${requestScope.freeBoardMap.begin_serialNo_desc - status.index}</td>
 					<td>${freeboard.subject}</td>
-					<td align="center">${freeboard.writer}</td>
+					<td align="center">${freeboard.nickname}</td>
 					<td align="center">${freeboard.readcount}</td>
 					<td align="center">${freeboard.reg_date}</td>
 				</tr>

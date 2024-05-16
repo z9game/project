@@ -204,9 +204,10 @@
 		<span style="cursor: pointer" 
 			onclick="location.replace('/communityFreeBoardForm.do')">
 			 [목록 화면으로] 
-		</span> 
-		<input type="button" value="수정/삭제"
-				onclick="document.freeBoardDetailForm.submit();" />
+		</span>
+		<c:if test="${requestScope.freeBoardDetail.writer == sessionScope.nickname}">
+			<input type="button" value="수정/삭제" onclick="document.freeBoardDetailForm.submit();" />
+		</c:if>
 	</center>
 	
 	

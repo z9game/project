@@ -96,10 +96,12 @@
 			<!--------------------------------------------------- -->
 			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 			<!--------------------------------------------------- -->
-			<span style="cursor: pointer"
-				onclick="location.replace('/communityNoticeBoardForm.do')">
-				[목록 화면으로] </span> <input type="button" value="수정/삭제"
-				onclick="document.noticeboardUpDelForm.submit();">
+			<span style="cursor: pointer" onclick="location.replace('/communityNoticeBoardForm.do')">
+				[목록 화면으로] 
+			</span> 
+			<c:if test="${requestScope.communityDTO.writer == sessionScope.nickname}">
+				<input type="button" value="수정/삭제" onclick="document.noticeboardUpDelForm.submit();">
+			</c:if>
 
 
 

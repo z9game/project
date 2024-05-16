@@ -105,9 +105,7 @@
 			<caption>[갤러리 수정/삭제]</caption>
 			<tr>
 				<th bgColor="lightgray">이 름</th>
-				<!-- <td>${requestScope.communityDTO.nickname}</td> -->
-				<td>${sessionScope.nickname}</td>
-			</tr>
+				<td>${requestScope.communityDTO.nickname}</td>
 			<tr>
 				<th bgColor="lightgray">제 목</th>
 				<td><input type="text" name="subject" class="subject" size="40"

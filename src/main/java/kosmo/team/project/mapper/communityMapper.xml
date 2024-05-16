@@ -12,11 +12,8 @@
       <if test="keyword1 != null and keyword1.length() > 0">
          <if test="searchType1 == 'all' ">
             (
-            	<!--	writer 컬럼 속성이 varchar2 이고 임시로 이미지보드 테이블 사용하여 주석처리 
-               upper(writer) like upper('%${keyword1}%')
+               upper(nickname) like upper('%${keyword1}%')
                or
-                -->
-                
                upper(subject) like upper('%${keyword1}%')
                or
                upper(content) like upper('%${keyword1}%')
@@ -24,7 +21,7 @@
          </if>
 
          <if test="searchType1 == 'writer'">
-            upper(writer) like upper('%${keyword1}%')
+            upper(nickname) like upper('%${keyword1}%')
          </if>
 
          <if test="searchType1 == 'subject'">
@@ -50,7 +47,7 @@
       <if test="keyword1 != null and keyword1.length() > 0">
          <if test="searchType1 == 'all' ">
             (
-               upper(writer) like upper('%${keyword1}%')
+               upper(nickname) like upper('%${keyword1}%')
                or
                upper(subject) like upper('%${keyword1}%')
                or
@@ -58,7 +55,7 @@
             )
          </if>
          <if test="searchType1 == 'writer'">
-            upper(writer) like upper('%${keyword1}%')
+            upper(nickname) like upper('%${keyword1}%')
          </if>
          <if test="searchType1 == 'subject'">
             upper(subject) like upper('%${keyword1}%')
@@ -205,7 +202,8 @@
       select
       f.b_no AS   "b_no",
       f.subject AS "subject",
-      ( select nickname from member where m_no = f.writer ) as "writer",      
+      f.writer as "writer",
+      ( select nickname from member where m_no = f.writer ) as "NICKNAME",      
       f.content AS "content",
       to_char(f.reg_date, 'YYYY-MM-DD') AS "reg_date",
       f.readcount AS "readcount"
@@ -510,21 +508,17 @@
 			 i.b_no 		"b_no"
            , i.subject 		"subject"
            , i.writer 		"writer"
-           
-           -- imageboard 테이블에 writer 가 varchar2 라 오류가 난다 테이블 변경하면 수정해야함.
-           --, m.nickname		"nickname"
-           
+           , m.nickname		"nickname"
            , i.content		"content"
            , i.readcount	"readcount"
            , i.reg_date		"reg_date"
            
-           from imageboard i		-- , member m 
+           from imageboard i, member m 
             
            where
            i.b_no = ${ b_no }
-           
-           --and
-           --i.writer = m.m_no      
+           and
+           i.writer = m.m_no      
    </select>
    
 	<!-- 갤러리 리스트 전체 개수. (임시로 IMAGEBOARD 테이블 사용) -->
@@ -543,11 +537,8 @@
                select 
                     ima.b_no
                   , ima.subject
-                  
-                  -- writer 컬럼 varchar2 라 주석처리
-                  -- , ( select nickname from member where m_no = s.writer ) as "WRITER"         
-                  -- , '이미지보드 테이블' as "WRITER"
-                  
+                  , ima.writer
+				  , ( select nickname from member where m_no = ima.writer ) as "NICKNAME"        
                   , ima.content            
                   , ima.readcount      
                   , ima.reg_date      
@@ -570,13 +561,8 @@
 				select 
 						ima.b_no
 					  , ima.subject
-					  
-					  
 					  , ima.writer
-					  -- writer 컬럼 varchar2 라 주석처리
-					  --, ( select nickname from member where m_no = ima.writer ) as "WRITER"         
-					  --, '이미지보드 테이블' as "WRITER"
-					  
+					  , ( select nickname from member where m_no = ima.writer ) as "NICKNAME"
 					  , ima.content      
 					  , ima.readcount   
 					  , ima.reg_date
@@ -710,7 +696,8 @@
                select 
                     s.sale_no      
                   , s.subject
-                  , ( select nickname from member where m_no = s.writer ) as "WRITER"         
+                  , s.writer	as "writer"
+                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"         
                   , s.content      
                   , s.readcount   
                   , s.reg_date   
@@ -722,7 +709,8 @@
                select 
                     f.free_sharing_no
                   , f.subject         
-                  , ( select nickname from member where m_no = f.writer ) as "WRITER"         
+                  , f.writer	as "writer"
+                  , ( select nickname from member where m_no = f.writer ) as "NICKNAME"       
                   , f.content         
                   , f.readcount      
                   , f.reg_date      
@@ -746,7 +734,8 @@
                select 
                     s.sale_no      
                   , s.subject
-                  , ( select nickname from member where m_no = s.writer ) as "WRITER"         
+                  , s.writer	as "writer"
+                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"          
                   , s.content      
                   , s.readcount   
                   , s.reg_date   
@@ -771,7 +760,8 @@
                select 
                     f.free_sharing_no
                   , f.subject         
-                  , ( select nickname from member where m_no = f.writer ) as "WRITER"         
+                  , f.writer	as "writer"
+                  , ( select nickname from member where m_no = f.writer ) as "NICKNAME"          
                   , f.content         
                   , f.readcount      
                   , f.reg_date
@@ -796,7 +786,8 @@
                select 
                     s.sale_no    as "b_no"   
                   , s.subject
-                  , ( select nickname from member where m_no = s.writer ) as "WRITER"         
+                  , s.writer	as "writer"
+                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"         
                   , s.content      
                   , s.readcount   
                   , s.reg_date
@@ -809,7 +800,8 @@
                select 
                     f.free_sharing_no
                   , f.subject         
-                  , ( select nickname from member where m_no = f.writer ) as "WRITER"         
+                  , f.writer	as "writer"
+                  , ( select nickname from member where m_no = f.writer ) as "nickname"          
                   , f.content         
                   , f.readcount      
                   , f.reg_date
@@ -839,7 +831,8 @@
                select 
                     s.sale_no    as "b_no"
                   , s.subject
-                  , ( select nickname from member where m_no = s.writer ) as "WRITER"         
+                  , s.writer	as "writer"
+                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"         
                   , s.content      
                   , s.readcount   
                   , s.reg_date
@@ -870,7 +863,8 @@
                select 
                     f.free_sharing_no  as "b_no"
                   , f.subject         
-                  , ( select nickname from member where m_no = f.writer ) as "WRITER"         
+                  , f.writer	as "writer"
+                  , ( select nickname from member where m_no = f.writer ) as "NICKNAME"          
                   , f.content         
                   , f.readcount      
                   , f.reg_date

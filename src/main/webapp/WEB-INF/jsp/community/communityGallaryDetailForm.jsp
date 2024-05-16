@@ -30,8 +30,7 @@
 			
 			<tr>
 				<th bgColor="lightgray">이름</th>
-				<!--  <td>${requestScope.communityDTO.nickname}</td> -->
-				<td>${sessionScope.nickname}</td>
+				<td>${requestScope.communityDTO.nickname}</td>
 			</tr>
 			
 			<tr>
