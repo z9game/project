@@ -90,7 +90,9 @@
          <span style="cursor: pointer"
             onclick="location.href='/matchingForm.do'">
             [목록 화면으로] </span>
-         <input type="button" value="수정/삭제" style="cursor:pointer" onclick="" >
+          <c:if test="${sessionScope.nickname eq requestScope.detail.nickname}">
+         	<input type="button" value="수정/삭제" style="cursor:pointer" onclick="" >
+          </c:if>
        </center>
        <div style="height:30px;"></div>
      

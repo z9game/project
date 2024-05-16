@@ -89,12 +89,12 @@ public class RecruitServiceImpl implements RecruitService {
 		
 		if(recruitTeamMemDTO.getDay() != null)
 		{
-			int insertDay = this.recruitDAO.insertDay(recruitTeamMemDTO);
+			int newInsertDay = this.recruitDAO.newInsertDay(recruitTeamMemDTO);
 		}
 		
 		if(recruitTeamMemDTO.getTime() != null)
 		{
-			int insertTime = this.recruitDAO.insertTime(recruitTeamMemDTO); 
+			int newInsertTime = this.recruitDAO.newInsertTime(recruitTeamMemDTO); 
 		}
 		return regTeamMemRecruit; 		
 		

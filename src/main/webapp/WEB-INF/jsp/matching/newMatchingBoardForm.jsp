@@ -15,8 +15,6 @@
 	{
 		var formObj = $("[name='newMatchingBoard']")
 		
-		alert(formObj.serialize());
-		
 		$.ajax({
 			//-------------------------------
 			// WAS 로 접속할 주소 설정

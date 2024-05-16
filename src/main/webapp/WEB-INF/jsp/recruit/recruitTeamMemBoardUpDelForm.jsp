@@ -95,8 +95,7 @@
 			<caption>[팀/팀원 모집 수정/삭제]</caption>
 			<tr>
 				<th bgColor="lightgray">이 름</th>
-				<td><input type="text" name="writer" class="writer" size="10"
-					maxlength="15" value="${requestScope.detail.writer}"></td>
+				<td>${requestScope.detail.nickname}</td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">제 목</th>

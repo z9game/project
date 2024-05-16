@@ -10,6 +10,7 @@
 <link href="/style/matchingFormStyle.css" rel="stylesheet">
 <link href="/style/matching.css" rel="stylesheet">
 <script src="/js/matchingFormScript.js"></script>
+<script src="/js/common.js"></script>
 
 <script>
 
@@ -49,6 +50,8 @@
 		if(typeof(keyword1)!='string' ){keyword1=""; }
 	    
 	    keyword1 = $.trim(keyword1);
+	    
+	    alert(boardSearchFormObj.serialize())
 	    
 		$.ajax({
 			//-------------------------------
