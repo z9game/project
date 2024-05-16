@@ -16,6 +16,7 @@ import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.RecordsDTO;
 import kosmo.team.project.service.MainService;
 import kosmo.team.project.utility.Page;
 
@@ -25,18 +26,84 @@ public class MainController {
 	private MainService mainService;
 
 	@RequestMapping(value = "/mainForm.do")
-	public ModelAndView mainForm(MainDTO mainDTO, MainSearchDTO mainSearchDTO) {
+	public ModelAndView mainForm(MainDTO mainDTO, MainSearchDTO mainSearchDTO, RecordsDTO recordsDTO) {
 
 	    ModelAndView mav = new ModelAndView();
+		
+		// 갤러리 section 
+	    int imageBoardListCnt = this.mainService.getImageBoardListCnt(mainDTO);
+	    
+	    List<MainDTO> imageBoardList = this.mainService.getImageBoardList(mainDTO);
+	    
+		mav.addObject("imageBoardList", imageBoardList);
+	    
+	    // 통계 section
+	    
+	    List<RecordsDTO> regionRatio = this.mainService.getRegionRatio(recordsDTO);
+		
+		mav.addObject("regionRatio", regionRatio);
+		
+		List<RecordsDTO> genderRatio = this.mainService.getGenderRatio(recordsDTO);
+		
+		mav.addObject("genderRatio", genderRatio);
+		
+		List<RecordsDTO> ageRatio = this.mainService.getAgeRatio(recordsDTO);
+		
+		mav.addObject("ageRatio", ageRatio);
+	    
+	    
+	    // 랭킹 section
+	    
+	    List<RecordsDTO> recordsGoalRatingTabAll = this.mainService.getRecordsGoalRatingTabAll(recordsDTO);
+		
+		mav.addObject("recordsGoalRatingTabAll", recordsGoalRatingTabAll);
 
-		/*
-		 * // 갤러리 section int imageBoardListCnt =
-		 * this.mainService.getImageBoardListCnt(mainDTO); List<MainDTO> imageBoardList
-		 * = this.mainService.getImageBoardList(mainDTO);
-		 * mav.addObject("imageBoardList", imageBoardList);
-		 */
+		List<RecordsDTO> recordsWinRatingTabAll = this.mainService.getRecordsWinRatingTabAll(recordsDTO);
+		
+		mav.addObject("recordsWinRatingTabAll", recordsWinRatingTabAll);
+		
+		List<RecordsDTO> recordsAssistRatingTabAll = this.mainService.getRecordsAssistRatingTabAll(recordsDTO);
+		
+		mav.addObject("recordsAssistRatingTabAll", recordsAssistRatingTabAll);
+		
+		List<RecordsDTO> recordsGoalRatingTabRegion = this.mainService.getRecordsGoalRatingTabRegion(recordsDTO);
+		
+		mav.addObject("recordsGoalRatingTabRegion", recordsGoalRatingTabRegion);
+
+		List<RecordsDTO> recordsWinRatingTabRegion = this.mainService.getRecordsWinRatingTabRegion(recordsDTO);
+		
+		mav.addObject("recordsWinRatingTabRegion", recordsWinRatingTabRegion);
+		
+		List<RecordsDTO> recordsAssistRatingTabRegion = this.mainService.getRecordsAssistRatingTabRegion(recordsDTO);
+		
+		mav.addObject("recordsAssistRatingTabRegion", recordsAssistRatingTabRegion);
+		
+		List<RecordsDTO> recordsGoalRatingTabGender = this.mainService.getRecordsGoalRatingTabGender(recordsDTO);
+		
+		mav.addObject("recordsGoalRatingTabGender", recordsGoalRatingTabGender);
+
+		List<RecordsDTO> recordsWinRatingTabGender = this.mainService.getRecordsWinRatingTabGender(recordsDTO);
+		
+		mav.addObject("recordsWinRatingTabGender", recordsWinRatingTabGender);
+		
+		List<RecordsDTO> recordsAssistRatingTabGender = this.mainService.getRecordsAssistRatingTabGender(recordsDTO);
+		
+		mav.addObject("recordsAssistRatingTabGender", recordsAssistRatingTabGender);
+		
+		List<RecordsDTO> recordsGoalRatingTabAge = this.mainService.getRecordsGoalRatingTabAge(recordsDTO);
+		
+		mav.addObject("recordsGoalRatingTabAge", recordsGoalRatingTabAge);
+
+		List<RecordsDTO> recordsWinRatingTabAge = this.mainService.getRecordsWinRatingTabAge(recordsDTO);
+		
+		mav.addObject("recordsWinRatingTabAge", recordsWinRatingTabAge);
+		
+		List<RecordsDTO> recordsAssistRatingTabAge = this.mainService.getRecordsAssistRatingTabAge(recordsDTO);
+		
+		mav.addObject("recordsAssistRatingTabAge", recordsAssistRatingTabAge);
 
 	    // 대회 일정 section
+		
 	    List<MainDTO> mainTournamentList = this.mainService.getMainTournamentList(mainDTO);
 	    mav.addObject("mainTournamentList", mainTournamentList);
 
