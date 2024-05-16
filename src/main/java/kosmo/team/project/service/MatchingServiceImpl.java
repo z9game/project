@@ -41,10 +41,37 @@ public class MatchingServiceImpl implements MatchingService {
 	}
 	
 	
-	
+	//새글쓰기
 	public int regMatchingBoard(MatchingDTO matchingDTO) {
+		//regMatchingBoard 라는 변수에 matchingDAO쪽에 있는 regMatchingBoard 메소드의 실행결과를 저장
 		int regMatchingBoard = this.matchingDAO.regMatchingBoard(matchingDTO);
+		//변수에 저장된 값을 나를 호출한 놈에게 돌려준다.
 		return regMatchingBoard;
 	}
 	
+	//수정,삭제를 위한 게시물 가져오기
+	public MatchingDTO getUpdelBoard(int match_no) {
+		
+		//getUpdelBoard 라는 변수에 matchingDAO쪽에 있는 getUpdelBoard 메소드의 실행결과를 저장
+		MatchingDTO getUpdelBoard = this.matchingDAO.getUpdelBoard(match_no);
+		//변수에 저장된 값을 나를 호출한 놈에게 돌려준다.
+		return getUpdelBoard;		
+	}
+	
+	
+	//게시물 수정
+	public int updateMatching(MatchingDTO matchingDTO) {
+		//updateMatching 라는 변수에 matchingDAO쪽에 있는 updateMatching 메소드의 실행결과를 저장
+		int updateMatching = this.matchingDAO.updateMatching(matchingDTO);
+		//변수에 저장된 값을 나를 호출한 놈에게 돌려준다.
+		return updateMatching;
+	}
+	
+	//게시물 삭제
+	public int deleteMatching(MatchingDTO matchingDTO) {
+		//deleteMatching 라는 변수에 matchingDAO쪽에 있는 deleteMatching 메소드의 실행결과를 저장
+		int deleteMatching = this.matchingDAO.deleteMatching(matchingDTO);
+		//변수에 저장된 값을 나를 호출한 놈에게 돌려준다.
+		return deleteMatching;
+	}
 }

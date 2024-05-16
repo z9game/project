@@ -17,8 +17,52 @@ public class MatchingDTO {
 	private String time_range;
 	private String day;
 	
+	private int sido_name;
+	private int sigungu_name;
+	private int time_no;
+	
+	private int sido_id;
+	private int sigungu_id;
+	private String date;
 	
 	
+	
+	public int getSido_id() {
+		return sido_id;
+	}
+	public void setSido_id(int sido_id) {
+		this.sido_id = sido_id;
+	}
+	public int getSigungu_id() {
+		return sigungu_id;
+	}
+	public void setSigungu_id(int sigungu_id) {
+		this.sigungu_id = sigungu_id;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public int getSido_name() {
+		return sido_name;
+	}
+	public void setSido_name(int sido_name) {
+		this.sido_name = sido_name;
+	}
+	public int getSigungu_name() {
+		return sigungu_name;
+	}
+	public void setSigungu_name(int sigungu_name) {
+		this.sigungu_name = sigungu_name;
+	}
+	public int getTime_no() {
+		return time_no;
+	}
+	public void setTime_no(int time_no) {
+		this.time_no = time_no;
+	}
 	public int getMatch_no() {
 		return match_no;
 	}

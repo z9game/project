@@ -91,11 +91,16 @@
             onclick="location.href='/matchingForm.do'">
             [목록 화면으로] </span>
           <c:if test="${sessionScope.nickname eq requestScope.detail.nickname}">
-         	<input type="button" value="수정/삭제" style="cursor:pointer" onclick="" >
+         	<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.matchingUpDelForm.submit()" >
           </c:if>
        </center>
        <div style="height:30px;"></div>
-     
-    
+     <form name="matchingUpDelForm" action="/matchingUpDelForm.do" method="post">
+	 <!------------------------------------------------------------------------>
+	 <!-- 게시판 고유번호가 저장된 hidden 태그 선언하기 -->
+	 <!------------------------------------------------------------------------>
+	 <input type="hidden" name="match_no"value="${requestScope.detail.match_no}">
+	 </form>
+ 
 </body>
 </html>

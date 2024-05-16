@@ -108,6 +108,7 @@
 	   ,tt.time_range
 	   ,m.day
 	   ,m.content
+	   ,m.match_no
 	from
 	    match m left join member mb on m.writer = mb.m_no    
 	            left join sido s on m.sido_name = s.sido_id
@@ -117,6 +118,11 @@
 		match_no = #{match_no}
 </select>
 
+
+
+<!-- 
+	//새글쓰기
+-->
 <insert id="regMatchingBoard" parameterType="kosmo.team.project.dto.MatchingDTO" >
  insert into match (match_no, title, writer, content, sido_name, sigungu_name, time_no, day)
  values(
@@ -130,6 +136,56 @@
     ,#{day}
  )
  </insert>
+ 
+<!-- 
+	//수정,삭제 게시물 가져오기
+-->
+ <select id="getUpdelBoard" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="int">
+	select
+	   m.title
+	   ,mb.nickname
+	   ,s.name      as "sido_c"
+	   ,si.name     as "sigungu_c"
+	   ,m.time_no
+	   ,m.day
+	   ,m.content
+	   ,m.match_no
+	from
+	    match m left join member mb on m.writer = mb.m_no    
+	            left join sido s on m.sido_name = s.sido_id
+	            left join sigungu si on m.sigungu_name = si.sigungu_id 
+	where
+		match_no = #{match_no}
+</select>
+
+<!-- 
+	//매칭 게시물 수정
+-->
+<update id="updateMatching" parameterType="kosmo.team.project.dto.MatchingDTO">
+update
+	match
+set
+	title=#{title},
+	sido_name=#{sido_id},
+	sigungu_name=#{sigungu_id},
+	content=#{content},
+	time_no=#{matchingTime},
+	day=#{date}
+where 
+	match_no = #{match_no}
+</update>
+
+<!-- 
+	//매칭 게시물 삭제
+-->
+<delete id="deleteMatching" parameterType="kosmo.team.project.dto.MatchingDTO">
+	delete
+	from
+		match
+	where
+		match_no = #{match_no}
+</delete>
+ 
 
 
 </mapper>
