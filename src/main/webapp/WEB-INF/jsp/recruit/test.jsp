@@ -487,7 +487,7 @@ function checkReserveForm()
 						<tr style="cursor:pointer" onClick=" goRecruitTeamMemDetailForm(${list.b_no});">
 							<td align="center">${requestScope.recruitMap.begin_serialNo_desc - status.index}</td>
 							<td align="center">${list.title}</td>
-							<td align="center">${list.writer}</td>
+							<td align="center">${list.nickname}</td>
 							<td align="center">${list.team_mem}</td>
 							<td align="center">${list.readcount}</td>
 							<td align="center">${list.reg_date}</td>

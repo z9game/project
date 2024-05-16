@@ -357,7 +357,7 @@ function goRecruitTeamMemDetailForm(b_no)
                   <tr style="cursor:pointer" onClick=" goRecruitTeamMemDetailForm(${list.b_no});">
                      <td align="center">${list.b_no}</td>
                      <td align="center">${list.title}</td>
-                     <td align="center">${list.writer}</td>
+                     <td align="center">${list.nickname}</td>
                      <td align="center">${list.readcount}</td>
                      <td align="center">${list.reg_date}</td>
                   </tr>

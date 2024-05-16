@@ -14,7 +14,7 @@
 <script>
 
 	//로그인을 하지 않고 글을 쓰려고 하면 로그인창으로 돌려보냄
-	function checkReserveForm() 
+	function checkLogin() 
 	{
 	   
 	   var sessionMid = '<%=session.getAttribute("mid")%>';
@@ -26,10 +26,12 @@
 	   }
 		else
 		{
-			location.href='/newRecruitTeamMemBoardForm.do'
+			location.href='/newMatchingBoardForm.do'
 		}
 		   
 	}
+	
+	
 	
 	//검색
 	function search() {
@@ -47,8 +49,6 @@
 		if(typeof(keyword1)!='string' ){keyword1=""; }
 	    
 	    keyword1 = $.trim(keyword1);
-	    
-	    alert(boardSearchFormObj.serialize());
 	    
 		$.ajax({
 			//-------------------------------
@@ -91,6 +91,13 @@
 			search();
 		}
 	}
+	
+	function goMatchDetail(match_no)
+	{
+		$("[name='matchingDetail'] [name='match_no']").val(match_no); 
+		document.matchingDetail.submit();
+	}
+	
 	
 	
 </script>
@@ -157,7 +164,7 @@
 	  				<dt class="item">시 간</dt>
 	  					<dd class="content">
 							<select name="matchingTime" id="" onchange="categoryChange(this)">
-				              	<option value="">시간 선택</option>
+				              	<option value="0">시간 선택</option>
 								<option value="1">AM06시~AM08시</option>
 								<option value="2">AM08시~AM10시</option>
 								<option value="3">AM10시~AM12시</option>
@@ -187,7 +194,7 @@
 		</div>
   		 <br><br><br>
 		<div class="newRecruitTeamMemBoardBtnDiv">
-			<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkReserveForm()">
+			<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkLogin()">
 		</div>
 	</center>
    
@@ -200,7 +207,8 @@
 					<th style="width:100px;">조회수</th>
 					<th style="width:100px;">등록일</th>
 					<c:forEach var="board" items="${requestScope.boardList}" varStatus="status">
-						<tr style="cursor:pointer" onClick="">
+														<!-- 클릭이 발생했을때 생기는 이벤트 -> goMatchDetail 함수 실행 / 매개변수로는 클릭한 게시물의 번호가 들어간다.-->
+						<tr style="cursor:pointer" onClick="goMatchDetail(${board.match_no})">
 							<td align="center">${board.match_no}</td>
 							<td align="center">${board.title}</td>
 							<td align="center">${board.nickname}</td>
@@ -216,7 +224,19 @@
 				</center>
 			</c:if>
 		</div>
-
+	<!-- 
+	action? -> 폼태그안의 값을 보낼 주소를 적는곳
+	method? -> 어떠한 방식으로 보낼지 ('get' or 'post')
+	name은 당연히 폼태그의 이름
+	 -->
+	<form action="/matchingDetailForm.do" method="post" name="matchingDetail">
+		<!-- 
+		폼태그에 있는 액션주소로 넘어갈 값 
+		name은 당연히 인풋태그의 이름 + 'match_no' 이름에 value값이 저장되어 갈거임. 
+		하지만 지금 이곳에서는 그 값을 설정해주지않고 함수부분에서 어떠한 값을 넘길것인지 설정해줄거임.
+		 -->
+		<input type="hidden" name="match_no">
+	</form>
 	
 	
 	<div style="height:30px;"></div>

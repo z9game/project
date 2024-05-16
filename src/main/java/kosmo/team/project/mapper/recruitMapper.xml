@@ -22,7 +22,7 @@
          <if test="keyword1 != null and keyword1.length() > 0">
             (
             <if test="searchType1 == 'writer'">
-               upper(writer) like upper('%${keyword1}%')
+               upper(m.nickname) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'title'">
                upper(title) like upper('%${keyword1}%')
@@ -31,7 +31,7 @@
                upper(content) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'all'">
-               upper(writer) like upper('%${keyword1}%')
+               upper(m.nickname) like upper('%${keyword1}%')
                or
                upper(title) like upper('%${keyword1}%')
                or
@@ -146,14 +146,15 @@
              select 
                  distinct(r.b_no) 
                  ,r.title
-                 ,r.writer 
+                 ,m.nickname 
                  ,r.content 
                  ,r.readcount 
                  ,r.team_mem
                  ,to_char(r.reg_date, 'YYYY-MM-DD') as "reg_date"
              from 
                  recruit_TeamMemBoard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
-                                   		LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
+                                   		LEFT JOIN teammemboard_time t ON r.b_no = t.b_no
+                                   		LEFT JOIN member m ON r.writer = m.m_no 
              where
                 1=1
              <include refid="boardWhere"/>
@@ -183,6 +184,7 @@
       from 
          recruit_TeamMemBoard r  LEFT JOIN (SELECT DISTINCT b_no, day FROM teammemboard_day) d ON r.b_no = d.b_no  
          						 LEFT JOIN (SELECT DISTINCT b_no, time FROM teammemboard_time) t ON r.b_no = t.b_no
+         						 LEFT JOIN member m ON r.writer = m.m_no 
        where
           1=1
        <include refid="boardWhere"/>
@@ -224,7 +226,7 @@
           select 
               t.b_no 
               ,t.title 
-              ,t.writer 
+              ,m.nickname
               ,t.content 
               ,t.readcount 
               ,to_char(t.reg_date, 'YYYY-MM-DD') as "reg_date"
@@ -235,6 +237,7 @@
           from 
               recruit_teammemboard t LEFT JOIN sido s ON t.sido = s.sido_id
                                  LEFT JOIN sigungu si ON t.sigungu = si.sigungu_id
+                                 LEFT JOIN member m ON t.writer = m.m_no 
           where
              b_no = #{b_no}
          
