@@ -234,6 +234,7 @@
               ,s.name    as "sido_c"
               ,si.name    as "sigungu_c"
               ,t.pos
+              ,t.writer
           from 
               recruit_teammemboard t LEFT JOIN sido s ON t.sido = s.sido_id
                                  LEFT JOIN sigungu si ON t.sigungu = si.sigungu_id
@@ -452,9 +453,16 @@
 				    rt.b_no = #{b_no}
 			)	
    		)
-   	
    	</insert>
    	
+   	<select id="findMyTeam" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO" resultType="int">     
+  		select
+  			count(*)
+  		from
+	 		team_member
+	 	where
+	 		team_member = #{m_no}
+   	</select>
    	
    	
    	 

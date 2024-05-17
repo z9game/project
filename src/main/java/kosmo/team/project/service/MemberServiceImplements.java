@@ -90,6 +90,26 @@ public class MemberServiceImplements implements MemberService {
 			return 2;
 		}
 		return registTeam;
-				
 	}
+
+    //승낙테이블의 개수가 몇개인지 확인
+    public int getWaitingCnt(int m_no) {
+    	int getWaitingCnt = this.memberDAO.getWaitingCnt(m_no);
+    	
+    	return getWaitingCnt;
+    }
+    
+    //승낙 대기인원 정보가져오기
+    public List<TeamDTO> getWaitingList(int m_no){
+  		List<TeamDTO> getWaitingList = this.memberDAO.getWaitingList(m_no);
+  		 return getWaitingList;
+  	 }
+    
+
+	//승낙 수락 할때
+	 public int regTeamMem(TeamDTO teamDTO){
+		 int regTeamMem = this.memberDAO.regTeamMem(teamDTO);
+		 int delWaitingList = this.memberDAO.delWaitingList(teamDTO);
+		 return regTeamMem;
+	 }
 }
