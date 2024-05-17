@@ -203,7 +203,9 @@
       f.b_no AS   "b_no",
       f.subject AS "subject",
       f.writer as "writer",
-      ( select nickname from member where m_no = f.writer ) as "NICKNAME",      
+      														-- NICKNAME 대문자를 소문자로 변경금지!
+      ( select nickname from member where m_no = f.writer ) as "NICKNAME",  
+          
       f.content AS "content",
       to_char(f.reg_date, 'YYYY-MM-DD') AS "reg_date",
       f.readcount AS "readcount"
@@ -538,7 +540,9 @@
                     ima.b_no
                   , ima.subject
                   , ima.writer
-				  , ( select nickname from member where m_no = ima.writer ) as "NICKNAME"        
+                  														-- NICKNAME 대문자를 소문자로 변경금지!
+				  , ( select nickname from member where m_no = ima.writer ) as "NICKNAME"   
+				       
                   , ima.content            
                   , ima.readcount      
                   , ima.reg_date      
@@ -562,7 +566,9 @@
 						ima.b_no
 					  , ima.subject
 					  , ima.writer
+					                    								-- NICKNAME 대문자를 소문자로 변경금지!
 					  , ( select nickname from member where m_no = ima.writer ) as "NICKNAME"
+					  
 					  , ima.content      
 					  , ima.readcount   
 					  , ima.reg_date
@@ -697,7 +703,9 @@
                     s.sale_no      
                   , s.subject
                   , s.writer	as "writer"
-                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"         
+                  												-- NICKNAME 대문자를 소문자로 변경금지!
+                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"  
+                         
                   , s.content      
                   , s.readcount   
                   , s.reg_date   
@@ -710,7 +718,9 @@
                     f.free_sharing_no
                   , f.subject         
                   , f.writer	as "writer"
+                                    							-- NICKNAME 대문자를 소문자로 변경금지!
                   , ( select nickname from member where m_no = f.writer ) as "NICKNAME"       
+                  
                   , f.content         
                   , f.readcount      
                   , f.reg_date      
@@ -735,7 +745,9 @@
                     s.sale_no      
                   , s.subject
                   , s.writer	as "writer"
-                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"          
+                                    								-- NICKNAME 대문자를 소문자로 변경금지!
+                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"   
+                         
                   , s.content      
                   , s.readcount   
                   , s.reg_date   
@@ -761,7 +773,9 @@
                     f.free_sharing_no
                   , f.subject         
                   , f.writer	as "writer"
-                  , ( select nickname from member where m_no = f.writer ) as "NICKNAME"          
+                                    								-- NICKNAME 대문자를 소문자로 변경금지!
+                  , ( select nickname from member where m_no = f.writer ) as "NICKNAME"    
+                        
                   , f.content         
                   , f.readcount      
                   , f.reg_date
@@ -787,7 +801,9 @@
                     s.sale_no    as "b_no"   
                   , s.subject
                   , s.writer	as "writer"
-                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"         
+                                    							-- NICKNAME 대문자를 소문자로 변경금지!
+                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME" 
+                          
                   , s.content      
                   , s.readcount   
                   , s.reg_date
@@ -801,7 +817,9 @@
                     f.free_sharing_no
                   , f.subject         
                   , f.writer	as "writer"
-                  , ( select nickname from member where m_no = f.writer ) as "nickname"          
+                            									-- NICKNAME 대문자를 소문자로 변경금지!
+                  , ( select nickname from member where m_no = f.writer ) as "NICKNAME"   
+                         
                   , f.content         
                   , f.readcount      
                   , f.reg_date
@@ -832,7 +850,9 @@
                     s.sale_no    as "b_no"
                   , s.subject
                   , s.writer	as "writer"
-                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"         
+                            									-- NICKNAME 대문자를 소문자로 변경금지!
+                  , ( select nickname from member where m_no = s.writer ) as "NICKNAME"   
+                        
                   , s.content      
                   , s.readcount   
                   , s.reg_date
@@ -864,7 +884,9 @@
                     f.free_sharing_no  as "b_no"
                   , f.subject         
                   , f.writer	as "writer"
-                  , ( select nickname from member where m_no = f.writer ) as "NICKNAME"          
+                            									-- NICKNAME 대문자를 소문자로 변경금지!
+                  , ( select nickname from member where m_no = f.writer ) as "NICKNAME"       
+                     
                   , f.content         
                   , f.readcount      
                   , f.reg_date
