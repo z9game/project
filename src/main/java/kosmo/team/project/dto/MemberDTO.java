@@ -16,7 +16,8 @@ public class MemberDTO {
 	private String reg_date;
 	private int age;
 	
-	private String team;
+	private String team_name;
+	private int team_master;
 	
 	private String sido;
 	private String sigungu;
@@ -35,7 +36,12 @@ public class MemberDTO {
 	
 	
 	
-	
+	public int getTeam_master() {
+		return team_master;
+	}
+	public void setTeam_master(int team_master) {
+		this.team_master = team_master;
+	}
 	public int getM_no() {
 		return m_no;
 	}
@@ -132,11 +138,12 @@ public class MemberDTO {
 	public void setSigungu(String sigungu) {
 		this.sigungu = sigungu;
 	}
-	public String getTeam() {
-		return team;
+	
+	public String getTeam_name() {
+		return team_name;
 	}
-	public void setTeam(String team) {
-		this.team = team;
+	public void setTeam_name(String team_name) {
+		this.team_name = team_name;
 	}
 	public int getGames_played() {
 		return games_played;

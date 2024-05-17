@@ -100,14 +100,17 @@
 	
 	
 	<!-- 마이페이지에 있는 내정보 가져오기 -->
-	<select id="getMyInfo" parameterType="String" resultType="kosmo.team.project.dto.MemberDTO">
+	<select id="getMyInfo" parameterType="int" resultType="kosmo.team.project.dto.MemberDTO">
 		select
-		    m.name    
-		    ,md.team           
+		    m.name
+		    ,m.m_no    
+		    ,t.team_name 
+		    ,t.team_master      
 		from
-		    member m left join member_detail md on m.m_no = md.member 
+		    member m left join team_member tm on m.m_no = tm.team_member  
+		             left join team t on t.team_no = tm.team_no 
 		where
-			m.mid = #{mid}
+			m.m_no = #{m_no}
 	</select>
 	
 	<!-- 마이페이지에 있는 내기록 가져오기 -->
@@ -139,6 +142,35 @@
 			and 
 			(sysdate - booking_date) <![CDATA[ <0 ]]>
 	</select>
+	
+	
+	
+	<!-- 팀 생성 -->
+	<insert id="registTeam" parameterType="kosmo.team.project.dto.TeamDTO">
+		insert into team(
+			team_no
+			,team_name
+			,team_master
+		)
+		values(
+			(select nvl(max(team_no),0)+1 from team)
+			,#{team_name}
+			,#{team_master}
+		)
+	</insert>
+	
+	<!-- 팀 생성후 멤버에 생성자 넣기 -->
+	<insert id="firstTeamMem" parameterType="kosmo.team.project.dto.TeamDTO">
+		insert into team_member(
+			team_no
+			,team_member
+		)
+		values(
+			(select team_no from team where team_master = #{team_master})
+			,#{team_master}
+		)
+	</insert>
+	
 	
 	
 	

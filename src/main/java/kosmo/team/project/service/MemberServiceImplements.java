@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kosmo.team.project.dao.MemberDAO;
 
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.TeamDTO;
 import kosmo.team.project.dto.bookingDTO;
 
 @Service
@@ -50,9 +51,9 @@ public class MemberServiceImplements implements MemberService {
 	}
 	
 	//마이페이지에 있는 내 정보 가져오기
-	public MemberDTO getMyInfo(String mid)
+	public MemberDTO getMyInfo(int m_no)
 	 {
-		 MemberDTO getMyInfo = this.memberDAO.getMyInfo(mid);
+		 MemberDTO getMyInfo = this.memberDAO.getMyInfo(m_no);
 		 
 		 return getMyInfo;
 		 
@@ -77,5 +78,18 @@ public class MemberServiceImplements implements MemberService {
 		List<bookingDTO> getBookedStadium = this.memberDAO.getBookedStadium(m_no);
 		
 		return getBookedStadium;
+	}
+	//팀 생성
+	public int registTeam(TeamDTO teamDTO){
+		
+		int registTeam = this.memberDAO.registTeam(teamDTO);
+		
+		int firstTeamMem = this.memberDAO.firstTeamMem(teamDTO);
+		
+		if(registTeam > 1) {
+			return 2;
+		}
+		return registTeam;
+				
 	}
 }

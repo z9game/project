@@ -57,4 +57,7 @@ public interface RecruitDAO {
 	public int deleteTime(RecruitTeamMemDTO recruitTeamMemDTO);
 	
 	public int recruitDeleteTeamMem(RecruitTeamMemDTO recruitTeamMemDTO);
+	
+	 //신청버튼을 누르면 내 정보가 승낙대기 테이블로 넘어감.
+	int regWaitingList(RecruitTeamMemDTO recruitTeamMemDTO);
 }

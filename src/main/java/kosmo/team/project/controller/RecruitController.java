@@ -234,7 +234,24 @@ public class RecruitController {
 	}
     
     
-    
+    //신청버튼을 누르면 내 정보가 승낙대기 테이블로 넘어감.
+    @RequestMapping( value = "/goWaitingList.do"
+			,method = RequestMethod.POST
+			, produces = "application/json; charset=UTF-8"
+			)
+	@ResponseBody
+	public Map<String, String> waitngList_myInfoProc(RecruitTeamMemDTO recruitTeamMemDTO)
+	{
+    	
+    int regWaitingList = this.recruitService.regWaitingList(recruitTeamMemDTO);
+    	
+	Map<String, String> resultMap = new HashMap<String, String>();
+	
+	resultMap.put("result", regWaitingList+"");
+	
+	
+	return resultMap;
+	}
     
     
     

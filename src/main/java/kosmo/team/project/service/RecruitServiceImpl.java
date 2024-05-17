@@ -157,5 +157,11 @@ public class RecruitServiceImpl implements RecruitService {
 		 int recruitDeleteTeamMem = this.recruitDAO.recruitDeleteTeamMem(recruitTeamMemDTO);
 		 return recruitDeleteTeamMem;
 	 }
-	
+	 //신청버튼을 누르면 내 정보가 승낙대기 테이블로 넘어감.
+	 public int regWaitingList(RecruitTeamMemDTO recruitTeamMemDTO) {
+		 int regWaitingList = this.recruitDAO.regWaitingList(recruitTeamMemDTO);
+		 return regWaitingList;
+	 }
+	 
+	 
 }
