@@ -634,12 +634,12 @@
    <!-- 레슨 모집 게시물 가져오기 + 검색조건 추가 아직 안 함 -->
    <select id="getRecruit_LessonBoardList" resultType="kosmo.team.project.dto.RecruitLessonDTO">
           	select 
-              distinct(h.recruitment_no) 
-              ,h.title 
+              distinct(l.recruitment_no) 
+              ,l.title 
               ,m.nickname 
-              ,h.content 
-              ,h.readcount 
-              ,to_char(h.reg_date, 'YYYY-MM-DD') as "reg_date"
+              ,l.content 
+              ,l.readcount 
+              ,to_char(l.reg_date, 'YYYY-MM-DD') as "reg_date"
           from 
               Lesson_recruitment l LEFT JOIN lessonboard_day dl ON l.recruitment_no = dl.recruitment_no 
                                   LEFT JOIN lessonboard_time tl ON l.recruitment_no = tl.recruitment_no
@@ -647,19 +647,48 @@
    </select>  
    
    
+   <!-- 레슨 모집 게시물 상세페이지 -->
    <select id="getRecruit_LessonDetail" resultType="kosmo.team.project.dto.RecruitLessonDTO" parameterType="int">
           select 
-              recruitment_no 
-              ,title 
-              ,writer 
-              ,content 
-              ,readcount 
-              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+              l.recruitment_no 
+              ,l.title 
+              ,m.nickname
+              ,l.content 
+              ,l.readcount
+              ,l.money 
+              ,to_char(l.reg_date, 'YYYY-MM-DD') as "reg_date"
+              ,s.name    as "sido_c"
+              ,si.name    as "sigungu_c"
           from 
-              lesson_recruitment
+              lesson_recruitment l LEFT JOIN sido s ON l.sido = s.sido_id
+                                 LEFT JOIN sigungu si ON l.sigungu = si.sigungu_id
+                                 LEFT JOIN member m ON l.nickname = m.m_no
           where
              recruitment_no = #{recruitment_no}
-   </select>  
+  </select>
+
+	<!-- 레슨 모집 상세페이지_요일 -->
+   <select id="getRecruit_lesson_day" parameterType="int" resultType="String">    
+      select
+         dof.day_name as "day"
+      from
+          lesson_recruitment l LEFT JOIN lessonboard_day ld ON l.recruitment_no = ld.recruitment_no 
+                                 LEFT JOIN day_of_week dof ON ld.day = dof.day_no             
+      where 
+      	  l.recruitment_no = #{recruitment_no} 
+      	  
+   </select>
+   
+   <!-- 레슨 모집 상세페이지_시간 -->
+   <select id="getRecruit_lesson_time" parameterType="int" resultType="String">    
+       select
+        lt.time as "time"
+      from
+          lesson_recruitment l LEFT JOIN lessonboard_time lt ON l.recruitment_no = lt.recruitment_no 
+       where 
+       	  l.recruitment_no = #{recruitment_no}      
+       	   
+   </select>
    	
    	 
 </mapper>

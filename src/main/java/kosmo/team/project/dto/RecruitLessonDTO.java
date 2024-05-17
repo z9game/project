@@ -6,7 +6,7 @@ public class RecruitLessonDTO {
 	
 	private int recruitment_no;
 	private String title;
-	private String writer;
+	private String nickname;
 	private String content;
 	private int readcount;
 	private String reg_date;
@@ -17,7 +17,6 @@ public class RecruitLessonDTO {
 	private String sigungu_c;
 	private List<String> day;
 	private List<String> time;
-	private String pos;
    	private int sido_id;
    	private int sigungu_id;
 	
@@ -30,16 +29,16 @@ public class RecruitLessonDTO {
 		this.recruitment_no = recruitment_no;
 	}
 	public String getTitle() {
-		return title;
+		return title; 
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWriter() {
-		return writer;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getContent() {
 		return content;
@@ -101,12 +100,6 @@ public class RecruitLessonDTO {
 	public void setTime(List<String> time) {
 		this.time = time;
 	}
-	public String getPos() {
-		return pos;
-	}
-	public void setPos(String pos) {
-		this.pos = pos;
-	}
 	public int getSido_id() {
 		return sido_id;
 	}
@@ -119,5 +112,4 @@ public class RecruitLessonDTO {
 	public void setSigungu_id(int sigungu_id) {
 		this.sigungu_id = sigungu_id;
 	}
-	
 }

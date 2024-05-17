@@ -23,8 +23,6 @@ public interface RecruitDAO {
 	
 	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no);
 	
-	public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
-	
 	
 	
 	
@@ -136,4 +134,14 @@ public interface RecruitDAO {
 
 	//레슨모집페이지_boardlist
 	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
+	
+	//레슨상세페이지
+	public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
+	
+	//용병모집상세페이지에서 요일 가져오기
+	public List<String> getRecruit_lesson_day(int recruitment_no);
+
+	//용병모집상세페이지에서 시간 가져오기
+	public List<String> getRecruit_lesson_time(int recruitment_no);
+	
 }

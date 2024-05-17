@@ -65,15 +65,6 @@ public class RecruitServiceImpl implements RecruitService {
 	}
 	
 
-	public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no) {
-
-		RecruitLessonDTO getRecruit_LessonDetail = this.recruitDAO.getRecruit_LessonDetail(recruitment_no);
-
-		return getRecruit_LessonDetail;
-
-	}
-	
-
 	
 	public int regTeamMemRecruit(RecruitTeamMemDTO recruitTeamMemDTO) {
 		int regTeamMemRecruit = this.recruitDAO.regTeamMemRecruit(recruitTeamMemDTO);
@@ -196,6 +187,7 @@ public class RecruitServiceImpl implements RecruitService {
 		 }
 		 return 0;
 	 }
+	 
 //==================================================================================================================================
 
 	//용병모집수정삭제페이지
@@ -256,6 +248,28 @@ public class RecruitServiceImpl implements RecruitService {
 			return getRecruit_LessonBoardList;
 
 		}	
+		
+		
+		//레슨상세페이지
+		public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no) {
+
+			RecruitLessonDTO getRecruit_LessonDetail = this.recruitDAO.getRecruit_LessonDetail(recruitment_no);
+
+			return getRecruit_LessonDetail;
+
+		}
+		
+		//레슨상세페이지 요일 가져오기
+		public List<String> getRecruit_lesson_day(int recruitment_no){
+			List<String> getRecruit_lesson_day = this.recruitDAO.getRecruit_lesson_day(recruitment_no); 
+			return getRecruit_lesson_day; 	
+		}
+		
+		//레슨상세페이지 시간 가져오기
+		public List<String> getRecruit_lesson_time(int recruitment_no){
+			List<String> getRecruit_lesson_time = this.recruitDAO.getRecruit_lesson_time(recruitment_no);
+			return getRecruit_lesson_time; 
+		}
 	 
 
 }

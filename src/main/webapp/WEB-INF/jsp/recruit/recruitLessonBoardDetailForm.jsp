@@ -46,13 +46,13 @@
 				style="border-collapse: collapse">
 				<caption>[레슨 모집 상세글 보기]</caption>
 				<tr>
-					<th bgColor="lightgray">이름</th>
+					<th bgColor="lightgray">닉네임</th>
 					<!--------------------------------------------------- -->
 					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 저장된 boardDTO 객체의 -->
 					<!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
 					<!-- 상세보기할 게시판의 이름 표현하기 -->
 					<!--------------------------------------------------- -->
-					<td>${requestScope.lessondetailList.writer}</td>
+					<td>${requestScope.lessondetailList.nickname}</td>
 				</tr>
 				<tr>
 					<th bgColor="lightgray">제목</th>
@@ -71,6 +71,14 @@
 					<!-- 상세보기할 게시판의 조회수 표현하기 -->
 					<!--------------------------------------------------- -->
 					<td>${requestScope.lessondetailList.readcount}</td>
+				</tr><tr>
+					<th bgColor="lightgray">비용</th>
+					<!--------------------------------------------------- -->
+					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
+					<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
+					<!-- 상세보기할 게시판의 조회수 표현하기 -->
+					<!--------------------------------------------------- -->
+					<td>${requestScope.lessondetailList.money}</td>
 				</tr>
 				<tr>
 					<th bgColor="lightgray">내 용</th>
@@ -92,6 +100,9 @@
 				<span style="cursor: pointer"
 					onclick="location.replace('/recruitLessonBoardForm.do')">
 					[목록 화면으로] </span>
+	        	<c:if test="${sessionScope.nickname eq requestScope.lessondetailList.nickname}">
+					<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.recruitLessonboardUpDelForm.submit()" >
+				</c:if>
 	    
 	    	</c:if>
 	    </center>	

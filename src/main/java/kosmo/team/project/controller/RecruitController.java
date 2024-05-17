@@ -25,6 +25,10 @@ public class RecruitController {
 	@Autowired
     private RecruitService recruitService;
 	
+	
+	//==================================================================================================================================
+
+    //팀/팀원모집페이지_boardlist	
     @RequestMapping(value = "/recruitTeamMemBoardForm.do")
     public ModelAndView recruitTeamMemBoardForm(RecruitSearchDTO recruitSearchDTO) {
     	
@@ -50,36 +54,9 @@ public class RecruitController {
     	
         return mav;
     }
-    
-    
-    
-    
-    
-    @RequestMapping(value = "/recruitHiredBoardForm.do")
-    public ModelAndView recruitHiredBoardForm() {
-    	
-    	List<RecruitHiredDTO> recruitHired = this.recruitService.getRecruit_HiredBoardList();
-    	ModelAndView mav = new ModelAndView();
-    	//오라클의 실행구문 결과물이 저장된 변수 recruitHired를 JSP쪽에서 ${requestScope.boardList.DTO안에있는멤버변수명} 이런식으로 불러 사용하기 위해 addObject라는 것을 사용
-    	//즉, JSP페이지에서 boardList라는 키값을 부르면 그 키값에 해당하는 데이터(recruitHired)를 사용할수 있는 것임.
-    	mav.addObject("boardList", recruitHired);
-    	mav.setViewName("/recruit/recruitHiredBoardForm.jsp");
-    	
-        return mav;
-    }
-    
-    @RequestMapping(value = "/recruitLessonBoardForm.do")
-    public ModelAndView recruitLessonBoardForm() {
-    	
-    	List<RecruitLessonDTO> recruitLesson = this.recruitService.getRecruit_LessonBoardList();
-    	ModelAndView mav = new ModelAndView();
-    	mav.addObject("boardList", recruitLesson);
-    	mav.setViewName("/recruit/recruitLessonBoardForm.jsp");
-    	
-        return mav;
-    }
 
 
+    //팀/팀원새글쓰기페이지
     @RequestMapping(value = "/newRecruitTeamMemBoardForm.do")
     public ModelAndView newRecruitTeamMemBoardForm() {
     	
@@ -89,16 +66,8 @@ public class RecruitController {
         return mav;
     }
     
-    @RequestMapping(value = "/newRecruitHiredBoardForm.do")
-    public ModelAndView newRecruitHiredBoardForm() {
-    	
-    	ModelAndView mav = new ModelAndView();
-    	mav.setViewName("/recruit/newRecruitHiredBoardForm.jsp");
-    	
-        return mav;
-    }
     
-    
+    //팀/팀원상세페이지
     @RequestMapping(value = "/recruitTeamMemBoardDetailForm.do")
     public ModelAndView recruitTeamBoardDetailForm(@RequestParam(value="b_no") int b_no) {
  
@@ -118,34 +87,7 @@ public class RecruitController {
         return mav;
     }
     
-    @RequestMapping(value = "/recruitHiredBoardDetailForm.do")
-    public ModelAndView recruitHiredBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
-    	
-    	RecruitHiredDTO recruitHiredDTO = this.recruitService.getRecruit_HiredDetail(recruitment_no);
-    	
-    	List<String> day = this.recruitService.getRecruit_hired_day(recruitment_no);
-    	List<String> time = this.recruitService.getRecruit_hired_time(recruitment_no);
-    	
-    	ModelAndView mav = new ModelAndView();
-    	mav.addObject("hireddetailList", recruitHiredDTO);
-    	mav.addObject("day", day);
-    	mav.addObject("time", time);
-    	mav.setViewName("/recruit/recruitHiredBoardDetailForm.jsp");
-    	
-        return mav;
-    }
-    
-    @RequestMapping(value = "/recruitLessonBoardDetailForm.do")
-    public ModelAndView recruitLessonBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
-    	
-    	RecruitLessonDTO recruitLessonDTO = this.recruitService.getRecruit_LessonDetail(recruitment_no);
-    	ModelAndView mav = new ModelAndView();
-    	mav.addObject("lessondetailList", recruitLessonDTO);
-    	mav.setViewName("/recruit/recruitLessonBoardDetailForm.jsp");
-    	
-        return mav;
-    }
-    
+    //팀/팀원새글쓰기페이지_등록
 	@RequestMapping( value = "/recruitTeamMemRegProc.do"
 					,method = RequestMethod.POST
 					, produces = "application/json; charset=UTF-8"
@@ -160,24 +102,9 @@ public class RecruitController {
 	
 	return resultMap;
 	}
-    
-	//용병모집 새글쓰기 저장 
-	@RequestMapping( value = "/recruitHiredRegProc.do"
-					,method = RequestMethod.POST
-					, produces = "application/json; charset=UTF-8"
-					)
-	@ResponseBody
-	public Map<String, String> recruitHiredRegProc(RecruitHiredDTO recruitHiredDTO)
-	{
-	Map<String, String> resultMap = new HashMap<String, String>();
-	int recruitHiredRegCnt = this.recruitService.regHiredRecruit(recruitHiredDTO);
-	resultMap.put("result", recruitHiredRegCnt+"");
-	
-	return resultMap;
-	}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 	
-    
+    //팀/팀원수정삭제페이지
     @RequestMapping(value = "/recruitTeamMemBoardUpDelForm.do")
     public ModelAndView recruitTeamMemBoardUpDelForm(@RequestParam(value="b_no") int b_no) {
     	// getRecruit_TeamMemUpDel 는 수정/삭제를 위해 데이터를 가져오는 메소드명
@@ -260,6 +187,63 @@ public class RecruitController {
 	}
     
 //==================================================================================================================================
+
+    //용병모집페이지_boardlist
+    @RequestMapping(value = "/recruitHiredBoardForm.do")
+    public ModelAndView recruitHiredBoardForm() {
+    	
+    	List<RecruitHiredDTO> recruitHired = this.recruitService.getRecruit_HiredBoardList();
+    	ModelAndView mav = new ModelAndView();
+    	//오라클의 실행구문 결과물이 저장된 변수 recruitHired를 JSP쪽에서 ${requestScope.boardList.DTO안에있는멤버변수명} 이런식으로 불러 사용하기 위해 addObject라는 것을 사용
+    	//즉, JSP페이지에서 boardList라는 키값을 부르면 그 키값에 해당하는 데이터(recruitHired)를 사용할수 있는 것임.
+    	mav.addObject("boardList", recruitHired);
+    	mav.setViewName("/recruit/recruitHiredBoardForm.jsp");
+    	
+        return mav;
+    }
+    
+    //용병상세페이지
+    @RequestMapping(value = "/recruitHiredBoardDetailForm.do")
+    public ModelAndView recruitHiredBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
+    	
+    	RecruitHiredDTO recruitHiredDTO = this.recruitService.getRecruit_HiredDetail(recruitment_no);
+    	
+    	List<String> day = this.recruitService.getRecruit_hired_day(recruitment_no);
+    	List<String> time = this.recruitService.getRecruit_hired_time(recruitment_no);
+    	
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("hireddetailList", recruitHiredDTO);
+    	mav.addObject("day", day);
+    	mav.addObject("time", time);
+    	mav.setViewName("/recruit/recruitHiredBoardDetailForm.jsp");
+    	
+        return mav;
+    }
+    
+    //용병새글쓰기페이지
+    @RequestMapping(value = "/newRecruitHiredBoardForm.do")
+    public ModelAndView newRecruitHiredBoardForm() {
+    	
+    	ModelAndView mav = new ModelAndView();
+    	mav.setViewName("/recruit/newRecruitHiredBoardForm.jsp");
+    	
+        return mav;
+    }
+    
+	//용병모집 새글쓰기 저장 
+	@RequestMapping( value = "/recruitHiredRegProc.do"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
+					)
+	@ResponseBody
+	public Map<String, String> recruitHiredRegProc(RecruitHiredDTO recruitHiredDTO)
+	{
+	Map<String, String> resultMap = new HashMap<String, String>();
+	int recruitHiredRegCnt = this.recruitService.regHiredRecruit(recruitHiredDTO);
+	resultMap.put("result", recruitHiredRegCnt+"");
+	
+	return resultMap;
+	}
     
     //용병모집수정삭제페이지
     @RequestMapping(value = "/recruitHiredBoardUpDelForm.do")
@@ -325,9 +309,39 @@ public class RecruitController {
     
     
 //==================================================================================================================================
+
+	//레슨모집페이지_boardlist
+    @RequestMapping(value = "/recruitLessonBoardForm.do")
+    public ModelAndView recruitLessonBoardForm() {
+    	
+    	List<RecruitLessonDTO> recruitLesson = this.recruitService.getRecruit_LessonBoardList();
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("boardList", recruitLesson);
+    	mav.setViewName("/recruit/recruitLessonBoardForm.jsp");
+    	
+        return mav;
+    }
+	
+	 //레슨상세페이지
+   @RequestMapping(value = "/recruitLessonBoardDetailForm.do")
+   public ModelAndView recruitLessonBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
+   	
+   	RecruitLessonDTO recruitLessonDTO = this.recruitService.getRecruit_LessonDetail(recruitment_no);
+   	
+   	List<String> day = this.recruitService.getRecruit_lesson_day(recruitment_no);
+   	List<String> time = this.recruitService.getRecruit_lesson_time(recruitment_no);
+   	
+   	ModelAndView mav = new ModelAndView();
+   	mav.addObject("lessondetailList", recruitLessonDTO);
+   	mav.addObject("day", day);
+   	mav.addObject("time", time);
+   	mav.setViewName("/recruit/recruitLessonBoardDetailForm.jsp");
+   	
+       return mav;
+   }
     
-    
-    //레슨모집페이지_boardlist
+  
+    //레슨새글쓰기페이지
 	@RequestMapping(value = "/newRecruitLessonBoardForm.do")
 	public ModelAndView newRecruitLessonBoardForm() {
 		
@@ -336,8 +350,6 @@ public class RecruitController {
 		
 	    return mav;
 	}
-    
-    
     
     
     

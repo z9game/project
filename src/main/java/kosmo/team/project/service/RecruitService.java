@@ -19,8 +19,6 @@ public interface RecruitService {
 	RecruitTeamMemDTO getRecruit_TeamMemDetail(int b_no);
 
 	RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no);
-
-	RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
 	
 	
 	
@@ -29,6 +27,7 @@ public interface RecruitService {
 	//용병모집 새글쓰기 저장 
 	public int regHiredRecruit(RecruitHiredDTO recruitHiredDTO);
 	
+	//??
 	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO);
 	
 	
@@ -92,5 +91,15 @@ public interface RecruitService {
 	
 	//레슨모집페이지_boardlist
 	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
+
+	//레슨상세페이지
+	RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
+	
+	//레슨상세페이지 요일 가져오기
+	public List<String> getRecruit_lesson_day(int recruitment_no);
+	
+	//레슨상세페이지 시간 가져오기
+	public List<String> getRecruit_lesson_time(int recruitment_no);
+	
 }
 
