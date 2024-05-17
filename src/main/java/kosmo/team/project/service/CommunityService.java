@@ -167,9 +167,9 @@ public interface CommunityService {
 	public List<CommunityDTO> getTabFreeSharingMarketplaceBoardList(CommunitySearchDTO communitySearchDTO);
 
 	
-	public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no);
+	public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no, boolean isReadCount);
 	
-	public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no);
+	public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no, boolean isReadCount);
 	
 	public int updateMarketplaceSaleBoard(CommunityDTO communityDTO);
 	

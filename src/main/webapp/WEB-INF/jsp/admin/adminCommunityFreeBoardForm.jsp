@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityFreeBoardForm</title>
+<title>adminCommunityFreeBoardForm</title>
 <link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
@@ -35,7 +35,7 @@
 					//-------------------------------
 					// WAS 로 접속할 주소 설정
 					//-------------------------------
-					url : "/communityFreeBoardForm.do"
+					url : "/adminFreeBoardForm.do"
 					//-------------------------------
 					// WAS 로 접속하는 방법 설정. get 또는 post
 					//-------------------------------
@@ -114,7 +114,7 @@
 	    	alert('로그인이 필요한 서비스입니다.');
 	    	location.href = '/loginForm.do';
 	    } else {
-	    	location.href = '/newCommunityFreeBoardForm.do';
+	    	location.href = '/adminNewCommunityFreeBoardForm.do';
 	    }
 	    
 	}
@@ -125,9 +125,10 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityFreeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">자유게시판</p>
+		<p class="titleBackgoundText">관리자 자유게시판</p>
 	</div>
-
+	
+	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 
 	<form name="communityFreeBoardSearchForm" onsubmit="return false">
 
@@ -136,7 +137,7 @@
 			class="rowCntPerPage">
 	</form>
 
-	<form name="detailForm" id="detailForm" action="/updateFreeBoardDetailReadCountPlusOne.do" method="post">
+	<form name="detailForm" id="detailForm" action="/adminUpdateFreeBoardDetailReadCountPlusOne.do" method="post">
 		<input type="hidden" name="b_no">
 	</form>
 

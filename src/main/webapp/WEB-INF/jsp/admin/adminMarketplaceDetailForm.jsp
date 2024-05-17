@@ -2,18 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
-<c:if test="${empty sessionScope.mid}">
-	<script>
-		alert("로그인이 필요한 서비스입니다.");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityNoticeBoardDetailForm</title>
+<title>adminMarketplaceDetailForm</title>
 <link href="/style/community/communityNoticeBoardFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityNoticeBoardFormScript.js"></script>
 
@@ -22,37 +16,15 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">공지사항</p>
+		<p class="titleBackgoundText">관리자 장터 상세보기</p>
 	</div>
 
+	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 
-
-
-
-	<!-- 만약에 1개의 게시판 데이터가 없으면-->
-	<!-- 만약에 HttpServletRequest 객체  "boardDTO" 라는 키값으로 저장된 놈이  null 이면 -->
-	<!-- <참고> ModelAndView 객체의 addObject 메소드로 저장된 놈은
-			HttpServletRequest 객체에도 저장된다.  -->
-
-	<!-- 만약에 상세보기할 게시판 이 삭제가 되었으면-->
-	<c:if test="${empty requestScope.communityDTO}">
-		<script>
-			alert("공지사항이 삭제되었습니다.");
-			location.replace("/communityNoticeBoardForm.do");
-		</script>
-	</c:if>
-
-
-
-	<!-- 만약에 1개의 게시판 데이터가 있으면-->
-	<!-- 만약에 HttpServletRequest 객체  "boardDTO" 라는 키값으로 저장된 놈이  null 이아니면 -->
-	<!-- <참고> ModelAndView 객체의 addObject 메소드로 저장된 놈은
-			HttpServletRequest 객체에도 저장된다.  -->
-	<!-- 만약에 상세보기할 게시판이 있으면-->
 	<c:if test="${!empty requestScope.communityDTO}">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7
 			style="border-collapse: collapse">
-			<caption>[공지사항 상세글 보기]</caption>
+			<caption>[장터 상세글 보기]</caption>
 			<tr>
 				<th bgColor="lightgray">이름</th>
 				<!--------------------------------------------------- -->
@@ -60,7 +32,7 @@
 				<!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
 				<!-- 상세보기할 게시판의 이름 표현하기 -->
 				<!--------------------------------------------------- -->
-				<td>${requestScope.communityDTO.writer}</td>
+				<td>${requestScope.communityDTO.nickname}</td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">제목</th>
@@ -96,12 +68,13 @@
 			<!--------------------------------------------------- -->
 			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 			<!--------------------------------------------------- -->
-			<span style="cursor: pointer" onclick="location.replace('/communityNoticeBoardForm.do')">
+			<span style="cursor: pointer"
+				onclick="location.replace('/adminMarketplaceBoardForm.do')">
 				[목록 화면으로] 
-			</span> 
-			<c:if test="${requestScope.communityDTO.writer == sessionScope.nickname}">
-				<input type="button" value="수정/삭제" onclick="document.noticeboardUpDelForm.submit();">
-			</c:if>
+			</span>
+				<input type="button" value="수정/삭제" onclick="document.marketplaceUpDelForm.submit();">
+
+		
 
 
 
@@ -119,10 +92,12 @@
 		<!-- [수정/삭제] 버튼 클릭하면 <form name="boardUpDelForm" ~> 태그에 설정한
 					정보를 이용하여 WAS 에 접속하기 -->
 		<!--------------------------------------------------- -->
-		<form name="noticeboardUpDelForm" action="/noticeboardUpDelForm.do" method="post">
-			<input type="hidden" name="b_no"
-				value="${requestScope.communityDTO.b_no}">
+		<form name="marketplaceUpDelForm" action="/adminMarketplaceboardUpDelForm.do" method="post">
+			<input type="hidden" name="b_no" 		value="${requestScope.communityDTO.b_no}">
+			<input type="hidden" name="table_name" 	value="${requestScope.communityDTO.table_name}">
 		</form>
+
+
 
 	</c:if>
 

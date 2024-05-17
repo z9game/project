@@ -425,7 +425,7 @@ public class CommunityServiceImplements implements CommunityService {
       return communityDAO.getTabFreeSharingMarketplaceBoardListCnt(communitySearchDTO);
    }
    
-   /*** 장터 Sale 테이블 리스트 가져오기 ***/
+   /*** 장터 Free_Sharing 테이블 리스트 가져오기 ***/
    @Override
    public List<CommunityDTO> getTabFreeSharingMarketplaceBoardList(CommunitySearchDTO communitySearchDTO) {
       return communityDAO.getTabFreeSharingMarketplaceBoardList(communitySearchDTO);
@@ -433,10 +433,12 @@ public class CommunityServiceImplements implements CommunityService {
    
    /*** 장터 Free_Sharing 테이블 조회수 디테일 가져오기 ***/
    @Override
-   public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no) {
+   public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no, boolean isReadCount) {
 
-      int updateCnt = this.communityDAO.updateMarketplaceSaleBoardReadCount(b_no);
-
+	   if(isReadCount) {
+		   this.communityDAO.updateMarketplaceSaleBoardReadCount(b_no);
+	   }
+      
       CommunityDTO communityDTO = this.communityDAO.getCommunityMarketplaceSaleDetailForm(b_no);
 
       return communityDTO;
@@ -445,9 +447,11 @@ public class CommunityServiceImplements implements CommunityService {
    
    /*** 장터 Free_Sharing 테이블 조회수 디테일 가져오기 ***/
    @Override
-   public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no) {
+   public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no, boolean isReadCount) {
 
-      int updateCnt = this.communityDAO.updateMarketplaceFreeSharingBoardReadCount(b_no);
+	   if(isReadCount) {
+		   	this.communityDAO.updateMarketplaceFreeSharingBoardReadCount(b_no);
+	   }
 
       CommunityDTO communityDTO = this.communityDAO.getCommunityMarketplaceFreeSharingDetailForm(b_no);
 
