@@ -30,4 +30,11 @@ public interface MemberDAO {
 	//팀 생성
 	int registTeam(TeamDTO teamDTO);
 	int firstTeamMem(TeamDTO teamDTO);
+    //승낙테이블의 개수가 몇개인지 확인
+    int getWaitingCnt(int m_no);
+  //승낙 대기인원 정보가져오기
+  	 List<TeamDTO> getWaitingList(int m_no);
+	//승낙 수락 할때
+  	int regTeamMem(TeamDTO teamDTO);
+  	int delWaitingList(TeamDTO teamDTO);
 }

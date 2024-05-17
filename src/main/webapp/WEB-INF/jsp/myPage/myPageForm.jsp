@@ -12,6 +12,24 @@
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 <script>
+	var cnt = 0;
+
+	function allApprove(){
+			if(cnt == 0)
+			{
+				$(".approve").prop("checked",true);
+				cnt++;
+				return;
+			}
+			if(cnt == 1)
+			{
+				$(".approve").prop("checked",false);
+				cnt--;
+				return;
+			}
+	}
+	
+	
 	function regTeam(){
 		
 		var teamObj = $("[name='teamRegist']");
@@ -44,6 +62,36 @@
 		});
 		
 	};
+	
+	
+	function regTeamMem(){
+			
+		var regTeam = $("[name='waitingList']");
+		
+		if (confirm("정말 수락 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/regTeamMemberProc.do",
+			type : "post",
+			data : regTeam.serialize(),
+			success : function(json) {
+				var result = json["result"];
+				if (result > 0) {
+					alert("수락 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_waiting");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("수락중 오류가 발생했습니다.");
+			}
+		});
+		
+	};
+	
 	
 	function modalOpen_waiting(){
 		var modal = document.querySelector(".modalDiv_waiting");
@@ -157,15 +205,17 @@
 	<!-- ================================================================================================================= -->
 	<!-- 팀 수락 관련 -->
 	<c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
-    	<center>
-			<table style="border-collapse:collapse" border="1">
-			<tr>
-				<td class="waitingCheck" onclick="modalOpen_waiting()">
-					팀모집 수락 대기인원이 있습니다.
-				</td>
-			</tr>
-		</table>
-		</center>
+		<c:if test="${requestScope.WaitingCnt > 0}">
+	    	<center>
+				<table style="border-collapse:collapse" border="1">
+				<tr>
+					<td class="waitingCheck" onclick="modalOpen_waiting()">
+						팀모집 수락 대기인원이 있습니다.
+					</td>
+				</tr>
+			</table>
+			</center>
+		</c:if>
 	</c:if>
 	
 	
@@ -174,22 +224,26 @@
 			<div class="modal_waiting">
 			<form name = "waitingList">
 				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
-					<caption><b>수락대기중인 팀원</b></caption>
+					<caption><b>수락대기중</b></caption>
 					<tr>
 						<th>이름</th>
 						<th>나이</th>
 						<th>지역</th>
-						<th>전체선택</th>
+						<th>선택</th>
 					</tr>
-					<tr>
-						<td align="center"></td>
-						<td align="center"></td>
-						<td align="center"></td>
-						<td align="center"></td>
-					</tr>
+					<c:forEach var="list" items="${requestScope.waitList}" varStatus="status">
+						<tr>
+							<td align="center">${list.name}</td>
+							<td align="center">${list.age}</td>
+							<td align="center">${list.sido}</td>
+							<td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${list.m_no}"></td>
+						</tr>
+					</c:forEach>
 				</table>
 			</form>
 			<div style="height:8px;"></div>
+			<button onclick="allApprove()">전체선택</button>
+			<button onclick="regTeamMem()">수락</button>
 			<button onclick="modalClose_waiting()">취소</button>
 			</div>
 		</div>

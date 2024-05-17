@@ -27,7 +27,11 @@
 				var result = json["result"];
 				if (result == 1) {
 					alert("신청이 완료되었습니다.");
-				} 
+				}
+				else if(result == 2)
+				{
+					alert("이미 팀이 있습니다.");
+				}
 				else {
 					alert("이미 신청한 팀입니다.");
 				}
@@ -157,7 +161,9 @@
 
       <center>
       <c:if test="${requestScope.list.team_mem eq '팀'}">
-         <input type="button" value="신청" style="cursor:pointer" onclick="goWaitingList()" >
+      	 <c:if test="${sessionScope.m_no ne requestScope.list.writer}">
+         	 <input type="button" value="신청" style="cursor:pointer" onclick="goWaitingList()" >
+         </c:if>
       </c:if>
          <span style="cursor: pointer"
             onclick="location.href='/recruitTeamMemBoardForm.do'">
