@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityMarketplaceBoardForm</title>
+<title>adminCommunityMarketplaceBoardForm</title>
 
 <link href="/style/community/communityMarketplaceBoardFormStyle.css" rel="stylesheet">
 
@@ -73,7 +73,7 @@
           alert('로그인이 필요한 서비스입니다.');
           location.href = '/loginForm.do';
        } else {
-          location.href = '/newCommunityMarketplaceSaleBoardForm.do';
+          location.href = '/adminNewCommunityMarketplaceSaleBoardForm.do';
        }
    }
    
@@ -85,7 +85,7 @@
           alert('로그인이 필요한 서비스입니다.');
           location.href = '/loginForm.do';
        } else {
-          location.href = '/newCommunityMarketplaceFreeSharingBoarForm.do';
+          location.href = '/adminNewCommunityMarketplaceFreeSharingBoarForm.do';
        }
    }
    
@@ -131,7 +131,7 @@
       insertHiddenValue();
       
       $.ajax({            
-              url       : "/communityMarketplaceBoardForm.do"
+              url       : "/adminMarketplaceBoardForm.do"
             , type       : "post"
             , data       : searchForm.serialize()
             , success    : function(responseHtml) { ajaxSuccess(responseHtml); }
@@ -207,9 +207,11 @@
    <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="communityMarketplaceBoardFormTitle">
        <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-       <p class="titleBackgoundText">장터</p>
+       <p class="titleBackgoundText">관리자 장터</p>
     </div>    
-   
+    
+    <%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+      	
    <form name="boardSearchForm" onsubmit="return false;">
       <input type="hidden" name="tabType" class="tabType" value=""> 
       <input type="hidden" name="keyword1" class="keyword1" value="">
@@ -219,8 +221,8 @@
       <input type="hidden" name="rowCntPerPage" class="rowCntPerPage" value="8" >
    </form>
    
-   <form name="marketplaceDetailForm" action="/communityMarketplaceDetailForm.do" method="post">
-      <input type="hidden" name="b_no" value="12345" >
+   <form name="marketplaceDetailForm" action="/adminCommunityMarketplaceDetailForm.do" method="post">
+      <input type="hidden" name="b_no" value="" >
       <input type="hidden" name="table_name" >
    </form>
    

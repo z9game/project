@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
-<c:if test="${empty sessionScope.mid}">
-	<script>
-		alert("로그인이 필요한 서비스입니다.");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
-
-<c:if test="${requestScope.communityDTO.writer != sessionScope.m_no}">
-	<script>
-		alert("작성한 사용자가 아닙니다");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
 
 <!DOCTYPE html><html>
 <head>
@@ -44,22 +31,22 @@
 			}
 	
 			$.ajax({
-				url : "/communityGallaryUpProc.do",
+				url : "/adminCommunityGallaryUpProc.do",
 				type : "post",
 				data : formObj.serialize(),
 				success : function(json) {
 					var result = json["result"];
 					
 					if (result == 0) {
-						alert("삭제된 갤러리 입니다.");
-						location.href = "/communityGallaryForm.do";
+						alert("관리자 삭제된 갤러리 입니다.");
+						location.href = "/adminGallaryForm.do";
 					} else {
-						alert("갤러리 수정 성공입니다.");
-						location.href = "/communityGallaryForm.do";
+						alert("관리자 갤러리 수정 성공입니다.");
+						location.href = "/adminGallaryForm.do";
 					}
 				},
 				error : function() {
-					alert("수정 실패! 관리자에게 문의 바랍니다.");
+					alert("관리자 수정 실패! 관리자에게 문의 바랍니다.");
 				}
 			});
 		}
@@ -72,21 +59,21 @@
 			}
 			
 			$.ajax({
-				url : "/communityGallaryDelProc.do",
+				url : "/adminCommunityGallaryDelProc.do",
 				type : "post",
 				data : formObj.serialize(),
 				success : function(json) {
 					var result = json["result"];
 					if (result == 0) {
-						alert("삭제된 갤러리입니다.");
-						location.href = "/communityGallaryForm.do";
+						alert("관리자 삭제된 갤러리입니다.");
+						location.href = "/adminGallaryForm.do";
 					} else {
-						alert("갤러리 삭제 성공입니다.");
-						location.href = "/communityGallaryForm.do";
+						alert("관리자 갤러리 삭제 성공입니다.");
+						location.href = "/adminGallaryForm.do";
 					}
 				},
 				error : function() {
-					alert("삭제 실패! 관리자에게 문의 바랍니다.");
+					alert("관리자 삭제 실패! 관리자에게 문의 바랍니다.");
 				}
 			});
 		}
@@ -99,7 +86,9 @@
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">갤러리</p>
 	</div>
-
+	
+   	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+   	
 	<form name="communityGallaryUpDelForm">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7 style="border-collpase: collpase">
 			<caption>[갤러리 수정/삭제]</caption>
@@ -129,7 +118,7 @@
 	<div style="height: 5px"></div>
 	
 	<center>
-		<span style="cursor: pointer" onclick="location.replace('/communityGallaryForm.do')">[목록화면으로]</span>
+		<span style="cursor: pointer" onclick="location.replace('/adminGallaryForm.do')">[목록화면으로]</span>
 	</center>
 	
 	<center>

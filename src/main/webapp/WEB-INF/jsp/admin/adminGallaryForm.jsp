@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityGallaryForm</title>
+<title>adminGallaryForm</title>
 <link href="/style/community/communityGallaryFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityGallaryFormScript.js"></script>
 <script>
@@ -41,7 +41,7 @@
 		searchFormSelectPageNo.val(listPage);
 	    
 	    $.ajax({            
-	            url       : "/communityGallaryForm.do"
+	            url       : "/adminGallaryForm.do"
 	          , type       : "post"
 	          , data       : searchForm.serialize()
 	          , success    : function(responseHtml) { ajaxSuccess(responseHtml); }
@@ -89,7 +89,7 @@
 	    	alert('로그인이 필요한 서비스입니다.');
 	    	location.href = '/loginForm.do';
 	    } else {
-	    	location.href = '/newCommunityGallaryForm.do';
+	    	location.href = '/adminNewCommunityGallaryForm.do';
 	    }
 	}
 </script>
@@ -98,8 +98,9 @@
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="communityGallaryFormTitle">
     	<img src="/image/CommunityTitleBackgroundImage.jpg" class="titleBackgoundImg">
-    	<p class="titleBackgoundText">갤러리</p>
+    	<p class="titleBackgoundText">관리자 갤러리</p>
     </div>
+   	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
     
    <form name="searchForm" onsubmit="return false;">
       <input type="hidden" name="keyword1" class="keyword1" value="">
@@ -107,8 +108,8 @@
       <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
       <input type="hidden" name="rowCntPerPage" class="rowCntPerPage" value="8" >
    </form>
-   
-   <form name="detailForm" action="/communityGallaryDetailForm.do" method="post">
+
+   <form name="detailForm" action="/adminCommunityGallaryDetailForm.do" method="post">
       <input type="hidden" name="b_no" value="" >
    </form>       
     

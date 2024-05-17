@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosmo.team.project.dao.MainDAO;
+import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.RecordsDTO;
 
 @Service
 @Transactional
@@ -19,23 +21,158 @@ public class MainServiceImplements implements MainService {
 	@Autowired
 	private MainDAO mainDAO;
 
-	/*
-	 * @Override public int getImageBoardListCnt(MainDTO mainDTO) {
-	 * 
-	 * int imageBoardListCnt = mainDAO.getImageBoardListCnt(mainDTO);
-	 * 
-	 * return imageBoardListCnt;
-	 * 
-	 * }
-	 * 
-	 * @Override public List<MainDTO> getImageBoardList(MainDTO mainDTO) {
-	 * 
-	 * List<MainDTO> imageBoardList = mainDAO.getImageBoardList(mainDTO);
-	 * 
-	 * return imageBoardList;
-	 * 
-	 * }
-	 */
+	@Override public int getImageBoardListCnt(MainDTO mainDTO) {
+	 
+		int imageBoardListCnt = mainDAO.getImageBoardListCnt(mainDTO);
+	 
+		return imageBoardListCnt;
+	 }
+	 
+	@Override public List<MainDTO> getImageBoardList(MainDTO mainDTO) {
+	
+		List<MainDTO> imageBoardList = mainDAO.getImageBoardList(mainDTO);
+	 
+		return imageBoardList;
+	}
+	
+	// 메인 페이지 통계 section
+	
+	@Override
+	public List<RecordsDTO> getRegionRatio(RecordsDTO recordsDTO) {
+		
+		List<RecordsDTO> regionRatio = this.mainDAO.getRegionRatio(recordsDTO);
+		
+		return regionRatio;
+	}
+	
+	@Override
+	public List<RecordsDTO> getGenderRatio(RecordsDTO recordsDTO) {
+		
+		List<RecordsDTO> genderRatio = this.mainDAO.getGenderRatio(recordsDTO);
+		
+		return genderRatio;
+	}
+	
+	@Override
+	public List<RecordsDTO> getAgeRatio(RecordsDTO recordsDTO) {
+		
+		List<RecordsDTO> ageRatio = this.mainDAO.getAgeRatio(recordsDTO);
+		
+		return ageRatio;
+	}
+	
+	
+	// 메인 페이지 랭킹 section
+	
+	@Override
+	public List<RecordsDTO> getRecordsGoalRatingTabAll(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsGoalRatingTabAll = this.mainDAO.getRecordsGoalRatingTabAll(recordsDTO);
+
+		return recordsGoalRatingTabAll;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsWinRatingTabAll(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsWinRatingTabAll = this.mainDAO.getRecordsWinRatingTabAll(recordsDTO);
+
+		return recordsWinRatingTabAll;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsAssistRatingTabAll(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsAssistRatingTabAll = this.mainDAO.getRecordsAssistRatingTabAll(recordsDTO);
+
+		return recordsAssistRatingTabAll;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsGoalRatingTabRegion(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsGoalRatingTabRegion = this.mainDAO.getRecordsGoalRatingTabRegion(recordsDTO);
+
+		return recordsGoalRatingTabRegion;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsWinRatingTabRegion(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsWinRatingTabRegion = this.mainDAO.getRecordsWinRatingTabRegion(recordsDTO);
+
+		return recordsWinRatingTabRegion;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsAssistRatingTabRegion(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsAssistRatingTabRegion = this.mainDAO.getRecordsAssistRatingTabRegion(recordsDTO);
+
+		return recordsAssistRatingTabRegion;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsGoalRatingTabGender(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsGoalRatingTabGender = this.mainDAO.getRecordsGoalRatingTabGender(recordsDTO);
+
+		return recordsGoalRatingTabGender;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsWinRatingTabGender(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsWinRatingTabGender = this.mainDAO.getRecordsWinRatingTabGender(recordsDTO);
+
+		return recordsWinRatingTabGender;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsAssistRatingTabGender(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsAssistRatingTabGender = this.mainDAO.getRecordsAssistRatingTabGender(recordsDTO);
+
+		return recordsAssistRatingTabGender;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsGoalRatingTabAge(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsGoalRatingTabAge = this.mainDAO.getRecordsGoalRatingTabAge(recordsDTO);
+
+		return recordsGoalRatingTabAge;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsWinRatingTabAge(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsWinRatingTabAge = this.mainDAO.getRecordsWinRatingTabAge(recordsDTO);
+
+		return recordsWinRatingTabAge;
+
+	}
+	
+	@Override
+	public List<RecordsDTO> getRecordsAssistRatingTabAge(RecordsDTO recordsDTO) {
+
+		List<RecordsDTO> recordsAssistRatingTabAge = this.mainDAO.getRecordsAssistRatingTabAge(recordsDTO);
+
+		return recordsAssistRatingTabAge;
+
+	}
+	
+	// 메인 페이지 경기 일정 section
 	
 	@Override
 	public List<MainDTO> getMainTournamentList(MainDTO mainDTO) {

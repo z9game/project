@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.TeamDTO;
 import kosmo.team.project.dto.bookingDTO;
 import kosmo.team.project.service.MemberService;
 
@@ -79,12 +80,16 @@ public class MemberController {
 		
 		//마이페이지 관련 컨트롤러
 		@RequestMapping(value = "/myPageForm.do")
-		  public ModelAndView myPageForm(@RequestParam(value="mid")String mid, @RequestParam(value="m_no")int m_no) {
+		  public ModelAndView myPageForm(@RequestParam(value="mid")String mid, @RequestParam(value="m_no")int m_no, TeamDTO teamDTO) {
 			
 			//마이페이지에 있는 내 정보 가져오기, 오라클 실행결과물을 myInfo라는 변수에 저장
-			 MemberDTO myInfo = this.memberService.getMyInfo(mid);
+			 MemberDTO myInfo = this.memberService.getMyInfo(m_no);
 			//마이페이지에 있는 내 기록 가져오기, 오라클 실행결과물을 myStat라는 변수에 저장
 			 MemberDTO myStat = this.memberService.getMyStat(mid);
+			//내가 팀장일때 팀모집 승낙 대기인원이 있을때
+			 int WaitingCnt = this.memberService.getWaitingCnt(m_no);
+			//승낙 대기인원 정보가져오기
+			 List<TeamDTO> waitList = this.memberService.getWaitingList(m_no);
 			 
 			 List<bookingDTO> bookedStadium = this.memberService.getBookedStadium(m_no);
 			 
@@ -97,6 +102,11 @@ public class MemberController {
 		     mav.addObject("myStat", myStat);
 		     //bookedStadium에 저장한 결과물을 페이지에서 requestScope를 사용해 얻어낼수 있게 설정
 		     mav.addObject("bookedStadium", bookedStadium);
+		     //승낙대기중인 인원이 있나 확인 
+		     mav.addObject("WaitingCnt", WaitingCnt);
+		     //승낙대기중인 인원목록
+		     mav.addObject("waitList", waitList);
+		     
 		     
 
 		     return mav;
@@ -117,6 +127,34 @@ public class MemberController {
 			return resultMap;
 		}
 		
+		
+		//팀 생성
+		@RequestMapping( value="/registTeamProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+		@ResponseBody
+		public Map<String,String> registTeamProc(TeamDTO teamDTO)
+		{
+			Map<String,String> resultMap = new HashMap<String,String>();
+			
+			int teamRegCnt = this.memberService.registTeam(teamDTO);
+		
+			resultMap.put("result", teamRegCnt+"");
+		
+			return resultMap;
+		}
+		
+		//팀 수락
+		@RequestMapping( value="/regTeamMemberProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+		@ResponseBody
+		public Map<String,String> regTeamMemberProc(TeamDTO teamDTO)
+		{
+			Map<String,String> resultMap = new HashMap<String,String>();
+			//승낙 수락 할때
+			 int approveMem = this.memberService.regTeamMem(teamDTO);
+		
+			resultMap.put("result", approveMem+"");
+		
+			return resultMap;
+		}
 		
 		
 		

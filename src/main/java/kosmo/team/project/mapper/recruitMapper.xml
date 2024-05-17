@@ -206,6 +206,7 @@
               ,s.name    as "sido_c"
               ,si.name    as "sigungu_c"
               ,t.pos
+              ,t.writer
           from 
               recruit_teammemboard t LEFT JOIN sido s ON t.sido = s.sido_id
                                  LEFT JOIN sigungu si ON t.sigungu = si.sigungu_id
@@ -388,7 +389,24 @@
 			b_no = #{b_no}
 	</delete>
    	
+   	<insert id="regWaitingList" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+   		insert
+   		into 
+   			waiting_teamReg
+   		values(
+   			#{m_no}
+   			,(
+   				select
+				    tm.team_no       
+				from
+				    team_member tm left join recruit_teammemboard rt on tm.team_member = rt.writer 
+				where
+				    rt.b_no = #{b_no}
+			)	
+   		)
+   	</insert>
    	
+<<<<<<< HEAD
    	
 <!-- ============================================================================================================================================================================================================================= -->
  
@@ -508,6 +526,15 @@
 	 where
 	 		 h.recruitment_no = #{recruitment_no}
 	  	   
+=======
+   	<select id="findMyTeam" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO" resultType="int">     
+  		select
+  			count(*)
+  		from
+	 		team_member
+	 	where
+	 		team_member = #{m_no}
+>>>>>>> refs/heads/develop
    	</select>
    	
    	 <!-- 용병 모집 수정삭제페이지_팀/팀원 -->

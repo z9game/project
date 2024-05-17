@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
-<c:if test="${empty sessionScope.mid}">
-	<script>
-		alert("로그인이 필요한 서비스입니다.");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
 
 <!DOCTYPE html><html>
 <head>
 	<meta charset="UTF-8">
-	<title>갤러리 상세보기</title>
+	<title>관리자 갤러리 상세보기</title>
 	<link href="/style/community/communityNoticeBoardFormStyle.css" rel="stylesheet">
 	<script src="/js/community/communityNoticeBoardFormScript.js"></script>
 </head>
@@ -21,8 +15,9 @@
 	
 	<div class="communityNoticeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">갤러리 상세보기</p>
+		<p class="titleBackgoundText">관리자 갤러리 상세보기</p>
 	</div>
+   	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 
 	<c:if test="${!empty requestScope.communityDTO}">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7 style="border-collapse: collapse">
@@ -50,18 +45,17 @@
 		</table>
 
 		<center>
-			<span style="cursor: pointer" onclick="location.replace('/communityGallaryForm.do')">
+			<span style="cursor: pointer" onclick="location.replace('/adminGallaryForm.do')"> 
 				[목록 화면으로] 
 			</span> 
-			<c:if test="${requestScope.communityDTO.writer == sessionScope.m_no}">
 				<input type="button" value="수정/삭제" onclick="document.communityGallaryUpDelForm.submit();">
-			</c:if>
+			
 			<!-- Form 에 설정된  액션 값 URL 주소로 이동 -->
 			<!-- <input type="button" value="댓글쓰기"  onclick="document.boardUpDelForm.submit();">-->
 			
 		</center>
-		
-		<form name="communityGallaryUpDelForm" action="/communityGallaryUpDelForm.do" method="post">
+		                                                   
+		<form name="communityGallaryUpDelForm" action="/adminCommunityGallaryUpDelForm.do" method="post">
 			<input type="hidden" name="b_no" value="${requestScope.communityDTO.b_no}">
 		</form>
 

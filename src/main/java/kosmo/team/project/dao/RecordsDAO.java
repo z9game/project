@@ -56,4 +56,14 @@ public interface RecordsDAO {
 	public List<RecordsDTO> getRecordsWinRatingTabAge(RecordsDTO recordsDTO);
 	
 	public List<RecordsDTO> getRecordsAssistRatingTabAge(RecordsDTO recordsDTO);
+	
+	// 통계
+	
+	public List<RecordsDTO> getAnnualRegisteredMember(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getRegionRatio(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getGenderRatio(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getAgeRatio(RecordsDTO recordsDTO);
 }

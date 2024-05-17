@@ -8,7 +8,111 @@
 <meta charset="UTF-8">
 <title>myPage</title>
 <link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+<link href="/style/myPage.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
+
+<script>
+	var cnt = 0;
+
+	function allApprove(){
+			if(cnt == 0)
+			{
+				$(".approve").prop("checked",true);
+				cnt++;
+				return;
+			}
+			if(cnt == 1)
+			{
+				$(".approve").prop("checked",false);
+				cnt--;
+				return;
+			}
+	}
+	
+	
+	function regTeam(){
+		
+		var teamObj = $("[name='teamRegist']");
+		
+		var keywordObj = teamObj.find("[name='team_name']");
+		
+		var keyword = keywordObj.val();
+		
+		if(typeof(keyword1)!='string' ){keyword1=""; }
+		    
+		keyword1 = $.trim(keyword1);
+		
+		
+		$.ajax({
+			url : "/registTeamProc.do",
+			type : "post",
+			data : teamObj.serialize(),
+			success : function(json) {
+				var result = json["result"];
+				if (result == 1) {
+					alert("팀 생성 완료");
+					var modal = document.querySelector(".modalDiv_regTeam");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("존재하는 팀이름입니다.");
+			}
+		});
+		
+	};
+	
+	
+	function regTeamMem(){
+			
+		var regTeam = $("[name='waitingList']");
+		
+		if (confirm("정말 수락 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/regTeamMemberProc.do",
+			type : "post",
+			data : regTeam.serialize(),
+			success : function(json) {
+				var result = json["result"];
+				if (result > 0) {
+					alert("수락 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_waiting");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("수락중 오류가 발생했습니다.");
+			}
+		});
+		
+	};
+	
+	
+	function modalOpen_waiting(){
+		var modal = document.querySelector(".modalDiv_waiting");
+		modal.style.display = "block";
+	};
+	
+	function modalClose_waiting(){
+		var modal = document.querySelector(".modalDiv_waiting");
+		modal.style.display = "none";
+	};
+	
+	function modalOpen_regTeam(){
+		var modal = document.querySelector(".modalDiv_regTeam");
+		modal.style.display = "block";
+	};
+	
+	function modalClose_regTeam(){
+		var modal = document.querySelector(".modalDiv_regTeam");
+		modal.style.display = "none";
+	};
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
@@ -17,7 +121,7 @@
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">마이페이지</p>
 	</div>
-	
+	<!-- ================================================================================================================= -->
 	<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
 	<caption><b>내 정보</b></caption>
 		<tr>
@@ -27,14 +131,14 @@
 		<tr>
 			<td>${requestScope.myInfo.name}</td>
 			<td>
-				<c:if test="${empty requestScope.myInfo.team}">없음</c:if>
-				<c:if test="${not empty requestScope.myInfo.team}">${requestScope.myInfo.team}</c:if>
+				<c:if test="${empty requestScope.myInfo.team_name}">없음</c:if>
+				<c:if test="${not empty requestScope.myInfo.team_name}">${requestScope.myInfo.team_name}</c:if>
 			</td>
 		</tr>
 	</table>
 	
 	<div style="height:25px;"></div>
-	
+	<!-- ================================================================================================================= -->
 	<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
 	<caption><b>내 기록</b></caption>
 		<tr>
@@ -55,7 +159,7 @@
 		</tr>
 	</table>
 	<div style="height:25px;"></div>
-	
+	<!-- ================================================================================================================= -->
 	<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
 	<caption><b>예약한 경기장</b></caption>
 		<tr>
@@ -82,7 +186,7 @@
 	
 	
 	<div style="height:25px;"></div>
-	
+	<!-- ================================================================================================================= -->
 	<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
 	<caption><b>다음 예정 경기</b></caption>
 		<tr>
@@ -96,6 +200,90 @@
 			<td></td>
 		</tr>
 	</table>
+	
+	<div style="height:30px;"></div>
+	<!-- ================================================================================================================= -->
+	<!-- 팀 수락 관련 -->
+	<c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
+		<c:if test="${requestScope.WaitingCnt > 0}">
+	    	<center>
+				<table style="border-collapse:collapse" border="1">
+				<tr>
+					<td class="waitingCheck" onclick="modalOpen_waiting()">
+						팀모집 수락 대기인원이 있습니다.
+					</td>
+				</tr>
+			</table>
+			</center>
+		</c:if>
+	</c:if>
+	
+	
+	<div class="modalDiv_waiting" align="center"> 
+		<div class="bg_waiting">
+			<div class="modal_waiting">
+			<form name = "waitingList">
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+					<caption><b>수락대기중</b></caption>
+					<tr>
+						<th>이름</th>
+						<th>나이</th>
+						<th>지역</th>
+						<th>선택</th>
+					</tr>
+					<c:forEach var="list" items="${requestScope.waitList}" varStatus="status">
+						<tr>
+							<td align="center">${list.name}</td>
+							<td align="center">${list.age}</td>
+							<td align="center">${list.sido}</td>
+							<td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${list.m_no}"></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</form>
+			<div style="height:8px;"></div>
+			<button onclick="allApprove()">전체선택</button>
+			<button onclick="regTeamMem()">수락</button>
+			<button onclick="modalClose_waiting()">취소</button>
+			</div>
+		</div>
+	</div>
+	
+	<div style="height:30px;"></div>
+	
+	<!-- ================================================================================================================= -->
+	<!-- 팀생성 관련 -->
+	<c:if test="${empty requestScope.myInfo.team_name}">
+    	<center>
+			<input type="button" name="regTeam" value="팀생성" onclick="modalOpen_regTeam()">
+		</center>
+	</c:if>
+	
+	
+	<div class="modalDiv_regTeam" align="center"> 
+		<div class="bg_regTeam">
+			<div class="modal_regTeam">
+			<form name = "teamRegist">
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+					<tr>
+						<th>팀명</th>
+						<td>
+							<input type="text" name="team_name" placeholder="팀명을 입력하세요">
+							<input type="hidden" name="team_master" value="${sessionScope.m_no}">
+						</td>
+					</tr>
+				</table>
+			</form>
+				<div style="height:8px;"></div>
+				<button onclick="regTeam()()">생성</button>
+				<button onclick="modalClose_regTeam()">취소</button>
+			</div>
+		</div>
+	</div>
+	
+		<!-- ================================================================================================================= -->
+	
+	
 	
 	
 	

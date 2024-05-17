@@ -2,20 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
-<c:if test="${empty sessionScope.mid}">
-	<script>
-		alert("로그인이 필요한 서비스입니다.");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
-
-<c:if test="${requestScope.communityDTO.writer != sessionScope.m_no}">
-	<script>
-		alert("작성한 사용자가 아닙니다");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,21 +39,21 @@
 		}
 		
 		$.ajax({
-			url : "/communityFreeBoardUpdateProc.do",
+			url : "/adminCommunityFreeBoardUpdateProc.do",
 			type : "post",
 			data : formObj.serialize(),
 			success : function(json) {
 				var result = json["result"];
 				if (result == 0) {
-					alert("삭제된 글입니다.");
-					location.href = "/communityFreeBoardForm.do";
+					alert("관리자 삭제된 글입니다.");
+					location.href = "/adminFreeBoardForm.do";
 				} else {
-					alert("자유게시판 수정 성공입니다.");
-					location.href = "/communityFreeBoardForm.do";
+					alert("관리자 자유게시판 수정 성공입니다.");
+					location.href = "/adminFreeBoardForm.do";
 				}
 			},
 			error : function() {
-				alert("수정 실패! 관리자에게 문의 바랍니다.");
+				alert("관리자 수정 실패! 관리자에게 문의 바랍니다.");
 			}
 		});
 	}
@@ -81,25 +67,25 @@
 		}
 		
 		$.ajax({
-			url : "/communityFreeBoardDelProc.do",
+			url : "/adminCommunityFreeBoardDelProc.do",
 			type : "post",
 			data : formObj.serialize(),
 			success : function(json) {
 				var result = json["result"];
 				if (result == 0) {
-					alert("삭제된 글입니다.");
-					location.href = "/communityFreeBoardForm.do";
+					alert("관리자 삭제된 글입니다.");
+					location.href = "/adminFreeBoardForm.do";
 				} 
 				else if (result == -1) {
-					alert("댓글이 있으면 삭제하지 못합니다.")
+					alert("관리자 댓글이 있으면 삭제하지 못합니다.")
 				}
 				else {
-					alert("자유게시판 삭제 성공입니다.");
-					location.href = "/communityFreeBoardForm.do";
+					alert("관리자 자유게시판 삭제 성공입니다.");
+					location.href = "/adminFreeBoardForm.do";
 				}
 			},
 			error : function() {
-				alert("삭제 실패! 관리자에게 문의 바랍니다.");
+				alert("관리자 삭제 실패! 관리자에게 문의 바랍니다.");
 			}
 		});
 	}
@@ -115,7 +101,7 @@
 		<p class="titleBackgoundText">자유게시판</p>
 	</div>
 
-
+	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 
 	<form name="communityFreeBoardUpDelForm">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7
@@ -151,7 +137,7 @@
 
 	<div style="height: 5px"></div>
 	<center>
-		<span style="cursor: pointer"onclick="location.replace('/communityFreeBoardForm.do')">[목록 화면으로]
+		<span style="cursor: pointer"onclick="location.replace('/adminFreeBoardForm.do')">[목록 화면으로]
 		</span>
 	</center>
 	<center>

@@ -2,86 +2,78 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
-<c:if test="${empty sessionScope.mid}">
-	<script>
-		alert("로그인이 필요한 서비스입니다.");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
-
-<c:if test="${requestScope.communityDTO.writer != sessionScope.nickname}">
-	<script>
-		alert("작성한 사용자가 아닙니다");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityNoticeBoardDetailForm</title>
+<title>adminMarketplaceBoardDetailForm</title>
 <link href="/style/community/communityNoticeBoardFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityNoticeBoardFormScript.js"></script>
-
-
-
-
 
 <script>
 	function checkBoardUpForm() {
 
-		
-		var formObj = $("[name='noticeboardUpDelForm']");
-		var writerObj = formObj.find(".writer");
+		var formObj = $("[name='marketplaceboardUpDelForm']");
 		var subjectObj = formObj.find(".subject");
 		var contentObj = formObj.find(".content");
+		
+		if (subjectObj.val().trim().length == 0) {
+			alert("제목을 입력해야 합니다.");
+			return;
+		}
+		
+		if (contentObj.val().trim().length == 0) {
+			alert("내용을 입력해야 합니다.");
+			return;
+		}
 
 		if (confirm("정말수정하시겠습니까?") == false) {
 			return;
 		}
 
 		$.ajax({
-			url : "/noticeboardUpProc.do",
+			url : "/adminMarketplaceboardUpProc.do",
 			type : "post",
 			data : formObj.serialize(),
 			success : function(json) {
 				var result = json["result"];
+				
 				if (result == 0) {
-					alert("삭제된 공지사항입니다.");
-					location.href = "/communityNoticeBoardForm.do";
+					alert("삭제된 장터 입니다.");
+					location.href = "/adminMarketplaceBoardForm.do";
 				} else {
-					alert("공지사항 수정 성공입니다.");
-					location.href = "/communityNoticeBoardForm.do";
+					alert("관리자 장터 수정 성공입니다.");
+					location.href = "/adminMarketplaceBoardForm.do";
 				}
 			},
 			error : function() {
-				alert("수정 실패! 관리자에게 문의 바랍니다.");
+				alert("관리자 수정 실패! 관리자에게 문의 바랍니다.");
 			}
 		});
 	}
 
 	function checkBoardDelForm() {
-		var formObj = $("[name='noticeboardUpDelForm']");
+		var formObj = $("[name='marketplaceboardUpDelForm']");
 		if (confirm("정말 삭제하시겠습니까?") == false) {
 			return;
 		}
+		
 		$.ajax({
-			url : "/noticeboardDelProc.do",
+			url : "/adminMarketplaceBoardDelProc.do",
 			type : "post",
 			data : formObj.serialize(),
 			success : function(json) {
 				var result = json["result"];
 				if (result == 0) {
-					alert("삭제된 공지사항입니다.");
-					location.href = "/communityNoticeBoardForm.do";
+					alert("관리자 삭제된 장터입니다.");
+					location.href = "/adminMarketplaceBoardForm.do";
 				} else {
-					alert("공지사항 삭제 성공입니다.");
-					location.href = "/communityNoticeBoardForm.do";
+					alert("관리자 장터 삭제 성공입니다.");
+					location.href = "/adminMarketplaceBoardForm.do";
 				}
 			},
 			error : function() {
-				alert("삭제 실패! 관리자에게 문의 바랍니다.");
+				alert("관리자 삭제 실패! 관리자에게 문의 바랍니다.");
 			}
 		});
 	}
@@ -92,19 +84,18 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">공지사항</p>
+		<p class="titleBackgoundText">장터</p>
 	</div>
 
+	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 
-
-	<form name="noticeboardUpDelForm">
+	<form name="marketplaceboardUpDelForm">
 		<table align="center" bordercolor="gray" border=1 cellpadding=7
 			style="border-collpase: collpase">
-			<caption>[공지사항 수정/삭제]</caption>
+			<caption>[장터 수정/삭제]</caption>
 			<tr>
 				<th bgColor="lightgray">이 름</th>
-				<td>${requestScope.communityDTO.writer}<input type="hidden" name="writer" class="writer" size="10"
-					maxlength="15" value="${requestScope.communityDTO.writer}"></td>
+				<td>${requestScope.communityDTO.nickname}</td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">제 목</th>
@@ -124,15 +115,15 @@
 			</tr>
 
 		</table>
-		<input type="hidden" name="b_no"
-			value="${requestScope.communityDTO.b_no}">
+		<input type="hidden" name="b_no" value="${requestScope.communityDTO.b_no}">
+		<input type="hidden" name="table_name" value="${requestScope.communityDTO.table_name}">
 	</form>
 
 
 	<div style="height: 5px"></div>
 	<center>
 		<span style="cursor: pointer"
-			onclick="location.replace('/communityNoticeBoardForm.do')">[목록 화면으로]
+			onclick="location.replace('/adminMarketplaceBoardForm.do')">[목록화면으로]
 		</span>
 	</center>
 	<center>

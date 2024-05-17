@@ -61,8 +61,15 @@ public interface RecruitService {
 	public int recruitUpdateTeamMem(RecruitTeamMemDTO recruitTeamMemDTO);
 	//팀/팀원 게시물 삭제를 위한 메소드 이름만 정의
 	public int recruitDeleteTeamMem(RecruitTeamMemDTO recruitTeamMemDTO);
+
+	
+
+	 //신청버튼을 누르면 내 정보가 승낙대기 테이블로 넘어감.
+	int regWaitingList(RecruitTeamMemDTO recruitTeamMemDTO);
+
 	
 //==================================================================================================================================
+
 
 	//용병모집수정삭제페이지
 	RecruitHiredDTO getRecruit_HiredUpDel(int recruitment_no);

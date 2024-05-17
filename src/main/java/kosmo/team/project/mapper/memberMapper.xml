@@ -100,14 +100,17 @@
 	
 	
 	<!-- 마이페이지에 있는 내정보 가져오기 -->
-	<select id="getMyInfo" parameterType="String" resultType="kosmo.team.project.dto.MemberDTO">
+	<select id="getMyInfo" parameterType="int" resultType="kosmo.team.project.dto.MemberDTO">
 		select
-		    m.name    
-		    ,md.team           
+		    m.name
+		    ,m.m_no    
+		    ,t.team_name 
+		    ,t.team_master      
 		from
-		    member m left join member_detail md on m.m_no = md.member 
+		    member m left join team_member tm on m.m_no = tm.team_member  
+		             left join team t on t.team_no = tm.team_no 
 		where
-			m.mid = #{mid}
+			m.m_no = #{m_no}
 	</select>
 	
 	<!-- 마이페이지에 있는 내기록 가져오기 -->
@@ -139,6 +142,89 @@
 			and 
 			(sysdate - booking_date) <![CDATA[ <0 ]]>
 	</select>
+	
+	
+	
+	<!-- 팀 생성 -->
+	<insert id="registTeam" parameterType="kosmo.team.project.dto.TeamDTO">
+		insert into team(
+			team_no
+			,team_name
+			,team_master
+		)
+		values(
+			(select nvl(max(team_no),0)+1 from team)
+			,#{team_name}
+			,#{team_master}
+		)
+	</insert>
+	
+	<!-- 팀 생성후 멤버에 생성자 넣기 -->
+	<insert id="firstTeamMem" parameterType="kosmo.team.project.dto.TeamDTO">
+		insert into team_member(
+			team_no
+			,team_member
+		)
+		values(
+			(select team_no from team where team_master = #{team_master})
+			,#{team_master}
+		)
+	</insert>
+	
+	
+	<select id="getWaitingCnt" parameterType="int" resultType="int">
+		select
+		    count(*)
+		from
+		    waiting_teamReg
+		where
+		    team=(
+		    select  
+		        team_no 
+		    from
+		        team_member 
+		    where 
+		        team_member = #{m_no} 
+		    )
+	</select>
+	
+	<select id="getWaitingList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
+		select
+			m.m_no
+		    ,m.name 
+		    ,to_number(to_char(sysdate, 'YYYY')) -
+				to_number(to_char(m.birthdate, 'YYYY')) AS "age" 
+		    ,s.name as "sido"
+		from
+		    member m left join sido s on m.sido_id = s.sido_id
+		             left join waiting_teamReg wt on m.m_no = wt.name 
+		where
+		    wt.team = (
+		        select  
+		            team_no 
+		        from
+		            team_member 
+		        where 
+		            team_member = #{m_no}  
+		    )
+	</select>
+	
+	<insert id="regTeamMem" parameterType="kosmo.team.project.dto.TeamDTO">
+		 insert into team_member
+      <foreach collection="m_no_A" item="m_no"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select team from waiting_teamReg where name = #{m_no}),#{m_no} from dual 
+      </foreach>
+	</insert>
+	
+	<delete id="delWaitingList" parameterType="kosmo.team.project.dto.TeamDTO">
+		delete 
+		from
+			waiting_teamReg
+		where
+			<foreach collection="m_no_A" item="m_no"  open= " ( "  close = " ) "   separator=" or " >
+	        name=#{m_no}
+	        </foreach>
+	</delete>
 	
 	
 	

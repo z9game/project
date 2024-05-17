@@ -58,235 +58,239 @@
 	        searchAge('10대');
 	    });
 	});
+	
+// 전체 카테고리 선택
 
+	function clickToSortTabAll(sortTabAll) {
+		
+	    var sortTabAllObj = $("[name='recordsRankingFormTabAll']");
+	    
+	    sortTabAllObj.find("[name='sortTabAll']").val(sortTabAll);
+
+	    recordsRankingFormTabAll(sortTabAllObj);
+	}
+	
+	function searchAll() {
+		
+	    var tabAllObj = $("[name='recordsRankingFormTabAll']");
+	   
+	    recordsRankingFormTabAll(tabAllObj);
+	}
+	
+	function recordsRankingFormTabAll(sortTabAllObj){
+		
+		$.ajax({
+			
+	        url: "/recordsRankingForm.do",
+	        
+	        type: "post",
+	        
+	        data: sortTabAllObj.serialize(),
+	        
+	        success: function(responseHtml) {
+	        	
+	            var obj = $(responseHtml);
+	            
+	            $("[name='recordsRankingFormTabAll']").html(obj.find("[name='recordsRankingFormTabAll']").html());
+	        
+	        },
+	        error: function() {alert("전체 정렬 실패");}
+	    });
+	}
+	
 // 지역 카테고리 선택
 
 	$(document).ready(function() {
-		
 	    $(".region").click(function() {
-	    	
 	        $(".region").removeClass("selected");
-	        
 	        $(this).addClass("selected");
 	    });
 	});
 
-	function searchRegion(sido_id){
+	function clickToSortTabRegion(sortTabRegion) {
 		
-		$.ajax({
+	    var sortTabRegionObj = $("[name='recordsRankingFormTabRegion']");
+	    var tabRegionObj = $("[name='recordsRankingFormSelectTabRegion']");
+	    
+	    sortTabRegionObj.find("[name='sortTabRegion']").val(sortTabRegion);
+	    
+	    tabRegionObj.find("[name='sortTabRegion']").val(sortTabRegion);
+	    
+	    recordsRankingFormTabRegion(sortTabRegionObj, tabRegionObj);
+	}
 
-			url : "/recordsRankingForm.do",
-			
-			type : "post",
-			
-			data : "sido_id=" + sido_id,
-			
-			success : function(responseHtml){
-			
-						var obj = $(responseHtml);
-						
-						$(".recordsRankingFormTabRegionWinRating").html(obj.find(".recordsRankingFormTabRegionWinRating").html());
-						$(".recordsRankingFormTabRegionGoalRating").html(obj.find(".recordsRankingFormTabRegionGoalRating").html());
-						$(".recordsRankingFormTabRegionAssistRating").html(obj.find(".recordsRankingFormTabRegionAssistRating").html());
-						
-						$("[name='recordsRankingFormTabRegion']").html(obj.find("[name='recordsRankingFormTabRegion']").html());
-					},
-			
-			error : function(){alert("지역 변경 오류")}
-		});
-	
+	function searchRegion(sido_id) {
+		
+	    var sortTabRegionObj = $("[name='recordsRankingFormTabRegion']");
+	    var tabRegionObj = $("[name='recordsRankingFormSelectTabRegion']");
+	    
+	    sortTabRegionObj.find("[name='sido_id']").val(sido_id);
+	    
+	    tabRegionObj.find("[name='sido_id']").val(sido_id);
+	    
+	    recordsRankingFormTabRegion(sortTabRegionObj, tabRegionObj);
+	}
+
+
+	function recordsRankingFormTabRegion(sortTabRegionObj, tabRegionObj) { 
+		
+		var formData = {
+		        sortTabRegion: sortTabRegionObj.find("[name='sortTabRegion']").val(),
+		        sido_id: tabRegionObj.find("[name='sido_id']").val()
+		    };
+		
+	    $.ajax({
+	    	
+	        url: "/recordsRankingForm.do",
+	        
+	        type: "post",
+	        
+	        data: formData,
+	        
+	        success: function(responseHtml) {
+	        	
+	            var obj = $(responseHtml);
+	            
+	            $(".recordsRankingFormTabRegionWinRating").html(obj.find(".recordsRankingFormTabRegionWinRating").html());
+	            $(".recordsRankingFormTabRegionGoalRating").html(obj.find(".recordsRankingFormTabRegionGoalRating").html());
+	            $(".recordsRankingFormTabRegionAssistRating").html(obj.find(".recordsRankingFormTabRegionAssistRating").html());
+	            
+	            $("[name='recordsRankingFormTabRegion']").html(obj.find("[name='recordsRankingFormTabRegion']").html());
+	        },
+	        error: function() {
+	            alert("지역 변경 실패");
+	        }
+	    });
 	}
 	
 // 성별 카테고리 선택
 	
 	$(document).ready(function() {
-		
 	    $(".gender").click(function() {
-	    	
 	        $(".gender").removeClass("selected");
-	        
 	        $(this).addClass("selected");
 	    });
 	});
-	
-	function searchGender(text){
-		
-		$.ajax({
 
-			url : "/recordsRankingForm.do",
-			
-			type : "post",
-			
-			data : "gender=" + text,
-			
-			success : function(responseHtml){
-				
-						var obj = $(responseHtml);
-						
-						$(".recordsRankingFormTabGenderWinRating").html(obj.find(".recordsRankingFormTabGenderWinRating").html());
-						$(".recordsRankingFormTabGenderGoalRating").html(obj.find(".recordsRankingFormTabGenderGoalRating").html());
-						$(".recordsRankingFormTabGenderAssistRating").html(obj.find(".recordsRankingFormTabGenderAssistRating").html());
-						
-						$("[name='recordsRankingFormTabGender']").html(obj.find("[name='recordsRankingFormTabGender']").html());
-					},
-			
-			error : function(){alert("성별 변경 오류")}
-		});
-	
+	function clickToSortTabGender(sortTabGender) {
+		
+	    var sortTabGenderObj = $("[name='recordsRankingFormTabGender']");
+	    var tabGenderObj = $("[name='recordsRankingFormSelectTabGender']");
+	    
+	    sortTabGenderObj.find("[name='sortTabGender']").val(sortTabGender);
+	    
+	    tabGenderObj.find("[name='sortTabGender']").val(sortTabGender);
+	    
+	    recordsRankingFormTabGender(sortTabGenderObj, tabGenderObj);
+	}
+
+	function searchGender(gender) {
+		
+	    var sortTabGenderObj = $("[name='recordsRankingFormTabGender']");
+	    var tabGenderObj = $("[name='recordsRankingFormSelectTabGender']");
+	    
+	    sortTabGenderObj.find("[name='gender']").val(gender);
+	    
+	    tabGenderObj.find("[name='gender']").val(gender);
+	    
+	    recordsRankingFormTabGender(sortTabGenderObj, tabGenderObj);
+	}
+
+
+	function recordsRankingFormTabGender(sortTabGenderObj, tabGenderObj) { 
+		
+		var formData = {
+		        sortTabGender: sortTabGenderObj.find("[name='sortTabGender']").val(),
+		        gender: tabGenderObj.find("[name='gender']").val()
+		    };
+		
+	    $.ajax({
+	    	
+	        url: "/recordsRankingForm.do",
+	        
+	        type: "post",
+	        
+	        data: formData,
+	        
+	        success: function(responseHtml) {
+	        	
+	            var obj = $(responseHtml);
+	            
+	            $(".recordsRankingFormTabGenderWinRating").html(obj.find(".recordsRankingFormTabGenderWinRating").html());
+	            $(".recordsRankingFormTabGenderGoalRating").html(obj.find(".recordsRankingFormTabGenderGoalRating").html());
+	            $(".recordsRankingFormTabGenderAssistRating").html(obj.find(".recordsRankingFormTabGenderAssistRating").html());
+	            
+	            $("[name='recordsRankingFormTabGender']").html(obj.find("[name='recordsRankingFormTabGender']").html());
+	        },
+	        error: function() {
+	            alert("지역 변경 실패");
+	        }
+	    });
 	}
 	
 // 연령대 카테고리 선택
 
 	$(document).ready(function() {
-		
 	    $(".age").click(function() {
-	    	
 	        $(".age").removeClass("selected");
-	        
 	        $(this).addClass("selected");
 	    });
 	});
-		
-	function searchAge(text){
-		
-		$.ajax({
 
-			url : "/recordsRankingForm.do",
-			
-			type : "post",
-			
-			data : "age=" + text,
-			
-			success : function(responseHtml){
-			
-						var obj = $(responseHtml);
-						
-						$(".recordsRankingFormTabAgeWinRating").html(obj.find(".recordsRankingFormTabAgeWinRating").html());
-						$(".recordsRankingFormTabAgeGoalRating").html(obj.find(".recordsRankingFormTabAgeGoalRating").html());
-						$(".recordsRankingFormTabAgeAssistRating").html(obj.find(".recordsRankingFormTabAgeAssistRating").html());
-						
-						$("[name='recordsRankingFormTabAge']").html(obj.find("[name='recordsRankingFormTabAge']").html());
-					},
-			
-			error : function(){alert("연령대 변경 오류")}
-		});
-	
+	function clickToSortTabAge(sortTabAge) {
+		
+	    var sortTabAgeObj = $("[name='recordsRankingFormTabAge']");
+	    var tabAgeObj = $("[name='recordsRankingFormSelectTabAge']");
+	    
+	    sortTabAgeObj.find("[name='sortTabAge']").val(sortTabAge);
+	    
+	    tabAgeObj.find("[name='sortTabAge']").val(sortTabAge);
+	    
+	    recordsRankingFormTabAge(sortTabAgeObj, tabAgeObj);
 	}
 
-// Sort - All
+	function searchAge(age) {
+		
+	    var sortTabAgeObj = $("[name='recordsRankingFormTabAge']");
+	    var tabAgeObj = $("[name='recordsRankingFormSelectTabAge']");
+	    
+	    sortTabAgeObj.find("[name='age']").val(age);
+	    
+	    tabAgeObj.find("[name='age']").val(age);
+	    
+	    recordsRankingFormTabAge(sortTabAgeObj, tabAgeObj);
+	}
 
-	function clickToSortTabAll(sortTabAll){
+
+	function recordsRankingFormTabAge(sortTabAgeObj, tabAgeObj) { 
 		
-		var formObj = $("[name='recordsRankingFormTabAll']")
+		var formData = {
+		        sortTabAge: sortTabAgeObj.find("[name='sortTabAge']").val(),
+		        age: tabAgeObj.find("[name='age']").val()
+		    };
 		
-		$("[name='recordsRankingFormTabAll']").find("[name='sortTabAll']").val(sortTabAll);
-		$(".recordsRankingFormTabAllTableDiv").submit();
-		
-		$.ajax({
-			
-			url:"/recordsRankingForm.do",
-			
-			type:"post",
-			
-			data:formObj.serialize(),
-			
-			success: function(responseHtml){
-				var obj = $(responseHtml);
-				
-				$("[name = recordsRankingFormTabAll]").html(
-					obj.find("[name = recordsRankingFormTabAll]").html()	
-				);
-			},
-			
-			error: function(){alert("Sort 실패")}
-		})
-	}
-	
-// Sort - Region
-	
-	function clickToSortTabRegion(sortTabRegion){
-			
-		var formObj = $("[name='recordsRankingFormTabRegion']")
-		
-		$("[name='recordsRankingFormTabRegion']").find("[name='sortTabRegion']").val(sortTabRegion);
-		$(".recordsRankingFormTabRegionTableDiv").submit();
-		
-		$.ajax({
-			
-			url:"/recordsRankingForm.do",
-			
-			type:"post",
-			
-			data:formObj.serialize(),
-			
-			success: function(responseHtml){
-				var obj = $(responseHtml);
-				
-				$("[name = recordsRankingFormTabRegion]").html(
-					obj.find("[name = recordsRankingFormTabRegion]").html()	
-				);
-			},
-			
-			error: function(){alert("Sort 실패")}
-		})
-	}
-		
-// Sort - Gender
-		
-	function clickToSortTabGender(sortTabGender){
-		
-		var formObj = $("[name='recordsRankingFormTabGender']")
-		
-		$("[name='recordsRankingFormTabGender']").find("[name='sortTabGender']").val(sortTabGender);
-		$(".recordsRankingFormTabGenderTableDiv").submit();
-		
-		$.ajax({
-			
-			url:"/recordsRankingForm.do",
-			
-			type:"post",
-			
-			data:formObj.serialize(),
-			
-			success: function(responseHtml){
-				var obj = $(responseHtml);
-				
-				$("[name = recordsRankingFormTabGender]").html(
-					obj.find("[name = recordsRankingFormTabGender]").html()	
-				);
-			},
-			
-			error: function(){alert("Sort 실패")}
-		})
-	}
-	
-// Sort - Age
-	
-	function clickToSortTabAge(sortTabAge){
-		
-		var formObj = $("[name='recordsRankingFormTabAge']")
-		
-		$("[name='recordsRankingFormTabAge']").find("[name='sortTabAge']").val(sortTabAge);
-		$(".recordsRankingFormTabAgeTableDiv").submit();
-		
-		$.ajax({
-			
-			url:"/recordsRankingForm.do",
-			
-			type:"post",
-			
-			data:formObj.serialize(),
-			
-			success: function(responseHtml){
-				var obj = $(responseHtml);
-				
-				$("[name = recordsRankingFormTabAge]").html(
-					obj.find("[name = recordsRankingFormTabAge]").html()	
-				);
-			},
-			
-			error: function(){alert("Sort 실패")}
-		})
+	    $.ajax({
+	    	
+	        url: "/recordsRankingForm.do",
+	        
+	        type: "post",
+	        
+	        data: formData,
+	        
+	        success: function(responseHtml) {
+	        	
+	            var obj = $(responseHtml);
+	            
+	            $(".recordsRankingFormTabAgeWinRating").html(obj.find(".recordsRankingFormTabAgeWinRating").html());
+	            $(".recordsRankingFormTabAgeGoalRating").html(obj.find(".recordsRankingFormTabAgeGoalRating").html());
+	            $(".recordsRankingFormTabAgeAssistRating").html(obj.find(".recordsRankingFormTabAgeAssistRating").html());
+	            
+	            $("[name='recordsRankingFormTabAge']").html(obj.find("[name='recordsRankingFormTabAge']").html());
+	        },
+	        error: function() {
+	            alert("지역 변경 실패");
+	        }
+	    });
 	}
 </script>
 </head>
@@ -298,62 +302,60 @@
     </div>
     <div class="recordsRankingFormCategoryTab">
     	<ul class="recordsRankingFormCategoryTabNav">
-	    	<li><a href="#recordsRankingFormCategoryTabAll">전체 순위</a></li>
+	    	<li><a href="#recordsRankingFormCategoryTabAll" onClick="searchAll()" class="searchAll">전체 순위</a></li>
 	    	<li><a href="#recordsRankingFormCategoryTabRegion">지역별 순위</a> <!-- ajax로 지역 구분 -->
-	    		<div class="recordsRankingFormCategoryTabSelectDiv">
-			    	<table class="recordsRankingFormCategoryTabSelect" align="center" style="border-collapse:collapse">
-			    		<!-- <tr align="center">
-			    			<td class="region selected" onClick="searchRegion(9)">서울</td>
-			    			<td class="region" onClick="searchRegion(2, 11)">경기/인천</td>
-			    			<td class="region" onClick="searchRegion(1)">강원</td>
-			    			<td class="region" onClick="searchRegion(7, 15, 16)">충청</td>
-			    		</tr>
-			    		<tr align="center">
-			    			<td class="region" onClick="searchRegion(5, 12, 13)">전라</td>
-			    			<td class="region" onClick="searchRegion(3, 4, 6, 8, 10)">경상</td>
-			    			<td class="region" onClick="searchRegion(14)">제주</td>
-			    		</tr> -->
-			    		<tr align="center">
-			    			<td class="region selected" onClick="searchRegion(9)">서울</td>
-			    			<td class="region" onClick="searchRegion(2)">경기/인천</td>
-			    			<td class="region" onClick="searchRegion(1)">강원</td>
-			    			<td class="region" onClick="searchRegion(7)">충청</td>
-			    		</tr>
-			    		<tr align="center">
-			    			<td class="region" onClick="searchRegion(5)">전라</td>
-			    			<td class="region" onClick="searchRegion(3)">경상</td>
-			    			<td class="region" onClick="searchRegion(14)">제주</td>
-			    		</tr>
-			    	</table>
-			    </div>
+	    		<form name="recordsRankingFormSelectTabRegion">
+				    <input type="hidden" name="sido_id">
+		    		<div class="recordsRankingFormCategoryTabSelectDiv">
+				    	<table class="recordsRankingFormCategoryTabSelect" align="center" style="border-collapse:collapse">
+				    		<tr align="center">
+				    			<td class="region" onClick="searchRegion(9)">서울</td>
+				    			<td class="region" onClick="searchRegion(2)">경기/인천</td>
+				    			<td class="region" onClick="searchRegion(1)">강원</td>
+				    			<td class="region" onClick="searchRegion(7)">충청</td>
+				    		</tr>
+				    		<tr align="center">
+				    			<td class="region" onClick="searchRegion(5)">전라</td>
+				    			<td class="region" onClick="searchRegion(3)">경상</td>
+				    			<td class="region" onClick="searchRegion(14)">제주</td>
+				    		</tr>
+				    	</table>
+				    </div>
+				</form>
 		    </li>
 	    	<li><a href="#recordsRankingFormCategoryTabGender">성별 순위</a> <!-- ajax로 남/녀 구분 -->
-	    		<div class="recordsRankingFormCategoryTabSelectDiv">
-			    	<table class="recordsRankingFormCategoryTabSelect" align="center" style="border-collapse:collapse; width: 100%;">
-			    		<tr>
-			    			<td class="gender selected" onClick="searchGender('남')" style="width: 50%; text-align: center;">남</td>
-			    			<td class="gender" onClick="searchGender('여')" style="width: 50%; text-align: center;">여</td>
-			    		</tr>
-			    	</table>
-			    </div>
+	    		<form name="recordsRankingFormSelectTabGender">
+				    <input type="hidden" name="gender">
+		    		<div class="recordsRankingFormCategoryTabSelectDiv">
+				    	<table class="recordsRankingFormCategoryTabSelect" align="center" style="border-collapse:collapse; width: 100%;">
+				    		<tr>
+				    			<td class="gender" onClick="searchGender('남')" style="width: 50%; text-align: center;">남</td>
+				    			<td class="gender" onClick="searchGender('여')" style="width: 50%; text-align: center;">여</td>
+				    		</tr>
+				    	</table>
+				    </div>
+				</form>
 		    </li>
 	    	<li><a href="#recordsRankingFormCategoryTabAge">연령대별 순위</a> <!-- ajax로 연령대 구분 -->
-	    		<div class="recordsRankingFormCategoryTabSelectDiv">
-			    	<table class="recordsRankingFormCategoryTabSelect" align="center" style="border-collapse:collapse">
-			    		<tr>
-			    			<td class="age selected" onClick="searchAge('10대')">10대</td>
-			    			<td class="age" onClick="searchAge('20대')">20대</td>
-			    			<td class="age" onClick="searchAge('30대')">30대</td>
-			    			<td class="age" onClick="searchAge('40대')">40대</td>
-			    		</tr>
-			    		<tr>
-			    			<td class="age" onClick="searchAge('50대')">50대</td>
-			    			<td class="age" onClick="searchAge('60대')">60대</td>
-			    			<td class="age" onClick="searchAge('70대')">70대</td>
-			    			<td class="age" onClick="searchAge('80대')">80대</td>
-			    		</tr>
-			    	</table>
-			    </div>
+	    		<form name="recordsRankingFormSelectTabAge">
+				    <input type="hidden" name="age">
+		    		<div class="recordsRankingFormCategoryTabSelectDiv">
+				    	<table class="recordsRankingFormCategoryTabSelect" align="center" style="border-collapse:collapse">
+				    		<tr>
+				    			<td class="age" onClick="searchAge('10대')">10대</td>
+				    			<td class="age" onClick="searchAge('20대')">20대</td>
+				    			<td class="age" onClick="searchAge('30대')">30대</td>
+				    			<td class="age" onClick="searchAge('40대')">40대</td>
+				    		</tr>
+				    		<tr>
+				    			<td class="age" onClick="searchAge('50대')">50대</td>
+				    			<td class="age" onClick="searchAge('60대')">60대</td>
+				    			<td class="age" onClick="searchAge('70대')">70대</td>
+				    			<td class="age" onClick="searchAge('80대')">80대</td>
+				    		</tr>
+				    	</table>
+				    </div>
+				</form>
 		    </li>
 	    </ul>
 	    <div class="recordsRankingFormCategoryTabContent">
@@ -393,8 +395,8 @@
 					    </c:forEach>
 				    </table>
 				</div>
-			    <form name="recordsRankingFormTabAll" onsubmit="return false">
-				    <input type="hidden" name="sortTabAll" class="sortTabAll">
+			    <form name="recordsRankingFormTabAll">
+				    <input type="hidden" name="sortTabAll">
 				    <div class="recordsRankingFormTabAllTableDiv">
 				    	<table class="recordsRankingFormTabAllTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
 				    		<tr>
@@ -511,8 +513,8 @@
 					    </c:forEach>
 				    </table>
 				</div>
-			    <form name="recordsRankingFormTabRegion" onsubmit="return false">
-				    <input type="hidden" name="sortTabRegion" class="sortTabRegion">
+			    <form name="recordsRankingFormTabRegion">
+				    <input type="hidden" name="sortTabRegion">
 				    <div class="recordsRankingFormTabRegionTableDiv">
 				    	<table class="recordsRankingFormTabRegionTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
 				    		<tr>
@@ -629,8 +631,8 @@
 					    </c:forEach>
 				    </table>
 				</div>
-			    <form name="recordsRankingFormTabGender" onsubmit="return false">
-				    <input type="hidden" name="sortTabGender" class="sortTabGender">
+			    <form name="recordsRankingFormTabGender">
+				    <input type="hidden" name="sortTabGender">
 				    <div class="recordsRankingFormTabGenderTableDiv">
 				    	<table class="recordsRankingFormTabGenderTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
 				    		<tr>
@@ -747,8 +749,8 @@
 					    </c:forEach>
 				    </table>
 				</div>
-			    <form name="recordsRankingFormTabAge" onsubmit="return false">
-				    <input type="hidden" name="sortTabAge" class="sortTabAge">
+			    <form name="recordsRankingFormTabAge">
+				    <input type="hidden" name="sortTabAge">
 				    <div class="recordsRankingFormTabAgeTableDiv">
 				    	<table class="recordsRankingFormTabAgeTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
 				    		<tr>

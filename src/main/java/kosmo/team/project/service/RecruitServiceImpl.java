@@ -178,7 +178,24 @@ public class RecruitServiceImpl implements RecruitService {
 		 int recruitDeleteTeamMem = this.recruitDAO.recruitDeleteTeamMem(recruitTeamMemDTO);
 		 return recruitDeleteTeamMem;
 	 }
-	
+
+	 
+
+	 //신청버튼을 누르면 내 정보가 승낙대기 테이블로 넘어감.
+	 public int regWaitingList(RecruitTeamMemDTO recruitTeamMemDTO) {
+		 //내가 팀에 속해있는지 확인
+		 int findMyTeam = this.recruitDAO.findMyTeam(recruitTeamMemDTO); 
+		 if(findMyTeam > 0)
+		 {
+			 return 2;
+		 }
+		 int regWaitingList = this.recruitDAO.regWaitingList(recruitTeamMemDTO);
+		 if(regWaitingList > 0) 
+		 {
+			 return 1;
+		 }
+		 return 0;
+	 }
 //==================================================================================================================================
 
 	//용병모집수정삭제페이지
@@ -238,5 +255,7 @@ public class RecruitServiceImpl implements RecruitService {
 
 			return getRecruit_LessonBoardList;
 
-		}	 
+		}	
+	 
+
 }

@@ -1,17 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
-<c:if test="${empty sessionScope.mid}">
-	<script>
-		alert("로그인이 필요합니다.");
-		location.replace("/loginForm.do");
-	</script>
-</c:if>
-
 <!DOCTYPE html><html>
 <head>
 	<meta charset="UTF-8">
-	<title>communityFreeBoardDetailForm</title>
+	<title>adminCommunityFreeBoardDetailForm</title>
 	<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
 	<script src="/js/community/communityFreeBoardFormScript.js"></script>
 
@@ -40,7 +33,7 @@
 			var serialize = freeBoardDetailFormCommentObj.serialize( );
 			
 			$.ajax( {
-					url 	:	 "/communityFreeBoardDetailCommentList.do"
+					url 	:	 "/adminCommunityFreeBoardDetailCommentList.do"
 				,	type 	:	 "post"
 				,	data 	:	 serialize
 				,	success :	 function(responseHtml) {	ajaxSuccess(responseHtml);	}
@@ -74,7 +67,7 @@
 			var serialize = commentOfCommentFormObj.serialize( );
 			
 			$.ajax( {
-					url 	:	 "/communityFreeBoardDetailCommentOfCommentList.do"
+					url 	:	 "/adminCommunityFreeBoardDetailCommentOfCommentList.do"
 				,	type 	:	 "post"
 				,	data 	:	 serialize
 				,	success :	 function(responseHtml) {	ajaxSuccess(responseHtml);	}
@@ -103,7 +96,7 @@
 			var serialize = commentPageFormObj.serialize( );
 			
 			$.ajax( {
-					url 	:	 "/communityFreeBoardDetail.do"
+					url 	:	 "/adminCommunityFreeBoardDetail.do"
 				,	type 	:	 "post"
 				,	data 	:	 serialize
 				,	success :	 function(responseHtml) {	ajaxSuccess(responseHtml);	}
@@ -144,11 +137,13 @@
 	
 	<div class="communityFreeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">자유게시판</p>
+		<p class="titleBackgoundText">관리자 자유게시판</p>
 	</div>
 
+	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+
 	<table border="1" bordercolor="gray" align="center" cellpadding="7">
-		<caption>[자유게시판 상세글 보기]</caption>
+		<caption>[관리자 자유게시판 상세글 보기]</caption>
 		<tr>
 			<th bgColor="lightgray">글쓴이</th>
 			<td>${ requestScope.freeBoardDetail.writer }</td>
@@ -202,12 +197,10 @@
 	
 	<center>
 		<span style="cursor: pointer" 
-			onclick="location.replace('/communityFreeBoardForm.do')">
+			onclick="location.replace('/adminFreeBoardForm.do')">
 			 [목록 화면으로] 
 		</span>
-		<c:if test="${requestScope.freeBoardDetail.writer == sessionScope.nickname}">
 			<input type="button" value="수정/삭제" onclick="document.freeBoardDetailForm.submit();" />
-		</c:if>
 	</center>
 	
 	
@@ -302,7 +295,7 @@
 		<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
 	</form>
 	
-	<form name="freeBoardDetailForm" id="freeBoardDetailForm" action="/communityFreeBoardUpDelForm.do" method="post">
+	<form name="freeBoardDetailForm" id="freeBoardDetailForm" action="/adminCommunityFreeBoardUpDelForm.do" method="post">
 		<input type="hidden" name="nick_name" class="nick_name">
 		<input type="hidden" name="content" class="content">
 		<input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
