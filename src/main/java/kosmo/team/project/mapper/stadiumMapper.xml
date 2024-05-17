@@ -322,6 +322,12 @@
 
 </select>
 
+
+
+<!-- 양도 -->
+
+
+
 	<insert id="insertStadiumYangdo" parameterType="kosmo.team.project.dto.MyRentStaidumTimeDTO">
     insert into stadium_yangdo (
         yangdo_no,
@@ -378,15 +384,15 @@
 		select * from ( select rownum RNUM, zxcvb.* from (
 
 		select
-		yangdo_no AS "yangdo_no",
-		title AS "title",
-		writer AS "writer",
-		content AS "content",
-		to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
-		readcount AS "readcount",
-		booking_no as "booking_no"
+		sy.yangdo_no AS "yangdo_no",
+		sy.title AS "title",
+		m.nickname AS "writer",
+		sy.content AS "content",
+		to_char(sy.reg_date, 'YYYY-MM-DD') AS "reg_date",
+		sy.readcount AS "readcount",
+		sy.booking_no as "booking_no"
 		FROM
-		stadium_yangdo
+		stadium_yangdo sy join member m on m.m_no = sy.writer
 
 		where 1=1
 		
@@ -417,5 +423,167 @@
 		where 1=1
 
 	</select>
+	
+	
+	
+		<select id="getStadiumYangdo" parameterType="int"
+		resultType="kosmo.team.project.dto.YangdoDTO">
+
+		select
+		sy.booking_no as "booking_no",
+			sy.yangdo_no as "yangdo_no",
+              sy.title as "title",
+              m.nickname as "writer",
+              sy.content as "content",
+              sy.readcount as "readcount",
+              to_char(b.booking_date, 'yyyy-mm-dd (DY)', 'NLS_DATE_LANGUAGE=KOREAN') as "yangdo_date",
+              b.stadium_no as "stadium_no",
+              b.time_slot as "time_slot",
+              t.time_range as "yangdo_time", 
+              st.stadium_name as "yangdo_stadium",
+              s.name as "yangdo_sido",
+              sg.name as "yangdo_sigungu",
+              to_char(sy.reg_date,'YYYY-MM-DD') AS "reg_date"
+  	
+              from
+               stadium_yangdo sy
+               join member m ON m.m_no = sy.writer
+               join booking b on b.booking_no = sy.booking_no
+               join stadium st on b.stadium_no = st.stadium_no  
+               join time_table t on t.time_no = b.time_slot 
+               join sido s on st.sido_name = s.sido_id 
+               join sigungu sg on st.sido_name = sg.sigungu_id
+		where
+		 yangdo_no = #{yangdo_no}
+
+	</select>
+	
+	
+	<update id="updateStadiumYangdo" parameterType="int">
+
+		update
+		stadium_yangdo
+		set
+		readcount = readcount +1 where yangdo_no = #{yangdo_no}
+
+
+
+	</update>
+	
+	
+	<select id="getYangdoDate"
+		resultType="kosmo.team.project.dto.MyYangdoStaidumTimeDTO"
+		parameterType="kosmo.team.project.dto.MyYangdoStaidumTimeDTO">
+
+			select
+			    b.m_no AS "m_no",
+			    b.stadium_no AS "stadium_no",
+			    to_char(b.booking_date, 'yyyy-mm-dd (DY)', 'NLS_DATE_LANGUAGE=KOREAN') AS "booking_date"
+
+			from
+			    booking b
+			where
+			    b.m_no = #{m_no} AND
+			    b.stadium_no = #{stadium_no}
+			    and booking_date >TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+			group by
+			    b.m_no,
+			    b.stadium_no,
+			    to_char(b.booking_date, 'yyyy-mm-dd (DY)', 'NLS_DATE_LANGUAGE=KOREAN')
+
+
+	</select>
+	
+	<select id="getYangdoTimeRanges"
+    resultType="kosmo.team.project.dto.MyYangdoStaidumTimeDTO"
+    parameterType="kosmo.team.project.dto.MyYangdoStaidumTimeDTO">
+
+    select
+        b.m_no as "m_no",
+        b.stadium_no as "stadium_no",
+        b.time_slot as "time_slot",
+        t.time_range as "time_range"
+    from
+        booking b
+        join time_table t on b.time_slot = t.time_no
+    where
+        b.m_no = #{m_no} 
+        and b.stadium_no = #{stadium_no} 
+        and b.booking_date = to_date(#{booking_date}, 'yyyy-mm-dd')
+        and booking_date >TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+
+</select>
+	
+	<!-- 양도삭제 -->
+	<select id="getYangdoDelCnt" parameterType="int"
+		resultType="int">
+		select
+		count(*) from stadium_yangdo where yangdo_no=#{yangdo_no}
+	</select>
+
+
+	<delete id="deleteYangdo"
+		parameterType="kosmo.team.project.dto.YangdoDTO">
+		delete from
+		stadium_yangdo
+		where
+		yangdo_no=#{yangdo_no}
+		<!-- ========================================== #{b_no} 뜻 ========================================== 
+			=============== {b_no} 의미 =============== SQL 문에 참여할 BoardDTO 객체 안의 멤버변수 
+			b_no 안의 데이터를 표현하기 즉 게시판 번호를 표현하기 =============== # 의미 =============== 표현할 
+			데이터가 문자라면 표현할 때 앞뒤에 ' 를 붙인다. 숫자라면 표현할 때 앞뒤에 ' 를 붙이지 않는다. -->
+	</delete>
+	
+	<update id="updateYangdo"
+        parameterType="kosmo.team.project.dto.YangdoDTO">
+
+    update stadium_yangdo set
+        title = #{title},
+        content = #{content}
+       <if test="(stadium_no != null and stadium_no > 0) and (booking_date != null and booking_date != '선택') and (time_slot != null and time_slot >0)">
+        , booking_no = (
+            select booking_no 
+            from booking 
+            where stadium_no = #{stadium_no}
+              and booking_date = #{booking_date}
+              and time_slot = #{time_slot}
+              and m_no = #{m_no}
+        )
+        </if>
+    where yangdo_no = #{yangdo_no}
+
+</update>
+	
+	<select id="getYangdoUpCnt" parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
+		   select count(*) from stadium_yangdo
+		   where  
+		   1=1
+		   <if test="(stadium_no != null and stadium_no > 0) and (booking_date != null and booking_date != '선택') and (time_slot != null and time_slot >0)">
+        	and
+        	booking_no = (
+            select booking_no 
+            from booking 
+            where stadium_no = #{stadium_no}
+              and booking_date = #{booking_date}
+              and time_slot = #{time_slot}
+              and m_no = #{m_no}
+        )
+        </if>
+
+
+	</select>
+	
+	<update id="updateSincheong"
+        parameterType="kosmo.team.project.dto.YangdoDTO">
+
+    update booking set
+        m_no = #{m_no}
+       
+		where 1=1
+		and
+        	booking_no = #{booking_no}
+
+
+	</update>
 
 </mapper>

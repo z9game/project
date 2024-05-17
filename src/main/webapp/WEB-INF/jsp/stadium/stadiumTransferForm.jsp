@@ -11,6 +11,28 @@
 <script src="/js/stadiumTransferFormScript.js"></script>
 <script>
 
+$(document).ready(function() {
+    $(".rowCntPerPage").val("10");
+    search();
+
+
+  
+});
+
+
+
+function goTransferDetailForm(yangdo_no) {
+
+    $("[name='transferDetailForm'] [name='yangdo_no']").val(yangdo_no);
+
+    
+
+document.transferDetailForm.submit();
+}
+
+
+
+
 
 
 function stadiumTransferForm(){
@@ -185,7 +207,7 @@ function pageNoClick( clickPageNo ){
 					<c:forEach var="Yangdo" items="${requestScope.stadiumYangdoList}"
 						varStatus="status">
 						<tr style="cursor: pointer"
-							onClick="goBoardDetailForm(${Yangdo.m_no});">
+							onClick="goTransferDetailForm(${Yangdo.yangdo_no});">
 							<td align="center">${requestScope.StadiumYangdoMap.begin_serialNo_desc - status.count + 1}</td>
 							<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
 							<td align="center">${Yangdo.title}</td>
@@ -240,7 +262,11 @@ function pageNoClick( clickPageNo ){
 	
 	
 	
-	
+	<form name="transferDetailForm" action="/transferDetailForm.do"
+		method="post">
+		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+		<input type="hidden" name="yangdo_no" >
+	</form>
 	
 	
 	

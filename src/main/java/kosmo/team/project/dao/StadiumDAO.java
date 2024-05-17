@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kosmo.team.project.dto.MyRentStaidumTimeDTO;
+import kosmo.team.project.dto.MyYangdoStaidumTimeDTO;
 import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
@@ -57,6 +58,24 @@ public interface StadiumDAO {
 	public int getStadiumYangdoListCnt(YangdoSearchDTO yangdoSearchDTO);
 
 	public List<YangdoDTO> getStadiumYangdoList(YangdoSearchDTO yangdoSearchDTO);
+
+	public YangdoDTO getStadiumYangdo(int yangdo_no);
+
+	public int updateStadiumYangdo(int yangdo_no);
+
+	public List<MyYangdoStaidumTimeDTO> getYangdoDate(MyYangdoStaidumTimeDTO myYangdoStaidumTimeDTO);
+
+	public List<MyYangdoStaidumTimeDTO> getYangdoTimeRanges(MyYangdoStaidumTimeDTO myYangdoStaidumTimeDTO);
+
+	public int getYangdoDelCnt(int yangdo_no);
+
+	public int deleteYangdo(YangdoDTO yangdoDTO);
+
+	public int updateYangdo(YangdoDTO yangdoDTO);
+
+	public int getYangdoUpCnt(YangdoDTO yangdoDTO);
+
+	public int updateSincheong(YangdoDTO yangdoDTO);
 	
 
 	

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kosmo.team.project.dao.StadiumDAO;
 import kosmo.team.project.dto.MyRentStaidumTimeDTO;
+import kosmo.team.project.dto.MyYangdoStaidumTimeDTO;
 import kosmo.team.project.dto.RentStadiumDTO;
 import kosmo.team.project.dto.StadiumDTO;
 import kosmo.team.project.dto.StadiumSearchDTO;
@@ -171,6 +172,85 @@ public class StadiumServiceImplements implements StadiumService {
 		List<YangdoDTO> stadiumYangdoList = this.stadiumDAO.getStadiumYangdoList(yangdoSearchDTO);
 
 		return stadiumYangdoList;
+	}
+	
+	
+	//양도 디테일
+	
+	@Override
+	public YangdoDTO getStadiumYangdo(int yangdo_no) {
+		
+		int updateCnt = this.stadiumDAO.updateStadiumYangdo(yangdo_no);
+		
+		YangdoDTO yangdoDTO = this.stadiumDAO.getStadiumYangdo(yangdo_no);
+
+		return yangdoDTO;
+	}
+
+	
+	@Override
+	public YangdoDTO getYangdoForUpDel(int yangdo_no) {
+		YangdoDTO yangdoDTO = this.stadiumDAO.getStadiumYangdo(yangdo_no);
+
+		return yangdoDTO;
+	}
+
+	@Override
+	public List<MyYangdoStaidumTimeDTO> getYangdoDate(MyYangdoStaidumTimeDTO myYangdoStaidumTimeDTO) {
+		List<MyYangdoStaidumTimeDTO> yangdoDate = stadiumDAO.getYangdoDate(myYangdoStaidumTimeDTO);
+
+		return yangdoDate;
+	}
+
+	@Override
+	public List<MyYangdoStaidumTimeDTO> getYangdoTimeRanges(MyYangdoStaidumTimeDTO myYangdoStaidumTimeDTO) {
+		List<MyYangdoStaidumTimeDTO> yangdotimeRanges = stadiumDAO.getYangdoTimeRanges(myYangdoStaidumTimeDTO);
+
+		return yangdotimeRanges;
+	}
+
+	@Override
+	public int deleteYangdo(YangdoDTO yangdoDTO) {
+		int yangdoCnt = this.stadiumDAO.getYangdoDelCnt(yangdoDTO.getYangdo_no());
+		
+		if (yangdoCnt == 0) {
+			return yangdoCnt;
+		}
+
+		int yangdoDelCnt = this.stadiumDAO.deleteYangdo(yangdoDTO);
+
+		// 수정 적용개수 리턴하기
+		return yangdoDelCnt;
+	}
+
+	@Override
+	public int updateYangdo(YangdoDTO yangdoDTO) {
+		//이미 양도에 같은게 있으면 3반환
+		int UpCnt = this.stadiumDAO.getYangdoUpCnt(yangdoDTO);
+		
+		if (UpCnt >= 1) {
+			return 3;
+		}
+		
+		
+		
+		int yangdoCnt = this.stadiumDAO.getYangdoDelCnt(yangdoDTO.getYangdo_no());
+		
+		if (yangdoCnt == 0) {
+			return yangdoCnt;
+		}
+		int yangdoUpCnt = this.stadiumDAO.updateYangdo(yangdoDTO);
+
+		// 수정 적용개수 리턴하기
+		return yangdoUpCnt;
+	}
+
+	@Override
+	public int updateSincheong(YangdoDTO yangdoDTO) {
+		
+		int sincheongCnt = this.stadiumDAO.updateSincheong(yangdoDTO);
+
+		return sincheongCnt;
 	}
 
 }

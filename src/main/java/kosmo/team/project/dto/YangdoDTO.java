@@ -5,7 +5,7 @@ public class YangdoDTO {
 	
 	private int yangdo_no;
 	private String title;
-	private int writer;
+	private String writer;
 	private int m_no;
 	private String content;
 	private String reg_date;
@@ -14,6 +14,26 @@ public class YangdoDTO {
 	private int MyStadium;
 	private String MyDate;
 	private int MyTimeRange;
+	
+	private String yangdo_date;
+	private String booking_date;
+	private String yangdo_time;
+	private String yangdo_stadium;
+	private String yangdo_sido;
+	private String yangdo_sigungu;
+	private int stadium_no;
+	private int time_slot;
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public int getYangdo_no() {
 		return yangdo_no;
 	}
@@ -26,10 +46,10 @@ public class YangdoDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getWriter() {
+	public String getWriter() {
 		return writer;
 	}
-	public void setWriter(int writer) {
+	public void setWriter(String writer) {
 		this.writer = writer;
 	}
 	public int getM_no() {
@@ -80,14 +100,59 @@ public class YangdoDTO {
 	public void setMyTimeRange(int myTimeRange) {
 		MyTimeRange = myTimeRange;
 	}
+	public String getYangdo_date() {
+		return yangdo_date;
+	}
+	public void setYangdo_date(String yangdo_date) {
+		this.yangdo_date = yangdo_date;
+	}
+	public String getBooking_date() {
+		return booking_date;
+	}
+	public void setBooking_date(String booking_date) {
+		this.booking_date = booking_date;
+	}
+	public String getYangdo_time() {
+		return yangdo_time;
+	}
+	public void setYangdo_time(String yangdo_time) {
+		this.yangdo_time = yangdo_time;
+	}
+	public String getYangdo_stadium() {
+		return yangdo_stadium;
+	}
+	public void setYangdo_stadium(String yangdo_stadium) {
+		this.yangdo_stadium = yangdo_stadium;
+	}
+	public String getYangdo_sido() {
+		return yangdo_sido;
+	}
+	public void setYangdo_sido(String yangdo_sido) {
+		this.yangdo_sido = yangdo_sido;
+	}
+	public String getYangdo_sigungu() {
+		return yangdo_sigungu;
+	}
+	public void setYangdo_sigungu(String yangdo_sigungu) {
+		this.yangdo_sigungu = yangdo_sigungu;
+	}
+	public int getStadium_no() {
+		return stadium_no;
+	}
+	public void setStadium_no(int stadium_no) {
+		this.stadium_no = stadium_no;
+	}
+	public int getTime_slot() {
+		return time_slot;
+	}
+	public void setTime_slot(int time_slot) {
+		this.time_slot = time_slot;
+	}
 	
 	
 	
-
 	
 	
-	
-
 	
 	
 	
