@@ -46,7 +46,7 @@ public class RecruitController {
     	ModelAndView mav = new ModelAndView();
     	mav.addObject("boardList", recruitTeamMem);
     	mav.addObject("recruitMap", recruitMap);
-    	mav.setViewName("/recruit/test.jsp");
+    	mav.setViewName("/recruit/recruitTeamMemBoardForm.jsp");
     	
         return mav;
     }
@@ -60,6 +60,8 @@ public class RecruitController {
     	
     	List<RecruitHiredDTO> recruitHired = this.recruitService.getRecruit_HiredBoardList();
     	ModelAndView mav = new ModelAndView();
+    	//오라클의 실행구문 결과물이 저장된 변수 recruitHired를 JSP쪽에서 ${requestScope.boardList.DTO안에있는멤버변수명} 이런식으로 불러 사용하기 위해 addObject라는 것을 사용
+    	//즉, JSP페이지에서 boardList라는 키값을 부르면 그 키값에 해당하는 데이터(recruitHired)를 사용할수 있는 것임.
     	mav.addObject("boardList", recruitHired);
     	mav.setViewName("/recruit/recruitHiredBoardForm.jsp");
     	
@@ -76,16 +78,8 @@ public class RecruitController {
     	
         return mav;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     @RequestMapping(value = "/newRecruitTeamMemBoardForm.do")
     public ModelAndView newRecruitTeamMemBoardForm() {
     	
@@ -137,8 +131,14 @@ public class RecruitController {
     public ModelAndView recruitHiredBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {
     	
     	RecruitHiredDTO recruitHiredDTO = this.recruitService.getRecruit_HiredDetail(recruitment_no);
+    	
+    	List<String> day = this.recruitService.getRecruit_hired_day(recruitment_no);
+    	List<String> time = this.recruitService.getRecruit_hired_time(recruitment_no);
+    	
     	ModelAndView mav = new ModelAndView();
     	mav.addObject("hireddetailList", recruitHiredDTO);
+    	mav.addObject("day", day);
+    	mav.addObject("time", time);
     	mav.setViewName("/recruit/recruitHiredBoardDetailForm.jsp");
     	
         return mav;
@@ -169,6 +169,21 @@ public class RecruitController {
 	
 	return resultMap;
 	}
+    
+	//용병모집 새글쓰기 저장 
+	@RequestMapping( value = "/recruitHiredRegProc.do"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
+					)
+	@ResponseBody
+	public Map<String, String> recruitHiredRegProc(RecruitHiredDTO recruitHiredDTO)
+	{
+	Map<String, String> resultMap = new HashMap<String, String>();
+	int recruitHiredRegCnt = this.recruitService.regHiredRecruit(recruitHiredDTO);
+	resultMap.put("result", recruitHiredRegCnt+"");
+	
+	return resultMap;
+	}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 	
     
@@ -194,8 +209,8 @@ public class RecruitController {
     
     //팀/팀원 게시물 수정
     @RequestMapping( value = "/recruitTeamMemBoardUpProc.do"
-			,method = RequestMethod.POST
-			, produces = "application/json; charset=UTF-8"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
 			)
 	@ResponseBody
 	// map을 사용한 이유? -> JSON 형식을 사용하기 위해
@@ -236,9 +251,69 @@ public class RecruitController {
     
     
     
+//==================================================================================================================================
+    
+    //용병모집수정삭제페이지
+    @RequestMapping(value = "/recruitHiredBoardUpDelForm.do")
+    public ModelAndView recruitHiredBoardUpDelForm(@RequestParam(value="recruitment_no") int recruitment_no) {
+    	// getRecruit_HiredUpDel 는 수정/삭제를 위해 데이터를 가져오는 메소드명
+    	RecruitHiredDTO recruitHiredDTO = this.recruitService.getRecruit_HiredUpDel(recruitment_no);
+    	List<String> recruitHiredDTO_day = this.recruitService.getRecruit_HiredUpDel_day(recruitment_no);
+    	List<String> recruitHiredDTO_time = this.recruitService.getRecruit_HiredUpDel_time(recruitment_no);
+    	RecruitHiredDTO recruitHiredDTO_sidosigungu = this.recruitService.getRecruit_HiredUpDel_sidosigungu(recruitment_no);
+    	
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("detail", recruitHiredDTO);
+    	mav.addObject("updel_day", recruitHiredDTO_day);
+    	mav.addObject("updel_time", recruitHiredDTO_time);
+    	mav.addObject("updel_sidosigungu", recruitHiredDTO_sidosigungu);
+    	mav.addObject("updel_time", recruitHiredDTO_time);
+    	mav.setViewName("/recruit/recruitHiredBoardUpDelForm.jsp");
+    	
+        return mav;
+    }  
     
     
+    //용병 게시물 수정
+    @RequestMapping( value = "/recruitHiredBoardUpProc.do"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
+			)
+	@ResponseBody
+	// map을 사용한 이유? -> JSON 형식을 사용하기 위해
+	public Map<String, String> recruitHiredBoardUpProc(RecruitHiredDTO recruitHiredDTO)
+	{
+    //resultMap 이라는 변수 선언(자료형은 map) 
+	Map<String, String> resultMap = new HashMap<String, String>();
+	//recruitHiredUpCnt 이라는 변수 선언 (자료형은 int)
+	//업데이트가 성공했는지 안했는지의 결과가 변수에 저장될것임 -> 성공했으면 '1'이 들어오고 실패하면 '0'이 들어올것임.
+	int recruitHiredUpCnt = this.recruitService.recruitUpdateHired(recruitHiredDTO);
+	//recruitHiredUpCnt에 저장된 결과를 map 형식으로 만들어준 변수 resultMap에 저장
+	//어떻게? -> map 사용법은 키값명을 호출하면 그 키값명에 저장한 데이터가 나옴
+	//여기서는 "result"라는 키값명에 recruitHiredUpCnt를 저장.
+	//즉, "result"를 호출하면 recruitHiredUpCnt가 나오는 것임.
+	resultMap.put("result", recruitHiredUpCnt+"");
+	
+	
+	return resultMap;
+	}
     
+    
+    //용병 게시물 삭제
+    @RequestMapping( value = "/recruitHiredBoardDelProc.do"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
+			)
+	@ResponseBody
+	public Map<String, String> recruitHiredBoardDelProc(RecruitHiredDTO recruitHiredDTO)
+	{
+	Map<String, String> resultMap = new HashMap<String, String>();
+	int recruitHiredDelCnt = this.recruitService.recruitDeleteHired(recruitHiredDTO);
+	resultMap.put("result", recruitHiredDelCnt+"");
+	
+	
+	return resultMap;
+	}
     
     
     

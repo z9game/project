@@ -29,10 +29,8 @@
 						<!-- 하위 카테고리 -->
 						<ul class="navInner">
 							<li class="navInner-item"><a href="/recruitTeamMemBoardForm.do">팀/팀원</a></li>
-							<li class="navInner-item"><a
-								href="/recruitHiredBoardForm.do">용병</a></li>
-							<li class="navInner-item"><a
-								href="/recruitLessonBoardForm.do">레슨</a></li>
+							<li class="navInner-item"><a href="/recruitHiredBoardForm.do">용병</a></li>
+							<li class="navInner-item"><a href="/recruitLessonBoardForm.do">레슨</a></li>
 						</ul></li>
 					<li class="nav-item"><a href="/stadiumRentForm.do">경기장</a> <!-- 하위 카테고리 -->
 						<ul class="navInner">

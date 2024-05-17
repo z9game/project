@@ -139,6 +139,8 @@
    
 
 
+ <!-- 팀/팀원 모집 -->
+ 
 
 	<!-- 팀/팀원 모집 게시물 가져오기 + 검색조건까지 추가 -->
    <select id="getRecruit_TeamMemList" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="kosmo.team.project.dto.RecruitSearchDTO">
@@ -174,7 +176,7 @@
          ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
       ]]>
       
-   </select>
+   </select>   
    
    
    <!-- 팀/팀원 모집 게시물의 개수 구하기 + 검색한 후의 개수도 포함 -->
@@ -191,37 +193,7 @@
       
    </select>
    
-   
-   
-   
-   <select id="getRecruit_HiredBoardList" resultType="kosmo.team.project.dto.RecruitHiredDTO">
-          select 
-              recruitment_no 
-              ,title 
-              ,writer 
-              ,content 
-              ,readcount 
-              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-          from 
-              Hired_recruitment
-   </select>
-   
-   <select id="getRecruit_LessonBoardList" resultType="kosmo.team.project.dto.RecruitLessonDTO">
-          select 
-              recruitment_no 
-              ,title 
-              ,writer 
-              ,content 
-              ,readcount 
-              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-              ,money
-          from 
-              Lesson_recruitment
-   </select>      
-   
-   
-  
-   
+   <!-- 팀/팀원 모집 게시물 상세페이지 -->
    <select id="getRecruit_TeamMemDetail" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="int">
           select 
               t.b_no 
@@ -240,40 +212,114 @@
                                  LEFT JOIN member m ON t.writer = m.m_no 
           where
              b_no = #{b_no}
-         
-         
+  </select>
+
+	<!-- 팀/팀원 모집 상세페이지_요일 -->
+   <select id="getRecruit_day" parameterType="int" resultType="String">    
+      select
+         dof.day_name as "day"
+      from
+          recruit_teammemboard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
+                                 LEFT JOIN day_of_week dof ON d.day = dof.day_no             
+                                 where r.b_no = #{b_no} 
    </select>
    
-   <select id="getRecruit_HiredDetail" resultType="kosmo.team.project.dto.RecruitHiredDTO" parameterType="int">
-          select 
-              recruitment_no 
-              ,title 
-              ,writer 
-              ,content 
-              ,readcount 
-              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-          from 
-              hired_recruitment
-          where
-             recruitment_no = #{recruitment_no}
-   </select>   
+   <!-- 팀/팀원 모집 상세페이지_시간 -->
+   <select id="getRecruit_time" parameterType="int" resultType="String">    
+      select
+         t.time as "time"
+      from
+          recruit_teammemboard r LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
+                            where r.b_no = #{b_no}       
+   </select>
+   
+   <!-- 팀/팀원 모집 수정삭제페이지 -->
+   <select id="getRecruit_TeamMemUpDel" parameterType="int" resultType="kosmo.team.project.dto.RecruitTeamMemDTO">     
+	    select
+			  m.nickname
+			  ,r.title
+			  ,r.pos
+			  ,r.team_mem
+			  ,r.content
+			  ,r.b_no
+		from
+	        recruit_teammemboard r LEFT JOIN member m ON r.writer = m.m_no 
+		where 
+			   r.b_no=#{b_no}
+	</select>
+   
+   <!-- 팀/팀원 모집 수정삭제페이지_요일 -->
+    <select id="getRecruit_TeamMemUpDel_day" parameterType="int" resultType="String">     
+  
+	   select
+	 		 dof.day_name as "day"
+		from
+	    	  recruit_teammemboard r LEFT JOIN teammemboard_day d on r.b_no=d.b_no
+	                          		 LEFT JOIN day_of_week dof on d.day=dof.day_no
+		where
+			  r.b_no=#{b_no}
+   	</select>
+   
+    <!-- 팀/팀원 모집 수정삭제페이지_시간 -->
+    <select id="getRecruit_TeamMemUpDel_time" parameterType="int" resultType="String">     
+  
+	  select
+	      t.time as "time"
+	  from
+	       recruit_teammemboard r LEFT JOIN teammemboard_time t on r.b_no=t.b_no
+	  where
+	  	   r.b_no=#{b_no}
+	  	   
+   	</select>
+   
+    <!-- 팀/팀원 모집 수정삭제페이지_시군구 -->
+	<select id="getRecruit_TeamMemUpDel_sidosigungu" parameterType="int" resultType="kosmo.team.project.dto.RecruitTeamMemDTO">     
+  
+	 select
+		    s.sido_id as "sido"
+		    ,s.name		as "sido_c"
+		    ,si.sigungu_id as "sigungu"
+		    ,si.name		as "sigungu_c"
+	 from
+		    recruit_teammemboard r LEFT JOIN sido s on r.sido=s.sido_id
+		                           LEFT JOIN sigungu si on r.sigungu=sigungu_id
+	 where
+	 		 r.b_no=#{b_no}
+	  	   
+   	</select>
+   	
+   	 <!-- 팀/팀원 모집 수정삭제페이지_팀/팀원 -->
+   	<update id="recruitUpdateTeamMem" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+	update
+		recruit_teammemboard
+	set
+		title=#{title},
+		sido=#{sido_id},
+		sigungu=#{sigungu_id},
+		pos=#{pos},
+		team_mem=#{team_mem}
+	where 
+		b_no = #{b_no}
+	</update>
    
    
-   <select id="getRecruit_LessonDetail" resultType="kosmo.team.project.dto.RecruitLessonDTO" parameterType="int">
-          select 
-              recruitment_no 
-              ,title 
-              ,writer 
-              ,content 
-              ,readcount 
-              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-          from 
-              lesson_recruitment
-          where
-             recruitment_no = #{recruitment_no}
-   </select>  
+    <!-- day 테이블에 요일 삽입 쿼리 (수정할때) -->
+   <insert id="insertDay" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+         insert into teammemboard_day
+      <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select b_no from recruit_teammemboard where b_no = #{b_no}), #{day} from dual 
+      </foreach>
+   </insert> 
    
+   <!-- time 테이블에 시간 삽입 쿼리 (수정할때) -->
+   <insert id="insertTime" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+         insert into teammemboard_time
+      <foreach collection="time" item="time"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select b_no from recruit_teammemboard where b_no = #{b_no}), #{time} from dual
+      </foreach>
+   </insert> 
    
+   <!-- 팀/팀원 모집 새글쓰기 -->
    <insert id="regTeamMemRecruit" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO" >
    insert into recruit_teammemboard (b_no, title, writer, content, team_mem,sido,sigungu,pos)
    values(
@@ -289,23 +335,7 @@
    </insert>
    
    
-    <!-- day 테이블에 날짜 삽입 쿼리 -->
-   <insert id="insertDay" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
-         insert into teammemboard_day
-      <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
-         select  (select b_no from recruit_teammemboard where b_no = #{b_no}), #{day} from dual 
-      </foreach>
-   </insert> 
-   
-   <!-- time 테이블에 시간 삽입 쿼리 -->
-   <insert id="insertTime" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
-         insert into teammemboard_time
-      <foreach collection="time" item="time"  open= " ( "  close = " ) "   separator=" union " >
-         select  (select b_no from recruit_teammemboard where b_no = #{b_no}), #{time} from dual
-      </foreach>
-   </insert> 
-   
-   
+   <!-- 새글쓰기할때 teammemboard_day 테이블에 최초의 값을 입력해줌-->
    <insert id="newInsertDay" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
          insert into teammemboard_day
       <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
@@ -313,7 +343,7 @@
       </foreach>
    </insert> 
    
-   <!-- time 테이블에 시간 삽입 쿼리 -->
+   <!-- 새글쓰기할때 teammemboard_time 테이블에 최초의 값을 입력해줌 -->
    <insert id="newInsertTime" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
          insert into teammemboard_time
       <foreach collection="time" item="time"  open= " ( "  close = " ) "   separator=" union " >
@@ -321,7 +351,7 @@
       </foreach>
    </insert> 
    
-   
+   <!-- 조회수? -->
    <update id="updateTeamMemReadCnt" parameterType="int">
       update 
          recruit_teammemboard
@@ -330,89 +360,8 @@
       where
          b_no=#{b_no}
    </update>
-
-
-   <select id="getRecruit_day" parameterType="int" resultType="String">    
-      select
-         dof.day_name as "day"
-      from
-          recruit_teammemboard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
-                                 LEFT JOIN day_of_week dof ON d.day = dof.day_no             
-                                 where r.b_no = #{b_no} 
-   </select>
-   
-   <select id="getRecruit_time" parameterType="int" resultType="String">    
-      select
-         t.time as "time"
-      from
-          recruit_teammemboard r LEFT JOIN teammemboard_time t ON r.b_no = t.b_no 
-                            where r.b_no = #{b_no}       
-   </select>
-   
-   <select id="getRecruit_TeamMemUpDel" parameterType="int" resultType="kosmo.team.project.dto.RecruitTeamMemDTO">     
-	    select
-			  m.nickname
-			  ,r.title
-			  ,r.pos
-			  ,r.team_mem
-			  ,r.content
-			  ,r.b_no
-		from
-	        recruit_teammemboard r LEFT JOIN member m ON r.writer = m.m_no 
-		where 
-			   r.b_no=#{b_no}
-	</select>
-   
-    <select id="getRecruit_TeamMemUpDel_day" parameterType="int" resultType="String">     
-  
-	   select
-	 		 dof.day_name as "day"
-		from
-	    	  recruit_teammemboard r LEFT JOIN teammemboard_day d on r.b_no=d.b_no
-	                          		 LEFT JOIN day_of_week dof on d.day=dof.day_no
-		where
-			  r.b_no=#{b_no}
-   	</select>
-   
-    <select id="getRecruit_TeamMemUpDel_time" parameterType="int" resultType="String">     
-  
-	  select
-	      t.time as "time"
-	  from
-	       recruit_teammemboard r LEFT JOIN teammemboard_time t on r.b_no=t.b_no
-	  where
-	  	   r.b_no=#{b_no}
-	  	   
-   	</select>
-   
-	<select id="getRecruit_TeamMemUpDel_sidosigungu" parameterType="int" resultType="kosmo.team.project.dto.RecruitTeamMemDTO">     
-  
-	 select
-		    s.sido_id as "sido"
-		    ,s.name		as "sido_c"
-		    ,si.sigungu_id as "sigungu"
-		    ,si.name		as "sigungu_c"
-	 from
-		    recruit_teammemboard r LEFT JOIN sido s on r.sido=s.sido_id
-		                           LEFT JOIN sigungu si on r.sigungu=sigungu_id
-	 where
-	 		 r.b_no=#{b_no}
-	  	   
-   	</select> 
-   	
-   	<update id="recruitUpdateTeamMem" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
-	update
-		recruit_teammemboard
-	set
-		title=#{title},
-		sido=#{sido_id},
-		sigungu=#{sigungu_id},
-		pos=#{pos},
-		team_mem=#{team_mem}
-	where 
-		b_no = #{b_no}
-	</update>
 	
+	 <!-- 팀/팀원 모집 요일 삭제 -->
 	<delete id="deleteDay" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
 		delete
 		from
@@ -421,6 +370,7 @@
 			b_no = #{b_no}
 	</delete>
 	
+	 <!-- 팀/팀원 모집 시간 삭제 -->
 	<delete id="deleteTime" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
 		delete
 		from
@@ -429,6 +379,7 @@
 			b_no = #{b_no}
 	</delete>
 	
+	 <!-- 팀/팀원 모집 팀/팀원 게시물 삭제 -->
 	<delete id="recruitDeleteTeamMem" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
 		delete
 		from
@@ -439,7 +390,249 @@
    	
    	
    	
+<!-- ============================================================================================================================================================================================================================= -->
+ 
+ <!-- 용병 모집 --> 
+   
+   
+   
+   <!-- 용병 모집 게시물 가져오기 + 검색조건 추가 아직 안 함 -->
+   <select id="getRecruit_HiredBoardList" resultType="kosmo.team.project.dto.RecruitHiredDTO">
+          	select 
+              distinct(h.recruitment_no) 
+              ,h.title 
+              ,m.nickname 
+              ,h.content 
+              ,h.readcount 
+              ,to_char(h.reg_date, 'YYYY-MM-DD') as "reg_date"
+          from 
+              Hired_recruitment h LEFT JOIN hiredboard_day dh ON h.recruitment_no = dh.recruitment_no 
+                                  LEFT JOIN hiredboard_time th ON h.recruitment_no = th.recruitment_no
+                                  LEFT JOIN member m ON h.nickname = m.m_no
+   </select> 
+   
+   
+   <!-- 용병 모집 게시물의 개수 구하기 + 검색한 후의 개수도 포함 -->
+   <!-- 아직 안 만듦 -->
+            
+         
+   <!-- 용병 모집 게시물 상세페이지 -->
+   <select id="getRecruit_HiredDetail" resultType="kosmo.team.project.dto.RecruitHiredDTO" parameterType="int">
+          select 
+              h.recruitment_no 
+              ,h.title 
+              ,m.nickname 
+              ,h.content 
+              ,h.readcount 
+              ,to_char(h.reg_date, 'YYYY-MM-DD') as "reg_date"
+              ,s.name    as "sido_c"
+              ,si.name    as "sigungu_c"
+              ,h.pos
+          from 
+              hired_recruitment h LEFT JOIN sido s ON h.sido = s.sido_id
+                                  LEFT JOIN sigungu si ON h.sigungu = si.sigungu_id
+                                  LEFT JOIN member m ON h.nickname = m.m_no
+          where
+             recruitment_no = #{recruitment_no}
+   </select>  
+   
+
+	<!-- 용병모집상세페이지에서 요일 가져오기 -->
+   <select id="getRecruit_hired_day" parameterType="int" resultType="String">    
+      select
+         dof.day_name as "day"
+      from
+          hired_recruitment h LEFT JOIN hiredboard_day hd ON h.recruitment_no = hd.recruitment_no 
+                              LEFT JOIN day_of_week dof ON hd.day = dof.day_no             
+      where
+      	  h.recruitment_no = #{recruitment_no} 
+   </select>
+   
+   <!-- 용병모집상세페이지에서 시간 가져오기 -->
+   <select id="getRecruit_hired_time" parameterType="int" resultType="String">    
+      select
+         ht.time as "time"
+      from
+          hired_recruitment h LEFT JOIN hiredboard_time ht ON h.recruitment_no = ht.recruitment_no 
+       where
+       	  h.recruitment_no = #{recruitment_no}       
+   </select>  
+   
+   <!-- 용병모집수정삭제페이지 -->
+   <select id="getRecruit_HiredUpDel" parameterType="int" resultType="kosmo.team.project.dto.RecruitHiredDTO">     
+	    select
+			  m.nickname
+			  ,h.title
+			  ,h.pos
+			  ,h.content
+			  ,h.recruitment_no
+		from
+	        hired_recruitment h LEFT JOIN member m ON h.nickname = m.m_no 
+		where 
+			   h.recruitment_no = #{recruitment_no}
+	</select>
+   
+   <!-- 용병모집수정삭제페이지_요일 -->
+    <select id="getRecruit_HiredUpDel_day" parameterType="int" resultType="String">  
+	    select
+              dof.day_name as "day"
+        from
+              hired_recruitment h LEFT JOIN hiredboard_day hd on h.recruitment_no=hd.recruitment_no
+                                  LEFT JOIN day_of_week dof on hd.day=dof.day_no
+        where
+              h.recruitment_no = #{recruitment_no}
+   	</select>
+   
+   <!-- 용병모집수정삭제페이지_시간 -->
+    <select id="getRecruit_HiredUpDel_time" parameterType="int" resultType="String">     
+		select
+		    ht.time as "time"
+		from
+		    hired_recruitment h LEFT JOIN hiredboard_time ht on h.recruitment_no=ht.recruitment_no
+		where
+		    h.recruitment_no = #{recruitment_no}
+   	</select>
+   
+   
+   <!-- 용병모집수정삭제페이지_시군구 -->
+	<select id="getRecruit_HiredUpDel_sidosigungu" parameterType="int" resultType="kosmo.team.project.dto.RecruitHiredDTO">     
+  
+	 select
+		    s.sido_id as "sido"
+		    ,s.name		as "sido_c"
+		    ,si.sigungu_id as "sigungu"
+		    ,si.name		as "sigungu_c"
+	 from
+		    hired_recruitment h LEFT JOIN sido s on h.sido=s.sido_id
+		                        LEFT JOIN sigungu si on h.sigungu=sigungu_id
+	 where
+	 		 h.recruitment_no = #{recruitment_no}
+	  	   
+   	</select>
    	
+   	 <!-- 용병 모집 수정삭제페이지_팀/팀원 -->
+   	<update id="recruitUpdateHired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
+	update
+		hired_recruitment
+	set
+		title=#{title},
+		sido=#{sido_id},
+		sigungu=#{sigungu_id},
+		pos=#{pos}
+	where 
+		recruitment_no = #{recruitment_no}
+	</update>
+	
+	 <!-- 용병 모집 요일 삭제 -->
+	<delete id="deleteDay_hired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
+		delete
+		from
+			hiredboard_day
+		where
+			recruitment_no = #{recruitment_no}
+	</delete>
+	
+	 <!-- 용병 모집 시간 삭제 -->
+	<delete id="deleteTime_hired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
+		delete
+		from
+			hiredboard_time
+		where
+			recruitment_no = #{recruitment_no}
+	</delete>
+   
+   
+    <!-- 용병모집 수정페이지 저장_요일 삽입 -->
+   <insert id="insertDay_hired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
+         insert into hiredboard_day
+      <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select recruitment_no from hired_recruitment where recruitment_no = #{recruitment_no}), #{day} from dual 
+      </foreach>
+   </insert> 
+    
+   
+   <!-- 용병모집 수정페이지 저장_시간 삽입 	 -->
+   <insert id="insertTime_hired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
+         insert into hiredboard_time
+      <foreach collection="time" item="time"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select recruitment_no from hired_recruitment where recruitment_no = #{recruitment_no}), #{time} from dual
+      </foreach>
+   </insert> 
+   
+   <!-- 팀/팀원 모집 게시글 새글쓰기 입력하기 -->
+   <insert id="regHiredRecruit" parameterType="kosmo.team.project.dto.RecruitHiredDTO" >
+   insert into hired_recruitment (recruitment_no, title, nickname, content, sido, sigungu, pos)
+   values(
+      (select nvl(max(recruitment_no),0)+1 from hired_recruitment)
+      <!-- DTO에 담긴 외부에서 입력한 값을 가져올 때는 #을 사용한다 -->
+      ,#{title}
+      ,#{nickname}
+      ,#{content}
+      ,#{sido}
+      ,#{sigungu}
+      ,#{pos}
+   )
+   </insert>
+   
+   <!-- 새글쓰기할때 hiredboard_day 테이블에 최초의 값을 입력해줌-->
+   <insert id="newInsertDay_hired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
+         insert into hiredboard_day
+      <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select max(recruitment_no) from hired_recruitment), #{day} from dual 
+      </foreach>
+   </insert> 
+   
+   <!-- 새글쓰기할때 hiredboard_time 테이블에 최초의 값을 입력해줌 -->
+   <insert id="newInsertTime_hired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
+         insert into hiredboard_time
+      <foreach collection="time" item="time"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select max(recruitment_no) from hired_recruitment), #{time} from dual
+      </foreach>
+   </insert>
+   
+   <!-- 용병 모집 용병 게시물 삭제 -->
+	<delete id="recruitDeleteHired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
+		delete
+		from
+			hired_recruitment
+		where
+			recruitment_no = #{recruitment_no}
+	</delete> 
+   
+   
+ <!--  ========================================================================================================  -->
+   
+  
+ <!-- 레슨 모집 --> 
+ 
+ 
+   <select id="getRecruit_LessonBoardList" resultType="kosmo.team.project.dto.RecruitLessonDTO">
+          select 
+              recruitment_no 
+              ,title 
+              ,writer 
+              ,content 
+              ,readcount 
+              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+              ,money
+          from 
+              Lesson_recruitment
+   </select>  
+   
+   
+   <select id="getRecruit_LessonDetail" resultType="kosmo.team.project.dto.RecruitLessonDTO" parameterType="int">
+          select 
+              recruitment_no 
+              ,title 
+              ,writer 
+              ,content 
+              ,readcount 
+              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
+          from 
+              lesson_recruitment
+          where
+             recruitment_no = #{recruitment_no}
+   </select>  
    	
    	 
 </mapper>
