@@ -404,9 +404,16 @@
 				    rt.b_no = #{b_no}
 			)	
    		)
-   	</insert>
-   	
-<<<<<<< HEAD
+   	</insert>   
+
+   	<select id="findMyTeam" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO" resultType="int">     
+  		select
+  			count(*)
+  		from
+	 		team_member
+	 	where
+	 		team_member = #{m_no}
+   	</select>
    	
 <!-- ============================================================================================================================================================================================================================= -->
  
@@ -525,17 +532,7 @@
 		                        LEFT JOIN sigungu si on h.sigungu=sigungu_id
 	 where
 	 		 h.recruitment_no = #{recruitment_no}
-	  	   
-=======
-   	<select id="findMyTeam" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO" resultType="int">     
-  		select
-  			count(*)
-  		from
-	 		team_member
-	 	where
-	 		team_member = #{m_no}
->>>>>>> refs/heads/develop
-   	</select>
+	</select>  	
    	
    	 <!-- 용병 모집 수정삭제페이지_팀/팀원 -->
    	<update id="recruitUpdateHired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
