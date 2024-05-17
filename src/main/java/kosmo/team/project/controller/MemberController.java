@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.TeamDTO;
 import kosmo.team.project.dto.bookingDTO;
 import kosmo.team.project.service.MemberService;
 
@@ -82,7 +83,7 @@ public class MemberController {
 		  public ModelAndView myPageForm(@RequestParam(value="mid")String mid, @RequestParam(value="m_no")int m_no) {
 			
 			//마이페이지에 있는 내 정보 가져오기, 오라클 실행결과물을 myInfo라는 변수에 저장
-			 MemberDTO myInfo = this.memberService.getMyInfo(mid);
+			 MemberDTO myInfo = this.memberService.getMyInfo(m_no);
 			//마이페이지에 있는 내 기록 가져오기, 오라클 실행결과물을 myStat라는 변수에 저장
 			 MemberDTO myStat = this.memberService.getMyStat(mid);
 			 
@@ -118,7 +119,19 @@ public class MemberController {
 		}
 		
 		
+		//팀 생성
+		@RequestMapping( value="/registTeamProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+		@ResponseBody
+		public Map<String,String> registTeamProc(TeamDTO teamDTO)
+		{
+			Map<String,String> resultMap = new HashMap<String,String>();
+			
+			int teamRegCnt = this.memberService.registTeam(teamDTO);
 		
+			resultMap.put("result", teamRegCnt+"");
+		
+			return resultMap;
+		}
 		
 	
 		

@@ -23,6 +23,18 @@ public class RecruitTeamMemDTO {
    private int sigungu_id;
    
    
+   //팀신청할때
+   private int m_no;
+  
+
+   
+   
+public int getM_no() {
+	return m_no;
+}
+public void setM_no(int m_no) {
+	this.m_no = m_no;
+}
 public int getB_no() {
 	return b_no;
 }

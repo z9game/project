@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.TeamDTO;
 import kosmo.team.project.dto.bookingDTO;
 
 @Mapper
@@ -19,11 +20,14 @@ public interface MemberDAO {
 	MemberDTO updateMemForm(String mid);
 	
 	//마이페이지에 있는 내 정보 가져오기
-	MemberDTO getMyInfo(String mid);
+	MemberDTO getMyInfo(int m_no);
 	//마이페이지에 있는 내 기록 가져오기
 	MemberDTO getMyStat(String mid);
 	
 	int updateMem(MemberDTO memberDTO);
 	
 	List<bookingDTO> getBookedStadium(int m_no);
+	//팀 생성
+	int registTeam(TeamDTO teamDTO);
+	int firstTeamMem(TeamDTO teamDTO);
 }
