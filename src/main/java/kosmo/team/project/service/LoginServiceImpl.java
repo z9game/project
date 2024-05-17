@@ -1,5 +1,7 @@
 package kosmo.team.project.service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosmo.team.project.dao.LoginDAO;
+import kosmo.team.project.dto.CustomerServiceDetailDTO;
+import kosmo.team.project.dto.MainDTO;
 
 @Service
 @Transactional
@@ -44,4 +48,21 @@ public class LoginServiceImpl implements LoginService {
 		return loginDAO.getM_no(mid);
 
 	}
+	
+	// 회원 정보 찾기
+	
+	@Override
+	public Map<String, String> getMemberInfo(String name, String phone) {
+		
+	    return loginDAO.getMemberInfo(name, phone);
+	    
+	}
+	
+	@Override
+    public int updatePassword(String mid, String pwd) {
+		
+		int changePwdCnt = this.loginDAO.updatePassword(mid, pwd);
+		
+        return changePwdCnt;
+    }
 }

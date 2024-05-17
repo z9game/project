@@ -17,5 +17,22 @@
 	<select id="getM_no" resultType="int">
 		select m_no from member where mid=#{mid}
 	</select>
-		
+	
+	<select id="getMemberInfo" parameterType="map" resultType="map">
+		select 
+			mid as "mid",
+		    password as "password"
+		 from 
+		 	member
+		 where
+		    name = #{name}
+		    and
+		    phone = #{phone}
+	</select>
+	
+	<update id="updatePassword">
+	    update member
+	    set password = #{pwd}
+	    where mid = #{mid}
+	</update>
 </mapper>
