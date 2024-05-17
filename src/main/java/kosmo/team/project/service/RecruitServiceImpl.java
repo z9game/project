@@ -38,15 +38,6 @@ public class RecruitServiceImpl implements RecruitService {
 
 	}
 	
-	
-	public List<RecruitLessonDTO> getRecruit_LessonBoardList() {
-
-		List<RecruitLessonDTO> getRecruit_LessonBoardList = this.recruitDAO.getRecruit_LessonBoardList();
-
-		return getRecruit_LessonBoardList;
-
-	}
-	
 	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO) {
 		
 		int boardListCnt = this.recruitDAO.getBoardListCnt(recruitSearchDTO);
@@ -237,5 +228,15 @@ public class RecruitServiceImpl implements RecruitService {
 		 return recruitDeleteHired;
 	 }
 		 
-		 
+
+//==================================================================================================================================	 
+		
+		//레슨모집페이지_boardlist
+		public List<RecruitLessonDTO> getRecruit_LessonBoardList() {
+
+			List<RecruitLessonDTO> getRecruit_LessonBoardList = this.recruitDAO.getRecruit_LessonBoardList();
+
+			return getRecruit_LessonBoardList;
+
+		}	 
 }

@@ -16,8 +16,6 @@ public interface RecruitDAO {
 	
 	public List<RecruitHiredDTO> getRecruit_HiredBoardList();
 	
-	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
-	
 	
 	
 	
@@ -125,4 +123,11 @@ public interface RecruitDAO {
 	public int insertTime_hired(RecruitHiredDTO recruitHiredDTO);
 	
 	public int recruitDeleteHired(RecruitHiredDTO recruitHiredDTO);
+	
+	
+	
+//---------------------------------------------------------------------------	
+
+	//레슨모집페이지_boardlist
+	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
 }

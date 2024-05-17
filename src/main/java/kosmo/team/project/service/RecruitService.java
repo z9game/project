@@ -14,8 +14,6 @@ public interface RecruitService {
 	
 	public List<RecruitHiredDTO> getRecruit_HiredBoardList();
 	
-	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
-	
 	
 	
 	RecruitTeamMemDTO getRecruit_TeamMemDetail(int b_no);
@@ -80,6 +78,12 @@ public interface RecruitService {
 	public int recruitUpdateHired(RecruitHiredDTO recruitHiredDTO);
 	//용병 게시물 삭제를 위한 메소드 이름만 정의
 	public int recruitDeleteHired(RecruitHiredDTO recruitHiredDTO);
+
+
+//==================================================================================================================================
 	
+	
+	//레슨모집페이지_boardlist
+	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
 }
 

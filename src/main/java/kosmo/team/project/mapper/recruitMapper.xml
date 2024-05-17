@@ -604,19 +604,22 @@
    
   
  <!-- 레슨 모집 --> 
- 
- 
+   
+   
+   
+   <!-- 레슨 모집 게시물 가져오기 + 검색조건 추가 아직 안 함 -->
    <select id="getRecruit_LessonBoardList" resultType="kosmo.team.project.dto.RecruitLessonDTO">
-          select 
-              recruitment_no 
-              ,title 
-              ,writer 
-              ,content 
-              ,readcount 
-              ,to_char(reg_date, 'YYYY-MM-DD') as "reg_date"
-              ,money
+          	select 
+              distinct(h.recruitment_no) 
+              ,h.title 
+              ,m.nickname 
+              ,h.content 
+              ,h.readcount 
+              ,to_char(h.reg_date, 'YYYY-MM-DD') as "reg_date"
           from 
-              Lesson_recruitment
+              Lesson_recruitment l LEFT JOIN lessonboard_day dl ON l.recruitment_no = dl.recruitment_no 
+                                  LEFT JOIN lessonboard_time tl ON l.recruitment_no = tl.recruitment_no
+                                  LEFT JOIN member m ON l.nickname = m.m_no
    </select>  
    
    

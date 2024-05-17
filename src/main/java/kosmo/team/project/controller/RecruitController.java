@@ -98,15 +98,6 @@ public class RecruitController {
         return mav;
     }
     
-    @RequestMapping(value = "/newRecruitLessonBoardForm.do")
-    public ModelAndView newRecruitLessonBoardForm() {
-    	
-    	ModelAndView mav = new ModelAndView();
-    	mav.setViewName("/recruit/newRecruitLessonBoardForm.jsp");
-    	
-        return mav;
-    }
-    
     
     @RequestMapping(value = "/recruitTeamMemBoardDetailForm.do")
     public ModelAndView recruitTeamBoardDetailForm(@RequestParam(value="b_no") int b_no) {
@@ -316,7 +307,18 @@ public class RecruitController {
 	}
     
     
+//==================================================================================================================================
     
+    
+    //레슨모집페이지_boardlist
+	@RequestMapping(value = "/newRecruitLessonBoardForm.do")
+	public ModelAndView newRecruitLessonBoardForm() {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/recruit/newRecruitLessonBoardForm.jsp");
+		
+	    return mav;
+	}
     
     
     
