@@ -8,6 +8,7 @@ public class CommunityFreeBoardDetailDTO {
 	private String content;
 	private String reg_date;
 	private int readcount;
+	private String nickname;
 
 	// 댓글 페이지
 	private int group_no;
@@ -24,6 +25,14 @@ public class CommunityFreeBoardDetailDTO {
 	// 댓글 2
 	private String nick_name;
 	private int comment_no;
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
 	public int getB_no() {
 		return b_no;
