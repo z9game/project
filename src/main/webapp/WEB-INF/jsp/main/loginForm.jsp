@@ -12,6 +12,10 @@
 
 <script>
 
+
+
+
+
 	function doLogin()
 	{
 		var midobj=$(".mid");

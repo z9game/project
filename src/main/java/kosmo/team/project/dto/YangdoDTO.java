@@ -5,7 +5,8 @@ public class YangdoDTO {
 	
 	private int yangdo_no;
 	private String title;
-	private String writer;
+	private int writer;
+	private String nickname;
 	private int m_no;
 	private String content;
 	private String reg_date;
@@ -14,6 +15,8 @@ public class YangdoDTO {
 	private int MyStadium;
 	private String MyDate;
 	private int MyTimeRange;
+	private String status;
+	private int transferred_to;
 	
 	private String yangdo_date;
 	private String booking_date;
@@ -23,17 +26,6 @@ public class YangdoDTO {
 	private String yangdo_sigungu;
 	private int stadium_no;
 	private int time_slot;
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public int getYangdo_no() {
 		return yangdo_no;
 	}
@@ -46,11 +38,17 @@ public class YangdoDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWriter() {
+	public int getWriter() {
 		return writer;
 	}
-	public void setWriter(String writer) {
+	public void setWriter(int writer) {
 		this.writer = writer;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public int getM_no() {
 		return m_no;
@@ -100,6 +98,18 @@ public class YangdoDTO {
 	public void setMyTimeRange(int myTimeRange) {
 		MyTimeRange = myTimeRange;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getTransferred_to() {
+		return transferred_to;
+	}
+	public void setTransferred_to(int transferred_to) {
+		this.transferred_to = transferred_to;
+	}
 	public String getYangdo_date() {
 		return yangdo_date;
 	}
@@ -148,6 +158,9 @@ public class YangdoDTO {
 	public void setTime_slot(int time_slot) {
 		this.time_slot = time_slot;
 	}
+	
+	
+	
 	
 	
 	

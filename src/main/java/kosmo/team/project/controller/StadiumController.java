@@ -208,16 +208,33 @@ public class StadiumController {
 	//디테일
 	
 	@RequestMapping(value = "/transferDetailForm.do")
-	public ModelAndView transferDetailForm(@RequestParam(value = "yangdo_no") int yangdo_no) {
+	public ModelAndView transferDetailForm(@RequestParam(value = "yangdo_no") int yangdo_no, HttpSession session) {
 
+		Integer checkM_no = (Integer) session.getAttribute("m_no");
+		
+		if (checkM_no == null) {
+	        // 로그인 페이지로 리다이렉트
+	        ModelAndView loginRedirect = new ModelAndView("redirect:/loginForm.do");
+	        // 로그인이 필요한 메시지를 전달할 수도 있습니다.
+
+	        return loginRedirect;
+	    }
+		
+		
+		
+		
 		YangdoDTO yangdoDTO = this.stadiumService.getStadiumYangdo(yangdo_no);
+		
+		
+	
+		
 		
 
 		ModelAndView mav = new ModelAndView();
 		
 
 
-		System.out.println(yangdoDTO.getM_no());
+		//System.out.println(yangdoDTO.getM_no());
 		
 		
 		mav.addObject("yangdoDTO", yangdoDTO);

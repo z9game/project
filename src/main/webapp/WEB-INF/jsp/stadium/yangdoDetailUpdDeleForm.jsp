@@ -287,7 +287,7 @@ function loadTimeRanges() {
 			<caption>[양도 수정/삭제]</caption>
 			<tr>
 				<th bgColor="lightgray">작성자</th>
-					<td>${ requestScope.yangdoDTO.writer }</td>
+					<td>${ requestScope.yangdoDTO.nickname }</td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">제 목</th>
@@ -339,7 +339,7 @@ function loadTimeRanges() {
 		</table>
 		<input type="hidden" name="yangdo_no"
 			value="${requestScope.yangdoDTO.yangdo_no}">
-		<input type="button" value="신청" onclick="yangdoSincheongForm('${requestScope.yangdoDTO.yangdo_no}', '<%=request.getSession().getAttribute("m_no") %>');">
+		
 	</form>
 
 

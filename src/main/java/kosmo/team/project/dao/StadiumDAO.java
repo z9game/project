@@ -76,6 +76,8 @@ public interface StadiumDAO {
 	public int getYangdoUpCnt(YangdoDTO yangdoDTO);
 
 	public int updateSincheong(YangdoDTO yangdoDTO);
+
+	public int updateBooking(YangdoDTO yangdoDTO);
 	
 
 	
