@@ -107,8 +107,7 @@
 			<foreach collection="ageRange" item="tmp2" open=" and ( "
 				close=" ) " separator=" or ">
 				<if test="tmp2 == '10대'  ">
-					to_number(to_char(sysdate, 'YYYY')) -
-					to_number(to_char(birthdate, 'YYYY')) between 10 and 19
+					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 10 and 19
 				</if>
 				<if test="tmp2 == '20대'  ">
 					to_number(to_char(sysdate, 'YYYY')) -
