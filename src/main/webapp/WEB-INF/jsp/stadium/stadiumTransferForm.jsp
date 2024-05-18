@@ -9,26 +9,38 @@
 <title>StadiumTransferForm</title>
 <link href="/style/stadiumTransferFormStyle.css" rel="stylesheet">
 <script src="/js/stadiumTransferFormScript.js"></script>
+
 <script>
 
 $(document).ready(function() {
     $(".rowCntPerPage").val("10");
     search();
 
-
-  
+ 
 });
 
 
 
 function goTransferDetailForm(yangdo_no) {
+	 var sessionMid = '<%= session.getAttribute("mid") %>';
 
-    $("[name='transferDetailForm'] [name='yangdo_no']").val(yangdo_no);
+	    if (sessionMid == "" || sessionMid == 'null') {
+	        alert('로그인이 필요한 서비스입니다.');
+	        location.href = '/loginForm.do';
+	        return;
+	    } else {
+	    	$("[name='transferDetailForm'] [name='yangdo_no']").val(yangdo_no);
 
-    
+	    	document.transferDetailForm.submit();
+	        
+	    }
+	}
+	
+	
+	
+	
 
-document.transferDetailForm.submit();
-}
+
 
 
 
@@ -53,8 +65,10 @@ function search(){
 
 	SearchFormObj = $("[name='stadiumTransferFormConditionalSearch']");
 
-	SearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val() );
+	alert(SearchFormObj.serialize( ));
+	
 
+    SearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val() );
     
 
     $.ajax({
@@ -116,13 +130,15 @@ function pageNoClick( clickPageNo ){
 </script>
 </head>
 <body>
+
+
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="stadiumTransferFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">경기장 양도</p>
 	</div>
 	
-	<div class="stadiumTransferFormContainer">
+
 	
 	<form name="stadiumTransferFormConditionalSearch" onsubmit="return false">
 
@@ -169,6 +185,14 @@ function pageNoClick( clickPageNo ){
 											<option value="0">군/구 선택</option>
 									</select></td>
 								</tr>
+								<tr>
+						<tr>
+							<th>양도상태</th>
+							<td><input type="checkbox" name="status" value="양도중"
+								class="양도중">양도중 
+								<input type="checkbox" name="status" value="양도완료"
+								class="stadium_status">양도완료</td>
+						</tr>
 							</table>
 					</tr>
 					<tr align="center">
@@ -187,7 +211,7 @@ function pageNoClick( clickPageNo ){
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 </form>
 
-
+	<div class="stadiumTransferFormContainer">
 
 		<div class="stadiumTransferFormBoard">
 			<div class="newStadiumTransferBoardBtnDiv">
@@ -211,7 +235,7 @@ function pageNoClick( clickPageNo ){
 							<td align="center">${requestScope.StadiumYangdoMap.begin_serialNo_desc - status.count + 1}</td>
 							<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
 							<td align="center">${Yangdo.title}</td>
-							<td align="center">${Yangdo.writer}</td>
+							<td align="center">${Yangdo.nickname}</td>
 							<td align="center">${Yangdo.readcount}</td>
 							<td align="center">${Yangdo.reg_date}</td>
 						</tr>

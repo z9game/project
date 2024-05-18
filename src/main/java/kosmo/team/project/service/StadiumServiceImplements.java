@@ -249,7 +249,10 @@ public class StadiumServiceImplements implements StadiumService {
 	public int updateSincheong(YangdoDTO yangdoDTO) {
 		
 		int sincheongCnt = this.stadiumDAO.updateSincheong(yangdoDTO);
-
+			
+		int BookingCnt = this.stadiumDAO.updateBooking(yangdoDTO);
+		
+		
 		return sincheongCnt;
 	}
 

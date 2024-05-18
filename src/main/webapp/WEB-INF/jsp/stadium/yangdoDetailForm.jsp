@@ -12,13 +12,34 @@
 <link href="/style/community/communityNoticeBoardFormStyle.css"
 	rel="stylesheet">
 <script src="/js/community/communityNoticeBoardFormScript.js"></script>
+
+
+
+
 <script>
+
+function checkRedirect() {
+    var status = "${requestScope.yangdoDTO.status}";
+    var writer = "${requestScope.yangdoDTO.writer}";
+    var transferredTo = "${requestScope.yangdoDTO.transferred_to}";
+    var currentUser = "<%= request.getSession().getAttribute("m_no") %>";
+
+    if (status !== "양도중" && currentUser !== writer && currentUser !== transferredTo) {
+        alert("양도 완료된 글입니다.");
+        window.location.href = "/stadiumTransferForm.do";
+    }
+}
+checkRedirect();
+
+
+
+
 
 
 function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 	alert(yangdo_no)
 	alert(booking_no)
-
+	alert(m_no)
 
 	
 	
@@ -63,6 +84,9 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 
 </script>
 </head>
+
+
+
 	<body>
 		<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
@@ -83,7 +107,7 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 				<caption>[게시판 상세글 보기]</caption>
 				<tr>
 					<th bgColor="lightgray">작성자</th>
-					<td>${ requestScope.yangdoDTO.writer }</td>
+					<td>${ requestScope.yangdoDTO.nickname }</td>
 				</tr>
 				<tr>
 					<th bgColor="lightgray">제 목</th>
@@ -118,12 +142,23 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 						<textarea style="border:none;" name="content" class="content" rows="13" cols="40" maxlength="500" readonly>${ requestScope.yangdoDTO.content }</textarea>
 					</td>
 				</tr>
-				<tr>
-					<th bgColor="lightgray">신청</th>
-					<td>
-						<input type="button" value="신청" onclick="yangdoSincheongForm('${requestScope.yangdoDTO.yangdo_no}', '<%=request.getSession().getAttribute("m_no") %>','${requestScope.yangdoDTO.booking_no}');">
-					</td>
-				</tr>
+				<c:if test="${not empty sessionScope.m_no and requestScope.yangdoDTO.writer ne sessionScope.m_no}">
+					<c:if test="${requestScope.yangdoDTO.status ne '양도완료'}">
+						<tr>
+							<th bgColor="lightgray" >신청</th>
+							<td>
+								<input type="button" value="신청" onclick="yangdoSincheongForm('${requestScope.yangdoDTO.yangdo_no}', '<%=request.getSession().getAttribute("m_no") %>','${requestScope.yangdoDTO.booking_no}');">
+							</td>
+						</tr>
+					</c:if>
+				</c:if>
+				<c:if test="${requestScope.yangdoDTO.status eq '양도완료'}">
+        			<tr>
+            			<th bgColor="lightgray">상태</th>
+           				 	<td>양도완료</td>
+       				</tr>
+    			</c:if>
+				
 				
 			</table>			
 			
@@ -131,8 +166,9 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 			
 			<center>
 				<span style="cursor: pointer;" onclick="location.replace('/stadiumTransferForm.do')">[목록 화면으로]</span>
+				<c:if test="${requestScope.yangdoDTO.status ne '양도완료'}">
 				<input type="button" value="수정/삭제" onclick="document.yangdoDetailUpdDeleForm.submit();">
-				
+				</c:if>
 			</center>
 			
 			<form name="yangdoDetailUpdDeleForm" action="/yangdoDetailUpdDeleForm.do" method="post">
