@@ -730,7 +730,16 @@ public class AdminServiceImplements implements AdminService {
 		      return boardDeleteCount;
 		      
 		   }
-	
+
+		 @Override
+		 public int adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO) {
+			 return adminDAO.adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(detailDTO);
+		 }	
+
+		 @Override
+		 public int adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO) {
+			 return adminDAO.adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(detailDTO);
+		 }
 	
 	
 	
