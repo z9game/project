@@ -240,7 +240,6 @@ public class CommunityServiceImplements implements CommunityService {
 
    }
    
-   
    @Override
    public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO) {
       
@@ -248,6 +247,16 @@ public class CommunityServiceImplements implements CommunityService {
 
       return freeBoardDetailCommentPageList;
       
+   }
+   
+   @Override
+   public int communityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO) {
+      return communityDAO.communityFreeBoardDetailCommentOfCommentUpdateProc(detailDTO);
+   }
+   
+   @Override
+   public int communityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO) {
+      return communityDAO.communityFreeBoardDetailCommentOfCommentDeleteProc(detailDTO);
    }
    
    
@@ -431,21 +440,27 @@ public class CommunityServiceImplements implements CommunityService {
       return communityDAO.getTabFreeSharingMarketplaceBoardList(communitySearchDTO);
    }
    
+   /*** 장터 Free_Sharing 테이블 조회수 디테일 가져오기 ***/
    @Override
-   public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no) {
+   public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no, boolean isReadCount) {
 
-      //int updateCnt = this.communityDAO.updateNoticeBoardReadCount(b_no);
-
+	   if(isReadCount) {
+		   this.communityDAO.updateMarketplaceSaleBoardReadCount(b_no);
+	   }
+      
       CommunityDTO communityDTO = this.communityDAO.getCommunityMarketplaceSaleDetailForm(b_no);
 
       return communityDTO;
 
    }
    
+   /*** 장터 Free_Sharing 테이블 조회수 디테일 가져오기 ***/
    @Override
-   public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no) {
+   public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no, boolean isReadCount) {
 
-      //int updateCnt = this.communityDAO.updateNoticeBoardReadCount(b_no);
+	   if(isReadCount) {
+		   	this.communityDAO.updateMarketplaceFreeSharingBoardReadCount(b_no);
+	   }
 
       CommunityDTO communityDTO = this.communityDAO.getCommunityMarketplaceFreeSharingDetailForm(b_no);
 

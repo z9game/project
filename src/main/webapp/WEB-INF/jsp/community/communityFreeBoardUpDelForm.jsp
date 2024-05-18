@@ -2,6 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
+<c:if test="${empty sessionScope.mid}">
+	<script>
+		alert("로그인이 필요한 서비스입니다.");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
+
+<c:if test="${requestScope.communityDTO.writer != sessionScope.m_no}">
+	<script>
+		alert("작성한 사용자가 아닙니다");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
 
 <!DOCTYPE html>
 <html>
@@ -10,9 +23,6 @@
 <title>CommunityFreeBoardUpDelForm</title>
 <link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
-
-
-
 
 
 <script>
@@ -102,7 +112,7 @@
 	
 	<div class="communityFreeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">장터</p>
+		<p class="titleBackgoundText">자유게시판</p>
 	</div>
 
 
@@ -141,9 +151,8 @@
 
 	<div style="height: 5px"></div>
 	<center>
-		<span style="cursor: pointer"
-			onclick="location.replace('/communityFreeBoardForm.do')">[목록
-			화면으로]</span>
+		<span style="cursor: pointer"onclick="location.replace('/communityFreeBoardForm.do')">[목록 화면으로]
+		</span>
 	</center>
 	<center>
 		<input type="button" value="수정" onclick="checkBoardUpForm();">

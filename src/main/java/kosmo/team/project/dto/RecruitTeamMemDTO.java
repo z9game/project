@@ -6,7 +6,8 @@ public class RecruitTeamMemDTO {
    
    private int b_no;
    private String title;
-   private String writer;
+   private int writer;
+   private String nickname;
    private String content;
    private int readcount;
    private String reg_date;
@@ -22,6 +23,18 @@ public class RecruitTeamMemDTO {
    private int sigungu_id;
    
    
+   //팀신청할때
+   private int m_no;
+  
+
+   
+   
+public int getM_no() {
+	return m_no;
+}
+public void setM_no(int m_no) {
+	this.m_no = m_no;
+}
 public int getB_no() {
 	return b_no;
 }
@@ -34,10 +47,11 @@ public String getTitle() {
 public void setTitle(String title) {
 	this.title = title;
 }
-public String getWriter() {
+
+public int getWriter() {
 	return writer;
 }
-public void setWriter(String writer) {
+public void setWriter(int writer) {
 	this.writer = writer;
 }
 public String getContent() {
@@ -118,6 +132,13 @@ public int getSigungu_id() {
 public void setSigungu_id(int sigungu_id) {
 	this.sigungu_id = sigungu_id;
 }
+public String getNickname() {
+	return nickname;
+}
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+
 
    
    

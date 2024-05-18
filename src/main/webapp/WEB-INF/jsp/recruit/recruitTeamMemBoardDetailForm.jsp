@@ -9,6 +9,39 @@
 <title>RecruitTeamBoardDetailForm</title>
 <link href="/style/recruitTeamBoardDetailFormStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
+
+<script>
+	function goWaitingList()
+	{
+		var formObj = $("[name='waitingList']");
+		
+		if (confirm("신청 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/goWaitingList.do",
+			type : "post",
+			data : formObj.serialize(),
+			success : function(json) {
+				var result = json["result"];
+				if (result == 1) {
+					alert("신청이 완료되었습니다.");
+				}
+				else if(result == 2)
+				{
+					alert("이미 팀이 있습니다.");
+				}
+				else {
+					alert("이미 신청한 팀입니다.");
+				}
+			},
+			error : function() {
+				alert("수정 실패! 관리자에게 문의 바랍니다.");
+			}
+		});
+	}
+</script>
 </head>
 <body>
    <%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -52,7 +85,7 @@
                <!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
                <!-- 상세보기할 게시판의 이름 표현하기 -->
                <!--------------------------------------------------- -->
-               <td>${requestScope.list.writer}</td>
+               <td>${requestScope.list.nickname}</td>
             </tr>
             <tr>
                <th bgColor="lightgray">제목</th>
@@ -127,13 +160,18 @@
       </center>
 
       <center>
-         <!--------------------------------------------------- -->
-         <!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
-         <!--------------------------------------------------- -->
+      <c:if test="${requestScope.list.team_mem eq '팀원'}">
+      	 <c:if test="${sessionScope.m_no ne requestScope.list.writer}">
+         	 <input type="button" value="신청" style="cursor:pointer" onclick="goWaitingList()" >
+         </c:if>
+      </c:if>
          <span style="cursor: pointer"
             onclick="location.href='/recruitTeamMemBoardForm.do'">
             [목록 화면으로] </span>
-         <input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.boardUpDelForm.submit()" >
+        <c:if test="${sessionScope.nickname eq requestScope.list.nickname}">
+    		<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.boardUpDelForm.submit()" >
+		</c:if>
+         
     
        </c:if>
        </center>
@@ -146,6 +184,12 @@
 		<!-- 게시판 고유번호가 저장된 hidden 태그 선언하기 -->
 		<!------------------------------------------------------------------------>
 		<input type="hidden" name="b_no"value="${requestScope.list.b_no}">
+		</form>
+		
+		<!-- 팀모집 게시물일때 신청버튼을 누르면 넘어갈 정보들 -->
+		<form name="waitingList">
+			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
+			<input type="hidden" name="b_no"value="${requestScope.list.b_no}">
 		</form>
     
 </body>

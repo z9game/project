@@ -304,15 +304,12 @@
 				onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}+1)">[다음]</span>
 				<span style="cursor: pointer"
 				onClick="pageNoClick(${requestScope.tournamentMap.last_pageNo})">[마지막]</span>
-			</span> <select name="rowCntPerPage" class="rowCntPerPage"
-				onChange="search()">
-				<option value="10">10
-				<option value="15">15
-				<option value="20">20
-			</select>행보기 &nbsp;&nbsp;&nbsp;
+			</span> 
 		</center>
 		
     </center>
+    
+    <div style="height:20px;"></div>
     <form action="/tournamentBoardDetail.do" method="post" name="tournamentBoardDetail">
     	<input type="hidden" name="list_no">
     </form>

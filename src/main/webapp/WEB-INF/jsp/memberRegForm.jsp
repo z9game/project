@@ -170,7 +170,7 @@ function regMember()
 			if(result == 1)
 			{
 				alert("회원가입 성공.");
-				location.href='/main/loginForm.do';
+				location.href='/loginForm.do';
 			}
 
 			else

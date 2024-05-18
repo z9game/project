@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
+<c:if test="${empty sessionScope.mid}">
+	<script>
+		alert("로그인이 필요한 서비스입니다.");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
+
 <!DOCTYPE html><html>
 <head>
 	<meta charset="UTF-8">
-	<title>장터 상세보기</title>
+	<title>갤러리 상세보기</title>
 	<link href="/style/community/communityNoticeBoardFormStyle.css" rel="stylesheet">
 	<script src="/js/community/communityNoticeBoardFormScript.js"></script>
 </head>
@@ -23,8 +30,7 @@
 			
 			<tr>
 				<th bgColor="lightgray">이름</th>
-				<!--  <td>${requestScope.communityDTO.nickname}</td> -->
-				<td>${sessionScope.nickname}</td>
+				<td>${requestScope.communityDTO.nickname}</td>
 			</tr>
 			
 			<tr>
@@ -47,9 +53,9 @@
 			<span style="cursor: pointer" onclick="location.replace('/communityGallaryForm.do')">
 				[목록 화면으로] 
 			</span> 
-			
-			<input type="button" value="수정/삭제" onclick="document.communityGallaryUpDelForm.submit();">
-
+			<c:if test="${requestScope.communityDTO.writer == sessionScope.m_no}">
+				<input type="button" value="수정/삭제" onclick="document.communityGallaryUpDelForm.submit();">
+			</c:if>
 			<!-- Form 에 설정된  액션 값 URL 주소로 이동 -->
 			<!-- <input type="button" value="댓글쓰기"  onclick="document.boardUpDelForm.submit();">-->
 			

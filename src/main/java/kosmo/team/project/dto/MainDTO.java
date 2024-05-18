@@ -10,6 +10,8 @@ public class MainDTO {
 	private int readcount;
 	private int password;
 	private String mid;
+	private String phone;
+	private String name;
 	
 	private String region;
 	private String regist_start;
@@ -67,6 +69,18 @@ public class MainDTO {
 	}
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getRegion() {
 		return region;

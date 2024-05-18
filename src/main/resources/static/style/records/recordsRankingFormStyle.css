@@ -131,3 +131,27 @@ a{
 	margin-bottom: 50px;
 	width: 1000px;
 }
+
+.recordsRankingFormTabRegionRating{
+	margin: 0 auto;
+	margin-top: 130px;
+	display: flex;
+	margin-bottom: 50px;
+	width: 1000px;
+}
+
+.recordsRankingFormTabGenderRating{
+	margin: 0 auto;
+	margin-top: 130px;
+	display: flex;
+	margin-bottom: 50px;
+	width: 1000px;
+}
+
+.recordsRankingFormTabAgeRating{
+	margin: 0 auto;
+	margin-top: 130px;
+	display: flex;
+	margin-bottom: 50px;
+	width: 1000px;
+}

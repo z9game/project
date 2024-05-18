@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp" %>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +87,7 @@
 	
 	    if (sessionMid === 'null') {
 	    	alert('로그인이 필요한 서비스입니다.');
-	    	location.href = '/main/loginForm.do';
+	    	location.href = '/loginForm.do';
 	    } else {
 	    	location.href = '/newCommunityGallaryForm.do';
 	    }
@@ -125,11 +127,7 @@
 					<td>
 						<select name="searchType1">
 							<option value="all">전체</option>
-							
-							<!--	writer 컬럼 속성이 varchar2 이고 임시로 이미지보드 테이블 사용하여 주석처리   
 							<option value="writer">글작성자</option> 
-							-->
-							
 							<option value="subject">제목</option>
 							<option value="content">내용</option>
 							<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
@@ -148,7 +146,7 @@
 						<img src="/image/SoccerBall.jpg" class="communityGallaryImage">
 					</div>
 					<div class="communityGallarySubject">${imageboard.subject}</div>
-					<div class="communityGallaryWriter">${imageboard.writer}</div>
+					<div class="communityGallaryWriter">${imageboard.nickname}</div>
 					<div class="communityGallaryRegDate">${imageboard.reg_date}</div>
 				</div>
 			</c:forEach>

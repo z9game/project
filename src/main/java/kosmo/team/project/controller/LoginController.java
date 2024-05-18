@@ -1,6 +1,7 @@
 package kosmo.team.project.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.service.LoginService;
 
 @Controller
@@ -82,5 +85,49 @@ public class LoginController {
 		session.invalidate(); // 세션 무효화
 		return "redirect:/loginForm.do"; // 로그인 페이지로 리다이렉트
 	}
+	
+	
+	@RequestMapping(value = "/memberInfoFindForm.do")
+	public ModelAndView memberInfoFindForm() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("/memberInfoFindForm.jsp");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/memberInfoFindProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> memberInfoFindProc(@RequestParam(value = "name") String name, @RequestParam(value = "phone") String phone) {
+		
+		Map<String,String> memberInfo = loginService.getMemberInfo(name, phone);
+		
+		Map<String,Object> response = new HashMap<>();
+		
+		if(memberInfo != null) {
+			
+			response.put("success", true);
+			
+			response.put("memberInfo", memberInfo);
+		} else {
+			
+			response.put("success", false);
+		}
+		
+		return response;
+	}
+	
+	@RequestMapping(value = "/changePasswordProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String,Object> changePasswordProc(String mid, String pwd){
 
+	    Map<String,Object> changePwd = new HashMap<>();
+	    
+	    int changePwdCnt = this.loginService.updatePassword(mid, pwd);
+
+	    changePwd.put("result", changePwdCnt + "");
+
+	    return changePwd;
+	}
 }

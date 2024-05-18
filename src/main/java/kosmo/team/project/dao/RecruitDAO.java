@@ -34,6 +34,10 @@ public interface RecruitDAO {
 	
 	public int insertTime(RecruitTeamMemDTO recruitTeamMemDTO);	
 	
+	public int newInsertDay(RecruitTeamMemDTO recruitTeamMemDTO);	
+	
+	public int newInsertTime(RecruitTeamMemDTO recruitTeamMemDTO);
+	
 	public List<String> getRecruit_day(int b_no);
 	
 	public List<String> getRecruit_time(int b_no);
@@ -53,4 +57,9 @@ public interface RecruitDAO {
 	public int deleteTime(RecruitTeamMemDTO recruitTeamMemDTO);
 	
 	public int recruitDeleteTeamMem(RecruitTeamMemDTO recruitTeamMemDTO);
+	
+	 //신청버튼을 누르면 내 정보가 승낙대기 테이블로 넘어감.
+	int regWaitingList(RecruitTeamMemDTO recruitTeamMemDTO);
+	
+	int findMyTeam(RecruitTeamMemDTO recruitTeamMemDTO); 
 }

@@ -2,6 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
+<c:if test="${empty sessionScope.mid}">
+	<script>
+		alert("로그인이 필요한 서비스입니다.");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
+
+<c:if test="${requestScope.communityDTO.writer != sessionScope.m_no}">
+	<script>
+		alert("작성한 사용자가 아닙니다");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
 
 <!DOCTYPE html>
 <html>

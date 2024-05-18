@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp" %>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +71,7 @@
    
        if (sessionMid === 'null') {
           alert('로그인이 필요한 서비스입니다.');
-          location.href = '/main/loginForm.do';
+          location.href = '/loginForm.do';
        } else {
           location.href = '/newCommunityMarketplaceSaleBoardForm.do';
        }
@@ -81,7 +83,7 @@
    
        if (sessionMid === 'null') {
           alert('로그인이 필요한 서비스입니다.');
-          location.href = '/main/loginForm.do';
+          location.href = '/loginForm.do';
        } else {
           location.href = '/newCommunityMarketplaceFreeSharingBoarForm.do';
        }
@@ -265,7 +267,7 @@
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
                         <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.writer}</div>
+                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
                         <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
                      </div>
@@ -347,7 +349,7 @@
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
                         <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.writer}</div>
+                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
                         <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
                      </div>
@@ -428,7 +430,7 @@
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
                         <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.writer}</div>
+                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
                         <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
                      </div>

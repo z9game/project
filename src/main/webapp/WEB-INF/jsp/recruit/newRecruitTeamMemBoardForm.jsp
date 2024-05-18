@@ -161,6 +161,8 @@
 				</tr>
 				
 			</table>
+			
+			<input type="hidden" name="writer" value="${sessionScope.m_no}">
 			<div class="newRecruitTeamMemBoardFormBtnDiv">
 				<div class="resetBtnDiv">
 					<input type="reset" class="boardResetBtn"value="다시 작성">
