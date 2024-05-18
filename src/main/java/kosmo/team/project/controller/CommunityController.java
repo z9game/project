@@ -253,15 +253,6 @@ public class CommunityController {
       return communityFreeBoardDetail(detailDTO);
    }
    
-   /*** 자유게시판 대댓글, 자유게시판 상세보기 ***/
-   @RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentList.do")
-   public ModelAndView freeBoardDetailCommentOfCommentList(CommunityFreeBoardDetailDTO detailDTO) {
-      
-      communityService.insertFreeBoardDetailCommentToComment(detailDTO);
-
-      return communityFreeBoardDetail(detailDTO);
-   }
-   
    /*** 자유게시판 수정 삭제 페이지 ***/
    @RequestMapping(value = "/communityFreeBoardUpDelForm.do")
    public ModelAndView communityFreeBoardUpDelForm(CommunityFreeBoardDetailDTO detailDTO) {
@@ -312,6 +303,33 @@ public class CommunityController {
       resultMap.put("result", result + "");
       
       return resultMap;
+   }
+   
+   /*** 자유게시판 대댓글 입력, 자유게시판 상세보기 ***/
+   @RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentInsertProc.do")
+   public ModelAndView communityFreeBoardDetailCommentOfCommentInsertProc(CommunityFreeBoardDetailDTO detailDTO) {
+      
+      communityService.insertFreeBoardDetailCommentToComment(detailDTO);
+
+      return communityFreeBoardDetail(detailDTO);
+   }
+   
+   /*** 자유게시판 대댓글 수정, 자유게시판 상세보기 ***/
+   @RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentUpdateProc.do")
+   public ModelAndView communityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO) {
+      
+      communityService.communityFreeBoardDetailCommentOfCommentUpdateProc(detailDTO);
+
+      return communityFreeBoardDetail(detailDTO);
+   }
+   
+   /*** 자유게시판 대댓글 삭제, 자유게시판 상세보기 ***/
+   @RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentDeleteProc.do")
+   public ModelAndView communityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO) {
+      
+      communityService.communityFreeBoardDetailCommentOfCommentDeleteProc(detailDTO);
+
+      return communityFreeBoardDetail(detailDTO);
    }
    
    

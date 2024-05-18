@@ -75,6 +75,10 @@ public interface CommunityDAO {
    
    public int getFreeBoardCommentCount(int b_no);
    
+   public int communityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public int communityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO);
+   
    
    
    //----------------------------------------
