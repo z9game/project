@@ -25,17 +25,17 @@
                upper(m.nickname) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'title'">
-               upper(title) like upper('%${keyword1}%')
+               upper(r.title) like upper('%${keyword1}%')
             </if>
             <if test="searchType1== 'content'">
-               upper(content) like upper('%${keyword1}%')
+               upper(r.content) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'all'">
                upper(m.nickname) like upper('%${keyword1}%')
                or
-               upper(title) like upper('%${keyword1}%')
+               upper(r.title) like upper('%${keyword1}%')
                or
-               upper(content) like upper('%${keyword1}%')
+               upper(r.content) like upper('%${keyword1}%')
             </if>
             )
          </if>
@@ -461,6 +461,17 @@
              recruitment_no = #{recruitment_no}
    </select>  
    
+  
+   <!-- 조회수 올리기 용병페이지-->
+   <update id="hiredDeatilCnt" parameterType="int">
+      update 
+         hired_recruitment
+      set
+         readcount=readcount+1 
+      where
+         recruitment_no = #{recruitment_no}
+   </update>
+   
 
 	<!-- 용병모집상세페이지에서 요일 가져오기 -->
    <select id="getRecruit_hired_day" parameterType="int" resultType="String">    
@@ -519,6 +530,7 @@
    	</select>
    
    
+   
    <!-- 용병모집수정삭제페이지_시군구 -->
 	<select id="getRecruit_HiredUpDel_sidosigungu" parameterType="int" resultType="kosmo.team.project.dto.RecruitHiredDTO">     
   
@@ -534,7 +546,7 @@
 	 		 h.recruitment_no = #{recruitment_no}
 	</select>  	
    	
-   	 <!-- 용병 모집 수정삭제페이지_팀/팀원 -->
+   	 <!-- 용병 모집 수정삭제페이지 -->
    	<update id="recruitUpdateHired" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
 	update
 		hired_recruitment
@@ -583,7 +595,7 @@
       </foreach>
    </insert> 
    
-   <!-- 팀/팀원 모집 게시글 새글쓰기 입력하기 -->
+   <!-- 용병 모집 게시글 새글쓰기 입력하기 -->
    <insert id="regHiredRecruit" parameterType="kosmo.team.project.dto.RecruitHiredDTO" >
    insert into hired_recruitment (recruitment_no, title, nickname, content, sido, sigungu, pos)
    values(
@@ -689,6 +701,157 @@
        	  l.recruitment_no = #{recruitment_no}      
        	   
    </select>
+   
+  
+   <!-- 조회수 올리기 레슨페이지-->
+   <update id="lessonDeatilCnt" parameterType="int">
+      update 
+         lesson_recruitment
+      set
+         readcount=readcount+1 
+      where
+         recruitment_no = #{recruitment_no}
+   </update>
+   
+   <!-- 레슨 모집 새글쓰기 -->
+   <insert id="regLessonRecruit" parameterType="kosmo.team.project.dto.RecruitLessonDTO" >
+   insert into lesson_recruitment (recruitment_no, title, nickname, content, money, sido, sigungu)
+   values(
+      (select nvl(max(recruitment_no),0)+1 from lesson_recruitment)
+      ,#{title}
+      ,#{nickname}
+      ,#{content}
+      ,#{money}
+      ,#{sido}
+      ,#{sigungu}
+   )
+   </insert>
+   
+   
+   <!-- 새글쓰기할때 lessonboard_day 테이블에 최초의 값을 입력해줌-->
+   <insert id="newInsertDay_lesson" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+         insert into lessonboard_day
+      <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select max(recruitment_no) from lesson_recruitment), #{day} from dual 
+      </foreach>
+   </insert> 
+   
+   <!-- 새글쓰기할때 lessonboard_time 테이블에 최초의 값을 입력해줌 -->
+   <insert id="newInsertTime_lesson" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+         insert into lessonboard_time
+      <foreach collection="time" item="time"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select max(recruitment_no) from lesson_recruitment), #{time} from dual
+      </foreach>
+   </insert> 
+   
+   <!-- 레슨모집수정삭제페이지 -->
+   <select id="getRecruit_LessonUpDel" parameterType="int" resultType="kosmo.team.project.dto.RecruitLessonDTO">     
+	    select
+			  m.nickname
+			  ,l.title
+			  ,l.money
+			  ,l.content
+			  ,l.recruitment_no
+		from
+	        lesson_recruitment l LEFT JOIN member m ON l.nickname = m.m_no 
+		where 
+			   l.recruitment_no = #{recruitment_no}
+	</select>
+   
+   <!-- 레슨모집수정삭제페이지_요일 -->
+    <select id="getRecruit_LessonUpDel_day" parameterType="int" resultType="String">  
+	    select
+              dof.day_name as "day"
+        from
+              lesson_recruitment l LEFT JOIN lessonboard_day ld on l.recruitment_no=ld.recruitment_no
+                                   LEFT JOIN day_of_week dof on ld.day=dof.day_no
+        where
+              l.recruitment_no = #{recruitment_no}
+   	</select>
+   
+   <!-- 레슨모집수정삭제페이지_시간 -->
+    <select id="getRecruit_LessonUpDel_time" parameterType="int" resultType="String">     
+		select
+		    lt.time as "time"
+		from
+		    lesson_recruitment l LEFT JOIN lessonboard_time lt on l.recruitment_no=lt.recruitment_no
+		where
+		    l.recruitment_no = #{recruitment_no}
+   	</select>
+   
+   
+   <!-- 레슨모집수정삭제페이지_시군구 -->
+	<select id="getRecruit_LessonUpDel_sidosigungu" parameterType="int" resultType="kosmo.team.project.dto.RecruitLessonDTO">     
+  
+	 select
+		    s.sido_id as "sido"
+		    ,s.name		as "sido_c"
+		    ,si.sigungu_id as "sigungu"
+		    ,si.name		as "sigungu_c"
+	 from
+		    lesson_recruitment l LEFT JOIN sido s on l.sido=s.sido_id
+		                        LEFT JOIN sigungu si on l.sigungu=sigungu_id
+	 where
+	 		 l.recruitment_no = #{recruitment_no}
+	</select>    	
+   	
+   	 <!-- 레슨 모집 수정삭제페이지 -->
+   	<update id="recruitUpdateLesson" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+	update
+		lesson_recruitment
+	set
+		title=#{title},
+		sido=#{sido_id},
+		sigungu=#{sigungu_id},
+		money=#{money}
+	where 
+		recruitment_no = #{recruitment_no}
+	</update>
+	
+	 <!-- 레슨 모집 요일 삭제 -->
+	<delete id="deleteDay_lesson" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+		delete
+		from
+			lessonboard_day
+		where
+			recruitment_no = #{recruitment_no}
+	</delete>
+	
+	 <!-- 레슨 모집 시간 삭제 -->
+	<delete id="deleteTime_lesson" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+		delete
+		from
+			lessonboard_time
+		where
+			recruitment_no = #{recruitment_no}
+	</delete>	
+   
+   
+    <!-- 레슨모집 수정페이지 저장_요일 삽입 -->
+   <insert id="insertDay_lesson" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+         insert into lessonboard_day
+      <foreach collection="day" item="day"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select recruitment_no from lesson_recruitment where recruitment_no = #{recruitment_no}), #{day} from dual 
+      </foreach>
+   </insert> 
+    
+   
+   <!-- 레슨모집 수정페이지 저장_시간 삽입 	 -->
+   <insert id="insertTime_lesson" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+         insert into lessonboard_time
+      <foreach collection="time" item="time"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select recruitment_no from lesson_recruitment where recruitment_no = #{recruitment_no}), #{time} from dual
+      </foreach>
+   </insert> 
+   
+   <!-- 레슨모집 레슨 게시물 삭제 -->
+	<delete id="recruitDeleteLesson" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+		delete
+		from
+			lesson_recruitment
+		where
+			recruitment_no = #{recruitment_no}
+	</delete> 
    	
    	 
 </mapper>

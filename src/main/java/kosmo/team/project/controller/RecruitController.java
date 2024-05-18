@@ -118,7 +118,6 @@ public class RecruitController {
     	mav.addObject("updel_day", recruitTeamMemDTO_day);
     	mav.addObject("updel_time", recruitTeamMemDTO_time);
     	mav.addObject("updel_sidosigungu", recruitTeamMemDTO_sidosigungu);
-    	mav.addObject("updel_time", recruitTeamMemDTO_time);
     	mav.setViewName("/recruit/recruitTeamMemBoardUpDelForm.jsp");
     	
         return mav;
@@ -259,7 +258,6 @@ public class RecruitController {
     	mav.addObject("updel_day", recruitHiredDTO_day);
     	mav.addObject("updel_time", recruitHiredDTO_time);
     	mav.addObject("updel_sidosigungu", recruitHiredDTO_sidosigungu);
-    	mav.addObject("updel_time", recruitHiredDTO_time);
     	mav.setViewName("/recruit/recruitHiredBoardUpDelForm.jsp");
     	
         return mav;
@@ -349,6 +347,82 @@ public class RecruitController {
 		mav.setViewName("/recruit/newRecruitLessonBoardForm.jsp");
 		
 	    return mav;
+	}
+    
+	//레슨모집 새글쓰기 저장 
+	@RequestMapping( value = "/recruitLessonRegProc.do"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
+					)
+	@ResponseBody
+	public Map<String, String> recruitLessonRegProc(RecruitLessonDTO recruitLessonDTO)
+	{
+	Map<String, String> resultMap = new HashMap<String, String>();
+	int recruitLessonRegCnt = this.recruitService.regLessonRecruit(recruitLessonDTO);
+	resultMap.put("result", recruitLessonRegCnt+"");
+	
+	return resultMap;
+	}
+    
+    //레슨모집수정삭제페이지
+    @RequestMapping(value = "/recruitLessonBoardUpDelForm.do")
+    public ModelAndView recruitLessonBoardUpDelForm(@RequestParam(value="recruitment_no") int recruitment_no) {
+    	// getRecruit_LessonUpDel 는 수정/삭제를 위해 데이터를 가져오는 메소드명
+    	RecruitLessonDTO recruitLessonDTO = this.recruitService.getRecruit_LessonUpDel(recruitment_no);
+    	List<String> recruitLessonDTO_day = this.recruitService.getRecruit_LessonUpDel_day(recruitment_no);
+    	List<String> recruitLessonDTO_time = this.recruitService.getRecruit_LessonUpDel_time(recruitment_no);
+    	RecruitLessonDTO recruitLessonDTO_sidosigungu = this.recruitService.getRecruit_LessonUpDel_sidosigungu(recruitment_no);
+    	
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("detail", recruitLessonDTO);
+    	mav.addObject("updel_day", recruitLessonDTO_day);
+    	mav.addObject("updel_time", recruitLessonDTO_time);
+    	mav.addObject("updel_sidosigungu", recruitLessonDTO_sidosigungu);
+    	mav.setViewName("/recruit/recruitLessonBoardUpDelForm.jsp");
+    	
+        return mav;
+    }  
+    
+    
+    //레슨 게시물 수정
+    @RequestMapping( value = "/recruitLessonBoardUpProc.do"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
+			)
+	@ResponseBody
+	// map을 사용한 이유? -> JSON 형식을 사용하기 위해
+	public Map<String, String> recruitLessonBoardUpProc(RecruitLessonDTO recruitLessonDTO)
+	{
+    //resultMap 이라는 변수 선언(자료형은 map) 
+	Map<String, String> resultMap = new HashMap<String, String>();
+	//recruitLessonUpCnt 이라는 변수 선언 (자료형은 int)
+	//업데이트가 성공했는지 안했는지의 결과가 변수에 저장될것임 -> 성공했으면 '1'이 들어오고 실패하면 '0'이 들어올것임.
+	int recruitLessonUpCnt = this.recruitService.recruitUpdateLesson(recruitLessonDTO);
+	//recruitHiredUpCnt에 저장된 결과를 map 형식으로 만들어준 변수 resultMap에 저장
+	//어떻게? -> map 사용법은 키값명을 호출하면 그 키값명에 저장한 데이터가 나옴
+	//여기서는 "result"라는 키값명에 recruitHiredUpCnt를 저장.
+	//즉, "result"를 호출하면 recruitHiredUpCnt가 나오는 것임.
+	resultMap.put("result", recruitLessonUpCnt+"");
+	
+	
+	return resultMap;
+	}
+    
+    
+    //레슨 게시물 삭제
+    @RequestMapping( value = "/recruitLessonBoardDelProc.do"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
+			)
+	@ResponseBody
+	public Map<String, String> recruitLessonBoardDelProc(RecruitLessonDTO recruitLessonDTO)
+	{
+	Map<String, String> resultMap = new HashMap<String, String>();
+	int recruitLessonDelCnt = this.recruitService.recruitDeleteLesson(recruitLessonDTO);
+	resultMap.put("result", recruitLessonDelCnt+"");
+	
+	
+	return resultMap;
 	}
     
     

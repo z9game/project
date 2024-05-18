@@ -21,6 +21,11 @@ public interface RecruitDAO {
 	
 	public RecruitTeamMemDTO getRecruit_TeamMemDetail(int b_no);
 	
+	//조회수 올리기는 용병상세페이지에서 실행
+	int hiredDeatilCnt(int recruitment_no);
+	
+	
+	
 	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no);
 	
 	
@@ -54,10 +59,10 @@ public interface RecruitDAO {
 	//팀원모집 새글쓰기 시간 삽입
 	public int newInsertTime(RecruitTeamMemDTO recruitTeamMemDTO);
 	
-	//팀원모집 새글쓰기 요일 삽입
+	//용병모집 새글쓰기 요일 삽입
 	public int newInsertDay_hired(RecruitHiredDTO recruitHiredDTO);	
 	
-	//팀원모집 새글쓰기 시간 삽입
+	//용병모집 새글쓰기 시간 삽입
 	public int newInsertTime_hired(RecruitHiredDTO recruitHiredDTO);
 	
 	
@@ -138,10 +143,49 @@ public interface RecruitDAO {
 	//레슨상세페이지
 	public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
 	
-	//용병모집상세페이지에서 요일 가져오기
+	//조회수 올리기는 레슨상세페이지에서 실행
+	int lessonDeatilCnt(int recruitment_no);
+	
+	//레슨모집상세페이지에서 요일 가져오기
 	public List<String> getRecruit_lesson_day(int recruitment_no);
 
-	//용병모집상세페이지에서 시간 가져오기
+	//레슨모집상세페이지에서 시간 가져오기
 	public List<String> getRecruit_lesson_time(int recruitment_no);
+	
+	//레슨모집 새글쓰기 저장 
+	public int regLessonRecruit(RecruitLessonDTO recruitLessonDTO);
+	
+	//레슨모집 새글쓰기 요일 삽입
+	public int newInsertDay_lesson(RecruitLessonDTO recruitLessonDTO);	
+	
+	//레슨모집 새글쓰기 시간 삽입
+	public int newInsertTime_lesson(RecruitLessonDTO recruitLessonDTO);
+	
+	
+	
+	//레슨모집 수정페이지
+	public RecruitLessonDTO getRecruit_LessonUpDel(int recruitment_no);
+	
+	public List<String> getRecruit_LessonUpDel_day(int recruitment_no);
+	
+	public List<String> getRecruit_LessonUpDel_time(int recruitment_no);
+	
+	public RecruitLessonDTO getRecruit_LessonUpDel_sidosigungu(int recruitment_no);
+	
+	
+	//레슨 게시물 수정
+	public int recruitUpdateLesson(RecruitLessonDTO recruitLessonDTO);
+	
+	public int deleteDay_lesson(RecruitLessonDTO recruitLessonDTO);
+	
+	public int deleteTime_lesson(RecruitLessonDTO recruitLessonDTO);
+	
+	
+
+	public int insertDay_lesson(RecruitLessonDTO recruitLessonDTO);	
+	
+	public int insertTime_lesson(RecruitLessonDTO recruitLessonDTO);
+	
+	public int recruitDeleteLesson(RecruitLessonDTO recruitLessonDTO);
 	
 }

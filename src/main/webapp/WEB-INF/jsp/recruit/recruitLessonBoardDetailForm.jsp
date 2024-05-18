@@ -71,7 +71,39 @@
 					<!-- 상세보기할 게시판의 조회수 표현하기 -->
 					<!--------------------------------------------------- -->
 					<td>${requestScope.lessondetailList.readcount}</td>
-				</tr><tr>
+				</tr>
+				
+				<tr>
+                  <th bgColor="lightgray">지역</th>
+                  <!--------------------------------------------------- -->
+                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
+                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
+                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
+                  <!--------------------------------------------------- -->
+                  <td>${requestScope.lessondetailList.sido_c} ${requestScope.lessondetailList.sigungu_c}</td>
+               </tr>
+               
+               <tr>
+                  <th bgColor="lightgray">요일</th>
+                  <!--------------------------------------------------- -->
+                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
+                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
+                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
+                  <!--------------------------------------------------- -->
+                  <td>${requestScope.day}</td>
+               </tr>
+               
+               <tr>
+                  <th bgColor="lightgray">시간</th>
+                  <!--------------------------------------------------- -->
+                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
+                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
+                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
+                  <!--------------------------------------------------- -->
+                  <td>${requestScope.time}</td>
+               </tr>
+				
+				<tr>
 					<th bgColor="lightgray">비용</th>
 					<!--------------------------------------------------- -->
 					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
@@ -101,12 +133,23 @@
 					onclick="location.replace('/recruitLessonBoardForm.do')">
 					[목록 화면으로] </span>
 	        	<c:if test="${sessionScope.nickname eq requestScope.lessondetailList.nickname}">
-					<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.recruitLessonboardUpDelForm.submit()" >
+					<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.recruitLessonBoardUpDelForm.submit()" >
 				</c:if>
 	    
 	    	</c:if>
 	    </center>	
-    
+	    
+	    
+	    
+    	<<!--------------------------------------------------------------------------->
+		<!-- WAS에 "/recruitTeamMemBoardUpDelForm.do" 주소로 접속하기 위한 form 태그 선언하기 -->
+		<!--------------------------------------------------------------------------->
+		<form name="recruitLessonBoardUpDelForm" action="/recruitLessonBoardUpDelForm.do" method="post">
+		<!------------------------------------------------------------------------>
+		<!-- 게시판 고유번호가 저장된 hidden 태그 선언하기 -->
+		<!------------------------------------------------------------------------>
+		<input type="hidden" name="recruitment_no"value="${requestScope.lessondetailList.recruitment_no}">
+		</form>
     
 </body>
 </html>
