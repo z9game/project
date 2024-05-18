@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kosmo.team.project.dto.AdminSearchDTO;
+import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.RecruitHiredDTO;
 import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitSearchDTO;
@@ -135,6 +137,16 @@ public interface RecruitDAO {
 	
 	
 	
+	//용병페이지_페이지처리하기
+	public List<RecruitHiredDTO> getRecruitHired(RecruitSearchDTO recruitSearchDTO);
+
+	public int getHiredListCnt(RecruitSearchDTO recruitSearchDTO);
+
+	public int getHiredListAllCnt();
+	
+	
+	
+	
 //---------------------------------------------------------------------------	
 
 	//레슨모집페이지_boardlist
@@ -187,5 +199,4 @@ public interface RecruitDAO {
 	public int insertTime_lesson(RecruitLessonDTO recruitLessonDTO);
 	
 	public int recruitDeleteLesson(RecruitLessonDTO recruitLessonDTO);
-	
 }

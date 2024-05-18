@@ -21,6 +21,8 @@ public class RecruitSearchDTO {
 	private int end_rowNo;
 	
 	
+	
+	
 	public String getSearchType1() {
 		return searchType1;
 	}

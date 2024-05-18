@@ -37,9 +37,10 @@ public class AdminController {
 	
 	
 	
-	
+	//있어야함
 	@RequestMapping("/adminForm.do")
 
+	//있어야함
 	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, HttpSession session  ) {
 		
 		
@@ -57,10 +58,10 @@ public class AdminController {
 		
 		
 		
-		
+		//다 있어야함
 		// admin인 경우에만 회원 목록 조회 수행
 		int memberListAllCnt = this.adminService.getMemberListAllCnt();
-
+		
 		int memberListCnt = this.adminService.getMemberListCnt(adminSearchDTO);
 			
 		

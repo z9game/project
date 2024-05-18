@@ -10,6 +10,8 @@ import kosmo.team.project.dao.CommunityDAO;
 import kosmo.team.project.dao.RecruitDAO;
 import kosmo.team.project.dao.SampleDAO;
 import kosmo.team.project.dao.TournamentDAO;
+import kosmo.team.project.dto.AdminSearchDTO;
+import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.RecruitHiredDTO;
 import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitSearchDTO;
@@ -22,6 +24,10 @@ public class RecruitServiceImpl implements RecruitService {
 	@Autowired
 	private RecruitDAO recruitDAO;
 	
+
+//==================================================================================================================================	
+	
+	//팀/팀원모집페이지_boardlist
 	public List<RecruitTeamMemDTO> getRecruit_TeamMemList(RecruitSearchDTO recruitSearchDTO) {
 
 		List<RecruitTeamMemDTO> getRecruit_TeamMemList = this.recruitDAO.getRecruit_TeamMemList(recruitSearchDTO);
@@ -29,15 +35,8 @@ public class RecruitServiceImpl implements RecruitService {
 		return getRecruit_TeamMemList;
 
 	}
-
-	public List<RecruitHiredDTO> getRecruit_HiredBoardList() {
-
-		List<RecruitHiredDTO> getRecruit_HiredBoardList = this.recruitDAO.getRecruit_HiredBoardList();
-
-		return getRecruit_HiredBoardList;
-
-	}
 	
+	//??
 	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO) {
 		
 		int boardListCnt = this.recruitDAO.getBoardListCnt(recruitSearchDTO);
@@ -45,8 +44,10 @@ public class RecruitServiceImpl implements RecruitService {
 		return boardListCnt;
 	}
 	
+	//팀/팀원상세페이지
 	public RecruitTeamMemDTO getRecruit_TeamMemDetail(int b_no) {
 
+		//조회수올리기
 		int updateReadCnt = this.recruitDAO.updateTeamMemReadCnt(b_no);
 		
 		RecruitTeamMemDTO getRecruit_TeamMemDetail = this.recruitDAO.getRecruit_TeamMemDetail(b_no);
@@ -55,20 +56,19 @@ public class RecruitServiceImpl implements RecruitService {
 
 	}
 	
-	
-	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no) {
-		
-		//조회수 올리기는 용병상세페이지에서 실행
-		int hiredDeatilCnt = this.recruitDAO.hiredDeatilCnt(recruitment_no);
-
-		RecruitHiredDTO getRecruit_HiredDetail = this.recruitDAO.getRecruit_HiredDetail(recruitment_no);
-
-		return getRecruit_HiredDetail;
-
+	//팀/팀원상세페이지에서 요일 가져오기
+	public List<String> getRecruit_day(int b_no){
+		List<String> getRecruit_day = this.recruitDAO.getRecruit_day(b_no); 
+		return getRecruit_day; 	
 	}
 	
-
+	//팀/팀원상세페이지에서 시간 가져오기
+	public List<String> getRecruit_time(int b_no){
+		List<String> getRecruit_time = this.recruitDAO.getRecruit_time(b_no);
+		return getRecruit_time; 
+	}
 	
+	//팀/팀원모집수정삭제페이지
 	public int regTeamMemRecruit(RecruitTeamMemDTO recruitTeamMemDTO) {
 		int regTeamMemRecruit = this.recruitDAO.regTeamMemRecruit(recruitTeamMemDTO);
 		
@@ -102,29 +102,6 @@ public class RecruitServiceImpl implements RecruitService {
 		return regHiredRecruit; 		
 		
 	}
-	
-	public List<String> getRecruit_day(int b_no){
-		List<String> getRecruit_day = this.recruitDAO.getRecruit_day(b_no); 
-		return getRecruit_day; 	
-	}
-	
-	public List<String> getRecruit_time(int b_no){
-		List<String> getRecruit_time = this.recruitDAO.getRecruit_time(b_no);
-		return getRecruit_time; 
-	}
-	
-	//용병모집상세페이지에서 요일 가져오기
-	public List<String> getRecruit_hired_day(int recruitment_no){
-		List<String> getRecruit_hired_day = this.recruitDAO.getRecruit_hired_day(recruitment_no); 
-		return getRecruit_hired_day; 	
-	}
-	
-	//용병모집상세페이지에서 시간 가져오기
-	public List<String> getRecruit_hired_time(int recruitment_no){
-		List<String> getRecruit_hired_time = this.recruitDAO.getRecruit_hired_time(recruitment_no);
-		return getRecruit_hired_time; 
-	}
-	
 
 	
 	public RecruitTeamMemDTO getRecruit_TeamMemUpDel(int b_no) {
@@ -148,7 +125,7 @@ public class RecruitServiceImpl implements RecruitService {
 		 return recruitTeamMemDTO_sidosigungu;
 	 }
 	 
-	 //service(인터페이스 공간)에 이름만 정의해준 메소드의 기능을 이 안에서 정의, 팀/팀원 게시물 수정
+	 //service(인터페이스 공간)에 이름만 정의해준 메소드의 기능을 이 안에서 정의, 팀/팀원 게시물 수정(삭제후재입력)
 	 public int recruitUpdateTeamMem(RecruitTeamMemDTO recruitTeamMemDTO){
 		 int deleteDay = this.recruitDAO.deleteDay(recruitTeamMemDTO);
 		 int deleteTime = this.recruitDAO.deleteTime(recruitTeamMemDTO);
@@ -193,29 +170,64 @@ public class RecruitServiceImpl implements RecruitService {
 	 
 //==================================================================================================================================
 
+	//용병모집board페이지
+	public List<RecruitHiredDTO> getRecruit_HiredBoardList() {
+
+		List<RecruitHiredDTO> getRecruit_HiredBoardList = this.recruitDAO.getRecruit_HiredBoardList();
+
+		return getRecruit_HiredBoardList;
+
+	}
+	
+	//용병상세페이지
+	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no) {
+		
+		//조회수 올리기는 용병상세페이지에서 실행
+		int hiredDeatilCnt = this.recruitDAO.hiredDeatilCnt(recruitment_no);
+
+		RecruitHiredDTO getRecruit_HiredDetail = this.recruitDAO.getRecruit_HiredDetail(recruitment_no);
+
+		return getRecruit_HiredDetail;
+
+	}
+	
+	//용병모집상세페이지에서 요일 가져오기
+	public List<String> getRecruit_hired_day(int recruitment_no){
+		List<String> getRecruit_hired_day = this.recruitDAO.getRecruit_hired_day(recruitment_no); 
+		return getRecruit_hired_day; 	
+	}
+	
+	//용병모집상세페이지에서 시간 가져오기
+	public List<String> getRecruit_hired_time(int recruitment_no){
+		List<String> getRecruit_hired_time = this.recruitDAO.getRecruit_hired_time(recruitment_no);
+		return getRecruit_hired_time; 
+	}
+	 
 	//용병모집수정삭제페이지
 	public RecruitHiredDTO getRecruit_HiredUpDel(int recruitment_no) {
 		RecruitHiredDTO recruitHiredDTO = this.recruitDAO.getRecruit_HiredUpDel(recruitment_no);
 		return recruitHiredDTO;
 	}
 	
+	//용병모집수정페이지에서 요일 가져오기
 	public List<String> getRecruit_HiredUpDel_day(int recruitment_no) {
 		List<String> recruitHiredDTO_day = this.recruitDAO.getRecruit_HiredUpDel_day(recruitment_no);
 		return recruitHiredDTO_day;
 	}
 	
+	//용병모집수정페이지에서 시간 가져오기
 	public List<String> getRecruit_HiredUpDel_time(int recruitment_no) {
 		List<String> recruitHiredDTO_time = this.recruitDAO.getRecruit_HiredUpDel_time(recruitment_no);
 		return recruitHiredDTO_time;
 	}
 	
-	
+	//용병모집수정페이지에서 시군구 가져오기
 	 public RecruitHiredDTO getRecruit_HiredUpDel_sidosigungu(int recruitment_no) {
 		 RecruitHiredDTO recruitHiredDTO_sidosigungu = this.recruitDAO.getRecruit_HiredUpDel_sidosigungu(recruitment_no);
 		 return recruitHiredDTO_sidosigungu;
 	 }
 	 
-	 //service(인터페이스 공간)에 이름만 정의해준 메소드의 기능을 이 안에서 정의, 용병 게시물 수정
+	 //service(인터페이스 공간)에 이름만 정의해준 메소드의 기능을 이 안에서 정의, 용병 게시물 수정(삭제후재입력)
 	 public int recruitUpdateHired(RecruitHiredDTO recruitHiredDTO){
 		 int deleteDay_hired = this.recruitDAO.deleteDay_hired(recruitHiredDTO);
 		 int deleteTime_hired = this.recruitDAO.deleteTime_hired(recruitHiredDTO);
@@ -232,6 +244,36 @@ public class RecruitServiceImpl implements RecruitService {
 		 
 		 return recruitUpdateHired;
 	 }
+	 
+	 //용병페이징처리
+	 @Override
+		public List<RecruitHiredDTO> getRecruitHired(RecruitSearchDTO recruitSearchDTO) {
+
+			List<RecruitHiredDTO> recruitHired = this.recruitDAO.getRecruitHired(recruitSearchDTO);
+
+			return recruitHired;
+
+		}
+
+		public int getHiredListCnt(RecruitSearchDTO recruitSearchDTO) {
+
+			int hiredListCnt = this.recruitDAO.getHiredListCnt(recruitSearchDTO);
+
+			return hiredListCnt;
+
+		}
+
+		public int getHiredListAllCnt() {
+			// --------------------------------------
+			// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
+			// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
+			// --------------------------------------
+			int hiredListAllCnt = this.recruitDAO.getHiredListAllCnt();
+			// --------------------------------------
+			// 변수 boardListAllCnt 안의 데이터를 리턴하기
+			// --------------------------------------
+			return hiredListAllCnt;
+		}
 	 
 	 
 	//service(인터페이스 공간)에 이름만 정의해준 메소드의 기능을 이 안에서 정의, 용병 게시물 삭제

@@ -16,11 +16,11 @@
 <script>
 
 
-
+//$(document).read는 body태그를 읽고 나서 실행하는 거...기본값 10개로 설정
 $(document).ready(function() {
     $(".rowCntPerPage").val("10");
-    search();
-    checkDate();
+    search(); //요거는 아님
+    checkDate(); //요거는 아님
     
     
 
@@ -44,13 +44,13 @@ $(document).ready(function() {
 }
 
 
-	
+	//이거있어야함
 	function search() {
 		//---------------------------------------------
 		// 변수 boardSearchFormObj 선언하고 
 		// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
 		//---------------------------------------------
-		var boardSearchFormObj = $("[name='adminSearchForm']");
+		var boardSearchFormObj = $("[name='adminSearchForm']");//이거있어야함.searchform여기있음
 
 		var keyword1Obj = boardSearchFormObj.find(".keyword1"); 
 		  
@@ -73,7 +73,7 @@ $(document).ready(function() {
 	    var maxGames_played = maxGames_playedObj.val();
 	    
 	    
-	  
+	   //이거있어야함
 	    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
 		
 		
@@ -81,7 +81,7 @@ $(document).ready(function() {
 	    
 
 
-		
+		//이거있어야함
 		$.ajax({
 					//-------------------------------
 					// WAS 로 접속할 주소 설정
@@ -102,12 +102,12 @@ $(document).ready(function() {
 						var obj = $(responseHtml);
 
 	
-						
+						//해당하는 페이지의 내용으로 덮어씌워라
 						$(".adminFormContainer").html(obj.filter(".adminFormContainer").html());
 						
 						
 
-						
+						//번호를 눌렀을 때 해당하는 페이지의 내용을 가지고 와라
 						$(".pagingNos").html(obj.find(".pagingNos").html());
 						
 
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 				});
 
-	}
+	}//요기까지
 
 	function searchWithSort(sort) {
 	    $("[name='adminSearchForm']").find("[name='sort']").val(sort);
@@ -158,6 +158,7 @@ $(document).ready(function() {
 
 	}
 
+	     //이거있어야함
 	//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 	// [페이지 번호]를 클릭하면 호출되는 함수 pageNoClick 선언하기 
 	// 쪼개서 보여주기.
@@ -170,11 +171,11 @@ $(document).ready(function() {
 		// 즉 <input type="hidden" name="selectPageNo" value="1"> 태그에
 		// value 값에 [클릭한 페이지 번호]를 저장하기
 		//---------------------------------------------
-		$("[name='adminSearchForm']").find(".selectPageNo").val(clickPageNo)
+		$("[name='adminSearchForm']").find(".selectPageNo").val(clickPageNo) //searchform여기있음
 
 		search()
 
-	}
+	} //요까지
 
 	function checkDate() {
 		$(function() {
@@ -250,7 +251,7 @@ $(document).ready(function() {
 
 
 
-
+	<!-- searchform여기있음 -->
 	<form name="adminSearchForm" onsubmit="return false">
 
 		<table align="center">
@@ -383,7 +384,10 @@ $(document).ready(function() {
 			</tr>
 
 		</table>
-		<input type="hidden" name="sort" class="sort"> <input
+		<input type="hidden" name="sort" class="sort"> 
+		
+		<!-- 이거있어야함 / form태그 안에 있어야 함. 이름은 마음대로 ex.searchform -->
+		<input
 			type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 
@@ -541,7 +545,7 @@ $(document).ready(function() {
 
 
 
-
+	<!-- 있어야함 -->
 	<center>
 
 		<span class="pagingNos"> <span style="cursor: pointer"
@@ -574,7 +578,7 @@ $(document).ready(function() {
 			<option value="20">20
 		</select>행보기 &nbsp;&nbsp;&nbsp;
 	</center>
-
+	<!-- 있어야함 -->
 
 	<form name="adminMemberDetailForm" action="/adminMemberDetailForm.do"
 		method="post">

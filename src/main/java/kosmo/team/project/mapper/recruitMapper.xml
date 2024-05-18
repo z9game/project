@@ -422,7 +422,10 @@
    
    
    <!-- 용병 모집 게시물 가져오기 + 검색조건 추가 아직 안 함 -->
-   <select id="getRecruit_HiredBoardList" resultType="kosmo.team.project.dto.RecruitHiredDTO">
+   <select id="getRecruitHired" resultType="kosmo.team.project.dto.RecruitHiredDTO">
+   		select * from (
+		select rownum RNUM, zxcvb.* from (
+		
           	select 
               distinct(h.recruitment_no) 
               ,h.title 
@@ -431,14 +434,32 @@
               ,h.readcount 
               ,to_char(h.reg_date, 'YYYY-MM-DD') as "reg_date"
           from 
-              Hired_recruitment h LEFT JOIN hiredboard_day dh ON h.recruitment_no = dh.recruitment_no 
+              hired_recruitment h LEFT JOIN hiredboard_day dh ON h.recruitment_no = dh.recruitment_no 
                                   LEFT JOIN hiredboard_time th ON h.recruitment_no = th.recruitment_no
                                   LEFT JOIN member m ON h.nickname = m.m_no
+                                  
+        <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
    </select> 
    
    
    <!-- 용병 모집 게시물의 개수 구하기 + 검색한 후의 개수도 포함 -->
-   <!-- 아직 안 만듦 -->
+   <!-- 아직 안 만듦 만드는 중-->
+   <select id="getHiredListCnt" resultType="int">
+		select count(*)
+		from
+			hired_recruitment
+		<include refid="boardWhere" />
+	</select>
+
+
+
+	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
+	<select id="getHiredListAllCnt" resultType="int">
+		select count(*)
+		from
+			hired_recruitment
+		<include refid="boardWhere" />
+	</select>
             
          
    <!-- 용병 모집 게시물 상세페이지 -->

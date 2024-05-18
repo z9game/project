@@ -36,6 +36,8 @@ public class AdminSearchDTO {
     private int minAssists;
     private int maxAssists;
     
+    //주석처리된부분4개필요함
+    
     // 선택한 페이지 번호 관련 파값 저장 변수
     private int selectPageNo;
     // 페이지 당 보여줄 행의 개수 관련 파값 저장 변수
@@ -44,7 +46,8 @@ public class AdminSearchDTO {
     private int begin_rowNo;
     // 테이블 검색 시 끝행 번호 저장 변수 선언.
     private int end_rowNo;
-	public String getSearchType1() {
+	
+    public String getSearchType1() {
 		return searchType1;
 	}
 	public void setSearchType1(String searchType1) {

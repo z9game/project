@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.AdminSearchDTO;
+import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.RecruitHiredDTO;
 import kosmo.team.project.dto.RecruitLessonDTO;
 import kosmo.team.project.dto.RecruitSearchDTO;
@@ -54,18 +58,6 @@ public class RecruitController {
     	
         return mav;
     }
-
-
-    //팀/팀원새글쓰기페이지
-    @RequestMapping(value = "/newRecruitTeamMemBoardForm.do")
-    public ModelAndView newRecruitTeamMemBoardForm() {
-    	
-    	ModelAndView mav = new ModelAndView();
-    	mav.setViewName("/recruit/newRecruitTeamMemBoardForm.jsp");
-    	
-        return mav;
-    }
-    
     
     //팀/팀원상세페이지
     @RequestMapping(value = "/recruitTeamMemBoardDetailForm.do")
@@ -86,6 +78,18 @@ public class RecruitController {
     	
         return mav;
     }
+
+
+    //팀/팀원새글쓰기페이지
+    @RequestMapping(value = "/newRecruitTeamMemBoardForm.do")
+    public ModelAndView newRecruitTeamMemBoardForm() {
+    	
+    	ModelAndView mav = new ModelAndView();
+    	mav.setViewName("/recruit/newRecruitTeamMemBoardForm.jsp");
+    	
+        return mav;
+    }
+    
     
     //팀/팀원새글쓰기페이지_등록
 	@RequestMapping( value = "/recruitTeamMemRegProc.do"
@@ -189,13 +193,34 @@ public class RecruitController {
 
     //용병모집페이지_boardlist
     @RequestMapping(value = "/recruitHiredBoardForm.do")
-    public ModelAndView recruitHiredBoardForm() {
+    public ModelAndView recruitHiredBoardForm(RecruitSearchDTO recruitSearchDTO, HttpSession session) {
+        
+    		int hiredListAllCnt = this.recruitService.getHiredListAllCnt();
+
+    		int hiredListCnt = this.recruitService.getHiredListCnt(recruitSearchDTO);
+
+    		Map<String, Integer> hiredMap = Page.getPagingMap(
+
+    				recruitSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+    				, recruitSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+    				, hiredListCnt // 검색 결과물 개수
+
+    		);
+
+    		recruitSearchDTO.setSelectPageNo((int) hiredMap.get("selectPageNo"));
+    		recruitSearchDTO.setRowCntPerPage((int) hiredMap.get("rowCntPerPage"));
+    		recruitSearchDTO.setBegin_rowNo((int) hiredMap.get("begin_rowNo"));
+    		recruitSearchDTO.setEnd_rowNo((int) hiredMap.get("end_rowNo"));
     	
-    	List<RecruitHiredDTO> recruitHired = this.recruitService.getRecruit_HiredBoardList();
+    	List<RecruitHiredDTO> recruitHired = this.recruitService.getRecruitHired(recruitSearchDTO);
     	ModelAndView mav = new ModelAndView();
     	//오라클의 실행구문 결과물이 저장된 변수 recruitHired를 JSP쪽에서 ${requestScope.boardList.DTO안에있는멤버변수명} 이런식으로 불러 사용하기 위해 addObject라는 것을 사용
     	//즉, JSP페이지에서 boardList라는 키값을 부르면 그 키값에 해당하는 데이터(recruitHired)를 사용할수 있는 것임.
-    	mav.addObject("boardList", recruitHired);
+
+		mav.addObject("boardList", recruitHired);
+		mav.addObject("hiredListCnt", hiredListCnt);
+		mav.addObject("hiredListAllCnt", hiredListAllCnt);
+		mav.addObject("hiredMap", hiredMap);
     	mav.setViewName("/recruit/recruitHiredBoardForm.jsp");
     	
         return mav;
@@ -304,8 +329,7 @@ public class RecruitController {
 	
 	return resultMap;
 	}
-    
-    
+		
 //==================================================================================================================================
 
 	//레슨모집페이지_boardlist

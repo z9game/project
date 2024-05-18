@@ -14,6 +14,91 @@
 
 <script>
 
+//페이징처리_기본값10개로설정
+$(document).ready(function() {
+    $(".rowCntPerPage").val("10");
+    search() 
+});
+
+
+//페이징처리
+function search() {
+	//---------------------------------------------
+	// 변수 boardSearchFormObj 선언하고 
+	// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
+	//---------------------------------------------
+	var boardSearchFormObj = $("[name='recruit_hired']");
+
+    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
+	
+	
+
+    alert(boardSearchFormObj.serialize());
+
+
+	//이거있어야함
+	$.ajax({
+				//-------------------------------
+				// WAS 로 접속할 주소 설정
+				//-------------------------------
+				url : "/recruitHiredBoardForm.do"
+				//-------------------------------
+				// WAS 로 접속하는 방법 설정. get 또는 post
+				//-------------------------------
+				,
+				type : "post"
+
+				,
+				data : boardSearchFormObj.serialize()
+
+				,
+				success : function(responseHtml) {
+
+					var obj = $(responseHtml);
+
+
+					//해당하는 페이지의 내용으로 덮어씌워라
+					$(".recruitHiredBoard").html(obj.find(".recruitHiredBoard").html());
+					
+					
+
+					//번호를 눌렀을 때 해당하는 페이지의 내용을 가지고 와라
+					$(".pagingNos").html(obj.find(".pagingNos").html());
+					
+
+
+				}
+
+				,
+				error : function() {
+
+					alert("검색 실패! 관리자에게 문의 바랍니다.");
+				}
+
+			});
+
+}
+
+//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+// [페이지 번호]를 클릭하면 호출되는 함수 pageNoClick 선언하기 
+// 쪼개서 보여주기.
+//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+function pageNoClick(clickPageNo) {
+	//alert(clickPageNo);
+	//---------------------------------------------
+	// name='selectPageNo' 를 가진 태그의 value 값에 
+	// 매개변수로 들어오는 [클릭한 페이지 번호]를 저장하기
+	// 즉 <input type="hidden" name="selectPageNo" value="1"> 태그에
+	// value 값에 [클릭한 페이지 번호]를 저장하기
+	//---------------------------------------------
+	$("[name='recruit_hired']").find(".selectPageNo").val(clickPageNo)
+
+	search()
+
+}
+
+
+
 //엔터키작동
 function enterkey()
 {
@@ -25,54 +110,54 @@ function enterkey()
 }
 
 //검색
-function search() {
+// function search() {
 
-   //---------------------------------------------
-   // 변수 boardSearchFormObj 선언하고 
-   // name='recruit_hired' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
-   //---------------------------------------------
-   var boardSearchFormObj = $("[name='recruit_hired']");
+//    //---------------------------------------------
+//    // 변수 boardSearchFormObj 선언하고 
+//    // name='recruit_hired' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
+//    //---------------------------------------------
+//    var boardSearchFormObj = $("[name='recruit_hired']");
 
-   var keyword1Obj = boardSearchFormObj.find(".keyword1"); 
+//    var keyword1Obj = boardSearchFormObj.find(".keyword1"); 
 
-   var keyword1 = keyword1Obj.val();
+//    var keyword1 = keyword1Obj.val();
      
-   if(typeof(keyword1)!='string' ){keyword1=""; }
+//    if(typeof(keyword1)!='string' ){keyword1=""; }
     
-    keyword1 = $.trim(keyword1);
+//     keyword1 = $.trim(keyword1);
     
     
-   $.ajax({
-      //-------------------------------
-      // WAS 로 접속할 주소 설정
-      //-------------------------------
-      url : "/recruitHiredBoardForm.do"
-      //-------------------------------
-      // WAS 로 접속하는 방법 설정. get 또는 post
-      //-------------------------------
-      ,
-      type : "post"
+//    $.ajax({
+//       //-------------------------------
+//       // WAS 로 접속할 주소 설정
+//       //-------------------------------
+//       url : "/recruitHiredBoardForm.do"
+//       //-------------------------------
+//       // WAS 로 접속하는 방법 설정. get 또는 post
+//       //-------------------------------
+//       ,
+//       type : "post"
 
-      ,
-      data : boardSearchFormObj.serialize() 
+//       ,
+//       data : boardSearchFormObj.serialize() 
 
-      ,
-      success : function(responseHtml) {
+//       ,
+//       success : function(responseHtml) {
 
-         var obj = $(responseHtml);
+//          var obj = $(responseHtml);
 
-         $(".recruitHiredBoard").html(obj.find(".recruitHiredBoard").html());
+//          $(".recruitHiredBoard").html(obj.find(".recruitHiredBoard").html());
 			
-      }
+//       }
 
-      ,
-      error : function() {
+//       ,
+//       error : function() {
 
-         alert("검색 실패! 관리자에게 문의 바랍니다.");
-      }
+//          alert("검색 실패! 관리자에게 문의 바랍니다.");
+//       }
 
-   });
-}
+//    });
+// }
    
  
 
@@ -194,7 +279,11 @@ function search() {
 	  					</dd>
 	  			</dl>
 			</div>	
-			
+			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+	<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
+	<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+	<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+	<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 	 	</form>
 		
   <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->		
@@ -212,8 +301,6 @@ function search() {
 				<input type="button" class="newRecruitHiredBoardBtn" value="새 글 쓰기" onclick="checkReserveForm()">
 			</div>
 		</center>
-     
-     
      
       <div class="recruitHiredBoard">
          <table class="boardListTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin: 0 auto; margin-top:10px; width:1000px;">
@@ -246,6 +333,39 @@ function search() {
    </div>
   
 	<div style="height:30px;"></div>
+      
+      <center>
+
+		<span class="pagingNos"> <span style="cursor: pointer"
+			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.hiredMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+
+
+			<c:forEach var="pageNo"
+				begin="${requestScope.hiredMap.begin_pageNo}"
+				end="${requestScope.hiredMap.end_pageNo}">
+
+				<c:if test="${requestScope.hiredMap.selectPageNo==pageNo}">
+            ${pageNo}
+         </c:if>
+
+				<c:if test="${requestScope.hiredMap.selectPageNo!=pageNo}">
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+				</c:if>
+			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.hiredMap.selectPageNo}+1)">[다음]</span>
+			<span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.hiredMap.last_pageNo})">[마지막]</span>
+			&nbsp;&nbsp;&nbsp;
+			[${requestScope.hiredListCnt}/${requestScope.hiredListAllCnt}]개
+			&nbsp;&nbsp;
+		</span> <select name="rowCntPerPage" class="rowCntPerPage"
+			onChange="search()">
+			<option value="10">10
+			<option value="15">15
+			<option value="20">20
+		</select>행보기 &nbsp;&nbsp;&nbsp;
+	</center>
          
       <form name="recruitHiredBoardDetailForm" action="/recruitHiredBoardDetailForm.do" method="post">
          <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
