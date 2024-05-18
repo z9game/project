@@ -25,17 +25,17 @@
                upper(m.nickname) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'title'">
-               upper(title) like upper('%${keyword1}%')
+               upper(r.title) like upper('%${keyword1}%')
             </if>
             <if test="searchType1== 'content'">
-               upper(content) like upper('%${keyword1}%')
+               upper(r.content) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'all'">
                upper(m.nickname) like upper('%${keyword1}%')
                or
-               upper(title) like upper('%${keyword1}%')
+               upper(r.title) like upper('%${keyword1}%')
                or
-               upper(content) like upper('%${keyword1}%')
+               upper(r.content) like upper('%${keyword1}%')
             </if>
             )
          </if>

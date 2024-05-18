@@ -465,14 +465,14 @@ function checkReserveForm()
 					<th style="width:40px;">조회수</th>
 					
 					<c:if test="${param.sort_date!='reg_date asc' and param.sort_date!='reg_date desc'}">
-					<th width="100" onClick="searchWithSort('reg_date desc')" style="cursor:pointer">등록일</th>
+					<th width="100" onClick="searchWithSort('r.reg_date desc')" style="cursor:pointer">등록일</th>
 					</c:if>
 					<!--============================================================= -->
 					<!-- 만약 파명 "sort" 의 파값이 'reg_date desc' 면 -->
 					<!-- 즉 정렬 의지가 'reg_date desc' 면             -->
 					<!--============================================================= -->
 					<c:if test="${param.sort_date=='reg_date desc'}">
-						<th width="100" onClick="searchWithSort('reg_date asc')" style="cursor:pointer">등록일▼</th>
+						<th width="100" onClick="searchWithSort('r.reg_date asc')" style="cursor:pointer">등록일▼</th>
 					</c:if>	
 					<!--============================================================= -->
 					<!-- 만약 파명 "sort" 의 파값이 'reg_date asc' 면 -->

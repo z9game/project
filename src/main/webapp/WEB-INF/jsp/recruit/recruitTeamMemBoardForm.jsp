@@ -90,7 +90,7 @@ function sort_Mem()
 
          var obj = $(responseHtml);
 
-         $(".recruitTeamMemBoard").html(obj.find(".recruitMemBoard").html());
+         $(".recruitTeamMemBoard").html(obj.find(".recruitTeamMemBoard").html());
 
          sort="mem";
       }

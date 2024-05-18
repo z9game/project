@@ -107,9 +107,32 @@ public interface AdminDAO {
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 	int insertStadium(Stadim2DTO stadim2DTO);
 	
+
+	//=======================================================================================================
+	//대회일정
+	//=======================================================================================================
 	public List<TournamentDTO> getTournamentList(TournamentSearchDTO tournamentSearchDTO);
 	
 	public int getTournamentListCnt(TournamentSearchDTO tournamentSearchDTO);
+	
+	public TournamentDTO getTournamentDetail(int list_no);
+
+	public int deleteBoard(int list_no);
+	
+	public int regBoard(TournamentDTO tournamentDTO);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public int getCommunityGallaryBoardListAllCnt();
 	

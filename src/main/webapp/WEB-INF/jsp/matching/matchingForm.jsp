@@ -51,8 +51,6 @@
 	    
 	    keyword1 = $.trim(keyword1);
 	    
-	    alert(boardSearchFormObj.serialize())
-	    
 		$.ajax({
 			//-------------------------------
 			// WAS 로 접속할 주소 설정

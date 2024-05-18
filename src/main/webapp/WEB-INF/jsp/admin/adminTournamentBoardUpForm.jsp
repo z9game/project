@@ -9,38 +9,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>newAdminTournamentBoardForm</title>
+<title>AdminTournamentUpForm</title>
 <link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
 
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 <script>
-	function deleteBoard(){
-		
-		var formObj = $("[name='upDelTournament']");
-		if (confirm("정말 삭제하시겠습니까?") == false) {
-			return;
-		}
-
-		
-		$.ajax({
-			url : "/deleteTournamentProc.do",
-			type : "post",
-			data : formObj.serialize(),
-			success : function(json) {
-				var result = json["result"];
-				if (result == 1) {
-					alert("삭제되었습니다.");
-					location.href = "/adminTournamentBoardForm.do";
-				}
-			},
-			error : function() {
-				alert("삭제 실패! 관리자에게 문의 바랍니다.");
-			}
-		});
-		
-	}
-
+   
 </script>
 
 
@@ -59,7 +34,7 @@
             <tr>
                <th>제목</th>
                <td>
-               		${requestScope.detail.subject}  	 
+               		<input type="text" name="subject" value="${requestScope.detail.subject}"> 	 
                </td>
             </tr>
             
@@ -68,7 +43,16 @@
             <tr>
                <th>지역</th>
                <td>
-                  	${requestScope.detail.region}
+               		<select name="region">
+               			<option>지역선택</option>
+               			<option value="서울" <c:if test="${requestScope.region eq '서울'}">selected</c:if>>서울</option>
+               			<option value="경기/인천" <c:if test="${requestScope.region eq '경기'}">selected</c:if>>경기/인천</option>
+               			<option value="강원" <c:if test="${requestScope.region eq '강원'}">selected</c:if>>강원</option>
+               			<option value="충청" <c:if test="${requestScope.region eq '충청'}">selected</c:if>>충청</option>
+               			<option value="전라" <c:if test="${requestScope.region eq '전라'}">selected</c:if>>전라</option>
+               			<option value="경상" <c:if test="${requestScope.region eq '경상'}">selected</c:if>>경상</option>
+               			<option value="제주" <c:if test="${requestScope.region eq '제주'}">selected</c:if>>제주</option>
+               		</select>
                </td>
             </tr>
             
@@ -76,13 +60,15 @@
             <tr>
             	<th bgColor="lightgray">신청기간</th>
                  <td>
-                 	${requestScope.detail.regist_start} ~ ${requestScope.detail.regist_end}
+                 	<input type="date" name="regist_start" value="${requestScope.detail.regist_start}">
+                 	~
+                 	<input type="date" name="regist_end" value="${requestScope.detail.regist_end}">
                  </td> 
             </tr> 
          	<tr>
            		<th bgColor="lightgray">내 용</th>
 	            <td>
-	               <textarea name="content" class="content" rows="13" cols="40" maxlength="500" readonly>
+	               <textarea name="content" class="content" rows="13" cols="40" maxlength="500">
 	               ${requestScope.detail.content}
 	               </textarea>
 	            </td>
@@ -96,10 +82,9 @@
          <!--------------------------------------------------- -->
          <span style="cursor: pointer"
             onclick="location.href='/adminTournamentBoardForm.do'"> [목록화면으로] </span>
-         <input type="button" value="수정" style="cursor:pointer" onclick="document.upDelTournament.submit()">
-         <input type="button" value="삭제" style="cursor:pointer" onclick="deleteBoard()">
+         <input type="button" value="수정" style="cursor:pointer" onclick="document.updateTournament.submit()">
 
-	<form name="upDelTournament" action="/adminTournamentBoardUpForm.do" method="post">
+	<form name="updateTournament" action="/adminTournamentBoardUpForm.do" method="post">
 		<input type="hidden" name="list_no" value="${requestScope.detail.list_no}">
 	</form>
 
