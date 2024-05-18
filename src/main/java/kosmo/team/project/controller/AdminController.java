@@ -1298,8 +1298,8 @@ public class AdminController {
 		   }
 		
 		   /*** 자유게시판 대댓글, 자유게시판 상세보기 ***/
-		   @RequestMapping(value = "/adminCommunityFreeBoardDetailCommentOfCommentList.do")
-		   public ModelAndView adminCommunityFreeBoardDetailCommentOfCommentList(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {
+		   @RequestMapping(value = "/adminCommunityFreeBoardDetailCommentOfCommentInsertProc.do")
+		   public ModelAndView adminCommunityFreeBoardDetailCommentOfCommentInsertProc(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {		      
 		      
 			   adminService.insertFreeBoardDetailCommentToComment(detailDTO);
 
@@ -1349,7 +1349,24 @@ public class AdminController {
 
 		      return resultMap;      
 		   }
-	
+
+		   /*** 자유게시판 대댓글 수정, 자유게시판 상세보기 ***/
+		   @RequestMapping(value = "/adminCommunityFreeBoardDetailCommentOfCommentUpdateProc.do")
+		   public ModelAndView adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {
+		     
+		      adminService.adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(detailDTO);
+
+		     return adminCommunityFreeBoardDetail(detailDTO, session);
+		   }
+
+		   /*** 자유게시판 대댓글 삭제, 자유게시판 상세보기 ***/
+		   @RequestMapping(value = "/adminCommunityFreeBoardDetailCommentOfCommentDeleteProc.do")
+		   public ModelAndView adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {
+		     
+		      adminService.adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(detailDTO);
+
+		     return adminCommunityFreeBoardDetail(detailDTO, session);
+		   }
 	
 	
 	

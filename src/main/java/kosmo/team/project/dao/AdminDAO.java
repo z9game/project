@@ -206,4 +206,9 @@ public interface AdminDAO {
    public int getFreeBoardCommentCount(int b_no);
    
    public int deleteCommunityFreeBoard(CommunityDTO communityDTO);
+   
+   public int adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public int adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO);
+   
 }
