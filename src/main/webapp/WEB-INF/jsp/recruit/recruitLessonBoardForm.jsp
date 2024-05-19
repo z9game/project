@@ -14,6 +14,88 @@
 
 <script>
 
+//페이징처리_기본값10개로설정
+$(document).ready(function() {
+  $(".rowCntPerPage").val("10");
+});
+
+
+//페이징처리
+function search() {
+	//---------------------------------------------
+	// 변수 boardSearchFormObj 선언하고 
+	// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
+	//---------------------------------------------
+	var boardSearchFormObj = $("[name='recruit_lesson']");
+
+  boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
+	
+	
+	//값 들어오는지 확인
+  //alert(boardSearchFormObj.serialize());
+
+
+	//이거있어야함
+	$.ajax({
+				//--------------------------------------------
+				// WAS 로 접속할 주소 설정
+				//--------------------------------------------
+				url : "/recruitLessonBoardForm.do"
+				//--------------------------------------------
+				// WAS 로 접속하는 방법 설정. get 또는 post
+				//--------------------------------------------
+				,
+				type : "post"
+
+				,
+				data : boardSearchFormObj.serialize()
+
+				,
+				success : function(responseHtml) {
+
+					var obj = $(responseHtml);
+
+
+					//해당하는 페이지의 내용으로 덮어씌워라
+					$(".recruitLessonBoard").html(obj.find(".recruitLessonBoard").html());
+					
+					
+
+					//번호를 눌렀을 때 해당하는 페이지의 내용을 가지고 와라
+					$(".pagingNos").html(obj.find(".pagingNos").html());
+					
+
+
+				}
+
+				,
+				error : function() {
+
+					alert("검색 실패! 관리자에게 문의 바랍니다.");
+				}
+
+			});
+
+}
+
+//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+//[페이지 번호]를 클릭하면 호출되는 함수 pageNoClick 선언하기 
+//쪼개서 보여주기.
+//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+function pageNoClick(clickPageNo) {
+	//alert(clickPageNo);
+	//---------------------------------------------
+	// name='selectPageNo' 를 가진 태그의 value 값에 
+	// 매개변수로 들어오는 [클릭한 페이지 번호]를 저장하기
+	// 즉 <input type="hidden" name="selectPageNo" value="1"> 태그에
+	// value 값에 [클릭한 페이지 번호]를 저장하기
+	//---------------------------------------------
+	$("[name='recruit_lesson']").find(".selectPageNo").val(clickPageNo)
+
+	search()
+
+}
+
 //엔터키작동
 function enterkey()
 {
@@ -24,7 +106,7 @@ function enterkey()
    }
 }
 
-//검색
+/* //검색
 function search() {
 
    //---------------------------------------------
@@ -72,7 +154,7 @@ function search() {
       }
 
    });
-}
+} */
    
  
 
@@ -195,6 +277,13 @@ function search() {
 	  			</dl>
 			</div>	
 			
+			<!-- 페이징처리관련 밑에두줄-->
+			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
+			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			
 	 	</form>
 		
   <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->		
@@ -244,6 +333,40 @@ function search() {
             </c:if>
       </div>
    </div>
+   
+   <!-- 페이징 처리 -->
+    <center>
+
+		<span class="pagingNos"> <span style="cursor: pointer"
+			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.lessonMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+
+
+			<c:forEach var="pageNo"
+				begin="${requestScope.lessonMap.begin_pageNo}"
+				end="${requestScope.lessonMap.end_pageNo}">
+
+				<c:if test="${requestScope.lessonMap.selectPageNo==pageNo}">
+            ${pageNo}
+        	    </c:if>
+
+				<c:if test="${requestScope.lessonMap.selectPageNo!=pageNo}">
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+				</c:if>
+			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.lessonMap.selectPageNo}+1)">[다음]</span>
+			<span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.lessonMap.last_pageNo})">[마지막]</span>
+			&nbsp;&nbsp;&nbsp;
+			[${requestScope.lessonListCnt}/${requestScope.lessonListAllCnt}]개
+			&nbsp;&nbsp;
+		</span> <select name="rowCntPerPage" class="rowCntPerPage"
+			onChange="search()">
+			<option value="10">10
+			<option value="15">15
+			<option value="20">20
+		</select>행보기 &nbsp;&nbsp;&nbsp;
+	</center>
   
 	<div style="height:30px;"></div>
          

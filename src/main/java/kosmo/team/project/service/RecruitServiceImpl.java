@@ -245,47 +245,49 @@ public class RecruitServiceImpl implements RecruitService {
 		 return recruitUpdateHired;
 	 }
 	 
-	 //용병페이징처리
-	 @Override
-		public List<RecruitHiredDTO> getRecruitHired(RecruitSearchDTO recruitSearchDTO) {
-
-			List<RecruitHiredDTO> recruitHired = this.recruitDAO.getRecruitHired(recruitSearchDTO);
-
-			return recruitHired;
-
-		}
-
-		public int getHiredListCnt(RecruitSearchDTO recruitSearchDTO) {
-
-			int hiredListCnt = this.recruitDAO.getHiredListCnt(recruitSearchDTO);
-
-			return hiredListCnt;
-
-		}
-
-		public int getHiredListAllCnt() {
-			// --------------------------------------
-			// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
-			// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
-			// --------------------------------------
-			int hiredListAllCnt = this.recruitDAO.getHiredListAllCnt();
-			// --------------------------------------
-			// 변수 boardListAllCnt 안의 데이터를 리턴하기
-			// --------------------------------------
-			return hiredListAllCnt;
-		}
-	 
 	 
 	//service(인터페이스 공간)에 이름만 정의해준 메소드의 기능을 이 안에서 정의, 용병 게시물 삭제
 	 public int recruitDeleteHired(RecruitHiredDTO recruitHiredDTO) {
 		 int recruitDeleteHired = this.recruitDAO.recruitDeleteHired(recruitHiredDTO);
 		 return recruitDeleteHired;
 	 }
+	 
+	 
+	//용병페이징처리
+		 @Override
+			public List<RecruitHiredDTO> getRecruitHired(RecruitSearchDTO recruitSearchDTO) {
+
+				List<RecruitHiredDTO> recruitHired = this.recruitDAO.getRecruitHired(recruitSearchDTO);
+
+				return recruitHired;
+
+			}
+
+			public int getHiredListCnt(RecruitSearchDTO recruitSearchDTO) {
+
+				int hiredListCnt = this.recruitDAO.getHiredListCnt(recruitSearchDTO);
+
+				return hiredListCnt;
+
+			}
+
+			public int getHiredListAllCnt() {
+				// --------------------------------------
+				// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
+				// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
+				// --------------------------------------
+				int hiredListAllCnt = this.recruitDAO.getHiredListAllCnt();
+				// --------------------------------------
+				// 변수 boardListAllCnt 안의 데이터를 리턴하기
+				// --------------------------------------
+				return hiredListAllCnt;
+			}
 		 
 
 //==================================================================================================================================	 
 		
 		//레슨모집페이지_boardlist
+		/*
 		public List<RecruitLessonDTO> getRecruit_LessonBoardList() {
 
 			List<RecruitLessonDTO> getRecruit_LessonBoardList = this.recruitDAO.getRecruit_LessonBoardList();
@@ -293,7 +295,7 @@ public class RecruitServiceImpl implements RecruitService {
 			return getRecruit_LessonBoardList;
 
 		}	
-		
+		*/
 		
 		//레슨상세페이지
 		public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no) {
@@ -384,6 +386,37 @@ public class RecruitServiceImpl implements RecruitService {
 				 int recruitDeleteLesson = this.recruitDAO.recruitDeleteLesson(recruitLessonDTO);
 				 return recruitDeleteLesson;
 			 }
+			 
+			 
+		//레슨페이징처리
+		 @Override
+			public List<RecruitLessonDTO> getRecruitLesson(RecruitSearchDTO recruitSearchDTO) {
+
+				List<RecruitLessonDTO> recruitLesson = this.recruitDAO.getRecruitLesson(recruitSearchDTO);
+
+				return recruitLesson;
+
+			}
+
+			public int getLessonListCnt(RecruitSearchDTO recruitSearchDTO) {
+
+				int lessonListCnt = this.recruitDAO.getLessonListCnt(recruitSearchDTO);
+
+				return lessonListCnt;
+
+			}
+
+			public int getLessonListAllCnt() {
+				// --------------------------------------
+				// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
+				// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
+				// --------------------------------------
+				int lessonListAllCnt = this.recruitDAO.getLessonListAllCnt();
+				// --------------------------------------
+				// 변수 boardListAllCnt 안의 데이터를 리턴하기
+				// --------------------------------------
+				return lessonListAllCnt;
+			}	 
 		 
 	 
 

@@ -107,7 +107,7 @@ public interface RecruitService {
 	
 	
 	//레슨모집페이지_boardlist
-	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
+	// List<RecruitLessonDTO> getRecruitLesson();
 
 	//레슨상세페이지
 	RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
@@ -142,6 +142,15 @@ public interface RecruitService {
 	
 	//레슨 게시물 삭제를 위한 메소드 이름만 정의
 	public int recruitDeleteLesson(RecruitLessonDTO recruitLessonDTO);
+	
+	
+	
+	//레슨모집_페이징처리
+	public int getLessonListAllCnt();
+
+	public int getLessonListCnt(RecruitSearchDTO recruitSearchDTO);
+	
+	public List<RecruitLessonDTO> getRecruitLesson(RecruitSearchDTO recruitSearchDTO);
 	
 }
 

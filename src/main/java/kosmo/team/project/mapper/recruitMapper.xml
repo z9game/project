@@ -137,7 +137,131 @@
 		</if>
    </sql>
    
-
+   <!-- ============================================================================================= -->
+   
+	<sql id="lesson_boardwhere">
+       <if test="(keyword1 != null and keyword1.length() > 0)">
+      and (
+      </if>
+         <if test="keyword1 != null and keyword1.length() > 0">
+            (
+            <if test="searchType1 == 'nickname'">
+               upper(m.nickname) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'title'">
+               upper(l.title) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1== 'content'">
+               upper(l.content) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'all'">
+               upper(m.nickname) like upper('%${keyword1}%')
+               or
+               upper(l.title) like upper('%${keyword1}%')
+               or
+               upper(l.content) like upper('%${keyword1}%')
+            </if>
+            )
+         </if>
+      <if test="(keyword1 != null and keyword1.length() > 0)">
+         )
+      </if>
+      <if test="sido != null and sido>0">
+      and
+      (
+         l.sido = ${sido}
+      )
+         <if test="sigungu !=null and sigungu>0 ">
+         and
+         (
+            l.sigungu = ${sigungu}
+         )
+         </if>
+      </if>
+      </sql>
+      
+   <!-- ============================================================================================= -->   
+      
+	<sql id="hired_boardwhere">
+       <if test="(keyword1 != null and keyword1.length() > 0)">
+      and (
+      </if>
+         <if test="keyword1 != null and keyword1.length() > 0">
+            (
+            <if test="searchType1 == 'nickname'">
+               upper(m.nickname) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'title'">
+               upper(h.title) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1== 'content'">
+               upper(h.content) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'all'">
+               upper(m.nickname) like upper('%${keyword1}%')
+               or
+               upper(h.title) like upper('%${keyword1}%')
+               or
+               upper(h.content) like upper('%${keyword1}%')
+            </if>
+            )
+         </if>
+      <if test="(keyword1 != null and keyword1.length() > 0)">
+         )
+      </if>
+      <if test="sido != null and sido>0">
+      and
+      (
+         h.sido = ${sido}
+      )
+         <if test="sigungu !=null and sigungu>0 ">
+         and
+         (
+            h.sigungu = ${sigungu}
+         )
+         </if>
+      </if>
+       
+      <if test="day != null and day.size()>0">
+		    and (
+		    <if test="day.size() == 1 and day[0] == 0">
+		        dh.day IN (1, 2, 3, 4, 5, 6, 7)
+		    </if>
+		    <if test="day.size() != 0 and day[0] != 0">
+		        <foreach collection="day" item="tmp" separator=" OR ">
+		            dh.day = #{tmp}
+		        </foreach>
+		    </if>
+		    )
+		</if>
+		
+		<if test="time != null and time.size()>0">
+		    and (
+		    <if test="time.size() == 1 and time[0] == 'alltime'">
+		        th.time IN ('새벽','오전','오후','야간')
+		    </if>
+		    <if test="time.size() != 0 and time[0] != 'alltime'">
+		        <foreach collection="time" item="tmp" separator=" OR ">
+		            th.time = #{tmp}
+		        </foreach>
+		    </if>
+		    )
+		</if>
+		
+		<if test="pos != null and pos.size()>0">
+		    and (
+		    <if test="pos.size() == 1 and pos[0] == 'allpos'">
+		        h.pos IN ('ST','CM','CB','GK')
+		    </if>
+		    <if test="pos.size() != 0 and pos[0] != 'allpos'">
+		        <foreach collection="pos" item="tmp" separator=" OR ">
+		            h.pos = #{tmp}
+		        </foreach>
+		    </if>
+		    )
+		</if>
+      </sql>
+      
 
  <!-- 팀/팀원 모집 -->
  
@@ -422,22 +546,35 @@
    
    
    <!-- 용병 모집 게시물 가져오기 + 검색조건 추가 아직 안 함 -->
-   <select id="getRecruitHired" resultType="kosmo.team.project.dto.RecruitHiredDTO">
+   <select id="getRecruitHired" resultType="kosmo.team.project.dto.RecruitHiredDTO"  parameterType="kosmo.team.project.dto.RecruitSearchDTO">
+   		<!-- 페이징처리 밑에두줄 -->
    		select * from (
 		select rownum RNUM, zxcvb.* from (
 		
-          	select 
-              distinct(h.recruitment_no) 
-              ,h.title 
-              ,m.nickname 
-              ,h.content 
-              ,h.readcount 
-              ,to_char(h.reg_date, 'YYYY-MM-DD') as "reg_date"
-          from 
-              hired_recruitment h LEFT JOIN hiredboard_day dh ON h.recruitment_no = dh.recruitment_no 
-                                  LEFT JOIN hiredboard_time th ON h.recruitment_no = th.recruitment_no
-                                  LEFT JOIN member m ON h.nickname = m.m_no
-                                  
+          select h.recruitment_no,
+	           h.title,
+	           m.nickname,
+	           h.content,
+	           h.readcount,
+	           to_char(h.reg_date, 'YYYY-MM-DD') as "reg_date"
+		 from hired_recruitment h 
+						    LEFT JOIN hiredboard_day dh ON h.recruitment_no = dh.recruitment_no
+						    LEFT JOIN hiredboard_time th ON h.recruitment_no = th.recruitment_no
+						    LEFT JOIN member m ON h.nickname = m.m_no
+   		 where 1=1
+           	<include refid = "hired_boardwhere"/>
+   
+         group by h.recruitment_no, h.title, m.nickname, h.content, h.readcount, h.reg_date
+           		
+         	<if test="sort_date==null or sort_date.length()==0">
+	            order by
+	               h.recruitment_no desc
+            </if>
+            <if test="sort_date!=null and sort_date.length() > 0">
+               order by
+                  ${sort_date}
+            </if>
+         <!-- 페이징처리 밑에한줄 -->                         
         <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
    </select> 
    
@@ -447,8 +584,12 @@
    <select id="getHiredListCnt" resultType="int">
 		select count(*)
 		from
-			hired_recruitment
-		<include refid="boardWhere" />
+			hired_recruitment h LEFT JOIN hiredboard_day dh ON h.recruitment_no = dh.recruitment_no 
+                                LEFT JOIN hiredboard_time th ON h.recruitment_no = th.recruitment_no
+                                LEFT JOIN member m ON h.nickname = m.m_no
+		where 
+           		1=1
+		<include refid="hired_boardwhere" />
 	</select>
 
 
@@ -458,7 +599,6 @@
 		select count(*)
 		from
 			hired_recruitment
-		<include refid="boardWhere" />
 	</select>
             
          
@@ -665,7 +805,12 @@
    
    
    <!-- 레슨 모집 게시물 가져오기 + 검색조건 추가 아직 안 함 -->
-   <select id="getRecruit_LessonBoardList" resultType="kosmo.team.project.dto.RecruitLessonDTO">
+   <select id="getRecruitLesson" resultType="kosmo.team.project.dto.RecruitLessonDTO">
+   
+   	<!-- 페이징처리 밑에두줄 -->
+   		select * from (
+		select rownum RNUM, zxcvb.* from (
+		
           	select 
               distinct(l.recruitment_no) 
               ,l.title 
@@ -677,7 +822,29 @@
               Lesson_recruitment l LEFT JOIN lessonboard_day dl ON l.recruitment_no = dl.recruitment_no 
                                   LEFT JOIN lessonboard_time tl ON l.recruitment_no = tl.recruitment_no
                                   LEFT JOIN member m ON l.nickname = m.m_no
+                                  
+         <!-- 페이징처리 밑에한줄 -->                         
+        <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
    </select>  
+   
+   <!-- 레슨 모집 게시물의 개수 구하기 + 검색한 후의 개수도 포함 -->
+   <!-- 아직 안 만듦 만드는 중-->
+   <select id="getLessonListCnt" resultType="int"  parameterType="kosmo.team.project.dto.RecruitSearchDTO">
+		select count(*)
+		from
+			lesson_recruitment l LEFT JOIN MEMBER M ON l.recruitment_NO=M.M_NO
+		where 1=1	
+		<!-- <include refid="lesson_boardWhere" /> -->
+	</select>
+
+
+
+	<!-- 게시판 모든 행의 개수 구하는 select 문 내포하는 select 태그 선언하기 -->
+	<select id="getLessonListAllCnt" resultType="int">
+		select count(*)
+		from
+			lesson_recruitment
+	</select>
    
    
    <!-- 레슨 모집 게시물 상세페이지 -->

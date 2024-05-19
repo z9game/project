@@ -17,7 +17,6 @@
 //페이징처리_기본값10개로설정
 $(document).ready(function() {
     $(".rowCntPerPage").val("10");
-    search() 
 });
 
 
@@ -32,19 +31,19 @@ function search() {
     boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
 	
 	
-
-    alert(boardSearchFormObj.serialize());
+	//값 들어오는지 확인
+    //alert(boardSearchFormObj.serialize());
 
 
 	//이거있어야함
 	$.ajax({
-				//-------------------------------
+				//--------------------------------------------
 				// WAS 로 접속할 주소 설정
-				//-------------------------------
+				//--------------------------------------------
 				url : "/recruitHiredBoardForm.do"
-				//-------------------------------
+				//--------------------------------------------
 				// WAS 로 접속하는 방법 설정. get 또는 post
-				//-------------------------------
+				//--------------------------------------------
 				,
 				type : "post"
 
@@ -185,6 +184,13 @@ function enterkey()
 	   
    }
    
+   function searchWithSort(sort)
+   {
+   	$("[name='recruit_hired']").find("[name='sort_date']").val(sort);
+   	search();
+   	
+   }
+   
 </script>
 </head>
 <body>
@@ -279,11 +285,15 @@ function enterkey()
 	  					</dd>
 	  			</dl>
 			</div>	
+			
+			<!-- 페이징처리관련 밑에두줄-->
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-	<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
-	<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-	<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
-	<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
+			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			<input type="hidden" name="sort_date">
+			
 	 	</form>
 		
   <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->		
@@ -309,7 +319,23 @@ function enterkey()
                <th style="width:300px;">제목</th>
                <th style="width:80px;">닉네임</th>
                <th style="width:100px;">조회수</th>
-			   <th style="width:100px;">등록일</th>
+               <c:if test="${param.sort_date!='h.reg_date asc' and param.sort_date!='h.reg_date desc'}">
+					<th width="100" onClick="searchWithSort('h.reg_date desc')" style="cursor:pointer">등록일</th>
+					</c:if>
+					<!--============================================================= -->
+					<!-- 만약 파명 "sort" 의 파값이 'reg_date desc' 면 -->
+					<!-- 즉 정렬 의지가 'reg_date desc' 면             -->
+					<!--============================================================= -->
+					<c:if test="${param.sort_date=='h.reg_date desc'}">
+						<th width="100" onClick="searchWithSort('h.reg_date asc')" style="cursor:pointer">등록일▼</th>
+					</c:if>	
+					<!--============================================================= -->
+					<!-- 만약 파명 "sort" 의 파값이 'reg_date asc' 면 -->
+					<!-- 즉 정렬 의지가 'reg_date asc' 면             -->
+					<!--============================================================= -->
+					<c:if test="${param.sort_date=='h.reg_date asc'}">	
+						<th width="100" onClick="searchWithSort('')" style="cursor:pointer">등록일▲</th>
+					</c:if>
 			 </tr>		
                <c:forEach var="list" items="${requestScope.boardList}" varStatus="status">
                   <tr style="cursor:pointer" onClick=" goRecruitHiredDetailForm(${list.recruitment_no});">
@@ -334,6 +360,7 @@ function enterkey()
   
 	<div style="height:30px;"></div>
       
+      <!-- center 태그 있는 부분 페이징 처리 -->
       <center>
 
 		<span class="pagingNos"> <span style="cursor: pointer"

@@ -137,7 +137,7 @@ public interface RecruitDAO {
 	
 	
 	
-	//용병페이지_페이지처리하기
+	//용병페이지_페이징처리하기
 	public List<RecruitHiredDTO> getRecruitHired(RecruitSearchDTO recruitSearchDTO);
 
 	public int getHiredListCnt(RecruitSearchDTO recruitSearchDTO);
@@ -150,7 +150,7 @@ public interface RecruitDAO {
 //---------------------------------------------------------------------------	
 
 	//레슨모집페이지_boardlist
-	public List<RecruitLessonDTO> getRecruit_LessonBoardList();
+	//public List<RecruitLessonDTO> getRecruit_LessonBoardList();
 	
 	//레슨상세페이지
 	public RecruitLessonDTO getRecruit_LessonDetail(int recruitment_no);
@@ -199,4 +199,13 @@ public interface RecruitDAO {
 	public int insertTime_lesson(RecruitLessonDTO recruitLessonDTO);
 	
 	public int recruitDeleteLesson(RecruitLessonDTO recruitLessonDTO);
+	
+	
+	
+	//레슨페이지_페이징처리하기
+	public List<RecruitLessonDTO> getRecruitLesson(RecruitSearchDTO recruitSearchDTO);
+
+	public int getLessonListCnt(RecruitSearchDTO recruitSearchDTO);
+
+	public int getLessonListAllCnt();
 }

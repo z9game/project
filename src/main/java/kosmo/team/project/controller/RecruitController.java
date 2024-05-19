@@ -332,18 +332,42 @@ public class RecruitController {
 		
 //==================================================================================================================================
 
-	//레슨모집페이지_boardlist
+  //레슨모집페이지_boardlist
     @RequestMapping(value = "/recruitLessonBoardForm.do")
-    public ModelAndView recruitLessonBoardForm() {
+    public ModelAndView recruitLessonBoardForm(RecruitSearchDTO recruitSearchDTO, HttpSession session) {                         
+        
+    		int lessonListAllCnt = this.recruitService.getLessonListAllCnt();
+
+    		int lessonListCnt = this.recruitService.getLessonListCnt(recruitSearchDTO);
+
+    		Map<String, Integer> lessonMap = Page.getPagingMap(
+
+    				recruitSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+    				, recruitSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+    				, lessonListCnt // 검색 결과물 개수
+
+    		);
+
+    		recruitSearchDTO.setSelectPageNo((int) lessonMap.get("selectPageNo"));
+    		recruitSearchDTO.setRowCntPerPage((int) lessonMap.get("rowCntPerPage"));
+    		recruitSearchDTO.setBegin_rowNo((int) lessonMap.get("begin_rowNo"));
+    		recruitSearchDTO.setEnd_rowNo((int) lessonMap.get("end_rowNo"));
     	
-    	List<RecruitLessonDTO> recruitLesson = this.recruitService.getRecruit_LessonBoardList();
+    	List<RecruitLessonDTO> recruitLesson = this.recruitService.getRecruitLesson(recruitSearchDTO);
     	ModelAndView mav = new ModelAndView();
+    	//오라클의 실행구문 결과물이 저장된 변수 recruitHired를 JSP쪽에서 ${requestScope.boardList.DTO안에있는멤버변수명} 이런식으로 불러 사용하기 위해 addObject라는 것을 사용
+    	//즉, JSP페이지에서 boardList라는 키값을 부르면 그 키값에 해당하는 데이터(recruitHired)를 사용할수 있는 것임.
+
     	mav.addObject("boardList", recruitLesson);
-    	mav.setViewName("/recruit/recruitLessonBoardForm.jsp");
+		mav.addObject("lessonListCnt", lessonListCnt);
+		mav.addObject("lessonListAllCnt", lessonListAllCnt);
+		mav.addObject("lessondMap", lessonMap);
+		mav.setViewName("/recruit/recruitLessonBoardForm.jsp");
     	
         return mav;
     }
-	
+    
+    
 	 //레슨상세페이지
    @RequestMapping(value = "/recruitLessonBoardDetailForm.do")
    public ModelAndView recruitLessonBoardDetailForm(@RequestParam(value="recruitment_no") int recruitment_no) {

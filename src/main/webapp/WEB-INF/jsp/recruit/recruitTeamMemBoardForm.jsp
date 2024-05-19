@@ -424,7 +424,7 @@ function checkReserveForm()
 	 					</dd>
 	 			</dl>
 			</div>
-			
+			s
 				
 			<div class="detailSpace">
 	 			<dl class="detailBtn" >
