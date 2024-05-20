@@ -272,6 +272,16 @@ function search() {
 							<input type="checkbox" id="everytime" name="time" onclick="everyset()" value="alltime">상관없음&nbsp;&nbsp;
 	  					</dd>
 	  			</dl>
+	  				
+	  			<dl class="money">
+	 				<dt class="item">비 용</dt>
+	  					<dd  class="content">
+	  							<br>
+	  						<input type="checkbox" id="free" name="money" onclick="moneyset()" value="무료">무료&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="paid" name="money" onclick="moneyset()" value="유료">유료&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="everymoney" name="money" onclick="moneyset()" value="allmoney">상관없음&nbsp;&nbsp;&nbsp;
+	  					</dd>
+	  			</dl>
 			</div>	
 			
 			<!-- 페이징처리관련 밑에두줄-->
@@ -373,9 +383,7 @@ function search() {
 			onClick="pageNoClick(${requestScope.lessonMap.selectPageNo}+1)">[다음]</span>
 			<span style="cursor: pointer"
 			onClick="pageNoClick(${requestScope.lessonMap.last_pageNo})">[마지막]</span>
-			&nbsp;&nbsp;&nbsp;
-			[${requestScope.lessonListCnt}/${requestScope.lessonListAllCnt}]개
-			&nbsp;&nbsp;
+
 		</span> <select name="rowCntPerPage" class="rowCntPerPage"
 			onChange="search()">
 			<option value="10">10

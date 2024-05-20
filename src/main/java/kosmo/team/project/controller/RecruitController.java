@@ -361,7 +361,7 @@ public class RecruitController {
     	mav.addObject("boardList", recruitLesson);
 		mav.addObject("lessonListCnt", lessonListCnt);
 		mav.addObject("lessonListAllCnt", lessonListAllCnt);
-		mav.addObject("lessondMap", lessonMap);
+		mav.addObject("lessonMap", lessonMap);
 		mav.setViewName("/recruit/recruitLessonBoardForm.jsp");
     	
         return mav;

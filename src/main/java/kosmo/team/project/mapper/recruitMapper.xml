@@ -835,27 +835,27 @@
    
    	<!-- 페이징처리 밑에두줄 -->
    		select * from (
-		select rownum RNUM, zxcvb.* from (
-		
-          	select 
-               distinct(l.recruitment_no)
-              ,l.title 
-              ,m.nickname 
-              ,l.content 
-              ,l.readcount 
-              ,l.money
-              ,to_char(l.reg_date, 'YYYY-MM-DD') as reg_date
-          from 
-              Lesson_recruitment l  LEFT JOIN lessonboard_day dl ON l.recruitment_no = dl.recruitment_no 
-                                  	LEFT JOIN lessonboard_time tl ON l.recruitment_no = tl.recruitment_no
-                                  	LEFT JOIN member m ON l.nickname = m.m_no
-          where 1=1
-           	<include refid = "lesson_boardwhere"/>
+			select rownum RNUM, zxcvb.* from (
+			
+	          	select 
+	               distinct(l.recruitment_no)
+	              ,l.title 
+	              ,m.nickname 
+	              ,l.content 
+	              ,l.readcount 
+	              ,l.money
+	              ,to_char(l.reg_date, 'YYYY-MM-DD') as reg_date
+	          from 
+	              Lesson_recruitment l  LEFT JOIN lessonboard_day dl ON l.recruitment_no = dl.recruitment_no 
+	                                  	LEFT JOIN lessonboard_time tl ON l.recruitment_no = tl.recruitment_no
+	                                  	LEFT JOIN member m ON l.nickname = m.m_no
+	          where 1=1
+	           	<include refid = "lesson_boardwhere"/>
    
            		
          	<if test="sort_date==null or sort_date.length()==0">
 	            order by
-	               l.recruitment_no desc
+	               recruitment_no desc
             </if>
             <if test="sort_date!=null and sort_date.length() > 0">
                order by
@@ -868,7 +868,7 @@
    
    <!-- 레슨 모집 게시물의 개수 구하기 + 검색한 후의 개수도 포함 -->
    <select id="getLessonListCnt" resultType="int"  parameterType="kosmo.team.project.dto.RecruitSearchDTO">
-		select count(*)
+		select count(distinct l.recruitment_no)
 		from
 			lesson_recruitment l LEFT JOIN lessonboard_day dl ON l.recruitment_no = dl.recruitment_no 
                                  LEFT JOIN lessonboard_time tl ON l.recruitment_no = tl.recruitment_no
