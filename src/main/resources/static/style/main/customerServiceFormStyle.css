@@ -133,6 +133,7 @@ li {
 	margin-right: 50px;
 	margin-left: 50px;
 	margin-top: 30px;
+    border-radius: 30px;
 }
 
 .customerServiceCategoryTabNav li a:before{
@@ -144,15 +145,9 @@ li {
 	height: 3px;
 }
 
-.customerServiceCategoryTabNav li a.active:before{
-	background: #333;
-}
-
 .customerServiceCategoryTabNav li a{
 	position: relative;
 	display: block;
-	background: #f8f8f8;
-	color: #000;
 	padding: 0 30px;
 	line-height: 46px;
 	text-decoration: none;
@@ -160,8 +155,9 @@ li {
 }
 
 .customerServiceCategoryTabNav li a:hover, .customerServiceCategoryTabNav li a.active{
-	background: #fff;
-	color: #333;
+	background: #006666;
+	color: #FFFFFF;
+    border-radius: 30px;
 }
 
 .customerServiceCategoryTabContent{
@@ -176,32 +172,79 @@ li {
 
 table {
 	border-collapse: collapse;
-	border-color: gray;
+	border-color: none;
 	margin: 0 auto;
 	margin-top:20px;
 }
 
 th, td {
 	padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid gray;
 	border-color: gray;
 }
 
 th {
-	background-color: lightgray;
+	background-color: #c59246e0;
+    color: white;
 }
 
 .newCustomerServiceQnABoardBtnDiv{
-	margin-top: 10px;
-	margin-right: 900px;
+	margin-top: 20px;
+	margin-left: 900px;
 	text-align: center;
 }
 
 .newCustomerServiceQnABoardBtn{
 	width: 100px;
-	height: 30px;
+	height: 40px;
+    background-color: #c59246e0;
+    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #c59246e0;
+}
+
+#customerServiceQnABoardAllCount{
+    text-align: center;
+    margin-right: 900px;
 }
 
 .customerServiceCategoryTabQnAPaging{
 	text-align: center;
-	margin-top: 10px;
+}
+
+.customerServiceQnABoardListTable td{
+    height: 70px;
+}
+
+.customerServiceQnAFormFontLightGray{
+    color: #999999;
+}
+
+.activePageNo{
+    color: #FFFFFF;
+    background-color: #c59246e0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+}
+
+.arrowLeft {
+    color: #c59246e0;
+}
+
+.arrowLeft strong{
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.arrowRight {
+    color: #c59246e0;
+}
+
+.arrowRight strong{
+    font-size: 20px;
+    margin-left: 10px;
 }

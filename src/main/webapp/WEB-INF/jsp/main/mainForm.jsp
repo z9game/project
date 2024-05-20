@@ -107,7 +107,17 @@
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="mainFormContainer">
 		<div class="section" id="sectionMain">
-			<div class="sectionMainText">안녕하세요<br>우리는 1조<br>축구 매칭 사이트 제작<br>병합완료<br>cjk Branch</div>
+			<div class="sectionMainTextDiv">
+				<div class="sectionMainText" id="sectionMainText_1">FOOTBALL LEAGUE</div>
+				<br>
+				<div class="sectionMainText" id="sectionMainText_2">2024 생활체육 축구 매칭</div>
+				<br>
+				<div class="sectionMainText" id="sectionMainText_3">축구 매칭과 함께하는 내게 맞는 팀 구성</div>
+				<br>
+				<div class="sectionMainText" id="sectionMainText_4"><strong>5월 24일 개설</strong></div>
+				<br>
+				<div class="sectionMainText" id="sectionMainText_5">Coding 247</div>
+			</div>
 			<img src="/image/MainImage.jpg">
 		</div>
 		<div class="section" id="sectionStatistics">
