@@ -26,8 +26,11 @@ public interface MemberService {
     List<bookingDTO> getBookedStadium(int m_no);
     //팀 생성
     int registTeam(TeamDTO teamDTO);
-    //승낙테이블의 개수가 몇개인지 확인
+    //팀원 승낙테이블의 개수가 몇개인지 확인
     int getWaitingCnt(int m_no);
+    
+    //용병 승낙테이블의 개수가 몇개인지 확인
+	int getMercWaitingCnt(int m_no);
     
     //승낙 대기인원 정보가져오기
 	 List<TeamDTO> getWaitingList(int m_no);

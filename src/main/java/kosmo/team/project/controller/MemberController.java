@@ -94,10 +94,17 @@ public class MemberController {
 			//내가 팀장일때 팀모집 승낙 대기인원이 있을때
 			 int WaitingCnt = this.memberService.getWaitingCnt(m_no);
 			 
+			//내가 팀장일때 용병모집 승낙 대기인원이 있을때
+			 int mercWaitingCnt = this.memberService.getMercWaitingCnt(m_no);
+			 
 			//승낙 대기인원 정보가져오기
 			 List<TeamDTO> waitList = this.memberService.getWaitingList(m_no);
 			 
+			//예약한 경기장 가져오기
 			 List<bookingDTO> bookedStadium = this.memberService.getBookedStadium(m_no);
+			 
+			
+			 
 			 
 		     ModelAndView mav = new ModelAndView();
 

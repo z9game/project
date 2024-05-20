@@ -99,6 +99,13 @@ public class MemberServiceImplements implements MemberService {
     	return getWaitingCnt;
     }
     
+    //용병 승낙테이블의 개수가 몇개인지 확인
+    public int getMercWaitingCnt(int m_no) {
+  		int getMercWaitingCnt = this.memberDAO.getMercWaitingCnt(m_no);
+  		
+  		return getMercWaitingCnt;
+  	}
+    
     //승낙 대기인원 정보가져오기
     public List<TeamDTO> getWaitingList(int m_no){
   		List<TeamDTO> getWaitingList = this.memberDAO.getWaitingList(m_no);

@@ -329,6 +329,73 @@
 	</div>
 	
 	<div style="height:30px;"></div>
+	<!-- ================================================================================================================= -->
+	<!-- 용병 관련 -->
+	<c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
+		<!-- 이곳에 용병대기 리스트 들어갈거임 --><c:if test="">
+	    	<center>
+				<table style="border-collapse:collapse" border="1">
+				<tr>
+					<td class="waitingCheck" onclick="">
+						용병 수락 대기인원이 있습니다.
+					</td>
+				</tr>
+			</table>
+			</center>
+		</c:if>
+	</c:if>
+	
+	
+	<div class="modalDiv_waiting" align="center"> 
+		<div class="bg_waiting">
+			<div class="modal_waiting">
+			<form name = "waitingList">
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+					<caption><b>수락대기중</b></caption>
+					<tr>
+						<th>이름</th>
+						<th>나이</th>
+						<th>지역</th>
+						<th>선택</th>
+					</tr>
+					<c:forEach var="list" items="${requestScope.waitList}" varStatus="status">
+						<tr>
+							<td align="center">${list.name}</td>
+							<td align="center">${list.age}</td>
+							<td align="center">${list.sido}</td>
+							<td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${list.m_no}"></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</form>
+			<div style="height:8px;"></div>
+			<button onclick="">전체선택</button>
+			<button onclick="">수락</button>
+			<button onclick="">거절</button>
+			<button onclick="">취소</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- ================================================================================================================= -->
+	<!-- 레슨 관련 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<!-- ================================================================================================================= -->
 	<!-- 팀생성 관련 -->

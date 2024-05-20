@@ -188,6 +188,23 @@
 		    )
 	</select>
 	
+	<!-- 용병수락 대기자 있는가? -->
+	<select id="getMercWaitingCnt" parameterType="int" resultType="int">
+		select
+		    count(*)
+		from
+		    waiting_teamReg
+		where
+		    team=(
+		    select  
+		        team_no 
+		    from
+		        team_member 
+		    where 
+		        team_member = #{m_no} 
+		    )
+	</select>
+	
 	
 	<!-- 팀수락 대기자 명단 -->
 	<select id="getWaitingList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
