@@ -602,7 +602,7 @@
             select booking_no 
             from booking 
             where stadium_no = #{stadium_no}
-              and booking_date = #{booking_date}
+              and booking_date = to_date(#{booking_date},'yyyy-mm-dd')
               and time_slot = #{time_slot}
               and m_no = #{m_no}
         )
@@ -615,18 +615,16 @@
 		   select count(*) from stadium_yangdo
 		   where  
 		   1=1
-		   <if test="(stadium_no != null and stadium_no > 0) and (booking_date != null and booking_date != '선택') and (time_slot != null and time_slot >0)">
         	and
         	booking_no = (
             select booking_no 
             from booking 
             where stadium_no = #{stadium_no}
-              and booking_date = #{booking_date}
+              and booking_date = to_date(#{booking_date},'yyyy-mm-dd')
               and time_slot = #{time_slot}
               and m_no = #{m_no}
         )
-        </if>
-
+		
 
 	</select>
 	
