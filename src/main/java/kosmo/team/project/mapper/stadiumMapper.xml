@@ -274,23 +274,21 @@
 
 
 	<select id="getFullRent" parameterType="int" resultType="String">
-		select
-		to_char(booking_date, 'yyyy-mm-dd') as booking_date
+		select to_char(booking_date, 'yyyy-mm-dd') as booking_date
 		from booking
-		where
-		stadium_no = #{stadium_no}
+		where stadium_no = #{stadium_no}
 		group by booking_date
-		having count(time_slot)
-		= 11
+		having count(time_slot) = 11
 	</select>
 
-	<select id="getM_no"
+<select id="getM_no"
 		parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
 		select count(*)
 		from booking
 		where m_no = #{m_no}
-		 and booking_date >TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+		and to_date(booking_date,'yyyy-mm-dd') >= to_date(sysdate, 'yyyy-mm-dd')
 	</select>
+
 
 
 
@@ -341,7 +339,7 @@
 			where
 			    b.m_no = #{m_no} AND
 			    b.stadium_no = #{stadium_no}
-			    and booking_date >TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+			    and booking_date >TO_DATE(SYSDATE, 'yyyy-mm-dd')
 			group by
 			    b.m_no,
 			    b.stadium_no,
@@ -367,7 +365,7 @@
         b.m_no = #{m_no} 
         and b.stadium_no = #{stadium_no} 
         and b.booking_date = to_date(#{booking_date}, 'yyyy-mm-dd')
-        and booking_date >TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+        and booking_date >TO_DATE(SYSDATE, 'yyyy-mm-dd')
 
 </select>
 
@@ -544,7 +542,7 @@
 			where
 			    b.m_no = #{m_no} AND
 			    b.stadium_no = #{stadium_no}
-			    and booking_date >TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+			    and booking_date >TO_DATE(SYSDATE, 'yyyy-mm-dd')
 			group by
 			    b.m_no,
 			    b.stadium_no,
@@ -569,7 +567,7 @@
         b.m_no = #{m_no} 
         and b.stadium_no = #{stadium_no} 
         and b.booking_date = to_date(#{booking_date}, 'yyyy-mm-dd')
-        and booking_date >TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+        and booking_date >TO_DATE(SYSDATE, 'yyyy-mm-dd')
 
 </select>
 	
@@ -604,7 +602,7 @@
             select booking_no 
             from booking 
             where stadium_no = #{stadium_no}
-              and booking_date = #{booking_date}
+              and booking_date = to_date(#{booking_date},'yyyy-mm-dd')
               and time_slot = #{time_slot}
               and m_no = #{m_no}
         )
@@ -617,18 +615,16 @@
 		   select count(*) from stadium_yangdo
 		   where  
 		   1=1
-		   <if test="(stadium_no != null and stadium_no > 0) and (booking_date != null and booking_date != '선택') and (time_slot != null and time_slot >0)">
         	and
         	booking_no = (
             select booking_no 
             from booking 
             where stadium_no = #{stadium_no}
-              and booking_date = #{booking_date}
+              and booking_date = to_date(#{booking_date},'yyyy-mm-dd')
               and time_slot = #{time_slot}
               and m_no = #{m_no}
         )
-        </if>
-
+		
 
 	</select>
 	

@@ -129,31 +129,19 @@
 		
 		
 		function searchAll() {
-	
-			//---------------------------------------------
-			// 변수 boardSearchFormObj 선언하고 
-			// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
-			//---------------------------------------------
-			var boardSearchFormObj = $("[name='adminStadiumSearchForm']");
-	
-			boardSearchFormObj.find(".keyword1").val("");
-			boardSearchFormObj.find(".keyword2").val("");
-			boardSearchFormObj.find(".sort").val("");
-			boardSearchFormObj.find("#minDate").val("");
-			boardSearchFormObj.find("#maxDate").val("");
-			boardSearchFormObj.find(".selectPageNo").val("1");
-			
-			
-			boardSearchFormObj.find(".searchType1").val("all");
-			boardSearchFormObj.find(".gender").prop("checked", false);
-			boardSearchFormObj.find(".ageRange").prop("checked", false);
-			boardSearchFormObj.find(".sido").val("0");
-			boardSearchFormObj.find(".sigungu").val("0");
-			
-	
-			search();
-	
-		}
+	        var boardSearchFormObj = $("[name='adminStadiumSearchForm']");
+	        boardSearchFormObj.find(".keyword1").val("");
+	        boardSearchFormObj.find(".keyword2").val("");
+	        boardSearchFormObj.find(".sort").val("");
+	        boardSearchFormObj.find("#minDate").val("");
+	        boardSearchFormObj.find("#maxDate").val("");
+	        boardSearchFormObj.find(".selectPageNo").val("1");
+	        boardSearchFormObj.find(".searchType1").val("all");
+	        boardSearchFormObj.find(".stadium_status").prop("checked", false);
+	        boardSearchFormObj.find(".sido").val("0");
+	        boardSearchFormObj.find(".sigungu").val("0");
+	        search();
+	    }
 	
 		//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 		// [페이지 번호]를 클릭하면 호출되는 함수 pageNoClick 선언하기 

@@ -15,6 +15,8 @@
 <script>
 	function checkReserveForm() {
 
+		
+			
 		var formObj = $("[name='rentStadiumForm']");
 
 		var dateObj = formObj.find("#date");
@@ -27,6 +29,9 @@
 		
 		var sessionMid = '<%=session.getAttribute("mid")%>';
 
+		alert(formObj.serialize())
+		
+		
 		if (sessionMid == "" || sessionMid == 'null') {
 		    alert('로그인이 필요한 서비스입니다.');
 		    location.href = '/loginForm.do';
@@ -55,7 +60,7 @@
 				if(result ==3){
 					
 					alert("이미 예약되어있는 시간대입니다.");
-					location.href = "#";
+					return;
 					
 					
 				} 	else if (result == 4) {

@@ -131,32 +131,34 @@ $(document).ready(function() {
 	
 	
 	
-	function searchAll() {
+	 function searchAll() {
+	        var boardSearchFormObj = $("[name='adminSearchForm']");
+	        boardSearchFormObj.find(".keyword1").val("");
+	        boardSearchFormObj.find(".keyword2").val("");
+	        boardSearchFormObj.find(".sort").val("");
+	        boardSearchFormObj.find("#minDate").val("");
+	        boardSearchFormObj.find("#maxDate").val("");
+	        boardSearchFormObj.find(".selectPageNo").val("1");
+	        boardSearchFormObj.find(".searchType1").val("all");
+	        boardSearchFormObj.find(".gender").prop("checked", false);
+	        boardSearchFormObj.find(".ageRange").prop("checked", false);
+	        boardSearchFormObj.find(".sido").val("0");
+	        boardSearchFormObj.find(".sigungu").val("0");
+	        boardSearchFormObj.find(".minGames_played").val("0");
+	        boardSearchFormObj.find(".maxGames_played").val("0");
+	        boardSearchFormObj.find(".minWin").val("0");
+	        boardSearchFormObj.find(".maxWin").val("0");
+	        boardSearchFormObj.find(".minDraws").val("0");
+	        boardSearchFormObj.find(".maxDraws").val("0");
+	        boardSearchFormObj.find(".minLoss").val("0");
+	        boardSearchFormObj.find(".maxLoss").val("0");
+	        boardSearchFormObj.find(".minGoals").val("0");
+	        boardSearchFormObj.find(".maxGoals").val("0");
+	        boardSearchFormObj.find(".minAssists").val("0");
+	        boardSearchFormObj.find(".maxAssists").val("0");
 
-		//---------------------------------------------
-		// 변수 boardSearchFormObj 선언하고 
-		// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
-		//---------------------------------------------
-		var boardSearchFormObj = $("[name='adminSearchForm']");
-
-		boardSearchFormObj.find(".keyword1").val("");
-		boardSearchFormObj.find(".keyword2").val("");
-		boardSearchFormObj.find(".sort").val("");
-		boardSearchFormObj.find("#minDate").val("");
-		boardSearchFormObj.find("#maxDate").val("");
-		boardSearchFormObj.find(".selectPageNo").val("1");
-		
-		
-		boardSearchFormObj.find(".searchType1").val("all");
-		boardSearchFormObj.find(".gender").prop("checked", false);
-		boardSearchFormObj.find(".ageRange").prop("checked", false);
-		boardSearchFormObj.find(".sido").val("0");
-		boardSearchFormObj.find(".sigungu").val("0");
-		
-
-		search();
-
-	}
+	        search();
+	    }
 
 	//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 	// [페이지 번호]를 클릭하면 호출되는 함수 pageNoClick 선언하기 
