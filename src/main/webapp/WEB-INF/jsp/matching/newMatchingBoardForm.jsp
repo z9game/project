@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp" %>
 
+<c:if test="${empty sessionScope.mid}">
+	<script>
+		alert("로그인이 필요합니다.");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +18,12 @@
 <script src="/js/recruitTeamBoardFormScript.js"></script>
 
 <script>
+	$(function() {
+		
+		loadStadiumNo();
+		
+	});
+
 	function checkBoardRegForm()
 	{
 		var formObj = $("[name='newMatchingBoard']")
@@ -56,6 +69,86 @@
 	
 		});	
 	}
+	
+	function loadStadiumNo() {
+		var formObj = $("[name='newMatchingBoard']");
+	
+	    $.ajax({
+	        url: '/machingStadiumSelectBoxLoad.do',
+	        method: 'POST',
+	        data: formObj.serialize(),
+	        success: function(json) {
+	        	if (json[0] == null) { return; }
+	        	
+	            var options = '';
+	            for (var i = 0; i < json.length; i++) {
+	            	var s = json[i];
+	            	options += '<option value="' + s.stadium_no + '">' + s.stadium_name + '</option>';
+	            }
+	            
+	            $("select[name='stadium_no']").html(options); // select 요소에 추가
+	            
+	            loadMachingDay();
+	        },	
+	        
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생: " + error);
+	        }
+	    });
+	}
+	
+	function loadMachingDay() {
+		
+		var formObj = $("[name='newMatchingBoard']");
+		
+	    $.ajax({
+	        url: '/machingDaySelectBoxLoad.do',
+	        method: 'POST',
+	        data: formObj.serialize(),
+	        success: function(json) {
+	        	if (json[0] == null) { return; }
+	            var options = '';
+	            for (var i = 0; i < json.length; i++) {
+	            	var b = json[i];
+	            	options += '<option value="' + b.booking_date + '">' + b.booking_date + '</option>';
+	            }
+	            
+	            $("select[name='day']").html(options); // select 요소에 추가
+	            
+	            loadMachingTime();
+	        },	
+	        
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생: " + error);
+	        }
+	    });		
+	}
+	
+	function loadMachingTime() {
+		
+		var formObj = $("[name='newMatchingBoard']");
+		
+	    $.ajax({
+	        url: '/machingTimeSelectBoxLoad.do',
+	        method: 'POST',
+	        data: formObj.serialize(),
+	        success: function(json) {
+	        	if (json[0] == null) { return; }
+	            var options = '';
+	            for (var i = 0; i < json.length; i++) {
+	            	var t = json[i];
+	            	options += '<option value="' + t.time_no + '">' + t.time_range + '</option>';
+	            }
+	            
+	            $("select[name='matchingTime']").html(options); // select 요소에 추가
+	        },	
+	        
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생: " + error);
+	        }
+	    });		
+	}
+		
 </script>
 </head>
 <body>
@@ -90,6 +183,7 @@
                <!--------------------------------------------------- -->
                <td>${sessionScope.nickname}</td>
             </tr>
+            <!-- 	주석처리
             <tr>
                 <th bgColor="lightgray">지역</th>
                 <td>
@@ -118,7 +212,16 @@
 		            </select>
 				</td>
              </tr>
-             
+			-->
+			<tr>
+                <th bgColor="lightgray">경기장명</th>
+                <td>
+					<select name="stadium_no" id="stadium_no" onchange="loadMachingDay()">
+						<option value="0">매칭예약 미신청 상태</option>
+					</select>
+				</td>
+             </tr>
+             <!-- 	주석처리
              <tr>
                 <th bgColor="lightgray">시간</th>
                 <td>
@@ -138,13 +241,34 @@
 	            	</select>
                 </td>
              </tr>
+              -->
+              
+			<tr>
+				<th bgColor="lightgray">일시(날짜)</th>
+                <td>
+					<select name="day" onchange="loadMachingTime()">
+						<option value="0">매칭예약 미신청 상태</option>
+					</select>
+				</td>
+             </tr>
+              
+			<tr>
+                <th bgColor="lightgray">시간</th>
+                <td>
+                	<select name="matchingTime">
+                		<option value="0">매칭예약 미신청 상태</option>
+                	</select>
+                </td>
+             </tr>
              
+             <!-- 	주석처리 순서 위치도 바꿈 
              <tr>
                 <th bgColor="lightgray">일시</th>
                 <td>
 					<input type="date" id="date" name="day">
 				</td>
              </tr>
+			-->
           
             <tr>
                <th bgColor="lightgray">내 용</th>
@@ -160,6 +284,8 @@
       </center>
       
       <input type="hidden" name="writer" value="${sessionScope.m_no}">
+      <input type="hidden" name="m_no" value="${sessionScope.m_no}">
+      
      </form>
 
       <center>
