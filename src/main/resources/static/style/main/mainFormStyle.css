@@ -40,9 +40,10 @@ body {
     float: left;
 }
 
-.sectionMainText {
+.sectionMainTextDiv {
 	display: flex;
 	text-align: center;
+	flex-direction: column;
 }
 
 /*<------------------------------------------------------->*/

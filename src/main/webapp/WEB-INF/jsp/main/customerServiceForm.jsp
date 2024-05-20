@@ -184,28 +184,25 @@
 			<div id="customerServiceCategoryTabQnA">
 				<div class="customerServiceQnAFormContainer">
 					<div class="customerServiceQnAFormBoard">
-						<c:if test="${not sessionScope.mid.equals('admin')}">
-						    <div class="newCustomerServiceQnABoardBtnDiv">
-								<input type="button" class="newCustomerServiceQnABoardBtn" value="새 글 쓰기" onClick="newCustomerServiceQnABoardBtnClick()">
-							</div>
-						</c:if>
-						<table class="customerServiceQnABoardListTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
+						<div class="customerServiceQnAFormFontLightGray" id="customerServiceQnABoardAllCount">Total. ${requestScope.customerServiceQnABoardListAllCnt}개</div>
+						<table class="customerServiceQnABoardListTable" cellpadding="7" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
 							<tr>
 								<th style="width:50px;">번호</th>
 								<th style="width:300px;">제목</th>
 								<th style="width:80px;">작성자</th>
 								<th style="width:100px;">등록일</th>
 								<th style="width:100px;">조회수</th>
+							</tr>
 								<c:forEach var="customerServiceQnABoard" items="${requestScope.customerServiceQnABoardList}" varStatus="status">
 									<tr style="cursor:pointer" onClick="submitDetailForm(${customerServiceQnABoard.b_no},'${customerServiceQnABoard.mid}')">
-										<td align="center">${requestScope.customerServiceQnABoardMap.begin_serialNo_desc - status.count + 1}</td>
+										<td class="customerServiceQnAFormFontLightGray" align="center">${requestScope.customerServiceQnABoardMap.begin_serialNo_desc - status.count + 1}</td>
 										<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
 										<td>
 											${customerServiceQnABoard.subject}
 										</td>
-										<td align="center">${customerServiceQnABoard.writer}</td>
-										<td align="center">${customerServiceQnABoard.reg_date}</td>
-										<td align="center">${customerServiceQnABoard.readcount}</td>
+										<td class="customerServiceQnAFormFontLightGray" align="center">${customerServiceQnABoard.writer}</td>
+										<td class="customerServiceQnAFormFontLightGray" align="center">${customerServiceQnABoard.reg_date}</td>
+										<td class="customerServiceQnAFormFontLightGray" align="center">${customerServiceQnABoard.readcount}</td>
 									</tr>
 								</c:forEach>
 						</table>
@@ -217,22 +214,25 @@
 						</c:if>
 					</div>
 				</div>
+				<c:if test="${not sessionScope.mid.equals('admin')}">
+				    <div class="newCustomerServiceQnABoardBtnDiv">
+						<input type="button" class="newCustomerServiceQnABoardBtn" value="새 글 쓰기" onClick="newCustomerServiceQnABoardBtnClick()">
+					</div>
+				</c:if>
 				<div class="customerServiceCategoryTabQnAPaging">
 					<span class="pagingNos">
-						<span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span>
-						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+						<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
 						<c:forEach var="pageNo" begin="${requestScope.customerServiceQnABoardMap.begin_pageNo}" end="${requestScope.customerServiceQnABoardMap.end_pageNo}">
 							<c:if test="${requestScope.customerServiceQnABoardMap.selectPageNo==pageNo}">
-					            ${pageNo}
+					            <p class="activePageNo">${pageNo}</p>
 					        </c:if>
 							<c:if test="${requestScope.customerServiceQnABoardMap.selectPageNo!=pageNo}">
-								<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+								<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
 							</c:if>
-						</c:forEach>&nbsp;&nbsp;
-						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.selectPageNo}+1)">[다음]</span>
-						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span>
-						&nbsp;&nbsp;&nbsp;
-						Total. ${requestScope.customerServiceQnABoardListAllCnt}개
+						</c:forEach>
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+						<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
 					</span>
 				</div>
 			</div>
