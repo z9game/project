@@ -16,7 +16,7 @@ public interface RecruitDAO {
 
 	public List<RecruitTeamMemDTO> getRecruit_TeamMemList(RecruitSearchDTO recruitSearchDTO);
 	
-	public List<RecruitHiredDTO> getRecruit_HiredBoardList();
+	//public List<RecruitHiredDTO> getRecruit_HiredBoardList();
 	
 	
 	

@@ -182,6 +182,14 @@ function search() {
 	   
    }
    
+   //레슨페이지 sort 관련 함수
+   function searchWithSort(sort)
+   {
+   	$("[name='recruit_lesson']").find("[name='sort_date']").val(sort);
+   	search();
+   	
+   }
+   
 </script>
 </head>
 <body>
@@ -264,17 +272,6 @@ function search() {
 							<input type="checkbox" id="everytime" name="time" onclick="everyset()" value="alltime">상관없음&nbsp;&nbsp;
 	  					</dd>
 	  			</dl>
-	  				
-	  			<dl class="pos">
-	  				<dt class="item">포 지 션</dt>
-	  					<dd  class="content">
-	  						<input type="checkbox" id="st" name="pos" onclick="" value="ST">ST&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="cm" name="pos" onclick="" value="CM">CM&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="cb" name="pos" onclick="" value="CB">CB&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="gk" name="pos" onclick="" value="GK">GK&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="allPos" name="pos" onclick="" value="allpos">상관없음
-	  					</dd>
-	  			</dl>
 			</div>	
 			
 			<!-- 페이징처리관련 밑에두줄-->
@@ -283,6 +280,9 @@ function search() {
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			<input type="hidden" name="sort_date">
+			<!-- 위에 한 줄은 sort 관련 -->
+			
 			
 	 	</form>
 		
@@ -311,7 +311,23 @@ function search() {
                <th style="width:300px;">제목</th>
                <th style="width:80px;">닉네임</th>
                <th style="width:100px;">조회수</th>
-			   <th style="width:100px;">등록일</th>
+			   <c:if test="${param.sort_date!='l.reg_date asc' and param.sort_date!='l.reg_date desc'}">
+					<th width="100" onClick="searchWithSort('l.reg_date desc')" style="cursor:pointer">등록일</th>
+					</c:if>
+					<!--============================================================= -->
+					<!-- 만약 파명 "sort" 의 파값이 'reg_date desc' 면 -->
+					<!-- 즉 정렬 의지가 'reg_date desc' 면             -->
+					<!--============================================================= -->
+					<c:if test="${param.sort_date=='l.reg_date desc'}">
+						<th width="100" onClick="searchWithSort('l.reg_date asc')" style="cursor:pointer">등록일▼</th>
+					</c:if>	
+					<!--============================================================= -->
+					<!-- 만약 파명 "sort" 의 파값이 'reg_date asc' 면 -->
+					<!-- 즉 정렬 의지가 'reg_date asc' 면             -->
+					<!--============================================================= -->
+					<c:if test="${param.sort_date=='l.reg_date asc'}">	
+						<th width="100" onClick="searchWithSort('')" style="cursor:pointer">등록일▲</th>
+					</c:if>
 			 </tr>		
                <c:forEach var="list" items="${requestScope.boardList}" varStatus="status">
                   <tr style="cursor:pointer" onClick=" goRecruitLessonDetailForm(${list.recruitment_no});">

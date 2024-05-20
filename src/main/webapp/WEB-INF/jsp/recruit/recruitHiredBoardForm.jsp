@@ -184,6 +184,7 @@ function enterkey()
 	   
    }
    
+   //용병페이지 sort 관련 함수
    function searchWithSort(sort)
    {
    	$("[name='recruit_hired']").find("[name='sort_date']").val(sort);
@@ -293,6 +294,7 @@ function enterkey()
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			<input type="hidden" name="sort_date">
+			<!-- 위에 한 줄은 sort 관련 -->
 			
 	 	</form>
 		

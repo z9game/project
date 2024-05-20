@@ -60,7 +60,7 @@ public interface RecruitService {
 //==================================================================================================================================
 
 	//용병모집board페이지
-	public List<RecruitHiredDTO> getRecruit_HiredBoardList();
+	//public List<RecruitHiredDTO> getRecruit_HiredBoardList();
 
 	//용병상세페이지
 	RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no);

@@ -65,7 +65,7 @@
 					//<주의> href 메소드를 호출하여
 					//WAS로 접속 할때는 get 방식으로 접속한다.
 					//--------------------------
-					location.href='/matchingForm.do';
+					location.href='/mainForm.do';
 				}
 				else
 				{

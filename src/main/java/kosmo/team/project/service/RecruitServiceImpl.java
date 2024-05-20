@@ -171,13 +171,16 @@ public class RecruitServiceImpl implements RecruitService {
 //==================================================================================================================================
 
 	//용병모집board페이지
-	public List<RecruitHiredDTO> getRecruit_HiredBoardList() {
-
-		List<RecruitHiredDTO> getRecruit_HiredBoardList = this.recruitDAO.getRecruit_HiredBoardList();
-
-		return getRecruit_HiredBoardList;
-
-	}
+	/*
+	 * public List<RecruitHiredDTO> getRecruit_HiredBoardList() {
+	 * 
+	 * List<RecruitHiredDTO> getRecruit_HiredBoardList =
+	 * this.recruitDAO.getRecruit_HiredBoardList();
+	 * 
+	 * return getRecruit_HiredBoardList;
+	 * 
+	 * }
+	 */
 	
 	//용병상세페이지
 	public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no) {
