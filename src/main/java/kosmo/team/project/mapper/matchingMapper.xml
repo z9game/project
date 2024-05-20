@@ -221,6 +221,58 @@ where
 	where
 		match_no = #{match_no}
 </update>
+
+<!--주석 
+	매칭 새글쓰기 m_no를 받아 경기장명 셀렉트박스에 적용할 데이터 로드 -->
+<select id="machingStadiumSelectBoxLoad" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="kosmo.team.project.dto.MatchingDTO">
+	select 
+		  unique(b.stadium_no)    as "stadium_no"
+		, s.stadium_name  as "stadium_name"            
+
+	from booking b, time_table t, member m, stadium s
+	
+	where 1=1
+		and b.m_no = ${m_no}
+		and b.m_no = m.m_no
+		and b.time_slot = t.time_no
+		and b.stadium_no = s.stadium_no
+	order by b.stadium_no
+</select>
+
+<!--주석 
+	매칭 새글쓰기 m_no, stadium_no를 받아 경기날짜 셀렉트박스에 적용할 데이터 로드 -->
+<select id="machingDaySelectBoxLoad" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="kosmo.team.project.dto.MatchingDTO">
+	select 
+			unique(to_char(b.booking_date,'yyyy-mm-dd')) as "booking_date"       
+
+	from booking b, time_table t, member m, stadium s
+	
+	where 1=1
+	and b.m_no = ${m_no}
+	and b.stadium_no = ${stadium_no}
+	and b.m_no = m.m_no
+	and b.time_slot = t.time_no
+	and b.stadium_no = s.stadium_no
+	order by b.stadium_no
+</select>
+
+<!--주석 
+	매칭 새글쓰기 m_no, stadium_no를 받아 경기시간 셀렉트박스에 적용할 데이터 로드 -->
+<select id="machingTimeSelectBoxLoad" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="kosmo.team.project.dto.MatchingDTO">
+	select 
+			  unique(t.time_no)	as "time_no"
+			, t.time_range    	as "time_range"        
+
+	from booking b, time_table t, member m, stadium s
+	
+	where 1=1
+	and b.m_no = ${m_no}
+	and b.stadium_no = ${stadium_no}
+	and b.m_no = m.m_no
+	and b.time_slot = t.time_no
+	and b.stadium_no = s.stadium_no
+	order by b.stadium_no
+</select>
  
 
 
