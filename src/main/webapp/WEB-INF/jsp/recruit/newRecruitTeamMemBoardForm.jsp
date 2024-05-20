@@ -45,12 +45,17 @@
 				{
 					alert("게시물 입력 실패!")
 				}
+
+				
+
 			}
+
 			,
 			error : function() {
 
 				alert("입력 실패! 관리자에게 문의 바랍니다.");
 			}
+
 		});	
 	}
 
@@ -144,9 +149,7 @@
 					<th>종류</th>
 					<td>
 						<input type="radio" name="team_mem" value="팀">팀
-						<c:if test="${requestScope.teamCnt eq 1}">
-							<input type="radio" name="team_mem" value="팀원">팀원
-						</c:if>
+						<input type="radio" name="team_mem" value="팀원">팀원
 					</td>
 				</tr>
 				
