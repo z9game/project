@@ -33,7 +33,8 @@ public class MatchingServiceImpl implements MatchingService {
 	
 	//매칭 상세보기
 	public MatchingDTO getMatchingDetail(int match_no) {
-		
+		//게시물 조회수 증가
+		int matchingDetailCnt = this.matchingDAO.matchingDetailCnt(match_no);
 		//getMatchingDetail 라는 변수에 matchingDAO쪽에 있는 getMatchingDetail 메소드의 실행결과를 저장
 		MatchingDTO getMatchingDetail = this.matchingDAO.getMatchingDetail(match_no);
 		//변수에 저장된 값을 나를 호출한 놈에게 돌려준다.
@@ -73,5 +74,13 @@ public class MatchingServiceImpl implements MatchingService {
 		int deleteMatching = this.matchingDAO.deleteMatching(matchingDTO);
 		//변수에 저장된 값을 나를 호출한 놈에게 돌려준다.
 		return deleteMatching;
+	}
+	
+	//게시물 검색 개수 가져오기
+	public int getMatchListCnt(MatchingSearchDTO matchingSearchDTO ) {
+		
+		int getMatchListCnt = this.matchingDAO.getMatchListCnt(matchingSearchDTO);
+		
+		return getMatchListCnt;
 	}
 }

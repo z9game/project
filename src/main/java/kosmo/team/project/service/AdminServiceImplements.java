@@ -370,7 +370,9 @@ public class AdminServiceImplements implements AdminService {
 		return adminStadiumRegCnt;
 	}
 	
-	
+	//=======================================================================================================
+	//대회일정
+	//=======================================================================================================
 	public List<TournamentDTO> getTournamentList(TournamentSearchDTO tournamentSearchDTO) {
 
 		List<TournamentDTO> tournamentList = this.adminDAO.getTournamentList(tournamentSearchDTO);
@@ -388,6 +390,35 @@ public class AdminServiceImplements implements AdminService {
 	}
 	
 
+	public TournamentDTO getTournamentDetail(int list_no) {
+		
+		TournamentDTO getTournamentDetail = this.adminDAO.getTournamentDetail(list_no);
+		
+		return getTournamentDetail;
+	}
+	
+	public int deleteBoard(int list_no) {
+		
+		int deleteBoard = this.adminDAO.deleteBoard(list_no);
+		
+		return deleteBoard;
+	}
+
+
+	public int regBoard(TournamentDTO tournamentDTO) {
+		
+		int regBoard = this.adminDAO.regBoard(tournamentDTO);
+		return regBoard;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 갤러리
 		@Override
 		public int getCommunityGallaryBoardListAllCnt() {

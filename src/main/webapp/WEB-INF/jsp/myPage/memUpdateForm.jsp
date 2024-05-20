@@ -201,7 +201,7 @@ function memUpdate()
 		<div style="height:10px;"></div>
 		<center>
 			<input type="button" value="등록" onclick="memUpdate()">
-			<input type="button" value="목록으로" style="cursor:pointer" onclick="location.href='boardList.do'" >
+			<input type="button" value="메인화면으로" style="cursor:pointer" onclick="location.href='/mainForm.do'" >
 		</center>
 		<input type="hidden" name="mid" value="${requestScope.memberDTO.mid}">
 	</form>

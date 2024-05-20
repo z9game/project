@@ -743,36 +743,119 @@ public class AdminController {
 	}
 
 	
+	//========================================================================================================================================
+	// 대회일정 관련 어드민 페이지
+	//========================================================================================================================================
 	
-	 @RequestMapping(value = "/adminTournamentBoardForm.do")
-	    public ModelAndView tournamentBoardForm(TournamentSearchDTO tournamentSearchDTO) {
-	    	
-	 		int getTournamentListCnt = this.adminService.getTournamentListCnt(tournamentSearchDTO);
+	//게시물 페이지
+	@RequestMapping(value = "/adminTournamentBoardForm.do")
+    public ModelAndView tournamentBoardForm(TournamentSearchDTO tournamentSearchDTO) {
+    	
+ 		int getTournamentListCnt = this.adminService.getTournamentListCnt(tournamentSearchDTO);
+ 
+ 		Map<String, Integer> tournamentMap = Page.getPagingMap(
+ 			tournamentSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+			, tournamentSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+			, getTournamentListCnt // 검색 결과물 개수
+		);
+    	
+ 		tournamentSearchDTO.setSelectPageNo((int) tournamentMap.get("selectPageNo"));
+ 		tournamentSearchDTO.setRowCntPerPage((int) tournamentMap.get("rowCntPerPage"));
+ 		tournamentSearchDTO.setBegin_rowNo((int) tournamentMap.get("begin_rowNo"));
+ 		tournamentSearchDTO.setEnd_rowNo((int) tournamentMap.get("end_rowNo"));
 	 
-	 		Map<String, Integer> tournamentMap = Page.getPagingMap(
-	 			tournamentSearchDTO.getSelectPageNo()// 선택한 페이지 번호
-				, tournamentSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
-				, getTournamentListCnt // 검색 결과물 개수
-			);
-	    	
-	 		tournamentSearchDTO.setSelectPageNo((int) tournamentMap.get("selectPageNo"));
-	 		tournamentSearchDTO.setRowCntPerPage((int) tournamentMap.get("rowCntPerPage"));
-	 		tournamentSearchDTO.setBegin_rowNo((int) tournamentMap.get("begin_rowNo"));
-	 		tournamentSearchDTO.setEnd_rowNo((int) tournamentMap.get("end_rowNo"));
-		 
-	    	List<TournamentDTO> tournamentList = this.adminService.getTournamentList(tournamentSearchDTO);
-	        ModelAndView mav = new ModelAndView();
-	       
-	        mav.addObject("tournamentList", tournamentList);
-	        mav.addObject("tournamentMap", tournamentMap);
-	        mav.setViewName("/admin/adminTournamentBoardForm.jsp");
-	        
-	        
-	        return mav;
-	        
-	        
-	        
-	    }
+    	List<TournamentDTO> tournamentList = this.adminService.getTournamentList(tournamentSearchDTO);
+        ModelAndView mav = new ModelAndView();
+       
+        mav.addObject("tournamentList", tournamentList);
+        mav.addObject("tournamentMap", tournamentMap);
+        mav.setViewName("/admin/adminTournamentBoardForm.jsp");
+        
+        return mav;
+    }
+	
+	//상세보기 페이지
+	@RequestMapping(value = "/adminTournamentDetailForm.do")
+    public ModelAndView tournamentDetailForm(@RequestParam(value="list_no")int list_no) {
+		
+		TournamentDTO tournamentDetail = this.adminService.getTournamentDetail(list_no);
+        ModelAndView mav = new ModelAndView();
+       
+        mav.setViewName("/admin/adminTournamentBoardDetailForm.jsp");
+        mav.addObject("detail", tournamentDetail);
+        
+        return mav;
+    }
+	
+	//수정 페이지
+	@RequestMapping(value = "/adminTournamentBoardUpForm.do")
+    public ModelAndView TournamentBoardUpForm(@RequestParam(value="list_no")int list_no) {
+		
+		TournamentDTO tournamentDetail = this.adminService.getTournamentDetail(list_no);
+        ModelAndView mav = new ModelAndView();
+       
+        mav.setViewName("/admin/adminTournamentBoardUpForm.jsp");
+        mav.addObject("detail", tournamentDetail);
+        
+        return mav;
+    }
+	 
+	
+	//삭제관련
+	@RequestMapping(value = "/deleteTournamentProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> deleteTournamentProc(@RequestParam(value="list_no")int list_no) {
+
+		Map<String, String> resultMap = new HashMap<String, String>();
+		
+		int deleteCnt = this.adminService.deleteBoard(list_no);
+
+		resultMap.put("result",  deleteCnt+"");
+
+		return resultMap;
+	}
+	
+	//새 글쓰기 페이지
+	@RequestMapping(value = "/newTournamentBoard.do")
+    public ModelAndView newTournamentBoard() {
+		
+        ModelAndView mav = new ModelAndView();
+       
+        mav.setViewName("/admin/newTournamentBoard.jsp");
+        
+        return mav;
+    } 
+	
+	//새글 쓰기
+	@RequestMapping(value = "/newTournamentBoardProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> newTournamentBoardProc(TournamentDTO tournamentDTO) {
+
+		Map<String, String> resultMap = new HashMap<String, String>();
+		
+		int regCnt = this.adminService.regBoard(tournamentDTO);
+
+		resultMap.put("result",  regCnt+"");
+
+		return resultMap;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
      // ----------------------------------------------------------------
 		// admin 갤러리 리스트

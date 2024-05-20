@@ -245,7 +245,7 @@
 				//----------------------------------------------------------
 				//WAS 에 보낼 파라미터명과 파라미터값을 설정하기  ?파라미터명=파라미터값&파라미터명=파라미터값~~
 				//----------------------------------------------------------
-				,data : boardSearchFormObj.serialize() + "&region=" + text + "&ing=" + nowdate
+				,data : boardSearchFormObj.serialize() + "&ing=" + nowdate
 					
 				,success : function(responseHtml){
 					
@@ -275,7 +275,7 @@
 				//----------------------------------------------------------
 				//WAS 에 보낼 파라미터명과 파라미터값을 설정하기  ?파라미터명=파라미터값&파라미터명=파라미터값~~
 				//----------------------------------------------------------
-				,data : boardSearchFormObj.serialize() + "&region=" + text + "&end=" + nowdate
+				,data : boardSearchFormObj.serialize() + "&end=" + nowdate
 					
 				,success : function(responseHtml){
 					
@@ -342,7 +342,7 @@
 		
 		<div style="height:25px;"></div>
 		<br>
-		<input type="button" class="new_RegBoard" style="cursor:pointer" onClick="" value="새 글쓰기">
+		<input type="button" class="new_RegBoard" style="cursor:pointer" onClick="location.href='/newTournamentBoard.do'" value="새 글쓰기">
 		<div style="height:25px;"></div>
 	
 		<div>
@@ -364,7 +364,7 @@
 					<tr>
 						<td class="region1 selected1" onClick="search('전체')">&middot;전체</td>
 						<td class="region1" onClick="search('서울')">&middot;서울</td>
-						<td class="region1" onClick="search('경기')">&middot;경기/인천</td>
+						<td class="region1" onClick="search('경인')">&middot;경인</td>
 						<td class="region1" onClick="search('강원')">&middot;강원</td>
 						<td class="region1" onClick="search('충청')">&middot;충청</td>
 						<td class="region1" onClick="search('전라')">&middot;전라</td>
@@ -383,9 +383,9 @@
 			               <th style="width:80px;">신청기간</th>
 			               <th style="width:40px;">지역</th>
 			                <th style="width:40px;">등록일</th>
-			               <c:forEach var="gameList" items="${requestScope.tournamentList}">
+			               <c:forEach var="gameList" items="${requestScope.tournamentList}" varStatus="status">
 			                  <tr style="cursor:pointer" onClick="goTournamentBoardDetail(${gameList.list_no});">
-			                     <td align="center">${gameList.list_no}</td>
+			                     <td align="center">${requestScope.tournamentMap.begin_serialNo_desc - status.index}</td>
 			                     <td align="center">${gameList.subject}</td>
 			                     <td align="center">${gameList.regist_start} ~ ${gameList.regist_end}</td>
 			                     <td align="center">${gameList.region}</td>

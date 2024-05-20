@@ -32,4 +32,10 @@ public interface MatchingDAO {
 	
 	//게시물 삭제
 	int deleteMatching(MatchingDTO matchingDTO);
+	
+	//게시물 검색 개수 가져오기
+	int getMatchListCnt(MatchingSearchDTO matchingSearchDTO );
+	
+	//게시물 조회수 증가
+	int  matchingDetailCnt(int match_no);
 }

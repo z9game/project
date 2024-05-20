@@ -258,7 +258,8 @@ function checkReserveForm()
    }
 	else
 	{
-		location.href='/newRecruitTeamMemBoardForm.do'
+		document.newRecruitTeamMemBoard.submit();
+		//location.href='/newRecruitTeamMemBoardForm.do'
 	}
 	   
 }
@@ -376,6 +377,7 @@ function checkReserveForm()
 	  					</dd>
 	  			</dl>
 			</div>	
+			<!-- 상세보기 관련
 			
 			<div class="detail_Search">
 	 			<dl class="age">
@@ -431,7 +433,7 @@ function checkReserveForm()
 	 				<dt class="item" onclick="toggleText()" style="cursor:pointer">상세검색 열기</dt>
 	 			</dl>
 	 		</div>
-	 		
+	 		 -->
 	 		<input type="hidden" name="sort_date">
 	 		<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
@@ -535,9 +537,14 @@ function checkReserveForm()
 	<div style="height:30px;"></div>
 	
 	<form name="recruitTeamMemBoardDetailForm" action="/recruitTeamMemBoardDetailForm.do" method="post">
-         <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
-         <input type="hidden" name="b_no">
-      </form> 
+        <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+        <input type="hidden" name="b_no">
+     </form> 
+      
+     <form name="newRecruitTeamMemBoard" action="/newRecruitTeamMemBoardForm.do" method="post">
+    	<!-- 내 팀이 없는 상태에서 팀원 모집글 못쓰게 하기 위해 -->
+    	<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+    </form>  
 	   
 </body>
 </html>

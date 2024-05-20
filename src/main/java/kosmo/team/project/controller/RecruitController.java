@@ -87,10 +87,12 @@ public class RecruitController {
     
     
     @RequestMapping(value = "/newRecruitTeamMemBoardForm.do")
-    public ModelAndView newRecruitTeamMemBoardForm() {
+    public ModelAndView newRecruitTeamMemBoardForm(@RequestParam(value="m_no") int m_no) {
     	
+    	int haveTeamCnt = this.recruitService.getTeamCnt(m_no);
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("/recruit/newRecruitTeamMemBoardForm.jsp");
+    	mav.addObject("teamCnt", haveTeamCnt);
     	
         return mav;
     }
@@ -185,7 +187,6 @@ public class RecruitController {
     	mav.addObject("updel_day", recruitTeamMemDTO_day);
     	mav.addObject("updel_time", recruitTeamMemDTO_time);
     	mav.addObject("updel_sidosigungu", recruitTeamMemDTO_sidosigungu);
-    	mav.addObject("updel_time", recruitTeamMemDTO_time);
     	mav.setViewName("/recruit/recruitTeamMemBoardUpDelForm.jsp");
     	
         return mav;

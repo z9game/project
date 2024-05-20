@@ -62,4 +62,8 @@ public interface RecruitDAO {
 	int regWaitingList(RecruitTeamMemDTO recruitTeamMemDTO);
 	
 	int findMyTeam(RecruitTeamMemDTO recruitTeamMemDTO); 
+	
+	
+	//팀이 없을때, 새 글쓰기에서 팀원구하지 못하게
+	int getTeamCnt(int m_no);
 }
