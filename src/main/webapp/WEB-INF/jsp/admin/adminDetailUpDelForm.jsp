@@ -27,7 +27,7 @@
 		var phoneObj = formObj.find(".phone");
 		var detail_addressObj = formObj.find(".detail_address");
 
-		alert(formObj.serialize());
+		//alert(formObj.serialize());
 
 		if (confirm("정말수정하시겠습니까?") == false) {
 			return;

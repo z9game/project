@@ -103,7 +103,17 @@ function search(){
 		
 }
 
-
+function searchAll() {
+    // Reset all search fields in the form
+    $("[name='stadiumTransferFormConditionalSearch']").find("input[type=text]").val("");
+    $("[name='stadiumTransferFormConditionalSearch']").find("select").val("0");
+    $("[name='stadiumTransferFormConditionalSearch']").find("input[type=checkbox]").prop("checked", false);
+    $("[name='stadiumTransferFormConditionalSearch']").find(".rowCntPerPage").val("10");
+    $("[name='stadiumTransferFormConditionalSearch']").find(".SelectPageNo").val("1");
+    
+    // Perform the search
+    search();
+}
 
 
 

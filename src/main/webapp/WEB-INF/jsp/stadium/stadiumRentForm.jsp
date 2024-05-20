@@ -13,7 +13,7 @@
 
 <script>
 	$(document).ready(function() {
-	    $(".rowCntPerPage").val("10");
+	    $(".rowCntPerPage").val("8");
 	    search();
 	
 	  
@@ -102,6 +102,29 @@
 				});
 	
 	}
+	
+	
+	function searchAll() {
+		
+		
+		
+		$("[name='StadiumSearchForm']").find("input[type=text]").val("");
+	    $("[name='StadiumSearchForm']").find("select").val("0");
+	    $("[name='StadiumSearchForm']").find(".rowCntPerPage").val("8");
+	    $("[name='StadiumSearchForm']").find(".SelectPageNo").val("1")
+        
+        search();
+    }
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	function pageNoClick(clickPageNo) {
@@ -242,10 +265,10 @@
 			&nbsp;&nbsp;
 		</span> <select name="rowCntPerPage" class="rowCntPerPage"
 			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
+			<option value="8">8
+			<option value="12">12
+
+		</select>개수 &nbsp;&nbsp;&nbsp;
 	</center>
 
 
