@@ -105,6 +105,7 @@
 <!-- 
 	//매칭 상세보기 가져오기
 -->
+<!-- 
 <select id="getMatchingDetail" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="int">
 	select
 	   m.title
@@ -124,23 +125,43 @@
 	where
 		match_no = #{match_no}
 </select>
-
+ -->
+ 
+ 
+<select id="getMatchingDetail" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="int">
+	select
+		m.title
+	   ,mb.nickname
+	   ,m.readcount
+	   ,sta.stadium_name
+	   ,to_char(bk.booking_date, 'YYYY-MM-DD')
+	   ,tt.time_range
+	   ,m.content
+	   ,m.match_no
+	from
+		match m left join member mb on m.writer = mb.m_no
+				left join booking bk on m.writer = bk.m_no  
+				left join stadium sta on bk.stadium_no = sta.stadium_no
+				left join time_table tt on bk.time_slot = tt.time_no
+	where
+		match_no = #{match_no}
+		
+</select>
 
 
 <!-- 
 	//새글쓰기
 -->
 <insert id="regMatchingBoard" parameterType="kosmo.team.project.dto.MatchingDTO" >
- insert into match (match_no, title, writer, content, sido_name, sigungu_name, time_no, day)
+insert into match (match_no, title, writer, content, time_no, day, stadium)
  values(
     (select nvl(max(match_no),0)+1 from match)
     ,#{title}
     ,#{writer}
     ,#{content}
-    ,#{sido}
-    ,#{sigungu}
-    ,#{matchingTime}
+    ,#{time_no}
     ,#{day}
+    ,#{stadium_no_n}
  )
  </insert>
  

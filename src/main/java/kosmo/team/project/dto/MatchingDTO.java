@@ -28,6 +28,7 @@ public class MatchingDTO {
 	// 주석 추가
 	private int m_no;
 	private String stadium_no;
+	private int stadium_no_n;
 	private String stadium_name;	
 	private String booking_date;
 	//private Date date_booking_date;
@@ -178,6 +179,12 @@ public class MatchingDTO {
 	}
 	public void setSigungu(int sigungu) {
 		this.sigungu = sigungu;
+	}
+	public int getStadium_no_n() {
+		return stadium_no_n;
+	}
+	public void setStadium_no_n(int stadium_no_n) {
+		this.stadium_no_n = stadium_no_n;
 	}
 	
 	

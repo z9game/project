@@ -28,6 +28,8 @@
 	{
 		var formObj = $("[name='newMatchingBoard']")
 		
+		alert(formObj.serialize());
+		
 		$.ajax({
 			//-------------------------------
 			// WAS 로 접속할 주소 설정
@@ -216,7 +218,7 @@
 			<tr>
                 <th bgColor="lightgray">경기장명</th>
                 <td>
-					<select name="stadium_no" id="stadium_no" onchange="loadMachingDay()">
+					<select name="stadium_no_n" id="stadium_no" onchange="loadMachingDay()">
 						<option value="0">매칭예약 미신청 상태</option>
 					</select>
 				</td>
