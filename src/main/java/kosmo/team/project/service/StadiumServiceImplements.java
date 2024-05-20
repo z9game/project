@@ -228,6 +228,7 @@ public class StadiumServiceImplements implements StadiumService {
 		//이미 양도에 같은게 있으면 3반환
 		int UpCnt = this.stadiumDAO.getYangdoUpCnt(yangdoDTO);
 		
+
 		if (UpCnt >= 1) {
 			return 3;
 		}

@@ -53,8 +53,9 @@ function loadDate() {
     
     
 
-    if (stadiumId === "선택") {
+    if (stadiumId === 0) {
         $("select[name='MyDate']").html('<option value="선택">날짜</option>');
+
         return;
     }
 
@@ -106,7 +107,7 @@ function loadTimeRanges() {
     var m_no = $("input[name='m_no']").val(); // m_no의 값을 가져옵니다
     
     if (bookingDate === "선택") {
-        $("select[name='MyTimeRange']").html('<option value="0">시간</option>');
+        $("select[name='MyTimeRange']").html('<option value=0>시간</option>');
         return;
     }
 
@@ -187,7 +188,7 @@ function loadTimeRanges() {
 		 var bookingDate = $("select[name='MyDate']").val();
 		 
 		 var extractedDate = null; 
-		 if (bookingDate !== null && bookingDate !== '') {
+		 if (bookingDate !== null && bookingDate !== '' ) {
 		        var matchResult = bookingDate.match(/^([0-9]{4}-[0-9]{2}-[0-9]{2})/);
 		        if (matchResult !== null) {
 		            extractedDate = matchResult[0];
@@ -225,9 +226,10 @@ function loadTimeRanges() {
 				if (result == 0) {
 					alert("삭제된 양도입니다.");
 					location.href = "/stadiumTransferForm.do";
+					return;
 				}else if (result == 3){
 					alert("이미 같은조건의 게시글이있음")
-
+					return;
 				}
 				
 				else {
@@ -299,7 +301,7 @@ function loadTimeRanges() {
 				<td>
 					${requestScope.yangdoDTO.yangdo_stadium} - ${requestScope.yangdoDTO.yangdo_date} - ${requestScope.yangdoDTO.yangdo_time}<br>
 				    <select name="MyStadium" class="MyStadium" onchange="loadDate()">
-					    <option value="0">경기장선택</option>
+					    <option value=0>경기장선택</option>
 					    <c:forEach var="myStadium" items="${requestScope.myStadiumList}">
 					        <option value="${myStadium.stadium_no}">
 					            ${myStadium.stadium_name}
@@ -311,11 +313,11 @@ function loadTimeRanges() {
 					
 					
 				    <select name="MyDate" class="MyDate"onchange="loadTimeRanges()">
-				        <option value="0">날짜</option>
+				        <option value="선택">날짜</option>
 				       
 				    </select>
 				    <select name="MyTimeRange" class="MyTimeRange">
-				        <option value="0">시간</option>
+				        <option value=0>시간</option>
 				       
 				    </select>
 				</td>
@@ -339,6 +341,7 @@ function loadTimeRanges() {
 		</table>
 		<input type="hidden" name="yangdo_no"
 			value="${requestScope.yangdoDTO.yangdo_no}">
+			<input type="hidden" name="m_no" value="<%= request.getSession().getAttribute("m_no") %>">
 		
 	</form>
 
