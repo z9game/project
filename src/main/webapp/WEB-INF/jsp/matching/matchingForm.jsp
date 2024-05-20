@@ -14,6 +14,7 @@
 
 <script>
 
+	
 	//로그인을 하지 않고 글을 쓰려고 하면 로그인창으로 돌려보냄
 	function checkLogin() 
 	{
@@ -51,6 +52,8 @@
 	    
 	    keyword1 = $.trim(keyword1);
 	    
+	    boardSearchFormObj.find(".rowCntPerPage").val( $("select").filter(".rowCntPerPage").val());
+	    
 		$.ajax({
 			//-------------------------------
 			// WAS 로 접속할 주소 설정
@@ -71,6 +74,7 @@
 				var obj = $(responseHtml);
 
 				$(".matchingFormBoard").html(obj.filter(".matchingFormBoard").html());
+				$(".pagingNos").html(obj.find(".pagingNos").html());
 
 			}
 
@@ -99,6 +103,24 @@
 	{
 		$("[name='matchingDetail'] [name='match_no']").val(match_no); 
 		document.matchingDetail.submit();
+	}
+	
+	//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	// [페이지 번호]를 클릭하면 호출되는 함수 pageNoClick 선언하기 
+	//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+	function pageNoClick( clickPageNo ){
+		//alert(clickPageNo);
+		//---------------------------------------------
+		// name='selectPageNo' 를 가진 태그의 value 값에 
+		// 매개변수로 들어오는 [클릭한 페이지 번호]를 저장하기
+		// 즉 <input type="hidden" name="selectPageNo" value="1"> 태그에
+		// value 값에 [클릭한 페이지 번호]를 저장하기
+		//---------------------------------------------
+		 $("[name='matching_table']").find(".selectPageNo").val(clickPageNo);
+		//---------------------------------------------
+		// search 함수 호출하기
+		//---------------------------------------------
+		search();
 	}
 	
 	
@@ -185,6 +207,12 @@
 	  			</dl>
 			</div>	
 			
+		<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+		<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
+		<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
+		<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			
 	 	</form>
    
    
@@ -213,7 +241,7 @@
 					<c:forEach var="board" items="${requestScope.boardList}" varStatus="status">
 														<!-- 클릭이 발생했을때 생기는 이벤트 -> goMatchDetail 함수 실행 / 매개변수로는 클릭한 게시물의 번호가 들어간다.-->
 						<tr style="cursor:pointer" onClick="goMatchDetail(${board.match_no})">
-							<td align="center">${board.match_no}</td>
+							<td align="center">${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
 							<td align="center">${board.title}</td>
 							<td align="center">${board.nickname}</td>
 							<td align="center">${board.readcount}</td>
@@ -224,10 +252,43 @@
 			<c:if test="${empty requestScope.boardList}">
 				<br>
 				<center>
-					조건에 맞는 검색 결과가 없습니다.
+					조건에 맞는 검색 결과가 없습니다. 
 				</center>
 			</c:if>
 		</div>
+		
+	<center>
+
+		<span class="pagingNos"> <span style="cursor: pointer"
+			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.boardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
+
+
+			<c:forEach var="pageNo"
+				begin="${requestScope.boardMap.begin_pageNo}"
+				end="${requestScope.boardMap.end_pageNo}">
+
+				<c:if test="${requestScope.boardMap.selectPageNo==pageNo}">
+		            ${pageNo}
+		         </c:if>
+
+				<c:if test="${requestScope.boardMap.selectPageNo!=pageNo}">
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+				</c:if>
+			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.boardMap.selectPageNo}+1)">[다음]</span>
+			<span style="cursor: pointer"
+			onClick="pageNoClick(${requestScope.boardMap.last_pageNo})">[마지막]</span>
+		</span> <select name="rowCntPerPage" class="rowCntPerPage"
+			onChange="search()">
+			<option value="10">10
+			<option value="15">15
+			<option value="20">20
+		</select>행보기 &nbsp;&nbsp;&nbsp;
+		
+	</center>
+	
+	
 	<!-- 
 	action? -> 폼태그안의 값을 보낼 주소를 적는곳
 	method? -> 어떠한 방식으로 보낼지 ('get' or 'post')

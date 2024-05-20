@@ -15,17 +15,17 @@
                upper(mb.nickname) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'title'">
-               upper(title) like upper('%${keyword1}%')
+               upper(m.title) like upper('%${keyword1}%')
             </if>
             <if test="searchType1== 'content'">
-               upper(content) like upper('%${keyword1}%')
+               upper(m.content) like upper('%${keyword1}%')
             </if>
             <if test="searchType1 == 'all'">
                upper(mb.nickname) like upper('%${keyword1}%')
                or
-               upper(title) like upper('%${keyword1}%')
+               upper(m.title) like upper('%${keyword1}%')
                or
-               upper(content) like upper('%${keyword1}%')
+               upper(m.content) like upper('%${keyword1}%')
             </if>
             )
          </if>
@@ -48,12 +48,12 @@
       
       <if test="(date != null and date.length() > 0)">
       	and
-      	day = #{date}
+      	m.day = #{date}
       </if>
       
       <if test="(matchingTime != null and matchingTime>0)">
       	and
-      	time_no = #{matchingTime}
+      	m.time_no = #{matchingTime}
       </if>
       
    </sql>
@@ -80,17 +80,24 @@
 	여기서 parameterType가 그냥 오라클에 있는 테이블값만 어떠한 조건 없이 가져오기 때문. 
 -->
 <select id="getMatchingList" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="kosmo.team.project.dto.MatchingSearchDTO">
-	select
-	    m.match_no
-	    ,m.title
-	    ,mb.nickname
-	    ,m.readcount
-	    ,to_char(m.reg_date,'YYYY-MM-DD') as "reg_date"
-	from
-	    match m left join member mb on m.writer = mb.m_no
-	where
-        1=1
-     <include refid="boardWhere"/>   
+		select * from ( select rownum RNUM, zxcvb.* from( 
+			select
+			    m.match_no
+			    ,m.title
+			    ,mb.nickname
+			    ,m.readcount
+			    ,to_char(m.reg_date,'YYYY-MM-DD') as "reg_date"
+			from
+			    match m left join member mb on m.writer = mb.m_no
+			where
+		        1=1
+		     <include refid="boardWhere"/> 
+		     order by
+				m.match_no desc
+		 <![CDATA[
+         ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
+      ]]>
+
 </select>
 
 
@@ -185,6 +192,35 @@ where
 	where
 		match_no = #{match_no}
 </delete>
+
+
+
+<!-- 
+	//게시물 검색 개수 가져오기
+-->
+ <select id="getMatchListCnt" resultType="int" parameterType="kosmo.team.project.dto.MatchingSearchDTO">
+
+		select
+			count(*)
+		from
+			match m left join member mb on m.writer = mb.m_no 
+		where
+	        1=1
+	     <include refid="boardWhere"/>
+
+</select>
+
+<!-- 
+	//게시물 조희수 증가
+-->
+<update id="matchingDetailCnt" parameterType="int">
+	update
+		match
+	set
+		readcount = readcount + 1
+	where
+		match_no = #{match_no}
+</update>
  
 
 

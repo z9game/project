@@ -44,6 +44,8 @@ public interface RecruitService {
 	public int recruitDeleteTeamMem(RecruitTeamMemDTO recruitTeamMemDTO);
 	 //신청버튼을 누르면 내 정보가 승낙대기 테이블로 넘어감.
 	int regWaitingList(RecruitTeamMemDTO recruitTeamMemDTO);
+	//팀이 없을때, 새 글쓰기에서 팀원구하지 못하게
+	int getTeamCnt(int m_no);
 
 }
 

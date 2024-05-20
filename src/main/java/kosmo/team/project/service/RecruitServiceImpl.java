@@ -173,5 +173,14 @@ public class RecruitServiceImpl implements RecruitService {
 		 return 0;
 	 }
 	 
+
+	//팀이 없을때, 새 글쓰기에서 팀원구하지 못하게
+	 public int getTeamCnt(int m_no) {
+		 
+		 int getTeamCnt = this.recruitDAO.getTeamCnt(m_no);
+		 
+		 return getTeamCnt;
+	 }
+	 
 	 
 }

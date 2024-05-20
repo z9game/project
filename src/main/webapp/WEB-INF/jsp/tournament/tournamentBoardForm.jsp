@@ -232,7 +232,7 @@
 					<tr>
 						<td class="region1 selected1"  onClick="search('전체')">&middot;전체</td>
 						<td class="region1" onClick="search('서울')">&middot;서울</td>
-						<td class="region1" onClick="search('경기')">&middot;경기/인천</td>
+						<td class="region1" onClick="search('경인')">&middot;경인</td>
 						<td class="region1" onClick="search('강원')">&middot;강원</td>
 						<td class="region1" onClick="search('충청')">&middot;충청</td>
 						<td class="region1" onClick="search('전라')">&middot;전라</td>

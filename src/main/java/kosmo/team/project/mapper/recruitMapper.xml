@@ -150,7 +150,7 @@
                  ,r.content 
                  ,r.readcount 
                  ,r.team_mem
-                 ,to_char(r.reg_date, 'YYYY-MM-DD') as "reg_date"
+                 ,to_char(r.reg_date, 'YYYY-MM-DD') as reg_date
              from 
                  recruit_TeamMemBoard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
                                    		LEFT JOIN teammemboard_time t ON r.b_no = t.b_no
@@ -158,8 +158,8 @@
              where
                 1=1
              <include refid="boardWhere"/>
-                
              
+                 
              <if test="sort_date==null or sort_date.length()==0">
             order by
                r.b_no desc
@@ -463,6 +463,19 @@
 	 	where
 	 		team_member = #{m_no}
    	</select>
+   	
+   	
+   	
+	 <!-- 팀이 없을때, 새 글쓰기에서 팀원구하지 못하게 -->
+   	 <select id="getTeamCnt" parameterType="int" resultType="int">     
+  		select
+  			count(*)
+  		from
+	 		team_member
+	 	where
+	 		team_member = #{m_no}
+   	</select>
+   	
    	
    	
    	 

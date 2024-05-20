@@ -197,16 +197,22 @@ function search() {
 	       location.href = '/loginForm.do';
 	       return;
 	   }
-		else
-		{
-			location.href='/newRecruitTeamMemBoardForm.do'
-		}
+	   else
+	   {
+		   goNewRecruitTeamMemForm();
+		   //location.href='/newRecruitTeamMemBoardForm.do'
+	   }
 	   
    }
    
    
   
 
+}
+
+function goNewRecruitTeamMemForm()
+{
+	document.newRecruitTeamMemBoard.submit();
 }
 
 function goRecruitTeamMemDetailForm(b_no)
@@ -378,7 +384,12 @@ function goRecruitTeamMemDetailForm(b_no)
       <form name="recruitTeamMemBoardDetailForm" action="/recruitTeamMemBoardDetailForm.do" method="post">
          <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
          <input type="hidden" name="b_no">
-      </form>        
+      </form>   
+      
+      <form name="newRecruitTeamMemBoard" action="/newRecruitTeamMemBoardForm.do" method="post">
+      	<!-- 내 팀이 없는 상태에서 팀원 모집글 못쓰게 하기 위해 -->
+      	<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+      </form>     
      
       
 </body>

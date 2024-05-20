@@ -144,7 +144,9 @@
 					<th>종류</th>
 					<td>
 						<input type="radio" name="team_mem" value="팀">팀
-						<input type="radio" name="team_mem" value="팀원">팀원
+						<c:if test="${requestScope.teamCnt eq 1}">
+							<input type="radio" name="team_mem" value="팀원">팀원
+						</c:if>
 					</td>
 				</tr>
 				

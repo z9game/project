@@ -28,4 +28,7 @@ public interface MatchingService {
 	
 	//게시물 삭제
 	int deleteMatching(MatchingDTO matchingDTO);
+	
+	//게시물 검색 개수 가져오기
+	int getMatchListCnt(MatchingSearchDTO matchingSearchDTO );
 }

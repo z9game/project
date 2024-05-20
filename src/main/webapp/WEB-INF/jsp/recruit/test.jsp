@@ -258,7 +258,8 @@ function checkReserveForm()
    }
 	else
 	{
-		location.href='/newRecruitTeamMemBoardForm.do'
+		document.newRecruitTeamMemBoard.submit();
+		//location.href='/newRecruitTeamMemBoardForm.do'
 	}
 	   
 }
@@ -376,6 +377,7 @@ function checkReserveForm()
 	  					</dd>
 	  			</dl>
 			</div>	
+			<!-- 상세보기 관련
 			
 			<div class="detail_Search">
 	 			<dl class="age">
@@ -431,7 +433,7 @@ function checkReserveForm()
 	 				<dt class="item" onclick="toggleText()" style="cursor:pointer">상세검색 열기</dt>
 	 			</dl>
 	 		</div>
-	 		
+	 		 -->
 	 		<input type="hidden" name="sort_date">
 	 		<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
@@ -465,14 +467,14 @@ function checkReserveForm()
 					<th style="width:40px;">조회수</th>
 					
 					<c:if test="${param.sort_date!='reg_date asc' and param.sort_date!='reg_date desc'}">
-					<th width="100" onClick="searchWithSort('r.reg_date desc')" style="cursor:pointer">등록일</th>
+					<th width="100" onClick="searchWithSort('reg_date desc')" style="cursor:pointer">등록일</th>
 					</c:if>
 					<!--============================================================= -->
 					<!-- 만약 파명 "sort" 의 파값이 'reg_date desc' 면 -->
 					<!-- 즉 정렬 의지가 'reg_date desc' 면             -->
 					<!--============================================================= -->
 					<c:if test="${param.sort_date=='reg_date desc'}">
-						<th width="100" onClick="searchWithSort('r.reg_date asc')" style="cursor:pointer">등록일▼</th>
+						<th width="100" onClick="searchWithSort('reg_date asc')" style="cursor:pointer">등록일▼</th>
 					</c:if>	
 					<!--============================================================= -->
 					<!-- 만약 파명 "sort" 의 파값이 'reg_date asc' 면 -->
@@ -535,9 +537,14 @@ function checkReserveForm()
 	<div style="height:30px;"></div>
 	
 	<form name="recruitTeamMemBoardDetailForm" action="/recruitTeamMemBoardDetailForm.do" method="post">
-         <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
-         <input type="hidden" name="b_no">
-      </form> 
+        <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+        <input type="hidden" name="b_no">
+     </form> 
+      
+     <form name="newRecruitTeamMemBoard" action="/newRecruitTeamMemBoardForm.do" method="post">
+    	<!-- 내 팀이 없는 상태에서 팀원 모집글 못쓰게 하기 위해 -->
+    	<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+    </form>  
 	   
 </body>
 </html>

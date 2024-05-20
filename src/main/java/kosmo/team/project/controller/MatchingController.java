@@ -17,6 +17,7 @@ import kosmo.team.project.dto.MatchingSearchDTO;
 import kosmo.team.project.dto.RecruitTeamMemDTO;
 import kosmo.team.project.service.AdminService;
 import kosmo.team.project.service.MatchingService;
+import kosmo.team.project.utility.Page;
 
 @Controller
 public class MatchingController {
@@ -34,6 +35,35 @@ public class MatchingController {
     								//바로 밑의 매개변수는 JSP페이지에서 넘어오는 값을 저장하기위해 이렇게 선언. 무엇이 넘어오나? -> **검색조건**
     								//넘어오는 값들이 전부 DTO에 담을수 있는 값이기 때문
     public ModelAndView matchingForm(MatchingSearchDTO matchingSearchDTO) {
+    	//페이징 처리를 위한 코드들
+    	//--------------------------------------
+		// 게시판 검색 결과 개수를 구해서 변수 matchListCnt 에 저장하기
+		//--------------------------------------
+		int matchListCnt =  this.matchingservice.getMatchListCnt( matchingSearchDTO );
+		//--------------------------------------
+		// 게시판 페이징 처리 관련 정보들 저장한 Map<String,Object> 객체 구하고
+		// 이 객체의 메위주를 변수 boardMap 에 저장하기
+		// 이 객체안의 모든 정보는 boardList.jsp 페이지에서 사용될 예정이다.
+		//--------------------------------------
+		Map<String,Integer> boardMap = Page.getPagingMap(
+				matchingSearchDTO.getSelectPageNo()       // 선택한 페이지 번호
+				, matchingSearchDTO.getRowCntPerPage()    // 페이지 당 보여줄 검색 행의 개수
+				, matchListCnt                         // 검색 결과물 개수 
+		);
+
+		//-------------------------------------------------------------
+		// matchingSearchDTO 객체에 
+		//			선택 페이지 번호, 페이지 당 보일 행 개수
+		//			테이블에서 검색 시 사용할 시작 행 번호
+		//			테이블에서 검색 시 사용할 끝 행 번호
+		// 저장하기.
+		//-------------------------------------------------------------
+		matchingSearchDTO.setSelectPageNo(  (int)boardMap.get("selectPageNo")  ); 
+		matchingSearchDTO.setRowCntPerPage( (int)boardMap.get("rowCntPerPage") ); 
+		matchingSearchDTO.setBegin_rowNo(   (int)boardMap.get("begin_rowNo")   ); 
+		matchingSearchDTO.setEnd_rowNo(     (int)boardMap.get("end_rowNo")     ); 
+    	
+    	
     	
     	//매칭찾기 페이지에서 게시물들 오라클에서 가져오기
     	//List<MatchingDTO>?? => (n행 m열)을 가져오기 위해 사용, (1행 m열)일 경우에는 Map 또는 DTO를 사용 , (n행 1열)일 경우에는 List 사용
@@ -48,7 +78,7 @@ public class MatchingController {
     	//오라클의 실행구문 결과물이 저장된 변수 matchingList를 JSP쪽에서 ${requestScope.boardList.DTO안에있는멤버변수명} 이런식으로 불러 사용하기 위해 addObject라는 것을 사용
     	//즉, JSP페이지에서 boardList라는 키값을 부르면 그 키값에 해당하는 데이터(matchingList)를 사용할수 있는 것임.
     	mav.addObject("boardList", matchingList);
-    	
+    	mav.addObject("boardMap", boardMap);
         return mav;
     }
     
