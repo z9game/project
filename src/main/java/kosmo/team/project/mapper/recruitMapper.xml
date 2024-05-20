@@ -150,7 +150,7 @@
                  ,r.content 
                  ,r.readcount 
                  ,r.team_mem
-                 ,to_char(r.reg_date, 'YYYY-MM-DD') as "reg_date"
+                 ,to_char(r.reg_date, 'YYYY-MM-DD') as reg_date
              from 
                  recruit_TeamMemBoard r LEFT JOIN teammemboard_day d ON r.b_no = d.b_no 
                                    		LEFT JOIN teammemboard_time t ON r.b_no = t.b_no
