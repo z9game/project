@@ -27,8 +27,8 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: #006666;
+    color: #FFFFFF;
     padding: 20px;
     display: flex;
     width: 100%;
@@ -71,4 +71,9 @@ header {
 
 .auth-links{
 	margin-left:100px;
+}
+
+#logoFont{
+    font-size: 27px;
+    color: #FFFFFF;
 }

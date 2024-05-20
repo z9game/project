@@ -240,7 +240,6 @@ public class CommunityServiceImplements implements CommunityService {
 
    }
    
-   
    @Override
    public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO) {
       
@@ -248,6 +247,16 @@ public class CommunityServiceImplements implements CommunityService {
 
       return freeBoardDetailCommentPageList;
       
+   }
+   
+   @Override
+   public int communityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO) {
+      return communityDAO.communityFreeBoardDetailCommentOfCommentUpdateProc(detailDTO);
+   }
+   
+   @Override
+   public int communityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO) {
+      return communityDAO.communityFreeBoardDetailCommentOfCommentDeleteProc(detailDTO);
    }
    
    

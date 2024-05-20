@@ -202,5 +202,9 @@ public int getCommunityGallaryBoardListAllCnt();
 	 public int updateCommunityFreeBoard(CommunityDTO communityDTO);
 	 
 	 public int deleteCommunityFreeBoard(CommunityDTO communityDTO);
+	 
+	 public int adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO);
+
+	 public int adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO);
 
 }

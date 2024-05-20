@@ -81,6 +81,12 @@ public interface CommunityService {
 	/*** 자유게시판 입력  ***/
 	public int insertCommunityFreeBoard(CommunityDTO communityDTO);
 	
+	/*** 자유게시판 댓글의 댓글 업데이트 ***/
+	public int communityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO);
+	
+	/*** 자유게시판 댓글의 댓글 삭제 ***/
+	public int communityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO);
+	
 	
 	
 	
