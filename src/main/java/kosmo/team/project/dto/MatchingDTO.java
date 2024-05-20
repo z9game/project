@@ -25,8 +25,39 @@ public class MatchingDTO {
 	private int sigungu_id;
 	private String date;
 	
+	// 주석 추가
+	private int m_no;
+	private String stadium_no;
+	private String stadium_name;	
+	private String booking_date;
+	//private Date date_booking_date;
 	
 	
+	
+	public String getBooking_date() {
+		return booking_date;
+	}
+	public void setBooking_date(String booking_date) {
+		this.booking_date = booking_date;
+	}
+	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
+	}
+	public String getStadium_no() {
+		return stadium_no;
+	}
+	public void setStadium_no(String stadium_no) {
+		this.stadium_no = stadium_no;
+	}
+	public String getStadium_name() {
+		return stadium_name;
+	}
+	public void setStadium_name(String stadium_name) {
+		this.stadium_name = stadium_name;
+	}
 	public int getSido_id() {
 		return sido_id;
 	}

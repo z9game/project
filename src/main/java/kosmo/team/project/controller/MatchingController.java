@@ -14,8 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.MatchingDTO;
 import kosmo.team.project.dto.MatchingSearchDTO;
-import kosmo.team.project.dto.RecruitTeamMemDTO;
-import kosmo.team.project.service.AdminService;
 import kosmo.team.project.service.MatchingService;
 import kosmo.team.project.utility.Page;
 
@@ -202,5 +200,29 @@ public class MatchingController {
 	}
     
   //===============================================================================================================================================================================
+    
+    // 주석 
+    // 매칭 새글쓰기 m_no를 받아 경기장명 셀렉트박스에 적용할 데이터 로드
+    @RequestMapping(value = "/machingStadiumSelectBoxLoad.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<MatchingDTO> machingStadiumSelectBoxLoad(MatchingDTO dto) {
+        return matchingservice.machingStadiumSelectBoxLoad(dto);
+    }
+    
+    // 주석 
+    // 매칭 새글쓰기 m_no, stadium_no를 받아 경기날짜 셀렉트박스에 적용할 데이터 로드
+    @RequestMapping(value = "/machingDaySelectBoxLoad.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<MatchingDTO> machingDaySelectBoxLoad(MatchingDTO dto) {
+        return matchingservice.machingDaySelectBoxLoad(dto);
+    }
+    
+    // 주석 
+    // 매칭 새글쓰기 m_no, stadium_no를 받아 경기시간 셀렉트박스에 적용할 데이터 로드
+    @RequestMapping(value = "/machingTimeSelectBoxLoad.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<MatchingDTO> machingTimeSelectBoxLoad(MatchingDTO dto) {
+        return matchingservice.machingTimeSelectBoxLoad(dto);
+    }
     
 }

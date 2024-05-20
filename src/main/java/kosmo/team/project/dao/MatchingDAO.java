@@ -38,4 +38,16 @@ public interface MatchingDAO {
 	
 	//게시물 조회수 증가
 	int  matchingDetailCnt(int match_no);
+	
+    // 주석 
+    // 매칭 새글쓰기 m_no를 받아 경기장명 셀렉트박스에 적용할 데이터 로드	
+	public List<MatchingDTO> machingStadiumSelectBoxLoad(MatchingDTO dto);
+	
+	// 주석 
+    // 매칭 새글쓰기 m_no, stadium_no를 받아 경기날짜 셀렉트박스에 적용할 데이터 로드
+	public List<MatchingDTO> machingDaySelectBoxLoad(MatchingDTO dto);
+	
+	// 주석 
+    // 매칭 새글쓰기 m_no, stadium_no를 받아 경기시간 셀렉트박스에 적용할 데이터 로드
+	public List<MatchingDTO> machingTimeSelectBoxLoad(MatchingDTO dto);	
 }

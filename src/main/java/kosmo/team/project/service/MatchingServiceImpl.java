@@ -1,7 +1,6 @@
 package kosmo.team.project.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +81,26 @@ public class MatchingServiceImpl implements MatchingService {
 		int getMatchListCnt = this.matchingDAO.getMatchListCnt(matchingSearchDTO);
 		
 		return getMatchListCnt;
+	}
+	
+    // 주석 
+    // 매칭 새글쓰기 m_no를 받아 경기장명 셀렉트박스에 적용할 데이터 로드
+	@Override
+	public List<MatchingDTO> machingStadiumSelectBoxLoad(MatchingDTO dto) {
+		return matchingDAO.machingStadiumSelectBoxLoad(dto);
+	}
+	
+	// 주석 
+    // 매칭 새글쓰기 m_no, stadium_no를 받아 경기날짜 셀렉트박스에 적용할 데이터 로드
+	@Override
+	public List<MatchingDTO> machingDaySelectBoxLoad(MatchingDTO dto) {
+		return matchingDAO.machingDaySelectBoxLoad(dto);
+	}
+	
+	// 주석 
+    // 매칭 새글쓰기 m_no, stadium_no를 받아 경기시간 셀렉트박스에 적용할 데이터 로드
+	@Override
+	public List<MatchingDTO> machingTimeSelectBoxLoad(MatchingDTO dto) {
+		return matchingDAO.machingTimeSelectBoxLoad(dto);
 	}
 }

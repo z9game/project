@@ -26,11 +26,32 @@
 	       location.href = '/loginForm.do';
 	       return;
 	   }
-		else
-		{
-			location.href='/newMatchingBoardForm.do'
-		}
-		   
+	   
+   		// 주석
+   		// 경기장 대관 확인
+		var formObj = $("[name='newMatchingBoard']");
+		var m_no = '${sessionScope.m_no}';
+
+	    $.ajax({
+	        url: '/machingStadiumSelectBoxLoad.do',
+	        method: 'POST',
+	        data: 'm_no=' + m_no,
+	        success: function(json) {
+	        	if (json[0] == null) {
+	        		alert("경기장 대관을 먼저 해주어야 합니다.");
+	        		return; 
+				}
+	        	else
+	        	{
+	        		location.href='/newMatchingBoardForm.do';
+	        	}
+	        	
+	        },	
+	        
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생: " + error);
+	        }
+	    });
 	}
 	
 	
