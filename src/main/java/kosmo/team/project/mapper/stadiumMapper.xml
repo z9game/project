@@ -281,7 +281,7 @@
 		stadium_no = #{stadium_no}
 		group by booking_date
 		having count(time_slot)
-		= 11
+		= #{time_slot}
 	</select>
 
 	<select id="getM_no"
