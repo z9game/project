@@ -123,7 +123,6 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityFreeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">자유게시판</p>
 	</div>
 
@@ -139,18 +138,22 @@
 		<input type="hidden" name="b_no">
 	</form>
 
-<center>
-	<div style="height: 10px"></div>
-	<input type="button" value="    새 글쓰기    " onclick="newCommunityFreeBoardFormBtnClick()">
-	<div style="height: 10px"></div>
-</center>
+	
 
 <div class="communityFreeBoardFormContainer">
-
+	<div class="communityNoticeBoardFormTopContents">
+		<span class="communityNoticeBoardFormFontLightGray" id="communityNoticeBoardAllCount">Total. ${requestScope.noticeBoardListAllCnt}개</span>
+		<div class="communityNoticeBoardFormRowCntPerPage">
+			<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+				<option value="10">10개씩 보기
+				<option value="15">15개씩 보기
+				<option value="20">20개씩 보기
+			</select>
+		</div>
+	</div>
 	<div class="freeboardListDiv" style="margin-bottom: 20px;">
-		<table class="freeboardListTable" cellpadding="7" border="1"
-			bordercolor="gray" align="center"
-			style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
+		<table class="freeboardListTable" cellpadding="7" align="center"
+			style="border-collapse: collapse">
 			<tr>
 				<th style="width: 50px;">번호</th>
 				<th style="width: 300px;">제목</th>
@@ -167,11 +170,11 @@
 			<c:forEach var="freeboard" items="${requestScope.freeBoardList}"
 				varStatus="status">
 				<tr style="cursor: pointer" onClick="submitDetailForm( ${ freeboard.b_no } );">
-					<td align="center">${requestScope.freeBoardMap.begin_serialNo_desc - status.index}</td>
+					<td align="center" class="communityFreeBoardFormFontLightGray">${requestScope.freeBoardMap.begin_serialNo_desc - status.index}</td>
 					<td>${freeboard.subject}</td>
-					<td align="center">${freeboard.writer}</td>
-					<td align="center">${freeboard.readcount}</td>
-					<td align="center">${freeboard.reg_date}</td>
+					<td align="center" class="communityFreeBoardFormFontLightGray">${freeboard.writer}</td>
+					<td align="center" class="communityFreeBoardFormFontLightGray">${freeboard.readcount}</td>
+					<td align="center" class="communityFreeBoardFormFontLightGray">${freeboard.reg_date}</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -181,7 +184,9 @@
 		</c:if>
 	</div>
 </div>
-
+<div style="height: 10px">
+	<input type="button" value="    새 글쓰기    " onclick="newCommunityFreeBoardFormBtnClick()">
+</div>
 
 
 

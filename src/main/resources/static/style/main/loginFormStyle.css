@@ -18,6 +18,16 @@ th{
 	background-color:#aaaaaa;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  overflow: hidden;
+}
+
 .loginFormContainer{
 	margin: 0 auto;
 }

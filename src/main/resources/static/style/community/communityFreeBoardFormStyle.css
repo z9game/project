@@ -50,49 +50,78 @@ a{
 	height: 30px;
 }
 
-.communityFreeBoardFormTitle{
-	position: relative;
-}
-
-.titleBackgoundImg{
-	opacity: 0.5;
-	width: 100%;
-	height: 100px;
-}
-
 .titleBackgoundText{
+	border-bottom: 1px solid #006666;
+	width: 55%;
+	margin: 0 auto;
+	margin-bottom: 30px;
 	font-size: 40px;
-	position: absolute;
 	text-align: center;
-	top: 50%;
-	left: 50%;
-	transform: translate( -50%, -50% );
+	padding: 40px;
 }
 
+#communityNoticeBoardAllCount{
+	text-align: center;
+    margin-left: 460px;
+}
 
-.admin_side_nav {
-    height: 100vh;
-    position: absolute;
+.communityNoticeBoardFormRowCntPerPage{
+	margin-left: 820px;
+}
+
+.rowCntPerPage{
+	border: none;
+}
+
+.communityNoticeBoardFormTopContents{
+	display: flex;
+}
+
+.communityNoticeBoardPaging{
+	text-align: center;
+}
+
+.noticeboardListTable{
+	width: 1000px;
+}
+
+.noticeboardListTable td{
+    height: 70px;
+}
+
+.communityFreeBoardFormFontLightGray{
+    color: #999999;
+}
+
+.activePageNo{
+    color: #FFFFFF;
+    background-color: #c59246e0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
     display: inline-block;
-    float: left;
-    width: 190px;
+    text-align: center;
+    line-height: 30px;
 }
 
-
-
-
-
-
-
-
-
-
-
-.region1 {
-    cursor: pointer;
+.arrowLeft {
+    color: #c59246e0;
 }
 
-.selected1 {
-    color: red; /* 변경하고 싶은 색상으로 수정하세요 */
-    font-weight: bold;
+.arrowLeft strong{
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.arrowRight {
+    color: #c59246e0;
+}
+
+.arrowRight strong{
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+[class$='noticeboardListTable'] tr:nth-child(n+2):hover{
+	background-color:rgba(211, 211, 211, 0.3);
 }
