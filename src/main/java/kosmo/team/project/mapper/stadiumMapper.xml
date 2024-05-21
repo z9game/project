@@ -154,6 +154,7 @@
 		st.sigungu_name = si.sigungu_id
 		where st.stadium_status != '이용불가'
 		<include refid="stadiumWhere" />
+	
 
         <![CDATA[ ) zxcvb) where RNUM >= #{begin_rowNo} and RNUM <= #{end_rowNo} ]]>
 	</select>
@@ -314,6 +315,7 @@
 
 		where
 		b.m_no = #{m_no}
+		and to_date(booking_date,'yyyy-mm-dd') >=TO_DATE(SYSDATE, 'yyyy-mm-dd')
 		group by
 		b.m_no,
 		s.stadium_no,
@@ -321,6 +323,7 @@
 		sid.name,
 		sig.name,
 		s.detailed_address
+		
 
 
 	</select>
@@ -339,7 +342,7 @@
 			where
 			    b.m_no = #{m_no} AND
 			    b.stadium_no = #{stadium_no}
-			    and booking_date >TO_DATE(SYSDATE, 'yyyy-mm-dd')
+			   and to_date(booking_date,'yyyy-mm-dd') >=TO_DATE(SYSDATE, 'yyyy-mm-dd')
 			group by
 			    b.m_no,
 			    b.stadium_no,
@@ -365,7 +368,7 @@
         b.m_no = #{m_no} 
         and b.stadium_no = #{stadium_no} 
         and b.booking_date = to_date(#{booking_date}, 'yyyy-mm-dd')
-        and booking_date >TO_DATE(SYSDATE, 'yyyy-mm-dd')
+        and booking_date >=TO_DATE(SYSDATE, 'yyyy-mm-dd')
 
 </select>
 
@@ -418,6 +421,7 @@
 				and stadium_no = #{MyStadium} 
 		        and booking_date = to_date(#{MyDate},'yyyy-mm-dd') 
 		        and time_slot = #{MyTimeRange} )
+		      	and STATUS = '양도중'
 		
 	</select>
 	
@@ -447,7 +451,7 @@
 		join sigungu sg on s.sigungu_name = sg.sigungu_id
 		where 1=1
 		<include refid="yangdoWhere" />
-		    	
+		    	order by sy.yangdo_no desc	
 		    <![CDATA[
 			) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
 		]]>
@@ -542,7 +546,7 @@
 			where
 			    b.m_no = #{m_no} AND
 			    b.stadium_no = #{stadium_no}
-			    and booking_date >TO_DATE(SYSDATE, 'yyyy-mm-dd')
+			    and to_date(booking_date,'yyyy-mm-dd') >TO_DATE(SYSDATE, 'yyyy-mm-dd')
 			group by
 			    b.m_no,
 			    b.stadium_no,
