@@ -90,7 +90,6 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="updateCustomerServiceQnAFormTitle">
-	    <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 	   	<p class="titleBackgoundText">QnA 수정</p>
  	</div>
     <div class="updateCustomerServiceQnAFormContainer">
@@ -99,29 +98,29 @@
 	    </form>
 		<form name="updateCustomerServiceQnAForm">
 			<input type="hidden" class="b_no" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
-			<table class="updateCustomerServiceQnAFormRegTable" border="1" bordercolor="black">
+			<table class="updateCustomerServiceQnAFormRegTable">
 				<tr>
-					<th>제목</th>
-					<td>
-						<input type="text" name="subject" class="subject" size="40" maxlength="100" value="${requestScope.customerServiceDetailDTO.subject}">
+					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<input type="text" name="subject" class="subject" size="106" maxlength="100" value="${requestScope.customerServiceDetailDTO.subject}">
 					</td>
 				</tr>
 				<tr>
-					<th>글쓴이</th>
-					<td>
+					<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
 						<% out.println((String)session.getAttribute("nickname")); %>
 					</td>
 				</tr>
 				<tr>
-					<th>이메일</th>
-					<td>
+					<th style="border-bottom: 1px solid #FFFFFF;">이메일</th>
+					 <td style="border-bottom: 1px solid #c59246e0;">
 						<% out.println((String)session.getAttribute("email")); %>
 					</td>
 				</tr>
 				<tr>
-					<th>내용</th>
-					<td>
-						<textarea name="content" class="content" rows="20" cols="42" maxlength="1000" style="resize:none">${requestScope.customerServiceDetailDTO.content}</textarea>
+					<th >내용</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none">${requestScope.customerServiceDetailDTO.content}</textarea>
 					</td>
 				</tr>
 			</table>

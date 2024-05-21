@@ -227,7 +227,7 @@
         <table class="customerServiceQnADetailFormRegTable" style="border-bottom: 1px solid #999999;">
             <tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
                 <td>${requestScope.customerServiceDetailDTO.subject}</td>
-                <td style="text-align: right; margin-top:15px;"><p style="color: #999999;">작성자&nbsp;</p>/&nbsp;${requestScope.customerServiceDetailDTO.writer}</td>
+                <td style="text-align: right; margin-top:15px;"><span style="color: #999999;">작성자&nbsp;</span>/&nbsp;${requestScope.customerServiceDetailDTO.writer}</td>
             </tr>
             <tr>
                 <td>
@@ -256,7 +256,7 @@
 		            			<input type="hidden" name="c_no" value="${customerServiceQnADetailComment.c_no}">
 			                    <tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4);">
 			                   		<td class="customerServiceQnADetailCommentSubject">${customerServiceQnADetailComment.subject}</td>
-			                   		<td style="text-align: right"><span style="color: #999999;">작성자&nbsp;</span>/&nbsp;${customerServiceQnADetailComment.writer}<span style="color: #999999; margin-left: 20px;">작성일&nbsp;</span>/&nbsp;${customerServiceQnADetailComment.reg_date}</td>
+			                   		<td style="text-align: right;"><span style="color: #999999;">작성자&nbsp;</span>/&nbsp;${customerServiceQnADetailComment.writer}<span style="color: #999999; margin-left: 20px;">작성일&nbsp;</span>/&nbsp;${customerServiceQnADetailComment.reg_date}</td>
 			                    </tr>
 			                    <tr>
 			                    	<c:if test="${sessionScope.mid == 'admin'}">
@@ -292,16 +292,14 @@
             	<form name="customerServiceQnADetailFormCommentInsertForm">
             		<input type="hidden" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
        				<input type="hidden" name="bc_no" value="${requestScope.customerServiceDetailDTO.b_no}">
-	                <table>
-	                    <tr style="display: flex; border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4);">
+	                <table style="width:900px;">
+	                    <tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4);">
 	                    	<td>${requestScope.customerServiceDetailDTO.subject}(답변)</td>
-	                        <td style="display: flex;"><p style="color: #999999; text-align: right;">작성자&nbsp;</p>/&nbsp;${sessionScope.nickname}</td>
-	                        <td style="display: flex;"><p style="color: #999999; text-align: right;">작성일&nbsp;</p>/&nbsp;<c:set var="currentDate" value="<%= new java.text.SimpleDateFormat(\"yyyy-MM-dd\").format(new java.util.Date()) %>" />${currentDate}</td>
+	                        <td style="text-align: right;"><span style="color: #999999;">작성자&nbsp;</span>/&nbsp;${sessionScope.nickname}<span style="color: #999999; margin-left: 20px;">작성일&nbsp;</span>/&nbsp;<c:set var="currentDate" value="<%= new java.text.SimpleDateFormat(\"yyyy-MM-dd\").format(new java.util.Date()) %>" />${currentDate}</td>
 	                    </tr>
 	                    <tr>
-	                    	<th>답변 입력</th>
-	                        <td>
-								<textarea name="content" class="content" rows="20" cols="42" maxlength="1000" style="resize:none; width: 470px; height: 100px;"></textarea>
+	                        <td colspan="3">
+								<textarea name="content" class="content" rows="20" cols="111" maxlength="1000" style="resize:none; height: 100px;"></textarea>
 	                    	</td>
 	                    </tr>
 	                </table>

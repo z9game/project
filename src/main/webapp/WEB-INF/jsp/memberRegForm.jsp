@@ -189,67 +189,69 @@ function regMember()
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="memberRegFormContainer">
+    	<div class="memberRegTitle">
+    		<p>회원가입</p>
+    	</div>
 		<form name="memRegForm">
-			<table align="center" border=1 style="margin-bottom: 10px; margin-top: 10px;">
-				<caption style="margin-bottom:10px;"><b>[회원가입]</b><br></caption>
+			<table class="memberRegFormTable" align="center" style="margin-bottom: 10px; margin-top: 10px;">
 				<tr>
-					<th>아이디</th>
+					<th class="memberRegFormMidTh">아이디</th>
 					<td>
 						<input type="text" name="mid" class="mid" size="30" maxlength="30">
 						<input type="button" onclick="checkmid()" value="중복 확인">
 					</td>
 				</tr>
 				<tr>
-					<th>이름</th>
+					<th class="memberRegFormNameTh">이름</th>
 					<td>
 						<input type="text" name="name" class="name" size="40" maxlength="15">
 					</td>
 				</tr>
 				<tr>
-					<th>비밀번호</th>
+					<th class="memberRegFormPasswordTh">비밀번호</th>
 					<td>
 						<input type="password" name="password" class="password" size="40"  maxlength="30">
 					</td>
 				</tr>
 				<tr>
-					<th>비밀번호 확인</th>
+					<th class="memberRegFormPasswordCheckTh">비밀번호 확인</th>
 					<td>
 						<input type="password" name="checkpwd" class="checkpwd" size="40">
 					</td>
 				</tr>
 				<tr>
-					<th>별명</th>
+					<th class="memberRegFormNicknameTh">별명</th>
 					<td>
 						<input type="text" name="nickname" class="nickname" size="40" maxlength="30">
 					</td>
 				</tr>
 				<tr>
-					<th>이메일</th>
+					<th class="memberRegFormEmailTh">이메일</th>
 					<td>
 						<input type="text" name="email" class="email" size="40" maxlength="50">
 					</td>
 				</tr>
 				<tr>
-					<th>생년월일</th>
+					<th class="memberRegFormBirthdayTh">생년월일</th>
 					<td>
 						<input type="date" name="birthday" class="birthday" size="40" maxlength="30">
 					</td>
 				</tr>
 				<tr>
-					<th>전화번호</th>
+					<th class="memberRegFormPhoneTh">전화번호</th>
 					<td>
 						<input type="text" name="phone" class="phone" size="40" maxlength="30">
 					</td>
 				</tr>
 				<tr>
-					<th>성별</th>
+					<th class="memberRegFormGenderTh">성별</th>
 					<td>
 						<input type="radio" name="gender" class="gender" value="남">남
 						<input type="radio" name="gender" class="gender" value="여">여
 					</td>
 				</tr>
 				<tr>
-					<th>시/도</th>
+					<th class="memberRegFormRegionTh">시/도</th>
 					<td colspan="5" align="center">
 			            <select name="sido_id" id="" onchange="categoryChange(this)">
 			              <option value>시/도 선택</option>
@@ -276,7 +278,7 @@ function regMember()
 					</td>
 				</tr>
 				<tr>
-					<th>상세주소</th>
+					<th class="memberRegFormAdressTh">상세주소</th>
 					<td>
 			           <input type="text" name="detail_address" class="detail_address" size="40" maxlength="50">
 					</td>

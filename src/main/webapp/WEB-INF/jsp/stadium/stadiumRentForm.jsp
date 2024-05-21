@@ -106,12 +106,12 @@
 	
 	function searchAll() {
 		
-		
-		
-		$("[name='StadiumSearchForm']").find("input[type=text]").val("");
-	    $("[name='StadiumSearchForm']").find("select").val("0");
-	    $("[name='StadiumSearchForm']").find(".rowCntPerPage").val("8");
-	    $("[name='StadiumSearchForm']").find(".SelectPageNo").val("1")
+		 var boardSearchFormObj = $("[name='StadiumSearchForm']");
+		 boardSearchFormObj.find(".sido").val("0");
+	     boardSearchFormObj.find(".sigungu").val("0");
+		 boardSearchFormObj.find("input[type=text]").val("");
+		 boardSearchFormObj.find(".rowCntPerPage").val("8");
+		 boardSearchFormObj.find(".SelectPageNo").val("1")
         
         search();
     }

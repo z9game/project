@@ -10,8 +10,6 @@
 <link href="/style/memberInfoFindFormStyle.css" rel="stylesheet">
 <script src="/js/main/loginFormScript.js"></script>
 <script>
-	$(function(){$(".name").val("정보변경"); $(".phone").val("01077779999");})
-	
 	function memberInfoFind(){
 		
 		var name = $(".name").val();
@@ -50,25 +48,28 @@
 					$(".memberInfoFindFormContainer").remove();
 					
 					$(".memberInfoFindResultContainer").prepend(`
+							<div class="memberInfoFindFormTitle">
+					    		<p>회원 정보 찾기</p>
+					    	</div>
 							<form name="memberInfoFindResultForm">
-								<input type="text" name="mid" class="mid" value=" ` + response.memberInfo.mid + ` ">
-								<input type="text" name="password" class="password" value=" ` + response.memberInfo.password + ` ">
-								<table class="memberInfoFindResultTable" border="1" align="center">
+								<input type="hidden" name="mid" class="mid" value=" ` + response.memberInfo.mid + ` ">
+								<input type="hidden" name="password" class="password" value=" ` + response.memberInfo.password + ` ">
+								<table class="memberInfoFindResultTable" align="center">
 									<tr>
-										<th bgcolor="lightgray">아이디</th>
+										<th class="membermemberInfoFindMidResultTh">아이디</th>
 										<td class="memberInfoFindMidResult">
 											` + response.memberInfo.mid + `
 										</td>
 									</tr>
 									<tr>
-										<th>새 비밀번호</th>
+										<th class="membermemberInfoFindPasswordResultTh">새 비밀번호</th>
 										<td class="memberInfoFindPasswordResult">
 											<input type="password" name="pwd" class="pwd" size="50" maxlength="15">
 										</td>
 									</tr>
 									
 									<tr>
-										<th>비밀번호 확인</th>
+										<th class="memberInfoFindPasswordCheckResultTh">비밀번호 확인</th>
 										<td class="memberInfoFindPasswordCheckResult">
 											<input type="password" name="checkpwd" class="checkpwd" size="50" maxlength="15">
 										</td>
@@ -160,19 +161,21 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="memberInfoFindFormContainer">
+    	<div class="memberInfoFindFormTitle">
+    		<p>회원 정보 찾기</p>
+    	</div>
 		<form name="memberInfoFindForm" onsubmit="return false">
-			<table class="memberInfoFindTable" border="1" align="center">
-				<caption style="margin-bottom:10px;"><b>[회원 정보 찾기]</b></caption>
+			<table class="memberInfoFindTable" align="center">
 				<tr>
-					<th bgcolor="lightgray">이름</th>
+					<th class="memberInfoFindFormNameTh">이름</th>
 					<td>
-						<input type="text" name="name" class="name">
+						<input type="text" name="name" class="name" style="width: 305px; height: 30px;">
 					</td>
 				</tr>
 				<tr>
-					<th bgcolor="lightgray">전화번호</th>
+					<th class="memberInfoFindFormPhoneTh">전화번호</th>
 					<td>
-						<input type="text" name="phone" class="phone">
+						<input type="text" name="phone" class="phone" style="width: 305px; height: 30px;">
 					</td>
 				</tr>
 			</table>
