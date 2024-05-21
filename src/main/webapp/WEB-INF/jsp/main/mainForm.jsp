@@ -114,9 +114,9 @@
 				<br>
 				<div class="sectionMainText" id="sectionMainText_3">축구 매칭과 함께하는 내게 맞는 팀 구성</div>
 				<br>
-				<div class="sectionMainText" id="sectionMainText_4"><strong>5월 24일 개설</strong></div>
+				<div class="sectionMainText" id="sectionMainText_4">5월 24일 개설!!</div>
 				<br>
-				<div class="sectionMainText" id="sectionMainText_5">Coding 247</div>
+				<div class="sectionMainText" id="sectionMainText_5">- Coding 247</div>
 			</div>
 			<img src="/image/MainImage.jpg">
 		</div>

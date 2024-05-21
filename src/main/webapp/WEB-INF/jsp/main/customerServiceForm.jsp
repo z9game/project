@@ -137,7 +137,6 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="customerServiceFormTitle">
-        <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
         <p class="titleBackgoundText">고객센터</p>
     </div>
     <form name="customerServicePagingForm" onsubmit="return false">

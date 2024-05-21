@@ -35,23 +35,14 @@ a{
 	text-decoration:none;
 }
 
-.recordsStatisticsFormTitle{
-	position: relative;
-}
-
-.titleBackgoundImg{
-	opacity: 0.5;
-	width: 100%;
-	height: 100px;
-}
-
 .titleBackgoundText{
+	border-bottom: 1px solid #006666;
+	width: 55%;
+	margin: 0 auto;
+	margin-bottom: 30px;
 	font-size: 40px;
-	position: absolute;
 	text-align: center;
-	top: 50%;
-	left: 50%;
-	transform: translate( -50%, -50% );
+	padding: 40px;
 }
 
 .recordsStatisticsMatchingSuccessRateContainer, .recordsStatisticsAnnualRegisteredMemberRatioContainer, .recordsStatisticsRegionRatioContainer, .recordsStatisticsGenderRatioContainer, .recordsStatisticsAgeRatioContainer, .recordsStatisticsNumberOfTeamMemberContainer{

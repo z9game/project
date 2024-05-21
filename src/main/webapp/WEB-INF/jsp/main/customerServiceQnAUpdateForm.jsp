@@ -13,8 +13,8 @@
 	function checkQnABoardUpdateForm(b_no){
 		
 		var formObj = $("[name='updateCustomerServiceQnAForm']");
-		var subjectObj = formObj.find(".subject");
-		var contentObj = formObj.find(".content");
+		var subjectObj = formObj.find(".subject").trim();
+		var contentObj = formObj.find(".content").trim();
 		
 		var sessionPwd = "<%= session.getAttribute("password") %>";
 		
