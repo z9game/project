@@ -11,6 +11,10 @@
 <script src="/js/recruitTeamBoardFormScript.js"></script>
 
 <script>
+	$(function() {		
+		loadStadiumNo();		
+	});
+
 	//수정 관련 함수
 	function checkBoardUpForm() {
 		
@@ -18,7 +22,7 @@
 		if (confirm("정말 수정하시겠습니까?") == false) {
 			return;
 		}
-	
+		
 		$.ajax({
 			url : "/updateMatchingBoardProc.do",
 			type : "post",
@@ -46,6 +50,7 @@
 		if (confirm("정말 삭제하시겠습니까?") == false) {
 			return;
 		}
+		
 		$.ajax({
 			url : "/deleteMatchingBoardProc.do",
 			type : "post",
@@ -65,6 +70,109 @@
 			}
 		});
 	}
+	
+	function loadStadiumNo() {
+		var formObj = $("[name='upDelMatching']");
+	
+	    $.ajax({
+	        url: '/machingStadiumSelectBoxLoad.do',
+	        method: 'POST',
+	        data: formObj.serialize(),
+	        success: function(json) {
+	        	if (json[0] == null) { return; }
+	        	
+	        	var options = '';
+	        	var stadium_name = '${requestScope.upDelDetail.stadium_name}';
+	        	var stadium_no = '';
+	            
+	            for (var i = 0; i < json.length; i++) {
+	            	var s = json[i];
+	            	
+	            	if (s.stadium_name == stadium_name) {
+	            		stadium_no = s.stadium_no;
+	            	}
+	            	
+	            	options += '<option value="' + s.stadium_no + '">' + s.stadium_name + '</option>';	            	
+	            }
+	            
+	            var selectBox = $("select[name='stadium_no']");	            
+	            selectBox.html(options); // select 요소에 추가	            
+	            selectBox.val(stadium_no).prop("selected", true);
+	            
+	            loadMachingDay();
+	        },	
+	        
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생: " + error);
+	        }
+	    });
+	}
+	
+	function loadMachingDay() {
+		var formObj = $("[name='upDelMatching']");
+		
+	    $.ajax({
+	        url: '/machingDaySelectBoxLoad.do',
+	        method: 'POST',
+	        data: formObj.serialize(),
+	        success: function(json) {
+	        	if (json[0] == null) { return; }
+	        	
+	            var options = '';
+	            var booking_date = '${requestScope.upDelDetail.booking_date}';
+	            
+	            for (var i = 0; i < json.length; i++) {
+	            	var b = json[i];
+	            	options += '<option value="' + b.booking_date + '">' + b.booking_date + '</option>';
+	            }
+	            
+	            var selectBox = $("select[name='day']");
+	            selectBox.html(options); // select 요소에 추가
+	            selectBox.val(booking_date).prop("selected", true);
+	            
+	            loadMachingTime();
+	        },	
+	        
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생: " + error);
+	        }
+	    });		
+	}
+	
+	function loadMachingTime() {
+		var formObj = $("[name='upDelMatching']");
+		
+	    $.ajax({
+	        url: '/machingTimeSelectBoxLoad.do',
+	        method: 'POST',
+	        data: formObj.serialize(),
+	        success: function(json) {
+	        	if (json[0] == null) { return; }
+	        	
+	            var options = '';
+	            var time_range = '${requestScope.upDelDetail.time_range}';
+	            var time_no = '';
+	            
+	            for (var i = 0; i < json.length; i++) {
+	            	var t = json[i];
+	            	
+	            	if (t.time_range == time_range) {
+	            		time_no = t.time_no;
+	            	}
+	            	
+	            	options += '<option value="' + t.time_no + '">' + t.time_range + '</option>';	            	
+	            }
+	            
+	            var selectBox = $("select[name='matchingTime']");
+	            selectBox.html(options); // select 요소에 추가
+	            selectBox.val(time_no).prop("selected", true);
+	        },	
+	        
+	        error: function(xhr, status, error) {
+	            console.error("에러 발생: " + error);
+	        }
+	    });		
+	}	
 </script>
 </head>
 <body>
@@ -89,9 +197,11 @@
                <th bgColor="lightgray">글쓴이</th>
                <td>${requestScope.upDelDetail.nickname}</td>
             </tr>
+            
+            <!-- 주석 처리 
             <tr>
                 <th bgColor="lightgray">지 역</th>
-                <td colspan="5" >${requestScope.upDelDetail.sido_c}-${requestScope.upDelDetail.sigungu_c}->(수정)
+                <td colspan="5" >${requestScope.upDelDetail.sido_c}-${requestScope.upDelDetail.sigungu_c}(수정)
 		            <select name="sido_id" id="" onchange="categoryChange(this)">
 		              <option value="0">시/도 선택</option>
 		              <option value="1">강원</option>
@@ -116,7 +226,8 @@
 		            </select>
 				</td>
              </tr>
-             
+              -->
+             <!-- 
              <tr>
                 <th bgColor="lightgray">시 간</th>
                 <td>
@@ -136,12 +247,54 @@
 	            	</select>
 	            </td>
              </tr>
-             
+              -->
+             <!-- 
              <tr>
                 <th bgColor="lightgray">날 짜</th>
                 <td><input type="date" id="date" name="date" value="${requestScope.upDelDetail.day}"></td>
              </tr>
-          
+          	 -->
+          	 
+          	 <tr>
+               <th bgColor="lightgray">조회수</th>
+               <!--------------------------------------------------- -->
+               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
+               <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
+               <!-- 상세보기할 게시판의 조회수 표현하기 -->
+               <!--------------------------------------------------- -->
+               <td>${requestScope.upDelDetail.readcount}</td>
+            </tr>
+            
+            <tr>
+                <th bgColor="lightgray">경기장명</th>
+                <td>
+                	<!--  ${requestScope.detail.stadium_name} -->
+                	<select name="stadium_no" id="stadium_no" onchange="loadMachingDay()">
+						<option value="0">매칭예약 미신청 상태</option>
+					</select>
+                </td>
+             </tr>
+             
+             <tr>
+                <th bgColor="lightgray">일시(날짜)</th>
+                <td>
+                	<!-- ${requestScope.detail.booking_date} -->
+                	<select name="day" onchange="loadMachingTime()">
+						<option value="0">매칭예약 미신청 상태</option>
+					</select>
+                </td>
+             </tr>
+             
+             <tr>
+                <th bgColor="lightgray">시간</th>
+                <td>
+                	<!-- ${requestScope.detail.time_range} -->
+                	<select name="matchingTime">
+                		<option value="0">매칭예약 미신청 상태</option>
+                	</select>
+                </td>
+             </tr>          	 
+          	 
             <tr>
                <th bgColor="lightgray">내 용</th>
                <td><textarea name="content" class="content" rows="13"
@@ -149,6 +302,7 @@
             </tr>
          </table>
 		<input type="hidden" name="match_no" value="${requestScope.upDelDetail.match_no}">
+		<input type="hidden" name="m_no" value="${requestScope.upDelDetail.m_no}">
         </form>
       </center>
 
