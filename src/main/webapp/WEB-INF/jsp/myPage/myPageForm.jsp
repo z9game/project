@@ -14,6 +14,7 @@
 <script>
 	var cnt = 0;
 
+	//전체선택
 	function allApprove(){
 			if(cnt == 0)
 			{
@@ -29,7 +30,7 @@
 			}
 	}
 	
-	
+	//팀등록
 	function regTeam(){
 		
 		var teamObj = $("[name='teamRegist']");
@@ -63,7 +64,7 @@
 		
 	};
 	
-	
+	//팀원수락
 	function regTeamMem(){
 			
 		var regTeam = $("[name='waitingList']");
@@ -75,7 +76,7 @@
 		$.ajax({
 			url : "/regTeamMemberProc.do",
 			type : "post",
-			data : regTeam.serialize(),
+			data : regTeam.serialize() + "&reg = 1",
 			success : function(json) {
 				var result = json["result"];
 				if (result > 0) {
@@ -92,6 +93,7 @@
 		
 	};
 	
+	//팀원거절
 	function refuseTeamMem(){
 		
 		var refuseTeam = $("[name='waitingList']");
@@ -103,7 +105,7 @@
 		$.ajax({
 			url : "/regTeamMemberProc.do",
 			type : "post",
-			data : refuseTeam.serialize(),
+			data : refuseTeam.serialize() + "&refuse = 1",
 			success : function(json) {
 				var result = json["refuse"];
 				if (result == 0) {
@@ -120,7 +122,37 @@
 		
 	};
 	
+	//매칭수락
+	function matching(){
+			
+		var regMatch = $("[name='matchWaitingList']");
+		
+		if (confirm("정말 수락 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/matchingTeamProc.do",
+			type : "post",
+			data : regMatch.serialize(),
+			success : function(json) {
+				var result = json["approveMatch"];
+				if (result > 0) {
+					alert("수락 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_matching");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("수락중 오류가 발생했습니다.");
+			}
+		});
+		
+	};
 	
+	
+	//팀원 모집 신청인원
 	function modalOpen_waiting(){
 		var modal = document.querySelector(".modalDiv_waiting");
 		modal.style.display = "block";
@@ -130,7 +162,8 @@
 		var modal = document.querySelector(".modalDiv_waiting");
 		modal.style.display = "none";
 	};
-	
+	//-----------------------------------------------------------------
+	//팀생성
 	function modalOpen_regTeam(){
 		var modal = document.querySelector(".modalDiv_regTeam");
 		modal.style.display = "block";
@@ -140,7 +173,8 @@
 		var modal = document.querySelector(".modalDiv_regTeam");
 		modal.style.display = "none";
 	};
-	
+	//-----------------------------------------------------------------
+	//내정보에서 팀 클릭했을때
 	function modalOpen_myTeamInfo(){
 		var modal = document.querySelector(".modalDiv_myTeamInfo");
 		modal.style.display = "block";
@@ -150,8 +184,18 @@
 		var modal = document.querySelector(".modalDiv_myTeamInfo");
 		modal.style.display = "none";
 	};
+	//-----------------------------------------------------------------
+	//매칭신청이 있을때
+	function modalOpen_matching(){
+		var modal = document.querySelector(".modalDiv_matching");
+		modal.style.display = "block";
+	};
 	
-	
+	function modalClose_matching(){
+		var modal = document.querySelector(".modalDiv_matching");
+		modal.style.display = "none";
+	};
+	//-----------------------------------------------------------------
 </script>
 </head>
 <body>
@@ -267,17 +311,27 @@
 	<caption><b>다음 예정 경기</b></caption>
 		<tr>
 			<th>경기장명</th>
-			<th>주소</th>
 			<th>일시</th>
 			<th>시간</th>
+			<th>상대팀</th>
 		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+		<c:forEach var="list" items="${requestScope.getTeamMatchDay}" varStatus="status">
+			<tr>
+				<td align="center">${list.stadium_name}</td>
+				<td align="center">${list.day}</td>
+				<td align="center">${list.time_range}</td>
+				<td align="center">${list.team_name}</td>
+			</tr>
+		</c:forEach>
 	</table>
+	<c:if test="${empty requestScope.getTeamMatchDay}">
+			<center>
+			<br><br>
+			<b>예정된 경기가 없습니다.</b>
+			</center>
+			<div style="height:10px;"></div>
+	</c:if>
+	
 	
 	<div style="height:30px;"></div>
 	<!-- ================================================================================================================= -->
@@ -287,11 +341,11 @@
 	    	<center>
 				<table style="border-collapse:collapse" border="1">
 				<tr>
-					<td class="waitingCheck" onclick="modalOpen_waiting()">
+					<td style="cursor:pointer" class="waitingCheck" onclick="modalOpen_waiting()">
 						팀모집 수락 대기인원이 있습니다.
 					</td>
 				</tr>
-			</table>
+				</table>
 			</center>
 		</c:if>
 	</c:if>
@@ -309,12 +363,12 @@
 						<th>지역</th>
 						<th>선택</th>
 					</tr>
-					<c:forEach var="list" items="${requestScope.waitList}" varStatus="status">
+					<c:forEach var="listTeam" items="${requestScope.waitList}" varStatus="status">
 						<tr>
-							<td align="center">${list.name}</td>
-							<td align="center">${list.age}</td>
-							<td align="center">${list.sido}</td>
-							<td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${list.m_no}"></td>
+							<td align="center">${listTeam.name}</td>
+							<td align="center">${listTeam.age}</td>
+							<td align="center">${listTeam.sido}</td>
+							<td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${listTeam.m_no}"></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -331,51 +385,6 @@
 	<div style="height:30px;"></div>
 	<!-- ================================================================================================================= -->
 	<!-- 용병 관련 -->
-	<c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
-		<!-- 이곳에 용병대기 리스트 들어갈거임 --><c:if test="">
-	    	<center>
-				<table style="border-collapse:collapse" border="1">
-				<tr>
-					<td class="waitingCheck" onclick="">
-						용병 수락 대기인원이 있습니다.
-					</td>
-				</tr>
-			</table>
-			</center>
-		</c:if>
-	</c:if>
-	
-	
-	<div class="modalDiv_waiting" align="center"> 
-		<div class="bg_waiting">
-			<div class="modal_waiting">
-			<form name = "waitingList">
-				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
-					<caption><b>수락대기중</b></caption>
-					<tr>
-						<th>이름</th>
-						<th>나이</th>
-						<th>지역</th>
-						<th>선택</th>
-					</tr>
-					<c:forEach var="list" items="${requestScope.waitList}" varStatus="status">
-						<tr>
-							<td align="center">${list.name}</td>
-							<td align="center">${list.age}</td>
-							<td align="center">${list.sido}</td>
-							<td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${list.m_no}"></td>
-						</tr>
-					</c:forEach>
-				</table>
-			</form>
-			<div style="height:8px;"></div>
-			<button onclick="">전체선택</button>
-			<button onclick="">수락</button>
-			<button onclick="">거절</button>
-			<button onclick="">취소</button>
-			</div>
-		</div>
-	</div>
 	
 	
 	
@@ -393,6 +402,55 @@
 	
 	
 	
+	
+	
+
+	<!-- ================================================================================================================= -->
+	<!-- 매칭 관련 -->
+	<c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
+		<c:if test="${requestScope.matchWaitingCnt > 0}">
+	    	<center>
+				<table style="border-collapse:collapse" border="1">
+				<tr>
+					<td style="cursor:pointer" class="matchWaitingCheck" onclick="modalOpen_matching()">
+						매칭신청이 있습니다.
+					</td>
+				</tr>
+			</table>
+			</center>
+		</c:if>
+	</c:if>
+	
+	<div class="modalDiv_matching" align="center"> 
+		<div class="bg_matching">
+			<div class="modal_matching">
+			<form name = "matchWaitingList">
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+					<caption><b>수락대기중</b></caption>
+					<tr>
+						<th>팀 명</th>
+						<th>팀장명</th>
+						<th>선택</th>
+					</tr>
+					<c:forEach var="listMatch" items="${requestScope.matchWaitingList}" varStatus="status">
+						<tr>
+							<td align="center">${listMatch.team_name}</td>
+							<td align="center">${listMatch.nickname}</td>
+							<td align="center"><input type="radio" class="approve" name="team_no" value="${listMatch.team_no}"></td>
+						</tr>
+					</c:forEach>
+				</table>
+				
+				<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+				
+			</form>
+			<div style="height:8px;"></div>
+			<button onclick="matching()">수락</button>
+			<button onclick="">거절</button>
+			<button onclick="modalClose_matching()">취소</button>
+			</div>
+		</div>
+	</div>
 	
 	
 	
@@ -421,7 +479,7 @@
 				</table>
 			</form>
 				<div style="height:8px;"></div>
-				<button onclick="regTeam()()">생성</button>
+				<button onclick="regTeam()">생성</button>
 				<button onclick="modalClose_regTeam()">취소</button>
 			</div>
 		</div>

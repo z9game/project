@@ -266,6 +266,82 @@
 	</select>
 	
 	
+	<!-- 매칭신청 대기자 있는가? -->
+	<select id="getmatchWaitingCnt" parameterType="int" resultType="int">
+	    select
+		    count(*)
+		from
+		    waiting_matchreg
+		where
+		    match_no=(
+		       select
+		        match_no
+		    from 
+		        match m left join team_member tm on m.writer = tm.team_member 
+		    where
+		        m.writer = #{m_no}
+		    ) 
+	</select>
+	
+	<!-- 매칭 대기팀목록 -->
+	<select id="getMatchWaitingList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
+   		select
+		    t.team_name
+		    ,m.nickname
+		    ,wm.team_no
+		from
+		    waiting_matchreg wm left join team t on wm.team_no = t.team_no     
+		                        left join member m on t.team_master = m.m_no   
+		where
+		    match_no=(
+		       select
+		        match_no
+		    from 
+		        match m left join team_member tm on m.writer = tm.team_member 
+		    where
+		        m.writer = #{m_no}
+		    )  
+	</select>
+	
+	<!-- 매칭수락하면 match_day테이블로 넘어가고 다른 팀들은 자동 거절된다. -->
+	
+	<insert id="matchReg" parameterType="kosmo.team.project.dto.TeamDTO">
+		    
+		insert into match_day
+		values(
+		    (select wm.match_no from match m left join waiting_matchreg wm on m.match_no = wm.match_no where wm.team_no = #{team_no})
+		    ,(select team_no from team_member where team_member = #{m_no})
+		    ,#{team_no}   
+		)   
+	</insert>
+	
+	<delete id="delMatch" parameterType="kosmo.team.project.dto.TeamDTO">
+		delete 
+		from
+			waiting_matchreg
+		where
+			match_no = (select wm.match_no from match m left join waiting_matchreg wm on m.match_no = wm.match_no where wm.team_no = #{team_no}) 
+	</delete>
 	
 	
+	
+	
+	
+	
+	<!-- 다음 경기 일정들 -->
+	<select id="getTeamMatchDay" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
+   		 select
+		    t.team_name
+		    ,sta.stadium_name
+		    ,m.day
+		    ,tt.time_range
+		from
+		    match m left join stadium sta on m.stadium = sta.stadium_no
+		            left join time_table tt on m.time_no = tt.time_no
+		            left join match_day md on m.match_no = md.match_no
+		            left join team t on md.team2 = t.team_no
+		where
+		    md.team1 = (select team_no from team_member where team_member = #{m_no})
+	</select>
+	 
 </mapper>

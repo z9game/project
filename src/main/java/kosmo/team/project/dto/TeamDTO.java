@@ -17,10 +17,62 @@ public class TeamDTO {
 	
 	//팀정보
 	private int team_no;
+	
+	//매칭수락
+	private String nickname;
+	
+	//수락/거절
+	private int reg;
+	private int refuse;
+	
+	//다음경기일정
+	private String stadium_name;
+	private String day;
+	private String time_range;
 
 	
 	
 	
+	public String getStadium_name() {
+		return stadium_name;
+	}
+
+	public void setStadium_name(String stadium_name) {
+		this.stadium_name = stadium_name;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public String getTime_range() {
+		return time_range;
+	}
+
+	public void setTime_range(String time_range) {
+		this.time_range = time_range;
+	}
+
+	public int getReg() {
+		return reg;
+	}
+
+	public void setReg(int reg) {
+		this.reg = reg;
+	}
+
+	public int getRefuse() {
+		return refuse;
+	}
+
+	public void setRefuse(int refuse) {
+		this.refuse = refuse;
+	}
+
 	public int getTeam_no() {
 		return team_no;
 	}
@@ -85,6 +137,14 @@ public class TeamDTO {
 		this.team_name = team_name;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	
 	
 	
 	
