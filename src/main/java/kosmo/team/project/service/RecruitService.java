@@ -156,5 +156,8 @@ public interface RecruitService {
 	
 	public List<RecruitLessonDTO> getRecruitLesson(RecruitSearchDTO recruitSearchDTO);
 	
+	//레슨 신청하면 승낙대기 테이블로 들어간다.
+	int goWaitingLessonList(RecruitLessonDTO recruitLessonDTO);
+	
 }
 

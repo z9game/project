@@ -427,6 +427,10 @@ public class RecruitServiceImpl implements RecruitService {
 				return lessonListAllCnt;
 			}	 
 		 
-	 
+		//레슨 신청하면 승낙대기 테이블로 들어간다.
+		public int goWaitingLessonList(RecruitLessonDTO recruitLessonDTO) {
+			int goWaitingLessonList = this.recruitDAO.goWaitingLessonList(recruitLessonDTO);
+			return goWaitingLessonList;
+		}
 
 }

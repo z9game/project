@@ -14,6 +14,8 @@ public class TeamDTO {
 	private String sido;
 	private int m_no;
 	private List<Integer> m_no_A;
+	private List<Integer> m_no_H;
+	private List<Integer> m_no_L;
 	
 	//팀정보
 	private int team_no;
@@ -33,6 +35,22 @@ public class TeamDTO {
 	
 	
 	
+	public List<Integer> getM_no_L() {
+		return m_no_L;
+	}
+
+	public void setM_no_L(List<Integer> m_no_L) {
+		this.m_no_L = m_no_L;
+	}
+
+	public List<Integer> getM_no_H() {
+		return m_no_H;
+	}
+
+	public void setM_no_H(List<Integer> m_no_H) {
+		this.m_no_H = m_no_H;
+	}
+
 	public String getStadium_name() {
 		return stadium_name;
 	}

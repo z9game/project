@@ -33,7 +33,7 @@ function goWaitingHiredList()
 			}
 		},
 		error : function() {
-			alert("수정 실패! 관리자에게 문의 바랍니다.");
+			alert("신청 실패! 관리자에게 문의 바랍니다.");
 		}
 	});
 }

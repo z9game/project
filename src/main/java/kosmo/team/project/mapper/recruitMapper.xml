@@ -1110,6 +1110,18 @@
 		where
 			recruitment_no = #{recruitment_no}
 	</delete> 
+	
+	
+	<!-- 레슨 대기테이블 등록 -->
+	<insert id="goWaitingLessonList" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+   		insert
+   		into 
+   			waiting_lessonreg
+   		values(
+   			 #{recruitment_no}
+   			,#{m_no}
+   		)
+   	</insert>   
    	
    	 
 </mapper>

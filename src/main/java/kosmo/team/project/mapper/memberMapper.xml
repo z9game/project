@@ -347,9 +347,6 @@
 	
 	
 	
-	
-	
-	
 	<!-- 다음 경기 일정들 -->
 	<select id="getTeamMatchDay" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
    		 select
@@ -367,5 +364,65 @@
 		    and 
 			(sysdate - to_date(m.day)) <![CDATA[ <=0 ]]>
 	</select>
+	
+	<!-- 용병수락하면 내팀 용병테이블로 들어오고 대기 테이블에서 삭제된다. -->
+	<insert id="regHired" parameterType="kosmo.team.project.dto.TeamDTO">
+		 insert into team_merc
+      <foreach collection="m_no_H" item="m_no"  open= " ( "  close = " ) "   separator=" union " >
+         select  (select team from waiting_hiredReg where m_no = #{m_no}),#{m_no} from dual 
+      </foreach>
+	</insert>
+	
+	<delete id="delHired" parameterType="kosmo.team.project.dto.TeamDTO">
+		delete 
+		from
+			waiting_hiredReg
+		where
+			<foreach collection="m_no_H" item="m_no"  open= " ( "  close = " ) "   separator=" or " >
+	        m_no=#{m_no}
+	        </foreach>
+	</delete>
+	
+	
+	<!-- 팀에 들어온 용병목록가져오기 -->
+	<select id="getHiredList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
+		select
+		    m.name 
+		    ,m.m_no
+		    ,to_number(to_char(sysdate, 'YYYY')) -
+		        to_number(to_char(m.birthdate, 'YYYY')) AS "age" 
+		    ,s.name as "sido"
+		from
+		     member m left join sido s on m.sido_id = s.sido_id
+		              left join team_merc tm on m.m_no = tm.m_no
+		where
+		    tm.team_no = (select team_no from team_member where team_member = #{m_no})     
+		
+	</select>
+	
+	
+	<!-- 레슨수락하면 레슨테이블로 들어오고 대기 테이블에서 삭제된다. -->
+	<insert id="regLesson" parameterType="kosmo.team.project.dto.TeamDTO">
+		 insert into lesson_member
+      <foreach collection="m_no_L" item="m_no_L"  open= " ( "  close = " ) "   separator=" union " >
+         select  #{m_no},#{m_no_H} from dual 
+      </foreach>
+	</insert>
+	
+	<delete id="refuseLesson" parameterType="kosmo.team.project.dto.TeamDTO">
+		delete 
+		from
+			waiting_lessonReg
+		where
+			<foreach collection="m_no_L" item="m_no"  open= " ( "  close = " ) "   separator=" or " >
+	        m_no=#{m_no}
+	        </foreach>
+	</delete>
+	
+	<!-- 레슨 대기자목록
+	<select id="getWaitingLessonList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
+   		
+	</select>
+	 -->
 	 
 </mapper>

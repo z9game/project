@@ -170,12 +170,40 @@ public class MemberServiceImplements implements MemberService {
 	}
 	
 	//용병승낙 수락 할때
-	 int regHired(TeamDTO teamDTO) {
+	public int regHired(TeamDTO teamDTO) {
+		 int regHired = this.memberDAO.regHired(teamDTO);
+		 int delHired = this.memberDAO.delHired(teamDTO);
+		 return regHired;
 		 
 	 }
 	//용병승낙 거절 할때
-	 int refuseHired(TeamDTO teamDTO) {
-		 
+	public int refuseHired(TeamDTO teamDTO) {
+		int delHired = this.memberDAO.delHired(teamDTO);
+		return delHired;
 	 }
 	
+	//팀에 속해있는 용병 목록 가져오기
+	public List<TeamDTO> getHiredList(int m_no){
+		 List<TeamDTO> getHiredList = this.memberDAO.getHiredList(m_no);
+		 return getHiredList;
+	 }
+	
+	//레슨승낙 수락 할때
+	public int regLesson(TeamDTO teamDTO) {
+		 int regLesson = this.memberDAO.regLesson(teamDTO);
+		 int delLesson = this.memberDAO.delLesson(teamDTO);
+		 return regLesson;
+	}
+	
+	//레슨승낙 거절 할때
+	public int refuseLesson(TeamDTO teamDTO) {
+		int delLesson = this.memberDAO.delLesson(teamDTO);
+		return delLesson;
+	}
+	
+	//레슨승낙 대기인원 정보가져오기
+	public List<TeamDTO> getWaitingLessonList(int m_no){
+		 List<TeamDTO> getWaitingLessonList = this.memberDAO.getWaitingLessonList(m_no);
+		 return getWaitingLessonList;
+	}
 }

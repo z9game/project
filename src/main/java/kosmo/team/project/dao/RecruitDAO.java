@@ -210,4 +210,8 @@ public interface RecruitDAO {
 	public int getLessonListCnt(RecruitSearchDTO recruitSearchDTO);
 
 	public int getLessonListAllCnt();
+	
+	//레슨 신청하면 승낙대기 테이블로 들어간다.
+	int goWaitingLessonList(RecruitLessonDTO recruitLessonDTO);
+	
 }

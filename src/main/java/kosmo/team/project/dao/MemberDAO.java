@@ -63,5 +63,20 @@ public interface MemberDAO {
 	//다음 경기 일정 가져오기
 	List<TeamDTO> getTeamMatchDay(int m_no);
 	
+	//용병승낙 수락 할때
+	 int regHired(TeamDTO teamDTO);
+	 int delHired(TeamDTO teamDTO);
+	 
+	//팀에 속해있는 용병 목록 가져오기
+	List<TeamDTO> getHiredList(int m_no);
+	
+	//레슨승낙 수락 할때
+	 int regLesson(TeamDTO teamDTO);
+	//레슨승낙 거절 할때
+	 int delLesson(TeamDTO teamDTO);
+	 
+	//레슨승낙 대기인원 정보가져오기
+	 List<TeamDTO> getWaitingLessonList(int m_no);
+	
 	
 }

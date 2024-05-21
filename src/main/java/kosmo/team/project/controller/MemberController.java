@@ -103,6 +103,12 @@ public class MemberController {
 			//용병승낙 대기인원 정보가져오기
 			 List<TeamDTO> waitHiredList = this.memberService.getWaitingHiredList(m_no);
 			 
+			//레슨승낙 대기인원 정보가져오기
+			 //List<TeamDTO> waitLessonList = this.memberService.getWaitingLessonList(m_no);
+			 
+			//팀에 속해있는 용병 목록 가져오기
+			 List<TeamDTO> getHiredList = this.memberService.getHiredList(m_no);
+			 System.out.println(getHiredList.size());
 			//매칭승낙 대기팀 정보 가져오기
 			 List<TeamDTO> matchWaitingList = this.memberService.getMatchWaitingList(m_no);
 			 
@@ -140,6 +146,8 @@ public class MemberController {
 		     mav.addObject("matchWaitingList", matchWaitingList);
 		     //내팀 정보
 		     mav.addObject("teamInfo", teamInfo);
+		     //내팀 용병 정보
+		     mav.addObject("getHiredList", getHiredList);
 		     //다음경기 일정 가져오기
 		     mav.addObject("getTeamMatchDay", getTeamMatchDay);
 		     
@@ -226,6 +234,7 @@ public class MemberController {
 			{
 				//승낙 수락 할때
 				 int approveHired = this.memberService.regHired(teamDTO);
+				 
 				 resultMap.put("result", approveHired+"");
 			}
 			 
@@ -234,6 +243,31 @@ public class MemberController {
 				//승낙 거절 할때
 				 int refuseHired = this.memberService.refuseHired(teamDTO);
 				 resultMap.put("refuse", refuseHired+"");
+			}
+		
+			return resultMap;
+		}
+		
+		//레슨 수락/거절
+		@RequestMapping( value="/reglessonProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+		@ResponseBody
+		public Map<String,String> reglessonProc(TeamDTO teamDTO)
+		{
+			Map<String,String> resultMap = new HashMap<String,String>();
+			
+			if(teamDTO.getReg() == 1)
+			{
+				//승낙 수락 할때
+				 int approveLesson = this.memberService.regLesson(teamDTO);
+				 
+				 resultMap.put("result", approveLesson+"");
+			}
+			 
+			if(teamDTO.getRefuse() == 1)
+			{
+				//승낙 거절 할때
+				 int refuseLesson = this.memberService.refuseLesson(teamDTO);
+				 resultMap.put("refuse", refuseLesson+"");
 			}
 		
 			return resultMap;
