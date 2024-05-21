@@ -13,8 +13,8 @@
 	function checkQnABoardUpdateForm(b_no){
 		
 		var formObj = $("[name='updateCustomerServiceQnAForm']");
-		var subjectObj = formObj.find(".subject").trim();
-		var contentObj = formObj.find(".content").trim();
+		var subjectObj = formObj.find(".subject");
+		var contentObj = formObj.find(".content");
 		
 		var sessionPwd = "<%= session.getAttribute("password") %>";
 		
@@ -76,6 +76,15 @@
 	
 	    checkPwd();
 	}
+	
+	function QnAboardUpdateFormReset(){
+		var formObj = $("[name='updateCustomerServiceQnAForm']");
+		var subjectObj = formObj.find(".subject");
+		var contentObj = formObj.find(".content");
+		
+		subjectObj = $(".subject").val("");
+		contentObj = $(".content").val("");
+	}
 </script>
 </head>
 <body>
@@ -118,7 +127,7 @@
 			</table>
 			<div class="updateCustomerServiceQnAFormBtnDiv">
 				<div class="resetBtnDiv">
-					<input type="reset" class="boardResetBtn"value="다시 작성">
+					<input type="button" class="boardResetBtn" value="다시 작성" onClick="QnAboardUpdateFormReset()">
 				</div>
 				<div class="boardRegAndMoveList">
 					<input type="button" class="boardRegBtn" value="저장" onClick="checkQnABoardUpdateForm(${requestScope.customerServiceDetailDTO.b_no});">
