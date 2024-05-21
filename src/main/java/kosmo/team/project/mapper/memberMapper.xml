@@ -141,7 +141,7 @@
 		where
 			b.m_no = #{m_no}
 			and 
-			(sysdate - booking_date) <![CDATA[ <0 ]]>
+			(sysdate - booking_date) <![CDATA[ <=0 ]]>
 	</select>
 	
 	
@@ -342,6 +342,8 @@
 		            left join team t on md.team2 = t.team_no
 		where
 		    md.team1 = (select team_no from team_member where team_member = #{m_no})
+		    and 
+			(sysdate - to_date(m.day)) <![CDATA[ <=0 ]]>
 	</select>
 	 
 </mapper>
