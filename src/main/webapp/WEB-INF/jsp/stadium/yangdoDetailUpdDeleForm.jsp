@@ -183,9 +183,25 @@ function loadTimeRanges() {
 // 		if (confirm("정말수정하시겠습니까?") == false) {
 // 			return;
 // 		} */	
-
+		var stadiumSelected = $("select[name='MyStadium']").val();
 		
 		 var bookingDate = $("select[name='MyDate']").val();
+		 var timeRangeValue = $("select[name='MyTimeRange']").val();
+		 
+		 
+		 if (stadiumSelected !== "0" && (bookingDate === "선택" || bookingDate === null || bookingDate === '')) {
+		        alert("날짜를 선택해주세요.");
+		        return;
+		    }
+		 
+		 
+		 if (stadiumSelected !== "0" && bookingDate !== "선택" && (timeRangeValue === "0" || timeRangeValue === null || timeRangeValue === '')) {
+			    alert("시간을 선택해 주세요.");
+			    return;
+			}
+		 
+		 
+		 
 		 
 		 var extractedDate = null; 
 		 if (bookingDate !== null && bookingDate !== '' ) {
@@ -210,7 +226,7 @@ function loadTimeRanges() {
 
 
 
-		//alert(JSON.stringify(formData));
+		alert(JSON.stringify(formData));
 
 
 

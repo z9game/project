@@ -513,7 +513,7 @@
                join stadium st on b.stadium_no = st.stadium_no  
                join time_table t on t.time_no = b.time_slot 
                join sido s on st.sido_name = s.sido_id 
-               join sigungu sg on st.sido_name = sg.sigungu_id
+               join sigungu sg on st.sigungu_name = sg.sigungu_id
 		where
 		 yangdo_no = #{yangdo_no}
 
@@ -628,6 +628,7 @@
               and time_slot = #{time_slot}
               and m_no = #{m_no}
         )
+        and STATUS = '양도중'
 		
 
 	</select>
