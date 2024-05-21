@@ -163,5 +163,19 @@ public class MemberServiceImplements implements MemberService {
 		return getTeamMatchDay;
 	}
 	
+	//용병승낙 대기인원 정보가져오기
+	public List<TeamDTO> getWaitingHiredList(int m_no){
+		List<TeamDTO> getWaitingHiredList = this.memberDAO.getWaitingHiredList(m_no);
+		return getWaitingHiredList;
+	}
+	
+	//용병승낙 수락 할때
+	 int regHired(TeamDTO teamDTO) {
+		 
+	 }
+	//용병승낙 거절 할때
+	 int refuseHired(TeamDTO teamDTO) {
+		 
+	 }
 	
 }

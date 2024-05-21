@@ -152,6 +152,78 @@
 	};
 	
 	
+	//용병수락
+	function regTeamMem(){
+			
+		var regTeam = $("[name='hiredWaitingList']");
+		
+		if (confirm("정말 수락 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/regHiredProc.do",
+			type : "post",
+			data : regTeam.serialize() + "&reg = 1",
+			success : function(json) {
+				var result = json["result"];
+				if (result > 0) {
+					alert("수락 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_waiting");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("수락중 오류가 발생했습니다.");
+			}
+		});
+		
+	};
+	
+	//용병거절
+	function refuseTeamMem(){
+		
+		var refuseTeam = $("[name='hiredWaitingList']");
+		
+		if (confirm("정말 거절 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/regHiredProc.do",
+			type : "post",
+			data : refuseTeam.serialize() + "&refuse = 1",
+			success : function(json) {
+				var result = json["refuse"];
+				if (result == 0) {
+					alert("거절 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_waiting");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("거절중 오류가 발생했습니다.");
+			}
+		});
+		
+	};
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//팀원 모집 신청인원
 	function modalOpen_waiting(){
 		var modal = document.querySelector(".modalDiv_waiting");
@@ -400,7 +472,7 @@
 			<button onclick="allApprove()">전체선택</button>
 			<button onclick="regTeamMem()">수락</button>
 			<button onclick="refuseTeamMem()">거절</button>
-			<button onclick="modalClose_waiting()">취소</button>
+			<button onclick="modalClose_waiting()">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -409,6 +481,55 @@
 	<!-- ================================================================================================================= -->
 	<!-- 용병 관련 -->
 	
+	<c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
+		<c:if test="${requestScope.mercWaitingCnt > 0}">
+	    	<center>
+				<table style="border-collapse:collapse" border="1">
+				<tr>
+					<td style="cursor:pointer" class="matchWaitingCheck" onclick="modalOpen_hired()">
+						용병신청이 있습니다.
+					</td>
+				</tr>
+			</table>
+			</center>
+		</c:if>
+	</c:if>
+	
+	<div class="modalDiv_hired" align="center"> 
+		<div class="bg_hired">
+			<div class="modal_hired">
+			<form name = "hiredWaitingList">
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+					<caption><b>수락대기중</b></caption>
+					<tr>
+						<th>이름</th>
+						<th>나이</th>
+						<th>지역</th>
+						<th>선택</th>
+					</tr>
+					<c:forEach var="listhired" items="${requestScope.waitHiredList}" varStatus="status">
+						<tr>
+							<td align="center">${listhired.name}</td>
+							<td align="center">${listhired.age}</td>
+							<td align="center">${listhired.sido}</td>
+							<td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${listhired.m_no}"></td>
+						</tr>
+					</c:forEach>
+				</table>
+				
+				
+			</form>
+			<div style="height:8px;"></div>
+			<button onclick="allApprove()">전체선택</button>
+			<button onclick="">수락</button>
+			<button onclick="">거절</button>
+			<button onclick="modalClose_hired()">닫기</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div style="height:30px;"></div>
 	
 	
 	
@@ -470,7 +591,7 @@
 			<div style="height:8px;"></div>
 			<button onclick="matching()">수락</button>
 			<button onclick="">거절</button>
-			<button onclick="modalClose_matching()">취소</button>
+			<button onclick="modalClose_matching()">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -503,7 +624,7 @@
 			</form>
 				<div style="height:8px;"></div>
 				<button onclick="regTeam()">생성</button>
-				<button onclick="modalClose_regTeam()">취소</button>
+				<button onclick="modalClose_regTeam()">닫기</button>
 			</div>
 		</div>
 	</div>

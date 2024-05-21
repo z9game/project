@@ -194,7 +194,7 @@
 		select
 		    count(*)
 		from
-		    waiting_teamReg
+		    waiting_hiredReg
 		where
 		    team=(
 		    select  
@@ -220,6 +220,28 @@
 		             left join waiting_teamReg wt on m.m_no = wt.name 
 		where
 		    wt.team = (
+		        select  
+		            team_no 
+		        from
+		            team_member 
+		        where 
+		            team_member = #{m_no}  
+		    )
+	</select>
+	
+	<!-- 용병수락 대기자 명단 -->
+	<select id="getWaitingHiredList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
+		select
+		    m.m_no
+		    ,m.name 
+		    ,to_number(to_char(sysdate, 'YYYY')) -
+		        to_number(to_char(m.birthdate, 'YYYY')) AS "age" 
+		    ,s.name as "sido"
+		from
+		    member m left join sido s on m.sido_id = s.sido_id
+		             left join waiting_hiredReg wh on m.m_no = wh.m_no 
+		where
+		    wh.team = (
 		        select  
 		            team_no 
 		        from

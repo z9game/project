@@ -185,7 +185,7 @@ function goWaitingHiredList()
     	<!-- 용병모집 게시물일때 신청버튼을 누르면 넘어갈 정보들 -->
 		<form name="waitingHiredList">
 			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
-			<input type="hidden" name="b_no"value="${requestScope.hireddetailList.recruitment_no}">
+			<input type="hidden" name="recruitment_no"value="${requestScope.hireddetailList.recruitment_no}">
 		</form>
 </body>
 </html>

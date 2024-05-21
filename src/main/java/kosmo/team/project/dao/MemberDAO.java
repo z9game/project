@@ -36,8 +36,11 @@ public interface MemberDAO {
     //용병 승낙테이블의 개수가 몇개인지 확인
   	int getMercWaitingCnt(int m_no);
     
-    //승낙 대기인원 정보가져오기
+    //팀원승낙 대기인원 정보가져오기
   	 List<TeamDTO> getWaitingList(int m_no);
+  	 
+  	//용병승낙 대기인원 정보가져오기
+  	 List<TeamDTO> getWaitingHiredList(int m_no);
   	 
   	 
 	//승낙 수락 할때
