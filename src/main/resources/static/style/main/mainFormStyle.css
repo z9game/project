@@ -25,31 +25,47 @@ body {
 
 #sectionMain{
 	background-color:#F5F5F5;
-	height: calc(100% - 80px);
+	position: relative;
+    width: 100%;
+    height: 100vh;
 }
 
-#sectionMain img {
-    float: right;
-    height: calc(100% - 80px);
-}
-
-#sectionMain > div {
+.sectionMainImageDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    width: calc(50% - 1px);
-    background-color: #F5F5F5;
-    float: left;
+    overflow: hidden;
+}
+
+.sectionMainImageDiv img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
 }
 
 .sectionMainTextDiv {
-	display: flex;
-	text-align: center;
-	flex-direction: column;
-	margin: 0 auto;
-	margin-top: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    z-index: 1;
+    margin-top: -250px;
 }
 
-.sectionMainText{
-	font-size: 40px;
+.sectionMainText {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 10px 0;
 }
 
 #sectionMainText_1{
@@ -61,23 +77,16 @@ body {
 }
 
 #sectionMainText_3{
-	font-size: 20px;
-	color: #0BA780;
+	font-size: 30px;
+	color: #055F49;
+	text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
 }
 
 #sectionMainText_4{
 	font-size: 40px;
-	color: #055F49;
-	text-decoration: underline;
-	text-underline-position:under;
-}
-
-#sectionMainText_5{
-	font-size: 20px;
 	color: green;
 	text-align: right;
-	margin-right: 100px;
-	margin-top: 50px;
+	text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
 }
 
 /*<------------------------------------------------------->*/
@@ -96,13 +105,13 @@ body {
 }
 
 .sectionStatisticsTitle{
-	margin-top: 70px;
+	margin-top: 50px;
 	
 }
 
 .sectionStatisticsContainer{
 	display: flex;
-	margin-top: 70px;
+	margin-top: 30px;
 }
 
 .recordsStatisticsRegionRatioTitle, .recordsStatisticsGenderRatioTitle, .recordsStatisticsAgeRatioTitle{
@@ -116,6 +125,7 @@ body {
     width: 200px;
     height: 50px;
     text-align: center;
+    font-size: 18px;
 }
 
 .recordsStatisticsRegionRatioContainer, .recordsStatisticsGenderRatioContainer{
@@ -140,23 +150,17 @@ body {
 }
 
 .sectionRankingTitle{
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 table {
 	border-collapse: collapse;
-	border-color: gray;
 	margin: 0 auto;
 	margin-top:20px;
 }
 
 th, td {
 	padding: 10px 15px 10px 15px;
-	border-color: gray;
-}
-
-th {
-	background-color: lightgray;
 }
 
 li{
@@ -176,7 +180,7 @@ a{
 	float: left;
 	width: 100%;
 	height: 100%;
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 .recordsRankingFormCategoryTabNav{
@@ -280,7 +284,7 @@ a{
 }
 
 .sectionScheduleTitle{
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 .sectionScheduleContainer{
@@ -345,7 +349,7 @@ a{
 }
 
 .sectionMediaGallaryTitle{
-	margin-top: 100px;
+	margin-top: 50px;
 }
  
 .sectionMediaGallaryContainer::-webkit-scrollbar{
