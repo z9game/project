@@ -9,6 +9,35 @@
 <title>RecruitHiredBoardForm</title>
 <link href="/style/recruitHiredBoardFormStyle.css" rel="stylesheet">
 <script src="/js/recruitHiredBoardFormScript.js"></script>
+
+<script>
+function goWaitingHiredList()
+{
+	var formObj = $("[name='waitingHiredList']");
+	
+	if (confirm("신청 하시겠습니까?") == false) {
+		return;
+	}
+	
+	$.ajax({
+		url : "/goWaitingHiredList.do",
+		type : "post",
+		data : formObj.serialize(),
+		success : function(json) {
+			var result = json["result"];
+			if (result == 1) {
+				alert("신청이 완료되었습니다.");
+			}
+			else {
+				alert("이미 신청한 팀입니다.");
+			}
+		},
+		error : function() {
+			alert("수정 실패! 관리자에게 문의 바랍니다.");
+		}
+	});
+}
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -129,6 +158,9 @@
 			<!--------------------------------------------------- -->
 			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 			<!--------------------------------------------------- -->
+			<c:if test="${sessionScope.nickname ne requestScope.hireddetailList.nickname}">
+         	 	<input type="button" value="신청" style="cursor:pointer" onclick="goWaitingHiredList()" >
+         	</c:if>
 			<span style="cursor: pointer"
 				onclick="location.replace('/recruitHiredBoardForm.do')">
 				[목록 화면으로] </span>
@@ -140,7 +172,7 @@
     	</center>
     	
     	
-    	<<!--------------------------------------------------------------------------->
+    	<!--------------------------------------------------------------------------->
 		<!-- WAS에 "/recruitTeamMemBoardUpDelForm.do" 주소로 접속하기 위한 form 태그 선언하기 -->
 		<!--------------------------------------------------------------------------->
 		<form name="recruitHiredboardUpDelForm" action="/recruitHiredBoardUpDelForm.do" method="post">
@@ -150,6 +182,10 @@
 		<input type="hidden" name="recruitment_no"value="${requestScope.hireddetailList.recruitment_no}">
 		</form>
     
-    
+    	<!-- 용병모집 게시물일때 신청버튼을 누르면 넘어갈 정보들 -->
+		<form name="waitingHiredList">
+			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
+			<input type="hidden" name="b_no"value="${requestScope.hireddetailList.recruitment_no}">
+		</form>
 </body>
 </html>

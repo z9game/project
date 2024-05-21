@@ -162,7 +162,7 @@
       <center>
       <c:if test="${requestScope.list.team_mem eq '팀원'}">
       	 <c:if test="${sessionScope.m_no ne requestScope.list.writer}">
-         	 <input type="button" value="신청" style="cursor:pointer" onclick="goWaitingList()" >
+         	 <input type="button" value="신청" style="cursor:pointer" onclick="goWaitingList()">
          </c:if>
       </c:if>
          <span style="cursor: pointer"

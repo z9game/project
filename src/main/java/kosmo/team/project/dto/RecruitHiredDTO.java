@@ -20,9 +20,18 @@ public class RecruitHiredDTO {
    	private int sido_id;
    	private int sigungu_id;
 	
+   	//용병신청 관련
+   	private int m_no;
    	
    	
-   	public int getRecruitment_no() {
+   	
+   	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
+	}
+	public int getRecruitment_no() {
 		return recruitment_no;
 	}
 	public void setRecruitment_no(int recruitment_no) {

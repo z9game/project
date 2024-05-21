@@ -196,6 +196,29 @@
 		modal.style.display = "none";
 	};
 	//-----------------------------------------------------------------
+	//용병신청이 있을때
+	function modalOpen_hired(){
+		var modal = document.querySelector(".modalDiv_hired");
+		modal.style.display = "block";
+	};
+	
+	function modalClose_hired(){
+		var modal = document.querySelector(".modalDiv_hired");
+		modal.style.display = "none";
+	};
+	//-----------------------------------------------------------------
+	//레슨신청이 있을때
+	function modalOpen_lesson(){
+		var modal = document.querySelector(".modalDiv_lesson");
+		modal.style.display = "block";
+	};
+	
+	function modalClose_lesson(){
+		var modal = document.querySelector(".modalDiv_lesson");
+		modal.style.display = "none";
+	};
+	//-----------------------------------------------------------------
+	
 </script>
 </head>
 <body>
@@ -453,7 +476,7 @@
 	</div>
 	
 	
-	
+	<div style="height:30px;"></div>
 	
 	<!-- ================================================================================================================= -->
 	<!-- 팀생성 관련 -->

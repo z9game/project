@@ -36,7 +36,7 @@ public class RecruitServiceImpl implements RecruitService {
 
 	}
 	
-	//??
+	//게시물개수 리턴
 	public int getBoardListCnt(RecruitSearchDTO recruitSearchDTO) {
 		
 		int boardListCnt = this.recruitDAO.getBoardListCnt(recruitSearchDTO);
@@ -286,6 +286,12 @@ public class RecruitServiceImpl implements RecruitService {
 				return hiredListAllCnt;
 			}
 		 
+			
+	//용병 신청하면 승낙대기 테이블로 들어간다.
+	public int goWaitingHiredList(RecruitHiredDTO recruitHiredDTO) {
+		int goWaitingHiredList = this.recruitDAO.goWaitingHiredList(recruitHiredDTO);
+		return goWaitingHiredList;
+	}
 
 //==================================================================================================================================	 
 		

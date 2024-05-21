@@ -329,6 +329,26 @@ public class RecruitController {
 	
 	return resultMap;
 	}
+    
+    
+    //용병 신청하면 승낙대기 테이블로 들어간다.
+    @RequestMapping( value = "/goWaitingHiredList.do"
+					,method = RequestMethod.POST
+					, produces = "application/json; charset=UTF-8"
+			)
+	@ResponseBody
+	public Map<String, String> goWaitingHiredList(RecruitHiredDTO recruitHiredDTO)
+	{
+	Map<String, String> resultMap = new HashMap<String, String>();
+	int waitingHiredListCnt = this.recruitService.goWaitingHiredList(recruitHiredDTO);
+	
+	resultMap.put("result", waitingHiredListCnt+"");
+	
+	return resultMap;
+	}
+    
+    
+    
 		
 //==================================================================================================================================
 
