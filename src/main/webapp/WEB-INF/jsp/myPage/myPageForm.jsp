@@ -92,6 +92,34 @@
 		
 	};
 	
+	function refuseTeamMem(){
+		
+		var refuseTeam = $("[name='waitingList']");
+		
+		if (confirm("정말 거절 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/regTeamMemberProc.do",
+			type : "post",
+			data : refuseTeam.serialize(),
+			success : function(json) {
+				var result = json["refuse"];
+				if (result == 0) {
+					alert("거절 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_waiting");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("거절중 오류가 발생했습니다.");
+			}
+		});
+		
+	};
+	
 	
 	function modalOpen_waiting(){
 		var modal = document.querySelector(".modalDiv_waiting");
@@ -112,6 +140,18 @@
 		var modal = document.querySelector(".modalDiv_regTeam");
 		modal.style.display = "none";
 	};
+	
+	function modalOpen_myTeamInfo(){
+		var modal = document.querySelector(".modalDiv_myTeamInfo");
+		modal.style.display = "block";
+	};
+	
+	function modalClose_myTeamInfo(){
+		var modal = document.querySelector(".modalDiv_myTeamInfo");
+		modal.style.display = "none";
+	};
+	
+	
 </script>
 </head>
 <body>
@@ -122,6 +162,7 @@
 		<p class="titleBackgoundText">마이페이지</p>
 	</div>
 	<!-- ================================================================================================================= -->
+	<!-- 내정보  / 팀명 클릭시 팀원리스트 상세보기-->
 	<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
 	<caption><b>내 정보</b></caption>
 		<tr>
@@ -130,12 +171,47 @@
 		</tr>
 		<tr>
 			<td>${requestScope.myInfo.name}</td>
-			<td>
-				<c:if test="${empty requestScope.myInfo.team_name}">없음</c:if>
-				<c:if test="${not empty requestScope.myInfo.team_name}">${requestScope.myInfo.team_name}</c:if>
-			</td>
+			<c:if test="${empty requestScope.myInfo.team_name}">
+				<td>없음</td>
+			</c:if>
+			
+			<c:if test="${not empty requestScope.myInfo.team_name}">
+				<td style="cursor:pointer" onClick = "modalOpen_myTeamInfo()">${requestScope.myInfo.team_name}</td>
+			</c:if>
 		</tr>
 	</table>
+	
+	<div class="modalDiv_myTeamInfo" align="center"> 
+		<div class="bg_modalDiv_myTeamInfo">
+			<div class="modal_myTeamInfo">
+				
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+				<caption><b>팀원 목록</b></caption>
+					<tr>
+						<th>이름</th>
+						<th>지역</th>
+						<th>나이</th>
+					</tr>
+					<c:forEach var="team" items="${requestScope.teamInfo}" varStatus="status">
+						<tr>
+							<c:if test="${requestScope.myInfo.team_master eq team.m_no}">
+								<td align="center">${team.name}(팀장)</td>
+							</c:if>
+							<c:if test="${requestScope.myInfo.team_master ne team.m_no}">
+								<td align="center">${team.name}</td>
+							</c:if>
+							
+							<td align="center">${team.sido}</td>
+							<td align="center">${team.age}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				
+			<button onclick="modalClose_myTeamInfo()">닫기</button>
+			</div>
+		</div>
+	</div>
+
 	
 	<div style="height:25px;"></div>
 	<!-- ================================================================================================================= -->
@@ -190,11 +266,13 @@
 	<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
 	<caption><b>다음 예정 경기</b></caption>
 		<tr>
-			<th>지역</th>
-			<th>주소</th>
 			<th>경기장명</th>
+			<th>주소</th>
+			<th>일시</th>
+			<th>시간</th>
 		</tr>
 		<tr>
+			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>
@@ -244,12 +322,80 @@
 			<div style="height:8px;"></div>
 			<button onclick="allApprove()">전체선택</button>
 			<button onclick="regTeamMem()">수락</button>
+			<button onclick="refuseTeamMem()">거절</button>
 			<button onclick="modalClose_waiting()">취소</button>
 			</div>
 		</div>
 	</div>
 	
 	<div style="height:30px;"></div>
+	<!-- ================================================================================================================= -->
+	<!-- 용병 관련 -->
+	<c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
+		<!-- 이곳에 용병대기 리스트 들어갈거임 --><c:if test="">
+	    	<center>
+				<table style="border-collapse:collapse" border="1">
+				<tr>
+					<td class="waitingCheck" onclick="">
+						용병 수락 대기인원이 있습니다.
+					</td>
+				</tr>
+			</table>
+			</center>
+		</c:if>
+	</c:if>
+	
+	
+	<div class="modalDiv_waiting" align="center"> 
+		<div class="bg_waiting">
+			<div class="modal_waiting">
+			<form name = "waitingList">
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+					<caption><b>수락대기중</b></caption>
+					<tr>
+						<th>이름</th>
+						<th>나이</th>
+						<th>지역</th>
+						<th>선택</th>
+					</tr>
+					<c:forEach var="list" items="${requestScope.waitList}" varStatus="status">
+						<tr>
+							<td align="center">${list.name}</td>
+							<td align="center">${list.age}</td>
+							<td align="center">${list.sido}</td>
+							<td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${list.m_no}"></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</form>
+			<div style="height:8px;"></div>
+			<button onclick="">전체선택</button>
+			<button onclick="">수락</button>
+			<button onclick="">거절</button>
+			<button onclick="">취소</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- ================================================================================================================= -->
+	<!-- 레슨 관련 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<!-- ================================================================================================================= -->
 	<!-- 팀생성 관련 -->

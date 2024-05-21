@@ -99,6 +99,13 @@ public class MemberServiceImplements implements MemberService {
     	return getWaitingCnt;
     }
     
+    //용병 승낙테이블의 개수가 몇개인지 확인
+    public int getMercWaitingCnt(int m_no) {
+  		int getMercWaitingCnt = this.memberDAO.getMercWaitingCnt(m_no);
+  		
+  		return getMercWaitingCnt;
+  	}
+    
     //승낙 대기인원 정보가져오기
     public List<TeamDTO> getWaitingList(int m_no){
   		List<TeamDTO> getWaitingList = this.memberDAO.getWaitingList(m_no);
@@ -112,4 +119,19 @@ public class MemberServiceImplements implements MemberService {
 		 int delWaitingList = this.memberDAO.delWaitingList(teamDTO);
 		 return regTeamMem;
 	 }
+	 
+	//승낙 거절 할때
+	 public int refuseTeamMem(TeamDTO teamDTO) {
+		 int delWaitingList = this.memberDAO.delWaitingList(teamDTO);
+		 return delWaitingList;
+		 
+	 }
+	 
+	//마이페이지에 있는 내 정보에서 팀을 클릭하면 팀 멤버목록 출력.
+	 public List<TeamDTO> getTeamInfo(int m_no) {
+		
+		 List<TeamDTO> getTeamInfo = this.memberDAO.getTeamInfo(m_no);
+		
+		return getTeamInfo;
+	}
 }

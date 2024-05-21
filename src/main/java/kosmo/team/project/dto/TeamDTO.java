@@ -14,8 +14,21 @@ public class TeamDTO {
 	private String sido;
 	private int m_no;
 	private List<Integer> m_no_A;
+	
+	//팀정보
+	private int team_no;
 
 	
+	
+	
+	public int getTeam_no() {
+		return team_no;
+	}
+
+	public void setTeam_no(int team_no) {
+		this.team_no = team_no;
+	}
+
 	public List<Integer> getM_no_A() {
 		return m_no_A;
 	}
