@@ -221,85 +221,69 @@
     	<input type="hidden" class="b_no" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
     </form>
     <div class="customerServiceQnADetailFormTitle">
-        <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
         <p class="titleBackgoundText">QnA</p>
     </div>
-    <div class="moveListBtnDiv">
-        <input type="button" class="moveListBtn" value="목록" onClick="location.href = '/customerServiceForm.do'">
-    </div>
     <div class="customerServiceQnADetailFormContainer">
-        <table class="customerServiceQnADetailFormRegTable" border="1" bordercolor="black" style="width:600px;">
-            <tr>
-                <th>제목</th>
-                <td>
-                    ${requestScope.customerServiceDetailDTO.subject}
-                </td>
+        <table class="customerServiceQnADetailFormRegTable" style="border-bottom: 1px solid #999999;">
+            <tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
+                <td>${requestScope.customerServiceDetailDTO.subject}</td>
+                <td style="display: flex; margin-top:15px;"><p style="color: #999999;">작성자&nbsp;</p>/&nbsp;${requestScope.customerServiceDetailDTO.writer}</td>
             </tr>
             <tr>
-                <th>글쓴이</th>
                 <td>
-                    ${requestScope.customerServiceDetailDTO.writer}
-                </td>
-            </tr>
-            <tr>
-                <th>내용</th>
-                <td>
-                    <textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none; border:0; width:450px;" readonly>
-                        ${requestScope.customerServiceDetailDTO.content}
-                    </textarea>
+                    <textarea name="content" class="content" rows="20" cols="95" maxlength="1000" style="resize:none; border:0;" readonly>${requestScope.customerServiceDetailDTO.content}</textarea>
                 </td>
             </tr>
         </table>
         <c:if test="${sessionScope.mid != 'admin'}">
 	        <div class="upDelBoardBtnDiv">
-		        <input type="button" class="updateBoardBtn" value="수정" onClick="customerServiceQnAUpdate(${requestScope.customerServiceDetailDTO.b_no});">
+		        <input type="button" class="updateBoardBtn" value="수정" onClick="customerServiceQnAUpdate(${requestScope.customerServiceDetailDTO.b_no});" style="cursor: pointer">
 		        <c:if test="${not empty requestScope.customerServiceDetailDTO.b_no}">
-   					<button class="deleteBoardBtn" onclick="customerServiceQnADelete(${requestScope.customerServiceDetailDTO.b_no})">삭제</button>
+   					<button class="deleteBoardBtn" onclick="customerServiceQnADelete(${requestScope.customerServiceDetailDTO.b_no})" style="cursor: pointer">삭제</button>
 				</c:if>
 		    </div>
 		</c:if>
+		<div class="moveListBtnDiv">
+	        <input type="button" class="moveListBtn" value="목록" onClick="location.href = '/customerServiceForm.do'">
+	    </div>
         <div class="customerServiceQnADetailFormCommentInsertDiv">
         	<c:if test="${!empty requestScope.customerServiceQnADetailComment}">
         		<form name="customerServiceQnADetailFormCommentUpdateForm">
 		            <div class="customerServiceQnADetailFormComment">
 		            	<input type="hidden" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
-		                <table class="customerServiceQnADetailFormCommentTable" border="1" bordercolor="black">
+		                <table class="customerServiceQnADetailFormCommentTable" style="width:900px;">
 		                	<c:forEach var="customerServiceQnADetailComment" items="${requestScope.customerServiceQnADetailComment}" varStatus="status">
 		            			<input type="hidden" name="c_no" value="${customerServiceQnADetailComment.c_no}">
-			                    <tr>
-			                        <th>글쓴이</th>
-			                        <td>${customerServiceQnADetailComment.writer}</td>
-			                        <th>작성일</th>
-			                        <td>${customerServiceQnADetailComment.reg_date}</td>
-			                    </tr>
-			                    <tr>
-			                        <th>제목</th>
-			                        <td colspan="3" class="customerServiceQnADetailCommentSubject" style="width:490px;">${customerServiceQnADetailComment.subject}</td>
+			                    <tr style="display: flex; border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4);">
+			                   		<td class="customerServiceQnADetailCommentSubject">${customerServiceQnADetailComment.subject}</td>
+			                        <td style="display: flex;"><p style="color: #999999; margin-left: 400px;">작성자&nbsp;</p>/&nbsp;${customerServiceQnADetailComment.writer}</td>
+			                        <td style="display: flex;"><p style="color: #999999;">작성일&nbsp;</p>/&nbsp;${customerServiceQnADetailComment.reg_date}</td>
 			                    </tr>
 			                    <tr>
 			                    	<c:if test="${sessionScope.mid == 'admin'}">
-			                    		<th>내용</th>
-				                        <td colspan="3" class="customerServiceQnADetailCommentContent" style="width:490px; height:100px;">
-				                        	<textarea name="content" class="content${customerServiceQnADetailComment.c_no}" rows="10" cols="40" maxlength="1000" style="resize:none; border: 0;" data-c_no="${customerServiceQnADetailComment.c_no}">${customerServiceQnADetailComment.content}</textarea>
+				                        <td colspan="5" class="customerServiceQnADetailCommentContent" style="width:490px; height:100px;">
+				                        	<textarea name="content" class="content${customerServiceQnADetailComment.c_no}" rows="10" cols="110" maxlength="1000" style="resize:none; border: 0;" data-c_no="${customerServiceQnADetailComment.c_no}">${customerServiceQnADetailComment.content}</textarea>
 				                        </td>
 			                    	</c:if>
 			                    	<c:if test="${sessionScope.mid != 'admin'}">
-				                        <th>내용</th>
-				                        <td colspan="3" class="customerServiceQnADetailCommentContent" style="width:490px; height:100px;">
+				                        <td colspan="5" class="customerServiceQnADetailCommentContent" style="width:490px; height:100px;">
 				                        	${customerServiceQnADetailComment.content}
 				                        </td>
 				                	</c:if>
 			                    </tr>
 			                    <tr>
-			                    	<td colspan="4" style="text-align: right;">
+			                    	<td colspan="5" style="text-align: right;">
 					                    <c:if test="${sessionScope.mid == 'admin'}">
 						                	<div class="adminUpDelBtnDiv">
-						                		<button type="button" class="adminUpdateBtn" onclick="customerServiceCommentUpdate(${customerServiceQnADetailComment.c_no})">수정</button>
-						                		<button class="adminDeleteBtn" onclick="customerServiceCommentDelete(${customerServiceQnADetailComment.c_no})">삭제</button>
+						                		<button type="button" class="adminUpdateBtn" onclick="customerServiceCommentUpdate(${customerServiceQnADetailComment.c_no})" style="cursor: pointer">수정</button>
+						                		<button class="adminDeleteBtn" onclick="customerServiceCommentDelete(${customerServiceQnADetailComment.c_no})" style="cursor: pointer">삭제</button>
 						                	</div>
 						                </c:if>
 						        	</td>
 					        	</tr>
+					        	<tr><td></td></tr>
+					        	<tr><td></td></tr>
+					        	<tr><td></td></tr>
 			             	</c:forEach>
 		                </table>
 		            </div>
@@ -309,12 +293,11 @@
             	<form name="customerServiceQnADetailFormCommentInsertForm">
             		<input type="hidden" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
        				<input type="hidden" name="bc_no" value="${requestScope.customerServiceDetailDTO.b_no}">
-	                <table border="1" bordercolor="black">
+	                <table>
 	                    <tr>
-	                        <th>글쓴이</th>
-	                        <td>${sessionScope.nickname}</td>
-	                        <th>작성일</th>
-	                        <td><c:set var="currentDate" value="<%= new java.text.SimpleDateFormat(\"yyyy-MM-dd\").format(new java.util.Date()) %>" />${currentDate}</td>
+	                    	<td>${requestScope.customerServiceDetailDTO.subject}(답변)</td>
+	                        <td style="display: flex;"><p style="color: #999999; margin-left: 400px;">작성자&nbsp;</p>/&nbsp;${sessionScope.nickname}</td>
+	                        <td style="display: flex;"><p style="color: #999999;">작성일&nbsp;</p>/&nbsp;<c:set var="currentDate" value="<%= new java.text.SimpleDateFormat(\"yyyy-MM-dd\").format(new java.util.Date()) %>" />${currentDate}</td>
 	                    </tr>
 	                    <tr>
 	                        <th>답변 입력</th>

@@ -24,6 +24,34 @@
 		var mid = midobj.val();
 		var password = pwdobj.val();
 		
+		if(mid.trim() == '') {
+	        alert("아이디를 입력해주세요.");
+	        midobj.val("");
+	        return;
+	    }
+		
+		if(password.trim() == '') {
+	        alert("비밀번호를 입력해주세요.");
+	        pwdobj.val("");
+	        return;
+	    }
+		
+		/* if(new RegExp(/^[a-zA-Z0-9]{5,20}$/).test(mid) == false)
+		{	
+
+			alert("아이디는 영어 대/소문자 와 숫자로만 입력 가능합니다. 5 ~ 20자 이내")
+			midobj.val("");
+			return;
+		}
+		
+		
+		if(new RegExp(/^[a-zA-Z0-9]{5,20}$/).test(pwdobj.val()) == false)
+		{
+			alert("암호는 영어 대/소문자 와 숫자로만 입력 가능합니다. 5~20자 이내")
+			pwdobj.val("");
+			return;		
+		} */
+		
 		
 		$.ajax({
 			//----------------------------------------------------------
@@ -96,21 +124,24 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="loginFormContainer">
+    	<div class="loginTitle">
+    		<p>로그인</p>
+    	</div>
 		<form name="loginForm" onsubmit="return false">
-			<table border="1" align="center" style="margin-top:20px;">
-				<caption style="margin-bottom:10px;"><b>[로그인]</b></caption>
+			<table align="center" style="margin-top:100px;">
 				<tr>
-					<th bgcolor="lightgray">아이디</th>
+					<th class="loginFormMidTh">아이디</th>
 					<td>
-						<input type="text" name="mid" class="mid">
+						<input type="text" name="mid" class="mid" style="width: 305px; height: 30px; margin-right: 100px;">
 						<!-- class 값은 JQuery, CSS에서 통합적으로 사용하기 위해 설정 -->
 						<!-- name 값은 파라미터명="파라미터값"으로 사용되며 대부분의 경우 DB의 Column명과 일치함 -->
 					</td>
 				</tr>
+				<tr><td></td></tr>
 				<tr>
-					<th bgcolor="lightgray">암&nbsp;&nbsp;&nbsp;호</th>
+					<th class="loginFormPwdTh">비밀번호</th>
 					<td>
-						<input type="password" name="password" class="password" onkeyup="enterkey()">
+						<input type="password" name="password" class="password" style="width: 305px; height: 30px;" onkeyup="enterkey()">
 					</td>
 				</tr>
 			</table>

@@ -23,7 +23,7 @@
 
 			<nav class="headerNav">
 				<ul class="headerNavList">
-					<li><a href="/mainForm.do">홈</a></li>
+					<li class="nav-item"><a href="/mainForm.do">홈</a></li>
 
 					<li class="nav-item"><a href="/matchingForm.do">매칭 찾기</a></li>
 					<li class="nav-item"><a href="/recruitTeamMemBoardForm.do">모집</a>
@@ -65,25 +65,30 @@
 						</ul></li>
 					<li class="nav-item"><a href="/customerServiceForm.do">고객센터</a>
 					</li>
+
 					<c:if test="${not empty sessionScope.mid}">
-						<li class="auth-links" onClick="document.myPageForm.submit()" style="cursor: pointer">${sessionScope.nickname} 님 환영합니다!
-							&nbsp;&nbsp;&nbsp;
-						<c:if test="${sessionScope.mid!= 'admin'}">
-						<li class="auth-links" onclick="document.memUpdateForm.submit()" style="cursor: pointer">[회원정보 수정]
-						</c:if>
-						<c:if test="${sessionScope.mid== 'admin'}">
-						<a href="/adminForm.do">관리자페이지</a>
-						</c:if>		 
-							 <a href="/logoutProc.do">[로그아웃]</a>
-						</li>
+						<ul class="myPageAndLogout">
+						    <li class="nav-item" id="welcomeLogin" onclick="document.myPageForm.submit()">
+						        ${sessionScope.nickname} 님 환영합니다!
+						    </li>
+					        <c:if test="${sessionScope.mid != 'admin'}">
+					            <li class="nav-item" id="changeMemberData" onclick="document.memUpdateForm.submit()">회원정보 수정</li>
+					        </c:if>
+					        <c:if test="${sessionScope.mid == 'admin'}">
+					            <li class="nav-item" id="adminPage"><a href="/adminForm.do">관리자페이지</a></li>
+					        </c:if>
+					        <li class="nav-item" id="logOut"><a href="/logoutProc.do">로그아웃</a></li>
+					    </ul>
 					</c:if>
 
 
 					<c:if test="${empty sessionScope.mid}">
-						<li class="auth-links"><a href="/loginForm.do">로그인</a> | <a
-							href="/memberRegForm.do">회원가입</a></li>
+						<ul class="loginAndReg">
+							<li class="nav-item" id="login"><a href="/loginForm.do">로그인</a></li>
+							<li class="nav-item" id="register"><a href="/memberRegForm.do">회원가입</a></li>
+						</ul>
 					</c:if>
-
+					
 				</ul>
 			</nav>
 		</div>

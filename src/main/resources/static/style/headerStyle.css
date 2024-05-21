@@ -37,14 +37,18 @@ header {
 .headerLogo{
     height: 50px;
     width: 150px;
-    margin-right: 100px;
+    margin-right: 200px;
 }
                         
 .headerNav{
 	width: 100%;
 	margin-bottom: 20px;
 	text-align: center;
-	height: 40px;
+	height: 50px;
+}
+
+.nav-item{
+	margin-top: 20px;
 }
 
 .headerNavList>li{
@@ -69,11 +73,63 @@ header {
 	float: none;
 }
 
-.auth-links{
-	margin-left:100px;
+#login, #register, #changeMemberData, #logOut, #adminPage {
+    background: #009999;
+    color: #FFFFFF;
+    padding: 10px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#adminPage a, #logOut a, #login a, #register a {
+    color: #FFFFFF;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login, #changeMemberData, #adminPage{
+	border-right: 1px solid #006666;
+	border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#register, #logOut{
+	border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 #logoFont{
     font-size: 27px;
     color: #FFFFFF;
+}
+
+#welcomeLogin {
+    margin-top: 30px;
+    margin-left: 250px;
+    margin-right: 50px;
+}
+
+.loginAndReg{
+	display: flex;
+	margin: 0 auto;
+	margin-left: 1200px;
+}
+
+.myPageAndLogout{
+	display: flex;
+	margin: 0 auto;
+	margin-left: 600px;
+}
+
+[id$='loginAndReg'] :hover{
+	background:rgba(211, 211, 211, 0.3);
 }

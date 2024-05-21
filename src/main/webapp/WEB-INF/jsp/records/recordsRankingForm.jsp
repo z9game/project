@@ -297,7 +297,6 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recordsRankingFormTitle">
-    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">랭킹</p>
     </div>
     <div class="recordsRankingFormCategoryTab">
@@ -307,7 +306,7 @@
 	    		<form name="recordsRankingFormSelectTabRegion">
 				    <input type="hidden" name="sido_id">
 		    		<div class="recordsRankingFormCategoryTabSelectDiv">
-				    	<table class="recordsRankingFormCategoryTabSelect" align="center" style="border-collapse:collapse">
+				    	<table class="recordsRankingFormCategoryTabSelect" align="center" style="border-collapse:collapse;">
 				    		<tr align="center">
 				    			<td class="region" onClick="searchRegion(9)">서울</td>
 				    			<td class="region" onClick="searchRegion(2)">경기/인천</td>
@@ -361,9 +360,9 @@
 	    <div class="recordsRankingFormCategoryTabContent">
 	    	<div id="recordsRankingFormCategoryTabAll">
 			    <div class="recordsRankingFormTabAllRating">
-				    <table class="recordsRankingFormTabAllGoalRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabAllGoalRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 				    	<tr>
-				    		<th colspan="2">최다 승</th>
+				    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 승</th>
 				    	</tr>
 				    	<c:forEach var="recordsGoalRatingTabAll" items="${requestScope.recordsWinRatingTabAll}" varStatus="status" begin="0" end="2">
 					    	<tr>
@@ -372,9 +371,9 @@
 					    	</tr>
 					    </c:forEach>
 				    </table>
-				    <table class="recordsRankingFormTabAllWinRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabAllWinRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 				    	<tr>
-				    		<th colspan="2">최다 득점</th>
+				    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 득점</th>
 				    	</tr>
 				    	<c:forEach var="recordsWinRatingTabAll" items="${requestScope.recordsGoalRatingTabAll}" varStatus="status" begin="0" end="2">
 					    	<tr>
@@ -383,9 +382,9 @@
 					    	</tr>
 					    </c:forEach>
 				    </table>
-				    <table class="recordsRankingFormTabAllAssistRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabAllAssistRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 				    	<tr>
-				    		<th colspan="2">최다 도움</th>
+				    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 도움</th>
 				    	</tr>
 				    	<c:forEach var="recordsAssistRatingTabAll" items="${requestScope.recordsAssistRatingTabAll}" varStatus="status" begin="0" end="2">
 					    	<tr>
@@ -398,78 +397,78 @@
 			    <form name="recordsRankingFormTabAll">
 				    <input type="hidden" name="sortTabAll">
 				    <div class="recordsRankingFormTabAllTableDiv">
-				    	<table class="recordsRankingFormTabAllTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
-				    		<tr>
-				    			<th style="width:20px;">순위</th>
-				    			<th style="width:100px;">선수</th>
+				    	<table class="recordsRankingFormTabAllTable" cellpadding="7" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
+				    		<tr style="background-color: #c59246e0;">
+				    			<th style="width:20px; border-right: 1px solid #000000; border-left: 1px solid #000000;">순위</th>
+				    			<th style="width:100px; border-right: 1px solid #000000;">선수</th>
 				    			<c:if test="${param.sortTabAll!='games_played asc' and param.sortTabAll != 'games_played desc'}">
-				    				<th onClick="clickToSortTabAll('games_played desc')"style="width:50px; cursor:pointer;">경기수</th>
+				    				<th onClick="clickToSortTabAll('games_played desc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">경기수</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll == 'games_played desc'}">
-				    				<th onClick="clickToSortTabAll('games_played asc')"style="width:50px; cursor:pointer;">경기수 ▽</th>
+				    				<th onClick="clickToSortTabAll('games_played asc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">경기수 ▽</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll == 'games_played asc'}">
-				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer;">경기수 △</th>
+				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">경기수 △</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll!='wins asc' and param.sortTabAll != 'wins desc'}">
-				    				<th onClick="clickToSortTabAll('wins desc')"style="width:50px; cursor:pointer;">승</th>
+				    				<th onClick="clickToSortTabAll('wins desc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">승</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll == 'wins desc'}">
-				    				<th onClick="clickToSortTabAll('wins asc')"style="width:50px; cursor:pointer;">승 ▽</th>
+				    				<th onClick="clickToSortTabAll('wins asc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">승 ▽</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll =='wins asc'}">
-				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer;">승 △</th>
+				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">승 △</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll!='draws asc' and param.sortTabAll != 'draws desc'}">
-				    				<th onClick="clickToSortTabAll('draws desc')"style="width:50px; cursor:pointer;">무</th>
+				    				<th onClick="clickToSortTabAll('draws desc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">무</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll == 'draws desc'}">
-				    				<th onClick="clickToSortTabAll('draws asc')"style="width:50px; cursor:pointer;">무 ▽</th>
+				    				<th onClick="clickToSortTabAll('draws asc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">무 ▽</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll =='draws asc'}">
-				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer;">무 △</th>
+				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">무 △</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll!='losses asc' and param.sortTabAll != 'losses desc'}">
-				    				<th onClick="clickToSortTabAll('losses desc')"style="width:50px; cursor:pointer;">패</th>
+				    				<th onClick="clickToSortTabAll('losses desc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">패</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll == 'losses desc'}">
-				    				<th onClick="clickToSortTabAll('losses asc')"style="width:50px; cursor:pointer;">패 ▽</th>
+				    				<th onClick="clickToSortTabAll('losses asc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">패 ▽</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll =='losses asc'}">
-				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer;">패 △</th>
+				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">패 △</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll!='goals_for asc' and param.sortTabAll != 'goals_for desc'}">
-				    				<th onClick="clickToSortTabAll('goals_for desc')"style="width:50px; cursor:pointer;">득점</th>
+				    				<th onClick="clickToSortTabAll('goals_for desc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">득점</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll == 'goals_for desc'}">
-				    				<th onClick="clickToSortTabAll('goals_for asc')"style="width:50px; cursor:pointer;">득점 ▽</th>
+				    				<th onClick="clickToSortTabAll('goals_for asc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">득점 ▽</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll =='goals_for asc'}">
-				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer;">득점 △</th>
+				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">득점 △</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll!='goals_assist asc' and param.sortTabAll != 'goals_assist desc'}">
-				    				<th onClick="clickToSortTabAll('goals_assist desc')"style="width:50px; cursor:pointer;">도움</th>
+				    				<th onClick="clickToSortTabAll('goals_assist desc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">도움</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll == 'goals_assist desc'}">
-				    				<th onClick="clickToSortTabAll('goals_assist asc')"style="width:50px; cursor:pointer;">도움 ▽</th>
+				    				<th onClick="clickToSortTabAll('goals_assist asc')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">도움 ▽</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll =='goals_assist asc'}">
-				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer;">도움 △</th>
+				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer; border-right: 1px solid #000000;">도움 △</th>
 				    			</c:if>
-				    			<c:forEach var="recordsRankingTabAll" items="${requestScope.recordsRankingTabAll}" varStatus="status">
-									<tr>
-										<td align="center">${status.count}</td>
-										<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
-										<td align="center">${recordsRankingTabAll.nickname}</td>
-										<td align="center">${recordsRankingTabAll.games_played}</td>
-										<td align="center">${recordsRankingTabAll.wins}</td>
-										<td align="center">${recordsRankingTabAll.draws}</td>
-										<td align="center">${recordsRankingTabAll.losses}</td>
-										<td align="center">${recordsRankingTabAll.goals_for}</td>
-										<td align="center">${recordsRankingTabAll.goals_assist}</td>
-									</tr>
-								</c:forEach>
 				    		</tr>
+			    			<c:forEach var="recordsRankingTabAll" items="${requestScope.recordsRankingTabAll}" varStatus="status">
+								<tr>
+									<td align="center" style="border-right: 1px solid #000000; border-left: 1px solid #000000;">${status.count}</td>
+									<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
+									<td align="center" style="border-right: 1px solid #000000;">${recordsRankingTabAll.nickname}</td>
+									<td align="center" style="border-right: 1px solid #000000;">${recordsRankingTabAll.games_played}</td>
+									<td align="center" style="border-right: 1px solid #000000;">${recordsRankingTabAll.wins}</td>
+									<td align="center" style="border-right: 1px solid #000000;">${recordsRankingTabAll.draws}</td>
+									<td align="center" style="border-right: 1px solid #000000;">${recordsRankingTabAll.losses}</td>
+									<td align="center" style="border-right: 1px solid #000000;">${recordsRankingTabAll.goals_for}</td>
+									<td align="center" style="border-right: 1px solid #000000;">${recordsRankingTabAll.goals_assist}</td>
+								</tr>
+							</c:forEach>
 				    	</table>
 				    </div>
 				</form>
@@ -479,9 +478,9 @@
 			<!-- -------------------------------------------------------------------------------------------------------------------------- -->
 			<div id="recordsRankingFormCategoryTabRegion">
 			    <div class="recordsRankingFormTabRegionRating">
-				    <table class="recordsRankingFormTabRegionWinRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabRegionWinRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 				    	<tr>
-				    		<th colspan="2">최다 승</th>
+				    		<th colspan="2" style="background-color: #c59246e0;">최다 승</th>
 				    	</tr>
 				    	<c:forEach var="recordsGoalRatingTabRegion" items="${requestScope.recordsWinRatingTabRegion}" varStatus="status" begin="0" end="2">
 					    	<tr>
@@ -490,9 +489,9 @@
 					    	</tr>
 					    </c:forEach>
 				    </table>
-				    <table class="recordsRankingFormTabRegionGoalRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabRegionGoalRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 				    	<tr>
-				    		<th colspan="2">최다 득점</th>
+				    		<th colspan="2" style="background-color: #c59246e0;">최다 득점</th>
 				    	</tr>
 				    	<c:forEach var="recordsWinRatingTabRegion" items="${requestScope.recordsGoalRatingTabRegion}" varStatus="status" begin="0" end="2">
 					    	<tr>
@@ -501,9 +500,9 @@
 					    	</tr>
 					    </c:forEach>
 				    </table>
-				    <table class="recordsRankingFormTabRegionAssistRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabRegionAssistRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 				    	<tr>
-				    		<th colspan="2">최다 도움</th>
+				    		<th colspan="2" style="background-color: #c59246e0;">최다 도움</th>
 				    	</tr>
 				    	<c:forEach var="recordsAssistRatingTabRegion" items="${requestScope.recordsAssistRatingTabRegion}" varStatus="status" begin="0" end="2">
 					    	<tr>
@@ -516,8 +515,8 @@
 			    <form name="recordsRankingFormTabRegion">
 				    <input type="hidden" name="sortTabRegion">
 				    <div class="recordsRankingFormTabRegionTableDiv">
-				    	<table class="recordsRankingFormTabRegionTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
-				    		<tr>
+				    	<table class="recordsRankingFormTabRegionTable" cellpadding="7" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
+				    		<tr style="background-color: #c59246e0;">
 				    			<th style="width:20px;">순위</th>
 				    			<th style="width:100px;">선수</th>
 				    			<c:if test="${param.sortTabRegion!='games_played asc' and param.sortTabRegion != 'games_played desc'}">
@@ -574,20 +573,20 @@
 				    			<c:if test="${param.sortTabRegion =='goals_assist asc'}">
 				    				<th onClick="clickToSortTabRegion('')"style="width:50px; cursor:pointer;">도움 △</th>
 				    			</c:if>
-				    			<c:forEach var="recordsRankingTabRegion" items="${requestScope.recordsRankingTabRegion}" varStatus="status">
-									<tr class="recordsRankingTabRegion">
-										<td align="center">${status.count}</td>
-										<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
-										<td align="center">${recordsRankingTabRegion.nickname}</td>
-										<td align="center">${recordsRankingTabRegion.games_played}</td>
-										<td align="center">${recordsRankingTabRegion.wins}</td>
-										<td align="center">${recordsRankingTabRegion.draws}</td>
-										<td align="center">${recordsRankingTabRegion.losses}</td>
-										<td align="center">${recordsRankingTabRegion.goals_for}</td>
-										<td align="center">${recordsRankingTabRegion.goals_assist}</td>
-									</tr>
-								</c:forEach>
 				    		</tr>
+			    			<c:forEach var="recordsRankingTabRegion" items="${requestScope.recordsRankingTabRegion}" varStatus="status">
+								<tr class="recordsRankingTabRegion">
+									<td align="center">${status.count}</td>
+									<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
+									<td align="center">${recordsRankingTabRegion.nickname}</td>
+									<td align="center">${recordsRankingTabRegion.games_played}</td>
+									<td align="center">${recordsRankingTabRegion.wins}</td>
+									<td align="center">${recordsRankingTabRegion.draws}</td>
+									<td align="center">${recordsRankingTabRegion.losses}</td>
+									<td align="center">${recordsRankingTabRegion.goals_for}</td>
+									<td align="center">${recordsRankingTabRegion.goals_assist}</td>
+								</tr>
+							</c:forEach>
 				    	</table>
 				    </div>
 				</form>
@@ -597,7 +596,7 @@
 			<!-- -------------------------------------------------------------------------------------------------------------------------- -->
 			<div id="recordsRankingFormCategoryTabGender">
 			    <div class="recordsRankingFormTabGenderRating">
-				    <table class="recordsRankingFormTabGenderWinRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabGenderWinRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px; background-color: #c59246e0;">
 				    	<tr>
 				    		<th colspan="2">최다 승</th>
 				    	</tr>
@@ -608,7 +607,7 @@
 					    	</tr>
 					    </c:forEach>
 				    </table>
-				    <table class="recordsRankingFormTabGenderGoalRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabGenderGoalRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px; background-color: #c59246e0;">
 				    	<tr>
 				    		<th colspan="2">최다 득점</th>
 				    	</tr>
@@ -619,7 +618,7 @@
 					    	</tr>
 					    </c:forEach>
 				    </table>
-				    <table class="recordsRankingFormTabGenderAssistRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabGenderAssistRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px; background-color: #c59246e0;">
 				    	<tr>
 				    		<th colspan="2">최다 도움</th>
 				    	</tr>
@@ -635,7 +634,7 @@
 				    <input type="hidden" name="sortTabGender">
 				    <div class="recordsRankingFormTabGenderTableDiv">
 				    	<table class="recordsRankingFormTabGenderTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
-				    		<tr>
+				    		<tr style="background-color: #c59246e0;">
 				    			<th style="width:20px;">순위</th>
 				    			<th style="width:100px;">선수</th>
 				    			<c:if test="${param.sortTabGender!='games_played asc' and param.sortTabGender != 'games_played desc'}">
@@ -692,20 +691,20 @@
 				    			<c:if test="${param.sortTabGender =='goals_assist asc'}">
 				    				<th onClick="clickToSortTabGender('')"style="width:50px; cursor:pointer;">도움 △</th>
 				    			</c:if>
-				    			<c:forEach var="recordsRankingTabGender" items="${requestScope.recordsRankingTabGender}" varStatus="status">
-									<tr class="recordsRankingTabGender">
-										<td align="center">${status.count}</td>
-										<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
-										<td align="center">${recordsRankingTabGender.nickname}</td>
-										<td align="center">${recordsRankingTabGender.games_played}</td>
-										<td align="center">${recordsRankingTabGender.wins}</td>
-										<td align="center">${recordsRankingTabGender.draws}</td>
-										<td align="center">${recordsRankingTabGender.losses}</td>
-										<td align="center">${recordsRankingTabGender.goals_for}</td>
-										<td align="center">${recordsRankingTabGender.goals_assist}</td>
-									</tr>
-								</c:forEach>
 				    		</tr>
+			    			<c:forEach var="recordsRankingTabGender" items="${requestScope.recordsRankingTabGender}" varStatus="status">
+								<tr class="recordsRankingTabGender">
+									<td align="center">${status.count}</td>
+									<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
+									<td align="center">${recordsRankingTabGender.nickname}</td>
+									<td align="center">${recordsRankingTabGender.games_played}</td>
+									<td align="center">${recordsRankingTabGender.wins}</td>
+									<td align="center">${recordsRankingTabGender.draws}</td>
+									<td align="center">${recordsRankingTabGender.losses}</td>
+									<td align="center">${recordsRankingTabGender.goals_for}</td>
+									<td align="center">${recordsRankingTabGender.goals_assist}</td>
+								</tr>
+							</c:forEach>
 				    	</table>
 				    </div>
 				</form>
@@ -715,7 +714,7 @@
 			<!-- -------------------------------------------------------------------------------------------------------------------------- -->
 			<div id="recordsRankingFormCategoryTabAge">
 			    <div class="recordsRankingFormTabAgeRating">
-				    <table class="recordsRankingFormTabAgeWinRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabAgeWinRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px; background-color: #c59246e0;">
 				    	<tr>
 				    		<th colspan="2">최다 승</th>
 				    	</tr>
@@ -726,7 +725,7 @@
 					    	</tr>
 					    </c:forEach>
 				    </table>
-				    <table class="recordsRankingFormTabAgeGoalRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabAgeGoalRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px; background-color: #c59246e0;">
 				    	<tr>
 				    		<th colspan="2">최다 득점</th>
 				    	</tr>
@@ -737,7 +736,7 @@
 					    	</tr>
 					    </c:forEach>
 				    </table>
-				    <table class="recordsRankingFormTabAgeAssistRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+				    <table class="recordsRankingFormTabAgeAssistRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px; background-color: #c59246e0;">
 				    	<tr>
 				    		<th colspan="2">최다 도움</th>
 				    	</tr>
@@ -753,7 +752,7 @@
 				    <input type="hidden" name="sortTabAge">
 				    <div class="recordsRankingFormTabAgeTableDiv">
 				    	<table class="recordsRankingFormTabAgeTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
-				    		<tr>
+				    		<tr style="background-color: #c59246e0;">
 				    			<th style="width:20px;">순위</th>
 				    			<th style="width:100px;">선수</th>
 				    			<c:if test="${param.sortTabAge!='games_played asc' and param.sortTabAge != 'games_played desc'}">
@@ -810,20 +809,20 @@
 				    			<c:if test="${param.sortTabAge =='goals_assist asc'}">
 				    				<th onClick="clickToSortTabAge('')"style="width:50px; cursor:pointer;">도움 △</th>
 				    			</c:if>
-				    			<c:forEach var="recordsRankingTabAge" items="${requestScope.recordsRankingTabAge}" varStatus="status">
-									<tr class="recordsRankingTabAge">
-										<td align="center">${status.count}</td>
-										<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
-										<td align="center">${recordsRankingTabAge.nickname}</td>
-										<td align="center">${recordsRankingTabAge.games_played}</td>
-										<td align="center">${recordsRankingTabAge.wins}</td>
-										<td align="center">${recordsRankingTabAge.draws}</td>
-										<td align="center">${recordsRankingTabAge.losses}</td>
-										<td align="center">${recordsRankingTabAge.goals_for}</td>
-										<td align="center">${recordsRankingTabAge.goals_assist}</td>
-									</tr>
-								</c:forEach>
 				    		</tr>
+			    			<c:forEach var="recordsRankingTabAge" items="${requestScope.recordsRankingTabAge}" varStatus="status">
+								<tr class="recordsRankingTabAge">
+									<td align="center">${status.count}</td>
+									<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
+									<td align="center">${recordsRankingTabAge.nickname}</td>
+									<td align="center">${recordsRankingTabAge.games_played}</td>
+									<td align="center">${recordsRankingTabAge.wins}</td>
+									<td align="center">${recordsRankingTabAge.draws}</td>
+									<td align="center">${recordsRankingTabAge.losses}</td>
+									<td align="center">${recordsRankingTabAge.goals_for}</td>
+									<td align="center">${recordsRankingTabAge.goals_assist}</td>
+								</tr>
+							</c:forEach>
 				    	</table>
 				    </div>
 				</form>

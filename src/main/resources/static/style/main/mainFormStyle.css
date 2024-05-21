@@ -44,6 +44,40 @@ body {
 	display: flex;
 	text-align: center;
 	flex-direction: column;
+	margin: 0 auto;
+	margin-top: 300px;
+}
+
+.sectionMainText{
+	font-size: 40px;
+}
+
+#sectionMainText_1{
+	font-size: 50px;
+}
+
+#sectionMainText_2{
+	font-size: 50px;
+}
+
+#sectionMainText_3{
+	font-size: 20px;
+	color: #0BA780;
+}
+
+#sectionMainText_4{
+	font-size: 40px;
+	color: #055F49;
+	text-decoration: underline;
+	text-underline-position:under;
+}
+
+#sectionMainText_5{
+	font-size: 20px;
+	color: green;
+	text-align: right;
+	margin-right: 100px;
+	margin-top: 50px;
 }
 
 /*<------------------------------------------------------->*/
@@ -62,12 +96,34 @@ body {
 }
 
 .sectionStatisticsTitle{
-	margin-top: 100px;
+	margin-top: 70px;
+	
 }
 
 .sectionStatisticsContainer{
 	display: flex;
-	margin-top: 100px;
+	margin-top: 70px;
+}
+
+.recordsStatisticsRegionRatioTitle, .recordsStatisticsGenderRatioTitle, .recordsStatisticsAgeRatioTitle{
+	background: #006666;
+	color: #FFFFFF;
+    border-radius: 30px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+}
+
+.recordsStatisticsRegionRatioContainer, .recordsStatisticsGenderRatioContainer{
+	border-right: 1px solid #006666;
+}
+
+.recordsStatisticsRegionRatioContainer, .recordsStatisticsGenderRatioContainer, .recordsStatisticsAgeRatioContainer{
+	padding: 50px;
 }
 /*<------------------------------------------------------->*/
 /*<------------------- 랭킹 Section ----------------------->*/
@@ -137,6 +193,7 @@ a{
 	margin-right: 50px;
 	margin-left: 50px;
 	margin-top: 30px;
+    border-radius: 30px;
 }
 
 .recordsRankingFormCategoryTabNav li a:before{
@@ -148,15 +205,9 @@ a{
 	height: 3px;
 }
 
-.recordsRankingFormCategoryTabNav li a.active:before{
-	background: #333;
-}
-
 .recordsRankingFormCategoryTabNav li a{
 	position: relative;
 	display: block;
-	background: #f8f8f8;
-	color: #000;
 	padding: 0 30px;
 	line-height: 46px;
 	text-decoration: none;
@@ -164,8 +215,9 @@ a{
 }
 
 .recordsRankingFormCategoryTabNav li a:hover, .recordsRankingFormCategoryTabNav li a.active{
-	background: #fff;
-	color: #333;
+	background: #006666;
+	color: #FFFFFF;
+    border-radius: 30px;
 }
 
 .recordsRankingFormCategoryTabContent{
