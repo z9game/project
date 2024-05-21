@@ -3,18 +3,15 @@
 }
 
 table {
-	border: 1;
 	border-collapse: collapse;
-	border-color: gray;
 }
 
 th, td {
 	padding: 10px 15px 10px 15px;
-	border-color: gray;
 }
 
-th {
-	background-color: lightgray;
+.updateCustomerServiceQnAFormRegTable th {
+	background-color: rgba(197, 146, 70, 0.4);;
 }
 
 html,
@@ -38,43 +35,46 @@ a{
 	text-decoration:none;
 }
 
-.updateCustomerServiceQnAFormTitle{
-	position: relative;
-}
-
-.titleBackgoundImg{
-	opacity: 0.5;
-	width: 100%;
-	height: 100px;
-}
-
 .titleBackgoundText{
+	border-bottom: 1px solid #006666;
+	width: 55%;
+	margin: 0 auto;
 	font-size: 40px;
-	position: absolute;
 	text-align: center;
-	top: 50%;
-	left: 50%;
-	transform: translate( -50%, -50% );
+	padding: 40px;
 }
 
 .updateCustomerServiceQnAFormRegTable{
 	margin: 0 auto;
-	margin-top: 10px;
+	margin-top: 50px;
+	width: 1000px;
+	height: 200px;
 }
 
 .boardResetBtn{
 	width: 100px;
-	height: 30px;
+	height: 40px;
 	margin-top: 10px;
-	margin-left: 370px;
+	margin-left: 900px;
+	background-color: #c59246e0;
+    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #c59246e0;
+    cursor: pointer;
 }
 
 .boardRegBtn, .moveListBtn{
 	width: 150px;
 	height: 50px;
 	margin-top: 20px;
+	background-color: #c59246e0;
+    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #c59246e0;
+    cursor: pointer;
 }
 
 .updateCustomerServiceQnAFormBtnDiv{
 	text-align: center;
 }
+

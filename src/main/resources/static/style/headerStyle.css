@@ -27,11 +27,19 @@ body {
 }
 
 header {
-    background-color: #006666;
-    color: #FFFFFF;
+    background: linear-gradient(
+    to bottom,
+    rgba(245, 245, 245, 0) 10%,
+    rgba(245, 245, 245, 0.25) 25%,
+    rgba(245, 245, 245, 0.5) 50%,
+    rgba(245, 245, 245, 0.75) 75%,
+    rgba(245, 245, 245, 1) 100%
+    );
+    color: #000000;
     padding: 20px;
     display: flex;
     width: 100%;
+    border-bottom: 1px solid #000000;
 }
 
 .headerLogo{
@@ -74,8 +82,8 @@ header {
 }
 
 #login, #register, #changeMemberData, #logOut, #adminPage {
-    background: #009999;
-    color: #FFFFFF;
+    background: #eaeaec;
+    color: #000000;
     padding: 10px;
     width: 100px;
     height: 30px;
@@ -87,7 +95,7 @@ header {
 }
 
 #adminPage a, #logOut a, #login a, #register a {
-    color: #FFFFFF;
+    color: #000000;
     text-decoration: none;
     width: 100%;
     height: 100%;
@@ -97,23 +105,25 @@ header {
 }
 
 #login, #changeMemberData, #adminPage{
-	border-right: 1px solid #006666;
-	border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+	border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 1px solid #000000;
+    border-right: none;
 }
 
 #register, #logOut{
-	border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+	border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid #000000;
 }
 
 #logoFont{
     font-size: 27px;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 #welcomeLogin {
-    margin-top: 30px;
+    margin-top: 35px;
     margin-left: 250px;
     margin-right: 50px;
 }
@@ -131,5 +141,5 @@ header {
 }
 
 [id$='loginAndReg'] :hover{
-	background:rgba(211, 211, 211, 0.3);
+	background:rgba(245, 245, 245, 0.3);
 }

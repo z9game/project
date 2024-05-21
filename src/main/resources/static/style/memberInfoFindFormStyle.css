@@ -3,18 +3,11 @@
 }
 
 table {
-	border: 1;
 	border-collapse: collapse;
-	border-color: gray;
 }
 
 th, td {
 	padding: 10px 15px 10px 15px;
-	border-color: gray;
-}
-
-th {
-	background-color: lightgray;
 }
 
 html,
@@ -38,6 +31,60 @@ a{
 	text-decoration:none;
 }
 
+.memberInfoFindFormTitle{
+	border-bottom: 1px solid #000000;
+	width: 40%;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+
+.memberInfoFindFormTitle p{
+	text-align: center;
+	font-size: 40px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.memberInfoFindFormNameTh{
+	background: none;
+	color: #000000;
+	text-decoration: underline;
+	text-underline-position:under;
+	font-size: 18px;
+}
+
+.memberInfoFindFormPhoneTh{
+	background: none;
+	color: #000000;
+	text-decoration: underline;
+	text-underline-position:under;
+	font-size: 18px;
+}
+
+.membermemberInfoFindMidResultTh {
+	background: none;
+	color: #000000;
+	text-decoration: underline;
+	text-underline-position:under;
+	font-size: 18px;
+}
+
+.membermemberInfoFindPasswordResultTh{
+	background: none;
+	color: #000000;
+	text-decoration: underline;
+	text-underline-position:under;
+	font-size: 18px;
+}
+
+.memberInfoFindPasswordCheckResultTh{
+	background: none;
+	color: #000000;
+	text-decoration: underline;
+	text-underline-position:under;
+	font-size: 18px;
+}
+
 .memberInfoFindTable{
 	margin: 0 auto;
 	text-align: center;
@@ -46,12 +93,17 @@ a{
 
 .memberInfoFindFormBtn{
 	text-align: center;
-	margin-top: 10px;
+	margin-top: 30px;
 }
 
 .memberInfoFindBtn{
 	width: 150px;
 	height: 50px;
+	background: #c59246e0;
+	border-radius: 10px;
+	border: none;
+	color: #FFFFFF;
+	cursor: pointer;
 }
 
 .changePwdMoveToLoginFormBtnDiv{
@@ -64,6 +116,11 @@ a{
 	width: 150px;
 	height: 50px;
 	margin-top: 20px;
+	background: #c59246e0;
+	border-radius: 10px;
+	border: none;
+	color: #FFFFFF;
+	cursor: pointer;
 }
 
 .changePasswordBtnDiv{
@@ -73,7 +130,7 @@ a{
 .memberInfoFindResultTable{
 	margin: 0 auto;
 	margin-top: 20px;
-	width: 600px;
+	width: 700px;
 }
 
 .memberInfoFindMidResult, .memberInfoFindPasswordCheckResult, .memberInfoFindPasswordResult {
