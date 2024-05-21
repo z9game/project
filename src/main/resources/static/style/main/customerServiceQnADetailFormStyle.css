@@ -82,6 +82,11 @@ a{
     border: 1px solid #c59246e0;
 }
 
+.commentRegBtn{
+	text-align: center;
+	margin-left: 1500px;
+}
+
 .customerServiceQnADetailCommentContent{
 	border-bottom: 1px solid #000000;
 }

@@ -207,34 +207,34 @@
 				    <div class="recordsRankingFormCategoryTabContent">
 				    	<div id="recordsRankingFormCategoryTabAll">
 						    <div class="recordsRankingFormTabAllRating">
-							    <table class="recordsRankingFormTabAllGoalRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabAllGoalRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 승</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 승</th>
 							    	</tr>
 							    	<c:forEach var="recordsGoalRatingTabAll" items="${requestScope.recordsWinRatingTabAll}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsGoalRatingTabAll.nickname}</td>
 								    		<td>${recordsGoalRatingTabAll.wins} 승</td>
 								    	</tr>
 								    </c:forEach>
 							    </table>
-							    <table class="recordsRankingFormTabAllWinRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabAllWinRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 득점</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 득점</th>
 							    	</tr>
 							    	<c:forEach var="recordsWinRatingTabAll" items="${requestScope.recordsGoalRatingTabAll}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsWinRatingTabAll.nickname}</td>
 								    		<td>${recordsWinRatingTabAll.goals_for} 골</td>
 								    	</tr>
 								    </c:forEach>
 							    </table>
-							    <table class="recordsRankingFormTabAllAssistRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabAllAssistRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 도움</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 도움</th>
 							    	</tr>
 							    	<c:forEach var="recordsAssistRatingTabAll" items="${requestScope.recordsAssistRatingTabAll}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsAssistRatingTabAll.nickname}</td>
 								    		<td>${recordsAssistRatingTabAll.goals_assist} 회</td>
 								    	</tr>
@@ -247,34 +247,34 @@
 						<!-- -------------------------------------------------------------------------------------------------------------------------- -->
 						<div id="recordsRankingFormCategoryTabRegion">
 						    <div class="recordsRankingFormTabRegionRating">
-							    <table class="recordsRankingFormTabRegionWinRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabRegionWinRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 승</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 승</th>
 							    	</tr>
 							    	<c:forEach var="recordsGoalRatingTabRegion" items="${requestScope.recordsWinRatingTabRegion}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsGoalRatingTabRegion.nickname}</td>
 								    		<td>${recordsGoalRatingTabRegion.wins} 승</td>
 								    	</tr>
 								    </c:forEach>
 							    </table>
-							    <table class="recordsRankingFormTabRegionGoalRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabRegionGoalRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 득점</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 득점</th>
 							    	</tr>
 							    	<c:forEach var="recordsWinRatingTabRegion" items="${requestScope.recordsGoalRatingTabRegion}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsWinRatingTabRegion.nickname}</td>
 								    		<td>${recordsWinRatingTabRegion.goals_for} 골</td>
 								    	</tr>
 								    </c:forEach>
 							    </table>
-							    <table class="recordsRankingFormTabRegionAssistRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabRegionAssistRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 도움</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 도움</th>
 							    	</tr>
 							    	<c:forEach var="recordsAssistRatingTabRegion" items="${requestScope.recordsAssistRatingTabRegion}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsAssistRatingTabRegion.nickname}</td>
 								    		<td>${recordsAssistRatingTabRegion.goals_assist} 회</td>
 								    	</tr>
@@ -287,34 +287,34 @@
 						<!-- -------------------------------------------------------------------------------------------------------------------------- -->
 						<div id="recordsRankingFormCategoryTabGender">
 						    <div class="recordsRankingFormTabGenderRating">
-							    <table class="recordsRankingFormTabGenderWinRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabGenderWinRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 승</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 승</th>
 							    	</tr>
 							    	<c:forEach var="recordsGoalRatingTabGender" items="${requestScope.recordsWinRatingTabGender}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsGoalRatingTabGender.nickname}</td>
 								    		<td>${recordsGoalRatingTabGender.wins} 승</td>
 								    	</tr>
 								    </c:forEach>
 							    </table>
-							    <table class="recordsRankingFormTabGenderGoalRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabGenderGoalRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 득점</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 득점</th>
 							    	</tr>
 							    	<c:forEach var="recordsWinRatingTabGender" items="${requestScope.recordsGoalRatingTabGender}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsWinRatingTabGender.nickname}</td>
 								    		<td>${recordsWinRatingTabGender.goals_for} 골</td>
 								    	</tr>
 								    </c:forEach>
 							    </table>
-							    <table class="recordsRankingFormTabGenderAssistRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabGenderAssistRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 도움</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 도움</th>
 							    	</tr>
 							    	<c:forEach var="recordsAssistRatingTabGender" items="${requestScope.recordsAssistRatingTabGender}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsAssistRatingTabGender.nickname}</td>
 								    		<td>${recordsAssistRatingTabGender.goals_assist} 회</td>
 								    	</tr>
@@ -327,34 +327,34 @@
 						<!-- -------------------------------------------------------------------------------------------------------------------------- -->
 						<div id="recordsRankingFormCategoryTabAge">
 						    <div class="recordsRankingFormTabAgeRating">
-							    <table class="recordsRankingFormTabAgeWinRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabAgeWinRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 승</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 승</th>
 							    	</tr>
 							    	<c:forEach var="recordsGoalRatingTabAge" items="${requestScope.recordsWinRatingTabAge}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsGoalRatingTabAge.nickname}</td>
 								    		<td>${recordsGoalRatingTabAge.wins} 승</td>
 								    	</tr>
 								    </c:forEach>
 							    </table>
-							    <table class="recordsRankingFormTabAgeGoalRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabAgeGoalRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 득점</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 득점</th>
 							    	</tr>
 							    	<c:forEach var="recordsWinRatingTabAge" items="${requestScope.recordsGoalRatingTabAge}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsWinRatingTabAge.nickname}</td>
 								    		<td>${recordsWinRatingTabAge.goals_for} 골</td>
 								    	</tr>
 								    </c:forEach>
 							    </table>
-							    <table class="recordsRankingFormTabAgeAssistRating" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; width:200px;">
+							    <table class="recordsRankingFormTabAgeAssistRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2">최다 도움</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 도움</th>
 							    	</tr>
 							    	<c:forEach var="recordsAssistRatingTabAge" items="${requestScope.recordsAssistRatingTabAge}" varStatus="status" begin="0" end="2">
-								    	<tr>
+								    	<tr style="border-bottom: 1px solid #c59246e0;">
 								    		<td>${recordsAssistRatingTabAge.nickname}</td>
 								    		<td>${recordsAssistRatingTabAge.goals_assist} 회</td>
 								    	</tr>
