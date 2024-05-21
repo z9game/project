@@ -29,7 +29,7 @@
 		
 		var sessionMid = '<%=session.getAttribute("mid")%>';
 
-		alert(formObj.serialize())
+		//alert(formObj.serialize())
 		
 		
 		if (sessionMid == "" || sessionMid == 'null') {
