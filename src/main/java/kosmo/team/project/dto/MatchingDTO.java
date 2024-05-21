@@ -30,6 +30,7 @@ public class MatchingDTO {
 	private String stadium_no;
 	private String stadium_name;	
 	private String booking_date;
+	private int team_no;
 	//private Date date_booking_date;
 	
 	
@@ -178,6 +179,12 @@ public class MatchingDTO {
 	}
 	public void setSigungu(int sigungu) {
 		this.sigungu = sigungu;
+	}
+	public int getTeam_no() {
+		return team_no;
+	}
+	public void setTeam_no(int team_no) {
+		this.team_no = team_no;
 	}
 	
 	

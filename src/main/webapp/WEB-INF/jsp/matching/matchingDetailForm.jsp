@@ -111,7 +111,9 @@
          <!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
          <!--------------------------------------------------- -->
           <c:if test="${requestScope.myInfo.team_master eq sessionScope.m_no}">
+          	 <c:if test="${sessionScope.nickname ne requestScope.detail.nickname}">
 		  		<input type="button" value="경기신청" style="cursor:pointer" onclick="goWaitingList()" >
+		  	</c:if>
 		  </c:if>
 	
          <span style="cursor: pointer"

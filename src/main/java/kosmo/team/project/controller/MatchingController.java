@@ -25,6 +25,7 @@ public class MatchingController {
 	
 	@Autowired
 	private MatchingService matchingservice;
+	@Autowired
 	private MemberService memberService;
 
 	//===============================================================================================================================================================================

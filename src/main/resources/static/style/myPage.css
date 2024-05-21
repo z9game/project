@@ -97,6 +97,37 @@
 } 
 
 
+/* 매칭신청 관련 */
+.modalDiv_matching
+{
+	display: none;
+}
+
+.bg_matching
+{
+	width: 100vw;
+	height: 100vw;
+	background-color: rgba(0,0,0,.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.modal_matching
+{
+	position: middle;
+	z-index: 10;
+	background-color: white;
+	width: 50%;
+	left: 25%;
+	top: 25%;
+	padding: 20px;
+	border-radius: 15px;
+} 
+
+
+
 
 
 

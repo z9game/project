@@ -106,21 +106,21 @@ public class MemberServiceImplements implements MemberService {
   		return getMercWaitingCnt;
   	}
     
-    //승낙 대기인원 정보가져오기
+    //팀원승낙 대기인원 정보가져오기
     public List<TeamDTO> getWaitingList(int m_no){
   		List<TeamDTO> getWaitingList = this.memberDAO.getWaitingList(m_no);
   		 return getWaitingList;
   	 }
     
 
-	//승낙 수락 할때
+	//팀원승낙 수락 할때
 	 public int regTeamMem(TeamDTO teamDTO){
 		 int regTeamMem = this.memberDAO.regTeamMem(teamDTO);
 		 int delWaitingList = this.memberDAO.delWaitingList(teamDTO);
 		 return regTeamMem;
 	 }
 	 
-	//승낙 거절 할때
+	//팀원승낙 거절 할때
 	 public int refuseTeamMem(TeamDTO teamDTO) {
 		 int delWaitingList = this.memberDAO.delWaitingList(teamDTO);
 		 return delWaitingList;
@@ -134,4 +134,34 @@ public class MemberServiceImplements implements MemberService {
 		
 		return getTeamInfo;
 	}
+	 
+	 
+	//내가 팀장일때 매칭 신청이 들어왔을때
+	public int getmatchWaitingCnt(int m_no) {
+		int getmatchWaitingCnt = this.memberDAO.getmatchWaitingCnt(m_no);
+		return getmatchWaitingCnt;
+		
+	}
+	
+
+	//매칭승낙 대기팀 정보 가져오기
+	public List<TeamDTO> getMatchWaitingList(int m_no){
+		List<TeamDTO> getMatchWaitingList = this.memberDAO.getMatchWaitingList(m_no);
+		 return getMatchWaitingList;
+	 }
+	
+	//매칭수락
+	public int matchReg(TeamDTO teamDTO) {
+		int matchReg = this.memberDAO.matchReg(teamDTO);
+		int delMatch = this.memberDAO.delMatch(teamDTO);
+		return matchReg;
+	}
+	
+	//다음 경기 일정 가져오기
+	public List<TeamDTO> getTeamMatchDay(int m_no){
+		List<TeamDTO> getTeamMatchDay = this.memberDAO.getTeamMatchDay(m_no);
+		return getTeamMatchDay;
+	}
+	
+	
 }
