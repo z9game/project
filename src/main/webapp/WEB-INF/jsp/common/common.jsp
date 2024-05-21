@@ -96,11 +96,11 @@ function setweekgroup() {
       if($("#day1").is(":checked") || $("#day2").is(":checked") || $("#day3").is(":checked") || $("#day4").is(":checked") || $("#day5").is(":checked")) 
       {
          $("#day0").prop("checked", false);
-      } 
-     
-   //=============================================================================================================================================================================================
-   }
+      }
+      
+     }
    
+   //=============================================================================================================================================================================================
    
    function everyset()
    {
@@ -119,21 +119,23 @@ function setweekgroup() {
    }
    
  	//=============================================================================================================================================================================================
-    function everymoney()
- 	{
-    	 if ($("#everymoney").is(":checked")) {
-             $("#free, #paid").prop("checked", false);
-          }
- 	
+     function everymoney()
+  	{
+     	 if ($("#nomatter").is(":checked")) {
+              $("#free, #paid").prop("checked", false);
+           }
+  	}
     
-    function moneycheck()
-    	 if ($("#free").is(":checked") && ("#paid").is(":checked")) {
-    	        everymoney.prop("checked", true);
-    	        $("#free").prop("checked", false);
-    	        $("#paid").prop("checked", false);
-    	    } else {
-    	        everymoney.prop("checked", false);
-    	    }
- 	}
-   
+     function moneycheck()
+     	{
+     	if ($("#free").is(":checked") && $("#paid").is(":checked")) {
+     		 $("#nomatter").prop("checked", true);
+     	        $("#free").prop("checked", false);
+     	        $("#paid").prop("checked", false);
+     	    } else {
+     	    	$("#nomatter").prop("checked", false);
+     	    }
+ 	
+     	}
+    
    </script>

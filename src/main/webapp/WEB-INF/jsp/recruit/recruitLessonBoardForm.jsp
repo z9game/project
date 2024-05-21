@@ -279,7 +279,7 @@ function search() {
 	  							
 	  						<input type="checkbox" id="free" name="money" onclick="moneycheck()" value="무료">무료&nbsp;&nbsp;&nbsp;
 							<input type="checkbox" id="paid" name="money" onclick="moneycheck()" value="유료">유료&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="everymoney" name="money" onclick="everymoney()" value="상관없음">상관없음&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="nomatter" name="money" onclick="everymoney()" value="상관없음">상관없음&nbsp;&nbsp;&nbsp;
 	  					</dd>
 	  			</dl>
 			</div>	

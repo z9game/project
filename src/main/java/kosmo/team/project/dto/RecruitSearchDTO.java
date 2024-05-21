@@ -9,6 +9,7 @@ public class RecruitSearchDTO {
 	private String sort;
 	private int sido;
 	private int sigungu;
+	private String money;
 	private List<String> time;
 	private List<String> pos;
 	private List<Integer> day;  
@@ -21,6 +22,12 @@ public class RecruitSearchDTO {
 	private int end_rowNo;
 	
 	
+	public String getMoney() {
+		return money;
+	}
+	public void setMoney(String money) {
+		this.money = money;
+	}
 	public String getSearchType1() {
 		return searchType1;
 	}
