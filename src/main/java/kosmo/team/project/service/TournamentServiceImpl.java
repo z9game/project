@@ -40,4 +40,12 @@ public class TournamentServiceImpl implements TournamentService {
 		return recruitTeamBoardDetailForm;
 	}
 
+	//페이징 처리를 위한 게시물 개수 가져오기
+	public int getTournamentListCnt(TournamentSearchDTO tournamentSearchDTO) {
+		
+		int getTournamentListCnt = this.tournamentDAO.getTournamentListCnt(tournamentSearchDTO);
+
+		return getTournamentListCnt;
+	}
+	
 }

@@ -195,8 +195,7 @@
 			</tr>
 			<tr>
 				<th bgColor="lightgray">상태</th>
-				<td><input type="radio" name="stadium_status" value="양호">양호
-					<input type="radio" name="stadium_status" value="안좋음">안좋음
+				<td><input type="radio" name="stadium_status" value="사용가능">사용가능
 					<input type="radio" name="stadium_status" value="이용불가">이용불가</td>
 			</tr>
 			<tr>

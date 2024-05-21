@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kosmo.team.project.dto.AdminCommunitySearchDTO;
 import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 import kosmo.team.project.dto.Stadim2DTO;
@@ -105,8 +107,131 @@ public interface AdminDAO {
 	// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 	int insertStadium(Stadim2DTO stadim2DTO);
 	
+
+	//=======================================================================================================
+	//대회일정
+	//=======================================================================================================
 	public List<TournamentDTO> getTournamentList(TournamentSearchDTO tournamentSearchDTO);
 	
 	public int getTournamentListCnt(TournamentSearchDTO tournamentSearchDTO);
+	
+	public TournamentDTO getTournamentDetail(int list_no);
 
+	public int deleteBoard(int list_no);
+	
+	public int regBoard(TournamentDTO tournamentDTO);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public int getCommunityGallaryBoardListAllCnt();
+	
+	public int getCommunityGallaryBoardListCnt(AdminCommunitySearchDTO communitySearchDTO);
+	
+	public List<CommunityDTO> getCommunityGallaryBoardList(AdminCommunitySearchDTO communitySearchDTO);
+
+	public int insertCommunityGallaryProc(CommunityDTO communityDTO);
+	
+	public int updateCommunityGallaryReadCount(int b_no);
+	
+	public CommunityDTO getCommunityGallaryDetailForm(int b_no);
+	
+	public int getCommunityGallaryBoardCnt(int b_no);
+	
+	public int updateCommunityGallaryUpProc(CommunityDTO communityDTO);
+	
+	public int deleteCommunityGallaryDelProc(CommunityDTO communityDTO);
+	
+   //--All
+   /*** admin 장터 sale, free_sharing 테이블 리스트 총 개수 가져오기  ***/
+   public int getTabAllMarketplaceBoardListAllCnt();
+	
+   public int getTabAllMarketplaceBoardListCnt(AdminCommunitySearchDTO communitySearchDTO);
+   
+   public List<CommunityDTO> getTabAllMarketplaceBoardList(AdminCommunitySearchDTO communitySearchDTO);
+   
+   public int getTabSaleMarketplaceBoardListAllCnt();
+   
+   public int getTabSaleMarketplaceBoardListCnt(AdminCommunitySearchDTO communitySearchDTO);
+   
+   public List<CommunityDTO> getTabSaleMarketplaceBoardList(AdminCommunitySearchDTO communitySearchDTO);
+   
+   public int getTabFreeSharingMarketplaceBoardListAllCnt();
+   
+   public int getTabFreeSharingMarketplaceBoardListCnt(AdminCommunitySearchDTO communitySearchDTO);
+   
+   public List<CommunityDTO> getTabFreeSharingMarketplaceBoardList(AdminCommunitySearchDTO communitySearchDTO);
+	
+   // 장터 세일
+   public int insertMarketplaceSaleCommunity(CommunityDTO communityDTO);
+   
+   public int insertMarketplaceFreeSharingCommunity(CommunityDTO communityDTO);
+   
+   public int updateMarketplaceSaleBoardReadCount(int b_no);
+   
+   public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no);
+   
+   public int updateMarketplaceFreeSharingBoardReadCount(int b_no);
+   
+   public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no);
+   
+   public int getMarketplaceSaleBoardCnt(int b_no);
+   
+   public int updateMarketplaceSaleBoard(CommunityDTO communityDTO);
+   
+   public int getMarketplaceFreeSharingBoardCnt(int b_no);
+   
+   public int updateMarketplaceFreeSharingBoard(CommunityDTO communityDTO);
+   
+   public int deleteMarketplaceSaleBoard(CommunityDTO communityDTO);
+   
+   public int deleteMarketplaceFreeSharingBoard(CommunityDTO communityDTO);
+   
+   //자유게시판-------------------------------------------------------------------------------------------------------------
+   public int getFreeBoardAllCnt();
+   
+   public int getFreeBoardListCnt(AdminCommunitySearchDTO communitySearchDTO);
+   
+   public List<CommunityDTO> getFreeBoardList(AdminCommunitySearchDTO communitySearchDTO);
+   
+   public int insertCommunityFreeBoard(CommunityDTO communityDTO);
+   
+   public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public int insertFreeBoardDetailComment(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public int updateFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public int insertFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public CommunityDTO getFreeBoard(int b_no);
+   
+   public int getCommunityFreeBoardCount(int b_no);
+   
+   public int updateCommunityFreeBoard(CommunityDTO communityDTO);
+   
+   public int getFreeBoardCommentCount(int b_no);
+   
+   public int deleteCommunityFreeBoard(CommunityDTO communityDTO);
+   
+   public int adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO);
+   
+   public int adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO);
+   
 }

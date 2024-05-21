@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
+<c:if test="${empty sessionScope.mid}">
+	<script>
+		alert("로그인이 필요한 서비스입니다.");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
+
+<c:if test="${requestScope.communityDTO.writer != sessionScope.m_no}">
+	<script>
+		alert("작성한 사용자가 아닙니다");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
+
 <!DOCTYPE html><html>
 <head>
 	<meta charset="UTF-8">
@@ -91,9 +105,7 @@
 			<caption>[갤러리 수정/삭제]</caption>
 			<tr>
 				<th bgColor="lightgray">이 름</th>
-				<!-- <td>${requestScope.communityDTO.nickname}</td> -->
-				<td>${sessionScope.nickname}</td>
-			</tr>
+				<td>${requestScope.communityDTO.nickname}</td>
 			<tr>
 				<th bgColor="lightgray">제 목</th>
 				<td><input type="text" name="subject" class="subject" size="40"

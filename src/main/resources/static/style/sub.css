@@ -215,6 +215,16 @@ fieldset {
 	text-align:center;
 }
 
+.middle .item{
+	font-weight: bold;
+	background: #f3f3f4;
+	border-bottom: 1px solid #d5d5d5;
+	width: 300px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align:center;
+}
+
 
 
 .middle .day, .middle .time{

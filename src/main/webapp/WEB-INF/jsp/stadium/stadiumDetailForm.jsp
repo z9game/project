@@ -15,9 +15,12 @@
 <script>
 	function checkReserveForm() {
 
+		
+			
 		var formObj = $("[name='rentStadiumForm']");
 
 		var dateObj = formObj.find("#date");
+		
 	    var timeSlotObj = formObj.find("[name='time_slot']"); // 수정된 부분
 
 	    var selectedDate = dateObj.val();
@@ -26,9 +29,12 @@
 		
 		var sessionMid = '<%=session.getAttribute("mid")%>';
 
+		alert(formObj.serialize())
+		
+		
 		if (sessionMid == "" || sessionMid == 'null') {
 		    alert('로그인이 필요한 서비스입니다.');
-		    location.href = '/main/loginForm.do';
+		    location.href = '/loginForm.do';
 		    return;
 		}
 
@@ -54,7 +60,7 @@
 				if(result ==3){
 					
 					alert("이미 예약되어있는 시간대입니다.");
-					location.href = "#";
+					return;
 					
 					
 				} 	else if (result == 4) {

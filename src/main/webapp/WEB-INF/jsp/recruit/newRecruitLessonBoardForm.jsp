@@ -6,9 +6,61 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NewRecruitLessonBoardForm</title>
+<title>새 글쓰기</title>
 <link href="/style/newRecruitLessonBoardFormStyle.css" rel="stylesheet">
 <script src="/js/newRecruitLessonBoardFormScript.js"></script>
+<script src="/js/common.js"></script>
+
+<script>
+
+	function checkBoardRegForm()
+	{
+		var formObj = $("[name='newRecruitLessonBoardForm']")
+		
+		$.ajax({
+			//-------------------------------
+			// WAS 로 접속할 주소 설정
+			//-------------------------------
+			url : "/recruitLessonRegProc.do"
+			//-------------------------------
+			// WAS 로 접속하는 방법 설정. get 또는 post
+			//-------------------------------
+			,
+			type : "post"
+
+			,
+			data : formObj.serialize()
+
+			,
+			success : function(json) {
+
+				var result = json["result"];
+				
+				if(result == 1)
+				{
+					alert("게시물 입력 성공!");
+					location.href='/recruitLessonBoardForm.do';
+				}
+				else
+				{
+					alert("게시물 입력 실패!")
+				}
+
+				
+
+			}
+
+			,
+			error : function() {
+
+				alert("입력 실패! 관리자에게 문의 바랍니다.");
+			}
+
+		});	
+	}
+
+</script>
+
 </head>
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -16,75 +68,87 @@
     	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">레슨 모집 등록</p>
     </div>
-    <div class="newRecruitLessonBoardFormContainer">
+    <div class="newRecruitHiredBoardFormContainer">
+    
 		<form name="newRecruitLessonBoardForm">
 			<table class="newRecruitLessonBoardFormRegTable" border="1" bordercolor="black">
 				<tr>
 					<th>제목</th>
 					<td>
-						<input type="text" name="subject" class="subject" size="40" maxlength="30">
+						<input type="text" name="title" class="title" size="40" maxlength="30">
 					</td>
 				</tr>
 				<tr>
-					<th>글쓴이</th>
+					<th>닉네임</th>
 					<td>
-						<input type="text" name="writer" class="writer" size="40" maxlength="15">
+						${sessionScope.nickname}
 					</td>
-				<tr>
-					<th>
-						지역
-					</th>
-					<td colspan="5">
-						<div class="search_boxes">
-				            <select name="sido" class="sido" id="" onchange="categoryChange(this)">
-					        	<option value>시/도 선택</option>
-					            <option value="general01">강원</option>
-					            <option value="general02">경기</option>
-					            <option value="general03">경남</option>
-					            <option value="general04">경북</option>
-					            <option value="general05">광주</option>
-					            <option value="general06">대구</option>
-					            <option value="general07">대전</option>
-					            <option value="general08">부산</option>
-					            <option value="general09">서울</option>
-					            <option value="general10">울산</option>
-					            <option value="general11">인천</option>
-					            <option value="general12">전남</option>
-					            <option value="general13">전북</option>
-					            <option value="general14">제주</option>
-					            <option value="general15">충남</option>
-					            <option value="general16">충북</option>
-				            </select>
-				            <select name="gungu" class="gungu" id="state">
-				              <option>군/구 선택</option>
-				            </select>
-				         </div>
-			         </td>
 				</tr>
+				<tr>
+					<th>지역</th>
+					<td>
+						<select name="sido" id="" onchange="categoryChange(this)">
+			              	<option value="0">시/도 선택</option>
+							<option value="1">강원</option>
+							<option value="2">경기</option>
+							<option value="3">경남</option>
+							<option value="4">경북</option>
+							<option value="5">광주</option>
+							<option value="6">대구</option>
+							<option value="7">대전</option>
+							<option value="8">부산</option>
+							<option value="9">서울</option>
+							<option value="10">울산</option>
+							<option value="11">인천</option>
+							<option value="12">전남</option>
+							<option value="13">전북</option>
+							<option value="14">제주</option>
+							<option value="15">충남</option>
+							<option value="16">충북</option>
+		            	</select>
+
+			            <select name="sigungu" id="state">
+			              <option>군/구 선택</option>
+			            </select>
+					</td>
+				</tr>
+				
 				<tr>
 					<th>요일</th>
 					<td>
-						<input type="radio" id="day1" name="day" onclick="setweekDay()" value="mon" checked>월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" id="day2" name="day" onclick="setweekDay()" value="tue">화&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" id="day3" name="day" onclick="setweekDay()" value="wed">수&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" id="day4" name="day" onclick="setweekDay()" value="thr">목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" id="day5" name="day" onclick="setweekDay()" value="fri">금&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" id="day6" name="day" onclick="setweekDay()" value="sat">토&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" id="day7" name="day" onclick="setweekDay()" value="sun">일
+						<input type="checkbox" name="day" value="1">월
+						<input type="checkbox" name="day" value="2">화
+						<input type="checkbox" name="day" value="3">수
+						<input type="checkbox" name="day" value="4">목
+						<input type="checkbox" name="day" value="5">금
+						<input type="checkbox" name="day" value="6">토
+						<input type="checkbox" name="day" value="7">일
 					</td>
 				</tr>
+				<tr>
+					<th>시간</th>
+					<td>
+						<input type="checkbox" name="time" value="새벽">새벽
+						<input type="checkbox" name="time" value="오전">오전
+						<input type="checkbox" name="time" value="오후">오후
+						<input type="checkbox" name="time" value="야간">야간
+					</td>
+				</tr>
+				
+				<tr>
+					<th>비용</th>
+					<td>
+						<input type="radio" name="money" value="무료">무료
+						<input type="radio" name="money" value="유료">유료
+				</tr>
+				
 				<tr>
 					<th>내용</th>
 					<td>
 						<textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none"></textarea>
 					</td>
 				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td>
-						<input type="password" name="pwd" class="pwd" size="40" maxlength="4">
-					</td>
-				</tr>
+				
 			</table>
 			<div class="newRecruitLessonBoardFormBtnDiv">
 				<div class="resetBtnDiv">
@@ -95,6 +159,7 @@
 					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/recruitLessonBoardForm.do')">
 				</div>
 			</div>
+			      <input type="hidden" name="nickname" value="${sessionScope.m_no}">
 		</form>
 	</div>
 </body>

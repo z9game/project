@@ -15,4 +15,6 @@ public interface TournamentDAO {
 	public List<TournamentDTO> getTournamentList(TournamentSearchDTO tournamentSearchDTO);
 	
 	public TournamentDTO recruitTeamBoardDetailForm(int b_no);
+
+	public int getTournamentListCnt(TournamentSearchDTO tournamentSearchDTO);
 }

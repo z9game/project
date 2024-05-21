@@ -63,7 +63,7 @@ function memUpdate()
 			if(result == 1)
 			{
 				alert("정보 수정 성공. 다시 로그인 해주세요");
-				location.href='loginForm.do';
+				location.href='/loginForm.do';
 			}
 
 			else
@@ -127,7 +127,7 @@ function memUpdate()
 				<th>암호</th>
 				<td>
 				<!-------------------------------------------------------->
-				<input type="password" name="pwd" class="pwd" size="15" maxlength="15">
+				<input type="password" name="password" class="pwd" size="15" maxlength="15">
 				<!-------------------------------------------------------->
 				</td>
 			</tr>
@@ -201,10 +201,9 @@ function memUpdate()
 		<div style="height:10px;"></div>
 		<center>
 			<input type="button" value="등록" onclick="memUpdate()">
-			<input type="button" value="목록으로" style="cursor:pointer" onclick="location.href='boardList.do'" >
+			<input type="button" value="메인화면으로" style="cursor:pointer" onclick="location.href='/mainForm.do'" >
 		</center>
-		<input type="hidden" name="mid" class="mid">
-		<input type="hidden" name="mid_no" class="mid_no">
+		<input type="hidden" name="mid" value="${requestScope.memberDTO.mid}">
 	</form>
 	
 	

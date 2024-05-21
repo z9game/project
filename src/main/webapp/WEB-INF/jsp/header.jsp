@@ -101,7 +101,10 @@
 	
 	<form name="myPageForm" action="/myPageForm.do" method="post">
 		<input type="hidden" name="mid" value="${sessionScope.mid}">
+		<input type="hidden" name="m_no" value="${sessionScope.m_no}">
 	</form>
+	
+	
 		
 		
 </body>

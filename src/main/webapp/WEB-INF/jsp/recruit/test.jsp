@@ -178,7 +178,6 @@ function search() {
     boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val());
     
     
-    
 	$.ajax({
 		//-------------------------------
 		// WAS 로 접속할 주소 설정
@@ -254,12 +253,13 @@ function checkReserveForm()
 
    if (sessionMid == "" || sessionMid == 'null') {
        alert('로그인이 필요한 서비스입니다.');
-       location.href = '/main/loginForm.do';
+       location.href = '/loginForm.do';
        return;
    }
 	else
 	{
-		location.href='/newRecruitTeamMemBoardForm.do'
+		document.newRecruitTeamMemBoard.submit();
+		//location.href='/newRecruitTeamMemBoardForm.do'
 	}
 	   
 }
@@ -377,6 +377,7 @@ function checkReserveForm()
 	  					</dd>
 	  			</dl>
 			</div>	
+			<!-- 상세보기 관련
 			
 			<div class="detail_Search">
 	 			<dl class="age">
@@ -432,7 +433,7 @@ function checkReserveForm()
 	 				<dt class="item" onclick="toggleText()" style="cursor:pointer">상세검색 열기</dt>
 	 			</dl>
 	 		</div>
-	 		
+	 		 -->
 	 		<input type="hidden" name="sort_date">
 	 		<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
@@ -487,7 +488,7 @@ function checkReserveForm()
 						<tr style="cursor:pointer" onClick=" goRecruitTeamMemDetailForm(${list.b_no});">
 							<td align="center">${requestScope.recruitMap.begin_serialNo_desc - status.index}</td>
 							<td align="center">${list.title}</td>
-							<td align="center">${list.writer}</td>
+							<td align="center">${list.nickname}</td>
 							<td align="center">${list.team_mem}</td>
 							<td align="center">${list.readcount}</td>
 							<td align="center">${list.reg_date}</td>
@@ -536,9 +537,14 @@ function checkReserveForm()
 	<div style="height:30px;"></div>
 	
 	<form name="recruitTeamMemBoardDetailForm" action="/recruitTeamMemBoardDetailForm.do" method="post">
-         <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
-         <input type="hidden" name="b_no">
-      </form> 
+        <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
+        <input type="hidden" name="b_no">
+     </form> 
+      
+     <form name="newRecruitTeamMemBoard" action="/newRecruitTeamMemBoardForm.do" method="post">
+    	<!-- 내 팀이 없는 상태에서 팀원 모집글 못쓰게 하기 위해 -->
+    	<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+    </form>  
 	   
 </body>
 </html>

@@ -67,7 +67,7 @@ function search(){
 	 boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val() );
 
 
-	 alert(boardSearchFormObj.serialize());
+	 //alert(boardSearchFormObj.serialize());
     
 
     $.ajax({
@@ -131,7 +131,8 @@ function searchAll() {
 	// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
 	//---------------------------------------------
 	var boardSearchFormObj = $("[name='adminNoticeBoardSearchForm']");
-
+	boardSearchFormObj.find("#minDate").val("");
+    boardSearchFormObj.find("#maxDate").val("");
 	
 	boardSearchFormObj.find(".selectPageNo").val("1")
 

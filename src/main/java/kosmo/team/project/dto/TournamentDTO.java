@@ -25,12 +25,6 @@ public class TournamentDTO {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getRegion() {
-		return region;
-	}
-	public void setRegion(String region) {
-		this.region = region;
-	}
 	public String getContent() {
 		return content;
 	}
@@ -54,6 +48,12 @@ public class TournamentDTO {
 	}
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
 	}
 	
 	

@@ -170,7 +170,7 @@ function regMember()
 			if(result == 1)
 			{
 				alert("회원가입 성공.");
-				location.href='/main/loginForm.do';
+				location.href='/loginForm.do';
 			}
 
 			else
@@ -284,7 +284,7 @@ function regMember()
 			</table>
 			<div class="regConfirmBtnDiv">
 				<input type="button" class="regConfirmBtn" value="회원가입" onclick="regMember()">
-				<input type="button" class="moveLoginPage" value="로그인 화면" onClick="location.replace('/main/loginForm.do')">
+				<input type="button" class="moveLoginPage" value="로그인 화면" onClick="location.replace('/loginForm.do')">
 			</div>
 		</form>
 	</div>

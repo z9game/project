@@ -38,9 +38,9 @@ public class CommunityController {
 
       Map<String, Integer> noticeBoardMap = Page.getPagingMap(
 
-            communitySearchDTO.getSelectPageNo()// 선택한 페이지 번호
+            communitySearchDTO.getSelectPageNo()	// 선택한 페이지 번호
             , communitySearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
-            , noticeBoardListCnt // 검색 결과물 개수
+            , noticeBoardListCnt					// 검색 결과물 개수
 
       );
 
@@ -253,15 +253,6 @@ public class CommunityController {
       return communityFreeBoardDetail(detailDTO);
    }
    
-   /*** 자유게시판 대댓글, 자유게시판 상세보기 ***/
-   @RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentList.do")
-   public ModelAndView freeBoardDetailCommentOfCommentList(CommunityFreeBoardDetailDTO detailDTO) {
-      
-      communityService.insertFreeBoardDetailCommentToComment(detailDTO);
-
-      return communityFreeBoardDetail(detailDTO);
-   }
-   
    /*** 자유게시판 수정 삭제 페이지 ***/
    @RequestMapping(value = "/communityFreeBoardUpDelForm.do")
    public ModelAndView communityFreeBoardUpDelForm(CommunityFreeBoardDetailDTO detailDTO) {
@@ -312,6 +303,33 @@ public class CommunityController {
       resultMap.put("result", result + "");
       
       return resultMap;
+   }
+   
+   /*** 자유게시판 대댓글 입력, 자유게시판 상세보기 ***/
+   @RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentInsertProc.do")
+   public ModelAndView communityFreeBoardDetailCommentOfCommentInsertProc(CommunityFreeBoardDetailDTO detailDTO) {
+      
+      communityService.insertFreeBoardDetailCommentToComment(detailDTO);
+
+      return communityFreeBoardDetail(detailDTO);
+   }
+   
+   /*** 자유게시판 대댓글 수정, 자유게시판 상세보기 ***/
+   @RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentUpdateProc.do")
+   public ModelAndView communityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO) {
+      
+      communityService.communityFreeBoardDetailCommentOfCommentUpdateProc(detailDTO);
+
+      return communityFreeBoardDetail(detailDTO);
+   }
+   
+   /*** 자유게시판 대댓글 삭제, 자유게시판 상세보기 ***/
+   @RequestMapping(value = "/communityFreeBoardDetailCommentOfCommentDeleteProc.do")
+   public ModelAndView communityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO) {
+      
+      communityService.communityFreeBoardDetailCommentOfCommentDeleteProc(detailDTO);
+
+      return communityFreeBoardDetail(detailDTO);
    }
    
    
@@ -437,6 +455,9 @@ public class CommunityController {
 
 		return resultMap;
 	}
+	
+	
+	
 
    
    
@@ -536,11 +557,11 @@ public class CommunityController {
       ModelAndView mav = new ModelAndView();
       
       if (table_name.equals("sale")) {
-         CommunityDTO sale = this.communityService.getCommunityMarketplaceSaleDetailForm(b_no);
+         CommunityDTO sale = this.communityService.getCommunityMarketplaceSaleDetailForm(b_no, true);
          mav.addObject("communityDTO", sale);
       }
       else {
-         CommunityDTO freeSharing = this.communityService.getCommunityMarketplaceFreeSharingDetailForm(b_no);
+         CommunityDTO freeSharing = this.communityService.getCommunityMarketplaceFreeSharingDetailForm(b_no, true);
          mav.addObject("communityDTO", freeSharing);
       }
 
@@ -555,11 +576,11 @@ public class CommunityController {
       ModelAndView mav = new ModelAndView();
       
       if (table_name.equals("sale")) {
-         CommunityDTO sale = this.communityService.getCommunityMarketplaceSaleDetailForm(b_no);
+         CommunityDTO sale = this.communityService.getCommunityMarketplaceSaleDetailForm(b_no, false);
          mav.addObject("communityDTO", sale);
       }
       else {
-         CommunityDTO freeSharing = this.communityService.getCommunityMarketplaceFreeSharingDetailForm(b_no);
+         CommunityDTO freeSharing = this.communityService.getCommunityMarketplaceFreeSharingDetailForm(b_no, false);
          mav.addObject("communityDTO", freeSharing);
       }
 

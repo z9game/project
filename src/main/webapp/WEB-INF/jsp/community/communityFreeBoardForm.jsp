@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,7 +112,7 @@
 	    
 	    if (sessionMid === 'null') {
 	    	alert('로그인이 필요한 서비스입니다.');
-	    	location.href = '/main/loginForm.do';
+	    	location.href = '/loginForm.do';
 	    } else {
 	    	location.href = '/newCommunityFreeBoardForm.do';
 	    }
@@ -169,7 +170,7 @@
 				<tr style="cursor: pointer" onClick="submitDetailForm( ${ freeboard.b_no } );">
 					<td align="center">${requestScope.freeBoardMap.begin_serialNo_desc - status.index}</td>
 					<td>${freeboard.subject}</td>
-					<td align="center">${freeboard.writer}</td>
+					<td align="center">${freeboard.nickname}</td>
 					<td align="center">${freeboard.readcount}</td>
 					<td align="center">${freeboard.reg_date}</td>
 				</tr>

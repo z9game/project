@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kosmo.team.project.dao.AdminDAO;
+import kosmo.team.project.dto.AdminCommunitySearchDTO;
 import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 import kosmo.team.project.dto.RecruitSearchDTO;
@@ -368,7 +370,9 @@ public class AdminServiceImplements implements AdminService {
 		return adminStadiumRegCnt;
 	}
 	
-	
+	//=======================================================================================================
+	//대회일정
+	//=======================================================================================================
 	public List<TournamentDTO> getTournamentList(TournamentSearchDTO tournamentSearchDTO) {
 
 		List<TournamentDTO> tournamentList = this.adminDAO.getTournamentList(tournamentSearchDTO);
@@ -377,6 +381,7 @@ public class AdminServiceImplements implements AdminService {
 
 	}
 	
+	//페이징 처리를 위한 게시물 개수 가져오기
 	public int getTournamentListCnt(TournamentSearchDTO tournamentSearchDTO) {
 		
 		int getTournamentListCnt = this.adminDAO.getTournamentListCnt(tournamentSearchDTO);
@@ -384,8 +389,388 @@ public class AdminServiceImplements implements AdminService {
 		return getTournamentListCnt;
 	}
 	
+
+	public TournamentDTO getTournamentDetail(int list_no) {
+		
+		TournamentDTO getTournamentDetail = this.adminDAO.getTournamentDetail(list_no);
+		
+		return getTournamentDetail;
+	}
+	
+	public int deleteBoard(int list_no) {
+		
+		int deleteBoard = this.adminDAO.deleteBoard(list_no);
+		
+		return deleteBoard;
+	}
+
+
+	public int regBoard(TournamentDTO tournamentDTO) {
+		
+		int regBoard = this.adminDAO.regBoard(tournamentDTO);
+		return regBoard;
+	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	// 갤러리
+		@Override
+		public int getCommunityGallaryBoardListAllCnt() {
+			return adminDAO.getCommunityGallaryBoardListAllCnt();
+		}
+
+		@Override
+		public int getCommunityGallaryBoardListCnt(AdminCommunitySearchDTO communitySearchDTO) {
+			return adminDAO.getCommunityGallaryBoardListCnt(communitySearchDTO);
+		}
+
+		@Override
+		public List<CommunityDTO> getCommunityGallaryBoardList(AdminCommunitySearchDTO communitySearchDTO) {
+			return adminDAO.getCommunityGallaryBoardList(communitySearchDTO);
+		}
+
+		@Override
+		public int insertCommunityGallaryProc(CommunityDTO communityDTO) {
+			int boardRegCnt = this.adminDAO.insertCommunityGallaryProc(communityDTO);
+			return boardRegCnt;
+		}
+		
+		@Override
+		public CommunityDTO getCommunityGallaryDetailForm(int b_no, boolean isUpdateReadCount) {
+
+			if (isUpdateReadCount) {
+				this.adminDAO.updateCommunityGallaryReadCount(b_no);
+			}
+
+			CommunityDTO communityDTO = this.adminDAO.getCommunityGallaryDetailForm(b_no);
+
+			return communityDTO;
+		}
+		
+		@Override
+		public int updateCommunityGallaryUpProc(CommunityDTO communityDTO) {
+
+			int boardCnt = this.adminDAO.getCommunityGallaryBoardCnt(communityDTO.getB_no());
+			if (boardCnt == 0) {
+				return boardCnt;
+			}
+			int boardUpCnt = this.adminDAO.updateCommunityGallaryUpProc(communityDTO);
+
+			return boardUpCnt;
+		}
+		
+		@Override
+		public int deleteCommunityGallaryDelProc(CommunityDTO communityDTO) {
+
+			int boardCnt = this.adminDAO.getCommunityGallaryBoardCnt(communityDTO.getB_no());
+			if (boardCnt == 0) {
+				return boardCnt;
+			}
+			int boardDelCnt = this.adminDAO.deleteCommunityGallaryDelProc(communityDTO);
+
+			return boardDelCnt;
+		}
+		
+		//-All----------------------------------------------------------------------------------------------
+	   /*** 장터 sale, free_sharing 테이블 리스트 총 개수 가져오기  ***/
+	   @Override
+	   public int getTabAllMarketplaceBoardListAllCnt() {
+	      return adminDAO.getTabAllMarketplaceBoardListAllCnt();
+	   }
+	   
+	   /*** 장터 sale, free_sharing 테이블 리스트 개수 가져오기 ***/
+	   @Override
+	   public int getTabAllMarketplaceBoardListCnt(AdminCommunitySearchDTO communitySearchDTO) {
+	      return adminDAO.getTabAllMarketplaceBoardListCnt(communitySearchDTO);
+	   }
+	   
+	   /*** 장터 sale, free_sharing 테이블 리스트 가져오기 ***/
+	   @Override
+	   public List<CommunityDTO> getTabAllMarketplaceBoardList(AdminCommunitySearchDTO communitySearchDTO) {
+	      return adminDAO.getTabAllMarketplaceBoardList(communitySearchDTO);
+	   }
+	   
+	   //-Sale----------------------------------------------------------------------------------------------
+	   /*** 장터 sale 테이블 리스트 총 개수 가져오기  ***/
+	   @Override
+	   public int getTabSaleMarketplaceBoardListAllCnt() {
+	      return adminDAO.getTabSaleMarketplaceBoardListAllCnt();
+	   }
+	   
+	   /*** 장터 sale 테이블 리스트 개수 가져오기  ***/
+	   @Override
+	   public int getTabSaleMarketplaceBoardListCnt(AdminCommunitySearchDTO communitySearchDTO) {
+	      return adminDAO.getTabSaleMarketplaceBoardListCnt(communitySearchDTO);
+	   }
+		
+	   /*** 장터 sale 테이블 리스트 가져오기 ***/
+	   @Override
+	   public List<CommunityDTO> getTabSaleMarketplaceBoardList(AdminCommunitySearchDTO communitySearchDTO) {
+	      return adminDAO.getTabSaleMarketplaceBoardList(communitySearchDTO);
+	   }
+		
+	 //FreeSharing-----------------------------------------------------------------------------------------------
+	   /*** 장터 Free_Sharing 테이블 리스트 총 개수 가져오기  ***/
+	   @Override
+	   public int getTabFreeSharingMarketplaceBoardListAllCnt() {
+	      return adminDAO.getTabFreeSharingMarketplaceBoardListAllCnt();
+	   }
+	   
+	   /*** 장터 Free_Sharing 테이블 리스트 개수 가져오기  ***/
+	   @Override
+	   public int getTabFreeSharingMarketplaceBoardListCnt(AdminCommunitySearchDTO communitySearchDTO) {
+	      return adminDAO.getTabFreeSharingMarketplaceBoardListCnt(communitySearchDTO);
+	   }
+	   
+	   /*** 장터 Free_Sharing 테이블 리스트 가져오기 ***/
+	   @Override
+	   public List<CommunityDTO> getTabFreeSharingMarketplaceBoardList(AdminCommunitySearchDTO communitySearchDTO) {
+	      return adminDAO.getTabFreeSharingMarketplaceBoardList(communitySearchDTO);
+	   }
+	      
+	   // -----------------------------------
+	  // 장터
+	  // -----------------------------------
+	  /*** 장터 Sale 등록  ***/
+	  @Override
+	  public int insertMarketplaceSaleCommunity(CommunityDTO communityDTO) {
+	     int boardRegCnt = this.adminDAO.insertMarketplaceSaleCommunity(communityDTO);
+	     return boardRegCnt;
+	  }
+	  
+	  /*** 장터 FreeSharing 등록  ***/
+	  @Override
+	  public int insertMarketplaceFreeSharingCommunity(CommunityDTO communityDTO) {
+	     int boardRegCnt = this.adminDAO.insertMarketplaceFreeSharingCommunity(communityDTO);
+	     return boardRegCnt;
+	  }
+	  
+		/*** 장터 Free_Sharing 테이블 조회수 디테일 가져오기 ***/
+		@Override
+		public CommunityDTO getCommunityMarketplaceSaleDetailForm(int b_no, boolean isReadCount) {
+
+			if (isReadCount) {
+				this.adminDAO.updateMarketplaceSaleBoardReadCount(b_no);
+			}
+			CommunityDTO communityDTO = this.adminDAO.getCommunityMarketplaceSaleDetailForm(b_no);
+
+			return communityDTO;
+
+		}
+	  
+		/*** 장터 Free_Sharing 테이블 조회수 디테일 가져오기 ***/
+		@Override
+		public CommunityDTO getCommunityMarketplaceFreeSharingDetailForm(int b_no, boolean isReadCount) {
+
+			if (isReadCount) {
+				this.adminDAO.updateMarketplaceFreeSharingBoardReadCount(b_no);
+			}
+			CommunityDTO communityDTO = this.adminDAO.getCommunityMarketplaceFreeSharingDetailForm(b_no);
+
+			return communityDTO;
+
+		}
+	  
+		@Override
+		public int updateMarketplaceSaleBoard(CommunityDTO communityDTO) {
+
+			int boardCnt = this.adminDAO.getMarketplaceSaleBoardCnt(communityDTO.getB_no());
+			if (boardCnt == 0) {
+				return boardCnt;
+			}
+			int boardUpCnt = this.adminDAO.updateMarketplaceSaleBoard(communityDTO);
+
+			return boardUpCnt;
+		}
+		
+		@Override
+		public int updateMarketplaceFreeSharingBoard(CommunityDTO communityDTO) {
+
+			int boardCnt = this.adminDAO.getMarketplaceFreeSharingBoardCnt(communityDTO.getB_no());
+			if (boardCnt == 0) {
+				return boardCnt;
+			}
+			int boardUpCnt = this.adminDAO.updateMarketplaceFreeSharingBoard(communityDTO);
+
+			return boardUpCnt;
+		}
+		
+		@Override
+		public int deleteMarketplaceSaleBoard(CommunityDTO communityDTO) {
+
+			int boardCnt = this.adminDAO.getMarketplaceSaleBoardCnt(communityDTO.getB_no());
+			if (boardCnt == 0) {
+				return boardCnt;
+			}
+			int boardDelCnt = this.adminDAO.deleteMarketplaceSaleBoard(communityDTO);
+
+			return boardDelCnt;
+		}
+		
+		@Override
+		public int deleteMarketplaceFreeSharingBoard(CommunityDTO communityDTO) {
+
+			int boardCnt = this.adminDAO.getMarketplaceFreeSharingBoardCnt(communityDTO.getB_no());
+			if (boardCnt == 0) {
+				return boardCnt;
+			}
+			int boardDelCnt = this.adminDAO.deleteMarketplaceFreeSharingBoard(communityDTO);
+
+			return boardDelCnt;
+		}
+		
+		//자유 게시판-------------------------------------------------------------------------------------------------
+		public int getFreeBoardAllCnt() {
+		      // --------------------------------------
+		      // BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
+		      // 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
+		      // --------------------------------------
+		      int freeBoardListAllCnt = this.adminDAO.getFreeBoardAllCnt();
+		      // --------------------------------------
+		      // 변수 boardListAllCnt 안의 데이터를 리턴하기
+		      // --------------------------------------
+		      return freeBoardListAllCnt;
+		   }
+		
+		 @Override
+		   public int getFreeBoardListCnt(AdminCommunitySearchDTO communitySearchDTO) {
+
+		      int freeBoardListCount = this.adminDAO.getFreeBoardListCnt(communitySearchDTO);
+
+		      return freeBoardListCount;
+
+		   }
+		
+		 @Override
+		   public List<CommunityDTO> getFreeBoardList(AdminCommunitySearchDTO communitySearchDTO) {
+
+		      List<CommunityDTO> freeBoardList = this.adminDAO.getFreeBoardList(communitySearchDTO);
+
+		      return freeBoardList;
+
+		   }
+		
+		 @Override
+		   public int insertCommunityFreeBoard(CommunityDTO communityDTO) {
+		      
+		      int boardRegCount = adminDAO.insertCommunityFreeBoard(communityDTO);
+		      
+		      return boardRegCount;
+		      
+		   }
+		
+		 @Override
+		   public int updateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO) {
+		      
+		      return adminDAO.updateFreeBoardDetailReadCountPlusOne(detailDTO);
+		      
+		   }
+		
+		 @Override
+		   public CommunityFreeBoardDetailDTO getFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO) {
+		   
+		      CommunityFreeBoardDetailDTO freeBoardDetail = adminDAO.getFreeBoardDetail(detailDTO);
+		      
+		      return freeBoardDetail;
+		      
+		   }
+		
+		 @Override
+		   public int getFreeBoardDetailCommentPageListCount(CommunityFreeBoardDetailDTO detailDTO) {
+
+		      int freeBoardDetailCommentPageListCount = adminDAO.getFreeBoardDetailCommentPageListCount(detailDTO);
+
+		      return freeBoardDetailCommentPageListCount;
+
+		   }
+		 
+		 @Override
+		   public List<CommunityFreeBoardDetailDTO> getFreeBoardDetailCommentPageList(CommunityFreeBoardDetailDTO detailDTO) {
+		      
+		      List<CommunityFreeBoardDetailDTO> freeBoardDetailCommentPageList = adminDAO.getFreeBoardDetailCommentPageList(detailDTO);
+
+		      return freeBoardDetailCommentPageList;
+		      
+		   }
+		 
+		 @Override
+		   public int insertFreeBoardDetailComment(CommunityFreeBoardDetailDTO detailDTO) {
+
+		      int insertFreeBoardDetailCommentCount = adminDAO.insertFreeBoardDetailComment(detailDTO);
+
+		      return insertFreeBoardDetailCommentCount;
+
+		   }
+		 
+		 @Override
+		   public int insertFreeBoardDetailCommentToComment(CommunityFreeBoardDetailDTO detailDTO) {
+
+			 adminDAO.updateFreeBoardDetailCommentToComment(detailDTO);
+		      
+		      int insertFreeBoardDetailCommentToCommentCount = adminDAO.insertFreeBoardDetailCommentToComment(detailDTO);
+
+		      return insertFreeBoardDetailCommentToCommentCount;
+
+		   }
+		 
+		 public CommunityDTO getFreeBoard(int b_no) {
+
+		      CommunityDTO communityDTO = this.adminDAO.getFreeBoard(b_no);
+
+		      return communityDTO;
+
+		   }
+		 
+		 public int updateCommunityFreeBoard(CommunityDTO communityDTO) {
+		      
+		      int boardCount = adminDAO.getCommunityFreeBoardCount(communityDTO.getB_no());
+		      
+		      if (boardCount == 0) {
+		         return boardCount;
+		      }
+		      
+		      int boardUpdateCount = adminDAO.updateCommunityFreeBoard(communityDTO);
+
+		      return boardUpdateCount;
+		   }
+		 
+		 @Override
+		   public int deleteCommunityFreeBoard(CommunityDTO communityDTO) {
+
+		      int b_no = communityDTO.getB_no();
+		      int boardCount = adminDAO.getCommunityFreeBoardCount(b_no);
+		      
+		      if (boardCount == 0) {
+		         return boardCount;
+		      }
+		      
+		      int commentCount = adminDAO.getFreeBoardCommentCount(b_no);
+		      
+		      if (commentCount > 0) {
+		         return -1;
+		      }
+
+		      int boardDeleteCount = adminDAO.deleteCommunityFreeBoard(communityDTO);
+
+		      return boardDeleteCount;
+		      
+		   }
+
+		 @Override
+		 public int adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO) {
+			 return adminDAO.adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(detailDTO);
+		 }	
+
+		 @Override
+		 public int adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO) {
+			 return adminDAO.adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(detailDTO);
+		 }
 	
 	
 	

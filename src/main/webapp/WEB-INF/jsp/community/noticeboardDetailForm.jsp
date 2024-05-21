@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
-
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
+
+<c:if test="${empty sessionScope.mid}">
+	<script>
+		alert("로그인이 필요한 서비스입니다.");
+		location.replace("/loginForm.do");
+	</script>
+</c:if>
 
 <!DOCTYPE html>
 <html>
@@ -92,10 +96,12 @@
 			<!--------------------------------------------------- -->
 			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 			<!--------------------------------------------------- -->
-			<span style="cursor: pointer"
-				onclick="location.replace('/communityNoticeBoardForm.do')">
-				[목록 화면으로] </span> <input type="button" value="수정/삭제"
-				onclick="document.noticeboardUpDelForm.submit();">
+			<span style="cursor: pointer" onclick="location.replace('/communityNoticeBoardForm.do')">
+				[목록 화면으로] 
+			</span> 
+			<c:if test="${requestScope.communityDTO.writer == sessionScope.nickname}">
+				<input type="button" value="수정/삭제" onclick="document.noticeboardUpDelForm.submit();">
+			</c:if>
 
 
 
@@ -117,8 +123,6 @@
 			<input type="hidden" name="b_no"
 				value="${requestScope.communityDTO.b_no}">
 		</form>
-
-
 
 	</c:if>
 

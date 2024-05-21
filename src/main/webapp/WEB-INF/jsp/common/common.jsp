@@ -81,6 +81,22 @@ function setweekgroup() {
      if ($("#day0").is(":checked")) {
          $("#day1, #day2, #day3, #day4, #day5, #day6, #day7, #workweekcdGroupA, #workweekcdGroupB").prop("checked", false);
       }
+   }
+     
+     
+   function setweekDay() {
+   
+      if ($("#day1").is(":checked") && $("#day2").is(":checked") && $("#day3").is(":checked") && $("#day4").is(":checked") && $("#day5").is(":checked")) {
+         $("#workweekcdGroupA").prop("checked", true);
+      }  
+      else {
+         $("#workweekcdGroupA").prop("checked", false);
+      }
+      
+      if($("#day1").is(":checked") || $("#day2").is(":checked") || $("#day3").is(":checked") || $("#day4").is(":checked") || $("#day5").is(":checked")) 
+      {
+         $("#day0").prop("checked", false);
+      } 
      
    //=============================================================================================================================================================================================
    }
@@ -101,6 +117,23 @@ function setweekgroup() {
             $("#everytime").prop("checked", false);
          }  
    }
-      
+   
+ 	//=============================================================================================================================================================================================
+    function everymoney()
+ 	{
+    	 if ($("#everymoney").is(":checked")) {
+             $("#free, #paid").prop("checked", false);
+          }
+ 	
+    
+    function moneycheck()
+    	 if ($("#free").is(":checked") && ("#paid").is(":checked")) {
+    	        everymoney.prop("checked", true);
+    	        $("#free").prop("checked", false);
+    	        $("#paid").prop("checked", false);
+    	    } else {
+    	        everymoney.prop("checked", false);
+    	    }
+ 	}
    
    </script>

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.AdminCommunitySearchDTO;
 import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
+import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 import kosmo.team.project.dto.Stadim2DTO;
@@ -741,39 +743,713 @@ public class AdminController {
 	}
 
 	
+	//========================================================================================================================================
+	// 대회일정 관련 어드민 페이지
+	//========================================================================================================================================
 	
-	 @RequestMapping(value = "/adminTournamentBoardForm.do")
-	    public ModelAndView tournamentBoardForm(TournamentSearchDTO tournamentSearchDTO) {
-	    	
-	 		int getTournamentListCnt = this.adminService.getTournamentListCnt(tournamentSearchDTO);
+	//게시물 페이지
+	@RequestMapping(value = "/adminTournamentBoardForm.do")
+    public ModelAndView tournamentBoardForm(TournamentSearchDTO tournamentSearchDTO) {
+    	
+ 		int getTournamentListCnt = this.adminService.getTournamentListCnt(tournamentSearchDTO);
+ 
+ 		Map<String, Integer> tournamentMap = Page.getPagingMap(
+ 			tournamentSearchDTO.getSelectPageNo()// 선택한 페이지 번호
+			, tournamentSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+			, getTournamentListCnt // 검색 결과물 개수
+		);
+    	
+ 		tournamentSearchDTO.setSelectPageNo((int) tournamentMap.get("selectPageNo"));
+ 		tournamentSearchDTO.setRowCntPerPage((int) tournamentMap.get("rowCntPerPage"));
+ 		tournamentSearchDTO.setBegin_rowNo((int) tournamentMap.get("begin_rowNo"));
+ 		tournamentSearchDTO.setEnd_rowNo((int) tournamentMap.get("end_rowNo"));
 	 
-	 		Map<String, Integer> tournamentMap = Page.getPagingMap(
-	 			tournamentSearchDTO.getSelectPageNo()// 선택한 페이지 번호
-				, tournamentSearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
-				, getTournamentListCnt // 검색 결과물 개수
+    	List<TournamentDTO> tournamentList = this.adminService.getTournamentList(tournamentSearchDTO);
+        ModelAndView mav = new ModelAndView();
+       
+        mav.addObject("tournamentList", tournamentList);
+        mav.addObject("tournamentMap", tournamentMap);
+        mav.setViewName("/admin/adminTournamentBoardForm.jsp");
+        
+        return mav;
+    }
+	
+	//상세보기 페이지
+	@RequestMapping(value = "/adminTournamentDetailForm.do")
+    public ModelAndView tournamentDetailForm(@RequestParam(value="list_no")int list_no) {
+		
+		TournamentDTO tournamentDetail = this.adminService.getTournamentDetail(list_no);
+        ModelAndView mav = new ModelAndView();
+       
+        mav.setViewName("/admin/adminTournamentBoardDetailForm.jsp");
+        mav.addObject("detail", tournamentDetail);
+        
+        return mav;
+    }
+	
+	//수정 페이지
+	@RequestMapping(value = "/adminTournamentBoardUpForm.do")
+    public ModelAndView TournamentBoardUpForm(@RequestParam(value="list_no")int list_no) {
+		
+		TournamentDTO tournamentDetail = this.adminService.getTournamentDetail(list_no);
+        ModelAndView mav = new ModelAndView();
+       
+        mav.setViewName("/admin/adminTournamentBoardUpForm.jsp");
+        mav.addObject("detail", tournamentDetail);
+        
+        return mav;
+    }
+	 
+	
+	//삭제관련
+	@RequestMapping(value = "/deleteTournamentProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> deleteTournamentProc(@RequestParam(value="list_no")int list_no) {
+
+		Map<String, String> resultMap = new HashMap<String, String>();
+		
+		int deleteCnt = this.adminService.deleteBoard(list_no);
+
+		resultMap.put("result",  deleteCnt+"");
+
+		return resultMap;
+	}
+	
+	//새 글쓰기 페이지
+	@RequestMapping(value = "/newTournamentBoard.do")
+    public ModelAndView newTournamentBoard() {
+		
+        ModelAndView mav = new ModelAndView();
+       
+        mav.setViewName("/admin/newTournamentBoard.jsp");
+        
+        return mav;
+    } 
+	
+	//새글 쓰기
+	@RequestMapping(value = "/newTournamentBoardProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> newTournamentBoardProc(TournamentDTO tournamentDTO) {
+
+		Map<String, String> resultMap = new HashMap<String, String>();
+		
+		int regCnt = this.adminService.regBoard(tournamentDTO);
+
+		resultMap.put("result",  regCnt+"");
+
+		return resultMap;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+     // ----------------------------------------------------------------
+		// admin 갤러리 리스트
+		// ----------------------------------------------------------------
+		/*** 갤러리 페이지 ***/
+		@RequestMapping(value = "/adminGallaryForm.do")
+		public ModelAndView adminGallaryForm(AdminCommunitySearchDTO communitySearchDTO, HttpSession session) {
+			// 세션에서 사용자 아이디를 가져옴
+			String userId = (String) session.getAttribute("mid");
+			// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+			if (userId == null || !userId.equals("admin")) {
+				return new ModelAndView("redirect:/loginForm.do");
+			}
+			// IMAGEBOARD TABLE 에서 WRITER 컬럼 VARCHAR2 -> NUMBER 바꿔야 하는데 커뮤니티 말고 다른 곳에서도 이테이블
+			// 사용하여 컬럼 NUMBER로 변경 보류(갤러리 테이블도 없다)
+			// 로그인 하여 닉네임으로 보여주는 것도 작업할 수 없어 '이미지보드 테이블' as "WRITER" 하여 채웠다.
+
+			int communityGallaryBoardListAllCnt = adminService.getCommunityGallaryBoardListAllCnt();
+			int communityGallaryBoardListCnt = adminService.getCommunityGallaryBoardListCnt(communitySearchDTO);
+
+			Map<String, Integer> communityGallaryBoardPageMap = Page.getPagingMap(communitySearchDTO.getSelectPageNo() // 선택한
+																														// 페이지
+																														// 번호
+					, 8 // 페이지 당 보여줄 검색 행의 개수
+					, communityGallaryBoardListCnt // 검색 결과물 개수
 			);
-	    	
-	 		tournamentSearchDTO.setSelectPageNo((int) tournamentMap.get("selectPageNo"));
-	 		tournamentSearchDTO.setRowCntPerPage((int) tournamentMap.get("rowCntPerPage"));
-	 		tournamentSearchDTO.setBegin_rowNo((int) tournamentMap.get("begin_rowNo"));
-	 		tournamentSearchDTO.setEnd_rowNo((int) tournamentMap.get("end_rowNo"));
-		 
-	    	List<TournamentDTO> tournamentList = this.adminService.getTournamentList(tournamentSearchDTO);
-	        ModelAndView mav = new ModelAndView();
-	       
-	        mav.addObject("tournamentList", tournamentList);
-	        mav.addObject("tournamentMap", tournamentMap);
-	        mav.setViewName("/admin/adminTournamentBoardForm.jsp");
-	        
-	        
-	        return mav;
-	        
-	        
-	        
-	    }
-	
-	
-	
+
+			communitySearchDTO.setSelectPageNo((int) communityGallaryBoardPageMap.get("selectPageNo"));
+			communitySearchDTO.setRowCntPerPage((int) communityGallaryBoardPageMap.get("rowCntPerPage"));
+			communitySearchDTO.setBegin_rowNo((int) communityGallaryBoardPageMap.get("begin_rowNo"));
+			communitySearchDTO.setEnd_rowNo((int) communityGallaryBoardPageMap.get("end_rowNo"));
+
+			List<CommunityDTO> communityGallaryBoardList = adminService
+					.getCommunityGallaryBoardList(communitySearchDTO);
+
+			ModelAndView mav = new ModelAndView();
+
+			mav.addObject("communityGallaryBoardList", communityGallaryBoardList);
+			mav.addObject("communityGallaryBoardListSize", communityGallaryBoardList.size());
+			mav.addObject("communityGallaryBoardListCnt", communityGallaryBoardListCnt);
+			mav.addObject("communityGallaryBoardListAllCnt", communityGallaryBoardListAllCnt);
+			mav.addObject("communityGallaryBoardPageMap", communityGallaryBoardPageMap);
+
+			mav.setViewName(adminFolder + "adminGallaryForm.jsp");
+
+			return mav;
+		}
+
+		/*** admin 갤러리 등록 페이지 ***/
+		@RequestMapping(value = "/adminNewCommunityGallaryForm.do")
+		public ModelAndView adminNewCommunityGallaryForm(CommunityDTO communityDTO, HttpSession session) {
+			// 세션에서 사용자 아이디를 가져옴
+			String userId = (String) session.getAttribute("mid");
+			// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+			if (userId == null || !userId.equals("admin")) {
+				return new ModelAndView("redirect:/loginForm.do");
+			}
+
+			ModelAndView mav = new ModelAndView();
+
+			mav.setViewName(adminFolder + "adminNewCommunityGallaryForm.jsp");
+
+			return mav;
+		}
+
+		/*** admin 갤러리 새글쓰기 ***/
+		@ResponseBody
+		@RequestMapping(value = "/adminCommunityGallaryProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		public Map<String, String> adminCommunityGallaryProc(CommunityDTO communityDTO) {
+
+			int result = adminService.insertCommunityGallaryProc(communityDTO);
+
+			Map<String, String> resultMap = new HashMap<String, String>();
+			resultMap.put("result", result + "");
+
+			return resultMap;
+		}
+		
+		/*** admin 갤러리 상세보기 ***/
+		@RequestMapping(value = "/adminCommunityGallaryDetailForm.do")
+		public ModelAndView adminCommunityGallaryDetailForm(@RequestParam(value = "b_no") int b_no, HttpSession session) {
+			// 세션에서 사용자 아이디를 가져옴
+			String userId = (String) session.getAttribute("mid");
+			// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+			if (userId == null || !userId.equals("admin")) {
+				return new ModelAndView("redirect:/loginForm.do");
+			}
+			ModelAndView mav = new ModelAndView();
+
+			CommunityDTO dto = this.adminService.getCommunityGallaryDetailForm(b_no, true);
+
+			mav.addObject("communityDTO", dto);
+
+			mav.setViewName(adminFolder + "adminCommunityGallaryDetailForm.jsp");
+
+			return mav;
+		}
+		
+		/*** admin 갤러리 업데이트/삭제 보기 ***/
+		@RequestMapping(value = "/adminCommunityGallaryUpDelForm.do")
+		public ModelAndView adminCommunityGallaryUpDelForm(@RequestParam(value = "b_no") int b_no, HttpSession session) {
+			// 세션에서 사용자 아이디를 가져옴
+			String userId = (String) session.getAttribute("mid");
+			// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+			if (userId == null || !userId.equals("admin")) {
+				return new ModelAndView("redirect:/loginForm.do");
+			}
+			ModelAndView mav = new ModelAndView();
+
+			CommunityDTO dto = this.adminService.getCommunityGallaryDetailForm(b_no, false);
+
+			mav.addObject("communityDTO", dto);
+
+			mav.setViewName(adminFolder + "adminCommunityGallaryUpDelForm.jsp");
+
+			return mav;
+		}
+		
+		/*** admin 갤러리 업데이트 처리 ***/
+		@ResponseBody
+		@RequestMapping(value = "/adminCommunityGallaryUpProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		public Map<String, String> adminCommunityGallaryUpProc(CommunityDTO communityDTO) {
+
+			int marketplaceboardUpCnt = this.adminService.updateCommunityGallaryUpProc(communityDTO);
+			
+			Map<String, String> resultMap = new HashMap<String, String>();
+
+			resultMap.put("result", marketplaceboardUpCnt + "");
+			
+			return resultMap;
+		}
+		
+		/*** admin 갤러리 삭제 처리 ***/
+		@ResponseBody
+		@RequestMapping(value = "/adminCommunityGallaryDelProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		public Map<String, String> adminCommunityGallaryDelProc(CommunityDTO communityDTO) {
+
+			int marketplaceboardDelCnt = this.adminService.deleteCommunityGallaryDelProc(communityDTO);
+			
+			Map<String, String> resultMap = new HashMap<String, String>();
+
+			resultMap.put("result", marketplaceboardDelCnt + "");
+
+			return resultMap;
+		}
+		
+		/*** 장터 페이지 ***/
+		   
+		@RequestMapping(value = "/adminMarketplaceBoardForm.do")
+		public ModelAndView adminMarketplaceBoardForm(AdminCommunitySearchDTO communitySearchDTO, HttpSession session) {
+			// 세션에서 사용자 아이디를 가져옴
+			String userId = (String) session.getAttribute("mid");
+			// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+			if (userId == null || !userId.equals("admin")) {
+				return new ModelAndView("redirect:/loginForm.do");
+			}
+			ModelAndView mav = new ModelAndView();
+
+			// All-------------------------------------------------------------------------------
+			int tabAllMarketplaceBoardListAllCnt = adminService.getTabAllMarketplaceBoardListAllCnt();
+			int tabAllMarketplaceBoardListCnt = adminService.getTabAllMarketplaceBoardListCnt(communitySearchDTO);
+
+			Map<String, Integer> tabAllMarketplaceBoardPageMap = Page.getPagingMap(communitySearchDTO.getSelectPageNo() // 선택한
+																														// 페이지
+																														// 번호
+					, 8 // 페이지 당 보여줄 검색 행의 개수
+					, tabAllMarketplaceBoardListCnt // 검색 결과물 개수
+			);
+
+			communitySearchDTO.setSelectPageNo((int) tabAllMarketplaceBoardPageMap.get("selectPageNo"));
+			communitySearchDTO.setRowCntPerPage((int) tabAllMarketplaceBoardPageMap.get("rowCntPerPage"));
+			communitySearchDTO.setBegin_rowNo((int) tabAllMarketplaceBoardPageMap.get("begin_rowNo"));
+			communitySearchDTO.setEnd_rowNo((int) tabAllMarketplaceBoardPageMap.get("end_rowNo"));
+
+			List<CommunityDTO> tabAllMarketplaceBoardList = adminService.getTabAllMarketplaceBoardList(communitySearchDTO);
+
+			mav.addObject("tabAllMarketplaceBoardList", tabAllMarketplaceBoardList);
+			mav.addObject("tabAllMarketplaceBoardListSize", tabAllMarketplaceBoardList.size());
+			mav.addObject("tabAllMarketplaceBoardListCnt", tabAllMarketplaceBoardListCnt);
+			mav.addObject("tabAllMarketplaceBoardListAllCnt", tabAllMarketplaceBoardListAllCnt);
+			mav.addObject("tabAllMarketplaceBoardPageMap", tabAllMarketplaceBoardPageMap);
+
+			// Sale-------------------------------------------------------------------------------
+			int tabSaleMarketplaceBoardListAllCnt = adminService.getTabSaleMarketplaceBoardListAllCnt();
+			int tabSaleMarketplaceBoardListCnt = adminService.getTabSaleMarketplaceBoardListCnt(communitySearchDTO);
+
+			Map<String, Integer> tabSaleMarketplaceBoardPageMap = Page.getPagingMap(communitySearchDTO.getSelectPageNo() // 선택한
+																															// 페이지
+																															// 번호
+					, 8 // 페이지 당 보여줄 검색 행의 개수
+					, tabSaleMarketplaceBoardListCnt // 검색 결과물 개수
+			);
+
+			communitySearchDTO.setSelectPageNo((int) tabSaleMarketplaceBoardPageMap.get("selectPageNo"));
+			communitySearchDTO.setRowCntPerPage((int) tabSaleMarketplaceBoardPageMap.get("rowCntPerPage"));
+			communitySearchDTO.setBegin_rowNo((int) tabSaleMarketplaceBoardPageMap.get("begin_rowNo"));
+			communitySearchDTO.setEnd_rowNo((int) tabSaleMarketplaceBoardPageMap.get("end_rowNo"));
+
+			List<CommunityDTO> tabSaleMarketplaceBoardList = adminService.getTabSaleMarketplaceBoardList(communitySearchDTO);
+
+			mav.addObject("tabSaleMarketplaceBoardList", tabSaleMarketplaceBoardList);
+			mav.addObject("tabSaleMarketplaceBoardListSize", tabSaleMarketplaceBoardList.size());
+			mav.addObject("tabSaleMarketplaceBoardListCnt", tabSaleMarketplaceBoardListCnt);
+			mav.addObject("tabSaleMarketplaceBoardListAllCnt", tabSaleMarketplaceBoardListAllCnt);
+			mav.addObject("tabSaleMarketplaceBoardPageMap", tabSaleMarketplaceBoardPageMap);
+
+			// -------------------------------------------------------------------------------
+
+			// FreeSharing-------------------------------------------------------------------------------
+			int tabFreeSharingMarketplaceBoardListAllCnt = adminService.getTabFreeSharingMarketplaceBoardListAllCnt();
+			int tabFreeSharingMarketplaceBoardListCnt = adminService.getTabFreeSharingMarketplaceBoardListCnt(communitySearchDTO);
+
+			Map<String, Integer> tabFreeSharingMarketplaceBoardPageMap = Page
+					.getPagingMap(communitySearchDTO.getSelectPageNo() // 선택한 페이지 번호
+							, 8 // 페이지 당 보여줄 검색 행의 개수
+							, tabFreeSharingMarketplaceBoardListCnt // 검색 결과물 개수
+					);
+
+			communitySearchDTO.setSelectPageNo((int) tabFreeSharingMarketplaceBoardPageMap.get("selectPageNo"));
+			communitySearchDTO.setRowCntPerPage((int) tabFreeSharingMarketplaceBoardPageMap.get("rowCntPerPage"));
+			communitySearchDTO.setBegin_rowNo((int) tabFreeSharingMarketplaceBoardPageMap.get("begin_rowNo"));
+			communitySearchDTO.setEnd_rowNo((int) tabFreeSharingMarketplaceBoardPageMap.get("end_rowNo"));
+
+			List<CommunityDTO> tabFreeSharingMarketplaceBoardList = adminService.getTabFreeSharingMarketplaceBoardList(communitySearchDTO);
+
+			mav.addObject("tabFreeSharingMarketplaceBoardList", tabFreeSharingMarketplaceBoardList);
+			mav.addObject("tabFreeSharingMarketplaceBoardListSize", tabFreeSharingMarketplaceBoardList.size());
+			mav.addObject("tabFreeSharingMarketplaceBoardListCnt", tabFreeSharingMarketplaceBoardListCnt);
+			mav.addObject("tabFreeSharingMarketplaceBoardListAllCnt", tabFreeSharingMarketplaceBoardListAllCnt);
+			mav.addObject("tabFreeSharingMarketplaceBoardPageMap", tabFreeSharingMarketplaceBoardPageMap);
+
+			mav.setViewName(adminFolder + "adminCommunityMarketplaceBoardForm.jsp");
+
+			return mav;
+		}
+		
+		/*** 장터 Sale 등록 페이지(화면) ***/
+		@RequestMapping(value = "/adminNewCommunityMarketplaceSaleBoardForm.do")
+		public ModelAndView adminNewCommunityMarketplaceSaleBoardForm(CommunityDTO communityDTO, HttpSession session) {
+			// 세션에서 사용자 아이디를 가져옴
+			String userId = (String) session.getAttribute("mid");
+			// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+			if (userId == null || !userId.equals("admin")) {
+				return new ModelAndView("redirect:/loginForm.do");
+			}
+			ModelAndView mav = new ModelAndView();
+
+			mav.setViewName(adminFolder + "adminNewCommunityMarketplaceSaleForm.jsp");
+
+			return mav;
+		}
+		
+		/*** 장터 Sale 새글쓰기 ***/
+	   @ResponseBody
+	   @RequestMapping(value = "/adminCommunityMarketplaceSaleBoardRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	   public Map<String, String> adminCommunityMarketplaceSaleBoardRegProc(CommunityDTO communityDTO) {
+	      
+	      int result = adminService.insertMarketplaceSaleCommunity(communityDTO);
+	      
+	      Map<String, String> resultMap = new HashMap<String, String>();
+	      resultMap.put("result", result + "");
+	      
+	      return resultMap;
+	   }
+		
+	   /*** 장터 FreeSharing 등록 페이지(화면) ***/
+	   @RequestMapping(value = "/adminNewCommunityMarketplaceFreeSharingBoarForm.do")
+	   public ModelAndView adminNewCommunityMarketplaceFreeSharingBoarForm(CommunityDTO communityDTO, HttpSession session) {
+		// 세션에서 사용자 아이디를 가져옴
+		String userId = (String) session.getAttribute("mid");
+		// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+		if (userId == null || !userId.equals("admin")) {
+			return new ModelAndView("redirect:/loginForm.do");
+		}
+	      ModelAndView mav = new ModelAndView();
+
+	      mav.setViewName(adminFolder + "adminNewCommunityMarketplaceFreeSharingForm.jsp");
+
+	      return mav;
+	   }
+		
+	   /*** 장터 FreeSharing 새글쓰기 ***/
+	   @ResponseBody
+	   @RequestMapping(value = "/adminNewCommunityMarketplaceFreeSharingBoardRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	   public Map<String, String> adminNewCommunityMarketplaceFreeSharingBoardRegProc(CommunityDTO communityDTO) {
+	      
+	      int result = adminService.insertMarketplaceFreeSharingCommunity(communityDTO);
+	      
+	      Map<String, String> resultMap = new HashMap<String, String>();
+	      resultMap.put("result", result + "");
+	      
+	      return resultMap;
+	   }
+		
+		@RequestMapping(value = "/adminCommunityMarketplaceDetailForm.do")
+		public ModelAndView adminCommunityMarketplaceDetailForm(@RequestParam(value = "b_no") int b_no,
+			@RequestParam(value = "table_name") String table_name, HttpSession session) {
+			// 세션에서 사용자 아이디를 가져옴
+			String userId = (String) session.getAttribute("mid");
+			// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+			if (userId == null || !userId.equals("admin")) {
+				return new ModelAndView("redirect:/loginForm.do");
+			}
+			ModelAndView mav = new ModelAndView();
+
+			if (table_name.equals("sale")) {
+				CommunityDTO sale = this.adminService.getCommunityMarketplaceSaleDetailForm(b_no, true);
+				mav.addObject("communityDTO", sale);
+			} else {
+				CommunityDTO freeSharing = this.adminService.getCommunityMarketplaceFreeSharingDetailForm(b_no, true);
+				mav.addObject("communityDTO", freeSharing);
+			}
+
+			mav.setViewName(adminFolder + "adminMarketplaceDetailForm.jsp");
+
+			return mav;
+		}
+		
+		@RequestMapping(value = "/adminMarketplaceboardUpDelForm.do")
+		   public ModelAndView adminMarketplaceboardUpDelForm(@RequestParam(value = "b_no") int b_no, @RequestParam(value = "table_name") String table_name, HttpSession session) {
+			// 세션에서 사용자 아이디를 가져옴
+			String userId = (String) session.getAttribute("mid");
+			// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+			if (userId == null || !userId.equals("admin")) {
+				return new ModelAndView("redirect:/loginForm.do");
+			}
+		      ModelAndView mav = new ModelAndView();
+		      
+		      if (table_name.equals("sale")) {
+		         CommunityDTO sale = this.adminService.getCommunityMarketplaceSaleDetailForm(b_no, false);
+		         mav.addObject("communityDTO", sale);
+		      }
+		      else {
+		         CommunityDTO freeSharing = this.adminService.getCommunityMarketplaceFreeSharingDetailForm(b_no, false);
+		         mav.addObject("communityDTO", freeSharing);
+		      }
+
+		      mav.setViewName(adminFolder + "adminMarketplaceboardUpDelForm.jsp");
+
+		      return mav;
+		   }
+		
+		 /*** 장터 업데이트 ***/
+		@ResponseBody
+		@RequestMapping(value = "/adminMarketplaceboardUpProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		
+		public Map<String, String> adminMarketplaceboardUpProc(CommunityDTO communityDTO) {
+
+			int marketplaceboardUpCnt = 0;
+			
+			String table_name = communityDTO.getTable_name();
+			
+			if (table_name.equals("sale")) {
+				marketplaceboardUpCnt = this.adminService.updateMarketplaceSaleBoard(communityDTO);
+			} else {
+				marketplaceboardUpCnt = this.adminService.updateMarketplaceFreeSharingBoard(communityDTO);
+			}
+
+			Map<String, String> resultMap = new HashMap<String, String>();
+
+			resultMap.put("result", marketplaceboardUpCnt + "");
+			
+			return resultMap;
+		}
+		
+		 /*** 장터 삭제 ***/
+		   @ResponseBody
+		   @RequestMapping(value = "/adminMarketplaceBoardDelProc.do", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")   
+		   public Map<String, String> adminMarketplaceBoardDelProc(CommunityDTO communityDTO) {
+		      
+			  int marketplaceboardDelCnt = 0; 
+			  
+			  String table_name = communityDTO.getTable_name();
+			  
+			  if (table_name.equals("sale")) {
+					marketplaceboardDelCnt = this.adminService.deleteMarketplaceSaleBoard(communityDTO);
+				} else {
+					marketplaceboardDelCnt = this.adminService.deleteMarketplaceFreeSharingBoard(communityDTO);
+				}
+		      
+		      Map<String, String> resultMap = new HashMap<String, String>();
+
+		      resultMap.put("result", marketplaceboardDelCnt + "");
+
+		      return resultMap;
+		   }
+		
+		   // ----------------------------------------------------------------
+		   // 자유게시판
+		   // ----------------------------------------------------------------
+		   /*** 자유게시판 페이지 ***/
+		   @RequestMapping(value = "/adminFreeBoardForm.do")
+		   public ModelAndView adminFreeBoardForm(AdminCommunitySearchDTO communitySearchDTO, HttpSession session) {
+				// 세션에서 사용자 아이디를 가져옴
+				String userId = (String) session.getAttribute("mid");
+				// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+				if (userId == null || !userId.equals("admin")) {
+					return new ModelAndView("redirect:/loginForm.do");
+				}
+		      int freeBoardListAllCnt = this.adminService.getFreeBoardAllCnt();
+
+		      int freeBoardListCnt = this.adminService.getFreeBoardListCnt(communitySearchDTO);
+
+		      Map<String, Integer> freeBoardMap = Page.getPagingMap(
+
+		            communitySearchDTO.getSelectPageNo()// 선택한 페이지 번호
+		            , communitySearchDTO.getRowCntPerPage() // 페이지 당 보여줄 검색 행의 개수
+		            , freeBoardListCnt // 검색 결과물 개수
+
+		      );
+
+		      communitySearchDTO.setSelectPageNo((int) freeBoardMap.get("selectPageNo"));
+		      communitySearchDTO.setRowCntPerPage((int) freeBoardMap.get("rowCntPerPage"));
+		      communitySearchDTO.setBegin_rowNo((int) freeBoardMap.get("begin_rowNo"));
+		      communitySearchDTO.setEnd_rowNo((int) freeBoardMap.get("end_rowNo"));
+
+		      List<CommunityDTO> freeBoardList = this.adminService.getFreeBoardList(communitySearchDTO);
+
+		      ModelAndView mav = new ModelAndView();
+
+		      mav.addObject("freeBoardList", freeBoardList);
+
+		      mav.addObject("freeBoardListCnt", freeBoardListCnt);
+
+		      mav.addObject("freeBoardListAllCnt", freeBoardListAllCnt);
+
+		      mav.addObject("freeBoardMap", freeBoardMap);
+
+		      mav.setViewName(adminFolder + "adminCommunityFreeBoardForm.jsp");
+
+		      return mav;
+		   }
+		
+		   /*** 자유게시판 새글쓰기 ***/
+		   @RequestMapping(value = "/adminNewCommunityFreeBoardForm.do")
+		   public ModelAndView adminNewCommunityFreeBoardForm(CommunityDTO communityDTO, HttpSession session) {
+			   // 세션에서 사용자 아이디를 가져옴
+				String userId = (String) session.getAttribute("mid");
+				// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+				if (userId == null || !userId.equals("admin")) {
+					return new ModelAndView("redirect:/loginForm.do");
+				}
+		      ModelAndView mav = new ModelAndView();
+
+		      mav.setViewName(adminFolder + "adminNewCommunityFreeBoardForm.jsp");
+
+		      return mav;
+		   }
+		
+		   /*** 자유게시판 글 등록 ***/
+		   @ResponseBody
+		   @RequestMapping(value = "/adminCommunityFreeBoardRegProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		   public Map<String, String> adminCommunityFreeBoardRegProc(CommunityDTO communityDTO) {
+		      
+		      int result = adminService.insertCommunityFreeBoard(communityDTO);
+		      
+		      Map<String, String> resultMap = new HashMap<String, String>();
+		      resultMap.put("result", result + "");
+		      
+		      return resultMap;
+		   }
+		
+		   /*** 자유게시판 조회수 올리는것 ***/
+		   @RequestMapping(value = "/adminUpdateFreeBoardDetailReadCountPlusOne.do")
+		   public ModelAndView adminUpdateFreeBoardDetailReadCountPlusOne(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {
+			   // 세션에서 사용자 아이디를 가져옴
+				String userId = (String) session.getAttribute("mid");
+				// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+				if (userId == null || !userId.equals("admin")) {
+					return new ModelAndView("redirect:/loginForm.do");
+				}
+			   adminService.updateFreeBoardDetailReadCountPlusOne(detailDTO);
+
+		      return adminCommunityFreeBoardDetail(detailDTO, session);
+		   }
+		
+		   /*** 자유게시판 상세보기 ***/
+		   @RequestMapping(value = "/adminCommunityFreeBoardDetail.do")
+		   public ModelAndView adminCommunityFreeBoardDetail(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {
+			   // 세션에서 사용자 아이디를 가져옴
+				String userId = (String) session.getAttribute("mid");
+				// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+				if (userId == null || !userId.equals("admin")) {
+					return new ModelAndView("redirect:/loginForm.do");
+				}
+		      CommunityFreeBoardDetailDTO freeBoardDetail = adminService.getFreeBoardDetail(detailDTO);
+		      
+		      int commentListCount = adminService.getFreeBoardDetailCommentPageListCount(detailDTO);
+		      
+		      Map<String, Integer> pageMap = Page.getPagingMap(
+		               detailDTO.getSelectPageNo()
+		            ,   detailDTO.getRowCntPerPage()
+		            ,   commentListCount
+		      );
+
+		      detailDTO.setSelectPageNo((int) pageMap.get("selectPageNo"));
+		      detailDTO.setRowCntPerPage((int) pageMap.get("rowCntPerPage"));
+		      detailDTO.setBegin_rowNo((int) pageMap.get("begin_rowNo"));
+		      detailDTO.setEnd_rowNo((int) pageMap.get("end_rowNo"));
+		      
+		      List<CommunityFreeBoardDetailDTO> freeBoardDetailCommentPageList = adminService.getFreeBoardDetailCommentPageList(detailDTO);
+		      
+		      ModelAndView mav = new ModelAndView();
+		      mav.addObject("commentListCount", commentListCount);
+		      mav.addObject("pageMap", pageMap);
+		      mav.addObject("detailDTO", detailDTO);
+		      mav.addObject("freeBoardDetail", freeBoardDetail);
+		      mav.addObject("freeBoardDetailCommentList", freeBoardDetailCommentPageList);
+		      mav.addObject("freeBoardDetailCommentListSize", freeBoardDetailCommentPageList.size());
+
+		      mav.setViewName(adminFolder + "adminCommunityFreeBoardDetailForm.jsp");      
+		      
+		      return mav;
+		   }
+		
+		   /*** 자유게시판 댓글 추가, 자유게시판 상세보기 ***/
+		   @RequestMapping(value = "/adminCommunityFreeBoardDetailCommentList.do")
+		   public ModelAndView adminCommunityFreeBoardDetailCommentList(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {
+		      
+			   adminService.insertFreeBoardDetailComment(detailDTO);
+		      
+		      return adminCommunityFreeBoardDetail(detailDTO, session);
+		   }
+		
+		   /*** 자유게시판 대댓글, 자유게시판 상세보기 ***/
+		   @RequestMapping(value = "/adminCommunityFreeBoardDetailCommentOfCommentInsertProc.do")
+		   public ModelAndView adminCommunityFreeBoardDetailCommentOfCommentInsertProc(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {		      
+		      
+			   adminService.insertFreeBoardDetailCommentToComment(detailDTO);
+
+		      return adminCommunityFreeBoardDetail(detailDTO, session);
+		   }
+		
+		   /*** 자유게시판 수정 삭제 페이지 ***/
+		   @RequestMapping(value = "/adminCommunityFreeBoardUpDelForm.do")
+		   public ModelAndView adminCommunityFreeBoardUpDelForm(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {
+			   // 세션에서 사용자 아이디를 가져옴
+				String userId = (String) session.getAttribute("mid");
+				// 사용자 아이디가 admin이 아니라면 로그인 페이지로 리다이렉트
+				if (userId == null || !userId.equals("admin")) {
+					return new ModelAndView("redirect:/loginForm.do");
+				}
+		      CommunityDTO communityDTO = adminService.getFreeBoard(detailDTO.getB_no());
+
+		      ModelAndView mav = new ModelAndView();
+		      mav.addObject("communityDTO", communityDTO);
+		      mav.setViewName(adminFolder + "adminCommunityFreeBoardUpDelForm.jsp");
+
+		      return mav;      
+		   }
+		
+		   /*** 자유게시판 상세보기, 업데이트 ***/
+		   @ResponseBody
+		   @RequestMapping(value = "/adminCommunityFreeBoardUpdateProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")   
+		   public Map<String, String> adminCommunityFreeBoardUpdateProc(CommunityDTO communityDTO) {
+
+		      int updateCount = adminService.updateCommunityFreeBoard(communityDTO);
+
+		      Map<String, String> resultMap = new HashMap<String, String>();
+		      resultMap.put("result", updateCount + "");
+
+		      return resultMap;      
+		   }
+		
+		   /*** 자유게시판 상세보기, 삭제 ***/
+		   @ResponseBody
+		   @RequestMapping(value = "/adminCommunityFreeBoardDelProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")   
+		   public Map<String, String> adminCommunityFreeBoardDelProc(CommunityDTO communityDTO) {
+		      
+		      int boardDeleteCount = adminService.deleteCommunityFreeBoard(communityDTO);
+
+		      Map<String, String> resultMap = new HashMap<String, String>();
+		      resultMap.put("result", boardDeleteCount + "");
+
+		      return resultMap;      
+		   }
+
+		   /*** 자유게시판 대댓글 수정, 자유게시판 상세보기 ***/
+		   @RequestMapping(value = "/adminCommunityFreeBoardDetailCommentOfCommentUpdateProc.do")
+		   public ModelAndView adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {
+		     
+		      adminService.adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(detailDTO);
+
+		     return adminCommunityFreeBoardDetail(detailDTO, session);
+		   }
+
+		   /*** 자유게시판 대댓글 삭제, 자유게시판 상세보기 ***/
+		   @RequestMapping(value = "/adminCommunityFreeBoardDetailCommentOfCommentDeleteProc.do")
+		   public ModelAndView adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO, HttpSession session) {
+		     
+		      adminService.adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(detailDTO);
+
+		     return adminCommunityFreeBoardDetail(detailDTO, session);
+		   }
 	
 	
 	
