@@ -284,6 +284,7 @@ function search() {
 	  			</dl>
 			</div>	
 			
+			
 			<!-- 페이징처리관련 밑에두줄-->
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
