@@ -183,7 +183,6 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recordsStatisticsFormTitle">
-    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">통계</p>
     </div>
     <div class="recordsStatisticsMatchingSuccessRateContainer">

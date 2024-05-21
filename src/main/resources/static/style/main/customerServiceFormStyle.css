@@ -79,7 +79,7 @@ li {
 }
 
 #category li.active {
-  background-color: #333;
+  background-color: #c59246e0;
   color: #fff;
   width: 50%;
   border-radius: 8px;
@@ -91,26 +91,14 @@ li {
 .customerServiceCategory span{
 	font-size: 18px;
 }
- 
-.customerServiceFormTitle{
-	/* position: relative; */
-	border-bottom: 1px solid #FFFFFF;
-}
-/* 
-.titleBackgoundImg{
-	opacity: 0.5;
-	width: 100%;
-	height: 100px;
-}
- */
 .titleBackgoundText{
+	border-bottom: 1px solid #006666;
+	width: 55%;
+	margin: 0 auto;
+	margin-bottom: 30px;
 	font-size: 40px;
-	/* position: absolute; */
 	text-align: center;
-	/* top: 50%;
-	left: 50%;
-	transform: translate( -50%, -50% ); */
-	
+	padding: 40px;
 }
 
 /*tab css*/
@@ -203,6 +191,7 @@ th {
     color: #FFFFFF;
     border-radius: 10px;
     border: 1px solid #c59246e0;
+    cursor: pointer;
 }
 
 #customerServiceQnABoardAllCount{
@@ -249,4 +238,8 @@ th {
 .arrowRight strong{
     font-size: 20px;
     margin-left: 10px;
+}
+
+[class$='customerServiceQnABoardListTable'] tr:nth-child(n+2):hover{
+	background-color:rgba(211, 211, 211, 0.3);
 }

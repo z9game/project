@@ -205,6 +205,17 @@
 		    </if>
 		    )
 		</if>
+		
+		<if test="money != null">
+		    and (
+		    <if test="money != null and money == '상관없음'">
+		        l.money IN ('무료','유료')
+		    </if>
+		    <if test="money != null and money != '상관없음'">
+		            l.money = #{money}
+		    </if>
+		    )
+		</if>
       </sql>
       
    <!-- ============================================================================================= -->   
