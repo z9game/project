@@ -103,4 +103,10 @@ public class MatchingServiceImpl implements MatchingService {
 	public List<MatchingDTO> machingTimeSelectBoxLoad(MatchingDTO dto) {
 		return matchingDAO.machingTimeSelectBoxLoad(dto);
 	}
+	
+	//승낙 대기 리스트로 팀정보 넘어감
+	public int regWaitingList(MatchingDTO matchingDTO) {
+		int regWaitingList = this.matchingDAO.regWaitingList(matchingDTO);
+		return regWaitingList;
+	}
 }

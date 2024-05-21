@@ -103,7 +103,8 @@
 	<select id="getMyInfo" parameterType="int" resultType="kosmo.team.project.dto.MemberDTO">
 		select
 		    m.name
-		    ,m.m_no    
+		    ,m.m_no
+		    ,t.team_no    
 		    ,t.team_name 
 		    ,t.team_master   
 		from

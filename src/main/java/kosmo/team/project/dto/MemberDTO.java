@@ -16,6 +16,7 @@ public class MemberDTO {
 	private String reg_date;
 	private int age;
 	
+	private int team_no;
 	private String team_name;
 	private int team_master;
 	
@@ -180,6 +181,12 @@ public class MemberDTO {
 	}
 	public void setGoals_assist(int goals_assist) {
 		this.goals_assist = goals_assist;
+	}
+	public int getTeam_no() {
+		return team_no;
+	}
+	public void setTeam_no(int team_no) {
+		this.team_no = team_no;
 	}
 	
 	

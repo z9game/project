@@ -9,6 +9,35 @@
 <title>RecruitTeamBoardDetailForm</title>
 <link href="/style/recruitTeamBoardDetailFormStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
+
+<script>
+	function goWaitingList()
+	{
+		var formObj = $("[name='waitingList']");
+		
+		if (confirm("신청 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/goMatchWaitingList.do",
+			type : "post",
+			data : formObj.serialize(),
+			success : function(json) {
+				var result = json["result"];
+				if (result == 1) {
+					alert("신청이 완료되었습니다.");
+				}
+				else {
+					alert("이미 신청한 팀입니다.");
+				}
+			},
+			error : function() {
+				alert("수정 실패! 관리자에게 문의 바랍니다.");
+			}
+		});
+	}
+</script>
 </head>
 <body>
    <%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -49,26 +78,20 @@
                <!--------------------------------------------------- -->
                <td>${requestScope.detail.readcount}</td>
             </tr>
-            
             <tr>
-                <th bgColor="lightgray">지역</th>
-                <!--------------------------------------------------- -->
-                <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-                <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-                <!-- 상세보기할 게시판의 조회수 표현하기 -->
-                <!--------------------------------------------------- -->
-                <td>${requestScope.detail.sido_c} ${requestScope.detail.sigungu_c}</td>
+                <th bgColor="lightgray">경기장명</th>
+                <td>${requestScope.detail.stadium_name}</td>
              </tr>
-             
+             <tr>
+                <th bgColor="lightgray">일시(날짜)</th>
+                <td>${requestScope.detail.booking_date}</td>
+             </tr>
              <tr>
                 <th bgColor="lightgray">시간</th>
                 <td>${requestScope.detail.time_range}</td>
              </tr>
              
-             <tr>
-                <th bgColor="lightgray">일시</th>
-                <td>${requestScope.detail.day}</td>
-             </tr>
+             
           
             <tr>
                <th bgColor="lightgray">내 용</th>
@@ -87,6 +110,10 @@
          <!--------------------------------------------------- -->
          <!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
          <!--------------------------------------------------- -->
+          <c:if test="${requestScope.myInfo.team_master eq sessionScope.m_no}">
+		  		<input type="button" value="경기신청" style="cursor:pointer" onclick="goWaitingList()" >
+		  </c:if>
+	
          <span style="cursor: pointer"
             onclick="location.href='/matchingForm.do'">
             [목록 화면으로] </span>
@@ -101,6 +128,14 @@
 	 <!------------------------------------------------------------------------>
 	 <input type="hidden" name="match_no"value="${requestScope.detail.match_no}">
 	 </form>
+	 
+	 <!-- 매칭 게시물일때 신청버튼을 누르면 넘어갈 정보들 -->
+		<form name="waitingList">
+			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
+			<input type="hidden" name="team_no"value="${requestScope.myInfo.team_no}">
+			<input type="hidden" name="match_no"value="${requestScope.detail.match_no}">
+			
+		</form>
  
 </body>
 </html>

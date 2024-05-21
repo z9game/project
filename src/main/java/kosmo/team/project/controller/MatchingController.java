@@ -14,7 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.MatchingDTO;
 import kosmo.team.project.dto.MatchingSearchDTO;
+import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.RecruitTeamMemDTO;
 import kosmo.team.project.service.MatchingService;
+import kosmo.team.project.service.MemberService;
 import kosmo.team.project.utility.Page;
 
 @Controller
@@ -22,6 +25,7 @@ public class MatchingController {
 	
 	@Autowired
 	private MatchingService matchingservice;
+	private MemberService memberService;
 
 	//===============================================================================================================================================================================
 	
@@ -86,18 +90,23 @@ public class MatchingController {
     @RequestMapping(value = "/matchingDetailForm.do")
     									//matchingForm에서 matchingDetailForm으로 올때 form태그 안에 name='match_no' 인 태그의 값이 들어온다. 
     									//그리고 그값을 match_no라는 변수를 선언하고 그 안에 넣었음.
-    public ModelAndView matchingDetailForm(@RequestParam(value="match_no")int match_no) {
-    	
+    public ModelAndView matchingDetailForm(@RequestParam(value="match_no")int match_no, @RequestParam(value="m_no")int m_no) {
+
     	//matchingDetail 이라는 변수를 선언하고 그 안에 getMatchingDetail 메소드의 실행결과를 저장한다.
     	//MatchingDTO 자료형? -> 받을 결과물의 틀을 미리 만들어둔거나 마찬가지. 즉, 해당하는 값 외의 값이 들어오면 오류를 발생시킴.
     	// 오류예시 -> DTO에는 b_no라고 틀을 만들고 오라클 결과물의 컬럼명은 m_no일때 두 이름이 다르니 저장이 절대절대절대절대 불가능
     	MatchingDTO matchingDetail = this.matchingservice.getMatchingDetail(match_no);
+    	
+    	//내 정보 가져오기, 오라클 실행결과물을 myInfo라는 변수에 저장
+		MemberDTO myInfo = this.memberService.getMyInfo(m_no);
+    	
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("/matching/matchingDetailForm.jsp");
     	
     	//오라클에서 가져온 결과물을 저장한 matchingDetail을 JSP쪽에서 ${requestScope.~}를 이용해 사용할 수 있게 addObject라는 것을 사용 
     	mav.addObject("detail", matchingDetail);
-    	
+	    //myInfo에 저장한 결과물을 페이지에서 requestScope를 사용해 얻어낼수 있게 설정
+        mav.addObject("myInfo", myInfo);
         return mav;
     }
     
@@ -224,5 +233,26 @@ public class MatchingController {
 	public List<MatchingDTO> machingTimeSelectBoxLoad(MatchingDTO dto) {
         return matchingservice.machingTimeSelectBoxLoad(dto);
     }
+
+    //===============================================================================================================================================================================
+    
+    //신청버튼을 누르면 내 정보가 승낙대기 테이블로 넘어감.
+    @RequestMapping( value = "/goMatchWaitingList.do"
+			,method = RequestMethod.POST
+			, produces = "application/json; charset=UTF-8"
+			)
+	@ResponseBody
+	public Map<String, String> waitngList_myInfoProc(MatchingDTO matchingDTO)
+	{
+    	
+    int regWaitingList = this.matchingservice.regWaitingList(matchingDTO);
+    	
+	Map<String, String> resultMap = new HashMap<String, String>();
+	
+	resultMap.put("result", regWaitingList+"");
+	
+	
+	return resultMap;
+	}
     
 }

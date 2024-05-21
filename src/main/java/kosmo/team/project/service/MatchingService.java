@@ -44,4 +44,7 @@ public interface MatchingService {
     // 매칭 새글쓰기 m_no, stadium_no를 받아 경기시간 셀렉트박스에 적용할 데이터 로드
 	public List<MatchingDTO> machingTimeSelectBoxLoad(MatchingDTO dto);	
 	
+	//승낙 대기 리스트로 팀정보 넘어감
+	int regWaitingList(MatchingDTO matchingDTO);
+	
 }

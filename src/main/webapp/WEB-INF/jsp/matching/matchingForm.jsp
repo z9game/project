@@ -322,6 +322,7 @@
 		하지만 지금 이곳에서는 그 값을 설정해주지않고 함수부분에서 어떠한 값을 넘길것인지 설정해줄거임.
 		 -->
 		<input type="hidden" name="match_no">
+		<input type="hidden" name="m_no" value="${sessionScope.m_no}">
 	</form>
 	
 	
