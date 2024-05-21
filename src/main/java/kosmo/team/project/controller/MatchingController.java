@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import kosmo.team.project.dto.MatchingDTO;
 import kosmo.team.project.dto.MatchingSearchDTO;
 import kosmo.team.project.dto.MemberDTO;
-import kosmo.team.project.dto.RecruitTeamMemDTO;
 import kosmo.team.project.service.MatchingService;
 import kosmo.team.project.service.MemberService;
 import kosmo.team.project.utility.Page;
@@ -25,6 +24,7 @@ public class MatchingController {
 	
 	@Autowired
 	private MatchingService matchingservice;
+	@Autowired
 	private MemberService memberService;
 
 	//===============================================================================================================================================================================
