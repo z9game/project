@@ -213,7 +213,7 @@ insert into match (match_no, title, writer, content, time_no, day, stadium)
 	where
 		m.match_no = #{match_no}    
 	    and
-	    sta.stadium_name = (select sta.stadium_name from match m left join stadium sta on m.stadium = sta.stadium_no)
+	    sta.stadium_name = (select sta.stadium_name from match m left join stadium sta on m.stadium = sta.stadium_no where m.stadium = (select stadium from match where match_no = #{match_no}))
 	    and
 	    m.time_no = (select time_no from match where match_no = #{match_no})
 	    and
