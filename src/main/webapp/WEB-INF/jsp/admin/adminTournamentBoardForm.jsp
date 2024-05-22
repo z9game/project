@@ -229,8 +229,6 @@
 	    
 	    keyword1 = $.trim(keyword1);
 	    
-	    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val());
-	    
 	 	if(ing_or_end == "진행")
 		{
 			$.ajax({
@@ -334,7 +332,6 @@
 			<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()"> 
 			
 			<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
-			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 		</form>	
 		
 		<div style="height:10px;"></div>
@@ -428,12 +425,7 @@
 				onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}+1)">[다음]</span>
 				<span style="cursor: pointer"
 				onClick="pageNoClick(${requestScope.tournamentMap.last_pageNo})">[마지막]</span>
-			</span> <select name="rowCntPerPage" class="rowCntPerPage"
-				onChange="search()">
-				<option value="10">10
-				<option value="15">15
-				<option value="20">20
-			</select>행보기 &nbsp;&nbsp;&nbsp;
+			</span>
 		</center>
 		
     </center>

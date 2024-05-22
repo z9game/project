@@ -27,8 +27,6 @@ function search() {
 	// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
 	//---------------------------------------------
 	var boardSearchFormObj = $("[name='recruit_lesson']");
-
-  boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
 	
 	
 	//값 들어오는지 확인
@@ -289,8 +287,6 @@ function search() {
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
-			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			<input type="hidden" name="sort_date">
 			<!-- 위에 한 줄은 sort 관련 -->
 			
@@ -385,12 +381,7 @@ function search() {
 			<span style="cursor: pointer"
 			onClick="pageNoClick(${requestScope.lessonMap.last_pageNo})">[마지막]</span>
 
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
+		</span> 
 	</center>
   
 	<div style="height:30px;"></div>

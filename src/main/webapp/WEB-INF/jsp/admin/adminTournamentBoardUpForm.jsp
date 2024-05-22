@@ -29,7 +29,7 @@
 
    <%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 
-      
+      <form name="newAdminTournamentBoardFormRegTable">
          <table class="newAdminTournamentBoardFormRegTable" border="1" bordercolor="black">
             <tr>
                <th>제목</th>
@@ -45,13 +45,13 @@
                <td>
                		<select name="region">
                			<option>지역선택</option>
-               			<option value="서울" <c:if test="${requestScope.region eq '서울'}">selected</c:if>>서울</option>
-               			<option value="경인" <c:if test="${requestScope.region eq '경인'}">selected</c:if>>경인</option>
-               			<option value="강원" <c:if test="${requestScope.region eq '강원'}">selected</c:if>>강원</option>
-               			<option value="충청" <c:if test="${requestScope.region eq '충청'}">selected</c:if>>충청</option>
-               			<option value="전라" <c:if test="${requestScope.region eq '전라'}">selected</c:if>>전라</option>
-               			<option value="경상" <c:if test="${requestScope.region eq '경상'}">selected</c:if>>경상</option>
-               			<option value="제주" <c:if test="${requestScope.region eq '제주'}">selected</c:if>>제주</option>
+               			<option value="서울">서울</option>
+               			<option value="경인">경인</option>
+               			<option value="강원">강원</option>
+               			<option value="충청">충청</option>
+               			<option value="전라">전라</option>
+               			<option value="경상">경상</option>
+               			<option value="제주">제주</option>
                		</select>
                </td>
             </tr>
@@ -73,7 +73,8 @@
 	               </textarea>
 	            </td>
          	</tr>
-      </table>
+     	 </table>
+      </form>
 
 
       <center>

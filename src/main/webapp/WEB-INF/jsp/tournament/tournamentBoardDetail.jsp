@@ -31,7 +31,7 @@
 	<c:if test="${empty requestScope.list}">
 		<script>
 			alert("게시글이 삭제되었습니다.");
-			location.replace("/recruitTeamBoardForm.do");
+			location.replace("/tournamentBoardForm.do");
 		</script>
 	</c:if>
 
