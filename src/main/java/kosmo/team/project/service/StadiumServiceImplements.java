@@ -78,7 +78,7 @@ public class StadiumServiceImplements implements StadiumService {
 
 		// System.out.print(m_noCnt);
 
-		if (m_noCnt >= 3) {
+		if (m_noCnt >= 5) {
 
 			return 4;
 		}
@@ -216,6 +216,12 @@ public class StadiumServiceImplements implements StadiumService {
 		if (yangdoCnt == 0) {
 			return yangdoCnt;
 		}
+		
+		int checkStatusDelCnt = this.stadiumDAO.getCheckStatusDelCnt(yangdoDTO.getYangdo_no());
+		
+		if (checkStatusDelCnt >= 1) {
+			return 8;
+		}
 
 		int yangdoDelCnt = this.stadiumDAO.deleteYangdo(yangdoDTO);
 
@@ -240,6 +246,12 @@ public class StadiumServiceImplements implements StadiumService {
 		if (yangdoCnt == 0) {
 			return yangdoCnt;
 		}
+		
+		int checkStatusUpCnt = this.stadiumDAO.getCheckStatusUpCnt(yangdoDTO.getYangdo_no());
+		if (checkStatusUpCnt >=1) {
+			return 7;
+		}
+		
 		int yangdoUpCnt = this.stadiumDAO.updateYangdo(yangdoDTO);
 
 		// 수정 적용개수 리턴하기

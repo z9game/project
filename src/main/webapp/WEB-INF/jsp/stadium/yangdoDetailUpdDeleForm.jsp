@@ -176,13 +176,26 @@ function loadTimeRanges() {
 	function checkYangdoUpForm() {
 
 		 var formObj = $("[name='yangdoDetailUpdDeleForm']");
-// 		var writerObj = formObj.find(".writer");
-// 		var subjectObj = formObj.find(".subject");
-// 		var contentObj = formObj.find(".content");
+ 		//var writerObj = formObj.find(".writer");
+ 		var subjectObj = formObj.find(".title");
+ 		var contentObj = formObj.find(".content");
 
-// 		if (confirm("정말수정하시겠습니까?") == false) {
-// 			return;
-// 		} */	
+
+
+		if (subjectObj.val().trim() == "") {
+	        alert("제목을 입력해주세요");
+	        return;
+	    }
+	    
+	    if (contentObj.val().trim().length == 0) {
+	        alert("내용을 1자 이상 입력해주세요.");
+	        contentObj.val("");
+	        return;
+	    }
+	    
+
+
+
 		var stadiumSelected = $("select[name='MyStadium']").val();
 		
 		 var bookingDate = $("select[name='MyDate']").val();
@@ -226,9 +239,10 @@ function loadTimeRanges() {
 
 
 
-		alert(JSON.stringify(formData));
+		//alert(JSON.stringify(formData));
 
-
+ 		if (confirm("정말수정하시겠습니까?") == false) {
+ 			return;		}	
 
 	
 		
@@ -246,8 +260,11 @@ function loadTimeRanges() {
 				}else if (result == 3){
 					alert("이미 같은조건의 게시글이있음")
 					return;
+				}else if ( result ==7){
+					
+				alert("이이 양도한 글입니다.")
+					
 				}
-				
 				else {
 					alert("양도 수정 성공입니다.");
 					location.href = "/stadiumTransferForm.do";
@@ -278,7 +295,11 @@ function loadTimeRanges() {
 				if (result == 0) {
 					alert("삭제된 양도입니다.");
 					location.href = "/stadiumTransferForm.do";
-				} else {
+				}else if ( result == 8){
+					alert("이미 양도완료한 글입니다.")
+					
+				} 
+				else {
 					alert("양도 삭제 성공입니다.");
 					location.href = "/stadiumTransferForm.do";
 				}
@@ -367,6 +388,7 @@ function loadTimeRanges() {
 		<span style="cursor: pointer"
 			onclick="location.replace('/stadiumTransferForm.do')">[목록
 			화면으로]</span>
+			
 	</center>
 	<center>
 		<input type="button" value="수정" onclick="checkYangdoUpForm();">

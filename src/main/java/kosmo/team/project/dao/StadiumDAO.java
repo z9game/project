@@ -78,6 +78,10 @@ public interface StadiumDAO {
 	public int updateSincheong(YangdoDTO yangdoDTO);
 
 	public int updateBooking(YangdoDTO yangdoDTO);
+
+	public int getCheckStatusDelCnt(int yangdo_no);
+
+	public int getCheckStatusUpCnt(int yangdo_no);
 	
 
 	

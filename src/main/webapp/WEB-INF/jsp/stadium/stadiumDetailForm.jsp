@@ -183,7 +183,7 @@
 			<caption>[스타디움 예약 상세]</caption>
 			<tr>
 				<th bgColor="lightgray">날짜</th>
-				<td><input type="text" id="date" name="date"
+				<td><input type="text" id="date" name="date" readonly="readonly"
 					required="required"></td>
 			</tr>
 			<tr>
