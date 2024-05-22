@@ -24,6 +24,7 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 	
+    	//회원가입창
 		@RequestMapping(value = "/memberRegForm.do")
 	    public ModelAndView memberRegForm() {
 	    	
@@ -33,6 +34,7 @@ public class MemberController {
 	        return mav;
 	    }
 		
+		//회원가입 시도
 		@RequestMapping( value="/memberRegProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 		@ResponseBody
 		

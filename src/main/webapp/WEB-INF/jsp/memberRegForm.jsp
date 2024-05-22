@@ -24,6 +24,14 @@ function checkmid()
         return;
     }
 	
+	if(new RegExp(/^[a-zA-Z0-9]{5,20}$/).test(midobj.val()) == false)
+	{	
+
+		alert("아이디는 영어 대/소문자 와 숫자로만 입력 가능합니다./5~20자 이내")
+		midobj.val("");
+		return;
+	}
+	
 	//-----------------------------------------------------
 	// JQuery 객체의 [ajax 메소드]를 호출하여
 	// WAS 에 비동기방식으로 "/boardRegProc.do" 주소로 접속하고 
@@ -86,13 +94,42 @@ function regMember()
 	var checkpwdobj = $(".checkpwd");
 	var nameobj = $(".name");
 	var emailObj = $(".email");
-	var nicknameObj = $(".nickname")
+	var nicknameObj = $(".nickname");
+	var phone1Obj = $(".phone1");
+	var phone2Obj = $(".phone2");
+	var phone3Obj = $(".phone3");
+	var addressObj = $(".detail_address")
 	var formobj = $("[name='memRegForm']")
 	
 	
 	
+	if(new RegExp(/^[a-zA-Z가-힣0-9\s]+$/).test(addressObj.val()) == false)
+	{	
+		alert("잘못된 주소형식입니다.");
+		addressObj.val("");
+		return;
+	}
 
+	if(new RegExp(/^[0-9]{3}$/).test(phone1Obj.val()) == false)
+	{	
+		alert("잘못된 전화번호형식입니다.");
+		phone1Obj.val("");
+		return;
+	}
 	
+	if(new RegExp(/^[0-9]{4}$/).test(phone2Obj.val()) == false)
+	{	
+		alert("잘못된 전화번호형식입니다.");
+		phone2Obj.val("");
+		return;
+	}
+	
+	if(new RegExp(/^[0-9]{4}$/).test(phone3Obj.val()) == false)
+	{	
+		alert("잘못된 전화번호형식입니다.");
+		phone3Obj.val("");
+		return;
+	}
 	
 	if(new RegExp(/^[가-힣]{2,15}$/).test(nameobj.val()) == false)
 	{	
@@ -220,7 +257,7 @@ function regMember()
 				<tr>
 					<th class="memberRegFormNameTh">이름</th>
 					<td>
-						<input type="text" name="name" class="name" size="40" maxlength="15">
+						<input type="text" name="name" class="name" size="40" maxlength="30">
 					</td>
 				</tr>
 				<tr>
@@ -244,7 +281,7 @@ function regMember()
 				<tr>
 					<th class="memberRegFormEmailTh">이메일</th>
 					<td>
-						<input type="text" name="email" class="email" size="40" maxlength="50">
+						<input type="text" name="email" class="email" size="40" maxlength="100">
 					</td>
 				</tr>
 				<tr>
@@ -256,7 +293,7 @@ function regMember()
 				<tr>
 					<th class="memberRegFormPhoneTh">전화번호</th>
 					<td>
-						<input type="text" name="phone" class="phone" size="40" maxlength="30">
+						<input type="tel" name="phone1" class="phone1" size="3" maxlength="3">-<input type="tel" name="phone2" class="phone2" size="3" maxlength="4">-<input type="tel" name="phone3" class="phone3" size="3" maxlength="4">
 					</td>
 				</tr>
 				<tr>
