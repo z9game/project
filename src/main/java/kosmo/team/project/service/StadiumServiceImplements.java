@@ -78,7 +78,7 @@ public class StadiumServiceImplements implements StadiumService {
 
 		// System.out.print(m_noCnt);
 
-		if (m_noCnt >= 5) {
+		if (m_noCnt >= 3){
 
 			return 4;
 		}

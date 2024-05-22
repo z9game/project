@@ -166,8 +166,8 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 			
 			<center>
 				<span style="cursor: pointer;" onclick="location.replace('/stadiumTransferForm.do')">[목록 화면으로]</span>
-				<c:if test="${requestScope.yangdoDTO.status ne '양도완료'}">
-				<input type="button" value="수정/삭제" onclick="document.yangdoDetailUpdDeleForm.submit();">
+				<c:if test="${requestScope.yangdoDTO.status ne '양도완료' and requestScope.yangdoDTO.m_no eq sessionScope.m_no}">
+   				 <input type="button" value="수정/삭제" onclick="document.yangdoDetailUpdDeleForm.submit();">
 				</c:if>
 			</center>
 			

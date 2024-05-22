@@ -26,6 +26,14 @@
 			upper(st.stadium_name) like upper('%${Stadiumkeyword2}%')
 			)
 		</if>
+		
+
+
+		<if
+			test="( Stadiumkeyword1 !=null and Stadiumkeyword1.length()>0) or (Stadiumkeyword2!=null and Stadiumkeyword2.length()>0)">
+			)
+		</if>
+		
 		<if test="sido !=null and sido>0 ">
 			and
 			(
@@ -43,13 +51,6 @@
 
 
 		</if>
-
-
-		<if
-			test="( Stadiumkeyword1 !=null and Stadiumkeyword1.length()>0) or (Stadiumkeyword2!=null and Stadiumkeyword2.length()>0)">
-			)
-		</if>
-
 
 	</sql>
 
