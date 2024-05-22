@@ -14,11 +14,7 @@
 
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 <script>
-	var gender = "${requestScope.memberDTO.gender}";
-	console.log("Gender value: " + gender);
-	if (!gender) {
-		console.log("Gender value is empty or undefined!");
-	}
+
 </script>
 
 
@@ -98,7 +94,7 @@
 				<!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
 				<!-- 상세보기할 게시판의 이름 표현하기 -->
 				<!--------------------------------------------------- -->
-				<td>${requestScope.memberDTO.phone}</td>
+				<td>${requestScope.memberDTO.phone1}-${requestScope.memberDTO.phone2}-${requestScope.memberDTO.phone3}</td>
 			</tr>
 			<tr>
 				<th bgColor="lightgray">성별</th>
