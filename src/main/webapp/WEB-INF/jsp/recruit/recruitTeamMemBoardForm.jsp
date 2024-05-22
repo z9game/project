@@ -175,8 +175,6 @@ function search() {
     
     keyword1 = $.trim(keyword1);
     
-    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val());
-    
     
 	$.ajax({
 		//-------------------------------
@@ -376,7 +374,7 @@ function checkReserveForm()
 	  					</dd>
 	  			</dl>
 			</div>	
-			
+			<!-- 
 			<div class="detail_Search">
 	 			<dl class="age">
 	  				<dt class="item">연 령</dt>
@@ -424,17 +422,17 @@ function checkReserveForm()
 	 					</dd>
 	 			</dl>
 			</div>
-			s
+			
 				
 			<div class="detailSpace">
 	 			<dl class="detailBtn" >
 	 				<dt class="item" onclick="toggleText()" style="cursor:pointer">상세검색 열기</dt>
 	 			</dl>
 	 		</div>
-	 		
+	 		 -->
+	 		 
 	 		<input type="hidden" name="sort_date">
 	 		<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
-			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 	 	</form>
 		
   <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->			
@@ -524,12 +522,7 @@ function checkReserveForm()
 			onClick="pageNoClick(${requestScope.recruitMap.selectPageNo}+1)">[다음]</span>
 			<span style="cursor: pointer"
 			onClick="pageNoClick(${requestScope.recruitMap.last_pageNo})">[마지막]</span>
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
+		</span> 
 		
 	</center>
 	<div style="height:30px;"></div>
