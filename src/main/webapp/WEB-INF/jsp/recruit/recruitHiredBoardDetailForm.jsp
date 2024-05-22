@@ -158,9 +158,11 @@ function goWaitingHiredList()
 			<!--------------------------------------------------- -->
 			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 			<!--------------------------------------------------- -->
-			<c:if test="${sessionScope.nickname ne requestScope.hireddetailList.nickname}">
-         	 	<input type="button" value="신청" style="cursor:pointer" onclick="goWaitingHiredList()" >
-         	</c:if>
+			<c:if test="${not empty sessionScope.m_no}">
+				<c:if test="${sessionScope.nickname ne requestScope.hireddetailList.nickname}">
+	         	 	<input type="button" value="신청" style="cursor:pointer" onclick="goWaitingHiredList()" >
+	         	</c:if>
+	         </c:if>
 			<span style="cursor: pointer"
 				onclick="location.replace('/recruitHiredBoardForm.do')">
 				[목록 화면으로] </span>
