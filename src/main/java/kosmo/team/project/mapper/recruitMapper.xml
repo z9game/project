@@ -929,6 +929,7 @@
               ,to_char(l.reg_date, 'YYYY-MM-DD') as "reg_date"
               ,s.name    as "sido_c"
               ,si.name    as "sigungu_c"
+              ,m.m_no
           from 
               lesson_recruitment l LEFT JOIN sido s ON l.sido = s.sido_id
                                  LEFT JOIN sigungu si ON l.sigungu = si.sigungu_id
@@ -1118,7 +1119,7 @@
    		into 
    			waiting_lessonreg
    		values(
-   			 #{recruitment_no}
+   			 #{writer}
    			,#{m_no}
    		)
    	</insert>   

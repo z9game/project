@@ -77,6 +77,9 @@ public interface MemberDAO {
 	 
 	//레슨승낙 대기인원 정보가져오기
 	 List<TeamDTO> getWaitingLessonList(int m_no);
+	 
+	//나의 레슨을 듣는 인원목록 가져오기
+	 List<TeamDTO> getLessonList(int m_no);
 	
 	
 }

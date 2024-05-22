@@ -104,7 +104,7 @@ public class MemberController {
 			 List<TeamDTO> waitHiredList = this.memberService.getWaitingHiredList(m_no);
 			 
 			//레슨승낙 대기인원 정보가져오기
-			 //List<TeamDTO> waitLessonList = this.memberService.getWaitingLessonList(m_no);
+			 List<TeamDTO> waitLessonList = this.memberService.getWaitingLessonList(m_no);
 			 
 			//팀에 속해있는 용병 목록 가져오기
 			 List<TeamDTO> getHiredList = this.memberService.getHiredList(m_no);
@@ -120,7 +120,9 @@ public class MemberController {
 			 
 			//내가 팀장일때 매칭 신청이 들어왔을때
 			 int matchWaitingCnt = this.memberService.getmatchWaitingCnt(m_no);
-			
+
+		    //나의 레슨을 듣는 인원목록 가져오기
+			 List<TeamDTO> getLessonList = this.memberService.getLessonList(m_no);
 			 
 			 
 		     ModelAndView mav = new ModelAndView();
@@ -142,6 +144,8 @@ public class MemberController {
 		     mav.addObject("waitList", waitList);
 		     //용병승낙대기중인 인원목록
 		     mav.addObject("waitHiredList", waitHiredList);
+		     //레슨승낙대기중인 인원목록
+		     mav.addObject("waitLessonList", waitLessonList);
 		     //매칭대기중인 팀 목록
 		     mav.addObject("matchWaitingList", matchWaitingList);
 		     //내팀 정보
@@ -150,7 +154,8 @@ public class MemberController {
 		     mav.addObject("getHiredList", getHiredList);
 		     //다음경기 일정 가져오기
 		     mav.addObject("getTeamMatchDay", getTeamMatchDay);
-		     
+		     //나의 레슨을 듣는 인원목록 가져오기
+		     mav.addObject("getLessonList", getLessonList);
 		     
 
 		     return mav;

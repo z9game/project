@@ -206,4 +206,10 @@ public class MemberServiceImplements implements MemberService {
 		 List<TeamDTO> getWaitingLessonList = this.memberDAO.getWaitingLessonList(m_no);
 		 return getWaitingLessonList;
 	}
+	
+	 //나의 레슨을 듣는 인원목록 가져오기
+	public List<TeamDTO> getLessonList(int m_no){
+		 List<TeamDTO> getLessonList = this.memberDAO.getLessonList(m_no);
+		 return getLessonList;
+	 }
 }

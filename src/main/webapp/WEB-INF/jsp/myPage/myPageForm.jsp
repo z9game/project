@@ -648,15 +648,15 @@
 						<th>지역</th>
 						<th>나이</th>
 					</tr>
-					<c:forEach var="lesson" items="" varStatus="status">
+					<c:forEach var="lesson" items="${requestScope.getLessonList}" varStatus="status">
 						<tr>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"></td>
+							<td align="center">${lesson.name}</td>
+							<td align="center">${lesson.sido}</td>
+							<td align="center">${lesson.age}</td>
 						</tr>
 					</c:forEach>
 				</table>
-				<c:if test="">
+				<c:if test="${empty requestScope.getLessonList}">
 					<center>
 					<br>
 					<b>관리하는 인원이 없습니다.</b>
@@ -673,16 +673,16 @@
 							<th>나이</th>
 							<th>선택</th>
 						</tr>
-						<c:forEach var="lesson" items="" varStatus="status">
+						<c:forEach var="lessonWaiting" items="${requestScope.waitLessonList}" varStatus="status">
 							<tr>
-								<td align="center"></td>
-								<td align="center"></td>
-								<td align="center"></td>
-								<td align="center"><input type="checkbox" class="approve" name="m_no_L" value=""></td>
+								<td align="center">${lessonWaiting.name}</td>
+								<td align="center">${lessonWaiting.sido}</td>
+								<td align="center">${lessonWaiting.age}</td>
+								<td align="center"><input type="checkbox" class="approve" name="m_no_L" value="${lessonWaiting.m_no}"></td>
 							</tr>
 						</c:forEach>
 					</table>
-					<c:if test="">
+					<c:if test="${empty requestScope.waitLessonList}">
 						<center>
 						<br>
 						<b>대기중인 인원이 없습니다.</b>
