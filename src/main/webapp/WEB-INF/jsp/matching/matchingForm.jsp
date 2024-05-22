@@ -122,6 +122,14 @@
 	//게시물 상세보기페이지 넘어가기
 	function goMatchDetail(match_no)
 	{
+		 var sessionMid = '<%=session.getAttribute("mid")%>';
+			
+		   if (sessionMid == "" || sessionMid == 'null') {
+		       alert('로그인이 필요한 서비스입니다.');
+		       location.href = '/loginForm.do';
+		       return;
+		   }
+		
 		$("[name='matchingDetail'] [name='match_no']").val(match_no); 
 		document.matchingDetail.submit();
 	}

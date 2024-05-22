@@ -110,7 +110,7 @@ function memUpdate()
 			if(result == 1)
 			{
 				alert("정보 수정 성공. 다시 로그인 해주세요");
-				location.href='/loginForm.do';
+				location.href='/logoutProc.do';
 			}
 
 			else

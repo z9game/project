@@ -157,8 +157,10 @@ function goWaitingLessonList()
 				<!--------------------------------------------------- -->
 				<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 				<!--------------------------------------------------- -->
-				<c:if test="${sessionScope.nickname ne requestScope.lessondetailList.nickname}">
-	         	 	<input type="button" value="신청" style="cursor:pointer" onclick="goWaitingLessonList()" >
+				<c:if test="${not empty sessionScope.m_no}">
+					<c:if test="${sessionScope.nickname ne requestScope.lessondetailList.nickname}">
+		         	 	<input type="button" value="신청" style="cursor:pointer" onclick="goWaitingLessonList()" >
+		         	</c:if>
 	         	</c:if>
 				<span style="cursor: pointer"
 					onclick="location.replace('/recruitLessonBoardForm.do')">
