@@ -405,7 +405,7 @@
 	<insert id="regLesson" parameterType="kosmo.team.project.dto.TeamDTO">
 		 insert into lesson_member
       <foreach collection="m_no_L" item="m_no_L"  open= " ( "  close = " ) "   separator=" union " >
-         select  #{m_no},#{m_no_H} from dual 
+         select  #{m_no},#{m_no_L} from dual 
       </foreach>
 	</insert>
 	
@@ -419,10 +419,9 @@
 	        </foreach>
 	</delete>
 	
-	<!-- 레슨 대기자목록
+	<!-- 레슨 대기자목록-->
 	<select id="getWaitingLessonList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
    		
 	</select>
-	 -->
 	 
 </mapper>

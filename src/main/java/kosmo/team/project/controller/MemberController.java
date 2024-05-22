@@ -108,7 +108,7 @@ public class MemberController {
 			 
 			//팀에 속해있는 용병 목록 가져오기
 			 List<TeamDTO> getHiredList = this.memberService.getHiredList(m_no);
-			 System.out.println(getHiredList.size());
+			 
 			//매칭승낙 대기팀 정보 가져오기
 			 List<TeamDTO> matchWaitingList = this.memberService.getMatchWaitingList(m_no);
 			 
