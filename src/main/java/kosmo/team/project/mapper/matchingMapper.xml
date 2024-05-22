@@ -134,7 +134,7 @@
  
 <select id="getMatchingDetail" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="int">
 select
-   m.title
+   distinct m.title
    ,mb.nickname
    ,m.readcount
    ,sta.stadium_name
@@ -188,7 +188,7 @@ insert into match (match_no, title, writer, content, time_no, day, stadium)
 <!-- 주석처리 매칭 찾기 , 수정/삭제 
  <select id="getUpdelBoard" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="int">
 	select
-	    m.title
+	    distinct m.title
 	   ,mb.nickname
 	   ,m.readcount
 	   ,sta.stadium_name
@@ -209,13 +209,13 @@ insert into match (match_no, title, writer, content, time_no, day, stadium)
 	    and
 	    m.time_no = (select time_no from match where match_no = #{match_no})
 	    and
-	    m.day = (select day from match where match_no = #{match_no}) 
+	    m.day = (select day from match where match_no = #{match_no})  
 </select>
 -->
 <!-- 매칭 찾기 , 수정/삭제 -->
  <select id="getUpdelBoard" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="int">
 	select
-	    m.title
+	    distinct m.title
 	   ,mb.nickname
 	   ,m.readcount
 	   ,sta.stadium_name
@@ -230,13 +230,13 @@ insert into match (match_no, title, writer, content, time_no, day, stadium)
 	            left join stadium sta on bk.stadium_no = sta.stadium_no
 	            left join time_table tt on m.time_no = tt.time_no
 	where
-		m.match_no = #{match_no}    
+		m.match_no = 4
 	    and
-	    sta.stadium_name = (select unique(sta.stadium_name) from match m left join stadium sta on m.stadium = sta.stadium_no where m.stadium = (select stadium from match where match_no = #{match_no}))
+	    sta.stadium_name = (select unique(sta.stadium_name) from match m left join stadium sta on m.stadium = sta.stadium_no where m.stadium = (select stadium from match where match_no = 4))
 	    and
-	    m.time_no = (select time_no from match where match_no = #{match_no})
+	    m.time_no = (select time_no from match where match_no = 4)
 	    and
-	    m.day = (select day from match where match_no = #{match_no}) 
+	    to_char(bk.booking_date, 'YYYY-MM-DD') = to_char( (select day from match where match_no = 4))
 </select>
  
  
