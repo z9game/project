@@ -76,7 +76,7 @@
 		$.ajax({
 			url : "/regTeamMemberProc.do",
 			type : "post",
-			data : regTeam.serialize() + "&reg = 1",
+			data : regTeam.serialize() + "&reg=1",
 			success : function(json) {
 				var result = json["result"];
 				if (result > 0) {
@@ -105,7 +105,7 @@
 		$.ajax({
 			url : "/regTeamMemberProc.do",
 			type : "post",
-			data : refuseTeam.serialize() + "&refuse = 1",
+			data : refuseTeam.serialize() + "&refuse=1",
 			success : function(json) {
 				var result = json["refuse"];
 				if (result == 0) {
@@ -152,6 +152,140 @@
 	};
 	
 	
+	//용병수락
+	function regHired(){
+			
+		var regHired = $("[name='hiredWaitingList']");
+		
+		if (confirm("정말 수락 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/regHiredProc.do",
+			type : "post",
+			data : regHired.serialize() + "&reg=1",
+			success : function(json) {
+				var result = json["result"];
+				if (result > 0) {
+					alert("수락 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_hired");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("수락중 오류가 발생했습니다.");
+			}
+		});
+	};
+	
+	//용병거절
+	function refuseHired(){
+		
+		var refuseHired = $("[name='hiredWaitingList']");
+		
+		if (confirm("정말 거절 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/regHiredProc.do",
+			type : "post",
+			data : refuseHired.serialize() + "&refuse=1",
+			success : function(json) {
+				var result = json["refuse"];
+				if (result == 0) {
+					alert("거절 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_hired");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("거절중 오류가 발생했습니다.");
+			}
+		});
+	};
+	
+	
+	
+	
+	
+	//레슨수락
+	function regLesson(){
+			
+		var regLesson = $("[name='lessonWaitingList']");
+		
+		if (confirm("정말 수락 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/reglessonProc.do",
+			type : "post",
+			data : regLesson.serialize() + "&reg=1",
+			success : function(json) {
+				var result = json["result"];
+				if (result > 0) {
+					alert("수락 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_lesson");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("수락중 오류가 발생했습니다.");
+			}
+		});
+		
+	};
+	
+	//레슨거절
+	function refuseLesson(){
+		
+		var refuseLesson = $("[name='lessonWaitingList']");
+		
+		if (confirm("정말 거절 하시겠습니까?") == false) {
+			return;
+		}
+		
+		$.ajax({
+			url : "/reglessonProc.do",
+			type : "post",
+			data : refuseLesson.serialize() + "&refuse=1",
+			success : function(json) {
+				var result = json["refuse"];
+				if (result == 0) {
+					alert("거절 처리 되었습니다.");
+					var modal = document.querySelector(".modalDiv_lesson");
+					modal.style.display = "none";
+					location.reload();
+				}
+			},
+			error : function() {
+				alert("거절중 오류가 발생했습니다.");
+			}
+		});
+		
+	};
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//팀원 모집 신청인원
 	function modalOpen_waiting(){
 		var modal = document.querySelector(".modalDiv_waiting");
@@ -196,6 +330,29 @@
 		modal.style.display = "none";
 	};
 	//-----------------------------------------------------------------
+	//용병신청이 있을때
+	function modalOpen_hired(){
+		var modal = document.querySelector(".modalDiv_hired");
+		modal.style.display = "block";
+	};
+	
+	function modalClose_hired(){
+		var modal = document.querySelector(".modalDiv_hired");
+		modal.style.display = "none";
+	};
+	//-----------------------------------------------------------------
+	//레슨신청이 있을때
+	function modalOpen_lesson(){
+		var modal = document.querySelector(".modalDiv_lesson");
+		modal.style.display = "block";
+	};
+	
+	function modalClose_lesson(){
+		var modal = document.querySelector(".modalDiv_lesson");
+		modal.style.display = "none";
+	};
+	//-----------------------------------------------------------------
+	
 </script>
 </head>
 <body>
@@ -226,7 +383,7 @@
 	</table>
 	
 	<div class="modalDiv_myTeamInfo" align="center"> 
-		<div class="bg_modalDiv_myTeamInfo">
+		<div class="bg_myTeamInfo">
 			<div class="modal_myTeamInfo">
 				
 				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
@@ -251,6 +408,29 @@
 					</c:forEach>
 				</table>
 				
+				<br><br><br>
+				
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+				<caption><b>용병 목록</b></caption>
+					<tr>
+						<th>이름</th>
+						<th>지역</th>
+						<th>나이</th>
+					</tr>
+					<c:forEach var="hired" items="${requestScope.getHiredList}" varStatus="status">
+						<tr>
+							<td align="center">${hired.name}</td>
+							<td align="center">${hired.sido}</td>
+							<td align="center">${hired.age}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<c:if test="${empty requestScope.getHiredList}">
+					<center>
+					<br>
+					<b>현재 팀에 용병이 없습니다.</b>
+					</center>
+				</c:if>
 			<button onclick="modalClose_myTeamInfo()">닫기</button>
 			</div>
 		</div>
@@ -377,7 +557,7 @@
 			<button onclick="allApprove()">전체선택</button>
 			<button onclick="regTeamMem()">수락</button>
 			<button onclick="refuseTeamMem()">거절</button>
-			<button onclick="modalClose_waiting()">취소</button>
+			<button onclick="modalClose_waiting()">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -386,6 +566,55 @@
 	<!-- ================================================================================================================= -->
 	<!-- 용병 관련 -->
 	
+	<c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
+		<c:if test="${requestScope.mercWaitingCnt > 0}">
+	    	<center>
+				<table style="border-collapse:collapse" border="1">
+				<tr>
+					<td style="cursor:pointer" class="matchWaitingCheck" onclick="modalOpen_hired()">
+						용병신청이 있습니다.
+					</td>
+				</tr>
+			</table>
+			</center>
+		</c:if>
+	</c:if>
+	
+	<div class="modalDiv_hired" align="center"> 
+		<div class="bg_hired">
+			<div class="modal_hired">
+			<form name = "hiredWaitingList">
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+					<caption><b>수락대기중</b></caption>
+					<tr>
+						<th>이름</th>
+						<th>나이</th>
+						<th>지역</th>
+						<th>선택</th>
+					</tr>
+					<c:forEach var="listhired" items="${requestScope.waitHiredList}" varStatus="status">
+						<tr>
+							<td align="center">${listhired.name}</td>
+							<td align="center">${listhired.age}</td>
+							<td align="center">${listhired.sido}</td>
+							<td align="center"><input type="checkbox" class="approve" name="m_no_H" value="${listhired.m_no}"></td>
+						</tr>
+					</c:forEach>
+				</table>
+				
+				
+			</form>
+			<div style="height:8px;"></div>
+			<button onclick="allApprove()">전체선택</button>
+			<button onclick="regHired()">수락</button>
+			<button onclick="refuseHired()">거절</button>
+			<button onclick="modalClose_hired()">닫기</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div style="height:30px;"></div>
 	
 	
 	
@@ -397,6 +626,78 @@
 	<!-- ================================================================================================================= -->
 	<!-- 레슨 관련 -->
 	
+	<center>
+		<table style="border-collapse:collapse" border="1">
+			<tr>
+				<td style="cursor:pointer" class="matchWaitingCheck" onclick="modalOpen_lesson()">
+					레슨 관리
+				</td>
+			</tr>
+		</table>
+	</center>
+	
+	
+	<div class="modalDiv_lesson" align="center"> 
+		<div class="bg_lesson">
+			<div class="modal_lesson">
+				
+				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+				<caption><b>나의 레슨 인원</b></caption>
+					<tr>
+						<th>이름</th>
+						<th>지역</th>
+						<th>나이</th>
+					</tr>
+					<c:forEach var="lesson" items="" varStatus="status">
+						<tr>
+							<td align="center"></td>
+							<td align="center"></td>
+							<td align="center"></td>
+						</tr>
+					</c:forEach>
+				</table>
+				<c:if test="">
+					<center>
+					<br>
+					<b>관리하는 인원이 없습니다.</b>
+					</center>
+				</c:if>
+				
+				<br><br><br>
+				<form name="lessonWaitingList">
+					<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+					<caption><b>신청대기자</b></caption>
+						<tr>
+							<th>이름</th>
+							<th>지역</th>
+							<th>나이</th>
+							<th>선택</th>
+						</tr>
+						<c:forEach var="lesson" items="" varStatus="status">
+							<tr>
+								<td align="center"></td>
+								<td align="center"></td>
+								<td align="center"></td>
+								<td align="center"><input type="checkbox" class="approve" name="m_no_L" value=""></td>
+							</tr>
+						</c:forEach>
+					</table>
+					<c:if test="">
+						<center>
+						<br>
+						<b>대기중인 인원이 없습니다.</b>
+						</center>
+					</c:if>
+					<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+				</form>
+				<div style="height:8px;"></div>
+				<button onclick="allApprove()">전체선택</button>
+				<button onclick="regLesson()()">수락</button>
+				<button onclick="refuseLesson()">거절</button>
+				<button onclick="modalClose_lesson()">닫기</button>
+			</div>
+		</div>
+	</div>
 	
 	
 	
@@ -447,13 +748,13 @@
 			<div style="height:8px;"></div>
 			<button onclick="matching()">수락</button>
 			<button onclick="">거절</button>
-			<button onclick="modalClose_matching()">취소</button>
+			<button onclick="modalClose_matching()">닫기</button>
 			</div>
 		</div>
 	</div>
 	
 	
-	
+	<div style="height:30px;"></div>
 	
 	<!-- ================================================================================================================= -->
 	<!-- 팀생성 관련 -->
@@ -480,12 +781,12 @@
 			</form>
 				<div style="height:8px;"></div>
 				<button onclick="regTeam()">생성</button>
-				<button onclick="modalClose_regTeam()">취소</button>
+				<button onclick="modalClose_regTeam()">닫기</button>
 			</div>
 		</div>
 	</div>
 	
-		<!-- ================================================================================================================= -->
+	<!-- ================================================================================================================= -->
 	
 	
 	

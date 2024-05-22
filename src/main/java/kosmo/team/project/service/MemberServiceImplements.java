@@ -163,5 +163,47 @@ public class MemberServiceImplements implements MemberService {
 		return getTeamMatchDay;
 	}
 	
+	//용병승낙 대기인원 정보가져오기
+	public List<TeamDTO> getWaitingHiredList(int m_no){
+		List<TeamDTO> getWaitingHiredList = this.memberDAO.getWaitingHiredList(m_no);
+		return getWaitingHiredList;
+	}
 	
+	//용병승낙 수락 할때
+	public int regHired(TeamDTO teamDTO) {
+		 int regHired = this.memberDAO.regHired(teamDTO);
+		 int delHired = this.memberDAO.delHired(teamDTO);
+		 return regHired;
+		 
+	 }
+	//용병승낙 거절 할때
+	public int refuseHired(TeamDTO teamDTO) {
+		int delHired = this.memberDAO.delHired(teamDTO);
+		return delHired;
+	 }
+	
+	//팀에 속해있는 용병 목록 가져오기
+	public List<TeamDTO> getHiredList(int m_no){
+		 List<TeamDTO> getHiredList = this.memberDAO.getHiredList(m_no);
+		 return getHiredList;
+	 }
+	
+	//레슨승낙 수락 할때
+	public int regLesson(TeamDTO teamDTO) {
+		 int regLesson = this.memberDAO.regLesson(teamDTO);
+		 int delLesson = this.memberDAO.delLesson(teamDTO);
+		 return regLesson;
+	}
+	
+	//레슨승낙 거절 할때
+	public int refuseLesson(TeamDTO teamDTO) {
+		int delLesson = this.memberDAO.delLesson(teamDTO);
+		return delLesson;
+	}
+	
+	//레슨승낙 대기인원 정보가져오기
+	public List<TeamDTO> getWaitingLessonList(int m_no){
+		 List<TeamDTO> getWaitingLessonList = this.memberDAO.getWaitingLessonList(m_no);
+		 return getWaitingLessonList;
+	}
 }

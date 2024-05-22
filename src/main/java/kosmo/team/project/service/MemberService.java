@@ -39,6 +39,9 @@ public interface MemberService {
 	//팀원승낙 거절 할때
 	 int refuseTeamMem(TeamDTO teamDTO);
 	 
+	//용병승낙 대기인원 정보가져오기
+	 List<TeamDTO> getWaitingHiredList(int m_no);
+	 
 	//마이페이지에 있는 내 정보에서 팀을 클릭하면 팀 멤버목록 출력.
 	 List<TeamDTO> getTeamInfo(int m_no);
 	 
@@ -53,5 +56,21 @@ public interface MemberService {
 	
 	//다음 경기 일정 가져오기
 	 List<TeamDTO> getTeamMatchDay(int m_no);
+	 
+	//용병승낙 수락 할때
+	 int regHired(TeamDTO teamDTO);
+	//용병승낙 거절 할때
+	 int refuseHired(TeamDTO teamDTO);
+	 
+	//팀에 속해있는 용병 목록 가져오기
+	 List<TeamDTO> getHiredList(int m_no);
+	 
+	//레슨승낙 수락 할때
+	 int regLesson(TeamDTO teamDTO);
+	//레슨승낙 거절 할때
+	 int refuseLesson(TeamDTO teamDTO);
+	 
+	//레슨승낙 대기인원 정보가져오기
+	 List<TeamDTO> getWaitingLessonList(int m_no);
 	
 }

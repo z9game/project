@@ -4,6 +4,7 @@ import java.util.List;
 
 public class RecruitLessonDTO {
 	
+	private int m_no;
 	private int recruitment_no;
 	private String title;
 	private String nickname;
@@ -22,7 +23,13 @@ public class RecruitLessonDTO {
 	
    	
    	
-   	public int getRecruitment_no() {
+   	public int getM_no() {
+		return m_no;
+	}
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
+	}
+	public int getRecruitment_no() {
 		return recruitment_no;
 	}
 	public void setRecruitment_no(int recruitment_no) {

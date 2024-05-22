@@ -101,6 +101,10 @@ public interface RecruitService {
 	public int getHiredListCnt(RecruitSearchDTO recruitSearchDTO);
 	
 	public List<RecruitHiredDTO> getRecruitHired(RecruitSearchDTO recruitSearchDTO);
+	
+
+    //용병 신청하면 승낙대기 테이블로 들어간다.
+	int goWaitingHiredList(RecruitHiredDTO recruitHiredDTO);
 
 
 //==================================================================================================================================
@@ -151,6 +155,9 @@ public interface RecruitService {
 	public int getLessonListCnt(RecruitSearchDTO recruitSearchDTO);
 	
 	public List<RecruitLessonDTO> getRecruitLesson(RecruitSearchDTO recruitSearchDTO);
+	
+	//레슨 신청하면 승낙대기 테이블로 들어간다.
+	int goWaitingLessonList(RecruitLessonDTO recruitLessonDTO);
 	
 }
 

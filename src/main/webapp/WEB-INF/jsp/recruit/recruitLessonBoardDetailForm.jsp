@@ -9,6 +9,34 @@
 <title>RecruitLessonBoardForm</title>
 <link href="/style/recruitLessonBoardFormStyle.css" rel="stylesheet">
 <script src="/js/recruitLessonBoardFormScript.js"></script>
+<script>
+function goWaitingLessonList()
+{
+	var formObj = $("[name='waitingLessonList']");
+	
+	if (confirm("신청 하시겠습니까?") == false) {
+		return;
+	}
+	
+	$.ajax({
+		url : "/goWaitingLessonList.do",
+		type : "post",
+		data : formObj.serialize(),
+		success : function(json) {
+			var result = json["result"];
+			if (result == 1) {
+				alert("신청이 완료되었습니다.");
+			}
+			else {
+				alert("이미 신청한 레슨입니다.");
+			}
+		},
+		error : function() {
+			alert("신청 실패! 관리자에게 문의 바랍니다.");
+		}
+	});
+}
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
@@ -129,6 +157,9 @@
 				<!--------------------------------------------------- -->
 				<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 				<!--------------------------------------------------- -->
+				<c:if test="${sessionScope.nickname ne requestScope.lessondetailList.nickname}">
+	         	 	<input type="button" value="신청" style="cursor:pointer" onclick="goWaitingLessonList()" >
+	         	</c:if>
 				<span style="cursor: pointer"
 					onclick="location.replace('/recruitLessonBoardForm.do')">
 					[목록 화면으로] </span>
@@ -149,6 +180,12 @@
 		<!-- 게시판 고유번호가 저장된 hidden 태그 선언하기 -->
 		<!------------------------------------------------------------------------>
 		<input type="hidden" name="recruitment_no"value="${requestScope.lessondetailList.recruitment_no}">
+		</form>
+		
+		<!-- 레슨모집 게시물일때 신청버튼을 누르면 넘어갈 정보들 -->
+		<form name="waitingLessonList">
+			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
+			<input type="hidden" name="recruitment_no"value="${requestScope.lessondetailList.recruitment_no}">
 		</form>
     
 </body>

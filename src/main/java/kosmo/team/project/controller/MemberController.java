@@ -100,6 +100,15 @@ public class MemberController {
 			//팀원승낙 대기인원 정보가져오기
 			 List<TeamDTO> waitList = this.memberService.getWaitingList(m_no);
 			 
+			//용병승낙 대기인원 정보가져오기
+			 List<TeamDTO> waitHiredList = this.memberService.getWaitingHiredList(m_no);
+			 
+			//레슨승낙 대기인원 정보가져오기
+			 //List<TeamDTO> waitLessonList = this.memberService.getWaitingLessonList(m_no);
+			 
+			//팀에 속해있는 용병 목록 가져오기
+			 List<TeamDTO> getHiredList = this.memberService.getHiredList(m_no);
+			 
 			//매칭승낙 대기팀 정보 가져오기
 			 List<TeamDTO> matchWaitingList = this.memberService.getMatchWaitingList(m_no);
 			 
@@ -125,14 +134,20 @@ public class MemberController {
 		     mav.addObject("bookedStadium", bookedStadium);
 		     //팀원승낙대기중인 인원이 있나 확인 
 		     mav.addObject("WaitingCnt", WaitingCnt);
+		     //용병승낙대기중인 인원이 있나 확인 
+		     mav.addObject("mercWaitingCnt", mercWaitingCnt);
 		     //매칭대기중인 팀이 있나 확인 
 		     mav.addObject("matchWaitingCnt", matchWaitingCnt);
 		     //팀원승낙대기중인 인원목록
 		     mav.addObject("waitList", waitList);
+		     //용병승낙대기중인 인원목록
+		     mav.addObject("waitHiredList", waitHiredList);
 		     //매칭대기중인 팀 목록
 		     mav.addObject("matchWaitingList", matchWaitingList);
 		     //내팀 정보
 		     mav.addObject("teamInfo", teamInfo);
+		     //내팀 용병 정보
+		     mav.addObject("getHiredList", getHiredList);
 		     //다음경기 일정 가져오기
 		     mav.addObject("getTeamMatchDay", getTeamMatchDay);
 		     
@@ -204,6 +219,56 @@ public class MemberController {
 			
 			int approveMatch = this.memberService.matchReg(teamDTO);
 			resultMap.put("approveMatch", approveMatch+"");
+		
+			return resultMap;
+		}
+		
+		//용병 수락/거절
+		@RequestMapping( value="/regHiredProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+		@ResponseBody
+		public Map<String,String> regHiredProc(TeamDTO teamDTO)
+		{
+			Map<String,String> resultMap = new HashMap<String,String>();
+			
+			if(teamDTO.getReg() == 1)
+			{
+				//승낙 수락 할때
+				 int approveHired = this.memberService.regHired(teamDTO);
+				 
+				 resultMap.put("result", approveHired+"");
+			}
+			 
+			if(teamDTO.getRefuse() == 1)
+			{
+				//승낙 거절 할때
+				 int refuseHired = this.memberService.refuseHired(teamDTO);
+				 resultMap.put("refuse", refuseHired+"");
+			}
+		
+			return resultMap;
+		}
+		
+		//레슨 수락/거절
+		@RequestMapping( value="/reglessonProc.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+		@ResponseBody
+		public Map<String,String> reglessonProc(TeamDTO teamDTO)
+		{
+			Map<String,String> resultMap = new HashMap<String,String>();
+			
+			if(teamDTO.getReg() == 1)
+			{
+				//승낙 수락 할때
+				 int approveLesson = this.memberService.regLesson(teamDTO);
+				 
+				 resultMap.put("result", approveLesson+"");
+			}
+			 
+			if(teamDTO.getRefuse() == 1)
+			{
+				//승낙 거절 할때
+				 int refuseLesson = this.memberService.refuseLesson(teamDTO);
+				 resultMap.put("refuse", refuseLesson+"");
+			}
 		
 			return resultMap;
 		}
