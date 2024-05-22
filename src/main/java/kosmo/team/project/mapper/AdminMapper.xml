@@ -791,10 +791,13 @@
 		m.mid AS "mid",
 		m.name AS "name",
 		m.nickname as "nickname",
+		m.password,
 		m.email as "email",
 		to_char(m.birthdate,
-		'YYYY-MM-DD') as "birthday",
-		m.phone as "phone",
+		'YYYY-MM-DD') as "birthday"
+		,substr(m.phone,0,3) as phone1
+		,substr(m.phone,5,4) as phone2
+		,substr(m.phone,10,4) as phone3,
 		m.gender as "gender",
 		s.name AS "sido",
 		si.name AS "sigungu",
