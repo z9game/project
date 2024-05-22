@@ -57,7 +57,7 @@
 	    var m_no = $("input[name='m_no']").val(); // m_no의 값을 가져옵니다
 	    
 	    if (bookingDate === "선택") {
-	        $("select[name='MyTimeRange']").html('<option value="선택">시간</option>');
+	        $("select[name='MyTimeRange']").html('<option value="0">시간</option>');
 	        return;
 	    }
 	
@@ -75,7 +75,7 @@
 	        },
 	        success: function(json) {
 	            var timeRanges = json;
-	            var timeOptions = '<option value="선택">시간</option>';
+	            var timeOptions = '<option value="0">시간</option>';
 	            for (var i = 0; i < timeRanges.length; i++) {
 	                timeOptions += '<option value="' + timeRanges[i].time_slot + '">' + timeRanges[i].time_range + '</option>';
 	            }
@@ -102,6 +102,26 @@
 		var formObj = $("[name='newStadiumTransferForm']");
 	    var subjectObj = formObj.find(".title");
 	    var contentObj = formObj.find(".content");
+	    var stadiumValue = $("select[name='MyStadium']").val();
+	    var bookingDate = $("select[name='MyDate']").val();
+	    var timeRangeValue = $("select[name='MyTimeRange']").val();
+	    
+	    
+	    if (stadiumValue === "선택") {
+	        alert("경기장을 선택해 주세요.");
+	        return;
+	    }
+	    
+	    if (bookingDate === "선택") {
+	        alert("날짜를 선택해 주세요.");
+	        return;
+	    }
+	    if (timeRangeValue === "0") {
+	        alert("시간을 선택해 주세요.");
+	        return;
+	    }
+	    
+	    
 	
 	    var bookingDate = $("select[name='MyDate']").val();
 	    var extractedDate = bookingDate.match(/^([0-9]{4}-[0-9]{2}-[0-9]{2})/)[0];
@@ -257,7 +277,7 @@
 					       
 					    </select>
 					    <select name="MyTimeRange" class="MyTimeRange">
-					        <option value="선택">시간</option>
+					        <option value="0">시간</option>
 					       
 					    </select>
 					</td>
