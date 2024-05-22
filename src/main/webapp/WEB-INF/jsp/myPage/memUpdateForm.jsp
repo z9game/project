@@ -17,6 +17,12 @@ function memUpdate()
 	var formobj = $("[name='memRegForm']");
 	var pwdobj = $(".pwd");
 	var checkpwdobj = $(".checkpwd");
+	var emailObj = $(".email");
+	var nicknameObj = $(".nickname");
+	var phone1Obj = $(".phone1");
+	var phone2Obj = $(".phone2");
+	var phone3Obj = $(".phone3");
+	var addressObj = $(".detail_address")
 	
 	if(new RegExp(/^[a-zA-Z0-9]{5,20}$/).test(pwdobj.val()) == false)
 	{
@@ -32,6 +38,47 @@ function memUpdate()
 		return;		
 	}
 	
+	if(new RegExp(/^([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/).test(emailObj.val()) == false)
+	{
+		alert("올바른 이메일 형식을 입력해주세요");
+		emailObj.val("");
+		return;
+	}
+	
+	if(new RegExp(/^[가-힣a-zA-Z0-9]{2,15}$/).test(nicknameObj.val()) == false)
+	{	
+		alert("닉네임은 2~15자 특수문자를 제외한 한글,영어,숫자로만 입력 가능합니다.");
+		nicknameObj.val("");
+		return;
+	}
+	
+	if(new RegExp(/^[a-zA-Z가-힣0-9\s]+$/).test(addressObj.val()) == false)
+	{	
+		alert("잘못된 주소형식입니다.");
+		addressObj.val("");
+		return;
+	}
+
+	if(new RegExp(/^[0-9]{3}$/).test(phone1Obj.val()) == false)
+	{	
+		alert("잘못된 전화번호형식입니다.");
+		phone1Obj.val("");
+		return;
+	}
+	
+	if(new RegExp(/^[0-9]{4}$/).test(phone2Obj.val()) == false)
+	{	
+		alert("잘못된 전화번호형식입니다.");
+		phone2Obj.val("");
+		return;
+	}
+	
+	if(new RegExp(/^[0-9]{4}$/).test(phone3Obj.val()) == false)
+	{	
+		alert("잘못된 전화번호형식입니다.");
+		phone3Obj.val("");
+		return;
+	}
 	
 	$.ajax({
 		//----------------------------------------------------------
@@ -127,7 +174,7 @@ function memUpdate()
 				<th>암호</th>
 				<td>
 				<!-------------------------------------------------------->
-				<input type="password" name="password" class="pwd" size="15" maxlength="15">
+				<input type="password" name="password" class="pwd" size="15" maxlength="15" value="${requestScope.memberDTO.password}">
 				<!-------------------------------------------------------->
 				</td>
 			</tr>
@@ -136,7 +183,7 @@ function memUpdate()
 				<th>암호확인</th>
 				<td>
 				<!-------------------------------------------------------->
-				<input type="password" name="checkpwd" class="checkpwd" size="15" maxlength="15">
+				<input type="password" name="checkpwd" class="checkpwd" size="15" maxlength="15" value="${requestScope.memberDTO.password}">
 				<!-------------------------------------------------------->
 				</td>
 			</tr>
@@ -154,7 +201,7 @@ function memUpdate()
 				<th>전화번호</th>
 				<td>
 				<!-------------------------------------------------------->
-				<input type="tel" name="phone" class="phone" size="25" maxlength="50" value="${requestScope.memberDTO.phone}">
+				<input type="tel" name="phone1" class="phone1" size="3" maxlength="3" value="${requestScope.memberDTO.phone1}">-<input type="tel" name="phone2" class="phone2" size="3" maxlength="4" value="${requestScope.memberDTO.phone2}">-<input type="tel" name="phone3" class="phone3" size="3" maxlength="4" value="${requestScope.memberDTO.phone3}">
 				<!-------------------------------------------------------->
 				</td>
 			</tr>

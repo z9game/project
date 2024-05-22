@@ -8,6 +8,9 @@ public class MemberDTO {
 	private String nickname;
 	private String email;
 	private String birthday;
+	private String phone1;
+	private String phone2;
+	private String phone3;
 	private String phone;
 	private String gender;
 	private int sido_id;
@@ -37,6 +40,30 @@ public class MemberDTO {
 	
 	
 	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getPhone1() {
+		return phone1;
+	}
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public String getPhone3() {
+		return phone3;
+	}
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
+	}
 	public int getTeam_master() {
 		return team_master;
 	}
@@ -84,12 +111,6 @@ public class MemberDTO {
 	}
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 	public String getGender() {
 		return gender;

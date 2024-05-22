@@ -39,9 +39,16 @@
 		
 		var keyword = keywordObj.val();
 		
-		if(typeof(keyword1)!='string' ){keyword1=""; }
+		if(typeof(keyword)!='string' ){keyword=""; }
 		    
-		keyword1 = $.trim(keyword1);
+		keyword = $.trim(keyword);
+		
+		if(new RegExp(/^[a-zA-Z가-힣0-9]{3,20}$/).test(keyword) == false)
+		{
+			alert("팀이름은 최소 3글자에서 20글자 사이어야합니다.")
+			keyword="";
+			return;		
+		}
 		
 		
 		$.ajax({
@@ -768,7 +775,7 @@
 	<div class="modalDiv_regTeam" align="center"> 
 		<div class="bg_regTeam">
 			<div class="modal_regTeam">
-			<form name = "teamRegist">
+			<form name = "teamRegist" onsubmit="return false;">
 				<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
 					<tr>
 						<th>팀명</th>

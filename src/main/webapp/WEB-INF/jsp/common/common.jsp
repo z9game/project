@@ -26,7 +26,7 @@
 
 <script >
 
-function setweekgroup() {
+function setweekgroup1() {
       if ($("#workweekcdGroupA").is(":checked")) {
          $("#day1, #day2, #day3, #day4, #day5").prop("checked", true);
          $("#day0").prop("checked", false);
@@ -42,7 +42,19 @@ function setweekgroup() {
       else {
          $("#day6, #day7").prop("checked", false);
       }
-   };
+};
+   
+ function setweekgroup2() {
+      if ($("#workweekcdGroupB").is(":checked")) {
+         $("#day6, #day7").prop("checked", true);
+         $("#day0").prop("checked", false);
+      } 
+      else {
+         $("#day6, #day7").prop("checked", false);
+      }
+};
+   
+
      
      
    function setweekDay() {
@@ -59,7 +71,7 @@ function setweekgroup() {
          $("#day0").prop("checked", false);
       }
       
-     }
+     };
 
     function setweekEnd() {
       
@@ -84,7 +96,8 @@ function setweekgroup() {
      if ($("#day0").is(":checked")) {
          $("#day1, #day2, #day3, #day4, #day5, #day6, #day7, #workweekcdGroupA, #workweekcdGroupB").prop("checked", false);
       }
-   }
+   };
+
    
    //=============================================================================================================================================================================================
    
@@ -132,23 +145,23 @@ function setweekgroup() {
     	}
    
  	//=============================================================================================================================================================================================
-     function everymoney()
+    function everymoney()
   	{
      	 if ($("#nomatter").is(":checked")) {
               $("#free, #paid").prop("checked", false);
            }
   	}
     
-     function moneycheck()
-     	{
-     	if ($("#free").is(":checked") && $("#paid").is(":checked")) {
-     		 $("#nomatter").prop("checked", true);
-     	        $("#free").prop("checked", false);
-     	        $("#paid").prop("checked", false);
-     	    } else {
-     	    	$("#nomatter").prop("checked", false);
-     	    }
- 	
-     	}
+    function moneycheck()
+   	{
+   	if ($("#free").is(":checked") && $("#paid").is(":checked")) {
+   		 $("#nomatter").prop("checked", true);
+   	        $("#free").prop("checked", false);
+   	        $("#paid").prop("checked", false);
+   	    } else {
+   	    	$("#nomatter").prop("checked", false);
+   	    }
+
+   	}
     
    </script>
