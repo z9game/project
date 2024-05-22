@@ -35,7 +35,6 @@ function setweekgroup1() {
          $("#day1, #day2, #day3, #day4, #day5").prop("checked", false);
       }
       
-      
       if ($("#workweekcdGroupB").is(":checked")) {
          $("#day6, #day7").prop("checked", true);
          $("#day0").prop("checked", false);
@@ -55,7 +54,9 @@ function setweekgroup1() {
       }
 };
    
-   
+
+     
+     
    function setweekDay() {
    
       if ($("#day1").is(":checked") && $("#day2").is(":checked") && $("#day3").is(":checked") && $("#day4").is(":checked") && $("#day5").is(":checked")) {
@@ -68,12 +69,16 @@ function setweekgroup1() {
       if($("#day1").is(":checked") || $("#day2").is(":checked") || $("#day3").is(":checked") || $("#day4").is(":checked") || $("#day5").is(":checked")) 
       {
          $("#day0").prop("checked", false);
-      } 
+      }
       
-      
+     };
+
+    function setweekEnd() {
       
       if ($("#day6").is(":checked") && $("#day7").is(":checked")) {
          $("#workweekcdGroupB").prop("checked", true);
+         $("#day0").prop("checked", false);
+         
       } 
       else {
          $("#workweekcdGroupB").prop("checked", false);
@@ -91,8 +96,8 @@ function setweekgroup1() {
      if ($("#day0").is(":checked")) {
          $("#day1, #day2, #day3, #day4, #day5, #day6, #day7, #workweekcdGroupA, #workweekcdGroupB").prop("checked", false);
       }
-   }
-     
+   };
+
    
    //=============================================================================================================================================================================================
    
@@ -106,11 +111,38 @@ function setweekgroup1() {
    
    function timeset()
    {
-      if($("#morning").is(":checked") || $("#am").is(":checked") || $("#pm").is(":checked") || $("#night").is(":checked")) 
-         {
-            $("#everytime").prop("checked", false);
-         }  
+	   if ($("#morning").is(":checked") && $("#am").is(":checked") && $("#pm").is(":checked") && $("#night").is(":checked")) {
+  		 $("#everytime").prop("checked", true);
+	       	 	$("#morning").prop("checked", false);
+	       		$("#am").prop("checked", false);
+  	        	$("#pm").prop("checked", false);
+  	       		$("#night").prop("checked", false);
+  	    } else {
+  	    	$("#everytime").prop("checked", false);
+  	    }
    }
+   
+	//=============================================================================================================================================================================================
+    function setposition()
+ 	{
+    	 if ($("#allPos").is(":checked")) {
+             $("#st, #cm, #cb, #gk").prop("checked", false);
+          }
+ 	}
+   
+    function positioncheck()
+    	{
+    	if ($("#st").is(":checked") && $("#cm").is(":checked") && $("#cb").is(":checked") && $("#gk").is(":checked")) {
+    		 $("#allPos").prop("checked", true);
+ 	       	 	$("#st").prop("checked", false);
+	       		$("#cm").prop("checked", false);
+    	        $("#cb").prop("checked", false);
+    	        $("#gk").prop("checked", false);
+    	    } else {
+    	    	$("#allPos").prop("checked", false);
+    	    }
+	
+    	}
    
  	//=============================================================================================================================================================================================
      function everymoney()
@@ -120,16 +152,16 @@ function setweekgroup1() {
            }
   	}
     
-     function moneycheck()
-     	{
-     	if ($("#free").is(":checked") && $("#paid").is(":checked")) {
-     		 $("#nomatter").prop("checked", true);
-     	        $("#free").prop("checked", false);
-     	        $("#paid").prop("checked", false);
-     	    } else {
-     	    	$("#nomatter").prop("checked", false);
-     	    }
- 	
-     	}
+    function moneycheck()
+   	{
+   	if ($("#free").is(":checked") && $("#paid").is(":checked")) {
+   		 $("#nomatter").prop("checked", true);
+   	        $("#free").prop("checked", false);
+   	        $("#paid").prop("checked", false);
+   	    } else {
+   	    	$("#nomatter").prop("checked", false);
+   	    }
+
+   	}
     
    </script>

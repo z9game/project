@@ -348,8 +348,8 @@ function checkReserveForm()
 							<input type="checkbox" id="day3" name="day" onclick="setweekDay()" value="3">수&nbsp;&nbsp;
 							<input type="checkbox" id="day4" name="day" onclick="setweekDay()" value="4">목&nbsp;&nbsp;
 							<input type="checkbox" id="day5" name="day" onclick="setweekDay()" value="5">금<br>
-							<input type="checkbox" id="day6" name="day" onclick="setweekDay()" value="6">토&nbsp;&nbsp;
-							<input type="checkbox" id="day7" name="day" onclick="setweekDay()" value="7">일<br>
+							<input type="checkbox" id="day6" name="day" onclick="setweekEnd()" value="6">토&nbsp;&nbsp;
+							<input type="checkbox" id="day7" name="day" onclick="setweekEnd()" value="7">일<br>
 							<input type="checkbox" id="day0" name="day" value="0" onclick="allday()">상관없음
 	  					</dd>
 	  				</dl>
@@ -368,11 +368,11 @@ function checkReserveForm()
 	  			<dl class="pos">
 	  				<dt class="item">포 지 션</dt>
 	  					<dd  class="content">
-	  						<input type="checkbox" id="st" name="pos" onclick="" value="ST">ST&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="cm" name="pos" onclick="" value="CM">CM&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="cb" name="pos" onclick="" value="CB">CB&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="gk" name="pos" onclick="" value="GK">GK&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="allPos" name="pos" onclick="" value="allpos">상관없음
+	  						<input type="checkbox" id="st" name="pos" onclick="positioncheck()" value="ST">ST&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="cm" name="pos" onclick="positioncheck()" value="CM">CM&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="cb" name="pos" onclick="positioncheck()" value="CB">CB&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="gk" name="pos" onclick="positioncheck()" value="GK">GK&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="allPos" name="pos" onclick="setposition()" value="allpos">상관없음
 	  					</dd>
 	  			</dl>
 			</div>	
