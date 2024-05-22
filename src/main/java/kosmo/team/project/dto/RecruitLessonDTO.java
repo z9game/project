@@ -20,10 +20,20 @@ public class RecruitLessonDTO {
 	private List<String> time;
    	private int sido_id;
    	private int sigungu_id;
+   	
+   	
+   	//레슨모집관련 확인
+   	private int writer;
 	
    	
    	
-   	public int getM_no() {
+   	public int getWriter() {
+		return writer;
+	}
+	public void setWriter(int writer) {
+		this.writer = writer;
+	}
+	public int getM_no() {
 		return m_no;
 	}
 	public void setM_no(int m_no) {

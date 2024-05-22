@@ -184,7 +184,8 @@ function goWaitingLessonList()
 		
 		<!-- 레슨모집 게시물일때 신청버튼을 누르면 넘어갈 정보들 -->
 		<form name="waitingLessonList">
-			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
+			<input type="hidden" name="writer" value="${requestScope.lessondetailList.m_no}">
+			<input type="hidden" name="m_no" value="${sessionScope.m_no}">
 			<input type="hidden" name="recruitment_no"value="${requestScope.lessondetailList.recruitment_no}">
 		</form>
     

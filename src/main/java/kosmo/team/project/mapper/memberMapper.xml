@@ -409,7 +409,7 @@
       </foreach>
 	</insert>
 	
-	<delete id="refuseLesson" parameterType="kosmo.team.project.dto.TeamDTO">
+	<delete id="delLesson" parameterType="kosmo.team.project.dto.TeamDTO">
 		delete 
 		from
 			waiting_lessonReg
@@ -421,7 +421,32 @@
 	
 	<!-- 레슨 대기자목록-->
 	<select id="getWaitingLessonList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
-   		
+   		select
+		    m.name 
+		    ,m.m_no
+		    ,to_number(to_char(sysdate, 'YYYY')) -
+		        to_number(to_char(m.birthdate, 'YYYY')) AS "age" 
+		    ,s.name as "sido"
+		from
+		     member m left join sido s on m.sido_id = s.sido_id
+		              left join waiting_lessonreg wl on m.m_no = wl.m_no
+		where
+		    wl.writer = #{m_no}  
+	</select>
+	
+	<!-- 나의 레슨 듣는 사람들 목록-->
+	<select id="getLessonList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
+   		select
+		    m.name 
+		    ,m.m_no
+		    ,to_number(to_char(sysdate, 'YYYY')) -
+		        to_number(to_char(m.birthdate, 'YYYY')) AS "age" 
+		    ,s.name as "sido"
+		from
+		     member m left join sido s on m.sido_id = s.sido_id
+		              left join lesson_member lm on m.m_no = lm.student
+		where
+		    lm.instructor = #{m_no} 
 	</select>
 	 
 </mapper>
