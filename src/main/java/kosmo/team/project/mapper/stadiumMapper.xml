@@ -648,6 +648,17 @@
 
 	</update>
 	
+	<select id="getCheckStatusDelCnt" parameterType="int"
+		resultType="int">
+		select
+		count(*) from stadium_yangdo where yangdo_no=#{yangdo_no} and STATUS = '양도완료'
+	</select>
+	
+	<select id="getCheckStatusUpCnt" parameterType="int"
+		resultType="int">
+		select
+		count(*) from stadium_yangdo where yangdo_no=#{yangdo_no} and STATUS = '양도완료'
+	</select>
 	
 	
 	

@@ -107,6 +107,19 @@
 	    var timeRangeValue = $("select[name='MyTimeRange']").val();
 	    
 	    
+	    if (subjectObj.val().trim() == "") {
+	        alert("제목을 입력해주세요");
+	        return;
+	    }
+	    
+	    if (contentObj.val().trim().length == 0) {
+	        alert("내용을 1자 이상 입력해주세요.");
+	        contentObj.val("");
+	        return;
+	    }
+	    
+	    
+	    
 	    if (stadiumValue === "선택") {
 	        alert("경기장을 선택해 주세요.");
 	        return;
@@ -120,6 +133,9 @@
 	        alert("시간을 선택해 주세요.");
 	        return;
 	    }
+	    
+	    
+	    
 	    
 	    
 	
@@ -147,17 +163,6 @@
 		
 		var sessionPwd = "<%= session.getAttribute("password") %>";
 		
-		if(new RegExp(/^.{2,100}$/).test(subjectObj.val())==false){
-			alert("제목은 2~100자 한글입니다.");
-			subjectObj.val("");
-			return;
-		}
-		
-		if (contentObj.val().trim().length==0||contentObj.val().trim().length>1000){
-			alert("내용은 1~1000자 입력해야 합니다.");
-			contentObj.val("");
-			return;
-		}
 		
 	    function checkPwd() {
 	    	var pwdInsert = prompt("계정 비밀번호를 입력해주세요.");
