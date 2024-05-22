@@ -341,8 +341,8 @@ function checkReserveForm()
 				<dl class="day">
 	  				<dt class="item">요 일</dt>
 	  					<dd class="content">
-							<input type="checkbox" id="workweekcdGroupA" name="allweekday" onclick="setweekgroup()">평일(월,화,수,목,금)&nbsp;&nbsp;
-							<input type="checkbox" id="workweekcdGroupB" name="allweekend" onclick="setweekgroup()">주말(토,일)<br>
+							<input type="checkbox" id="workweekcdGroupA" name="allweekday" onclick="setweekgroup1()">평일(월,화,수,목,금)&nbsp;&nbsp;
+							<input type="checkbox" id="workweekcdGroupB" name="allweekend" onclick="setweekgroup2()">주말(토,일)<br>
 							<input type="checkbox" id="day1" name="day" onclick="setweekDay()" value="1">월&nbsp;&nbsp;
 							<input type="checkbox" id="day2" name="day" onclick="setweekDay()" value="2">화&nbsp;&nbsp;
 							<input type="checkbox" id="day3" name="day" onclick="setweekDay()" value="3">수&nbsp;&nbsp;

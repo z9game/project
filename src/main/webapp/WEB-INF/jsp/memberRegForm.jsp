@@ -85,7 +85,10 @@ function regMember()
 	var pwdobj = $(".password");
 	var checkpwdobj = $(".checkpwd");
 	var nameobj = $(".name");
+	var emailObj = $(".email");
+	var nicknameObj = $(".nickname")
 	var formobj = $("[name='memRegForm']")
+	
 	
 	
 
@@ -98,6 +101,12 @@ function regMember()
 		return;
 	}
 	
+	if(new RegExp(/^[가-힣a-zA-Z0-9]{2,15}$/).test(nicknameObj.val()) == false)
+	{	
+		alert("닉네임은 2~15자 특수문자를 제외한 한글,영어,숫자로만 입력 가능합니다.");
+		nicknameObj.val("");
+		return;
+	}
 	
 	if(new RegExp(/^[a-zA-Z0-9]{5,20}$/).test(midobj.val()) == false)
 	{	
@@ -113,6 +122,13 @@ function regMember()
 		alert("암호는 영어 대/소문자 와 숫자로만 입력 가능/5~20자 이내")
 		pwdobj.val("");
 		return;		
+	}
+	
+	if(new RegExp(/^([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/).test(emailObj.val()) == false)
+	{
+		alert("올바른 이메일 형식을 입력해주세요");
+		emailObj.val("");
+		return;
 	}
 	
 	
@@ -175,7 +191,7 @@ function regMember()
 
 			else
 			{
-				alert("회원가입 실패, 관리자에게 문의 바람");
+				alert("모든 입력란을 채워주셔야합니다.");
 				
 			}
 			

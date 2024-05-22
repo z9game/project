@@ -26,7 +26,7 @@
 
 <script >
 
-function setweekgroup() {
+function setweekgroup1() {
       if ($("#workweekcdGroupA").is(":checked")) {
          $("#day1, #day2, #day3, #day4, #day5").prop("checked", true);
          $("#day0").prop("checked", false);
@@ -43,7 +43,17 @@ function setweekgroup() {
       else {
          $("#day6, #day7").prop("checked", false);
       }
-   };
+};
+   
+ function setweekgroup2() {
+      if ($("#workweekcdGroupB").is(":checked")) {
+         $("#day6, #day7").prop("checked", true);
+         $("#day0").prop("checked", false);
+      } 
+      else {
+         $("#day6, #day7").prop("checked", false);
+      }
+};
    
    
    function setweekDay() {
@@ -83,22 +93,6 @@ function setweekgroup() {
       }
    }
      
-     
-   function setweekDay() {
-   
-      if ($("#day1").is(":checked") && $("#day2").is(":checked") && $("#day3").is(":checked") && $("#day4").is(":checked") && $("#day5").is(":checked")) {
-         $("#workweekcdGroupA").prop("checked", true);
-      }  
-      else {
-         $("#workweekcdGroupA").prop("checked", false);
-      }
-      
-      if($("#day1").is(":checked") || $("#day2").is(":checked") || $("#day3").is(":checked") || $("#day4").is(":checked") || $("#day5").is(":checked")) 
-      {
-         $("#day0").prop("checked", false);
-      }
-      
-     }
    
    //=============================================================================================================================================================================================
    
