@@ -410,7 +410,7 @@
 
 
 	<select id="getYangdoCnt"
-		parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
 		select count(*) from stadium_yangdo
 		
 		where booking_no = (
@@ -425,6 +425,61 @@
 		      	and STATUS = '양도중'
 		
 	</select>
+	
+	<select id="getStadiumStatus"
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
+		select count(*) from stadium
+		
+		where
+			stadium_no = #{MyStadium}
+			and 
+			stadium_status = '이용불가'
+					
+	</select>
+	
+	
+	
+		<select id="getUpStadiumStatus"
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
+		select count(*) from stadium
+		
+		where
+			stadium_no = (select
+					stadium_no
+					from
+					booking
+					where			
+			booking_no = #{booking_no}
+			
+			
+			)
+		
+			and 
+			stadium_status = '이용불가'
+					
+	</select>
+	
+	
+	<select id="getSincheongStadiumStatus"
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
+		select count(*) from stadium
+		
+		where
+			stadium_no = (select
+					stadium_no
+					from
+					booking
+					where			
+			booking_no = #{booking_no}
+			
+			
+			)
+		
+			and 
+			stadium_status = '이용불가'
+					
+	</select>
+	
 	
 	
 	

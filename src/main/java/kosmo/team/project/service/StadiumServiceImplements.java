@@ -139,6 +139,13 @@ public class StadiumServiceImplements implements StadiumService {
 
 			return 2;
 		}
+		
+		
+		int StadiumStatusCnt = this.stadiumDAO.getStadiumStatus(yangdoDTO);
+		if (StadiumStatusCnt >= 1) {
+
+			return 3;
+		}
 
 		int StadiumYangdoCnt = this.stadiumDAO.insertStadiumYangdo(yangdoDTO);
 
@@ -231,6 +238,16 @@ public class StadiumServiceImplements implements StadiumService {
 
 	@Override
 	public int updateYangdo(YangdoDTO yangdoDTO) {
+		
+		//경기장상태가 이용불가면 리턴5
+		int StadiumUpStatusCnt = this.stadiumDAO.getUpStadiumStatus(yangdoDTO);
+		
+		if (StadiumUpStatusCnt >= 1) {
+
+			return 5;
+		}
+
+		
 		//이미 양도에 같은게 있으면 3반환
 		int UpCnt = this.stadiumDAO.getYangdoUpCnt(yangdoDTO);
 		
@@ -240,6 +257,7 @@ public class StadiumServiceImplements implements StadiumService {
 		}
 		
 		
+
 		
 		int yangdoCnt = this.stadiumDAO.getYangdoDelCnt(yangdoDTO.getYangdo_no());
 		
@@ -260,6 +278,16 @@ public class StadiumServiceImplements implements StadiumService {
 
 	@Override
 	public int updateSincheong(YangdoDTO yangdoDTO) {
+		
+		int StadiumStatusCnt = this.stadiumDAO.getSincheongStadiumStatus(yangdoDTO);
+		
+		if (StadiumStatusCnt >=1) {
+			return 9;
+		}
+		
+		
+		
+		
 		
 		int sincheongCnt = this.stadiumDAO.updateSincheong(yangdoDTO);
 			

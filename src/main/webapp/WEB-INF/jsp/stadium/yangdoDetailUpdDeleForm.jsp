@@ -245,7 +245,7 @@ function loadTimeRanges() {
  			return;		}	
 
 	
-		
+ 		var stadiumName = $("select[name='MyStadium'] option:selected").text();
 		
 		$.ajax({
 			url : "/yangdoUpProc.do",
@@ -257,12 +257,20 @@ function loadTimeRanges() {
 					alert("삭제된 양도입니다.");
 					location.href = "/stadiumTransferForm.do";
 					return;
-				}else if (result == 3){
-					alert("이미 같은조건의 게시글이있음")
-					return;
-				}else if ( result ==7){
+				}else if ( result == 5){
 					
-				alert("이이 양도한 글입니다.")
+					alert("현재 선택한 경기장"+"( "+ stadiumName + " )"+"은 이용불가 상태입니다.");
+						return;
+				}
+				else if (result == 3){
+					alert("이미 같은조건의 게시글이있음")
+					
+					return;
+				}
+				else if ( result ==7){
+					
+				alert("이미 양도한 글입니다.")
+				return;
 					
 				}
 				else {
@@ -340,9 +348,7 @@ function loadTimeRanges() {
 				    <select name="MyStadium" class="MyStadium" onchange="loadDate()">
 					    <option value=0>경기장선택</option>
 					    <c:forEach var="myStadium" items="${requestScope.myStadiumList}">
-					        <option value="${myStadium.stadium_no}">
-					            ${myStadium.stadium_name}
-					        </option>
+					        <option value="${myStadium.stadium_no}"> ${myStadium.stadium_name}</option>
 					    </c:forEach>
 					</select>
 					

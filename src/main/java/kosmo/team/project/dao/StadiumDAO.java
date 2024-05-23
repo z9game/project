@@ -82,6 +82,12 @@ public interface StadiumDAO {
 	public int getCheckStatusDelCnt(int yangdo_no);
 
 	public int getCheckStatusUpCnt(int yangdo_no);
+
+	public int getStadiumStatus(YangdoDTO yangdoDTO);
+
+	public int getUpStadiumStatus(YangdoDTO yangdoDTO);
+
+	public int getSincheongStadiumStatus(YangdoDTO yangdoDTO);
 	
 
 	

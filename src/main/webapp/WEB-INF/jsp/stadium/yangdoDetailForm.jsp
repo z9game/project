@@ -37,11 +37,11 @@ checkRedirect();
 
 
 function yangdoSincheongForm(yangdo_no, m_no,booking_no){
-	alert(yangdo_no)
-	alert(booking_no)
-	alert(m_no)
+// 	alert(yangdo_no)
+// 	alert(booking_no)
+// 	alert(m_no)
 
-	
+	var stadium = "${requestScope.yangdoDTO.yangdo_stadium}";
 	
 	$.ajax({
 		//-------------------------------
@@ -65,7 +65,12 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 			var result = json["result"];
 			if (result == 0) {
 				alert("실패.");
-
+				return;
+			}else if (result == 9){
+				
+				alert("현재 경기장 (" + stadium + ")은 이용불가상태입니다.")
+				location.href = "/stadiumTransferForm.do"; 
+				
 			}
 			
 			else {
@@ -166,7 +171,7 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 			
 			<center>
 				<span style="cursor: pointer;" onclick="location.replace('/stadiumTransferForm.do')">[목록 화면으로]</span>
-				<c:if test="${requestScope.yangdoDTO.status ne '양도완료' and requestScope.yangdoDTO.m_no eq sessionScope.m_no}">
+				<c:if test="${requestScope.yangdoDTO.status ne '양도완료' and requestScope.yangdoDTO.writer eq sessionScope.m_no}">
    				 <input type="button" value="수정/삭제" onclick="document.yangdoDetailUpdDeleForm.submit();">
 				</c:if>
 			</center>
