@@ -247,7 +247,18 @@ function pageNoClick( clickPageNo ){
 							onClick="goTransferDetailForm(${Yangdo.yangdo_no});">
 							<td align="center">${requestScope.StadiumYangdoMap.begin_serialNo_desc - status.count + 1}</td>
 							<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
-							<td align="center">${Yangdo.title}</td>
+							<c:if test="${Yangdo.stadium_status eq '이용불가'}">
+							    <c:if test="${Yangdo.status eq '양도완료'}">
+							        <td align="center">${Yangdo.title}</td>
+							    </c:if>
+							    <c:if test="${Yangdo.status ne '양도완료'}">
+							        <td align="center">${Yangdo.title}(경기장이용불가)</td>
+							    </c:if>
+							</c:if>
+							<c:if test="${Yangdo.stadium_status eq '사용가능'}">
+							    <td align="center">${Yangdo.title}</td>
+							</c:if>
+
 							<td align="center">${Yangdo.nickname}</td>
 							<td align="center">${Yangdo.readcount}</td>
 							<td align="center">${Yangdo.reg_date}</td>
