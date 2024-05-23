@@ -233,5 +233,7 @@ public interface AdminDAO {
    public int adminCommunityFreeBoardDetailCommentOfCommentUpdateProc(CommunityFreeBoardDetailDTO detailDTO);
    
    public int adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO);
+
+   public int getStadiumDuplication(Stadim2DTO stadim2dto);
    
 }

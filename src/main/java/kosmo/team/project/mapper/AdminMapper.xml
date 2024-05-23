@@ -1269,7 +1269,15 @@
 		)
 	</insert>
 
-
+		<select id="getStadiumDuplication" parameterType="kosmo.team.project.dto.Stadim2DTO" resultType="int">
+			select
+			count(*) from stadium 
+			where replace(stadium_name, ' ', '') = replace(#{stadium_name}, ' ', '')
+			and
+			sido_name = #{sido_id}
+			and
+			sigungu_name = #{sigungu_id}
+		</select>
 	<!-- 
 	<select id="getTournamentList" resultType="kosmo.team.project.dto.TournamentDTO" parameterType="kosmo.team.project.dto.TournamentSearchDTO">		
 		 select * from ( select rownum RNUM, zxcvb.* from( 

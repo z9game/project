@@ -54,10 +54,7 @@
         if (confirm("정말 입력하시겠습니까?") == false) {
             return;
         }
-	     
-		if (confirm("정말 입력하시겠습니까?") == false) {
-			return;
-		}
+
 		//-----------------------------------------------------
 		// JQuery 객체의 [ajax 메소드]를 호출하여
 		// WAS 에 비동기 방식 "/boardRegProc.do" 주소로 접속하고 
@@ -90,7 +87,14 @@
 				if (result == 1) {
 					alert("경기장 입력 성공입니다.");
 					location.href = "/adminStadiumForm.do"
-				} else {
+				}else if(result == 4) {
+					
+					alert("이미있는 경기장 입니다.");
+					location.href = "/adminStadiumForm.do"
+					
+				}
+				
+				else {
 					alert("경기장 입력 실패입니다. 관리자에게 문의 바람!");
 					location.href = "/adminStadiumForm.do"
 				}
@@ -154,7 +158,7 @@
 			<tr>
 				<th>경기장이름</th>
 				<td width="300px"><input type="text" name="stadium_name"
-					class="stadium_name" size="10" maxlength="15"></td>
+					class="stadium_name" size="10" ></td>
 			</tr>
 			<tr>
 				<th>시/도</th>
