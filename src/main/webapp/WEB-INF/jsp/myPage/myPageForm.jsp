@@ -728,7 +728,7 @@
 			</center>
 		</c:if>
 	</c:if>
-	
+	 
 	<div class="modalDiv_matching" align="center"> 
 		<div class="bg_matching">
 			<div class="modal_matching">
@@ -738,19 +738,34 @@
 					<tr>
 						<th>팀 명</th>
 						<th>팀장명</th>
+						<th>경기장</th>
+						<th>일 시</th>
+						<th>시 간</th>
 						<th>선택</th>
 					</tr>
 					<c:forEach var="listMatch" items="${requestScope.matchWaitingList}" varStatus="status">
 						<tr>
 							<td align="center">${listMatch.team_name}</td>
 							<td align="center">${listMatch.nickname}</td>
-							<td align="center"><input type="radio" class="approve" name="team_no" value="${listMatch.team_no}"></td>
+							<td align="center">${listMatch.stadium_name}</td>
+							<td align="center">${listMatch.day}</td>
+							<td align="center">${listMatch.time_range}</td>
+							<td align="center"><input type="radio" class="approve" name="team_no" value="${listMatch.vs_team}"></td>
 						</tr>
 					</c:forEach>
 				</table>
 				
 				<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+				 
 				
+				<!-- 
+				<input type="hidden" name="match_team" value="${requestScope.myInfo.team_no}">
+				<input type="hidden" name="vs_team" value="${requestScope.matchWaitingList.vs_team}">
+				<input type="hidden" name="stadium_no" value="${requestScope.matchWaitingList.stadium}">
+				<input type="hidden" name="time_no" value="${requestScope.matchWaitingList.time_no}">
+				<input type="hidden" name="day" value="${requestScope.matchWaitingList.day}">
+				 -->
+				 
 			</form>
 			<div style="height:8px;"></div>
 			<button onclick="matching()">수락</button>
@@ -759,7 +774,7 @@
 			</div>
 		</div>
 	</div>
-	
+	  
 	
 	<div style="height:30px;"></div>
 	
