@@ -22,7 +22,20 @@
 		var writerObj = formObj.find(".writer");
 		var subjectObj = formObj.find(".subject");
 		var contentObj = formObj.find(".content");
-
+		
+		if (subjectObj.val().trim() == "") {
+	        alert("제목을 입력해주세요");
+	        return;
+	    }
+	    
+	    if (contentObj.val().trim().length == 0) {
+	        alert("내용을 1자 이상 입력해주세요.");
+	        contentObj.val("");
+	        return;
+	    }
+		
+		
+		
 		if (confirm("정말수정하시겠습니까?") == false) {
 			return;
 		}

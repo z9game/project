@@ -18,50 +18,43 @@
 	//----------------------------------------
 
 	function checkAdminStadiumRegForm() {
-		//----------------------------------------------
-		// name='boardRegForm" 를 가진 form 태그 관리 JQuery 객체 메위주 얻기 
-		//----------------------------------------------
 		var formObj = $("[name='adminStadiumRegForm']");
-		//----------------------------------------------
-		// class='writer"  를 가진 태그 관리 JQuery 객체 메위주 얻기 
-		// class='subject" 를 가진 태그 관리 JQuery 객체 메위주 얻기 
-		// class='email"   를 가진 태그 관리 JQuery 객체 메위주 얻기 
-		// class='content" 를 가진 태그 관리 JQuery 객체 메위주 얻기 
-		// class='pwd"     를 가진 태그 관리 JQuery 객체 메위주 얻기 
-		//----------------------------------------------
-		var writerObj = formObj.find(".writer");
-		var subjectObj = formObj.find(".subject");
-		var contentObj = formObj.find(".content");
-		//----------------------------------------------
-		// 작성자명의 문자 패턴 검사하기
-		//----------------------------------------------
-		if (new RegExp(/^[가-힣]{2,15}$/).test(writerObj.val()) == false) {
-			alert("경기장이름은 2~15자 한글이어야합니다.");
-			writerObj.val("");
-			return;
-		}
-		//----------------------------------------------
-		// 제목의 문자 패턴 검사하기
-		//----------------------------------------------
-		if (new RegExp(/^.{2,30}$/).test(subjectObj.val()) == false) {
-			alert("제목은 임의 문자 2~30자 입력해야합니다");
-			subjectObj.val("");
-			return;
-		}
+        var stadiumName = formObj.find("[name='stadium_name']").val().trim();
+        var sidoId = formObj.find("[name='sido_id']").val();
+        var sigunguId = formObj.find("[name='sigungu_id']").val();
+        var detailAddress = formObj.find("[name='detail_address']").val().trim();
+        var stadiumStatus = formObj.find("[name='stadium_status']:checked").val();
+        var content = formObj.find("[name='content']").val().trim();
+        // 유효성 검사
+        if (stadiumName == "") {
+            alert("경기장 이름을 입력해주세요.");
+            return;
+        }
+        if (sidoId == 0) {
+            alert("시/도를 선택해주세요.");
+            return;
+        }
+        if (sigunguId == 0) {
+            alert("군/구를 선택해주세요.");
+            return;
+        }
+        if (detailAddress == "") {
+            alert("상세주소를 입력해주세요.");
+            return;
+        }
+        if (!stadiumStatus) {
+            alert("경기장 상태를 선택해주세요.");
+            return;
+        }
+        if (content.length < 1) {
+            alert("내용을 한 글자 이상 입력해주세요.");
+            return;
+        }
 
-		//----------------------------------------------
-		// 작성자명의 문자 패턴 검사하기
-		//----------------------------------------------
-		if (contentObj.val().trim().length == 0
-				|| contentObj.val().trim().length > 500) {
-			alert("내용은 임의 문자 1~500자 입력해야합니다.");
-			return;
-		}
-
-		alert(formObj.serialize());
-		//----------------------------------------------
-		// 정말 입력 할건지 확인하기
-		//----------------------------------------------
+        if (confirm("정말 입력하시겠습니까?") == false) {
+            return;
+        }
+	     
 		if (confirm("정말 입력하시겠습니까?") == false) {
 			return;
 		}
@@ -119,7 +112,7 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">공지사항</p>
+		<p class="titleBackgoundText"></p>
 	</div>
 
 
@@ -161,7 +154,7 @@
 			<tr>
 				<th>경기장이름</th>
 				<td width="300px"><input type="text" name="stadium_name"
-					class="writer" size="10" maxlength="15"></td>
+					class="stadium_name" size="10" maxlength="15"></td>
 			</tr>
 			<tr>
 				<th>시/도</th>

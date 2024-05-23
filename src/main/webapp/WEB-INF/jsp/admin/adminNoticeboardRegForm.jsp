@@ -34,30 +34,23 @@
 		//----------------------------------------------
 		// 작성자명의 문자 패턴 검사하기
 		//----------------------------------------------
-		if (new RegExp(/^[가-힣]{2,15}$/).test(writerObj.val()) == false) {
-			alert("작성자는 2~15자 한글이어야합니다.");
-			writerObj.val("");
-			return;
-		}
-		//----------------------------------------------
-		// 제목의 문자 패턴 검사하기
-		//----------------------------------------------
-		if (new RegExp(/^.{2,30}$/).test(subjectObj.val()) == false) {
-			alert("제목은 임의 문자 2~30자 입력해야합니다");
-			subjectObj.val("");
-			return;
-		}
+// 		if (new RegExp(/^[가-힣]{2,15}$/).test(writerObj.val()) == false) {
+// 			alert("작성자는 2~15자 한글이어야합니다.");
+// 			writerObj.val("");
+// 			return;
+// 		}
+		if (subjectObj.val().trim() == "") {
+	        alert("제목을 입력해주세요");
+	        return;
+	    }
+	    
+	    if (contentObj.val().trim().length == 0) {
+	        alert("내용을 1자 이상 입력해주세요.");
+	        contentObj.val("");
+	        return;
+	    }
 
-		//----------------------------------------------
-		// 작성자명의 문자 패턴 검사하기
-		//----------------------------------------------
-		if (contentObj.val().trim().length == 0
-				|| contentObj.val().trim().length > 500) {
-			alert("내용은 임의 문자 1~500자 입력해야합니다.");
-			return;
-		}
-
-		alert(formObj.serialize());
+		//alert(formObj.serialize());
 		//----------------------------------------------
 		// 정말 입력 할건지 확인하기
 		//----------------------------------------------
@@ -158,8 +151,9 @@
 				<th>작성자</th>
 				<td width="300px">
 					<!--------------------------------------------------------> <input
-					type="text" name="writer" class="writer" size="10" maxlength="15"
+					type="text" name="writer" class="writer" size="10" maxlength="15" readonly="readonly"
 					value="관리자"> <!-------------------------------------------------------->
+					<%= session.getAttribute("nickname") %>
 				</td>
 			</tr>
 			<tr>

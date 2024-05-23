@@ -107,6 +107,19 @@
 	    var timeRangeValue = $("select[name='MyTimeRange']").val();
 	    
 	    
+	    if (subjectObj.val().trim() == "") {
+	        alert("제목을 입력해주세요");
+	        return;
+	    }
+	    
+	    if (contentObj.val().trim().length == 0) {
+	        alert("내용을 1자 이상 입력해주세요.");
+	        contentObj.val("");
+	        return;
+	    }
+	    
+	    
+	    
 	    if (stadiumValue === "선택") {
 	        alert("경기장을 선택해 주세요.");
 	        return;
@@ -120,6 +133,9 @@
 	        alert("시간을 선택해 주세요.");
 	        return;
 	    }
+	    
+	    
+	    
 	    
 	    
 	
@@ -139,25 +155,14 @@
 	    
 	    
 		
-	    alert(JSON.stringify(formData));
+	    //alert(JSON.stringify(formData));
 		
-		
+		var stadiumName = $("select[name='MyStadium'] option:selected").text();
 		
 		
 		
 		var sessionPwd = "<%= session.getAttribute("password") %>";
 		
-		if(new RegExp(/^.{2,100}$/).test(subjectObj.val())==false){
-			alert("제목은 2~100자 한글입니다.");
-			subjectObj.val("");
-			return;
-		}
-		
-		if (contentObj.val().trim().length==0||contentObj.val().trim().length>1000){
-			alert("내용은 1~1000자 입력해야 합니다.");
-			contentObj.val("");
-			return;
-		}
 		
 	    function checkPwd() {
 	    	var pwdInsert = prompt("계정 비밀번호를 입력해주세요.");
@@ -170,7 +175,8 @@
 	        	
 	            alert("계정 비밀번호를 정확히 입력해주세요.");
 	            
-	            checkQnABoardRegForm();
+	           // checkQnABoardRegForm();
+	           return;
 	            
 	        } else {
 	            if(confirm("작성하시겠습니까?") == true){
@@ -198,7 +204,13 @@
 	    						alert("작성 성공");
 	    						location.href = '/stadiumTransferForm.do';
 	    						
-	    					}else if(result == 2){
+	    					}else if(result == 3){
+	    						
+	    						alert("현재 선택한 경기장"+"( "+ stadiumName + " )"+"은 이용불가 상태입니다.");
+	
+	
+	    					}
+	    					else if(result == 2){
 	    						
 	    						alert("이미 같은날과 시간에 양도신청한 경기장이있습니다.");
 	
