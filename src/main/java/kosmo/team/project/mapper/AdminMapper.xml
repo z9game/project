@@ -1283,6 +1283,23 @@
    			,#{region}
    		)
    </insert>
+   
+   <!-- 대회일정 수정 -->
+   <update id="updateCnt" parameterType="kosmo.team.project.dto.TournamentDTO">
+	update
+		tournament
+	set
+		subject = #{subject}
+		,content = #{content}
+		,regist_start = to_date(#{regist_start})
+   		,regist_end =to_date(#{regist_end})
+   		,region = #{region}
+	where 
+		list_no = #{list_no}
+	</update>
+   
+   
+   
 
 
 <sql id="gallaryWhere">

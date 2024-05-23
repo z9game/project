@@ -26,7 +26,6 @@
 	       location.href = '/loginForm.do';
 	       return;
 	   }
-	   
    		// 주석
    		// 경기장 대관 확인
 		var formObj = $("[name='newMatchingBoard']");
@@ -43,7 +42,7 @@
 				}
 	        	else
 	        	{
-	        		location.href='/newMatchingBoardForm.do';
+	        		document.newMatching.submit();
 	        	}
 	        	
 	        },	
@@ -72,8 +71,6 @@
 		if(typeof(keyword1)!='string' ){keyword1=""; }
 	    
 	    keyword1 = $.trim(keyword1);
-	    
-	    boardSearchFormObj.find(".rowCntPerPage").val( $("select").filter(".rowCntPerPage").val());
 	    
 		$.ajax({
 			//-------------------------------
@@ -239,8 +236,6 @@
 		<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 		<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
 		<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
-		<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			
 	 	</form>
    
@@ -308,12 +303,7 @@
 			onClick="pageNoClick(${requestScope.boardMap.selectPageNo}+1)">[다음]</span>
 			<span style="cursor: pointer"
 			onClick="pageNoClick(${requestScope.boardMap.last_pageNo})">[마지막]</span>
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
+		</span> 
 		
 	</center>
 	
@@ -330,6 +320,11 @@
 		하지만 지금 이곳에서는 그 값을 설정해주지않고 함수부분에서 어떠한 값을 넘길것인지 설정해줄거임.
 		 -->
 		<input type="hidden" name="match_no">
+		<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+	</form>
+	
+	
+	<form action="/newMatchingBoardForm.do" method="post" name="newMatching">
 		<input type="hidden" name="m_no" value="${sessionScope.m_no}">
 	</form>
 	

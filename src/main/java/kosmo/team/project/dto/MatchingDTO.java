@@ -31,10 +31,36 @@ public class MatchingDTO {
 	private String stadium_name;	
 	private String booking_date;
 	private int team_no;
+	private String team_name;
 	//private Date date_booking_date;
 	
 	
+	//매칭 신청 관련
+	private int match_team;
+	private int vs_team;
 	
+	
+	
+	
+	
+	public int getMatch_team() {
+		return match_team;
+	}
+	public void setMatch_team(int match_team) {
+		this.match_team = match_team;
+	}
+	public int getVs_team() {
+		return vs_team;
+	}
+	public void setVs_team(int vs_team) {
+		this.vs_team = vs_team;
+	}
+	public String getTeam_name() {
+		return team_name;
+	}
+	public void setTeam_name(String team_name) {
+		this.team_name = team_name;
+	}
 	public String getBooking_date() {
 		return booking_date;
 	}

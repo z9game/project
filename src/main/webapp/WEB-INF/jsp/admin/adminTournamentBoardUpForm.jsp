@@ -15,7 +15,34 @@
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 <script>
-   
+	function checkTournamentUpForm() {
+		
+		var formObj = $("[name='updateAdminTournament']");
+		
+		if (confirm("정말 수정하시겠습니까?") == false) {
+			return;
+		}
+	
+		$.ajax({
+			url : "/upTournamentBoardProc.do",
+			type : "post",
+			data : formObj.serialize(),
+			success : function(json) {
+				var result = json["result"];
+				if (result == 0) {
+					alert("삭제된 글입니다.");
+					location.href = "/adminTournamentBoardForm.do";
+				} 
+				else {
+					alert("대회일정 수정 성공입니다.");
+					location.href = "/adminTournamentBoardForm.do";
+				}
+			},
+			error : function() {
+				alert("수정 실패! 관리자에게 문의 바랍니다.");
+			}
+		});
+	}
 </script>
 
 
@@ -29,7 +56,7 @@
 
    <%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 
-      <form name="newAdminTournamentBoardFormRegTable">
+      <form name="updateAdminTournament">
          <table class="newAdminTournamentBoardFormRegTable" border="1" bordercolor="black">
             <tr>
                <th>제목</th>
@@ -68,12 +95,12 @@
          	<tr>
            		<th bgColor="lightgray">내 용</th>
 	            <td>
-	               <textarea name="content" class="content" rows="13" cols="40" maxlength="500">
-	               ${requestScope.detail.content}
-	               </textarea>
+	               <textarea name="content" class="content" rows="13" cols="40" maxlength="500">${requestScope.detail.content}</textarea>
 	            </td>
          	</tr>
      	 </table>
+     	 
+     	 <input type="hidden" name="list_no" value="${requestScope.detail.list_no}">
       </form>
 
 
@@ -83,11 +110,7 @@
          <!--------------------------------------------------- -->
          <span style="cursor: pointer"
             onclick="location.href='/adminTournamentBoardForm.do'"> [목록화면으로] </span>
-         <input type="button" value="수정" style="cursor:pointer" onclick="document.updateTournament.submit()">
-
-	<form name="updateTournament" action="/adminTournamentBoardUpForm.do" method="post">
-		<input type="hidden" name="list_no" value="${requestScope.detail.list_no}">
-	</form>
+         <input type="button" value="수정" style="cursor:pointer" onclick="checkTournamentUpForm();">
 
 </body>
 </html>

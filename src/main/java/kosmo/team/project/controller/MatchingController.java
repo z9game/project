@@ -114,10 +114,15 @@ public class MatchingController {
     
     //새글쓰기 페이지
     @RequestMapping(value = "/newMatchingBoardForm.do")
-    public ModelAndView newMatchingBoardForm() {
+    public ModelAndView newMatchingBoardForm(@RequestParam(value="m_no")int m_no) {
+    	
+    	//내 정보 가져오기, 오라클 실행결과물을 myInfo라는 변수에 저장
+    	MemberDTO myInfo = this.memberService.getMyInfo(m_no);
     	
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("/matching/newMatchingBoardForm.jsp");
+    	//myInfo에 저장한 결과물을 페이지에서 requestScope를 사용해 얻어낼수 있게 설정
+        mav.addObject("myInfo", myInfo);
     	
         return mav;
     }

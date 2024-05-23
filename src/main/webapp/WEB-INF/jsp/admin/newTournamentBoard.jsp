@@ -108,9 +108,7 @@
 	         	<tr>
 	           		<th bgColor="lightgray">내 용</th>
 		            <td>
-		               <textarea name="content" class="content" rows="13" cols="40" maxlength="500">
-		               
-		               </textarea>
+		               <textarea name="content" class="content" rows="13" cols="40" maxlength="500"></textarea>
 		            </td>
 	         	</tr>
 	      </table>

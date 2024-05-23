@@ -70,6 +70,10 @@
                <td>${requestScope.detail.nickname}</td>
             </tr>
             <tr>
+            	<th bgColor="lightgray">팀 명</th>
+            	<td>${requestScope.detail.team_name}</td>
+            </tr>
+            <tr>
                <th bgColor="lightgray">조회수</th>
                <!--------------------------------------------------- -->
                <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
@@ -134,9 +138,11 @@
 	 <!-- 매칭 게시물일때 신청버튼을 누르면 넘어갈 정보들 -->
 		<form name="waitingList">
 			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
-			<input type="hidden" name="team_no"value="${requestScope.myInfo.team_no}">
-			<input type="hidden" name="match_no"value="${requestScope.detail.match_no}">
-			
+			<input type="hidden" name="match_team"value="${requestScope.detail.team_no}">
+			<input type="hidden" name="vs_team"value="${requestScope.myInfo.team_no}">
+			<input type="hidden" name="stadium_no"value="${requestScope.detail.stadium_no}">
+			<input type="hidden" name="time_no"value="${requestScope.detail.time_no}">
+			<input type="hidden" name="day"value="${requestScope.detail.booking_date}">
 		</form>
  
 </body>

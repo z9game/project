@@ -121,7 +121,7 @@ public interface AdminDAO {
 	
 	public int regBoard(TournamentDTO tournamentDTO);
 	
-	
+	public int updateCnt(TournamentDTO tournamentDTO);
 	
 	
 	
