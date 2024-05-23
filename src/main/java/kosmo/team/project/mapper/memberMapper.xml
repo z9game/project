@@ -297,34 +297,20 @@
 		from
 		    waiting_matchreg
 		where
-		    match_no=(
-		       select
-		        match_no
-		    from 
-		        match m left join team_member tm on m.writer = tm.team_member 
-		    where
-		        m.writer = #{m_no}
-		    ) 
+		    match_team = (select team_no from team_member where team_member = #{m_no})
 	</select>
 	
 	<!-- 매칭 대기팀목록 -->
 	<select id="getMatchWaitingList" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
-   		select
+		select
 		    t.team_name
 		    ,m.nickname
-		    ,wm.team_no
+		    ,wm.vs_team
 		from
-		    waiting_matchreg wm left join team t on wm.team_no = t.team_no     
+		    waiting_matchreg wm left join team t on wm.vs_team = t.team_no     
 		                        left join member m on t.team_master = m.m_no   
 		where
-		    match_no=(
-		       select
-		        match_no
-		    from 
-		        match m left join team_member tm on m.writer = tm.team_member 
-		    where
-		        m.writer = #{m_no}
-		    )  
+		    match_team = (select team_no from team_member where team_member = #{m_no})  
 	</select>
 	
 	<!-- 매칭수락하면 match_day테이블로 넘어가고 다른 팀들은 자동 거절된다. -->

@@ -411,7 +411,12 @@ public class AdminServiceImplements implements AdminService {
 		return regBoard;
 	}
 	
-	
+
+	public int updateCnt(TournamentDTO tournamentDTO) {
+		
+		int updateCnt = this.adminDAO.updateCnt(tournamentDTO);
+		return updateCnt;
+	}
 	
 	
 	

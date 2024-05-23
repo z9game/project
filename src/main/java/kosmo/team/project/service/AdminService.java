@@ -121,6 +121,8 @@ public interface AdminService {
 	public int deleteBoard(int list_no);
 	
 	int regBoard(TournamentDTO tournamentDTO);
+	
+	int updateCnt(TournamentDTO tournamentDTO);
 
 	
 	

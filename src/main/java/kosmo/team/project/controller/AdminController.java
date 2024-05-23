@@ -799,7 +799,26 @@ public class AdminController {
         
         return mav;
     }
-	 
+	
+	//대회일정 수정
+	@RequestMapping(value = "/upTournamentBoardProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> upTournamentBoardProc(TournamentDTO tournamentDTO) {
+
+		Map<String, String> resultMap = new HashMap<String, String>();
+		
+		int updateCnt = this.adminService.updateCnt(tournamentDTO);
+
+		resultMap.put("result",  updateCnt+"");
+
+		return resultMap;
+	}
+
 	
 	//삭제관련
 	@RequestMapping(value = "/deleteTournamentProc.do"

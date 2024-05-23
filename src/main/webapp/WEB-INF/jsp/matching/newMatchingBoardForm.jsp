@@ -28,8 +28,6 @@
 	{
 		var formObj = $("[name='newMatchingBoard']")
 		
-		alert(formObj.serialize());
-		
 		$.ajax({
 			//-------------------------------
 			// WAS 로 접속할 주소 설정
@@ -185,6 +183,10 @@
                <!--------------------------------------------------- -->
                <td>${sessionScope.nickname}</td>
             </tr>
+            <tr>
+            	<th bgColor="lightgray">팀 명</th>
+            	<td>${requestScope.myInfo.team_name}</td>
+            </tr>
             <!-- 	주석처리
             <tr>
                 <th bgColor="lightgray">지역</th>
@@ -287,6 +289,7 @@
       
       <input type="hidden" name="writer" value="${sessionScope.m_no}">
       <input type="hidden" name="m_no" value="${sessionScope.m_no}">
+      <input type="hidden" name="team_no" value="${requestScope.myInfo.team_no}">
       
      </form>
 

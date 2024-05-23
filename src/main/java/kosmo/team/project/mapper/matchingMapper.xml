@@ -137,16 +137,22 @@ select
    distinct m.title
    ,mb.nickname
    ,m.readcount
+   ,sta.stadium_no
    ,sta.stadium_name
    ,to_char(bk.booking_date, 'YYYY-MM-DD') as booking_date
+   ,tt.time_no
    ,tt.time_range
    ,m.content
    ,m.match_no
+   ,t.team_name
+   ,t.team_no
 from
     match m left join member mb on m.writer = mb.m_no
             left join booking bk on m.writer = bk.m_no  
             left join stadium sta on bk.stadium_no = sta.stadium_no
             left join time_table tt on m.time_no = tt.time_no
+            left join team_member tm on m.writer = tm.team_member
+            left join team t on tm.team_no = t.team_no
 where
    m.match_no = #{match_no}     
     and
@@ -160,9 +166,7 @@ where
     and
     m.time_no = (select time_no from match where match_no = #{match_no})
     and
-    bk.booking_date = to_date( (select day from match where match_no = #{match_no}),'YYYY-MM-DD' )
-                                                                
-      
+    bk.booking_date = to_date( (select day from match where match_no =#{match_no}),'YYYY-MM-DD' )
 </select>
 
 
@@ -170,7 +174,7 @@ where
    //새글쓰기
 -->
 <insert id="regMatchingBoard" parameterType="kosmo.team.project.dto.MatchingDTO" >
-insert into match (match_no, title, writer, content, time_no, day, stadium)
+insert into match (match_no, title, writer, content, time_no, day, stadium, team_no)
  values(
     (select nvl(max(match_no),0)+1 from match)
     ,#{title}
@@ -179,6 +183,7 @@ insert into match (match_no, title, writer, content, time_no, day, stadium)
     ,#{matchingTime}
     ,#{day}
     ,${stadium_no}
+    ,#{team_no}
  )
  </insert>
  
@@ -230,13 +235,13 @@ insert into match (match_no, title, writer, content, time_no, day, stadium)
                left join stadium sta on bk.stadium_no = sta.stadium_no
                left join time_table tt on m.time_no = tt.time_no
    where
-      m.match_no = 4
+      m.match_no = #{match_no}
        and
-       sta.stadium_name = (select unique(sta.stadium_name) from match m left join stadium sta on m.stadium = sta.stadium_no where m.stadium = (select stadium from match where match_no = 4))
+       sta.stadium_name = (select unique(sta.stadium_name) from match m left join stadium sta on m.stadium = sta.stadium_no where m.stadium = (select stadium from match where match_no =  #{match_no}))
        and
-       m.time_no = (select time_no from match where match_no = 4)
+       m.time_no = (select time_no from match where match_no = #{match_no})
        and
-       to_char(bk.booking_date, 'YYYY-MM-DD') = to_char( (select day from match where match_no = 4))
+       to_char(bk.booking_date, 'YYYY-MM-DD') = to_char( (select day from match where match_no = #{match_no}))
 </select>
  
  
@@ -373,8 +378,11 @@ where
    into 
          waiting_matchReg
       values(
-         #{match_no}
-         ,#{team_no}   
+         #{match_team}
+         ,#{vs_team}
+         ,#{time_no}
+         ,#{day}
+         ,${stadium_no}
       )
       </insert>
  
