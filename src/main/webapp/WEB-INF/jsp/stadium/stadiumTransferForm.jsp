@@ -65,7 +65,7 @@ function search(){
 
 	SearchFormObj = $("[name='stadiumTransferFormConditionalSearch']");
 
-	//alert(SearchFormObj.serialize( ));
+	alert(SearchFormObj.serialize( ));
 	
 
     SearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val() );

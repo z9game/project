@@ -12,7 +12,6 @@ import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
-import kosmo.team.project.dto.RecruitSearchDTO;
 import kosmo.team.project.dto.Stadim2DTO;
 import kosmo.team.project.dto.TournamentDTO;
 import kosmo.team.project.dto.TournamentSearchDTO;
@@ -325,6 +324,16 @@ public class AdminServiceImplements implements AdminService {
 		// 수정할 게시판의 존재 개수 얻기
 		// 만약 수정할 게시판의 개수가 0개면(=이미 삭제되었으면) 0리턴하기
 		// --------------------------------------
+		int stadiumDuplicationCnt= this.adminDAO.getStadiumDuplication(stadim2DTO);
+		
+		if(stadiumDuplicationCnt >=1) {
+			
+			return 4;
+			
+			
+		}
+		
+		
 		int stadiumCnt = this.adminDAO.getStadiumCnt(stadim2DTO.getStadium_no());
 		if (stadiumCnt == 0) {
 			return stadiumCnt;
@@ -357,6 +366,24 @@ public class AdminServiceImplements implements AdminService {
 	
 	
 	public int insertStadium(Stadim2DTO stadim2DTO) {
+		
+		
+		
+		int stadiumDuplicationCnt= this.adminDAO.getStadiumDuplication(stadim2DTO);
+		
+		if(stadiumDuplicationCnt >=1) {
+			
+			return 4;
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
 		// ----------------------------------------------
 		// BoardDAOImpl 객체의
 		// insertBoard 메소드 호출하여

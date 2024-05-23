@@ -89,7 +89,13 @@
 				if (result == 0) {
 					alert("삭제된 경기장입니다.");
 					location.href = "/adminStadiumForm.do";
-				} else {
+				}else if(result == 4) {
+					
+					alert("이미있는 경기장 입니다.");
+					location.href = "/adminStadiumForm.do"
+					
+				} 
+				else {
 					alert("경기장 삭제 성공입니다.");
 					location.href = "/adminStadiumForm.do";
 				}
