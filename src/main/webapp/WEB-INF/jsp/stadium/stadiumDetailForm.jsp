@@ -68,7 +68,13 @@
 					location.href = "/stadiumRentForm.do";
 					
 					
-				}else {
+				} 	else if (result == 6) {
+					alert("삭제된스타디움입니다.");
+					location.href = "/stadiumRentForm.do";
+					
+					
+				}
+				else {
 					alert("예약 성공입니다.");
 					location.href = "/stadiumRentForm.do";
 				}

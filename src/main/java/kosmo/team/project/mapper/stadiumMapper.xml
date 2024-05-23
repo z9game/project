@@ -266,9 +266,16 @@
 	</select>
 
 
+	<select id="getRentStadiumCnt"
+		parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
+		select count(*)
+		from stadium
+		where stadium =#{stadium}
+		
+	</select>
 
 
-
+	
 
 	<!-- <select id="getRentTimeSlotCnt" parameterType="kosmo.team.project.dto.RentStadiumDTO" 
 		resultType="int"> select count(time_slot) from booking where stadium_no = 
@@ -407,7 +414,14 @@
     )
 </insert>
 
-
+	<select id="getYangdoStadiumCnt"
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
+		select count(*)
+		from stadium
+		where stadium =#{MyStadium}
+		
+	</select>
+	
 
 	<select id="getYangdoCnt"
 		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
