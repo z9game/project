@@ -261,7 +261,13 @@ function loadTimeRanges() {
 					
 					alert("현재 선택한 경기장"+"( "+ stadiumName + " )"+"은 이용불가 상태입니다.");
 						return;
+				}else if ( result == 6){
+					
+					alert("삭제된 경기장입니다");
+					location.href = "/stadiumTransferForm.do";
+						return;
 				}
+				
 				else if (result == 3){
 					alert("이미 같은조건의 게시글이있음")
 					
@@ -306,7 +312,13 @@ function loadTimeRanges() {
 				}else if ( result == 8){
 					alert("이미 양도완료한 글입니다.")
 					
-				} 
+				}else if ( result == 6){
+					
+					alert("삭제된 경기장입니다");
+					location.href = "/stadiumTransferForm.do";
+						return;
+				}
+				
 				else {
 					alert("양도 삭제 성공입니다.");
 					location.href = "/stadiumTransferForm.do";

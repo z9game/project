@@ -71,6 +71,11 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 				alert("현재 경기장 (" + stadium + ")은 이용불가상태입니다.")
 				location.href = "/stadiumTransferForm.do"; 
 				
+			}else if ( result == 6){
+				
+				alert("삭제된 경기장입니다");
+				location.href = "/stadiumTransferForm.do";
+					return;
 			}
 			
 			else {
