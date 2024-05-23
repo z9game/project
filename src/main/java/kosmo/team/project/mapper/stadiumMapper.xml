@@ -498,7 +498,9 @@
 		sy.content AS "content",
 		to_char(sy.reg_date, 'YYYY-MM-DD') AS "reg_date",
 		sy.readcount AS "readcount",
-		sy.booking_no as "booking_no"
+		sy.booking_no as "booking_no",
+		s.STADIUM_STATUS as "stadium_status",
+		sy.status as "status"
 		FROM
 		stadium_yangdo sy join member m on m.m_no = sy.writer
 		JOIN BOOKING B ON sy.BOOKING_NO = B.BOOKING_NO

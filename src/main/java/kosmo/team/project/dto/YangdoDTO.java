@@ -17,6 +17,7 @@ public class YangdoDTO {
 	private int MyTimeRange;
 	private String status;
 	private int transferred_to;
+	private String stadium_status;
 	
 	private String yangdo_date;
 	private String booking_date;
@@ -110,6 +111,12 @@ public class YangdoDTO {
 	public void setTransferred_to(int transferred_to) {
 		this.transferred_to = transferred_to;
 	}
+	public String getStadium_status() {
+		return stadium_status;
+	}
+	public void setStadium_status(String stadium_status) {
+		this.stadium_status = stadium_status;
+	}
 	public String getYangdo_date() {
 		return yangdo_date;
 	}
@@ -158,7 +165,7 @@ public class YangdoDTO {
 	public void setTime_slot(int time_slot) {
 		this.time_slot = time_slot;
 	}
-	
+
 	
 	
 	
