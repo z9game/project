@@ -155,9 +155,9 @@
 	    
 	    
 		
-	    alert(JSON.stringify(formData));
+	    //alert(JSON.stringify(formData));
 		
-		
+		var stadiumName = $("select[name='MyStadium'] option:selected").text();
 		
 		
 		
@@ -175,7 +175,8 @@
 	        	
 	            alert("계정 비밀번호를 정확히 입력해주세요.");
 	            
-	            checkQnABoardRegForm();
+	           // checkQnABoardRegForm();
+	           return;
 	            
 	        } else {
 	            if(confirm("작성하시겠습니까?") == true){
@@ -203,7 +204,13 @@
 	    						alert("작성 성공");
 	    						location.href = '/stadiumTransferForm.do';
 	    						
-	    					}else if(result == 2){
+	    					}else if(result == 3){
+	    						
+	    						alert("현재 선택한 경기장"+"( "+ stadiumName + " )"+"은 이용불가 상태입니다.");
+	
+	
+	    					}
+	    					else if(result == 2){
 	    						
 	    						alert("이미 같은날과 시간에 양도신청한 경기장이있습니다.");
 	
