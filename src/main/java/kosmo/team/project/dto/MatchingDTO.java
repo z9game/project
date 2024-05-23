@@ -28,7 +28,7 @@ public class MatchingDTO {
 	// 주석 추가
 	private int m_no;
 	private String stadium_no;
-	private String stadium_name;	
+	private String stadium_name;
 	private String booking_date;
 	private int team_no;
 	private String team_name;
@@ -38,11 +38,18 @@ public class MatchingDTO {
 	//매칭 신청 관련
 	private int match_team;
 	private int vs_team;
+	private int stadium;
 	
 	
 	
 	
 	
+	public int getStadium() {
+		return stadium;
+	}
+	public void setStadium(int stadium) {
+		this.stadium = stadium;
+	}
 	public int getMatch_team() {
 		return match_team;
 	}

@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosmo.team.project.dto.MatchingDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.TeamDTO;
 import kosmo.team.project.dto.bookingDTO;
+import kosmo.team.project.service.MatchingService;
 import kosmo.team.project.service.MemberService;
 
 @Controller
@@ -23,6 +25,8 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+    @Autowired
+	private MatchingService matchingservice;
 	
     	//회원가입창
 		@RequestMapping(value = "/memberRegForm.do")
@@ -112,19 +116,21 @@ public class MemberController {
 			 List<TeamDTO> getHiredList = this.memberService.getHiredList(m_no);
 			 
 			//매칭승낙 대기팀 정보 가져오기
-			 List<TeamDTO> matchWaitingList = this.memberService.getMatchWaitingList(m_no);
+			 List<MatchingDTO> matchWaitingList = this.memberService.getMatchWaitingList(m_no);
 			 
 			//예약한 경기장 가져오기
 			 List<bookingDTO> bookedStadium = this.memberService.getBookedStadium(m_no);
 			 
 			//다음 경기 일정 가져오기
-			 List<TeamDTO> getTeamMatchDay = this.memberService.getTeamMatchDay(m_no);
+			 //List<TeamDTO> getTeamMatchDay = this.memberService.getTeamMatchDay(m_no);
 			 
 			//내가 팀장일때 매칭 신청이 들어왔을때
 			 int matchWaitingCnt = this.memberService.getmatchWaitingCnt(m_no);
 
 		    //나의 레슨을 듣는 인원목록 가져오기
 			 List<TeamDTO> getLessonList = this.memberService.getLessonList(m_no);
+			 
+			 
 			 
 			 
 		     ModelAndView mav = new ModelAndView();
@@ -155,10 +161,9 @@ public class MemberController {
 		     //내팀 용병 정보
 		     mav.addObject("getHiredList", getHiredList);
 		     //다음경기 일정 가져오기
-		     mav.addObject("getTeamMatchDay", getTeamMatchDay);
+		     //mav.addObject("getTeamMatchDay", getTeamMatchDay);
 		     //나의 레슨을 듣는 인원목록 가져오기
 		     mav.addObject("getLessonList", getLessonList);
-		     
 
 		     return mav;
 		  }

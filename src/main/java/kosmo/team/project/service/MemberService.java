@@ -3,7 +3,7 @@ package kosmo.team.project.service;
 import java.util.List;
 import java.util.Map;
 
-
+import kosmo.team.project.dto.MatchingDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.TeamDTO;
 import kosmo.team.project.dto.bookingDTO;
@@ -49,7 +49,7 @@ public interface MemberService {
 	 int getmatchWaitingCnt(int m_no);
 	 
 	//매칭승낙 대기팀 정보 가져오기
-	 List<TeamDTO> getMatchWaitingList(int m_no);
+	 List<MatchingDTO> getMatchWaitingList(int m_no);
 	 
 	//매칭수락
 	int matchReg(TeamDTO teamDTO);

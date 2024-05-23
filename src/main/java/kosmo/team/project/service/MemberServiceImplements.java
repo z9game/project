@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import kosmo.team.project.dao.MemberDAO;
-
+import kosmo.team.project.dto.MatchingDTO;
 import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.TeamDTO;
 import kosmo.team.project.dto.bookingDTO;
@@ -145,8 +145,8 @@ public class MemberServiceImplements implements MemberService {
 	
 
 	//매칭승낙 대기팀 정보 가져오기
-	public List<TeamDTO> getMatchWaitingList(int m_no){
-		List<TeamDTO> getMatchWaitingList = this.memberDAO.getMatchWaitingList(m_no);
+	public List<MatchingDTO> getMatchWaitingList(int m_no){
+		List<MatchingDTO> getMatchWaitingList = this.memberDAO.getMatchWaitingList(m_no);
 		 return getMatchWaitingList;
 	 }
 	
