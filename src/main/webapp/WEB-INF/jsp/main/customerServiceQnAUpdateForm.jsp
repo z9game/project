@@ -41,7 +41,8 @@
 	        	
 	            alert("계정 비밀번호를 정확히 입력해주세요.");
 	            
-	            checkQnABoardUpdateForm();
+	            return;
+	            
 	            
 	        } else {
 	            if(confirm("수정하시겠습니까?") == true){
