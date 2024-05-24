@@ -83,7 +83,7 @@
 					        <c:if test="${sessionScope.mid == 'admin'}">
 					            <li class="nav-item" onClick="location.href = '/adminForm.do'"><a id="adminPage">관리자페이지</a></li>
 					        </c:if>
-					        <li class="nav-item" id="logOut" onClick="location.href = '/logoutProc.do'">로그아웃</li>
+					        <li class="nav-item" id="logOut" onClick="/logoutProc.do">로그아웃</li>
 					    </ul>
 					</c:if>
 
