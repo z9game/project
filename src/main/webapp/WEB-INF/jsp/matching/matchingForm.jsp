@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>MatchingForm</title>
 <link href="/style/matchingFormStyle.css" rel="stylesheet">
-<link href="/style/matching.css" rel="stylesheet">
+<!-- <link href="/style/matching.css" rel="stylesheet"> -->
 <script src="/js/matchingFormScript.js"></script>
 <script src="/js/common.js"></script>
 
@@ -156,13 +156,83 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="matchingFormTitle">
-    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">매칭 찾기</p>
     </div>
-   
-   <div style="height:30px;"></div>
    		<form name="matching_table" onsubmit="return false">
-			<div class="top">
+   			<table align="center">
+					<tr>
+						<td>
+							<table style="border-collapse: collapse; border-bottom: none; text-align: center;" align="center">
+								<tr class="area" style="text-align: center;">
+									<th class="item" style="border-radius: 10px; border-bottom: none;">지역</th>
+									<td class="content" colspan="5" style="justify-content: center; text-align: center; width:620px; border-bottom: none;"><select name="sido" class="sido" id=""
+										onchange="categoryChange(this)" style="width:200px; text-align: center;">
+											<option value="0">시/도 선택</option>
+											<option value="1">강원</option>
+											<option value="2">경기</option>
+											<option value="3">경남</option>
+											<option value="4">경북</option>
+											<option value="5">광주</option>
+											<option value="6">대구</option>
+											<option value="7">대전</option>
+											<option value="8">부산</option>
+											<option value="9">서울</option>
+											<option value="10">울산</option>
+											<option value="11">인천</option>
+											<option value="12">전남</option>
+											<option value="13">전북</option>
+											<option value="14">제주</option>
+											<option value="15">충남</option>
+											<option value="16">충북</option>
+									</select> <select name="sigungu" class="sigungu" id="state" style="width:200px; text-align: center;">
+											<option value="0">군/구 선택</option>
+									</select></td>
+								</tr>
+								<tr><td style="border-bottom: none;"></td></tr>
+								<tr class="day">
+									<th class="item" style="border-radius: 10px; border-bottom: none;">날짜</th>
+									<td class="content" colspan="5" style="justify-content: center; text-align: center; width:620px; border-bottom: none;">
+										<input type="date" id="date" name="date">
+									</td>
+								</tr>
+								<tr><td style="border-bottom: none;"></td></tr>
+								<tr class="time">
+	  								<th class="item" style="border-radius: 10px; border-bottom: none;">시간</th>
+	  								<td class="content" colspan="5" style="justify-content: center; text-align: center; width:620px; border-bottom: none;">
+	  									<select name="matchingTime" id="matchingTime" >
+							              	<option value="0">시간 선택</option>
+											<option value="1">AM06시~AM08시</option>
+											<option value="2">AM08시~AM10시</option>
+											<option value="3">AM10시~AM12시</option>
+											<option value="4">PM12시~PM14시</option>
+											<option value="5">PM14시~PM16시</option>
+											<option value="6">PM16시~PM18시</option>
+											<option value="7">PM18시~PM20시</option>
+											<option value="8">PM20시~PM22시</option>
+											<option value="9">PM22시~PM24시</option>
+											<option value="10">AM02시~AM04시</option>
+											<option value="11">AM04시~AM06시</option>
+						            	</select>
+	  								</td>
+	  							</tr>
+	  						</table>
+	  						<div class="search">
+								<div class="content">
+									<select name="searchType1" class="searchSelect">
+										<option value="all">전체</option>
+										<option value="writer">글작성자</option> 
+										<option value="subject">제목</option>
+										<option value="content">내용</option>
+									</select> 
+								</div>
+								<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()">
+								<input type="button" value="검색" class="item" class="searchBtn" onclick="search()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-right: 10px;">
+								<input type="button" value="초기화" class="searchAllBtn" onclick="searchAll()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">   
+							</div>
+						</td>
+					</tr>
+				</table>
+	  			<!-- </dl>
 				<dl class="search">
 	 				<dt class="item">검 색</dt>
 						<dd  class="content">
@@ -174,8 +244,8 @@
 							</select> 
 							<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()"> 
 						</dd>
-	 			</dl>
-	 			<dl class="area">
+	 			</dl> -->
+	 			<!-- <dl class="area">
 	 				<dt class="item">지 역</dt>
 	 					<dd class="content">	
 	 						<select name="sido" id="" onchange="categoryChange(this)">
@@ -202,8 +272,8 @@
 				              <option value="0">군/구 선택</option>
 				            </select>
 	 					</dd>
-	 			</dl>
-			</div>		
+	 			</dl> -->
+			<!-- </div>		
 			
 			<div class="middle">
 				<dl class="day">
@@ -211,8 +281,8 @@
 	  					<dd class="content">
 							<input type="date" id="date" name="date">
 	  					</dd>
-	  			</dl>
-	  			<dl class="time">
+	  			</dl> -->
+	  			<!-- <dl class="time">
 	  				<dt class="item">시 간</dt>
 	  					<dd class="content">
 							<select name="matchingTime" id="" >
@@ -231,7 +301,7 @@
 			            	</select>
 	  					</dd>
 	  			</dl>
-			</div>	
+			</div>	 -->
 			
 		<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 		<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
@@ -241,21 +311,17 @@
    
    
    
-   	<center>
+   	<!-- 
   		 <br><br>
   		 	<div class="searchBtn">
 			<dl class="searchBtn" >
  				<dt class="item" onclick="search()" class="searchBtn" style="cursor:pointer">검색</dt>
  			</dl>
 		</div>
-  		 <br><br><br>
-		<div class="newRecruitTeamMemBoardBtnDiv">
-			<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkLogin()">
-		</div>
-	</center>
-   
+  		 <br><br><br> -->
+		
 		<div class="matchingFormBoard">
-			<table class="boardListTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin: 0 auto; margin-top:10px; width:1000px;">
+			<table class="boardListTable" cellpadding="7" align="center" style="border-collapse:collapse;">
 				<tr>
 					<th style="width:50px;">번호</th>
 					<th style="width:300px;">제목</th>
@@ -265,11 +331,11 @@
 					<c:forEach var="board" items="${requestScope.boardList}" varStatus="status">
 														<!-- 클릭이 발생했을때 생기는 이벤트 -> goMatchDetail 함수 실행 / 매개변수로는 클릭한 게시물의 번호가 들어간다.-->
 						<tr style="cursor:pointer" onClick="goMatchDetail(${board.match_no})">
-							<td align="center">${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
+							<td align="center" class="matchingFormFontLightGray">${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
 							<td align="center">${board.title}</td>
-							<td align="center">${board.nickname}</td>
-							<td align="center">${board.readcount}</td>
-							<td align="center">${board.reg_date}</td>
+							<td align="center" class="matchingFormFontLightGray">${board.nickname}</td>
+							<td align="center" class="matchingFormFontLightGray">${board.readcount}</td>
+							<td align="center" class="matchingFormFontLightGray">${board.reg_date}</td>
 						</tr>
 					</c:forEach>
 			</table>
@@ -280,10 +346,27 @@
 				</center>
 			</c:if>
 		</div>
+		<div class="newRecruitTeamMemBoardBtnDiv">
+			<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkLogin()">
+		</div>
+		<div class="matchingBoardPaging">
+			<span class="pagingNos">
+				<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.boardMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+				<c:forEach var="pageNo" begin="${requestScope.boardMap.begin_pageNo}" end="${requestScope.boardMap.end_pageNo}">
+					<c:if test="${requestScope.boardMap.selectPageNo==pageNo}">
+			            <p class="activePageNo">${pageNo}</p>
+			        </c:if>
+					<c:if test="${requestScope.boardMap.selectPageNo!=pageNo}">
+						<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+					</c:if>
+				</c:forEach>
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.boardMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+				<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+			</span>
+		</div>
 		
-	<center>
-
-		<span class="pagingNos"> <span style="cursor: pointer"
+		<%-- <span class="pagingNos"> <span style="cursor: pointer"
 			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
 			onClick="pageNoClick(${requestScope.boardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
 
@@ -303,10 +386,8 @@
 			onClick="pageNoClick(${requestScope.boardMap.selectPageNo}+1)">[다음]</span>
 			<span style="cursor: pointer"
 			onClick="pageNoClick(${requestScope.boardMap.last_pageNo})">[마지막]</span>
-		</span> 
-		
-	</center>
-	
+		</span>  --%>
+
 	
 	<!-- 
 	action? -> 폼태그안의 값을 보낼 주소를 적는곳
@@ -328,7 +409,5 @@
 		<input type="hidden" name="m_no" value="${sessionScope.m_no}">
 	</form>
 	
-	
-	<div style="height:30px;"></div>
 </body>
 </html>

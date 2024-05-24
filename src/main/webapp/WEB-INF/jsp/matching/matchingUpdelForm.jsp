@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RecruitTeamBoardDetailForm</title>
-<link href="/style/recruitTeamBoardDetailFormStyle.css" rel="stylesheet">
+<title>MatchingUpDelForm</title>
+<link href="/style/matchingUpDelFormStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
 
 <script>
@@ -178,25 +178,25 @@
 <body>
    <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recruitTeamBoardDetailFormTitle">
-       <img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
-       <p class="titleBackgoundText">매칭 찾기</p>
+       <p class="titleBackgoundText">매칭 찾기 수정 / 삭제</p>
     </div>
 
    
-      <center>
      	<form name="upDelMatching">
-         <table align="center" bordercolor="gray" border=1 cellpadding=7
-            style="border-collapse: collapse">
-            <caption>[게시물 수정]</caption>
+         <table class="matchingUpDelTable" align="center" cellpadding=7
+            style="border-collapse: collapse; margin-top: 50px;">
             <tr>
-               <th bgColor="lightgray">제 목</th>
-               <td><input type="text" name="title" class="title" size="40"
-					maxlength="30" value="${requestScope.upDelDetail.title}"></td>
-            </tr>
-            <tr>
-               <th bgColor="lightgray">글쓴이</th>
-               <td>${requestScope.upDelDetail.nickname}</td>
-            </tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<input type="text" name="title" class="title" size="106" maxlength="100" value="${requestScope.upDelDetail.title}">
+				</td>
+			</tr>
+			<tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					${requestScope.upDelDetail.nickname}
+				</td>
+			</tr>
             
             <!-- 주석 처리 
             <tr>
@@ -254,70 +254,53 @@
                 <td><input type="date" id="date" name="date" value="${requestScope.upDelDetail.day}"></td>
              </tr>
           	 -->
-          	 
           	 <tr>
-               <th bgColor="lightgray">조회수</th>
-               <!--------------------------------------------------- -->
-               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-               <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-               <!-- 상세보기할 게시판의 조회수 표현하기 -->
-               <!--------------------------------------------------- -->
-               <td>${requestScope.upDelDetail.readcount}</td>
-            </tr>
-            
+				<th style="border-bottom: 1px solid #FFFFFF;">경기장명</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<select name="stadium_no" id="stadium_no" onchange="loadMachingDay()">
+						<option value="0">매칭예약 미신청 상태</option>
+					</select>
+				</td>
+			</tr>
+          	 <tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">일시(날짜)</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<select name="day" id="day" onchange="loadMachingTime()">
+						<option value="0">매칭예약 미신청 상태</option>
+					</select>
+				</td>
+			</tr>
             <tr>
-                <th bgColor="lightgray">경기장명</th>
-                <td>
-                	<!--  ${requestScope.detail.stadium_name} -->
-                	<select name="stadium_no" id="stadium_no" onchange="loadMachingDay()">
-						<option value="0">매칭예약 미신청 상태</option>
-					</select>
-                </td>
-             </tr>
-             
-             <tr>
-                <th bgColor="lightgray">일시(날짜)</th>
-                <td>
-                	<!-- ${requestScope.detail.booking_date} -->
-                	<select name="day" onchange="loadMachingTime()">
-						<option value="0">매칭예약 미신청 상태</option>
-					</select>
-                </td>
-             </tr>
-             
-             <tr>
-                <th bgColor="lightgray">시간</th>
-                <td>
-                	<!-- ${requestScope.detail.time_range} -->
-                	<select name="matchingTime">
+				<th style="border-bottom: 1px solid #FFFFFF;">시간</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<select name="matchingTime" id="time">
                 		<option value="0">매칭예약 미신청 상태</option>
                 	</select>
-                </td>
-             </tr>          	 
-          	 
-            <tr>
-               <th bgColor="lightgray">내 용</th>
-               <td><textarea name="content" class="content" rows="13"
-                     cols="40" maxlength="500">${requestScope.upDelDetail.content}</textarea></td>
-            </tr>
+				</td>
+			</tr>  
+			 <tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none">${requestScope.upDelDetail.content}</textarea>
+				</td>
+			</tr>
          </table>
+         <div class="matchingUpDelFormBtnDiv">
+			<div class="resetBtnDiv">
+				<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/matchingForm.do')">
+			</div>
+			<div class="boardRegAndMoveList">
+				<input type="button" value="수정" class="boardRegBtn" style="cursor:pointer" onclick="checkBoardUpForm();" >
+	         	<input type="button" value="삭제" class="boardDelBtn" style="cursor:pointer" onclick="checkBoardDelForm();" >
+				
+			</div>
+		</div>
 		<input type="hidden" name="match_no" value="${requestScope.upDelDetail.match_no}">
 		<input type="hidden" name="m_no" value="${requestScope.upDelDetail.m_no}">
         </form>
-      </center>
-
-      <center>
          <!--------------------------------------------------- -->
          <!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
          <!--------------------------------------------------- -->
-         <span style="cursor: pointer"
-            onclick="location.href='/matchingForm.do'">
-            [목록 화면으로] </span>
-         	<input type="button" value="수정" style="cursor:pointer" onclick="checkBoardUpForm();" >
-         	<input type="button" value="삭제" style="cursor:pointer" onclick="checkBoardDelForm();" >
-       </center>
-       <div style="height:30px;"></div>
-
- 
+        
 </body>
 </html>

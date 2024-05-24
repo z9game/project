@@ -14,6 +14,8 @@ function goWaitingLessonList()
 {
 	var formObj = $("[name='waitingLessonList']");
 	
+	
+
 	if (confirm("신청 하시겠습니까?") == false) {
 		return;
 	}
@@ -125,6 +127,7 @@ function goWaitingLessonList()
 		<form name="waitingLessonList">
 			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
 			<input type="hidden" name="recruitment_no"value="${requestScope.lessondetailList.recruitment_no}">
+			<input type="hidden" name="writer" value="${requestScope.lessondetailList.m_no}">
 		</form>
     
 </body>
