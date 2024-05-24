@@ -145,7 +145,7 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	
 	<div class="recruitLessonBoardUpDelFormTitle">
-		<p class="titleBackgoundText"> 레슨 모집 수정 / 삭제</p>
+		<p class="titleBackgoundText">레슨 모집 수정 / 삭제</p>
 	</div>
 	<form name="recruitLessonBoardUpDelForm">
 		<table class="recruitLessonBoardUpDelFormRegTable">
@@ -164,7 +164,7 @@
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">지역</th>
 				<td colspan="5" style="border-bottom: 1px solid #c59246e0;">${requestScope.updel_sidosigungu.sido_c}-${requestScope.updel_sidosigungu.sigungu_c}->(수정)
-					<select name="sido" id="sido" onchange="categoryChange(this)">
+					<select name="sido_id" id="sido_id" onchange="categoryChange(this)">
 		              	<option value="0">시/도 선택</option>
 						<option value="1">강원</option>
 						<option value="2">경기</option>
@@ -184,7 +184,7 @@
 						<option value="16">충북</option>
 	            	</select>
 
-		            <select name="sigungu" id="state">
+		            <select name="sigungu_id" id="state">
 		              <option>군/구 선택</option>
 		            </select>
 				</td>

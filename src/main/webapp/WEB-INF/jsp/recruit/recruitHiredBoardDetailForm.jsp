@@ -92,8 +92,8 @@ function goWaitingHiredList()
 					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.hireddetailList.pos}</td>
 				</tr>
 				<tr>
-					<th style=" width: 100px; height:250px; color: #000000">내 용</th>
-					<td>
+					<th style="width: 100px; height:250px; color: #000000; border-bottom: 1px solid #999999;">내 용</th>
+					<td style="border-bottom: 1px solid #999999;">
 						${requestScope.hireddetailList.content}
 					</td>
 				</tr>

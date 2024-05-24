@@ -14,7 +14,7 @@ th {
 	background-color: lightgray;
 }
 
-.recruitLessonBoardUpDelFormRegTable th {
+.recruitTeamMemBoardUpDelFormRegTable th {
 	background-color: rgba(197, 146, 70, 0.4);;
 }
 
@@ -45,7 +45,7 @@ a{
 	padding: 40px;
 }
 
-.recruitLessonBoardUpDelFormRegTable{
+.recruitTeamMemBoardUpDelFormRegTable{
 	margin: 0 auto;
 	margin-top: 50px;
 	width: 1000px;
@@ -75,7 +75,7 @@ a{
     cursor: pointer;
 }
 
-.recruitLessonBoardUpDelFormBtnDiv{
+.recruitTeamMemBoardUpDelFormBtnDiv{
 	text-align: center;
 }
 
