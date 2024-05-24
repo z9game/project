@@ -488,12 +488,12 @@
 	
 	<select id="getAnnualRegisteredMember" resultType="kosmo.team.project.dto.RecordsDTO" parameterType="kosmo.team.project.dto.RecordsDTO">
 		SELECT
-		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2000' THEN 1 ELSE 0 END) AS "count_2000",
-		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2005' THEN 1 ELSE 0 END) AS "count_2005",
-		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2010' THEN 1 ELSE 0 END) AS "count_2010",
-		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2015' THEN 1 ELSE 0 END) AS "count_2015",
-		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2020' THEN 1 ELSE 0 END) AS "count_2020",
-		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') = '2024' THEN 1 ELSE 0 END) AS "count_2024"
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') BETWEEN '2000' AND '2004' THEN 1 ELSE 0 END) AS "count_2000",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') BETWEEN '2005' AND '2009' THEN 1 ELSE 0 END) AS "count_2005",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') BETWEEN '2010' AND '2014' THEN 1 ELSE 0 END) AS "count_2010",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') BETWEEN '2015' AND '2019' THEN 1 ELSE 0 END) AS "count_2015",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') BETWEEN '2020' AND '2023' THEN 1 ELSE 0 END) AS "count_2020",
+		    SUM(CASE WHEN TO_CHAR(reg_date, 'YYYY') BETWEEN '2024' AND '2024' THEN 1 ELSE 0 END) AS "count_2024"
 		FROM
     		member
 	</select>
@@ -531,5 +531,17 @@
 		    SUM(CASE WHEN ((TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')) - TO_NUMBER(TO_CHAR(birthdate, 'YYYY'))) BETWEEN 80 AND 89) THEN 1 ELSE 0 END) AS "count_80"
 		FROM
 		    member
+	</select>
+	
+	<select id="getTeamMemberCnt" resultType="kosmo.team.project.dto.RecordsDTO" parameterType="kosmo.team.project.dto.RecordsDTO">
+		SELECT 
+		    t.team_name AS "teamname",
+		    COUNT(m.team_no) AS "count_team"
+		FROM 
+		    team_member m 
+		JOIN 
+		    team t ON m.team_no = t.team_no 
+		GROUP BY
+		    t.team_name
 	</select>
 </mapper>

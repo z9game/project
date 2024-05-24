@@ -3,31 +3,29 @@
 }
 
 table {
-	border: 1;
 	border-collapse: collapse;
-	border-color: gray;
 }
 
 th, td {
 	padding: 10px 15px 10px 15px;
-	border-color: gray;
 }
 
 th {
 	background-color: lightgray;
 }
 
+.newRecruitHiredBoardFormRegTable th {
+	background-color: rgba(197, 146, 70, 0.4);;
+}
+
 html,
 body {
-  /* width: 100%;
+  width: 100%;
   height: 100%;
   margin: 0;
   box-sizing: border-box;
   scrollbar-width: none;
-  overflow: hidden; */
-  height: 100%;
-  margin: 0;
-  padding: 0;
+  overflow-x: hidden;
 }
 
 ul, ol{
@@ -38,23 +36,13 @@ a{
 	text-decoration:none;
 }
 
-.newRecruitHiredBoardFormTitle{
-	position: relative;
-}
-
-.titleBackgoundImg{
-	opacity: 0.5;
-	width: 100%;
-	height: 100px;
-}
-
 .titleBackgoundText{
+	border-bottom: 1px solid #000000;
+	width: 55%;
+	margin: 0 auto;
 	font-size: 40px;
-	position: absolute;
 	text-align: center;
-	top: 50%;
-	left: 50%;
-	transform: translate( -50%, -50% );
+	padding: 40px;
 }
 
 .newRecruitHiredBoardFormRegTable{
@@ -64,34 +52,47 @@ a{
 
 .boardResetBtn{
 	width: 100px;
-	height: 30px;
+	height: 40px;
 	margin-top: 10px;
-	margin-left: 440px;
+	margin-left: 900px;
+	background-color: #c59246e0;
+    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #c59246e0;
+    cursor: pointer;
 }
 
 .boardRegBtn, .moveListBtn{
 	width: 150px;
 	height: 50px;
 	margin-top: 20px;
+	background-color: #c59246e0;
+    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #c59246e0;
+    cursor: pointer;
 }
 
 .newRecruitHiredBoardFormBtnDiv{
 	text-align: center;
 }
 
-.search_boxes{
-	display: flex;
+#sido, #state{
+	height: 35px;
+	margin-right: 20px;
+	border-radius: 10px;
+	border: 1px solid #c59246e0;
+	text-align: center;
+	width: 200px;
 }
 
-.search_boxes .searchBoxText{
-	margin-top: 7px;
-	margin-left: 10px;
+.title{
+	height: 35px;
+	border-radius: 10px;
+	border: 1px solid #c59246e0;
 }
 
-.search_boxes .sido, .search_boxes .gungu{
-	margin-right: 10px;
-}
-
-.newRecruitHiredBoardFormRegTable .search_boxes p{
-	font-size: 10px;
+.content{
+	border-radius: 10px;
+	border: 1px solid #c59246e0;
 }

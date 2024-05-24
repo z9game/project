@@ -78,10 +78,12 @@ public class StadiumServiceImplements implements StadiumService {
 
 		// System.out.print(m_noCnt);
 
-		if (m_noCnt >= 3) {
+		if (m_noCnt >= 3){
 
 			return 4;
 		}
+
+		
 
 		int rentCnt = this.stadiumDAO.getRentTimeCnt(rentStadiumDTO);
 
@@ -138,6 +140,13 @@ public class StadiumServiceImplements implements StadiumService {
 		if (yangdoCnt > 0) {
 
 			return 2;
+		}
+		
+		
+		int StadiumStatusCnt = this.stadiumDAO.getStadiumStatus(yangdoDTO);
+		if (StadiumStatusCnt >= 1) {
+
+			return 3;
 		}
 
 		int StadiumYangdoCnt = this.stadiumDAO.insertStadiumYangdo(yangdoDTO);
@@ -217,6 +226,12 @@ public class StadiumServiceImplements implements StadiumService {
 			return yangdoCnt;
 		}
 
+		int checkStatusDelCnt = this.stadiumDAO.getCheckStatusDelCnt(yangdoDTO.getYangdo_no());
+		
+		if (checkStatusDelCnt >= 1) {
+			return 8;
+		}
+
 		int yangdoDelCnt = this.stadiumDAO.deleteYangdo(yangdoDTO);
 
 		// 수정 적용개수 리턴하기
@@ -225,6 +240,16 @@ public class StadiumServiceImplements implements StadiumService {
 
 	@Override
 	public int updateYangdo(YangdoDTO yangdoDTO) {
+		
+		//경기장상태가 이용불가면 리턴5
+		int StadiumUpStatusCnt = this.stadiumDAO.getUpStadiumStatus(yangdoDTO);
+		
+		if (StadiumUpStatusCnt >= 1) {
+
+			return 5;
+		}
+
+		
 		//이미 양도에 같은게 있으면 3반환
 		int UpCnt = this.stadiumDAO.getYangdoUpCnt(yangdoDTO);
 		
@@ -232,14 +257,19 @@ public class StadiumServiceImplements implements StadiumService {
 		if (UpCnt >= 1) {
 			return 3;
 		}
-		
-		
+
 		
 		int yangdoCnt = this.stadiumDAO.getYangdoDelCnt(yangdoDTO.getYangdo_no());
 		
 		if (yangdoCnt == 0) {
 			return yangdoCnt;
 		}
+		
+		int checkStatusUpCnt = this.stadiumDAO.getCheckStatusUpCnt(yangdoDTO.getYangdo_no());
+		if (checkStatusUpCnt >=1) {
+			return 7;
+		}
+		
 		int yangdoUpCnt = this.stadiumDAO.updateYangdo(yangdoDTO);
 
 		// 수정 적용개수 리턴하기
@@ -248,6 +278,14 @@ public class StadiumServiceImplements implements StadiumService {
 
 	@Override
 	public int updateSincheong(YangdoDTO yangdoDTO) {
+		
+		int StadiumStatusCnt = this.stadiumDAO.getSincheongStadiumStatus(yangdoDTO);
+		
+		if (StadiumStatusCnt >=1) {
+			return 9;
+		}
+		
+		
 		
 		int sincheongCnt = this.stadiumDAO.updateSincheong(yangdoDTO);
 			

@@ -11,56 +11,40 @@
 <!DOCTYPE html><html>
 <head>
 	<meta charset="UTF-8">
-	<title>갤러리 상세보기</title>
-	<link href="/style/community/communityNoticeBoardFormStyle.css" rel="stylesheet">
-	<script src="/js/community/communityNoticeBoardFormScript.js"></script>
+	<title>CommunityGallaryDetialForm</title>
+	<link href="/style/community/communityGallaryDetailFormStyle.css" rel="stylesheet">
+	<!-- <script src="/js/community/communityNoticeBoardFormScript.js"></script> -->
 </head>
 
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	
-	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">갤러리 상세보기</p>
+	<div class="communityGallaryDetialFormTitle">
+		<p class="titleBackgoundText">갤러리</p>
 	</div>
 
 	<c:if test="${!empty requestScope.communityDTO}">
-		<table align="center" bordercolor="gray" border=1 cellpadding=7 style="border-collapse: collapse">
-			<caption>[갤러리 상세글 보기]</caption>
+		<table align="center" cellpadding=7 style="width:900px; border-collapse: collapse; border-bottom: 1px solid #999999; margin-top: 50px;">
 			
-			<tr>
-				<th bgColor="lightgray">이름</th>
-				<td>${requestScope.communityDTO.nickname}</td>
-			</tr>
-			
-			<tr>
-				<th bgColor="lightgray">제목</th>
+			<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 				<td>${requestScope.communityDTO.subject}</td>
+				<td style="text-align: right; margin-top: 15px;"><span style="color: #999999;">작성자&nbsp;</span>/&nbsp;${requestScope.communityDTO.nickname}<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${requestScope.communityDTO.readcount}</td>
 			</tr>
-			
-			<tr>
-				<th bgColor="lightgray">조회수</th>
-				<td>${requestScope.communityDTO.readcount}</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">내 용</th>
-				<td><textarea name="content" class="content" rows="13"
-						cols="40" maxlength="500" readonly>${requestScope.communityDTO.content}</textarea></td>
+			<tr style="width: 900px; height: 400px;">
+				<td colspan="2">
+					<div class="communityGallaryImageDiv">
+						<img src="/image/SoccerBall.jpg" class="communityGallaryImage">
+					</div>
+					${requestScope.communityDTO.content}
+				</td>
 			</tr>
 		</table>
-
-		<center>
-			<span style="cursor: pointer" onclick="location.replace('/communityGallaryForm.do')">
-				[목록 화면으로] 
-			</span> 
+		<div class="gallaryDetailBtnDiv">
 			<c:if test="${requestScope.communityDTO.writer == sessionScope.m_no}">
-				<input type="button" value="수정/삭제" onclick="document.communityGallaryUpDelForm.submit();">
+				<input type="button" value="수정/삭제" class="gallaryUpDelBtn" onclick="document.communityGallaryUpDelForm.submit();">
 			</c:if>
-			<!-- Form 에 설정된  액션 값 URL 주소로 이동 -->
-			<!-- <input type="button" value="댓글쓰기"  onclick="document.boardUpDelForm.submit();">-->
-			
-		</center>
-		
+			<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/communityGallaryForm.do')">
+		</div>
 		<form name="communityGallaryUpDelForm" action="/communityGallaryUpDelForm.do" method="post">
 			<input type="hidden" name="b_no" value="${requestScope.communityDTO.b_no}">
 		</form>

@@ -146,7 +146,6 @@ function pageNoClick( clickPageNo ){
 
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="stadiumTransferFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">경기장 양도</p>
 	</div>
 	
@@ -154,28 +153,14 @@ function pageNoClick( clickPageNo ){
 	
 	<form name="stadiumTransferFormConditionalSearch" onsubmit="return false">
 
-			<center>
 				<table align="center">
 					<tr>
 						<td>
-							<table border="1" cellpadding="5" cellspacing="0"
-								style="border-collapse: collapse" align="center">
-								<caption>
-									<b>[검색조건]</b>
-								</caption>
+							<table style="border-collapse: collapse; border-bottom: none;" align="center">
 								<tr>
-									<th>경기장이름</th>
-									<td><input type="text" name="Stadiumkeyword1"
-										class="Stadiumkeyword1"> <select name="orand">
-											<option value="or">or
-											<option value="and">and
-									</select> <input type="text" name="Stadiumkeyword2"
-										class="Stadiumkeyword2"></td>
-								</tr>
-								<tr>
-									<th>시/도</th>
-									<td colspan="5"><select name="sido" id="" class="sido"
-										onchange="categoryChange(this)">
+									<th style="border-radius: 10px; border-bottom: none;">지역</th>
+									<td colspan="5" style="text-align: center; width:200px; border-bottom: none;"><select name="sido" id="" class="sido"
+										onchange="categoryChange(this)" style="width:200px; text-align: center;">
 											<option value="0">시/도 선택</option>
 											<option value="1">강원</option>
 											<option value="2">경기</option>
@@ -193,28 +178,44 @@ function pageNoClick( clickPageNo ){
 											<option value="14">제주</option>
 											<option value="15">충남</option>
 											<option value="16">충북</option>
-									</select> <select name="sigungu" id="state" class="sigungu">
+									</select> <select name="sigungu" class="sigungu" id="state" style="width:200px; text-align: center;">
 											<option value="0">군/구 선택</option>
 									</select></td>
 								</tr>
-								<tr>
+								<tr><td></td></tr>
 						<tr>
-							<th>양도상태</th>
-							<td><input type="checkbox" name="status" value="양도중"
-								class="양도중">양도중 
-								<input type="checkbox" name="status" value="양도완료"
-								class="stadium_status">양도완료</td>
+						    <th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">양도상태</th>
+						    <td style="text-align: center; border-bottom: none; display: flex; justify-content: center; align-items: center;">
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="status" value="양도중" class="양도중" style="zoom:2.0; margin-right: 5px;">
+						            양도 중
+						        </label>
+						        <label style="display: flex; align-items: center;">
+						            <input type="checkbox" name="status" value="양도완료" class="stadium_status" style="zoom:2.0; margin-right: 5px;">
+						            양도 완료
+						        </label>
+						    </td>
 						</tr>
+						<tr><td></td></tr>
+								<tr>
+									<th style="border-radius: 10px; border-bottom: none; border-top: none;">경기장이름</th>
+									<td><input type="text" name="Stadiumkeyword1"
+										class="Stadiumkeyword1"> <select name="orand" class="orAnd" style="text-align: center;">
+											<option value="or">or
+											<option value="and">and
+									</select> <input type="text" name="Stadiumkeyword2"
+										class="Stadiumkeyword2"></td>
+								</tr>
+								<tr><td></td></tr>
 							</table>
 					</tr>
-					<tr align="center">
+					<tr align="center" style="border-top: 1px solid #c59246e0;">
 						<td><input type="button" value="검색" class="searchBtn"
-							onclick="search()"> <input type="button" value="모두 검색"
+							onclick="search()"> <input type="button" value="초기화"
 							class="searchAllBtn" onclick="searchAll()"></td>
 					</tr>
 
 				</table>
-			</center>
 
 
 
@@ -223,18 +224,22 @@ function pageNoClick( clickPageNo ){
 			type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 </form>
-
+<div class="stadiumTransferFormTopContents">
+		<span class="stadiumTransferFormFontLightGray" id="stadiumTransferAllCount">Total. ${requestScope.StadiumYangdoListAllCnt}개</span>
+		<div class="stadiumTransferFormRowCntPerPage">
+			<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+				<option value="10">10개씩 보기
+				<option value="15">15개씩 보기
+				<option value="20">20개씩 보기
+			</select>
+		</div>
+	</div>
 	<div class="stadiumTransferFormContainer">
 
 		<div class="stadiumTransferFormBoard">
-			<div class="newStadiumTransferBoardBtnDiv">
-				<input type="button" class="newStadiumTransferBoardBtn"
-					value="새 글 쓰기"
-					onClick="stadiumTransferForm();">
-			</div>
-			<table class="boardListTable" cellpadding="7" border="1"
-				bordercolor="gray" align="center"
-				style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
+			
+			<table class="boardListTable" cellpadding="7" align="center"
+				style="border-collapse: collapse;">
 				<tr>
 					<th style="width: 50px;">번호</th>
 					<th style="width: 300px;">제목</th>
@@ -245,12 +250,12 @@ function pageNoClick( clickPageNo ){
 						varStatus="status">
 						<tr style="cursor: pointer"
 							onClick="goTransferDetailForm(${Yangdo.yangdo_no});">
-							<td align="center">${requestScope.StadiumYangdoMap.begin_serialNo_desc - status.count + 1}</td>
+							<td align="center" class="stadiumTransferFormFontLightGray">${requestScope.StadiumYangdoMap.begin_serialNo_desc - status.count + 1}</td>
 							<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
 							<td align="center">${Yangdo.title}</td>
-							<td align="center">${Yangdo.nickname}</td>
-							<td align="center">${Yangdo.readcount}</td>
-							<td align="center">${Yangdo.reg_date}</td>
+							<td align="center" class="stadiumTransferFormFontLightGray">${Yangdo.nickname}</td>
+							<td align="center" class="stadiumTransferFormFontLightGray">${Yangdo.readcount}</td>
+							<td align="center" class="stadiumTransferFormFontLightGray">${Yangdo.reg_date}</td>
 						</tr>
 					</c:forEach>
 			</table>
@@ -260,44 +265,27 @@ function pageNoClick( clickPageNo ){
 			</c:if>
 		</div>
 	</div>
-	
-	
-	
-		<center>
-
-		<span class="pagingNos"> <span style="cursor: pointer"
-			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
-
-
-			<c:forEach var="pageNo"
-				begin="${requestScope.StadiumYangdoMap.begin_pageNo}"
-				end="${requestScope.StadiumYangdoMap.end_pageNo}">
-
+	<div class="newStadiumTransferBoardBtnDiv">
+		<input type="button" class="newStadiumTransferBoardBtn"
+			value="새 글 쓰기"
+			onClick="stadiumTransferForm();">
+	</div>
+	<div class="stadiumTransferPaging">
+		<span class="pagingNos">
+			<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.StadiumYangdoMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+			<c:forEach var="pageNo" begin="${requestScope.StadiumYangdoMap.begin_pageNo}" end="${requestScope.StadiumYangdoMap.end_pageNo}">
 				<c:if test="${requestScope.StadiumYangdoMap.selectPageNo==pageNo}">
-            ${pageNo}
-         </c:if>
-
+		            <p class="activePageNo">${pageNo}</p>
+		        </c:if>
 				<c:if test="${requestScope.StadiumYangdoMap.selectPageNo!=pageNo}">
-					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
 				</c:if>
-			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.StadiumYangdoMap.selectPageNo}+1)">[다음]</span>
-			<span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.StadiumYangdoMap.last_pageNo})">[마지막]</span>
-			&nbsp;&nbsp;&nbsp;
-			[${requestScope.StadiumYangdoListCnt}/${requestScope.StadiumYangdoListAllCnt}]개
-			&nbsp;&nbsp;
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
-	</center>
-	
-	
-	
+			</c:forEach>
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.StadiumYangdoMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+			<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+		</span>
+	</div>
 	
 	<form name="transferDetailForm" action="/transferDetailForm.do"
 		method="post">

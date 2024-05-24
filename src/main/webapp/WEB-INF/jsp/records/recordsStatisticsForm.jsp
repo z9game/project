@@ -11,15 +11,15 @@
 <!-- <script src="/js/recordsStatisticsFormScript.js"></script> -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	
-	<!-- 매칭 성공률 차트 함수 -->
+	<!-- 연도별 매칭 횟수 차트 함수 -->
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawRecordsStatisticsMatchingSuccessRateChart);
 
     function drawRecordsStatisticsMatchingSuccessRateChart() {
         var data = google.visualization.arrayToDataTable([
-        ['Year', '성공률'],
+        ['연도', '매칭 횟수'],
         ['2013',  0],
         ['2014',  0],
         ['2015',  0],
@@ -27,15 +27,12 @@
         ]);
 
         var options = {
-        title: '매칭 성공률',
-        hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-        vAxis: {minValue: 0}
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('recordsStatisticsMatchingSuccessRate'));
         chart.draw(data, options);
     }
-</script>
+</script> -->
 
 <!-- 연도별 등록 회원 차트 함수 -->
 
@@ -77,14 +74,19 @@
             <c:forEach var="regionRatio" items="${requestScope.regionRatio}" varStatus="status">
 	            ['서울', ${regionRatio.count_seoul}],
 	            ['경기도', ${regionRatio.count_gyeonggido}],
+	            ['KR-28', ${regionRatio.count_gyeonggido}],
 	            ['강원도', ${regionRatio.count_gangwondo}],
 	            ['충청남도', ${regionRatio.count_chungcheongdo}],
 	            ['충청북도', ${regionRatio.count_chungcheongdo}],
+	            ['KR-30', ${regionRatio.count_chungcheongdo}],
 	            ['전라남도', ${regionRatio.count_jeollado}],
 	            ['전라북도', ${regionRatio.count_jeollado}],
+	            ['KR-29', ${regionRatio.count_jeollado}],
 	            ['경상남도', ${regionRatio.count_gyeongsangdo}],
 	            ['경상북도', ${regionRatio.count_gyeongsangdo}],
-	            ['대구', ${regionRatio.count_gyeongsangdo}],
+	            ['KR-27', ${regionRatio.count_gyeongsangdo}],
+	            ['KR-26', ${regionRatio.count_gyeongsangdo}],
+	            ['KR-31', ${regionRatio.count_gyeongsangdo}],
 	            ['제주도', ${regionRatio.count_jejudo}]
 	    	</c:forEach>
         ]);
@@ -161,15 +163,10 @@
     google.charts.setOnLoadCallback(drawRecordsStatisticsNumberOfTeamMemberChart);
     function drawRecordsStatisticsNumberOfTeamMemberChart() {
     var data = google.visualization.arrayToDataTable([
-        ["팀", "팀원 수", { role: "style" } ],
-        ["A팀", 0, "red"],
-        ["B팀", 0, "orange"],
-        ["C팀", 0, "yellow"],
-        ["D팀", 0, "green"],
-        ["E팀", 0, "blue"],
-        ["F팀", 0, "navy"],
-        ["G팀", 0, "purple"],
-        ["H팀", 0, "blue"]
+        ["팀", "팀원 수"],
+        <c:forEach var="teamMemberCnt" items="${requestScope.teamMemberCnt}" varStatus="status">
+	        ["${teamMemberCnt.teamname}", ${teamMemberCnt.count_team}],
+	    </c:forEach>
     ]);
 
     var options = {
@@ -185,29 +182,29 @@
     <div class="recordsStatisticsFormTitle">
     	<p class="titleBackgoundText">통계</p>
     </div>
-    <div class="recordsStatisticsMatchingSuccessRateContainer">
-        <div class="recordsStatisticsMatchingSuccessRateTitle"><p>매칭 성공률</p></div>
+    <!-- <div class="recordsStatisticsMatchingSuccessRateContainer">
+        <div class="recordsStatisticsMatchingSuccessRateTitle"><p>연도별 매칭 횟수</p></div>
         <div id="recordsStatisticsMatchingSuccessRate" style="width: 100%; height: 500px;"></div>
-    </div>
+    </div> -->
     <div class="recordsStatisticsAnnualRegisteredMemberRatioContainer">
-        <div class="recordsStatisticsAnnualRegisteredMemberRatioTitle"><p>연도별 등록 회원 비율</p></div>
-        <div id="recordsStatisticsAnnualRegisteredMemberRatio" style="width: 900px; height: 300px;"></div>
+        <div class="recordsStatisticsAnnualRegisteredMemberRatioTitle"><p style="padding-top: 10px;">연도별 회원 등록 비율</p></div>
+        <div id="recordsStatisticsAnnualRegisteredMemberRatio" style="width: 50%; height: 300px; margin: 0 auto;"></div>
     </div>
     <div class="recordsStatisticsRegionRatioContainer">
-        <div class="recordsStatisticsRegionRatioTitle"><p>지역별 비율</p></div>
-        <div id="recordsStatisticsRegionRatio" style="width: 900px; height: 500px;"></div>
+        <div class="recordsStatisticsRegionRatioTitle"><p style="padding-top: 10px;">지역별 비율</p></div>
+        <div id="recordsStatisticsRegionRatio" style="width: 50%; height: 500px; margin: 0 auto;"></div>
     </div>
     <div class="recordsStatisticsGenderRatioContainer">
-        <div class="recordsStatisticsGenderRatioTitle"><p>성별 비율</p></div>
-        <div id="recordsStatisticsGenderRatio" style="width: 900px; height: 500px;"></div>
+        <div class="recordsStatisticsGenderRatioTitle"><p style="padding-top: 10px;">성별 비율</p></div>
+        <div id="recordsStatisticsGenderRatio" style="width: 50%; height: 600px; margin: 0 auto; margin-left:580px;"></div>
     </div>
     <div class="recordsStatisticsAgeRatioContainer">
-        <div class="recordsStatisticsAgeRatioTitle"><p>연령별 비율</p></div>
-        <div id="recordsStatisticsAgeRatio" style="width: 900px; height: 300px;"></div>
+        <div class="recordsStatisticsAgeRatioTitle"><p style="padding-top: 10px;">연령별 비율</p></div>
+        <div id="recordsStatisticsAgeRatio" style="width: 50%; height: 300px; margin: 0 auto;"></div>
     </div>
     <div class="recordsStatisticsNumberOfTeamMemberContainer">
-        <div class="recordsStatisticsNumberOfTeamMemberTitle"><p>팀원 수</p></div>
-        <div id="recordsStatisticsNumberOfTeamMember" style="width: 900px; height: 300px;"></div>
+        <div class="recordsStatisticsNumberOfTeamMemberTitle"><p style="padding-top: 10px;">팀원 수</p></div>
+        <div id="recordsStatisticsNumberOfTeamMember" style="width: 50%; height: 300px; margin: 0 auto;"></div>
 	</div>
 </body>
 </html>

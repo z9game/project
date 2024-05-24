@@ -15,14 +15,13 @@
 <head>
 <meta charset="UTF-8">
 <title>장터 상세보기</title>
-<link href="/style/community/communityNoticeBoardFormStyle.css" rel="stylesheet">
+<link href="/style/community/communityMarketplaceDetailFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityNoticeBoardFormScript.js"></script>
 
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
-	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+	<div class="communityMarketplaceFormTitle">
 		<p class="titleBackgoundText">장터 상세보기</p>
 	</div>
 
@@ -30,84 +29,31 @@
 
 
 	<c:if test="${!empty requestScope.communityDTO}">
-		<table align="center" bordercolor="gray" border=1 cellpadding=7
-			style="border-collapse: collapse">
-			<caption>[장터 상세글 보기]</caption>
-			<tr>
-				<th bgColor="lightgray">이름</th>
-				<!--------------------------------------------------- -->
-				<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 저장된 boardDTO 객체의 -->
-				<!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
-				<!-- 상세보기할 게시판의 이름 표현하기 -->
-				<!--------------------------------------------------- -->
-				<td>${requestScope.communityDTO.nickname}</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">제목</th>
-				<!--------------------------------------------------- -->
-				<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-				<!-- subject 라는 멤버변수 안의 데이터를 표현하기 -->
-				<!-- 상세보기할 게시판의 제목 표현하기 -->
-				<!--------------------------------------------------- -->
+			<table align="center" cellpadding=7 style="width:900px; border-collapse: collapse; border-bottom: 1px solid #999999; margin-top: 50px;">
+			
+			<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 				<td>${requestScope.communityDTO.subject}</td>
+				<td style="text-align: right; margin-top: 15px;"><span style="color: #999999;">작성자&nbsp;</span>/&nbsp;${requestScope.communityDTO.nickname}<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${requestScope.communityDTO.readcount}</td>
 			</tr>
-			<tr>
-				<th bgColor="lightgray">조회수</th>
-				<!--------------------------------------------------- -->
-				<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-				<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-				<!-- 상세보기할 게시판의 조회수 표현하기 -->
-				<!--------------------------------------------------- -->
-				<td>${requestScope.communityDTO.readcount}</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">내 용</th>
-				<!--------------------------------------------------- -->
-				<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-				<!-- content 라는 멤버변수 안의 데이터를 표현하기 -->
-				<!-- 상세보기할 게시판의 내용 표현하기 -->
-				<!--------------------------------------------------- -->
-				<td><textarea name="content" class="content" rows="13"
-						cols="40" maxlength="500" readonly>${requestScope.communityDTO.content}</textarea></td>
+			<tr style="width: 900px; height: 400px;">
+				<td colspan="2">
+					<div class="communityGallaryImageDiv">
+						<img src="/image/SoccerBall.jpg" class="communityGallaryImage">
+					</div>
+					${requestScope.communityDTO.content}
+				</td>
 			</tr>
 		</table>
-
-		<center>
-			<!--------------------------------------------------- -->
-			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
-			<!--------------------------------------------------- -->
-			<span style="cursor: pointer"
-				onclick="location.replace('/communityMarketplaceBoardForm.do')">
-				[목록 화면으로] 
-			</span>
+		<div class="marketplaceDetailBtnDiv">
 			<c:if test="${requestScope.communityDTO.writer == sessionScope.m_no}">
-				<input type="button" value="수정/삭제" onclick="document.marketplaceUpDelForm.submit();">
+				<input type="button" value="수정/삭제" class="gallaryUpDelBtn" onclick="document.marketplaceUpDelForm.submit();">
 			</c:if>
-		
-
-
-
-
-
-
-
-
-			<!-- Form 에 설정된  액션 값 URL 주소로 이동 -->
-
-
-			<!-- <input type="button" value="댓글쓰기"  onclick="document.boardUpDelForm.submit();">-->
-		</center>
-		<!--------------------------------------------------- -->
-		<!-- [수정/삭제] 버튼 클릭하면 <form name="boardUpDelForm" ~> 태그에 설정한
-					정보를 이용하여 WAS 에 접속하기 -->
-		<!--------------------------------------------------- -->
+			<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/communityMarketplaceBoardForm.do')">
+		</div>
 		<form name="marketplaceUpDelForm" action="/marketplaceboardUpDelForm.do" method="post">
 			<input type="hidden" name="b_no" 		value="${requestScope.communityDTO.b_no}">
 			<input type="hidden" name="table_name" 	value="${requestScope.communityDTO.table_name}">
 		</form>
-
-
-
 	</c:if>
 
 

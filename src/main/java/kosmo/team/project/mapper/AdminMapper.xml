@@ -9,354 +9,564 @@
 
 
 
-	<sql id="boardWhere">
+<!-- 	<sql id="boardWhere"> -->
 
-		<if
-			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
-			and (
-		</if>
-
-
-		<if test="keyword1!=null and keyword1.length()>0">
-			<if test="searchType1 == 'all' ">
-				(
-				upper(m.mid) like upper('%${keyword1}%')
-				or
-				upper(m.name)
-				like upper('%${keyword1}%')
-				or
-				upper(m.nickname) like
-				upper('%${keyword1}%')
-				or
-				upper(m.email) like upper('%${keyword1}%')
-				or
-				upper(m.phone) like
-				upper('%${keyword1}%')
-				)
-			</if>
-			<if test="searchType1 == 'mid'">
-				upper(m.mid) like upper('%${keyword1}%')
-			</if>
-			<if test="searchType1 == 'name'">
-				upper(m.name) like upper('%${keyword1}%')
-			</if>
-			<if test="searchType1 == 'nickname'">
-				upper(m.nickname) like upper('%${keyword1}%')
-			</if>
-			<if test="searchType1 == 'phone'">
-				upper(m.phone) like upper('%${keyword1}%')
-			</if>
-			<if test="searchType1 == 'email'">
-				upper(m.email) like upper('%${keyword1}%')
-			</if>
-
-		</if>
-
-		<if
-			test="(keyword1!=null and keyword1.length()>0) and (keyword2!=null and keyword2.length()>0)">
-			${orand}
-		</if>
-
-		<if test="keyword2!=null and keyword2.length()>0">
-			<if test="searchType1 == 'all' ">
-				(
-				upper(m.mid) like upper('%${keyword2}%')
-				or
-				upper(m.name)
-				like
-				upper('%${keyword2}%')
-				or
-				upper(m.nickname) like
-				upper('%${keyword2}%')
-				or
-				upper(m.email) like upper('%${keyword2}%')
-				or
-				upper(m.phone) like
-				upper('%${keyword2}%')
-				)
-			</if>
-			<if test="searchType1 == 'mid'">
-				upper(m.mid) like upper('%${keyword2}%')
-			</if>
-			<if test="searchType1 == 'name'">
-				upper(m.name) like upper('%${keyword2}%')
-			</if>
-			<if test="searchType1 == 'nickname'">
-				upper(m.nickname) like upper('%${keyword2}%')
-			</if>
-			<if test="searchType1 == 'phone'">
-				upper(m.phone) like upper('%${keyword2}%')
-			</if>
-			<if test="searchType1 == 'email'">
-				upper(m.email) like upper('%${keyword2}%')
-			</if>
-
-		</if>
-
-		<if test="gender!=null and gender.size()>0">
-			<foreach collection="gender" item="tmp" open=" and (  "
-				close="  ) " separator=" or ">
-
-				gender = '${tmp}'
-
-			</foreach>
-		</if>
+<!-- 		<if -->
+<!-- 			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)"> -->
+<!-- 			and ( -->
+<!-- 		</if> -->
 
 
-		<if test="ageRange != null and ageRange != '' ">
-			<foreach collection="ageRange" item="tmp2" open=" and ( "
-				close=" ) " separator=" or ">
-				<if test="tmp2 == '10대'  ">
-					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 10 and 19
-				</if>
-				<if test="tmp2 == '20대'  ">
-					to_number(to_char(sysdate, 'YYYY')) -
-					to_number(to_char(birthdate, 'YYYY')) between 20 and 29
-				</if>
-				<if test="tmp2 == '30대'  ">
-					to_number(to_char(sysdate, 'YYYY')) -
-					to_number(to_char(birthdate, 'YYYY')) between 30 and 39
-				</if>
-				<if test="tmp2 == '40대'  ">
-					to_number(to_char(sysdate, 'YYYY')) -
-					to_number(to_char(birthdate, 'YYYY')) between 40 and 49
-				</if>
-				<if test="tmp2 == '50대'  ">
-					to_number(to_char(sysdate, 'YYYY')) -
-					to_number(to_char(birthdate, 'YYYY')) between 50 and 59
-				</if>
-				<if test="tmp2 == '60대'  ">
-					to_number(to_char(sysdate, 'YYYY')) -
-					to_number(to_char(birthdate, 'YYYY')) between 60 and 69
-				</if>
-				<if test="tmp2 == '70대'  ">
-					to_number(to_char(sysdate, 'YYYY')) -
-					to_number(to_char(birthdate, 'YYYY')) between 70 and 79
-				</if>
-				<if test="tmp2 == '80대'  ">
-					to_number(to_char(sysdate, 'YYYY')) -
-					to_number(to_char(birthdate, 'YYYY')) between 80 and 89
-				</if>
-			</foreach>
-		</if>
+<!-- 		<if test="keyword1!=null and keyword1.length()>0"> -->
+<!-- 			<if test="searchType1 == 'all' "> -->
+<!-- 				( -->
+<!-- 				upper(m.mid) like upper('%${keyword1}%') -->
+<!-- 				or -->
+<!-- 				upper(m.name) -->
+<!-- 				like upper('%${keyword1}%') -->
+<!-- 				or -->
+<!-- 				upper(m.nickname) like -->
+<!-- 				upper('%${keyword1}%') -->
+<!-- 				or -->
+<!-- 				upper(m.email) like upper('%${keyword1}%') -->
+<!-- 				or -->
+<!-- 				upper(m.phone) like -->
+<!-- 				upper('%${keyword1}%') -->
+<!-- 				) -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'mid'"> -->
+<!-- 				upper(m.mid) like upper('%${keyword1}%') -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'name'"> -->
+<!-- 				upper(m.name) like upper('%${keyword1}%') -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'nickname'"> -->
+<!-- 				upper(m.nickname) like upper('%${keyword1}%') -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'phone'"> -->
+<!-- 				upper(m.phone) like upper('%${keyword1}%') -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'email'"> -->
+<!-- 				upper(m.email) like upper('%${keyword1}%') -->
+<!-- 			</if> -->
+
+<!-- 		</if> -->
+
+<!-- 		<if -->
+<!-- 			test="(keyword1!=null and keyword1.length()>0) and (keyword2!=null and keyword2.length()>0)"> -->
+<!-- 			${orand} -->
+<!-- 		</if> -->
+
+<!-- 		<if test="keyword2!=null and keyword2.length()>0"> -->
+<!-- 			<if test="searchType1 == 'all' "> -->
+<!-- 				( -->
+<!-- 				upper(m.mid) like upper('%${keyword2}%') -->
+<!-- 				or -->
+<!-- 				upper(m.name) -->
+<!-- 				like -->
+<!-- 				upper('%${keyword2}%') -->
+<!-- 				or -->
+<!-- 				upper(m.nickname) like -->
+<!-- 				upper('%${keyword2}%') -->
+<!-- 				or -->
+<!-- 				upper(m.email) like upper('%${keyword2}%') -->
+<!-- 				or -->
+<!-- 				upper(m.phone) like -->
+<!-- 				upper('%${keyword2}%') -->
+<!-- 				) -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'mid'"> -->
+<!-- 				upper(m.mid) like upper('%${keyword2}%') -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'name'"> -->
+<!-- 				upper(m.name) like upper('%${keyword2}%') -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'nickname'"> -->
+<!-- 				upper(m.nickname) like upper('%${keyword2}%') -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'phone'"> -->
+<!-- 				upper(m.phone) like upper('%${keyword2}%') -->
+<!-- 			</if> -->
+<!-- 			<if test="searchType1 == 'email'"> -->
+<!-- 				upper(m.email) like upper('%${keyword2}%') -->
+<!-- 			</if> -->
+
+<!-- 		</if> -->
+
+<!-- 		<if test="gender!=null and gender.size()>0"> -->
+<!-- 			<foreach collection="gender" item="tmp" open=" and (  " -->
+<!-- 				close="  ) " separator=" or "> -->
+
+<!-- 				gender = '${tmp}' -->
+
+<!-- 			</foreach> -->
+<!-- 		</if> -->
 
 
-		<if test="sido !=null and sido>0 ">
-			and
-			(
-			s.sido_id = ${sido}
-			)
+<!-- 		<if test="ageRange != null and ageRange != '' "> -->
+<!-- 			<foreach collection="ageRange" item="tmp2" open=" and ( " -->
+<!-- 				close=" ) " separator=" or "> -->
+<!-- 				<if test="tmp2 == '10대'  "> -->
+<!-- 					to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 10 and 19 -->
+<!-- 				</if> -->
+<!-- 				<if test="tmp2 == '20대'  "> -->
+<!-- 					to_number(to_char(sysdate, 'YYYY')) - -->
+<!-- 					to_number(to_char(birthdate, 'YYYY')) between 20 and 29 -->
+<!-- 				</if> -->
+<!-- 				<if test="tmp2 == '30대'  "> -->
+<!-- 					to_number(to_char(sysdate, 'YYYY')) - -->
+<!-- 					to_number(to_char(birthdate, 'YYYY')) between 30 and 39 -->
+<!-- 				</if> -->
+<!-- 				<if test="tmp2 == '40대'  "> -->
+<!-- 					to_number(to_char(sysdate, 'YYYY')) - -->
+<!-- 					to_number(to_char(birthdate, 'YYYY')) between 40 and 49 -->
+<!-- 				</if> -->
+<!-- 				<if test="tmp2 == '50대'  "> -->
+<!-- 					to_number(to_char(sysdate, 'YYYY')) - -->
+<!-- 					to_number(to_char(birthdate, 'YYYY')) between 50 and 59 -->
+<!-- 				</if> -->
+<!-- 				<if test="tmp2 == '60대'  "> -->
+<!-- 					to_number(to_char(sysdate, 'YYYY')) - -->
+<!-- 					to_number(to_char(birthdate, 'YYYY')) between 60 and 69 -->
+<!-- 				</if> -->
+<!-- 				<if test="tmp2 == '70대'  "> -->
+<!-- 					to_number(to_char(sysdate, 'YYYY')) - -->
+<!-- 					to_number(to_char(birthdate, 'YYYY')) between 70 and 79 -->
+<!-- 				</if> -->
+<!-- 				<if test="tmp2 == '80대'  "> -->
+<!-- 					to_number(to_char(sysdate, 'YYYY')) - -->
+<!-- 					to_number(to_char(birthdate, 'YYYY')) between 80 and 89 -->
+<!-- 				</if> -->
+<!-- 			</foreach> -->
+<!-- 		</if> -->
 
-			<if test="sigungu !=null and sigungu>0 ">
-				and
-				(
-				si.sigungu_id = ${sigungu}
-				)
 
-			</if>
+<!-- 		<if test="sido !=null and sido>0 "> -->
+<!-- 			and -->
+<!-- 			( -->
+<!-- 			s.sido_id = ${sido} -->
+<!-- 			) -->
 
+<!-- 			<if test="sigungu !=null and sigungu>0 "> -->
+<!-- 				and -->
+<!-- 				( -->
+<!-- 				si.sigungu_id = ${sigungu} -->
+<!-- 				) -->
 
-		</if>
-
-
-
-		<if test="(minDate != null and minDate.length() > 0)">
-			and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
-			<if test="(maxDate != null and maxDate.length() > 0)">
-				and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
-			</if>
-		</if>
-		<if test="(maxDate != null and maxDate.length() > 0)">
-			and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
-			<if test="(minDate != null and minDate.length() > 0)">
-				and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
-			</if>
-
-		</if>
+<!-- 			</if> -->
 
 
-		<if test="(minGames_played != null and minGames_played > 0)">
-			and games_played &gt;= to_number(#{minGames_played})
-			<if test="(maxGames_played != null and maxGames_played > 0)">
-				and games_played &lt;= to_number(#{maxGames_played})
-			</if>
-		</if>
-
-		<if test="(maxGames_played != null and maxGames_played > 0)">
-			and games_played &lt; = to_number(#{maxGames_played})
-			<if test="(minGames_played != null and minGames_played > 0)">
-				and games_played &gt; = to_number(#{minGames_played})
-			</if>
-		</if>
+<!-- 		</if> -->
 
 
 
+<!-- 		<if test="(minDate != null and minDate.length() > 0)"> -->
+<!-- 			and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate} -->
+<!-- 			<if test="(maxDate != null and maxDate.length() > 0)"> -->
+<!-- 				and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate} -->
+<!-- 			</if> -->
+<!-- 		</if> -->
+<!-- 		<if test="(maxDate != null and maxDate.length() > 0)"> -->
+<!-- 			and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate} -->
+<!-- 			<if test="(minDate != null and minDate.length() > 0)"> -->
+<!-- 				and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate} -->
+<!-- 			</if> -->
 
-		<if test="( minWin != null and minWin > 0)">
-			and wins &gt;= to_number(#{minWin})
-			<if test="( maxWin != null and maxWin > 0)">
-				and wins &lt;= to_number(#{maxWin})
-			</if>
-		</if>
+<!-- 		</if> -->
 
-		<if test="( maxWin != null and maxWin > 0)">
-			and wins &lt; = to_number(#{maxWin})
-			<if test="( minWin != null and minWin > 0)">
-				and wins &gt; = to_number(#{minWin})
-			</if>
-		</if>
+
+<!-- 		<if test="(minGames_played != null and minGames_played > 0)"> -->
+<!-- 			and games_played &gt;= to_number(#{minGames_played}) -->
+<!-- 			<if test="(maxGames_played != null and maxGames_played > 0)"> -->
+<!-- 				and games_played &lt;= to_number(#{maxGames_played}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
+
+<!-- 		<if test="(maxGames_played != null and maxGames_played > 0)"> -->
+<!-- 			and games_played &lt; = to_number(#{maxGames_played}) -->
+<!-- 			<if test="(minGames_played != null and minGames_played > 0)"> -->
+<!-- 				and games_played &gt; = to_number(#{minGames_played}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
 
 
 
 
-		<if test="( minDraws != null and minDraws > 0)">
-			and wins &gt;= to_number(#{minDraws})
-			<if test="( maxDraws != null and maxDraws > 0)">
-				and wins &lt;= to_number(#{maxDraws})
-			</if>
-		</if>
+<!-- 		<if test="( minWin != null and minWin > 0)"> -->
+<!-- 			and wins &gt;= to_number(#{minWin}) -->
+<!-- 			<if test="( maxWin != null and maxWin > 0)"> -->
+<!-- 				and wins &lt;= to_number(#{maxWin}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
 
-		<if test="( maxDraws != null and maxDraws > 0)">
-			and draws &lt; = to_number(#{maxDraws})
-			<if test="( minDraws != null and minDraws > 0)">
-				and draws &gt; = to_number(#{minDraws})
-			</if>
-		</if>
-
-
-		<if test="( minLoss != null and minLoss > 0)">
-			and wins &gt;= to_number(#{minLoss})
-			<if test="( maxLoss != null and maxLoss > 0)">
-				and wins &lt;= to_number(#{maxLoss})
-			</if>
-		</if>
-
-		<if test="( maxLoss != null and maxLoss > 0)">
-			and losses &lt; = to_number(#{maxLoss})
-			<if test="( minLoss != null and minLoss > 0)">
-				and losses &gt; = to_number(#{minLoss})
-			</if>
-		</if>
+<!-- 		<if test="( maxWin != null and maxWin > 0)"> -->
+<!-- 			and wins &lt; = to_number(#{maxWin}) -->
+<!-- 			<if test="( minWin != null and minWin > 0)"> -->
+<!-- 				and wins &gt; = to_number(#{minWin}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
 
 
 
-		<if test="( minGoals != null and minGoals > 0)">
-			and goals_for &gt;= to_number(#{minGoals})
-			<if test="( maxGoals != null and maxGoals > 0)">
-				and goals_for &lt;= to_number(#{maxGoals})
-			</if>
-		</if>
 
-		<if test="( maxGoals != null and maxGoals > 0)">
-			and goals_for &lt; = to_number(#{maxGoals})
-			<if test="( minGoals != null and minGoals > 0)">
-				and goals_for &gt; = to_number(#{minGoals})
-			</if>
-		</if>
+<!-- 		<if test="( minDraws != null and minDraws > 0)"> -->
+<!-- 			and wins &gt;= to_number(#{minDraws}) -->
+<!-- 			<if test="( maxDraws != null and maxDraws > 0)"> -->
+<!-- 				and wins &lt;= to_number(#{maxDraws}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
 
-
-		<if test="( minAssists != null and minAssists > 0)">
-			and goals_assist &gt;= to_number(#{minAssists})
-			<if test="( maxAssists != null and maxAssists > 0)">
-				and goals_assist &lt;= to_number(#{maxAssists})
-			</if>
-		</if>
-
-		<if test="( maxAssists != null and maxAssists > 0)">
-			and goals_assist &lt; = to_number(#{maxAssists})
-			<if test="( minAssists != null and minAssists > 0)">
-				and goals_assist &gt; = to_number(#{minAssists})
-			</if>
-		</if>
+<!-- 		<if test="( maxDraws != null and maxDraws > 0)"> -->
+<!-- 			and draws &lt; = to_number(#{maxDraws}) -->
+<!-- 			<if test="( minDraws != null and minDraws > 0)"> -->
+<!-- 				and draws &gt; = to_number(#{minDraws}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
 
 
+<!-- 		<if test="( minLoss != null and minLoss > 0)"> -->
+<!-- 			and wins &gt;= to_number(#{minLoss}) -->
+<!-- 			<if test="( maxLoss != null and maxLoss > 0)"> -->
+<!-- 				and wins &lt;= to_number(#{maxLoss}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
 
-		<if
-			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
-			)
-		</if>
+<!-- 		<if test="( maxLoss != null and maxLoss > 0)"> -->
+<!-- 			and losses &lt; = to_number(#{maxLoss}) -->
+<!-- 			<if test="( minLoss != null and minLoss > 0)"> -->
+<!-- 				and losses &gt; = to_number(#{minLoss}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
 
-	</sql>
+
+
+<!-- 		<if test="( minGoals != null and minGoals > 0)"> -->
+<!-- 			and goals_for &gt;= to_number(#{minGoals}) -->
+<!-- 			<if test="( maxGoals != null and maxGoals > 0)"> -->
+<!-- 				and goals_for &lt;= to_number(#{maxGoals}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
+
+<!-- 		<if test="( maxGoals != null and maxGoals > 0)"> -->
+<!-- 			and goals_for &lt; = to_number(#{maxGoals}) -->
+<!-- 			<if test="( minGoals != null and minGoals > 0)"> -->
+<!-- 				and goals_for &gt; = to_number(#{minGoals}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
+
+
+<!-- 		<if test="( minAssists != null and minAssists > 0)"> -->
+<!-- 			and goals_assist &gt;= to_number(#{minAssists}) -->
+<!-- 			<if test="( maxAssists != null and maxAssists > 0)"> -->
+<!-- 				and goals_assist &lt;= to_number(#{maxAssists}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
+
+<!-- 		<if test="( maxAssists != null and maxAssists > 0)"> -->
+<!-- 			and goals_assist &lt; = to_number(#{maxAssists}) -->
+<!-- 			<if test="( minAssists != null and minAssists > 0)"> -->
+<!-- 				and goals_assist &gt; = to_number(#{minAssists}) -->
+<!-- 			</if> -->
+<!-- 		</if> -->
+
+
+
+<!-- 		<if -->
+<!-- 			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)"> -->
+<!-- 			) -->
+<!-- 		</if> -->
+
+<!-- 	</sql> -->
+
+
+<sql id="boardWhere">
+
+    <!-- 키워드 조건 그룹화 시작 -->
+    <if test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+        and (
+    </if>
+
+    <!-- 키워드1 조건 -->
+    <if test="keyword1 != null and keyword1.length() > 0">
+        <if test="searchType1 == 'all'">
+            (
+            upper(m.mid) like upper('%${keyword1}%')
+            or
+            upper(m.name) like upper('%${keyword1}%')
+            or
+            upper(m.nickname) like upper('%${keyword1}%')
+            or
+            upper(m.email) like upper('%${keyword1}%')
+            or
+            upper(m.phone) like upper('%${keyword1}%')
+            )
+        </if>
+        <if test="searchType1 == 'mid'">
+            upper(m.mid) like upper('%${keyword1}%')
+        </if>
+        <if test="searchType1 == 'name'">
+            upper(m.name) like upper('%${keyword1}%')
+        </if>
+        <if test="searchType1 == 'nickname'">
+            upper(m.nickname) like upper('%${keyword1}%')
+        </if>
+        <if test="searchType1 == 'phone'">
+            upper(m.phone) like upper('%${keyword1}%')
+        </if>
+        <if test="searchType1 == 'email'">
+            upper(m.email) like upper('%${keyword1}%')
+        </if>
+    </if>
+
+    <!-- 키워드2 조건 -->
+    <if test="(keyword1 != null and keyword1.length() > 0) and (keyword2 != null and keyword2.length() > 0)">
+        ${orand}
+    </if>
+
+    <if test="keyword2 != null and keyword2.length() > 0">
+        <if test="searchType1 == 'all'">
+            (
+            upper(m.mid) like upper('%${keyword2}%')
+            or
+            upper(m.name) like upper('%${keyword2}%')
+            or
+            upper(m.nickname) like upper('%${keyword2}%')
+            or
+            upper(m.email) like upper('%${keyword2}%')
+            or
+            upper(m.phone) like upper('%${keyword2}%')
+            )
+        </if>
+        <if test="searchType1 == 'mid'">
+            upper(m.mid) like upper('%${keyword2}%')
+        </if>
+        <if test="searchType1 == 'name'">
+            upper(m.name) like upper('%${keyword2}%')
+        </if>
+        <if test="searchType1 == 'nickname'">
+            upper(m.nickname) like upper('%${keyword2}%')
+        </if>
+        <if test="searchType1 == 'phone'">
+            upper(m.phone) like upper('%${keyword2}%')
+        </if>
+        <if test="searchType1 == 'email'">
+            upper(m.email) like upper('%${keyword2}%')
+        </if>
+    </if>
+
+    <!-- 키워드 조건 그룹화 끝 -->
+    <if test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+        )
+    </if>
+
+    <!-- 성별 조건 -->
+    <if test="gender != null and gender.size() > 0">
+        <foreach collection="gender" item="tmp" open=" and (" close=")" separator=" or ">
+            gender = '${tmp}'
+        </foreach>
+    </if>
+
+    <!-- 나이 조건 -->
+    <if test="ageRange != null and ageRange != ''">
+        <foreach collection="ageRange" item="tmp2" open=" and (" close=")" separator=" or ">
+            <if test="tmp2 == '10대'">
+                to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 10 and 19
+            </if>
+            <if test="tmp2 == '20대'">
+                to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 20 and 29
+            </if>
+            <if test="tmp2 == '30대'">
+                to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 30 and 39
+            </if>
+            <if test="tmp2 == '40대'">
+                to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 40 and 49
+            </if>
+            <if test="tmp2 == '50대'">
+                to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 50 and 59
+            </if>
+            <if test="tmp2 == '60대'">
+                to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 60 and 69
+            </if>
+            <if test="tmp2 == '70대'">
+                to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 70 and 79
+            </if>
+            <if test="tmp2 == '80대'">
+                to_number(to_char(sysdate, 'YYYY')) - to_number(to_char(birthdate, 'YYYY')) between 80 and 89
+            </if>
+        </foreach>
+    </if>
+
+    <!-- 지역 조건 -->
+    <if test="sido != null and sido > 0">
+        and s.sido_id = ${sido}
+        <if test="sigungu != null and sigungu > 0">
+            and si.sigungu_id = ${sigungu}
+        </if>
+    </if>
+
+    <!-- 날짜 조건 -->
+    <if test="minDate != null and minDate.length() > 0">
+        and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
+    </if>
+    <if test="maxDate != null and maxDate.length() > 0">
+        and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
+    </if>
+
+    <!-- 게임 플레이 조건 -->
+    <if test="minGames_played != null and minGames_played > 0">
+        and games_played &gt;= to_number(#{minGames_played})
+    </if>
+    <if test="maxGames_played != null and maxGames_played > 0">
+        and games_played &lt;= to_number(#{maxGames_played})
+    </if>
+
+    <!-- 승리 조건 -->
+    <if test="minWin != null and minWin > 0">
+        and wins &gt;= to_number(#{minWin})
+    </if>
+    <if test="maxWin != null and maxWin > 0">
+        and wins &lt;= to_number(#{maxWin})
+    </if>
+
+    <!-- 무승부 조건 -->
+    <if test="minDraws != null and minDraws > 0">
+        and draws &gt;= to_number(#{minDraws})
+    </if>
+    <if test="maxDraws != null and maxDraws > 0">
+        and draws &lt;= to_number(#{maxDraws})
+    </if>
+
+    <!-- 패배 조건 -->
+    <if test="minLoss != null and minLoss > 0">
+        and losses &gt;= to_number(#{minLoss})
+    </if>
+    <if test="maxLoss != null and maxLoss > 0">
+        and losses &lt;= to_number(#{maxLoss})
+    </if>
+
+    <!-- 득점 조건 -->
+    <if test="minGoals != null and minGoals > 0">
+        and goals_for &gt;= to_number(#{minGoals})
+    </if>
+    <if test="maxGoals != null and maxGoals > 0">
+        and goals_for &lt;= to_number(#{maxGoals})
+    </if>
+
+    <!-- 어시스트 조건 -->
+    <if test="minAssists != null and minAssists > 0">
+        and goals_assist &gt;= to_number(#{minAssists})
+    </if>
+    <if test="maxAssists != null and maxAssists > 0">
+        and goals_assist &lt;= to_number(#{maxAssists})
+    </if>
+
+</sql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 	<!-- 공지사항 where -->
 
 
+<sql id="noticeWhere">
 
-	<sql id="noticeWhere">
-		<if
-			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
-			and (
-		</if>
+        
+        <!-- 키워드 조건이 있을 때 -->
+        <if test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+           and (
+        </if>
 
-		<if test="keyword1!=null and keyword1.length()>0">
-			<if test="searchType1 == 'all' ">
-				(
-				upper(content) like upper('%${keyword1}%')
-				or
-				upper(subject) like upper('%${keyword1}%')
-				)
-			</if>
-			<if test="searchType1 == 'content'">
-				upper(content) like upper('%${keyword1}%')
-			</if>
-			<if test="searchType1 == 'subject'">
-				upper(subject) like upper('%${keyword1}%')
-			</if>
+        <!-- keyword1 검색 조건 -->
+        <if test="keyword1 != null and keyword1.length() > 0">
+            <if test="searchType1 == 'all'">
+                (
+                upper(content) like upper('%${keyword1}%')
+                or
+                upper(subject) like upper('%${keyword1}%')
+                )
+            </if>
+            <if test="searchType1 == 'content'">
+                upper(content) like upper('%${keyword1}%')
+            </if>
+            <if test="searchType1 == 'subject'">
+                upper(subject) like upper('%${keyword1}%')
+            </if>
+        </if>
 
+        <!-- keyword2 검색 조건 -->
+        <if test="(keyword1 != null and keyword1.length() > 0) and (keyword2 != null and keyword2.length() > 0)">
+            ${orand}
+        </if>
+        <if test="keyword2 != null and keyword2.length() > 0">
+            <if test="searchType1 == 'all'">
+                (
+                upper(content) like upper('%${keyword2}%')
+                or
+                upper(subject) like upper('%${keyword2}%')
+                )
+            </if>
+            <if test="searchType1 == 'content'">
+                upper(content) like upper('%${keyword2}%')
+            </if>
+            <if test="searchType1 == 'subject'">
+                upper(subject) like upper('%${keyword2}%')
+            </if>
+        </if>
 
-		</if>
+        <!-- 키워드 조건이 있을 때 괄호 끝 -->
+        <if test="(keyword1 != null and keyword1.length() > 0) or (keyword2 != null and keyword2.length() > 0)">
+            )
+        </if>
 
-		<if
-			test="(keyword1!=null and keyword1.length()>0) and (keyword2!=null and keyword2.length()>0)">
-			${orand}
-		</if>
-
-		<if test="keyword2!=null and keyword2.length()>0">
-			<if test="searchType1 == 'all' ">
-				(
-				upper(content) like upper('%${keyword2}%')
-				or
-				upper(subject) like upper('%${keyword2}%')
-
-				)
-			</if>
-			<if test="searchType1 == 'content'">
-				upper(content) like upper('%${keyword2}%')
-			</if>
-			<if test="searchType1 == 'subject'">
-				upper(subject) like upper('%${keyword2}%')
-			</if>
-
-		</if>
-
-		<if test="(minDate != null and minDate.length() > 0)">
-			and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
-			<if test="(maxDate != null and maxDate.length() > 0)">
-				and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
-			</if>
-		</if>
-		<if test="(maxDate != null and maxDate.length() > 0)">
-			and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
-			<if test="(minDate != null and minDate.length() > 0)">
-				and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
-			</if>
-
-		</if>
+        <!-- 날짜 조건 -->
+        <if test="(minDate != null and minDate.length() > 0)">
+            and to_char(reg_date, 'YYYY-MM-DD') &gt;= #{minDate}
+        </if>
+        <if test="(maxDate != null and maxDate.length() > 0)">
+            and to_char(reg_date, 'YYYY-MM-DD') &lt;= #{maxDate}
+        </if>
 
 
+</sql>
 
-
-
-
-		<if
-			test="(keyword1!=null and keyword1.length()>0) or (keyword2!=null and keyword2.length()>0)">
-			)
-		</if>
-
-
-	</sql>
 
 
 	<!-- -->
@@ -581,10 +791,13 @@
 		m.mid AS "mid",
 		m.name AS "name",
 		m.nickname as "nickname",
+		m.password,
 		m.email as "email",
 		to_char(m.birthdate,
-		'YYYY-MM-DD') as "birthday",
-		m.phone as "phone",
+		'YYYY-MM-DD') as "birthday"
+		,substr(m.phone,0,3) as phone1
+		,substr(m.phone,5,4) as phone2
+		,substr(m.phone,10,4) as phone3,
 		m.gender as "gender",
 		s.name AS "sido",
 		si.name AS "sigungu",
@@ -1056,7 +1269,15 @@
 		)
 	</insert>
 
-
+		<select id="getStadiumDuplication" parameterType="kosmo.team.project.dto.Stadim2DTO" resultType="int">
+			select
+			count(*) from stadium 
+			where replace(stadium_name, ' ', '') = replace(#{stadium_name}, ' ', '')
+			and
+			sido_name = #{sido_id}
+			and
+			sigungu_name = #{sigungu_id}
+		</select>
 	<!-- 
 	<select id="getTournamentList" resultType="kosmo.team.project.dto.TournamentDTO" parameterType="kosmo.team.project.dto.TournamentSearchDTO">		
 		 select * from ( select rownum RNUM, zxcvb.* from( 

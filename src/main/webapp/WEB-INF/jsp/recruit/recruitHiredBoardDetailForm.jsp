@@ -7,8 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>RecruitHiredBoardForm</title>
-<link href="/style/recruitHiredBoardFormStyle.css" rel="stylesheet">
+<link href="/style/recruitHiredBoardDetailFormStyle.css" rel="stylesheet">
 <script src="/js/recruitHiredBoardFormScript.js"></script>
+
 
 <script>
 function goWaitingHiredList()
@@ -42,7 +43,6 @@ function goWaitingHiredList()
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recruitHiredBoardFormTitle">
-    	<img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">용병 모집</p>
     </div>
     
@@ -70,108 +70,61 @@ function goWaitingHiredList()
 	<!-- 만약에 상세보기할 게시판이 있으면-->
 	<c:if test="${!empty requestScope.hireddetailList}">
 	
-		<center>
-			<table align="center" bordercolor="gray" border=1 cellpadding=7
-				style="border-collapse: collapse">
-				<caption>[용병 모집 상세글 보기]</caption>
-				<tr>
-					<th bgColor="lightgray">닉네임</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 저장된 boardDTO 객체의 -->
-					<!-- nickname 이라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 이름 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.hireddetailList.nickname}</td>
+			<table align="center" cellpadding="7" style="width:900px; border-collapse: collapse; margin-top: 50px;">
+				<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
+					
+					<td colspan="2"><span>${requestScope.hireddetailList.title}</span><span style="float: right;"><span style="color: #999999; margin-top: 15px;">작성자&nbsp;</span>/&nbsp;${requestScope.hireddetailList.nickname}<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${requestScope.hireddetailList.readcount}</span></td>
 				</tr>
 				<tr>
-					<th bgColor="lightgray">제목</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- subject 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 제목 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.hireddetailList.title}</td>
+					<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">지역</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.hireddetailList.sido_c} ${requestScope.hireddetailList.sigungu_c}</td>
 				</tr>
 				<tr>
-					<th bgColor="lightgray">조회수</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 조회수 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.hireddetailList.readcount}</td>
+					<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">요일</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.day}</td>
 				</tr>
-				
 				<tr>
-                  <th bgColor="lightgray">지역</th>
-                  <!--------------------------------------------------- -->
-                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
-                  <!--------------------------------------------------- -->
-                  <td>${requestScope.hireddetailList.sido_c} ${requestScope.hireddetailList.sigungu_c}</td>
-               </tr>
-               
-               <tr>
-                  <th bgColor="lightgray">요일</th>
-                  <!--------------------------------------------------- -->
-                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
-                  <!--------------------------------------------------- -->
-                  <td>${requestScope.day}</td>
-               </tr>
-               
-               <tr>
-                  <th bgColor="lightgray">시간</th>
-                  <!--------------------------------------------------- -->
-                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
-                  <!--------------------------------------------------- -->
-                  <td>${requestScope.time}</td>
-               </tr>
-               
-               <tr>
-                  <th bgColor="lightgray">포지션</th>
-                  <!--------------------------------------------------- -->
-                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
-                  <!--------------------------------------------------- -->
-                  <td>${requestScope.hireddetailList.pos}</td>
-               </tr>
-				
-				<tr>
-					<th bgColor="lightgray">내 용</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- content 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 내용 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td><textarea name="content" class="content" rows="13"
-							cols="40" maxlength="500" readonly>${requestScope.hireddetailList.content}</textarea></td>
+					<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">시간</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.time}</td>
 				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">포지션</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.hireddetailList.pos}</td>
+				</tr>
+				<tr>
+					<th style="width: 100px; height:250px; color: #000000; border-bottom: 1px solid #999999;">내 용</th>
+					<td style="border-bottom: 1px solid #999999;">
+						${requestScope.hireddetailList.content}
+					</td>
+				</tr>
+				<c:if test="${sessionScope.nickname ne requestScope.hireddetailList.nickname}">
+					<tr>
+						<td colspan="2" style="text-align: center; border-top: 1px solid #999999;">
+							<input type="button" value="신청" style="cursor:pointer" class="hireRequestBtn" onclick="goWaitingHiredList()" >
+						</td>
+					</tr>
+				</c:if>
 			</table>
-		</center>
-		<center>
+			<div class="recruitHiredBoardDetailBtnDiv">
+				<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/recruitHiredBoardForm.do')">
+				<c:if test="${sessionScope.nickname eq requestScope.hireddetailList.nickname}">
+					<input type="button" value="수정/삭제" class="recruitHiredBoardDetailUpDelBtn" onclick="document.recruitHiredboardUpDelForm.submit()">
+				</c:if>
+			</div>
 			<!--------------------------------------------------- -->
 			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
 			<!--------------------------------------------------- -->
-			<c:if test="${not empty sessionScope.m_no}">
-				<c:if test="${sessionScope.nickname ne requestScope.hireddetailList.nickname}">
-	         	 	<input type="button" value="신청" style="cursor:pointer" onclick="goWaitingHiredList()" >
-	         	</c:if>
-	         </c:if>
-			<span style="cursor: pointer"
+			<%-- <c:if test="${sessionScope.nickname ne requestScope.hireddetailList.nickname}">
+         	 	<input type="button" value="신청" style="cursor:pointer" onclick="goWaitingHiredList()" >
+         	</c:if> --%>
+			<%-- <span style="cursor: pointer"
 				onclick="location.replace('/recruitHiredBoardForm.do')">
 				[목록 화면으로] </span>
         	<c:if test="${sessionScope.nickname eq requestScope.hireddetailList.nickname}">
 				<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.recruitHiredboardUpDelForm.submit()" >
-			</c:if>
+			</c:if> --%>
 				
     	</c:if>
-    	</center>
     	
     	
     	<!--------------------------------------------------------------------------->

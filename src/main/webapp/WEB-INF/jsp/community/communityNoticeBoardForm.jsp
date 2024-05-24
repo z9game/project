@@ -15,7 +15,7 @@
 <script>
 
 $(document).ready(function() { 		
-		$(".rowCntPerPage").val("10");
+		$(".communityNoticeBoardFormRowCntPerPage .rowCntPerPage").val("10");
    search();
    
 });
@@ -64,7 +64,7 @@ function search(){
 
   
     
-    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val() )
+    boardSearchFormObj.find(".rowCntPerPage").val($(".communityNoticeBoardFormRowCntPerPage .rowCntPerPage").val());
     
 
     
@@ -172,7 +172,6 @@ function pageNoClick( clickPageNo ){
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">공지사항</p>
 	</div>
 
@@ -192,14 +191,22 @@ function pageNoClick( clickPageNo ){
 
 
 
-
+	<div class="communityNoticeBoardFormTopContents">
+			<span class="communityNoticeBoardFormFontLightGray" id="communityNoticeBoardAllCount">Total. ${requestScope.noticeBoardListAllCnt}개</span>
+			<div class="communityNoticeBoardFormRowCntPerPage">
+				<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+					<option value="10">10개씩 보기
+					<option value="15">15개씩 보기
+					<option value="20">20개씩 보기
+				</select>
+			</div>
+		</div>
 
 
 	<div class="communityNoticeBoardFormContainer">
-
+		
 		<div class="noticeboardListDiv" style="margin-bottom: 20px;">
-			<table class="noticeboardListTable" cellpadding="7" border="1"
-				bordercolor="gray" align="center" style="border-collapse: collapse">
+			<table class="noticeboardListTable" cellpadding="7" align="center" style="border-collapse: collapse">
 				<tr>
 					<th style="width: 50px;">번호</th>
 					<th style="width: 300px;">제목</th>
@@ -219,11 +226,11 @@ function pageNoClick( clickPageNo ){
 					<tr style="cursor: pointer"
 					onClick="goNoticeboardDetailForm(${noticeboard.b_no});">
 
-							<td align="center">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
+							<td align="center" class="communityNoticeBoardFormFontLightGray">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
 							<td>${noticeboard.subject}</td>
-							<td align="center">${noticeboard.writer}</td>
-							<td align="center">${noticeboard.readcount}</td>
-							<td align="center">${noticeboard.reg_date}</td>
+							<td align="center" class="communityNoticeBoardFormFontLightGray">${noticeboard.writer}</td>
+							<td align="center" class="communityNoticeBoardFormFontLightGray">${noticeboard.readcount}</td>
+							<td align="center" class="communityNoticeBoardFormFontLightGray">${noticeboard.reg_date}</td>
 						</tr>
 					</c:forEach>
 			</table>
@@ -237,7 +244,7 @@ function pageNoClick( clickPageNo ){
 
 
 
-	<center>
+	<%-- <center>
 
 		<span class="pagingNos"> <span style="cursor: pointer"
 			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
@@ -262,14 +269,24 @@ function pageNoClick( clickPageNo ){
 			&nbsp;&nbsp;&nbsp;
 			[${requestScope.noticeBoardListCnt}/${requestScope.noticeBoardListAllCnt}]개
 			&nbsp;&nbsp;
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
-	</center>
-
+		</span>  &nbsp;&nbsp;&nbsp;
+	</center> --%>
+				<div class="communityNoticeBoardPaging">
+					<span class="pagingNos">
+						<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+						<c:forEach var="pageNo" begin="${requestScope.noticeBoardMap.begin_pageNo}" end="${requestScope.noticeBoardMap.end_pageNo}">
+							<c:if test="${requestScope.noticeBoardMap.selectPageNo==pageNo}">
+					            <p class="activePageNo">${pageNo}</p>
+					        </c:if>
+							<c:if test="${requestScope.noticeBoardMap.selectPageNo!=pageNo}">
+								<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+							</c:if>
+						</c:forEach>
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+						<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+					</span>
+				</div>
 
 
 	<!-- 이 form 태그를 /boardDetailForm.do로 WAS로 접속하기 위해 선언한다. -->
@@ -278,15 +295,5 @@ function pageNoClick( clickPageNo ){
 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
 		<input type="hidden" name="b_no">
 	</form>
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

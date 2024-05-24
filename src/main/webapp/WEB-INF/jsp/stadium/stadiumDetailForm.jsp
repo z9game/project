@@ -8,10 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>스타디움 예약 시스템</title>
-<link href="/style/community/communityNoticeBoardFormStyle.css"
+<title>StadiumDetailForm</title>
+<link href="/style/stadiumDetailFormStyle.css"
 	rel="stylesheet">
-<script src="/js/community/communityNoticeBoardFormScript.js"></script>
+<!-- <script src="/js/community/communityNoticeBoardFormScript.js"></script> -->
 <script>
 	function checkReserveForm() {
 
@@ -125,9 +125,8 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
-	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">스타디움 예약</p>
+	<div class="stadiumDetailFormTitle">
+		<p class="titleBackgoundText">경기장 대관</p>
 	</div>
 
 	<c:if test="${empty requestScope.stadiumDTO}">
@@ -143,54 +142,23 @@
     
 
 	<c:if test="${!empty requestScope.stadiumDTO}">
+		<div class="stadiumDiv">
+			<div class="stadiumImgDiv">
+				<img src="/image/st.jpg" style="border-radius: 15px;">
+				<form name="rentStadiumForm">
 
-		<table align="center" bordercolor="gray" border="1" cellpadding="7"
-			style="border-collapse: collapse;">
-			<caption>[경기장 상세글 보기]</caption>
-			<tr>
-				<th bgColor="lightgray">사진</th>
-				<td><img src="/image/st.jpg"></td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">경기장이름</th>
-				<td>${requestScope.stadiumDTO.stadium_name}</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">지역</th>
-				<td>${requestScope.stadiumDTO.sido_name}-${requestScope.stadiumDTO.sigungu_name}</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">등록일</th>
-				<td>${requestScope.stadiumDTO.reg_date}</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">상태</th>
-				<td>${requestScope.stadiumDTO.stadium_status}</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">비 고</th>
-				<td><textarea name="content" class="content" rows="13"
-						cols="20" maxlength="50" readonly>${requestScope.stadiumDTO.content}</textarea></td>
-			</tr>
-		</table>
-	</c:if>
+		<table class="rentStadiumTable" align="center" cellpadding="7" style="border-collapse: collapse; margin-top: 20px;">
 
-	<form name="rentStadiumForm">
-
-		<table align="center" border="1" bordercolor="gray" cellpadding="7"
-			style="border-collapse: collapse; margin-top: 20px;">
-
-			<caption>[스타디움 예약 상세]</caption>
 			<tr>
-				<th bgColor="lightgray">날짜</th>
-				<td><input type="text" id="date" name="date"
+				<th style="border-bottom: 1px solid #FFFFFF;">날짜</th>
+				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" id="date" name="date"
 					required="required"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">시간대</th>
-				<td>
+				<th style="border-bottom: 1px solid #FFFFFF;">시간대</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
 
-				<select name="time_slot" required="required">
+				<select name="time_slot" required="required" id="time_slot">
 				<option value="선택">선택</option>
 						<c:forEach var="time" items="${timeDTO}">
 							<option value="${time.time_no}">${time.time_range}</option>
@@ -201,20 +169,47 @@
 				</td>
 			</tr>
 
-			<tr>
+			<!-- <tr>
 				<td colspan="2" style="text-align: center;"><input
 					type="button" value="예약하기" onclick="checkReserveForm();"></td>
-			</tr>
+			</tr> -->
 		</table>
+		<div class="stadiumDetailBtnDiv">
+			<input type="button" value="예약" class="stadiumRegBtn" onclick="checkReserveForm();">
+			<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/stadiumRentForm.do')">
+		</div>
 		<input type="hidden" name="stadium_no"
 			value="${requestScope.stadiumDTO.stadium_no}">
 		
 		<input type="hidden" name="m_no" value="<%= request.getSession().getAttribute("m_no") %>">
 		
 	</form>
-	<center>
-		<span style="cursor: pointer"
-			onclick="location.replace('/stadiumRentForm.do')">[목록 화면으로]</span>
-	</center>
+			</div>
+			<table class="stadiumDetailTable" align="center" cellpadding="7" style="border-collapse: collapse;">
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">경기장이름</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.stadiumDTO.stadium_name}</td>
+				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">지역</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.stadiumDTO.sido_name} - ${requestScope.stadiumDTO.sigungu_name}</td>
+				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">등록일</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.stadiumDTO.reg_date}</td>
+				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">상태</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.stadiumDTO.stadium_status}</td>
+				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">비 고</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.stadiumDTO.content}</td>
+				</tr>
+			</table>
+		</div>
+	</c:if>
+
+	
 </body>
 </html>

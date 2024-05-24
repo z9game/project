@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityNoticeBoardDetailForm</title>
-<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+<title>YangdoDetailUpDeleForm</title>
+<link href="/style/yangdoDetailUpDeleFormStyle.css" rel="stylesheet">
 
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
@@ -16,6 +16,7 @@
 
 
 <script>
+
 
 
 
@@ -176,13 +177,26 @@ function loadTimeRanges() {
 	function checkYangdoUpForm() {
 
 		 var formObj = $("[name='yangdoDetailUpdDeleForm']");
-// 		var writerObj = formObj.find(".writer");
-// 		var subjectObj = formObj.find(".subject");
-// 		var contentObj = formObj.find(".content");
+ 		//var writerObj = formObj.find(".writer");
+ 		var subjectObj = formObj.find(".title");
+ 		var contentObj = formObj.find(".content");
 
-// 		if (confirm("정말수정하시겠습니까?") == false) {
-// 			return;
-// 		} */	
+
+
+		if (subjectObj.val().trim() == "") {
+	        alert("제목을 입력해주세요");
+	        return;
+	    }
+	    
+	    if (contentObj.val().trim().length == 0) {
+	        alert("내용을 1자 이상 입력해주세요.");
+	        contentObj.val("");
+	        return;
+	    }
+	    
+
+
+
 		var stadiumSelected = $("select[name='MyStadium']").val();
 		
 		 var bookingDate = $("select[name='MyDate']").val();
@@ -226,12 +240,13 @@ function loadTimeRanges() {
 
 
 
-		alert(JSON.stringify(formData));
+		//alert(JSON.stringify(formData));
 
-
+ 		if (confirm("정말수정하시겠습니까?") == false) {
+ 			return;		}	
 
 	
-		
+ 		var stadiumName = $("select[name='MyStadium'] option:selected").text();
 		
 		$.ajax({
 			url : "/yangdoUpProc.do",
@@ -243,11 +258,28 @@ function loadTimeRanges() {
 					alert("삭제된 양도입니다.");
 					location.href = "/stadiumTransferForm.do";
 					return;
-				}else if (result == 3){
-					alert("이미 같은조건의 게시글이있음")
-					return;
+				}else if ( result == 5){
+					
+					alert("현재 선택한 경기장"+"( "+ stadiumName + " )"+"은 이용불가 상태입니다.");
+						return;
+				}else if ( result == 6){
+					
+					alert("삭제된 경기장입니다");
+					location.href = "/stadiumTransferForm.do";
+						return;
 				}
 				
+				else if (result == 3){
+					alert("이미 같은조건의 게시글이있음")
+					
+					return;
+				}
+				else if ( result ==7){
+					
+				alert("이미 양도한 글입니다.")
+				return;
+					
+				}
 				else {
 					alert("양도 수정 성공입니다.");
 					location.href = "/stadiumTransferForm.do";
@@ -278,7 +310,17 @@ function loadTimeRanges() {
 				if (result == 0) {
 					alert("삭제된 양도입니다.");
 					location.href = "/stadiumTransferForm.do";
-				} else {
+				}else if ( result == 8){
+					alert("이미 양도완료한 글입니다.")
+					
+				}else if ( result == 6){
+					
+					alert("삭제된 경기장입니다");
+					location.href = "/stadiumTransferForm.do";
+						return;
+				}
+				
+				else {
 					alert("양도 삭제 성공입니다.");
 					location.href = "/stadiumTransferForm.do";
 				}
@@ -292,7 +334,6 @@ function loadTimeRanges() {
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">양도수정</p>
 	</div>
 
@@ -300,23 +341,22 @@ function loadTimeRanges() {
 
 
 	<form name="yangdoDetailUpdDeleForm">
-		<table align="center" bordercolor="gray" border=1 cellpadding=7
+		<table align="center" cellpadding=7
 			style="border-collpase: collpase">
-			<caption>[양도 수정/삭제]</caption>
 			<tr>
-				<th bgColor="lightgray">작성자</th>
-					<td>${ requestScope.yangdoDTO.nickname }</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">제 목</th>
-				<td><input type="text" name="title" class="title" size="40"
+				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" name="title" class="title" size="106"
 					maxlength="30" value="${requestScope.yangdoDTO.title}"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">경기장</th>
+				<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+				<td style="border-bottom: 1px solid #c59246e0;">${ requestScope.yangdoDTO.nickname }</td>
+			</tr>
+			<tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">경기장</th>
 				<td>
 					${requestScope.yangdoDTO.yangdo_stadium} - ${requestScope.yangdoDTO.yangdo_date} - ${requestScope.yangdoDTO.yangdo_time}<br>
-				    <select name="MyStadium" class="MyStadium" onchange="loadDate()">
+				    <select name="MyStadium" class="MyStadium" onchange="loadDate()" style="margin-top: 10px;">
 					    <option value=0>경기장선택</option>
 					    <c:forEach var="myStadium" items="${requestScope.myStadiumList}">
 					        <option value="${myStadium.stadium_no}">
@@ -338,19 +378,9 @@ function loadTimeRanges() {
 				    </select>
 				</td>
 			</tr>
-
 			<tr>
-				<th bgColor="lightgray">조회수</th>
-				<td>${requestScope.yangdoDTO.readcount}</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">등록일</th>
-				<td>${requestScope.yangdoDTO.reg_date}</td>
-			</tr>
-			<tr>
-				<th bgColor="lightgray">내 용</th>
-				<td><textarea name="content" class="content" rows="13"
-						cols="40" maxlength="500">${requestScope.yangdoDTO.content}
+				<th style="border-bottom: 1px solid #FFFFFF;">내 용</th>
+				<td style="border-bottom: 1px solid #c59246e0;"><textarea name="content" class="content" rows="20" cols="108" maxlength="500" style="resize: none;">${requestScope.yangdoDTO.content}
             </textarea>
 			</tr>
 
@@ -360,19 +390,14 @@ function loadTimeRanges() {
 			<input type="hidden" name="m_no" value="<%= request.getSession().getAttribute("m_no") %>">
 		
 	</form>
-
-
-	<div style="height: 5px"></div>
-	<center>
-		<span style="cursor: pointer"
-			onclick="location.replace('/stadiumTransferForm.do')">[목록
-			화면으로]</span>
-	</center>
-	<center>
-		<input type="button" value="수정" onclick="checkYangdoUpForm();">
-		<input type="button" value="삭제" onclick="checkYangdoDelForm();">
-	</center>
-
-
+	<div class="yangdoDetailUpDelBtnDiv">
+		<div class="moveListBtnDiv">
+			<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/stadiumTransferForm.do')">
+		</div>
+		<div class="boardRegAndMoveList">
+			<input type="button" class="checkBoardUpBtn" value="수정" onClick="checkYangdoUpForm();">
+			<input type="button" class="checkBoardDelBtn" value="삭제" onClick="checkYangdoDelForm();">
+		</div>
+	</div>
 </body>
 </html>

@@ -19,7 +19,36 @@
 <script>
 	function checkStadiumUpForm() {
 
-		var formObj = $("[name='adminStadiumUpDelForm']");
+	var		formObj = $("[name='adminStadiumUpDelForm']");
+    var    stadiumName = formObj.find("[name='stadium_name']").val().trim();
+    var    sidoId = formObj.find("[name='sido_id']").val();
+    var    sigunguId = formObj.find("[name='sigungu_id']").val();
+    var    detailAddress = formObj.find("[name='detail_address']").val().trim();
+    var    stadiumStatus = formObj.find("[name='stadium_status']:checked").val();
+     var   content = formObj.find("[name='content']").val().trim();
+		
+     if (stadiumName == "") {
+         alert("경기장 이름을 입력해주세요.");
+         return;
+     }
+     if (sidoId !== "0" && (sigunguId === "0" || sigunguId === null || sigunguId === '')) {
+	        alert("군구를 선택해주세요.");
+	        return;
+	    }
+     
+     
+     if (detailAddress == "") {
+         alert("상세주소를 입력해주세요.");
+         return;
+     }
+     if (!stadiumStatus) {
+         alert("경기장 상태를 선택해주세요.");
+         return;
+     }
+     if (content.length < 1) {
+         alert("내용을 한 글자 이상 입력해주세요.");
+         return;
+     }
 
 		if (confirm("정말수정하시겠습니까?") == false) {
 			return;
@@ -60,7 +89,13 @@
 				if (result == 0) {
 					alert("삭제된 경기장입니다.");
 					location.href = "/adminStadiumForm.do";
-				} else {
+				}else if(result == 4) {
+					
+					alert("이미있는 경기장 입니다.");
+					location.href = "/adminStadiumForm.do"
+					
+				} 
+				else {
 					alert("경기장 삭제 성공입니다.");
 					location.href = "/adminStadiumForm.do";
 				}
@@ -77,7 +112,7 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
 		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">경기장 수정삭제</p>
+		<p class="titleBackgoundText"></p>
 	</div>
 
 	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>

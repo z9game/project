@@ -1,7 +1,6 @@
 package kosmo.team.project.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.service.LoginService;
 
 @Controller
@@ -81,9 +79,16 @@ public class LoginController {
 	
 
 	@RequestMapping(value = "/logoutProc.do")
-	public String logoutProc(HttpSession session) {
+	public ModelAndView logoutProc(HttpSession session) {
 		session.invalidate(); // 세션 무효화
-		return "redirect:/loginForm.do"; // 로그인 페이지로 리다이렉트
+		
+	
+		
+		ModelAndView mav = new ModelAndView();
+		
+		
+		mav.setViewName("/main/mainForm.jsp");
+		return mav; // 로그인 페이지로 리다이렉트
 	}
 	
 	

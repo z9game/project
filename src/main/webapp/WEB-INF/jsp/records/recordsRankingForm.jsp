@@ -588,6 +588,12 @@
 								</tr>
 							</c:forEach>
 				    	</table>
+				    	<c:if test="${empty requestScope.recordsRankingTabAge}">
+							<tr class="recordsRankingTabAge" style="border-bottom: 1px solid #c59246e0;">
+								<br>
+								<center>조건에 맞는 검색 결과가 없습니다.</center>
+							</tr>
+						</c:if>
 				    </div>
 				</form>
 			</div>
@@ -824,6 +830,12 @@
 								</tr>
 							</c:forEach>
 				    	</table>
+				    	<c:if test="${empty requestScope.recordsRankingTabAge}">
+							<tr class="recordsRankingTabAge" style="border-bottom: 1px solid #c59246e0;">
+								<br>
+								<center>조건에 맞는 검색 결과가 없습니다.</center>
+							</tr>
+						</c:if>
 				    </div>
 				</form>
 			</div>

@@ -8,7 +8,7 @@ public class MainDTO {
 	private String content;
 	private String reg_date;
 	private int readcount;
-	private int password;
+	private String password;
 	private String mid;
 	private String phone;
 	private String name;
@@ -58,10 +58,10 @@ public class MainDTO {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	public String getMid() {

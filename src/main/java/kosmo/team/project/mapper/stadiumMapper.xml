@@ -26,6 +26,14 @@
 			upper(st.stadium_name) like upper('%${Stadiumkeyword2}%')
 			)
 		</if>
+		
+
+
+		<if
+			test="( Stadiumkeyword1 !=null and Stadiumkeyword1.length()>0) or (Stadiumkeyword2!=null and Stadiumkeyword2.length()>0)">
+			)
+		</if>
+		
 		<if test="sido !=null and sido>0 ">
 			and
 			(
@@ -43,13 +51,6 @@
 
 
 		</if>
-
-
-		<if
-			test="( Stadiumkeyword1 !=null and Stadiumkeyword1.length()>0) or (Stadiumkeyword2!=null and Stadiumkeyword2.length()>0)">
-			)
-		</if>
-
 
 	</sql>
 
@@ -267,7 +268,7 @@
 
 
 
-
+	
 
 	<!-- <select id="getRentTimeSlotCnt" parameterType="kosmo.team.project.dto.RentStadiumDTO" 
 		resultType="int"> select count(time_slot) from booking where stadium_no = 
@@ -407,9 +408,10 @@
 </insert>
 
 
+	
 
 	<select id="getYangdoCnt"
-		parameterType="kosmo.team.project.dto.RentStadiumDTO" resultType="int">
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
 		select count(*) from stadium_yangdo
 		
 		where booking_no = (
@@ -424,6 +426,61 @@
 		      	and STATUS = '양도중'
 		
 	</select>
+	
+	<select id="getStadiumStatus"
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
+		select count(*) from stadium
+		
+		where
+			stadium_no = #{MyStadium}
+			and 
+			stadium_status = '이용불가'
+					
+	</select>
+	
+	
+	
+		<select id="getUpStadiumStatus"
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
+		select count(*) from stadium
+		
+		where
+			stadium_no = (select
+					stadium_no
+					from
+					booking
+					where			
+			booking_no = #{booking_no}
+			
+			
+			)
+		
+			and 
+			stadium_status = '이용불가'
+					
+	</select>
+	
+	
+	<select id="getSincheongStadiumStatus"
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
+		select count(*) from stadium
+		
+		where
+			stadium_no = (select
+					stadium_no
+					from
+					booking
+					where			
+			booking_no = #{booking_no}
+			
+			
+			)
+		
+			and 
+			stadium_status = '이용불가'
+					
+	</select>
+	
 	
 	
 	
@@ -442,7 +499,9 @@
 		sy.content AS "content",
 		to_char(sy.reg_date, 'YYYY-MM-DD') AS "reg_date",
 		sy.readcount AS "readcount",
-		sy.booking_no as "booking_no"
+		sy.booking_no as "booking_no",
+		s.STADIUM_STATUS as "stadium_status",
+		sy.status as "status"
 		FROM
 		stadium_yangdo sy join member m on m.m_no = sy.writer
 		JOIN BOOKING B ON sy.BOOKING_NO = B.BOOKING_NO
@@ -648,6 +707,17 @@
 
 	</update>
 	
+	<select id="getCheckStatusDelCnt" parameterType="int"
+		resultType="int">
+		select
+		count(*) from stadium_yangdo where yangdo_no=#{yangdo_no} and STATUS = '양도완료'
+	</select>
+	
+	<select id="getCheckStatusUpCnt" parameterType="int"
+		resultType="int">
+		select
+		count(*) from stadium_yangdo where yangdo_no=#{yangdo_no} and STATUS = '양도완료'
+	</select>
 	
 	
 	

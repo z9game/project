@@ -10,6 +10,12 @@ public class RentStadiumDTO {
 	private int time_slot;
 	private String date;
 	private List<String> checkDate;
+	
+	
+	
+	
+	
+	
 	public int getM_no() {
 		return m_no;
 	}

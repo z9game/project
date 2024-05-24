@@ -162,7 +162,7 @@
       
       if (tabType == TAB_ALL) {
          $("#allBoardDiv").html(obj.find("#allBoardDiv").html());
-         $("#allPaingsDiv").html(obj.find("#allPaingsDiv").html());
+         $("#allPagingsDiv").html(obj.find("#allPagingsDiv").html());
          
          // 검색 조건 초기화 되어 hidden 값을 이용해 설정
          var tagTab = $("#tabAll");         
@@ -171,7 +171,7 @@
       }
       else if (tabType == TAB_SALE) {
          $("#saleBoardDiv").html(obj.find("#saleBoardDiv").html());
-         $("#salePaingsDiv").html(obj.find("#salePaingsDiv").html());
+         $("#salePagingsDiv").html(obj.find("#salePagingsDiv").html());
 
          // 검색 조건 초기화 되어 hidden 값을 이용해 설정
          var tagTab = $("#tabSale");         
@@ -180,7 +180,7 @@
       }
       else if (tabType == TAB_FREE_SHARING) {
          $("#freeSharingBoardDiv").html(obj.find("#freeSharingBoardDiv").html());
-         $("#freeSharingPaingsDiv").html(obj.find("#freeSharingPaingsDiv").html());
+         $("#freeSharingPagingsDiv").html(obj.find("#freeSharingPagingsDiv").html());
 
          // 검색 조건 초기화 되어 hidden 값을 이용해 설정
          var tagTab = $("#tabFreeSharing");         
@@ -206,8 +206,7 @@
 <body>
    <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="communityMarketplaceBoardFormTitle">
-       <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-       <p class="titleBackgoundText">장터</p>
+		<p class="titleBackgoundText">장터</p>
     </div>    
    
    <form name="boardSearchForm" onsubmit="return false;">
@@ -238,109 +237,74 @@
             
             <div id="tabAll">
              <div class="communityMarketplaceFAQContainer">
-                 
                <div class="communityMarketplaceSearch">
-                  <table border="1" bordercolor="black" style="border-collapse:collapse; margin: 0 auto; margin-top:25px; width:1000px;" cellpadding="7" align="center">
-                     <tr>
-                        <th>
-                           검&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;색
-                        </th>
-                        <td>
-                           <select name="searchType1">
-                              <option value="all">전체</option>
-                              <option value="writer">글작성자</option> 
-                              <option value="subject">제목</option>
-                              <option value="content">내용</option>
-                              <!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
-                           </select> 
-                           <input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" >
-                           <input type="button" value="    검색    " onclick="search()"> 
-                        </td>
-                     </tr>
-                  </table>               
-               </div>
+					<div class="searchSelectBox">
+						<select name="searchType1" class="searchSelect">
+							<option value="all">전체</option>
+							<option value="writer">글작성자</option> 
+							<option value="subject">제목</option>
+							<option value="content">내용</option>
+							<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
+						</select> 
+					</div>
+					<input type="text" name="keyword1" placeholder=" 검색어를 입력하세요" class="keyword1" >
+					<input type="button" value="    검색    " class="searchBtn" onclick="search()">          
+				</div>
+				<div class="communityMarketplaceFormTopContents">
+					<span class="communityMarketplaceFormFontLightGray" id="communityMarketplaceAllCount">Total. ${requestScope.tabAllMarketplaceBoardListAllCnt}개</span>
+				</div>
                
                  <div id="allBoardDiv" class="communityMarketplaceBoardFormContainer">
                   <c:forEach var="board" items="${requestScope.tabAllMarketplaceBoardList}" varStatus="status">
                      <div style="cursor: pointer;" class="communityMarketplaceBoardFormBoard" onClick="submitMarketplaceDetailForm('${ board.b_no }', '${ board.table_name }');">
-                        <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
+                        <div class="communityMarketplaceBoardImageDiv">
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
-                        <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
-                        <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
-                        <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
+                        <div class="communityMarketplaceBoardSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.subject}</div>
+                        <div class="communityMarketplaceBoardWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.nickname}</div>
+                        <div class="communityMarketplaceBoardRegDate" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.reg_date}</div>
+                        <div class="communityMarketplaceBoardReadcount" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.readcount}</div>
                      </div>
                   </c:forEach>
-                  
-                  <c:forEach var="empty_row" begin="${ requestScope.tabAllMarketplaceBoardListSize + 1 }" end="${ requestScope.tabAllMarketplaceBoardPageMap.rowCntPerPage }">
-                     <div class="communityMarketplaceBoardFormBoard">
-                        <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
-                           <!-- <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">  -->
-                        </div>
-                        <div class="communityMarketplaceBoardSubject">&nbsp;</div>
-                        <div class="communityMarketplaceBoardWriter">&nbsp;</div>
-                        <div class="communityMarketplaceBoardRegDate">&nbsp;</div>
-                        <div class="communityMarketplaceBoardReadcount">&nbsp;</div>
-                     </div>
-                  </c:forEach>
-                  
-                  <span id="allPaingsDiv" class="pagingNos">
-                     <span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
-                     <span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabAllMarketplaceBoardPageMap.selectPageNo } - 1 );">[이전]</span>
-                     &nbsp;&nbsp;
-                     
-                     <c:forEach var="pageNo" begin="${ requestScope.tabAllMarketplaceBoardPageMap.begin_pageNo }" end="${ requestScope.tabAllMarketplaceBoardPageMap.end_pageNo }">
-                        <c:if test="${ requestScope.tabAllMarketplaceBoardPageMap.selectPageNo == pageNo }">
-                           <span style="cursor:pointer" onClick="pageNoClick(${ pageNo });"><b><u>${ pageNo }</u></b></span>
-                        </c:if>
-               
-                        <c:if test="${ requestScope.tabAllMarketplaceBoardPageMap.selectPageNo != pageNo }">
-                           <span style="cursor:pointer" onClick="pageNoClick(${ pageNo });">[${ pageNo }]</span>
-                        </c:if>
-                     </c:forEach>
-                     &nbsp;&nbsp;
-                     
-                     <span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabAllMarketplaceBoardPageMap.selectPageNo } + 1 );">[다음]</span>
-                     <span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabAllMarketplaceBoardPageMap.last_pageNo } );">[마지막]</span>
-                     
-                     &nbsp;&nbsp;&nbsp;
-                     [${ requestScope.tabAllMarketplaceBoardListCnt } / ${ requestScope.tabAllMarketplaceBoardListAllCnt }] 개
-                  </span>
                </div>               
-                 <!-- end. container -->
-                 
              </div>
+             <div class="communityMarketplaceAllPaingsDiv">
+					<span id="allPagingsDiv" class="pagingNos">
+						<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tabAllMarketplaceBoardPageMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+						<c:forEach var="pageNo" begin="${requestScope.tabAllMarketplaceBoardPageMap.begin_pageNo}" end="${requestScope.tabAllMarketplaceBoardPageMap.end_pageNo}">
+							<c:if test="${requestScope.tabAllMarketplaceBoardPageMap.selectPageNo==pageNo}">
+					            <p class="activePageNo">${pageNo}</p>
+					        </c:if>
+							<c:if test="${requestScope.tabAllMarketplaceBoardPageMap.selectPageNo!=pageNo}">
+								<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+							</c:if>
+						</c:forEach>
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tabAllMarketplaceBoardPageMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+						<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+					</span>
+				</div>
          </div>   
     
          <div id="tabSale">
             <div class="communityMarketplaceQnAFormContainer">
+            	<div class="communityMarketplaceSearch">
+					<div class="searchSelectBox">
+						<select name="searchType1" class="searchSelect">
+							<option value="all">전체</option>
+							<option value="writer">글작성자</option> 
+							<option value="subject">제목</option>
+							<option value="content">내용</option>
+							<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
+						</select> 
+					</div>
+					<input type="text" name="keyword1" placeholder=" 검색어를 입력하세요" class="keyword1" >
+					<input type="button" value="    검색    " class="searchBtn" onclick="search()">          
+				</div>        
+				<div class="communityMarketplaceFormTopContents">
+					<span class="communityMarketplaceFormFontLightGray" id="communityMarketplaceAllCount">Total. ${ requestScope.tabSaleMarketplaceBoardListAllCnt }개</span>
+				</div>
          
-                 <div class="newCommunityMarketplaceBtnDiv">
-                  <input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceSaleBoardFormBtnClick();">
-               </div>
-
-               <div class="communityMarketplaceSearch">
-                  <table border="1" bordercolor="black" style="border-collapse:collapse; margin: 0 auto; margin-top:25px; width:1000px;" cellpadding="7" align="center">
-                     <tr>
-                        <th>
-                           검&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;색
-                        </th>
-                        <td>
-                           <select name="searchType1">
-                              <option value="all">전체</option>
-                              <option value="writer">글작성자</option> 
-                              <option value="subject">제목</option>
-                              <option value="content">내용</option>
-                              <!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
-                           </select> 
-                           <input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" >
-                           <input type="button" value="    검색    " onclick="search()"> 
-                        </td>
-                     </tr>
-                  </table>               
-               </div>
-               
                  <div id="saleBoardDiv" class="communityMarketplaceBoardFormContainer">
                   <c:forEach var="board" items="${requestScope.tabSaleMarketplaceBoardList}" varStatus="status">
                      
@@ -348,132 +312,91 @@
                         <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
-                        <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
-                        <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
-                        <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
+                        <div class="communityMarketplaceBoardSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.subject}</div>
+                        <div class="communityMarketplaceBoardWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.nickname}</div>
+                        <div class="communityMarketplaceBoardRegDate" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.reg_date}</div>
+                        <div class="communityMarketplaceBoardReadcount" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.readcount}</div>
                      </div>
                   </c:forEach>
-                  
-                  <c:forEach var="empty_row" begin="${ requestScope.tabSaleMarketplaceBoardListSize + 1 }" end="${ requestScope.tabSaleMarketplaceBoardPageMap.rowCntPerPage }">
-                     <div class="communityMarketplaceBoardFormBoard">
-                        <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
-                           <!-- <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">  -->
-                        </div>
-                        <div class="communityMarketplaceBoardSubject">&nbsp;</div>
-                        <div class="communityMarketplaceBoardWriter">&nbsp;</div>
-                        <div class="communityMarketplaceBoardRegDate">&nbsp;</div>
-                        <div class="communityMarketplaceBoardReadcount">&nbsp;</div>
-                     </div>
-                  </c:forEach>
-                  
-                  <span id="salePaingsDiv" class="pagingNos">
-                     <span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
-                     <span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo } - 1 );">[이전]</span>
-                     &nbsp;&nbsp;
-                     
-                     <c:forEach var="pageNo" begin="${ requestScope.tabSaleMarketplaceBoardPageMap.begin_pageNo }" end="${ requestScope.tabSaleMarketplaceBoardPageMap.end_pageNo }">
-                        <c:if test="${ requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo == pageNo }">
-                           <span style="cursor:pointer" onClick="pageNoClick(${ pageNo });"><b><u>${ pageNo }</u></b></span>
-                        </c:if>
-               
-                        <c:if test="${ requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo != pageNo }">
-                           <span style="cursor:pointer" onClick="pageNoClick(${ pageNo });">[${ pageNo }]</span>
-                        </c:if>
-                     </c:forEach>
-                     &nbsp;&nbsp;
-                     
-                     <span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo } + 1 );">[다음]</span>
-                     <span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabSaleMarketplaceBoardPageMap.last_pageNo } );">[마지막]</span>
-                     
-                     &nbsp;&nbsp;&nbsp;
-                     [${ requestScope.tabSaleMarketplaceBoardListCnt } / ${ requestScope.tabSaleMarketplaceBoardListAllCnt }] 개
-                  </span>                  
                </div>
                  <!-- end. container -->
-               
-            </div>   
+            </div>  
+            <div class="newCommunityMarketplaceSaleBoardFormBtnDiv">
+                 <input type="button" class="newCommunityMarketplaceSaleBoardFormBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceSaleBoardFormBtnClick();">
+              </div>
+             <div class="communityMarketplaceSalePaingsDiv">
+					<span id="salePagingsDiv" class="pagingNos">
+						<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+						<c:forEach var="pageNo" begin="${requestScope.tabSaleMarketplaceBoardPageMap.begin_pageNo}" end="${requestScope.tabSaleMarketplaceBoardPageMap.end_pageNo}">
+							<c:if test="${requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo==pageNo}">
+					            <p class="activePageNo">${pageNo}</p>
+					        </c:if>
+							<c:if test="${requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo!=pageNo}">
+								<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+							</c:if>
+						</c:forEach>
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tabSaleMarketplaceBoardPageMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+						<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+					</span>
+				</div> 
          </div>
          
          <div id="tabFreeSharing">
             <div class="communityMarketplaceQnAFormContainer">
          
-                 <div class="newCommunityMarketplaceBtnDiv">
-                  <input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceFreeSharingBoardFormBtnClick();">
-               </div>
-
                <div class="communityMarketplaceSearch">
-                  <table border="1" bordercolor="black" style="border-collapse:collapse; margin: 0 auto; margin-top:25px; width:1000px;" cellpadding="7" align="center">
-                     <tr>
-                        <th>
-                           검&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;색
-                        </th>
-                        <td>
-                           <select name="searchType1">
-                              <option value="all">전체</option>
-                              <option value="writer">글작성자</option> 
-                              <option value="subject">제목</option>
-                              <option value="content">내용</option>
-                              <!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
-                           </select> 
-                           <input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" >
-                           <input type="button" value="    검색    " onclick="search()"> 
-                        </td>
-                     </tr>
-                  </table>               
-               </div>
+					<div class="searchSelectBox">
+						<select name="searchType1" class="searchSelect">
+							<option value="all">전체</option>
+							<option value="writer">글작성자</option> 
+							<option value="subject">제목</option>
+							<option value="content">내용</option>
+							<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
+						</select> 
+					</div>
+					<input type="text" name="keyword1" placeholder=" 검색어를 입력하세요" class="keyword1" >
+					<input type="button" value="    검색    " class="searchBtn" onclick="search()">          
+				</div>   
                
+               <div class="communityMarketplaceFormTopContents">
+					<span class="communityMarketplaceFormFontLightGray" id="communityMarketplaceAllCount">Total. ${ requestScope.tabFreeSharingMarketplaceBoardListAllCnt }개</span>
+				</div>
                  <div id="freeSharingBoardDiv" class="communityMarketplaceBoardFormContainer">
                   <c:forEach var="board" items="${requestScope.tabFreeSharingMarketplaceBoardList}" varStatus="status">
                      <div style="cursor: pointer;" class="communityMarketplaceBoardFormBoard" onClick="submitMarketplaceDetailForm('${ board.b_no }', '${ board.table_name }');">
                         <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
-                        <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
-                        <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
-                        <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
+                        <div class="communityMarketplaceBoardSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.subject}</div>
+                        <div class="communityMarketplaceBoardWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.nickname}</div>
+                        <div class="communityMarketplaceBoardRegDate" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.reg_date}</div>
+                        <div class="communityMarketplaceBoardReadcount" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.readcount}</div>
                      </div>
-                  </c:forEach>
-                  
-                  <c:forEach var="empty_row" begin="${ requestScope.tabFreeSharingMarketplaceBoardListSize + 1 }" end="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.rowCntPerPage }">
-                     <div class="communityMarketplaceBoardFormBoard">
-                        <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
-                           <!-- <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">  -->
-                        </div>
-                        <div class="communityMarketplaceBoardSubject">&nbsp;</div>
-                        <div class="communityMarketplaceBoardWriter">&nbsp;</div>
-                        <div class="communityMarketplaceBoardRegDate">&nbsp;</div>
-                        <div class="communityMarketplaceBoardReadcount">&nbsp;</div>
-                     </div>
-                  </c:forEach>
-                  
-                  <span id="freeSharingPaingsDiv" class="pagingNos">
-                     <span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
-                     <span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo } - 1 );">[이전]</span>
-                     &nbsp;&nbsp;
-                     
-                     <c:forEach var="pageNo" begin="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.begin_pageNo }" end="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.end_pageNo }">
-                        <c:if test="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo == pageNo }">
-                           <span style="cursor:pointer" onClick="pageNoClick(${ pageNo });"><b><u>${ pageNo }</u></b></span>
-                        </c:if>
-               
-                        <c:if test="${ requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo != pageNo }">
-                           <span style="cursor:pointer" onClick="pageNoClick(${ pageNo });">[${ pageNo }]</span>
-                        </c:if>
-                     </c:forEach>
-                     &nbsp;&nbsp;
-                     
-                     <span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo } + 1 );">[다음]</span>
-                     <span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.tabFreeSharingMarketplaceBoardPageMap.last_pageNo } );">[마지막]</span>
-                     
-                     &nbsp;&nbsp;&nbsp;
-                     [${ requestScope.tabFreeSharingMarketplaceBoardListCnt } / ${ requestScope.tabFreeSharingMarketplaceBoardListAllCnt }] 개
-                  </span>                  
+                  </c:forEach>             
                </div>
                  <!-- end. container -->
                
             </div>   
+            <div class="newCommunityMarketplaceFreeSharingBoardFormBtnDiv">
+                  <input type="button" class="newCommunityMarketplaceFreeSharingBoardFormBtn" value="새 글 쓰기" onClick="newCommunityMarketplaceFreeSharingBoardFormBtnClick();">
+               </div>
+               <div class="communityMarketplaceFreeSharingPaingsDiv">
+					<span id="freeSharingPagingsDiv" class="pagingNos">
+						<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+						<c:forEach var="pageNo" begin="${requestScope.tabFreeSharingMarketplaceBoardPageMap.begin_pageNo}" end="${requestScope.tabFreeSharingMarketplaceBoardPageMap.end_pageNo}">
+							<c:if test="${requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo==pageNo}">
+					            <p class="activePageNo">${pageNo}</p>
+					        </c:if>
+							<c:if test="${requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo!=pageNo}">
+								<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+							</c:if>
+						</c:forEach>
+						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+						<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+					</span>
+				</div> 
          </div>
          
       

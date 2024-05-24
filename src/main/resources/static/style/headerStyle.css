@@ -15,15 +15,12 @@ a{
 
 html,
 body {
-  /* width: 100%;
+  width: 100%;
   height: 100%;
   margin: 0;
   box-sizing: border-box;
   scrollbar-width: none;
-  overflow: hidden; */
-  height: 100%;
-  margin: 0;
-  padding: 0;
+  overflow-x: hidden;
 }
 
 header {
@@ -65,6 +62,16 @@ header {
 	margin-right: 50px;
 }
 
+.headerNavList > li > a:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+.navInner-item > a:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
 .headerNavList{
 	gap: 50px;
 }
@@ -92,6 +99,8 @@ header {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border-radius: 20px;
+    border: 1px solid #000000;
 }
 
 #adminPage a, #logOut a, #login a, #register a {
@@ -105,16 +114,7 @@ header {
 }
 
 #login, #changeMemberData, #adminPage{
-	border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 1px solid #000000;
-    border-right: none;
-}
-
-#register, #logOut{
-	border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border: 1px solid #000000;
+	margin-right: 10px;
 }
 
 #logoFont{
@@ -123,9 +123,9 @@ header {
 }
 
 #welcomeLogin {
-    margin-top: 35px;
     margin-left: 250px;
     margin-right: 50px;
+    cursor: default;
 }
 
 .loginAndReg{
@@ -140,6 +140,9 @@ header {
 	margin-left: 600px;
 }
 
-[id$='loginAndReg'] :hover{
-	background:rgba(245, 245, 245, 0.3);
+#login:hover, #register:hover, #changeMemberData:hover, #logOut:hover, #adminPage:hover{
+	background: #006666;
+	color: white;
+	border-radius: 20px;
+    border: 1px solid #006666;
 }
