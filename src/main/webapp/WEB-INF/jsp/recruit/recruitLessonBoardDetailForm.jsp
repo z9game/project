@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>RecruitLessonBoardForm</title>
-<link href="/style/recruitLessonBoardFormStyle.css" rel="stylesheet">
+<link href="/style/recruitLessonBoardDetailFormStyle.css" rel="stylesheet">
 <script src="/js/recruitLessonBoardFormScript.js"></script>
 <script>
 function goWaitingLessonList()
@@ -41,7 +41,6 @@ function goWaitingLessonList()
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recruitLessonBoardFormTitle">
-    	<img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">레슨 모집</p>
     </div>
     
@@ -68,113 +67,51 @@ function goWaitingLessonList()
 			HttpServletRequest 객체에도 저장된다.  -->
 	<!-- 만약에 상세보기할 게시판이 있으면-->
 	<c:if test="${!empty requestScope.lessondetailList}">
-	
-		<center>
-			<table align="center" bordercolor="gray" border=1 cellpadding=7
-				style="border-collapse: collapse">
-				<caption>[레슨 모집 상세글 보기]</caption>
-				<tr>
-					<th bgColor="lightgray">닉네임</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 저장된 boardDTO 객체의 -->
-					<!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 이름 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.lessondetailList.nickname}</td>
+			<table align="center" cellpadding="7" style="width:900px; border-collapse: collapse; margin-top: 50px;">
+				<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
+					
+					<td colspan="2"><span>${requestScope.lessondetailList.title}</span><span style="float: right;"><span style="color: #999999; margin-top: 15px;">작성자&nbsp;</span>/&nbsp;${requestScope.lessondetailList.nickname}<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${requestScope.lessondetailList.readcount}</span></td>
 				</tr>
 				<tr>
-					<th bgColor="lightgray">제목</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- subject 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 제목 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.lessondetailList.title}</td>
+					<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">지역</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.lessondetailList.sido_c} ${requestScope.lessondetailList.sigungu_c}</td>
 				</tr>
 				<tr>
-					<th bgColor="lightgray">조회수</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 조회수 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.lessondetailList.readcount}</td>
-				</tr>
-				
-				<tr>
-                  <th bgColor="lightgray">지역</th>
-                  <!--------------------------------------------------- -->
-                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
-                  <!--------------------------------------------------- -->
-                  <td>${requestScope.lessondetailList.sido_c} ${requestScope.lessondetailList.sigungu_c}</td>
-               </tr>
-               
-               <tr>
-                  <th bgColor="lightgray">요일</th>
-                  <!--------------------------------------------------- -->
-                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
-                  <!--------------------------------------------------- -->
-                  <td>${requestScope.day}</td>
-               </tr>
-               
-               <tr>
-                  <th bgColor="lightgray">시간</th>
-                  <!--------------------------------------------------- -->
-                  <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-                  <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-                  <!-- 상세보기할 게시판의 조회수 표현하기 -->
-                  <!--------------------------------------------------- -->
-                  <td>${requestScope.time}</td>
-               </tr>
-				
-				<tr>
-					<th bgColor="lightgray">비용</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 조회수 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td>${requestScope.lessondetailList.money}</td>
+					<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">요일</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.day}</td>
 				</tr>
 				<tr>
-					<th bgColor="lightgray">내 용</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- content 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 내용 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td><textarea name="content" class="content" rows="13"
-							cols="40" maxlength="500" readonly>${requestScope.lessondetailList.content}</textarea></td>
+					<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">시간</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.time}</td>
 				</tr>
-			</table>
-		</center>
-	
-		<center>
-				<!--------------------------------------------------- -->
-				<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
-				<!--------------------------------------------------- -->
-				<c:if test="${not empty sessionScope.m_no}">
-					<c:if test="${sessionScope.nickname ne requestScope.lessondetailList.nickname}">
-		         	 	<input type="button" value="신청" style="cursor:pointer" onclick="goWaitingLessonList()" >
-		         	</c:if>
-	         	</c:if>
-				<span style="cursor: pointer"
-					onclick="location.replace('/recruitLessonBoardForm.do')">
-					[목록 화면으로] </span>
-	        	<c:if test="${sessionScope.nickname eq requestScope.lessondetailList.nickname}">
-					<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.recruitLessonBoardUpDelForm.submit()" >
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">포지션</th>
+					<td style="border-bottom: 1px solid #c59246e0;">${requestScope.lessondetailList.money}</td>
+				</tr>
+				<tr>
+					<th style=" width: 100px; height:250px; color: #000000; border-bottom: 1px solid #999999;">내 용</th>
+					<td style="border-bottom: 1px solid #999999;">
+						${requestScope.lessondetailList.content}
+					</td>
+				</tr>
+				<c:if test="${sessionScope.nickname ne requestScope.lessondetailList.nickname}">
+					<tr>
+						<td colspan="2" style="text-align: center; border-top: 1px solid #999999;">
+							<input type="button" value="신청" style="cursor:pointer" class="lessonRequestBtn" onclick="goWaitingLessonList()" >
+						</td>
+					</tr>
 				</c:if>
+			</table>
+			<div class="recruitLessonBoardDetailBtnDiv">
+				<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/recruitLessonBoardForm.do')">
+				<c:if test="${sessionScope.nickname eq requestScope.lessondetailList.nickname}">
+					<input type="button" value="수정/삭제" class="recruitLessonBoardDetailUpDelBtn" onclick="document.recruitLessonBoardUpDelForm.submit()">
+				</c:if>
+			</div>
 	    
 	    	</c:if>
-	    </center>	
-	    
-	    
-	    
-    	<<!--------------------------------------------------------------------------->
+	   
+    	<!--------------------------------------------------------------------------->
 		<!-- WAS에 "/recruitTeamMemBoardUpDelForm.do" 주소로 접속하기 위한 form 태그 선언하기 -->
 		<!--------------------------------------------------------------------------->
 		<form name="recruitLessonBoardUpDelForm" action="/recruitLessonBoardUpDelForm.do" method="post">
@@ -186,8 +123,7 @@ function goWaitingLessonList()
 		
 		<!-- 레슨모집 게시물일때 신청버튼을 누르면 넘어갈 정보들 -->
 		<form name="waitingLessonList">
-			<input type="hidden" name="writer" value="${requestScope.lessondetailList.m_no}">
-			<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
 			<input type="hidden" name="recruitment_no"value="${requestScope.lessondetailList.recruitment_no}">
 		</form>
     

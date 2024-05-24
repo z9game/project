@@ -21,6 +21,7 @@ body {
     scroll-snap-align: start;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 #sectionMain{

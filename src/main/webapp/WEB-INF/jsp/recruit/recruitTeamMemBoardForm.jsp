@@ -434,22 +434,6 @@ function checkReserveForm()
 						        </label>
 						    </td>
 						</tr>
-						<tr><td style="border-bottom: none;"></td></tr>
-						<!-- <tr class="search">
-							<th class="item" style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">검색</th>
-							<td class="content" style="text-align: center; border-bottom: none; display: flex; align-items: center;">
-								<select name="searchType1" style="text-align: center; height: 35px; margin-right: 20px; border-radius: 10px; border: 1px solid #c59246e0;">
-									<option value="all">전체</option>
-									<option value="writer">글작성자</option> 
-									<option value="title">제목</option>
-									<option value="content">내용</option>
-								</select> 
-								<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()">
-								<input type="button" value="검색" class="item" class="searchBtn" onclick="search()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-right: 30px;">
-								<input type="button" value="초기화" class="searchAllBtn" onclick="searchAll()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">
-							</td>
-						</tr> -->
-						<tr><td style="border-bottom: none;"></td></tr>
 								
 							</table>
 						<div class="search">
@@ -648,10 +632,10 @@ function checkReserveForm()
 			<table class="boardListTable" cellpadding="7" align="center" style="border-collapse:collapse;">
 				<tr>
 					<th style="width:50px;">번호</th>
-					<th style="width:250px;">제목</th>
+					<th style="width:300px;">제목</th>
 					<th style="width:80px;">글쓴이</th>
 					<th style="width:30px;">종류</th>
-					<th style="width:40px;">조회수</th>
+					<th style="width:100px;">조회수</th>
 					
 					<c:if test="${param.sort_date!='reg_date asc' and param.sort_date!='reg_date desc'}">
 					<th width="100" onClick="searchWithSort('reg_date desc')" style="cursor:pointer">등록일</th>
@@ -689,7 +673,6 @@ function checkReserveForm()
 					</center>
 			</c:if>
 		</div>
-	</div>
 	<div class="newRecruitTeamMemBoardBtnDiv">
 		<input type="button" class="newRecruitTeamMemBoardBtn"
 			value="새 글 쓰기"
