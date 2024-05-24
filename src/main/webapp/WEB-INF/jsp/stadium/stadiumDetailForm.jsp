@@ -94,7 +94,7 @@
 	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
 	        showTime: false,
 	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	        minDate: 0, // 오늘 이전 날짜 선택 불가능
+	        minDate: 0+1, // 오늘 이전 날짜 선택 불가능
 	        beforeShowDay: function(date) {
 	            // `date`는 현재 검사 중인 날짜 객체입니다.
 	          var disabledDates = ${requestScope.fullRent};

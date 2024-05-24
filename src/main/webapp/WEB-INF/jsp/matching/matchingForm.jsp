@@ -149,7 +149,20 @@
 		search();
 	}
 	
-	
+	function searchAll() {
+        var boardSearchFormObj = $("[name='matching_table']");
+
+        boardSearchFormObj.find("input[type=text]").val("");
+        boardSearchFormObj.find(".sido").val("0");
+        boardSearchFormObj.find(".sigungu").val("0");
+        boardSearchFormObj.find("#date").val(""); // Clear the date input
+        boardSearchFormObj.find("#matchingTime").val("0"); // Reset time to "0"
+
+        boardSearchFormObj.find(".rowCntPerPage").val("10");
+        boardSearchFormObj.find(".SelectPageNo").val("1");
+
+        search();
+    }
 	
 </script>
 </head>

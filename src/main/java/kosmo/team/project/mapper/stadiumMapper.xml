@@ -288,7 +288,7 @@
 		select count(*)
 		from booking
 		where m_no = #{m_no}
-		and to_date(booking_date,'yyyy-mm-dd') >= to_date(sysdate, 'yyyy-mm-dd')
+		and booking_date >= sysdate
 	</select>
 
 

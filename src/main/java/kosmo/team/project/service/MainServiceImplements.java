@@ -7,11 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosmo.team.project.dao.MainDAO;
-import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.CustomerServiceDetailDTO;
 import kosmo.team.project.dto.MainDTO;
 import kosmo.team.project.dto.MainSearchDTO;
-import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.RecordsDTO;
 
 @Service
