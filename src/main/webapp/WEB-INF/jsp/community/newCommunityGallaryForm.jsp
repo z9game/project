@@ -74,35 +74,34 @@ function checkGallaryBoardRegForm(){
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="newCommunityGallaryFormTitle">
-    	<img src="/image/CommunityTitleBackgroundImage.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">갤러리 등록</p>
     </div>
     <div class="newCommunityGallaryFormContainer">
 		<form name="newCommunityGallaryForm"> 
-			<table class="newCommunityGallaryFormRegTable" border="1" bordercolor="black">
+			<table class="newCommunityGallaryFormRegTable">
 				<tr>
-					<th>글쓴이</th>
-					<td>
-						<%= session.getAttribute("nickname") %>
+					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<input type="text" name="subject" class="subject" size="106" maxlength="100">
+					</td>
+				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<% out.println((String)session.getAttribute("nickname")); %>
 						<input type="hidden" name="writer" class="writer" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
 						<input type="hidden" name="nickname" class="nickname" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
 					</td>
 				</tr>
 				<tr>
-					<th>제목</th>
-					<td>
-						<input type="text" name="subject" class="subject" size="40" maxlength="30">
+					<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
 					</td>
 				</tr>
 				<tr>
-					<th>내용</th>
-					<td>
-						<textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<th>파일 첨부</th>
-					<td>
+					<th style="border-bottom: 1px solid #FFFFFF;">파일 첨부</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
 						<input type="file" name="imageFileAdd" class="imageFileAdd" accept="image/*" multiple>				
 					</td>
 				</tr>

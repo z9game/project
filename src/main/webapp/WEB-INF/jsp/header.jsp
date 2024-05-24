@@ -23,7 +23,7 @@
 
 			<nav class="headerNav">
 				<ul class="headerNavList">
-					<li class="nav-item"><a href="/mainForm.do">홈</a></li>
+					<li class="nav-item" id="nav-item-home"><a href="/mainForm.do">홈</a></li>
 
 					<li class="nav-item"><a href="/matchingForm.do">매칭 찾기</a></li>
 					<li class="nav-item"><a href="/recruitTeamMemBoardForm.do">모집</a>
@@ -67,25 +67,31 @@
 					</li>
 
 					<c:if test="${not empty sessionScope.mid}">
+						<li class="nav-item" id="welcomeLogin">
+					        <span>${sessionScope.nickname} 님 환영합니다!</span>
+					        <ul class="navInner">
+					        	<li class="navInner-item" onclick="document.myPageForm.submit()" style="cursor: pointer;"><a>마이 페이지</a></li>
+					        </ul>
+					    </li>
 						<ul class="myPageAndLogout">
-						    <li class="nav-item" id="welcomeLogin" onclick="document.myPageForm.submit()">
+						    <%-- <li class="nav-item" id="welcomeLogin" onclick="document.myPageForm.submit()">
 						        ${sessionScope.nickname} 님 환영합니다!
-						    </li>
+						    </li> --%>
 					        <c:if test="${sessionScope.mid != 'admin'}">
 					            <li class="nav-item" id="changeMemberData" onclick="document.memUpdateForm.submit()">회원정보 수정</li>
 					        </c:if>
 					        <c:if test="${sessionScope.mid == 'admin'}">
-					            <li class="nav-item" id="adminPage"><a href="/adminForm.do">관리자페이지</a></li>
+					            <li class="nav-item" onClick="location.href = '/adminForm.do'"><a id="adminPage">관리자페이지</a></li>
 					        </c:if>
-					        <li class="nav-item" id="logOut"><a href="/logoutProc.do">로그아웃</a></li>
+					        <li class="nav-item" id="logOut" onClick="location.href = '/logoutProc.do'">로그아웃</li>
 					    </ul>
 					</c:if>
 
 
 					<c:if test="${empty sessionScope.mid}">
 						<ul class="loginAndReg">
-							<li class="nav-item" id="login"><a href="/loginForm.do">로그인</a></li>
-							<li class="nav-item" id="register"><a href="/memberRegForm.do">회원가입</a></li>
+							<li class="nav-item" id="login" onClick="location.href = '/loginForm.do'">로그인</li>
+							<li class="nav-item" id="register" onClick="location.href = '/memberRegForm.do'">회원가입</li>
 						</ul>
 					</c:if>
 					

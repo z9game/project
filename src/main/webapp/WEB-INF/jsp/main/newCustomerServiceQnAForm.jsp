@@ -32,6 +32,8 @@
 		
 	    function checkPwd() {
 	    	var pwdInsert = prompt("계정 비밀번호를 입력해주세요.");
+	    	
+	    	alert(formObj.serialize());
 			
 			if (pwdInsert == null) { 
 		        return;
@@ -77,34 +79,34 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="newCustomerServiceQnAFormTitle">
-	    <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 	   	<p class="titleBackgoundText">QnA 등록</p>
  	</div>
     <div class="newCustomerServiceQnAFormContainer">
 		<form name="newCustomerServiceQnAForm">
-			<table class="newCustomerServiceQnAFormRegTable" border="1" bordercolor="black">
+			<table class="newCustomerServiceQnAFormRegTable">
 				<tr>
-					<th>제목</th>
-					<td>
-						<input type="text" name="subject" class="subject" size="40" maxlength="100">
+					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<input type="text" name="subject" class="subject" size="106" maxlength="100">
 					</td>
 				</tr>
 				<tr>
-					<th>글쓴이</th>
-					<td>
-						<input type="text" name="writer" class="writer" size="40" maxlength="100" value="<%= session.getAttribute("nickname") %>" style="border: 0;" readonly>
+					<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<% out.println((String)session.getAttribute("nickname")); %>
+						<input type="text" name="writer" class="writer" value="<%= session.getAttribute("nickname") %>">
 					</td>
 				</tr>
 				<tr>
-					<th>이메일</th>
-					<td>
+					<th style="border-bottom: 1px solid #FFFFFF;">이메일</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
 						<% out.println((String)session.getAttribute("email")); %>
 					</td>
 				</tr>
 				<tr>
-					<th>내용</th>
-					<td>
-						<textarea name="content" class="content" rows="20" cols="42" maxlength="1000" style="resize:none"></textarea>
+					<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
 					</td>
 				</tr>
 			</table>

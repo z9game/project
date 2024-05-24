@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RecruitTeamBoardDetailForm</title>
-<link href="/style/recruitTeamBoardDetailFormStyle.css" rel="stylesheet">
+<title>TournamentBoardDetail</title>
+<link href="/style/tournamentBoardDetailStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
 </head>
 
@@ -15,8 +15,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
-    <div class="recruitTeamBoardDetailFormTitle">
-    	<img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
+    <div class="tournamentBoardDetailTitle">
     	<p class="titleBackgoundText">대회 일정</p>
     </div>
     
@@ -31,7 +30,7 @@
 	<c:if test="${empty requestScope.list}">
 		<script>
 			alert("게시글이 삭제되었습니다.");
-			location.replace("/tournamentBoardForm.do");
+			location.replace("/recruitTeamBoardForm.do");
 		</script>
 	</c:if>
 
@@ -43,69 +42,23 @@
 			HttpServletRequest 객체에도 저장된다.  -->
 	<!-- 만약에 상세보기할 게시판이 있으면-->
 	<c:if test="${!empty requestScope.list}">
-	
-		<center>
-			<table align="center" bordercolor="gray" border=1 cellpadding=7
-				style="border-collapse: collapse">
-				<caption>[대회 일정 상세글 보기]</caption>
-				
-				<tr>
-					<th bgColor="lightgray">제목</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- subject 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 제목 표현하기 -->
-					<!--------------------------------------------------- -->
+		<table align="center" cellpadding=7 style="width:900px; border-collapse: collapse; border-bottom: 1px solid #999999; margin-top: 50px;">
+				<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 					<td>${requestScope.list.subject}</td>
+					<td style="text-align: right; margin-top: 15px;">${requestScope.list.regist_start} ~ ${requestScope.list.regist_end}&nbsp;&nbsp;&nbsp;<span style="color: #999999;">지역&nbsp;</span>/&nbsp;${requestScope.list.region}</td>
 				</tr>
-
-				<tr>
-	               <th bgColor="lightgray">지역</th>
-	               <!--------------------------------------------------- -->
-	               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-	               <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-	               <!-- 상세보기할 게시판의 조회수 표현하기 -->
-	               <!--------------------------------------------------- -->
-	               <td>${requestScope.list.region}</td>
-	            </tr>
-	            
-	            <tr>
-	               <th bgColor="lightgray">신청기간</th>
-	               <!--------------------------------------------------- -->
-	               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-	               <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-	               <!-- 상세보기할 게시판의 조회수 표현하기 -->
-	               <!--------------------------------------------------- -->
-	               <td>${requestScope.list.regist_start} ~ ${requestScope.list.regist_end}</td>
-	            </tr>
-	            
-				
-				<tr>
-					<th bgColor="lightgray">내 용</th>
-					<!--------------------------------------------------- -->
-					<!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-					<!-- content 라는 멤버변수 안의 데이터를 표현하기 -->
-					<!-- 상세보기할 게시판의 내용 표현하기 -->
-					<!--------------------------------------------------- -->
-					<td><textarea name="content" class="content" rows="13"
-							cols="40" maxlength="500" readonly>${requestScope.list.content}</textarea></td>
+	            <tr style="width: 900px; height: 400px; text-align: center;">
+					<td colspan="2">
+						<div class="tournamentBoardImageDiv" style="text-align: center; margin-bottom: 30px;">
+							<img src="/image/SoccerBall.jpg" class="communityGallaryImage">
+						</div>
+						${requestScope.list.content}
+					</td>
 				</tr>
 			</table>
-		</center>
-
-		<center>
-			<!--------------------------------------------------- -->
-			<!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
-			<!--------------------------------------------------- -->
-			<span style="cursor: pointer"
-				onclick="location.href='/tournamentBoardForm.do'">
-				[목록 화면으로] </span>
-    
+			<div class="tournamentBoardDetailBtnDiv">
+				<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/tournamentBoardForm.do')">
+			</div>
     	</c:if>
-    	</center>
-    	
-	<div style="height:30px;"></div>
-    
-    
 </body>
 </html>

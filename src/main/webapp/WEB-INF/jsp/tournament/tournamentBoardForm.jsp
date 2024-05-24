@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>TournamentBoardForm</title>
 <link href="/style/tournamentBoardFormStyle.css" rel="stylesheet">
-<script src="/js/tournamentBoardFormScript.js"></script>
+<!-- <script src="/js/tournamentBoardFormScript.js"></script> -->
 
 <script>
 
@@ -100,9 +99,7 @@
 				$(".region").html(obj.find(".region").html()  );
 				ing_or_end = "끝";
 				
-				
-		
-				
+				$(".boardList").find("#addTextLine").addClass("textLineDecoration");
 
 			}			
 			,error 	 : function(){alert("검색 실패 / 관리자에게 문의 바람");}
@@ -174,11 +171,10 @@
 					
 					var obj = $(responseHtml);
 					
-					$(".boardList").html( $(responseHtml).find(".boardList").html()  )
+					$(".boardList").html( $(responseHtml).find(".boardList").html()  );
 					
-			
+					$(".boardList").find("#addTextLine").addClass("textLineDecoration");
 					
-		
 				}			
 				,error 	 : function(){alert("검색 실패 / 관리자에게 문의 바람");}
 				
@@ -201,90 +197,84 @@
 		search_detail();
 
 	}
-	
 </script>
 
 </head>
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="tournamentBoardFormTitle">
-    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">대회일정</p>
     </div>
-    <br>
-    <center>
-		<div>
-			<table align="center" style="border-collapse:collapse" border="1">
-				<tr>
-					<td class="tournament onvalue" onclick="ing()">
-						진행중인 대회
-					</td>
-					<td class="tournament" onclick="end()">
-						마감된 대회
-					</td>
+	<div>
+		<div class="tournamentCategoryTabNavDiv">
+			<ul class="tournamentCategoryTabNav">
+	    		<li class="tournament onvalue" onclick="ing()">진행중인 대회</li>
+	    		<li class="tournament" onclick="end()">마감된 대회</li>
+	    	</ul>
+	    </div>
+		<div class="region"> <!-- 지역 선택 Div -->
+			<table align="center" style="border-collapse:collapse; width: 900px;">
+				<tr align="center">
+					<td class="region1 selected1"  onClick="search('전체')" style="border-bottom: none;">전체</td>
+					<td class="region1" onClick="search('서울')" style="border-bottom: none;">서울</td>
+					<td class="region1" onClick="search('경인')" style="border-bottom: none;">경인</td>
+					<td class="region1" onClick="search('강원')" style="border-bottom: none;">강원</td>
+					<td class="region1" onClick="search('충청')" style="border-bottom: none;">충청</td>
+					<td class="region1" onClick="search('전라')" style="border-bottom: none;">전라</td>
+					<td class="region1" onClick="search('경상')" style="border-bottom: none;">경상</td>
+					<td class="region1" onClick="search('제주')" style="border-bottom: none;">제주</td>
 				</tr>
 			</table> 
+		
+		
+			<div class="boardList">
 			
-			
-				
-			<div class="region"> <!-- 지역 선택 Div -->
-				<table align="center" style="border-collapse:collapse">
-					<tr>
-						<td class="region1 selected1"  onClick="search('전체')">&middot;전체</td>
-						<td class="region1" onClick="search('서울')">&middot;서울</td>
-						<td class="region1" onClick="search('경인')">&middot;경인</td>
-						<td class="region1" onClick="search('강원')">&middot;강원</td>
-						<td class="region1" onClick="search('충청')">&middot;충청</td>
-						<td class="region1" onClick="search('전라')">&middot;전라</td>
-						<td class="region1" onClick="search('경상')">&middot;경상</td>
-						<td class="region1" onClick="search('제주')">&middot;제주</td>
-					</tr>
-				</table> 
-			
-			
-				<div class="boardList">
-				<c:forEach var="gameList" items="${requestScope.tournamentList}">
-					<table style="border: 1px solid">
-						<tr style="cursor:pointer" onClick="goTournamentBoardDetail(${gameList.list_no});">
-							<td rowspan="3">
-								<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+				<table id="addTextLine" style="width: 700px; margin: 0 auto;">
+					<c:forEach var="gameList" items="${requestScope.tournamentList}">
+						<tr style="cursor:pointer;" onClick="goTournamentBoardDetail(${gameList.list_no});">
+							<td rowspan="2" style="width: 250px;">
+								<img src="/image/SoccerBackground.jpg" class="tournamentBoardImg">
 							</td>
-							
 							<td>
-								<b>${gameList.subject}</b>
-							</td>
-						</tr>	
-						
-						<tr>
-							<td>
-								대회지역 = ${gameList.region}
+								<b style="font-size: 18px;">${gameList.subject}</b><span class="tournamentBoardFormFontLightGray"> - ${gameList.region}</span>
 							</td>
 						</tr>
-						
 						<tr>
-							<td>
-								신청기간 = ${gameList.regist_start} ~ ${gameList.regist_end}
+							<td style="vertical-align: top;">
+								신청기간 : ${gameList.regist_start} ~ ${gameList.regist_end}
 							</td>
 						</tr>
-						
-						</c:forEach>
-					</table>
-					<c:if test="${empty requestScope.tournamentList}">
-						
-							<br><br><br><br>
-							<b>조건에 맞는 결과물이 없습니다.</b>
-						
-					</c:if>
-				</div>
+					</c:forEach>
+				</table>
+				<c:if test="${empty requestScope.tournamentList}">
 					
-			</div>	
-		</div>
-    </center>
+						<br><br><br><br>
+						<div class="noneResult" style="text-align: center;">
+							<b>조건에 맞는 결과물이 없습니다.</b>
+						</div>
+				</c:if>
+			</div>
+				
+		</div>	
+	</div>
+	<div class="tournamentPaging">
+		<span class="pagingNos">
+			<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+			<c:forEach var="pageNo" begin="${requestScope.tournamentMap.begin_pageNo}" end="${requestScope.tournamentMap.end_pageNo}">
+				<c:if test="${requestScope.tournamentMap.selectPageNo==pageNo}">
+		            <p class="activePageNo">${pageNo}</p>
+		        </c:if>
+				<c:if test="${requestScope.tournamentMap.selectPageNo!=pageNo}">
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+				</c:if>
+			</c:forEach>
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+			<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+		</span>
+	</div>
     
-    
-    <div style="height:10px;"></div>
-		<center>
-			<span class="pagingNos"> <span style="cursor: pointer"
+			<%-- <span class="pagingNos"> <span style="cursor: pointer"
 				onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
 				onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
 	
@@ -304,12 +294,7 @@
 				onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}+1)">[다음]</span>
 				<span style="cursor: pointer"
 				onClick="pageNoClick(${requestScope.tournamentMap.last_pageNo})">[마지막]</span>
-			</span> 
-		</center>
-		
-    </center>
-    
-    <div style="height:20px;"></div>
+			</span>  --%>
     <form action="/tournamentBoardDetail.do" method="post" name="tournamentBoardDetail">
     	<input type="hidden" name="list_no">
     </form>

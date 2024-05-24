@@ -61,30 +61,29 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="newCommunityFreeBoardFormTitle">
-		<img src="/image/CommunityTitleBackgroundImage.jpg"
-			class="titleBackgoundImg">
 		<p class="titleBackgoundText">자유게시판 등록</p>
 	</div>
 	<div class="newCommunityFreeBoardFormContainer">
 		<form name="newCommunityFreeBoardForm">
-			<table class="newCommunityFreeBoardFormRegTable" border="1"
-				bordercolor="black">
+			<table class="newCommunityFreeBoardFormRegTable">
 				<tr>
-					<th>글쓴이</th>
-					<td>
-						<%= session.getAttribute("nickname") %>
-						<input type="hidden" name="writer" class="writer" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
+					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<input type="text" name="subject" class="subject" size="106" maxlength="100">
 					</td>
-				</tr>				
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="subject" class="subject"
-						size="40" maxlength="30"></td>
 				</tr>
 				<tr>
-					<th>내용</th>
-					<td><textarea name="content" class="content" rows="20"
-							cols="40" maxlength="500" style="resize: none"></textarea></td>
+					<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<% out.println((String)session.getAttribute("nickname")); %>
+						<input type="hidden" name="writer" class="writer" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
+					</td>
+				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
+					</td>
 				</tr>
 				<!-- 
 				<tr>
@@ -96,13 +95,11 @@
 			</table>
 			<div class="newCommunityFreeBoardFormBtnDiv">
 				<div class="resetBtnDiv">
-					<input type="reset" class="boardResetBtn" value="다시 작성">
+					<input type="reset" class="boardResetBtn"value="다시 작성">
 				</div>
 				<div class="boardRegAndMoveList">
-					<input type="button" class="boardRegBtn" value="저장"
-						onClick="checkCommunityFreeBoardForm();"> <input
-						type="button" class="moveListBtn" value="목록"
-						onClick="location.replace('/communityFreeBoardForm.do')">
+					<input type="button" class="boardRegBtn" value="저장" onClick="checkCommunityFreeBoardForm();">
+					<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/communityFreeBoardForm.do')">
 				</div>
 			</div>
 		</form>

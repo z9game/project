@@ -14,12 +14,12 @@
 <head>
 <meta charset="UTF-8">
 <title>newCommunityMarketplaceFreeSharingForm</title>
-<link href="/style/community/newCommunityFreeBoardFormStyle.css" rel="stylesheet">
-<script src="/js/community/newCommunityFreeBoardFormScript.js"></script>
+<link href="/style/community/newCommunityMarketplaceFreeSharingBoardFormStyle.css" rel="stylesheet">
+<!-- <script src="/js/community/newCommunityFreeBoardFormScript.js"></script> -->
 <script>
 	function checkCommunityMarketplaceFreeSharingBoardForm() {
 
-		var formObj = $("[name='newCommunityMarketplaceFreeSharingBoarForm']");
+		var formObj = $("[name='newCommunityMarketplaceFreeSharingBoardForm']");
 		
 		var subject = $(".subject").val();
 		var content = $(".content").val();
@@ -60,31 +60,30 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
-	<div class="newCommunityFreeBoardFormTitle">
-		<img src="/image/CommunityTitleBackgroundImage.jpg"
-			class="titleBackgoundImg">
+	<div class="newCommunityMarketplaceFreeSharingBoardFormTitle">
 		<p class="titleBackgoundText">무료나눔 등록</p>
 	</div>
 	<div class="newCommunityFreeBoardFormContainer">
-		<form name="newCommunityMarketplaceFreeSharingBoarForm">
-			<table class="newCommunityFreeBoardFormRegTable" border="1"
-				bordercolor="black">
+		<form name="newCommunityMarketplaceFreeSharingBoardForm">
+			<table class="newCommunityMarketplaceFreeSharingBoardFormRegTable">
 				<tr>
-					<th>글쓴이</th>
-					<td>
-						<%= session.getAttribute("nickname") %>
-						<input type="hidden" name="nickname" class="nickname" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
+					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<input type="text" name="subject" class="subject" size="106" maxlength="100">
 					</td>
-				</tr>				
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="subject" class="subject"
-						size="40" maxlength="30"></td>
 				</tr>
 				<tr>
-					<th>내용</th>
-					<td><textarea name="content" class="content" rows="20"
-							cols="40" maxlength="500" style="resize: none"></textarea></td>
+					<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<% out.println((String)session.getAttribute("nickname")); %>
+						<input type="hidden" name="nickname" class="nickname" size="40" maxlength="15" value="<%= session.getAttribute("nickname") %>">
+					</td>
+				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
+					</td>
 				</tr>
 				<!-- 
 				<tr>
@@ -94,7 +93,7 @@
 				</tr>
 				 -->
 			</table>
-			<div class="newCommunityFreeBoardFormBtnDiv">
+			<div class="newCommunityMarketplaceFreeSharingBoardFormBtnDiv">
 				<div class="resetBtnDiv">
 					<input type="reset" class="boardResetBtn" value="다시 작성">
 				</div>

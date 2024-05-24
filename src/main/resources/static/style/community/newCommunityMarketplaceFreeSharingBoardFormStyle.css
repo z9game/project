@@ -10,7 +10,7 @@ th, td {
 	padding: 10px 15px 10px 15px;
 }
 
-.newCommunityGallaryFormRegTable th {
+.newCommunityMarketplaceFreeSharingBoardFormRegTable th {
 	background-color: rgba(197, 146, 70, 0.4);
 }
 
@@ -41,7 +41,7 @@ a{
 	padding: 40px;
 }
 
-.newCommunityGallaryFormRegTable{
+.newCommunityMarketplaceFreeSharingBoardFormRegTable{
 	margin: 0 auto;
 	margin-top: 50px;
 	width: 1000px;
@@ -71,6 +71,6 @@ a{
     cursor: pointer;
 }
 
-.newCommunityGallaryFormBtnDiv{
+.newCommunityMarketplaceFreeSharingBoardFormBtnDiv{
 	text-align: center;
 }

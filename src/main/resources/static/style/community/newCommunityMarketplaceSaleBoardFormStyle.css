@@ -10,8 +10,8 @@ th, td {
 	padding: 10px 15px 10px 15px;
 }
 
-.newCustomerServiceQnAFormRegTable th {
-	background-color: rgba(197, 146, 70, 0.4);;
+.newCommunityMarketplaceSaleBoarFormRegTable th {
+	background-color: rgba(197, 146, 70, 0.4);
 }
 
 html,
@@ -41,7 +41,7 @@ a{
 	padding: 40px;
 }
 
-.newCustomerServiceQnAFormRegTable{
+.newCommunityMarketplaceSaleBoarFormRegTable{
 	margin: 0 auto;
 	margin-top: 50px;
 	width: 1000px;
@@ -71,6 +71,6 @@ a{
     cursor: pointer;
 }
 
-.newCustomerServiceQnAFormBtnDiv{
+.newCommunityMarketplaceSaleFormBtnDiv{
 	text-align: center;
 }

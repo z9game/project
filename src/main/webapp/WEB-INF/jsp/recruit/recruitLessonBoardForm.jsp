@@ -27,6 +27,8 @@ function search() {
 	// name='boardSearchForm' 를 가진 form 태그 관리 JQuery 객체를 생성하고 저장하기
 	//---------------------------------------------
 	var boardSearchFormObj = $("[name='recruit_lesson']");
+
+  boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
 	
 	
 	//값 들어오는지 확인
@@ -154,6 +156,19 @@ function search() {
    });
 } */
    
+	function searchAll(){
+		
+		var boardSearchFormObj = $("[name='recruit_lesson']");
+		
+		boardSearchFormObj.find("input[type=text]").val("");
+	    boardSearchFormObj.find(".sido").val("0");
+	    boardSearchFormObj.find(".sigungu").val("0");
+	    boardSearchFormObj.find("input[type=checkbox]").prop("checked", false);
+	    boardSearchFormObj.find(".rowCntPerPage").val("10");
+	    boardSearchFormObj.find(".SelectPageNo").val("1");
+	
+	    search();
+	}
  
 
    function goRecruitLessonDetailForm(recruitment_no)
@@ -193,14 +208,19 @@ function search() {
 <body>
    <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recruitLessonBoardFormTitle">
-       <img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
-       <p class="titleBackgoundText"></p>
+       <p class="titleBackgoundText">레슨 모집</p>
     </div>
     <br>
    <div>
    <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
 		<form name="recruit_lesson" onsubmit="return false">
-			<div class="top">
+			<table align="center">
+				<tr>
+					<td>
+						<table style="border-collapse: collapse; border-bottom: none;" align="center">
+						
+						</table>
+				</tr>
 				<dl class="search">
 	 				<dt class="item">검 색</dt>
 						<dd  class="content">
@@ -286,6 +306,8 @@ function search() {
 			<!-- 페이징처리관련 밑에두줄-->
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
+			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
+			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			<input type="hidden" name="sort_date">
 			<!-- 위에 한 줄은 sort 관련 -->
@@ -381,7 +403,12 @@ function search() {
 			<span style="cursor: pointer"
 			onClick="pageNoClick(${requestScope.lessonMap.last_pageNo})">[마지막]</span>
 
-		</span> 
+		</span> <select name="rowCntPerPage" class="rowCntPerPage"
+			onChange="search()">
+			<option value="10">10
+			<option value="15">15
+			<option value="20">20
+		</select>행보기 &nbsp;&nbsp;&nbsp;
 	</center>
   
 	<div style="height:30px;"></div>

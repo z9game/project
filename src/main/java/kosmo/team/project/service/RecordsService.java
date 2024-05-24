@@ -1,6 +1,7 @@
 package kosmo.team.project.service;
 
 import java.util.List;
+
 import kosmo.team.project.dto.RecordsDTO;
 
 public interface RecordsService {
@@ -63,4 +64,6 @@ public interface RecordsService {
 	public List<RecordsDTO> getGenderRatio(RecordsDTO recordsDTO);
 	
 	public List<RecordsDTO> getAgeRatio(RecordsDTO recordsDTO);
+	
+	public List<RecordsDTO> getTeamMemberCnt(RecordsDTO recordsDTO);
 }

@@ -231,4 +231,12 @@ public class RecordsServiceImplements implements RecordsService {
 		
 		return ageRatio;
 	}
+	
+	@Override
+	public List<RecordsDTO> getTeamMemberCnt(RecordsDTO recordsDTO) {
+		
+		List<RecordsDTO> teamMemberCnt = this.recordsDAO.getTeamMemberCnt(recordsDTO);
+		
+		return teamMemberCnt;
+	}
 }

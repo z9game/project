@@ -89,13 +89,7 @@ public interface StadiumDAO {
 
 	public int getSincheongStadiumStatus(YangdoDTO yangdoDTO);
 
-	public int getRentStadiumCnt(RentStadiumDTO rentStadiumDTO);
 
-	public int getYangdoStadiumCnt(YangdoDTO yangdoDTO);
-	
-
-	
-	
 	
 	
 }

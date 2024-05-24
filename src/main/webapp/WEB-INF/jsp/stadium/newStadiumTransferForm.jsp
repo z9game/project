@@ -107,19 +107,6 @@
 	    var timeRangeValue = $("select[name='MyTimeRange']").val();
 	    
 	    
-	    if (subjectObj.val().trim() == "") {
-	        alert("제목을 입력해주세요");
-	        return;
-	    }
-	    
-	    if (contentObj.val().trim().length == 0) {
-	        alert("내용을 1자 이상 입력해주세요.");
-	        contentObj.val("");
-	        return;
-	    }
-	    
-	    
-	    
 	    if (stadiumValue === "선택") {
 	        alert("경기장을 선택해 주세요.");
 	        return;
@@ -133,9 +120,6 @@
 	        alert("시간을 선택해 주세요.");
 	        return;
 	    }
-	    
-	    
-	    
 	    
 	    
 	
@@ -155,14 +139,25 @@
 	    
 	    
 		
-	    //alert(JSON.stringify(formData));
+	    alert(JSON.stringify(formData));
 		
-		var stadiumName = $("select[name='MyStadium'] option:selected").text();
+		
 		
 		
 		
 		var sessionPwd = "<%= session.getAttribute("password") %>";
 		
+		if(new RegExp(/^.{2,100}$/).test(subjectObj.val())==false){
+			alert("제목은 2~100자 한글입니다.");
+			subjectObj.val("");
+			return;
+		}
+		
+		if (contentObj.val().trim().length==0||contentObj.val().trim().length>1000){
+			alert("내용은 1~1000자 입력해야 합니다.");
+			contentObj.val("");
+			return;
+		}
 		
 	    function checkPwd() {
 	    	var pwdInsert = prompt("계정 비밀번호를 입력해주세요.");
@@ -175,8 +170,7 @@
 	        	
 	            alert("계정 비밀번호를 정확히 입력해주세요.");
 	            
-	           // checkQnABoardRegForm();
-	           return;
+	            checkQnABoardRegForm();
 	            
 	        } else {
 	            if(confirm("작성하시겠습니까?") == true){
@@ -204,13 +198,7 @@
 	    						alert("작성 성공");
 	    						location.href = '/stadiumTransferForm.do';
 	    						
-	    					}else if(result == 3){
-	    						
-	    						alert("현재 선택한 경기장"+"( "+ stadiumName + " )"+"은 이용불가 상태입니다.");
-	
-	
-	    					}
-	    					else if(result == 2){
+	    					}else if(result == 2){
 	    						
 	    						alert("이미 같은날과 시간에 양도신청한 경기장이있습니다.");
 	
@@ -249,7 +237,6 @@
 	<body>
 	    <%@ include file="/WEB-INF/jsp/header.jsp" %>
 	    <div class="newStadiumTransferFormTitle">
-	    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 	    	<p class="titleBackgoundText">경기장 양도 등록</p>
 	    </div>
 	    
@@ -260,48 +247,45 @@
 	    
 	    <div class="newStadiumTransferFormContainer">
 			<form name="newStadiumTransferForm">
-				<table class="newStadiumTransferFormRegTable" border="1" bordercolor="black">
-					<tr>
-						<th>제목</th>
-						<td>
-							<input type="text" name="title" class="title" size="40" maxlength="30">
-						</td>
-					</tr>
-					<tr>
-						<th>글쓴이</th>
-						<td>
-							<%= session.getAttribute("nickname") %>
-				
-						</td>
-	
+				<table class="newStadiumTransferFormRegTable">
 				<tr>
-					<th bgColor="lightgray">경기장</th>
-					<td>
-					    <select name="MyStadium" class="MyStadium" onchange="loadDate()">
-					        <option value="선택" >경기장선택</option>
+					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<input type="text" name="title" class="title" size="106" maxlength="100">
+					</td>
+				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<%= session.getAttribute("nickname") %>
+					</td>
+				</tr>
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">경기장</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<select name="MyStadium" class="MyStadium" onchange="loadDate()" style="width: 200px;">
+					        <option value="선택" >경기장 선택</option>
 					        <c:forEach var="myStadium" items="${requestScope.myStadiumList}" varStatus="status" >
 					        	<option value="${myStadium.stadium_no}">${myStadium.stadium_name}</option>
 					        </c:forEach>
 					       
 					    </select>
-					    <select name="MyDate" class="MyDate"onchange="loadTimeRanges()">
+					    <select name="MyDate" class="MyDate"onchange="loadTimeRanges()" style="width: 200px;">
 					        <option value="선택">날짜</option>
 					       
 					    </select>
-					    <select name="MyTimeRange" class="MyTimeRange">
+					    <select name="MyTimeRange" class="MyTimeRange" style="width: 200px;">
 					        <option value="0">시간</option>
 					       
 					    </select>
 					</td>
-	
 				</tr>
-					<tr>
-						<th>내용</th>
-						<td>
-							<textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none"></textarea>
-						</td>
-					</tr>
-	
+				<tr>
+					<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
+					</td>
+				</tr>
 				</table>
 				<div class="newStadiumTransferFormBtnDiv">
 					<div class="resetBtnDiv">

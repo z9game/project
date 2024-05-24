@@ -20,8 +20,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityNoticeBoardDetailForm</title>
-<link href="/style/community/communityNoticeBoardFormStyle.css" rel="stylesheet">
+<title>CommunityNoticeBoardUpDelForm</title>
+<link href="/style/community/communityNoticeBoardUpDelFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityNoticeBoardFormScript.js"></script>
 
 
@@ -91,55 +91,37 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
-		<p class="titleBackgoundText">공지사항</p>
+		<p class="titleBackgoundText">공지사항 수정</p>
 	</div>
-
-
-
 	<form name="noticeboardUpDelForm">
-		<table align="center" bordercolor="gray" border=1 cellpadding=7
+		<table class="noticeBoardUpDelTable" align="center" cellpadding=7
 			style="border-collpase: collpase">
-			<caption>[공지사항 수정/삭제]</caption>
 			<tr>
-				<th bgColor="lightgray">이 름</th>
-				<td>${requestScope.communityDTO.writer}<input type="hidden" name="writer" class="writer" size="10"
-					maxlength="15" value="${requestScope.communityDTO.writer}"></td>
+				<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+				<td style="border-bottom: 1px solid #c59246e0;">${requestScope.communityDTO.writer}</td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">제 목</th>
-				<td><input type="text" name="subject" class="subject" size="40"
+				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" name="subject" class="subject" size="106"
 					maxlength="30" value="${requestScope.communityDTO.subject}"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">조회수</th>
-				<td>${requestScope.communityDTO.readcount}</td>
+				<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<textarea name="content" class="content" rows="20" cols="108" maxlength="500" style="resize: none;">${requestScope.communityDTO.content}</textarea>
+				</td>
 			</tr>
-
-			<tr>
-				<th bgColor="lightgray">내 용</th>
-				<td><textarea name="content" class="content" rows="13"
-						cols="40" maxlength="500">${requestScope.communityDTO.content}
-            </textarea>
-			</tr>
-
 		</table>
-		<input type="hidden" name="b_no"
-			value="${requestScope.communityDTO.b_no}">
+		<input type="hidden" name="b_no" value="${requestScope.communityDTO.b_no}">
 	</form>
-
-
-	<div style="height: 5px"></div>
-	<center>
-		<span style="cursor: pointer"
-			onclick="location.replace('/communityNoticeBoardForm.do')">[목록 화면으로]
-		</span>
-	</center>
-	<center>
-		<input type="button" value="수정" onclick="checkBoardUpForm();">
-		<input type="button" value="삭제" onclick="checkBoardDelForm();">
-	</center>
-
-
+	<div class="noticeBoardUpDelBtnDiv">
+		<div class="moveListBtnDiv">
+			<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/communityNoticeBoardForm.do')">
+		</div>
+		<div class="boardRegAndMoveList">
+			<input type="button" class="checkBoardUpBtn" value="수정" onClick="checkBoardUpForm();">
+			<input type="button" class="checkBoardDelBtn" value="삭제" onClick="checkBoardDelForm();">
+		</div>
+	</div>
 </body>
 </html>

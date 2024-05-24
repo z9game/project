@@ -4,14 +4,17 @@
 
 table {
 	border-collapse: collapse;
+	border-color: none;
+	margin: 0 auto;
 }
 
 th, td {
 	padding: 10px 15px 10px 15px;
 }
 
-.newCommunityGallaryFormRegTable th {
+th {
 	background-color: rgba(197, 146, 70, 0.4);
+    color: white;
 }
 
 html,
@@ -41,36 +44,31 @@ a{
 	padding: 40px;
 }
 
-.newCommunityGallaryFormRegTable{
-	margin: 0 auto;
-	margin-top: 50px;
-	width: 1000px;
-	height: 200px;
+.checkCommentBtn{
+	width: 70px;
+	height: 35px;
+	background-color: #c59246e0;
+    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #c59246e0;
+    cursor: pointer;
+    margin-left: 33px;
 }
 
-.boardResetBtn{
-	width: 100px;
-	height: 40px;
+.gallaryDetailBtnDiv{
+	justify-content: center;
 	margin-top: 10px;
-	margin-left: 900px;
+	margin-left: 750px;
+	display: flex;
+	gap: 10px;
+}
+
+.moveListBtn, .gallaryUpDelBtn{
+	width: 70px;
+	height: 35px;
 	background-color: #c59246e0;
     color: #FFFFFF;
     border-radius: 10px;
     border: 1px solid #c59246e0;
     cursor: pointer;
-}
-
-.boardRegBtn, .moveListBtn{
-	width: 150px;
-	height: 50px;
-	margin-top: 20px;
-	background-color: #c59246e0;
-    color: #FFFFFF;
-    border-radius: 10px;
-    border: 1px solid #c59246e0;
-    cursor: pointer;
-}
-
-.newCommunityGallaryFormBtnDiv{
-	text-align: center;
 }
