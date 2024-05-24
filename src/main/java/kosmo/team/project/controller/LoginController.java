@@ -3,7 +3,6 @@ package kosmo.team.project.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +79,7 @@ public class LoginController {
 	
 
 	@RequestMapping(value = "/logoutProc.do")
-	public ModelAndView logoutProc(HttpSession session,HttpServletResponse response) {
+	public ModelAndView logoutProc(HttpSession session) {
 		session.invalidate(); // 세션 무효화
 		
 	
