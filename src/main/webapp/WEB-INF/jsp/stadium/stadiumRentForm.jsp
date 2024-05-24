@@ -140,7 +140,6 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="stadiumRentFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">경기장 대관</p>
 	</div>
 
@@ -149,27 +148,14 @@
 	</div>
 
 	<form name="StadiumSearchForm" onsubmit="return false">
-	<center>
 		<table align="center">
 			<tr>
 				<td>
-					<table border="1" cellpadding="5" cellspacing="0"
-						style="border-collapse: collapse" align="center">
-						<caption>
-							<b>[검색조건]</b>
-						</caption>
+					<table style="border-collapse: collapse;" align="center">
 						<tr>
-							<th>경기장이름</th>
-							<td><input type="text" name="Stadiumkeyword1" class="Stadiumkeyword1">
-								<select name="orand">
-									<option value="or">or
-									<option value="and">and
-							</select> <input type="text" name="Stadiumkeyword2" class="Stadiumkeyword2"></td>
-						</tr>
-						<tr>
-							<th>시/도</th>
-							<td colspan="5"><select name="sido" id="" class="sido"
-								onchange="categoryChange(this)">
+							<th style="border-radius: 10px;">지역</th>
+							<td colspan="5" style="text-align: center; width:200px;"><select name="sido" id="" class="sido"
+								onchange="categoryChange(this)" style="width:200px; text-align: center;">
 									<option value="0">시/도 선택</option>
 									<option value="1">강원</option>
 									<option value="2">경기</option>
@@ -187,15 +173,25 @@
 									<option value="14">제주</option>
 									<option value="15">충남</option>
 									<option value="16">충북</option>
-							</select> <select name="sigungu" id="state" class="sigungu">
+							</select> <select name="sigungu" id="state" class="sigungu" style="width:200px; text-align: center;">
 									<option value="0">군/구 선택</option>
 							</select></td>
 						</tr>
+						<tr><td></td></tr>
+						<tr>
+							<th style="border-radius: 10px;">경기장이름</th>
+							<td><input type="text" name="Stadiumkeyword1" class="Stadiumkeyword1">
+								<select name="orand" class="orAnd" style="text-align: center;">
+									<option value="or">or
+									<option value="and">and
+							</select> <input type="text" name="Stadiumkeyword2" class="Stadiumkeyword2"></td>
+						</tr>
+						<tr><td></td></tr>
 					</table>
 			</tr>
-			<tr align="center">
+			<tr align="center" style="border-top: 1px solid #c59246e0;">
 				<td><input type="button" value="검색" class="searchBtn"
-					onclick="search()"> <input type="button" value="모두 검색"
+					onclick="search()"> <input type="button" value="초기화"
 					class="searchAllBtn" onclick="searchAll()"></td>
 			</tr>
 
@@ -203,12 +199,19 @@
 		<input type="hidden" name="sort" class="sort"> <input
 			type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
-</center>
 	</form>
 
 
 
-
+	<div class="stadiumRentFormTopContents">
+		<span class="stadiumRentFormFontLightGray" id="stadiumRentAllCount">Total. ${requestScope.StadiumListAllCnt}개</span>
+		<div class="stadiumRentFormRowCntPerPage">
+			<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+				<option value="8">8개씩 보기
+				<option value="12">12개씩 보기
+			</select>
+		</div>
+	</div>
 
 
 
@@ -227,7 +230,7 @@
 				<div class="stadiumRentWriter">지역:${stadiumList.sido_name}-${stadiumList.sigungu_name}</div>
 			</div>
 		</c:forEach>
-
+		
 
 
 
@@ -236,42 +239,23 @@
 			<center>조건에 맞는 검색 결과가 없습니다.</center>
 		</c:if>
 	</div>
-
-
-	<center>
-
-		<span class="pagingNos"> <span style="cursor: pointer"
-			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.StadiumMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
-
-
-			<c:forEach var="pageNo"
-				begin="${requestScope.StadiumMap.begin_pageNo}"
-				end="${requestScope.StadiumMap.end_pageNo}">
-
-				<c:if test="${requestScope.StadiumMap.selectPageNo==pageNo}">
-		            ${pageNo}
-		         </c:if>
-
-				<c:if test="${requestScope.StadiumMap.selectPageNo!=pageNo}">
-					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
-				</c:if>
-			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.StadiumMap.selectPageNo}+1)">[다음]</span>
-			<span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.StadiumMap.last_pageNo})">[마지막]</span>
-			&nbsp;&nbsp;&nbsp;
-			[${requestScope.StadiumListCnt}/${requestScope.StadiumListAllCnt}]개
-			&nbsp;&nbsp;
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="8">8
-			<option value="12">12
-
-		</select>개수 &nbsp;&nbsp;&nbsp;
-	</center>
-
-
+	<div class="stadiumRentPaging">
+			<span class="pagingNos">
+				<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.StadiumMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+				<c:forEach var="pageNo" begin="${requestScope.StadiumMap.begin_pageNo}" end="${requestScope.StadiumMap.end_pageNo}">
+					<c:if test="${requestScope.StadiumMap.selectPageNo==pageNo}">
+			            <p class="activePageNo">${pageNo}</p>
+			        </c:if>
+					<c:if test="${requestScope.StadiumMap.selectPageNo!=pageNo}">
+						<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+					</c:if>
+				</c:forEach>
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.StadiumMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+				<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+			</span>
+		</div>
+		
 	<form name="stadiumDetailForm" action="/stadiumDetailForm.do"
 		method="post">
 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->

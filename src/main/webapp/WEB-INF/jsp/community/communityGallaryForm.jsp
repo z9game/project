@@ -62,7 +62,7 @@
 	    var formSearchType1 = searchForm.find(".searchType1");
 	    
 		$("#boardDiv").html(obj.find("#boardDiv").html());
-		$("#paingsDiv").html(obj.find("#paingsDiv").html());
+		$("#pagingsDiv").html(obj.find("#pagingsDiv").html());
        
 		/*
 		// 검색 조건 초기화 되어 hidden 값을 이용해 설정
@@ -97,7 +97,6 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="communityGallaryFormTitle">
-    	<img src="/image/CommunityTitleBackgroundImage.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">갤러리</p>
     </div>
     
@@ -111,32 +110,20 @@
    <form name="detailForm" action="/communityGallaryDetailForm.do" method="post">
       <input type="hidden" name="b_no" value="" >
    </form>       
-    
-    <div class="newCommunityGallaryBtnDiv">
-		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityGallaryFormBtnClick();">
-	</div>
 	
     <div class="communityGallaryFormContainer">
-
 		<div class="communityGallaryFormSearch">
-			<table border="1" bordercolor="black" style="border-collapse:collapse; margin: 0 auto; margin-top:25px; width:1000px;" cellpadding="7" align="center">
-				<tr>
-					<th>
-						검&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;색
-					</th>
-					<td>
-						<select name="searchType1">
-							<option value="all">전체</option>
-							<option value="writer">글작성자</option> 
-							<option value="subject">제목</option>
-							<option value="content">내용</option>
-							<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
-						</select> 
-						<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" >
-						<input type="button" value="    검색    " onclick="search()"> 
-					</td>
-				</tr>
-			</table>               
+			<div class="searchSelectBox">
+				<select name="searchType1" class="searchSelect">
+					<option value="all">전체</option>
+					<option value="writer">글작성자</option> 
+					<option value="subject">제목</option>
+					<option value="content">내용</option>
+					<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
+				</select> 
+			</div>
+			<input type="text" name="keyword1" placeholder=" 검색어를 입력하세요" class="keyword1" >
+			<input type="button" value="    검색    " class="searchBtn" onclick="search()">          
 		</div>
 		
 		<div id="boardDiv" class="communityGallaryFormContainer">
@@ -151,7 +138,7 @@
 				</div>
 			</c:forEach>
 			
-			<c:forEach var="empty_row" begin="${ requestScope.communityGallaryBoardListSize + 1 }" end="${ requestScope.communityGallaryBoardPageMap.rowCntPerPage }">
+			<%-- <c:forEach var="empty_row" begin="${ requestScope.communityGallaryBoardListSize + 1 }" end="${ requestScope.communityGallaryBoardPageMap.rowCntPerPage }">
 				<div class="communityGallaryFormBoard">
 					<div class="communityGallaryImageDiv">
 						<!-- <img src="/image/SoccerBall.jpg" class="communityGallaryImage"> -->
@@ -160,31 +147,28 @@
 					<div class="communityGallaryWriter">&nbsp;</div>
 					<div class="communityGallaryRegDate">&nbsp;</div>
 				</div>
-			</c:forEach>
+			</c:forEach> --%>
 			
-			<span id="paingsDiv" class="pagingNos">
-				<span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
-				<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.communityGallaryBoardPageMap.selectPageNo } - 1 );">[이전]</span>
-				&nbsp;&nbsp;
-                     
-				<c:forEach var="pageNo" begin="${ requestScope.communityGallaryBoardPageMap.begin_pageNo }" end="${ requestScope.communityGallaryBoardPageMap.end_pageNo }">
-					<c:if test="${ requestScope.communityGallaryBoardPageMap.selectPageNo == pageNo }">
-						<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });"><b><u>${ pageNo }</u></b></span>
-					</c:if>
-               
-					<c:if test="${ requestScope.communityGallaryBoardPageMap.selectPageNo != pageNo }">
-						<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });">[${ pageNo }]</span>
-					</c:if>
-				</c:forEach>
-				&nbsp;&nbsp;
-                     
-				<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.communityGallaryBoardPageMap.selectPageNo } + 1 );">[다음]</span>
-				<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.communityGallaryBoardPageMap.last_pageNo } );">[마지막]</span>
-                     
-				&nbsp;&nbsp;&nbsp;
-				[${ requestScope.communityGallaryBoardListCnt } / ${ requestScope.communityGallaryBoardListAllCnt }] 개
-			</span>
 		</div>
+	</div>
+	<div class="newCommunityGallaryBtnDiv">
+		<input type="button" class="newCommunityGallaryBtn" value="새 글 쓰기" onClick="newCommunityGallaryFormBtnClick();">
+	</div>
+	<div class="communityGallaryPaging">
+		<span id="pagingsDiv" class="pagingNos">
+			<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.communityGallaryBoardPageMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+			<c:forEach var="pageNo" begin="${requestScope.communityGallaryBoardPageMap.begin_pageNo}" end="${requestScope.communityGallaryBoardPageMap.end_pageNo}">
+				<c:if test="${requestScope.communityGallaryBoardPageMap.selectPageNo==pageNo}">
+		            <p class="activePageNo">${pageNo}</p>
+		        </c:if>
+				<c:if test="${requestScope.communityGallaryBoardPageMap.selectPageNo!=pageNo}">
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+				</c:if>
+			</c:forEach>
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.communityGallaryBoardPageMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+			<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+		</span>
 	</div>
 
 </body>

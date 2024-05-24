@@ -5,6 +5,7 @@ body {
   margin: 0;
   box-sizing: border-box;
   scrollbar-width: none;
+  overflow-x: hidden;
 }
 
 li {
@@ -91,8 +92,9 @@ li {
 .customerServiceCategory span{
 	font-size: 18px;
 }
+
 .titleBackgoundText{
-	border-bottom: 1px solid #006666;
+	border-bottom: 1px solid #000000;
 	width: 55%;
 	margin: 0 auto;
 	margin-bottom: 30px;

@@ -82,15 +82,7 @@ public class StadiumServiceImplements implements StadiumService {
 
 			return 4;
 		}
-		
-		int stadiumCnt = this.stadiumDAO.getRentStadiumCnt(rentStadiumDTO);
-		if(stadiumCnt ==0) {
-			
-			return 6;
-			
-		}
-		
-		
+
 		
 
 		int rentCnt = this.stadiumDAO.getRentTimeCnt(rentStadiumDTO);
@@ -233,13 +225,7 @@ public class StadiumServiceImplements implements StadiumService {
 		if (yangdoCnt == 0) {
 			return yangdoCnt;
 		}
-		int stadiumCnt = this.stadiumDAO.getYangdoStadiumCnt(yangdoDTO);
-		if(stadiumCnt ==0) {
-			
-			return 6;
-			
-		}
-		
+
 		int checkStatusDelCnt = this.stadiumDAO.getCheckStatusDelCnt(yangdoDTO.getYangdo_no());
 		
 		if (checkStatusDelCnt >= 1) {
@@ -271,13 +257,6 @@ public class StadiumServiceImplements implements StadiumService {
 		if (UpCnt >= 1) {
 			return 3;
 		}
-		
-		int stadiumCnt = this.stadiumDAO.getYangdoStadiumCnt(yangdoDTO);
-		if(stadiumCnt ==0) {
-			
-			return 6;
-			
-		}
 
 		
 		int yangdoCnt = this.stadiumDAO.getYangdoDelCnt(yangdoDTO.getYangdo_no());
@@ -306,13 +285,6 @@ public class StadiumServiceImplements implements StadiumService {
 			return 9;
 		}
 		
-		
-		int stadiumCnt = this.stadiumDAO.getYangdoStadiumCnt(yangdoDTO);
-		if(stadiumCnt ==0) {
-			
-			return 6;
-			
-		}
 		
 		
 		int sincheongCnt = this.stadiumDAO.updateSincheong(yangdoDTO);

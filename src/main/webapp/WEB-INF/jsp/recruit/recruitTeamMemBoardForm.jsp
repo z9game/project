@@ -175,6 +175,8 @@ function search() {
     
     keyword1 = $.trim(keyword1);
     
+    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val());
+    
     
 	$.ajax({
 		//-------------------------------
@@ -211,6 +213,19 @@ function search() {
 
 }
 
+function searchAll(){
+	
+	var boardSearchFormObj = $("[name='recruit_Team_mem']");
+	
+	boardSearchFormObj.find("input[type=text]").val("");
+    boardSearchFormObj.find(".sido").val("0");
+    boardSearchFormObj.find(".sigungu").val("0");
+    boardSearchFormObj.find("input[type=checkbox]").prop("checked", false);
+    boardSearchFormObj.find(".rowCntPerPage").val("10");
+    boardSearchFormObj.find(".SelectPageNo").val("1");
+
+    search();
+}
 
 function toggleText() {
     var detailBtn = document.querySelector('.detailBtn');
@@ -266,15 +281,11 @@ function checkReserveForm()
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recruitTeamBoardFormTitle">
-    	<img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">팀 / 팀원 모집</p>
     </div>
     <br>
    <div>
-   
-   		<center>
-   		<br><br><br>
-	 	<table style="border-collapse:collapse" border="1">
+	 	<table class="recruitTeamMemBoardCategoryTab">
 			<tr>
 				<td class="teamRecruit onvalue" onclick="sort_All()">
 					전체
@@ -287,23 +298,194 @@ function checkReserveForm()
 				</td>
 			</tr>
 		</table>
-		<br>
-		</center>
 	
 	<!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
 		<form name="recruit_Team_mem" onsubmit="return false">
-			<div class="top">
+			<table align="center">
+					<tr>
+						<td>
+							<table style="border-collapse: collapse; border-bottom: none;" align="center">
+								<tr class="area">
+									<th class="item" style="border-radius: 10px; border-bottom: none;">지역</th>
+									<td class="content" colspan="5" style="text-align: center; width:200px; border-bottom: none;"><select name="sido" class="sido" id=""
+										onchange="categoryChange(this)" style="width:200px; text-align: center;">
+											<option value="0">시/도 선택</option>
+											<option value="1">강원</option>
+											<option value="2">경기</option>
+											<option value="3">경남</option>
+											<option value="4">경북</option>
+											<option value="5">광주</option>
+											<option value="6">대구</option>
+											<option value="7">대전</option>
+											<option value="8">부산</option>
+											<option value="9">서울</option>
+											<option value="10">울산</option>
+											<option value="11">인천</option>
+											<option value="12">전남</option>
+											<option value="13">전북</option>
+											<option value="14">제주</option>
+											<option value="15">충남</option>
+											<option value="16">충북</option>
+									</select> <select name="sigungu" class="sigungu" id="state" style="width:200px; text-align: center;">
+											<option value="0">군/구 선택</option>
+									</select></td>
+								</tr>
+						<tr><td style="border-bottom: none;"></td></tr>
+						<tr class="day">
+						    <th class="item" style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">요일</th>
+						    <td class="content" style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="allweekday" id="workweekcdGroupA" onClick="setweekgroup1()" style="zoom:2.0; margin-right: 5px;">
+						            평일(월, 화, 수, 목, 금)
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="allweekday" id="workweekcdGroupB" onClick="setweekgroup2()" style="zoom:2.0; margin-right: 5px;">
+						            주말(토, 일)
+						        </label>
+						    </td>
+						    <td class="content" style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="day" value="1" id="day1" onClick="setweekDay()" style="zoom:2.0; margin-right: 5px;">
+						            월
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="day" value="2" id="day2" onClick="setweekDay()" style="zoom:2.0; margin-right: 5px;">
+						            화
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="day" value="3" id="day3" onClick="setweekDay()" style="zoom:2.0; margin-right: 5px;">
+						            수
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="day" value="4" id="day4" onClick="setweekDay()" style="zoom:2.0; margin-right: 5px;">
+						            목 
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="day" value="5" id="day5" onClick="setweekDay()" style="zoom:2.0; margin-right: 5px;">
+						            금
+						        </label>
+						    </td>
+						    <td class="content" style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="day" value="6" id="day6" onClick="setweekEnd()" style="zoom:2.0; margin-right: 5px;">
+						            토
+						        </label>
+						        <label style="display: flex; align-items: center;">
+						            <input type="checkbox" name="day" value="7" id="day7" onClick="setweekEnd()" style="zoom:2.0; margin-right: 5px;">
+						            일
+						        </label>
+						    </td>
+						    <td class="content" style="text-align: left; border-bottom: none; display: flex; align-items: center;">
+						        <label style="display: flex; align-items: center;">
+						            <input type="checkbox" name="day" value="0" id="day0" onClick="allday()" style="zoom:2.0; margin-right: 5px;">
+						            상관없음
+						        </label>
+						    </td>
+						</tr>
+						<tr><td style="border-bottom: none;"></td></tr>
+						<tr class="time">
+						    <th class="item" style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">시간</th>
+						    <td class="content" style="text-align: center; border-bottom: none; display: flex; justify-content: center; align-items: center;">
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="time" id="morning" onClick="timeset()" value="새벽" style="zoom:2.0; margin-right: 5px;">
+						            새벽
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="time" id="am" onClick="timeset()" value="오전" style="zoom:2.0; margin-right: 5px;">
+						            오전
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="time" id="pm" onClick="timeset()" value="오후" style="zoom:2.0; margin-right: 5px;">
+						            오후
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="time" id="night" onClick="timeset()" value="야간" style="zoom:2.0; margin-right: 5px;">
+						            야간
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="time" id="everytime" onClick="everyset()" value="상관없음" style="zoom:2.0; margin-right: 5px;">
+						            상관없음
+						        </label>
+						    </td>
+						</tr>
+						<tr><td style="border-bottom: none;"></td></tr>
+						<tr class="pos">
+						    <th class="item" style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">포지션</th>
+						    <td class="content" style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="pos" id="st" onClick="positioncheck()" value="ST" style="zoom:2.0; margin-right: 5px;">
+						            ST
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="pos" id="cm" onClick="positioncheck()" value="CM" style="zoom:2.0; margin-right: 5px;">
+						            CM
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="pos" id="cb" onClick="positioncheck()" value="CB" style="zoom:2.0; margin-right: 5px;">
+						            CB
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="pos" id="gk" onClick="positioncheck()" value="GK" style="zoom:2.0; margin-right: 5px;">
+						            GK
+						        </label>
+						        <label style="display: flex; align-items: center; margin-right: 50px;">
+						            <input type="checkbox" name="pos" id="allPos" onClick="setposition()" value="allpos" style="zoom:2.0; margin-right: 5px;">
+						            상관없음
+						        </label>
+						    </td>
+						</tr>
+						<tr><td style="border-bottom: none;"></td></tr>
+						<!-- <tr class="search">
+							<th class="item" style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">검색</th>
+							<td class="content" style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+								<select name="searchType1" style="text-align: center; height: 35px; margin-right: 20px; border-radius: 10px; border: 1px solid #c59246e0;">
+									<option value="all">전체</option>
+									<option value="writer">글작성자</option> 
+									<option value="title">제목</option>
+									<option value="content">내용</option>
+								</select> 
+								<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()">
+								<input type="button" value="검색" class="item" class="searchBtn" onclick="search()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-right: 30px;">
+								<input type="button" value="초기화" class="searchAllBtn" onclick="searchAll()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">
+							</td>
+						</tr> -->
+						<tr><td style="border-bottom: none;"></td></tr>
+								
+							</table>
+						<div class="search">
+							<div class="content">
+								<select name="searchType1" class="searchSelect">
+									<option value="all">전체</option>
+									<option value="writer">글작성자</option> 
+									<option value="subject">제목</option>
+									<option value="content">내용</option>
+									<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
+								</select> 
+							</div>
+							<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()">
+							<input type="button" value="검색" class="item" class="searchBtn" onclick="search()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-right: 10px;">
+							<input type="button" value="초기화" class="searchAllBtn" onclick="searchAll()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">   
+						</div>
+					</tr>
+					<!-- <tr align="center" style="border-top: 1px solid #c59246e0;">
+						<td style="border-bottom: none;">
+							<input type="button" value="검색" class="item" class="searchBtn" onclick="search()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-right: 30px;">
+							<input type="button" value="초기화" class="searchAllBtn" onclick="searchAll()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">
+						</td>
+					</tr> -->
+				</table>
+			<!-- <div class="top">
 				<dl class="search">
 	 				<dt class="item">검 색</dt>
-						<dd  class="content">
-							<select name="searchType1">
-								<option value="all">전체</option>
-								<option value="writer">글작성자</option> 
-								<option value="title">제목</option>
-								<option value="content">내용</option>
-							</select> 
-							<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()"> 
-						</dd>
+					<dd  class="content">
+						<select name="searchType1">
+							<option value="all">전체</option>
+							<option value="writer">글작성자</option> 
+							<option value="title">제목</option>
+							<option value="content">내용</option>
+						</select> 
+						<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()"> 
+					</dd>
 	 			</dl>
 	 			<dl class="area">
 	 				<dt class="item">지 역</dt>
@@ -339,15 +521,15 @@ function checkReserveForm()
 				<dl class="day">
 	  				<dt class="item">요 일</dt>
 	  					<dd class="content">
-							<input type="checkbox" id="workweekcdGroupA" name="allweekday" onclick="setweekgroup1()">평일(월,화,수,목,금)&nbsp;&nbsp;
-							<input type="checkbox" id="workweekcdGroupB" name="allweekend" onclick="setweekgroup2()">주말(토,일)<br>
+							<input type="checkbox" id="workweekcdGroupA" name="allweekday" onclick="setweekgroup()">평일(월,화,수,목,금)&nbsp;&nbsp;
+							<input type="checkbox" id="workweekcdGroupB" name="allweekend" onclick="setweekgroup()">주말(토,일)<br>
 							<input type="checkbox" id="day1" name="day" onclick="setweekDay()" value="1">월&nbsp;&nbsp;
 							<input type="checkbox" id="day2" name="day" onclick="setweekDay()" value="2">화&nbsp;&nbsp;
 							<input type="checkbox" id="day3" name="day" onclick="setweekDay()" value="3">수&nbsp;&nbsp;
 							<input type="checkbox" id="day4" name="day" onclick="setweekDay()" value="4">목&nbsp;&nbsp;
 							<input type="checkbox" id="day5" name="day" onclick="setweekDay()" value="5">금<br>
-							<input type="checkbox" id="day6" name="day" onclick="setweekEnd()" value="6">토&nbsp;&nbsp;
-							<input type="checkbox" id="day7" name="day" onclick="setweekEnd()" value="7">일<br>
+							<input type="checkbox" id="day6" name="day" onclick="setweekDay()" value="6">토&nbsp;&nbsp;
+							<input type="checkbox" id="day7" name="day" onclick="setweekDay()" value="7">일<br>
 							<input type="checkbox" id="day0" name="day" value="0" onclick="allday()">상관없음
 	  					</dd>
 	  				</dl>
@@ -366,15 +548,15 @@ function checkReserveForm()
 	  			<dl class="pos">
 	  				<dt class="item">포 지 션</dt>
 	  					<dd  class="content">
-	  						<input type="checkbox" id="st" name="pos" onclick="positioncheck()" value="ST">ST&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="cm" name="pos" onclick="positioncheck()" value="CM">CM&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="cb" name="pos" onclick="positioncheck()" value="CB">CB&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" id="gk" name="pos" onclick="positioncheck()" value="GK">GK&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<input type="checkbox" id="allPos" name="pos" onclick="setposition()" value="allpos">상관없음
+	  						<input type="checkbox" id="st" name="pos" onclick="" value="ST">ST&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="cm" name="pos" onclick="" value="CM">CM&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="cb" name="pos" onclick="" value="CB">CB&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" id="gk" name="pos" onclick="" value="GK">GK&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							<input type="checkbox" id="allPos" name="pos" onclick="" value="allpos">상관없음
 	  					</dd>
 	  			</dl>
 			</div>	
-			<!-- 
+			
 			<div class="detail_Search">
 	 			<dl class="age">
 	  				<dt class="item">연 령</dt>
@@ -422,22 +604,22 @@ function checkReserveForm()
 	 					</dd>
 	 			</dl>
 			</div>
-			
+			s
 				
 			<div class="detailSpace">
 	 			<dl class="detailBtn" >
 	 				<dt class="item" onclick="toggleText()" style="cursor:pointer">상세검색 열기</dt>
 	 			</dl>
 	 		</div>
-	 		 -->
-	 		 
+	-->		
 	 		<input type="hidden" name="sort_date">
 	 		<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
+			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 	 	</form>
 		
-  <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->			
+<!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->  			
 			
-			
+<!--			
    		 <center>
    		 <br><br>
    		 	<div class="searchBtn">
@@ -449,12 +631,21 @@ function checkReserveForm()
 			<div class="newRecruitTeamMemBoardBtnDiv">
 				<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkReserveForm()">
 			</div>
-		</center>
+		</center> -->
 		
 		
-			
+		<div class="recruitTeamMemBoardTopContents">
+			<%-- <span class="stadiumTransferFormFontLightGray" id="stadiumTransferAllCount">Total. ${requestScope.StadiumYangdoListAllCnt}개</span> --%>
+			<div class="recruitTeamMemBoardFormRowCntPerPage">
+				<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+					<option value="10">10개씩 보기
+					<option value="15">15개씩 보기
+					<option value="20">20개씩 보기
+				</select>
+			</div>
+		</div>	
 		<div class="recruitTeamMemBoard">
-			<table class="boardListTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin: 0 auto; margin-top:10px; width:1000px;">
+			<table class="boardListTable" cellpadding="7" align="center" style="border-collapse:collapse;">
 				<tr>
 					<th style="width:50px;">번호</th>
 					<th style="width:250px;">제목</th>
@@ -470,24 +661,24 @@ function checkReserveForm()
 					<!-- 즉 정렬 의지가 'reg_date desc' 면             -->
 					<!--============================================================= -->
 					<c:if test="${param.sort_date=='reg_date desc'}">
-						<th width="100" onClick="searchWithSort('reg_date asc')" style="cursor:pointer">등록일▼</th>
+						<th width="100" onClick="searchWithSort('reg_date asc')" style="cursor:pointer">등록일 ▽</th>
 					</c:if>	
 					<!--============================================================= -->
 					<!-- 만약 파명 "sort" 의 파값이 'reg_date asc' 면 -->
 					<!-- 즉 정렬 의지가 'reg_date asc' 면             -->
 					<!--============================================================= -->
 					<c:if test="${param.sort_date=='reg_date asc'}">	
-						<th width="100" onClick="searchWithSort('')" style="cursor:pointer">등록일▲</th>
+						<th width="100" onClick="searchWithSort('')" style="cursor:pointer">등록일 △</th>
 					</c:if>
 				</tr>
 					<c:forEach var="list" items="${requestScope.boardList}" varStatus="status">
-						<tr style="cursor:pointer" onClick=" goRecruitTeamMemDetailForm(${list.b_no});">
-							<td align="center">${requestScope.recruitMap.begin_serialNo_desc - status.index}</td>
+						<tr style="cursor:pointer" onClick="goRecruitTeamMemDetailForm(${list.b_no});">
+							<td align="center" class="recruitTeamMemBoardFormFontLightGray">${requestScope.recruitMap.begin_serialNo_desc - status.index}</td>
 							<td align="center">${list.title}</td>
-							<td align="center">${list.nickname}</td>
-							<td align="center">${list.team_mem}</td>
-							<td align="center">${list.readcount}</td>
-							<td align="center">${list.reg_date}</td>
+							<td align="center" class="recruitTeamMemBoardFormFontLightGray">${list.nickname}</td>
+							<td align="center" class="recruitTeamMemBoardFormFontLightGray">${list.team_mem}</td>
+							<td align="center" class="recruitTeamMemBoardFormFontLightGray">${list.readcount}</td>
+							<td align="center" class="recruitTeamMemBoardFormFontLightGray">${list.reg_date}</td>
 						</tr>
 					</c:forEach>
 			</table>
@@ -496,10 +687,31 @@ function checkReserveForm()
 					<br><br>
 					<b>조건에 맞는 결과물이 없습니다.</b>
 					</center>
-					<div style="height:10px;"></div>
 			</c:if>
 		</div>
 	</div>
+	<div class="newRecruitTeamMemBoardBtnDiv">
+		<input type="button" class="newRecruitTeamMemBoardBtn"
+			value="새 글 쓰기"
+			onClick="checkReserveForm();">
+	</div>
+	<div class="recruitTeamMemBoardPaging">
+		<span class="pagingNos">
+			<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.recruitMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+			<c:forEach var="pageNo" begin="${requestScope.recruitMap.begin_pageNo}" end="${requestScope.recruitMap.end_pageNo}">
+				<c:if test="${requestScope.recruitMap.selectPageNo==pageNo}">
+		            <p class="activePageNo">${pageNo}</p>
+		        </c:if>
+				<c:if test="${requestScope.recruitMap.selectPageNo!=pageNo}">
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+				</c:if>
+			</c:forEach>
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.recruitMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+			<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+		</span>
+	</div>
+	<%-- 
 	<center>
 
 		<span class="pagingNos"> <span style="cursor: pointer"
@@ -522,10 +734,14 @@ function checkReserveForm()
 			onClick="pageNoClick(${requestScope.recruitMap.selectPageNo}+1)">[다음]</span>
 			<span style="cursor: pointer"
 			onClick="pageNoClick(${requestScope.recruitMap.last_pageNo})">[마지막]</span>
-		</span> 
+		</span> <select name="rowCntPerPage" class="rowCntPerPage"
+			onChange="search()">
+			<option value="10">10
+			<option value="15">15
+			<option value="20">20
+		</select>행보기 &nbsp;&nbsp;&nbsp;
 		
-	</center>
-	<div style="height:30px;"></div>
+	</center> --%>
 	
 	<form name="recruitTeamMemBoardDetailForm" action="/recruitTeamMemBoardDetailForm.do" method="post">
          <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->

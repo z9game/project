@@ -124,110 +124,84 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityFreeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">자유게시판</p>
 	</div>
 
 
 	<form name="communityFreeBoardSearchForm" onsubmit="return false">
 
-		<input type="hidden" name="SelectPageNo" class="SelectPageNo"
-			value="1"> <input type="hidden" name="rowCntPerPage"
-			class="rowCntPerPage">
+		<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
+			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 	</form>
 
 	<form name="detailForm" id="detailForm" action="/updateFreeBoardDetailReadCountPlusOne.do" method="post">
 		<input type="hidden" name="b_no">
 	</form>
 
-<center>
-	<div style="height: 10px"></div>
-	<input type="button" value="    새 글쓰기    " onclick="newCommunityFreeBoardFormBtnClick()">
-	<div style="height: 10px"></div>
-</center>
-
-<div class="communityFreeBoardFormContainer">
-
-	<div class="freeboardListDiv" style="margin-bottom: 20px;">
-		<table class="freeboardListTable" cellpadding="7" border="1"
-			bordercolor="gray" align="center"
-			style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
-			<tr>
-				<th style="width: 50px;">번호</th>
-				<th style="width: 300px;">제목</th>
-				<th style="width: 80px;">글쓴이</th>
-				<th style="width: 100px;">조회수</th>
-				<th style="width: 100px;">등록일</th>
-			</tr>
-
-
-
-
-
-
-			<c:forEach var="freeboard" items="${requestScope.freeBoardList}"
-				varStatus="status">
-				<tr style="cursor: pointer" onClick="submitDetailForm( ${ freeboard.b_no } );">
-					<td align="center">${requestScope.freeBoardMap.begin_serialNo_desc - status.index}</td>
-					<td>${freeboard.subject}</td>
-					<td align="center">${freeboard.nickname}</td>
-					<td align="center">${freeboard.readcount}</td>
-					<td align="center">${freeboard.reg_date}</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<c:if test="${empty freeBoardList}">
-			<br>
-			<center>조건에 맞는 검색 결과가 없습니다.</center>
-		</c:if>
+	<div class="communityFreeBoardFormTopContents">
+		<span class="communityFreeBoardFormFontLightGray" id="communityFreeBoardAllCount">Total. ${requestScope.freeBoardListAllCnt}개</span>
+		<div class="communityFreeBoardFormRowCntPerPage">
+			<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+				<option value="10">10개씩 보기
+				<option value="15">15개씩 보기
+				<option value="20">20개씩 보기
+			</select>
+		</div>
 	</div>
-</div>
 
-
-
-
-	<center>
-
-		<span class="pagingNos"> <span style="cursor: pointer"
-			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.freeBoardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
-
-
-			<c:forEach var="pageNo"
-				begin="${requestScope.freeBoardMap.begin_pageNo}"
-				end="${requestScope.freeBoardMap.end_pageNo}">
-
+	<div class="communityFreeBoardFormContainer">
+		
+		<div class="freeboardListDiv" style="margin-bottom: 20px;">
+			<table class="freeboardListTable" cellpadding="7" align="center"
+				style="border-collapse: collapse">
+				<tr>
+					<th style="width: 50px;">번호</th>
+					<th style="width: 300px;">제목</th>
+					<th style="width: 80px;">글쓴이</th>
+					<th style="width: 100px;">조회수</th>
+					<th style="width: 100px;">등록일</th>
+				</tr>
+	
+	
+	
+	
+	
+	
+				<c:forEach var="freeboard" items="${requestScope.freeBoardList}"
+					varStatus="status">
+					<tr style="cursor: pointer" onClick="submitDetailForm( ${ freeboard.b_no } );">
+						<td align="center" class="communityFreeBoardFormFontLightGray">${requestScope.freeBoardMap.begin_serialNo_desc - status.index}</td>
+						<td>${freeboard.subject}</td>
+						<td align="center" class="communityFreeBoardFormFontLightGray">${freeboard.nickname}</td>
+						<td align="center" class="communityFreeBoardFormFontLightGray">${freeboard.readcount}</td>
+						<td align="center" class="communityFreeBoardFormFontLightGray">${freeboard.reg_date}</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<c:if test="${empty freeBoardList}">
+				<br>
+				<center>조건에 맞는 검색 결과가 없습니다.</center>
+			</c:if>
+		</div>
+	</div>
+	<div class="newCommunityFreeBoardFormBtnDiv">
+		<input type="button" value="새 글 쓰기" class="newCommunityFreeBoardFormBtn" onclick="newCommunityFreeBoardFormBtnClick()">
+	</div>
+	<div class="communityFreeBoardPaging">
+		<span class="pagingNos">
+			<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.freeBoardMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+			<c:forEach var="pageNo" begin="${requestScope.freeBoardMap.begin_pageNo}" end="${requestScope.freeBoardMap.end_pageNo}">
 				<c:if test="${requestScope.freeBoardMap.selectPageNo==pageNo}">
-            ${pageNo}
-         </c:if>
-
+		            <p class="activePageNo">${pageNo}</p>
+		        </c:if>
 				<c:if test="${requestScope.freeBoardMap.selectPageNo!=pageNo}">
-					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
 				</c:if>
-			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.freeBoardMap.selectPageNo}+1)">[다음]</span>
-			<span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.freeBoardMap.last_pageNo})">[마지막]</span>
-			&nbsp;&nbsp;&nbsp;
-			[${requestScope.freeBoardListCnt}/${requestScope.freeBoardListAllCnt}]개
-			&nbsp;&nbsp;
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
-	</center>
-
-
-
-
-
-
-
-
-
-
-
+			</c:forEach>
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.freeBoardMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+			<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+		</span>
+	</div>
 </body>
 </html>

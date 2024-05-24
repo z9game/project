@@ -52,6 +52,9 @@ public class RecordsDTO {
 	private int count_70;
 	private int count_80;
 	
+	private String teamname;
+	private int count_team;
+	
 	public String getNickname() {
 		return nickname;
 	}
@@ -202,17 +205,17 @@ public class RecordsDTO {
 	public void setCount_gyeonggido(int count_gyeonggido) {
 		this.count_gyeonggido = count_gyeonggido;
 	}
-	public int getCount_jeollado() {
-		return count_jeollado;
-	}
-	public void setCount_jeollado(int count_jeollado) {
-		this.count_jeollado = count_jeollado;
-	}
 	public int getCount_gyeongsangdo() {
 		return count_gyeongsangdo;
 	}
 	public void setCount_gyeongsangdo(int count_gyeongsangdo) {
 		this.count_gyeongsangdo = count_gyeongsangdo;
+	}
+	public int getCount_jeollado() {
+		return count_jeollado;
+	}
+	public void setCount_jeollado(int count_jeollado) {
+		this.count_jeollado = count_jeollado;
 	}
 	public int getCount_chungcheongdo() {
 		return count_chungcheongdo;
@@ -291,5 +294,17 @@ public class RecordsDTO {
 	}
 	public void setCount_80(int count_80) {
 		this.count_80 = count_80;
+	}
+	public String getTeamname() {
+		return teamname;
+	}
+	public void setTeamname(String teamname) {
+		this.teamname = teamname;
+	}
+	public int getCount_team() {
+		return count_team;
+	}
+	public void setCount_team(int count_team) {
+		this.count_team = count_team;
 	}
 }

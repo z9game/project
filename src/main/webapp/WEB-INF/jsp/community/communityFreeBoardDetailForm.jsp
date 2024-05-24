@@ -12,7 +12,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>communityFreeBoardDetailForm</title>
-	<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+	<link href="/style/community/communityFreeBoardDetailFormStyle.css" rel="stylesheet">
 	<script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 	<script>
@@ -213,8 +213,8 @@
 			var comment_div_filter = obj.filter(".comment_div").html();							
 			$(".comment_div").html(comment_div_filter);
 			
-			var comment_page_div_filter = obj.filter(".comment_page_div").html();							
-			$(".comment_page_div").html(comment_page_div_filter);
+			var comment_page_div_filter = obj.filter(".communityFreeBoardCommentPaging").html();							
+			$(".communityFreeBoardCommentPaging").html(comment_page_div_filter);
 			
 		}
 		
@@ -242,85 +242,58 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	
 	<div class="communityFreeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">자유게시판</p>
 	</div>
 
-	<table border="1" bordercolor="gray" align="center" cellpadding="7">
-		<caption>[자유게시판 상세글 보기]</caption>
-		<tr>
-			<th bgColor="lightgray">글쓴이</th>
-			<td>${ requestScope.freeBoardDetail.nickname }</td>
-		</tr>
-		<tr>
-			<th bgColor="lightgray">제 목</th>
+	<table align="center" cellpadding="7" style="width:900px; border-collapse: collapse; border-bottom: 1px solid #999999; margin-top: 50px;">
+		<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 			<td>${ requestScope.freeBoardDetail.subject }</td>
+			<td style="text-align: right; margin-top: 15px;"><span style="color: #999999;">작성자&nbsp;</span>/&nbsp;${ requestScope.freeBoardDetail.nickname }<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${ requestScope.freeBoardDetail.readcount }</td>
+		</tr>
+		<tr style="width: 900px; height: 400px;">
+			<td colspan="2">${ requestScope.freeBoardDetail.content }</td>
 		</tr>
 		<tr>
-			<th bgColor="lightgray">조회수</th>
-			<td>${ requestScope.freeBoardDetail.readcount }</td>
-		</tr>
-		<tr>
-			<th bgColor="lightgray">내 용</th>
-			<td>
-				<textarea style="border:none;" name="content" class="content" rows="13" cols="40" maxlength="500" readonly>${ requestScope.freeBoardDetail.content }</textarea>
+			<td colspan="2">
+				<div class="freeBoardDetailBtnDiv">
+					<c:if test="${requestScope.freeBoardDetail.nickname == sessionScope.nickname}">
+						<input type="button" value="수정/삭제" class="freeBoardUpDelBtn" onclick="document.freeBoardDetailForm.submit();">
+					</c:if>
+					<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/communityFreeBoardForm.do')">
+				</div>
 			</td>
 		</tr>
-		<tr>
-			<th bgColor="lightgray">댓글쓰기</th>
+		<tr style="border-top: 1px solid #999999;">
+			<th style="background-color:rgba(197, 146, 70, 0.4); color: #000000;">댓글쓰기</th>
 			<td>
 				<form name="freeBoardDetailFormComment" id="freeBoardDetailFormComment" onsubmit="return false;">
 					<%= session.getAttribute("nickname") %>
 					<input type="hidden" name="nick_name" class="nick_name" value="<%= session.getAttribute("nickname") %>">
-					<input type="text" name="content" class="content">
-					<input type="button" value="댓글쓰기" onclick="comment();">
+					<input type="text" name="content" class="content" style="width: 530px;">
+					<input type="button" value="댓글쓰기" class="checkCommentBtn" onclick="comment();">
 					<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
 					<input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
 					<input type="hidden" name="rowCntPerPage" class="rowCntPerPage" value="10">
 				</form>		
 			</td>
 		</tr>
-		
-		<c:if test="${ !empty requestScope.sampleDetailCommentList }">
-			<tr>
-				<td colspan="2">[댓글]</td>
-			</tr>
-			
+		<%-- <c:if test="${ !empty requestScope.sampleDetailCommentList }">
 			<c:forEach var="comment" items="${ requestScope.sampleDetailCommentList }" varStatus="status">
 				<tr>
-					<td>${ comment.writer } (${ comment.reg_date })</td>
+					<td style="background-color:rgba(197, 146, 70, 0.4); color: #000000;">${ comment.writer } (${ comment.reg_date })</td>
 					<td>
 						<textarea style="border:none;" rows="1" cols="40" maxlength="500" readonly>${ comment.content }</textarea>
 					</td>
 				</tr>
 			</c:forEach>	
-		</c:if>
-	</table>	
-	
-	<div style="height:5px;"></div>
-	
-	<center>
-		<span style="cursor: pointer" 
-			onclick="location.replace('/communityFreeBoardForm.do')">
-			 [목록 화면으로] 
-		</span>
-		<c:if test="${requestScope.freeBoardDetail.nickname == sessionScope.nickname}">
-			<input type="button" value="수정/삭제" onclick="document.freeBoardDetailForm.submit();" />
-		</c:if>
-	</center>
-	
-	
+		</c:if> --%>
+	</table>
 	<div class="comment_div">
 		<c:if test="${ !empty requestScope.freeBoardDetailCommentList }">
-		
-			<table border="0" bordercolor="gray" align="center" cellpadding="7">
-				<tr>
-					<td colspan="2" width="600">[댓글]</td>
-				</tr>
-				
+			<table align="center" cellpadding="7" style="margin-top: 20px;">
 				<c:forEach var="comment" items="${ requestScope.freeBoardDetailCommentList }" varStatus="status">
 					<tr>
-						<td>
+						<td style="background-color:rgba(197, 146, 70, 0.4); color: #000000;">
 							${ comment.nick_name } (${ comment.reg_date })
 							<br>
 							<c:forEach var="n" begin="1" end="${ comment.print_level }">
@@ -355,45 +328,29 @@
 						</td>
 					</tr>						
 				</c:forEach>
-				
-				<c:forEach var="empty_row" begin="${ requestScope.freeBoardDetailCommentListSize + 1 }" end="${ requestScope.pageMap.rowCntPerPage }">
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-				</c:forEach>	
 			</table>
 		</c:if>		
 			
 	</div>
 	
-	<div class="comment_page_div">
+	<div class="communityFreeBoardCommentPaging">
 		<c:if test="${ !empty requestScope.freeBoardDetailCommentList }">		
-			<div style="height:5px;"></div>
-			<center>
-				<span class="pagingNos">
-					<span style="cursor:pointer;" onClick="pageNoClick( 1 );">[처음]</span>
-					<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.selectPageNo } - 1 );">[이전]</span>
-					&nbsp;&nbsp;
-					
-					<c:forEach var="pageNo" begin="${ requestScope.pageMap.begin_pageNo }" end="${ requestScope.pageMap.end_pageNo }">
-						<c:if test="${ requestScope.pageMap.selectPageNo == pageNo }">
-							<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });"><b><u>${ pageNo }</u></b></span>
-						</c:if>
-			
-						<c:if test="${ requestScope.pageMap.selectPageNo != pageNo }">
-							<span style="cursor:pointer" onClick="pageNoClick(${ pageNo });">[${ pageNo }]</span>
-						</c:if>
-					</c:forEach>
-					&nbsp;&nbsp;
-					
-					<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.selectPageNo } + 1 );">[다음]</span>
-					<span style="cursor:pointer;" onClick="pageNoClick( ${ requestScope.pageMap.last_pageNo } );">[마지막]</span>
-				</span>
-			</center>
+			<span class="pagingNos">
+				<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.pageMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+				<c:forEach var="pageNo" begin="${requestScope.pageMap.begin_pageNo}" end="${requestScope.pageMap.end_pageNo}">
+					<c:if test="${requestScope.pageMap.selectPageNo==pageNo}">
+			            <p class="activePageNo">${pageNo}</p>
+			        </c:if>
+					<c:if test="${requestScope.pageMap.selectPageNo!=pageNo}">
+						<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+					</c:if>
+				</c:forEach>
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.pageMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+				<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
+			</span>
 		</c:if>
-	</div>		
-	
+	</div>
 	<form name="commentOfCommentForm" id="commentOfCommentForm">
 		<input type="hidden" name="nick_name" class="nick_name">
 		<input type="hidden" name="content" class="content">

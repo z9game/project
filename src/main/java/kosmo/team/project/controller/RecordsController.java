@@ -1,17 +1,14 @@
 package kosmo.team.project.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.servlet.ModelAndView;
 
 import kosmo.team.project.dto.RecordsDTO;
 import kosmo.team.project.service.RecordsService;
-import kosmo.team.project.utility.Page;
 
 @Controller
 public class RecordsController {
@@ -136,7 +133,11 @@ public class RecordsController {
 		List<RecordsDTO> ageRatio = this.recordsService.getAgeRatio(recordsDTO);
 		
 		mav.addObject("ageRatio", ageRatio);
-    	
+		
+		List<RecordsDTO> teamMemberCnt = this.recordsService.getTeamMemberCnt(recordsDTO);
+        
+		mav.addObject("teamMemberCnt", teamMemberCnt);
+		
     	mav.setViewName("/records/recordsStatisticsForm.jsp");
     	
         return mav;

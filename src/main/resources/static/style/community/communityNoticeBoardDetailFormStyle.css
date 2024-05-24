@@ -4,14 +4,17 @@
 
 table {
 	border-collapse: collapse;
+	border-color: none;
+	margin: 0 auto;
 }
 
 th, td {
 	padding: 10px 15px 10px 15px;
 }
 
-.newCommunityGallaryFormRegTable th {
-	background-color: rgba(197, 146, 70, 0.4);
+th {
+	background-color: #c59246e0;
+    color: white;
 }
 
 html,
@@ -21,7 +24,6 @@ body {
   margin: 0;
   box-sizing: border-box;
   scrollbar-width: none;
-  overflow-x: hidden;
 }
 
 ul, ol{
@@ -41,36 +43,18 @@ a{
 	padding: 40px;
 }
 
-.newCommunityGallaryFormRegTable{
-	margin: 0 auto;
-	margin-top: 50px;
-	width: 1000px;
-	height: 200px;
-}
-
-.boardResetBtn{
-	width: 100px;
-	height: 40px;
-	margin-top: 10px;
-	margin-left: 900px;
-	background-color: #c59246e0;
-    color: #FFFFFF;
-    border-radius: 10px;
-    border: 1px solid #c59246e0;
-    cursor: pointer;
-}
-
-.boardRegBtn, .moveListBtn{
-	width: 150px;
-	height: 50px;
-	margin-top: 20px;
-	background-color: #c59246e0;
-    color: #FFFFFF;
-    border-radius: 10px;
-    border: 1px solid #c59246e0;
-    cursor: pointer;
-}
-
-.newCommunityGallaryFormBtnDiv{
+.noticeBoardBtnDiv{
 	text-align: center;
+	margin-top: 10px;
+	margin-left: 770px;
+}
+
+.moveListBtn, .noticeBoardUpDelBtn{
+	width: 70px;
+	height: 35px;
+	background-color: #c59246e0;
+    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #c59246e0;
+    cursor: pointer;
 }

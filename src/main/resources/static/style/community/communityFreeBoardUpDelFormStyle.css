@@ -4,13 +4,18 @@
 
 table {
 	border-collapse: collapse;
+	border-color: gray;
+	margin: 0 auto;
+	margin-top:20px;
 }
 
 th, td {
 	padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid gray;
+	border-color: gray;
 }
 
-.newCommunityGallaryFormRegTable th {
+th {
 	background-color: rgba(197, 146, 70, 0.4);
 }
 
@@ -33,22 +38,16 @@ a{
 }
 
 .titleBackgoundText{
-	border-bottom: 1px solid #000000;
+	border-bottom: 1px solid #006666;
 	width: 55%;
 	margin: 0 auto;
+	margin-bottom: 30px;
 	font-size: 40px;
 	text-align: center;
 	padding: 40px;
 }
 
-.newCommunityGallaryFormRegTable{
-	margin: 0 auto;
-	margin-top: 50px;
-	width: 1000px;
-	height: 200px;
-}
-
-.boardResetBtn{
+.moveListBtn{
 	width: 100px;
 	height: 40px;
 	margin-top: 10px;
@@ -60,7 +59,7 @@ a{
     cursor: pointer;
 }
 
-.boardRegBtn, .moveListBtn{
+.checkBoardUpBtn, .checkBoardDelBtn{
 	width: 150px;
 	height: 50px;
 	margin-top: 20px;
@@ -71,6 +70,6 @@ a{
     cursor: pointer;
 }
 
-.newCommunityGallaryFormBtnDiv{
+.freeBoardUpDelBtnDiv{
 	text-align: center;
 }

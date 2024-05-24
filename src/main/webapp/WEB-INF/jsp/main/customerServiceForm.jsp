@@ -111,12 +111,19 @@
              return;
 		} 
 		
-		if (sessionMid !== null && sessionMid !== 'admin' && mid == sessionMid) {
+		if (mid == sessionMid) {
 			$("[name='customerServiceDetailForm'] .b_no").val(b_no);
             document.customerServiceDetailForm.action = "/customerServiceQnADetailForm.do";
             document.customerServiceDetailForm.submit();
-		} else {
-	        alert("작성할 때 로그인 한 아이디와 다릅니다.");
+            
+		} else if(sessionMid === 'null'){
+			
+			alert("로그인 후 이용해주세요.");
+			
+	    } else {
+	    	
+	    	alert("작성할 때 로그인 한 아이디와 다릅니다.");
+	    	
 	    }
 	}
 
