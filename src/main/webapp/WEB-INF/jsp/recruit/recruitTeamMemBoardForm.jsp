@@ -220,6 +220,8 @@ function searchAll(){
 	boardSearchFormObj.find("input[type=text]").val("");
     boardSearchFormObj.find(".sido").val("0");
     boardSearchFormObj.find(".sigungu").val("0");
+    boardSearchFormObj.find(".sigungu").empty();
+    boardSearchFormObj.find(".sigungu").append('<option value="0">군/구 선택</option>');
     boardSearchFormObj.find("input[type=checkbox]").prop("checked", false);
     boardSearchFormObj.find(".rowCntPerPage").val("10");
     boardSearchFormObj.find(".SelectPageNo").val("1");
@@ -441,7 +443,7 @@ function checkReserveForm()
 								<select name="searchType1" class="searchSelect">
 									<option value="all">전체</option>
 									<option value="writer">글작성자</option> 
-									<option value="subject">제목</option>
+									<option value="title">제목</option>
 									<option value="content">내용</option>
 									<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
 								</select> 

@@ -36,12 +36,12 @@
       <if test="sido != null and sido>0">
          and
          (
-            m.sido_name = ${sido}
+            sta.sido_name = ${sido}
          )
          <if test="sigungu !=null and sigungu>0 ">
             and
             (
-               m.sigungu_name = ${sigungu}
+               sta.sigungu_name = ${sigungu}
             )
          </if>
       </if>
@@ -82,15 +82,20 @@
 <select id="getMatchingList" resultType="kosmo.team.project.dto.MatchingDTO" parameterType="kosmo.team.project.dto.MatchingSearchDTO">
       select * from ( select rownum RNUM, zxcvb.* from( 
          select
-             m.match_no
-             ,m.title
-             ,mb.nickname
-             ,m.readcount
-             ,to_char(m.reg_date,'YYYY-MM-DD') as "reg_date"
+            m.match_no
+            ,m.title
+            ,mb.nickname
+            ,m.readcount
+            ,to_char(m.reg_date,'YYYY-MM-DD') as "reg_date"
+            ,sta.sido_name
+            ,sta.sigungu_name
          from
-             match m left join member mb on m.writer = mb.m_no
+            match m left join member mb on m.writer = mb.m_no   
+                    left join stadium sta on m.stadium = sta.stadium_no
+                    left join sido s on sta.sido_name = s.sido_id
+                    left join sigungu si on sta.sigungu_name = si.sigungu_id
          where
-              1=1
+             1=1
            <include refid="boardWhere"/> 
            order by
             m.match_no desc
@@ -298,7 +303,10 @@ where
       select
          count(*)
       from
-         match m left join member mb on m.writer = mb.m_no 
+         match m left join member mb on m.writer = mb.m_no   
+                left join stadium sta on m.stadium = sta.stadium_no
+                left join sido s on sta.sido_name = s.sido_id
+                left join sigungu si on sta.sigungu_name = si.sigungu_id 
       where
            1=1
         <include refid="boardWhere"/>

@@ -144,6 +144,8 @@ $(document).ready(function() {
 	        boardSearchFormObj.find(".ageRange").prop("checked", false);
 	        boardSearchFormObj.find(".sido").val("0");
 	        boardSearchFormObj.find(".sigungu").val("0");
+		    boardSearchFormObj.find(".sigungu").empty();
+		    boardSearchFormObj.find(".sigungu").append('<option value="0">군/구 선택</option>');
 	        boardSearchFormObj.find(".minGames_played").val("0");
 	        boardSearchFormObj.find(".maxGames_played").val("0");
 	        boardSearchFormObj.find(".minWin").val("0");

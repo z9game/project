@@ -36,14 +36,6 @@ function setweekgroup1() {
       else {
          $("#day1, #day2, #day3, #day4, #day5").prop("checked", false);
       }
-      
-      if ($("#workweekcdGroupB").is(":checked")) {
-         $("#day6, #day7").prop("checked", true);
-         $("#day0").prop("checked", false);
-      } 
-      else {
-         $("#day6, #day7").prop("checked", false);
-      }
 };
    
  function setweekgroup2() {

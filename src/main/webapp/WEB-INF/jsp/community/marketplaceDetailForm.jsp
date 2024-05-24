@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>장터 상세보기</title>
 <link href="/style/community/communityMarketplaceDetailFormStyle.css" rel="stylesheet">
-<script src="/js/community/communityNoticeBoardFormScript.js"></script>
+<!-- <script src="/js/community/communityNoticeBoardFormScript.js"></script> -->
 
 </head>
 <body>
@@ -37,8 +37,8 @@
 			</tr>
 			<tr style="width: 900px; height: 400px;">
 				<td colspan="2">
-					<div class="communityGallaryImageDiv">
-						<img src="/image/SoccerBall.jpg" class="communityGallaryImage">
+					<div class="communityMarketplaceImageDiv">
+						<img src="/image/SoccerBall.jpg" class="communityMarketplaceImage">
 					</div>
 					${requestScope.communityDTO.content}
 				</td>
@@ -46,7 +46,7 @@
 		</table>
 		<div class="marketplaceDetailBtnDiv">
 			<c:if test="${requestScope.communityDTO.writer == sessionScope.m_no}">
-				<input type="button" value="수정/삭제" class="gallaryUpDelBtn" onclick="document.marketplaceUpDelForm.submit();">
+				<input type="button" value="수정/삭제" class="marketplaceUpDelBtn" onclick="document.marketplaceUpDelForm.submit();">
 			</c:if>
 			<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/communityMarketplaceBoardForm.do')">
 		</div>

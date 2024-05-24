@@ -52,17 +52,19 @@ a{
     border-radius: 10px;
     border: 1px solid #c59246e0;
     cursor: pointer;
-    margin-left: 33px;
+    margin-left: 25px;
 }
 
 .freeBoardDetailBtnDiv{
+	justify-content: center;
 	margin-top: 10px;
-	margin-left: 700px;
+	margin-left: 750px;
 	display: flex;
 	gap: 10px;
+	margin-bottom: 60px;
 }
 
-.moveListBtn, .freeBoardUpDelBtn{
+.moveListBtn, .freeBoardUpDelBtn, .checkCommentBtn{
 	width: 70px;
 	height: 35px;
 	background-color: #c59246e0;
@@ -75,6 +77,17 @@ a{
 .communityFreeBoardCommentPaging{
 	text-align: center;
 	margin-top: 30px;
+}
+
+.freeBoardDetailCommentDiv{
+	text-align: center;
+	margin-top: 100px;
+	border: 1px solid #999999;
+	width: 850px;
+	margin: 0 auto;
+	padding: 30px;
+	border-radius: 30px;
+	height: 170px;
 }
 
 .activePageNo{
@@ -104,4 +117,38 @@ a{
 .arrowRight strong{
     font-size: 20px;
     margin-left: 10px;
+}
+
+.freeBoardDetailCommentTitle{
+	margin-right: 730px;
+	margin-bottom: 30px;
+}
+
+.freeBoardDetailTextAndBtnAndWriter{
+	display: flex;
+	justify-content: center;
+}
+
+.freeBoardDetailWriter{
+	display: flex;
+	line-height: 2.5;
+	justify-content: center;
+	margin-right: 680px;
+}
+
+.freeBoardDetailWriterTitle{
+	background-color:rgba(197, 146, 70, 0.4);
+	width: 80px;
+	height: 40px;
+	line-height: 2.5;
+	border-radius: 10px;
+	margin-right: 10px;
+}
+
+.content{
+	height: 80px;
+	margin-top: 10px;
+	border-color: rgba(197, 146, 70, 0.4);
+	border-radius: 15px;
+	text-align: left;
 }

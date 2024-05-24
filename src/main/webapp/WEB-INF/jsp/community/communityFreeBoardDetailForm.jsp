@@ -53,7 +53,7 @@
 					url 	:	 "/communityFreeBoardDetailCommentList.do"
 				,	type 	:	 "post"
 				,	data 	:	 serialize
-				,	success :	 function(responseHtml) {	ajaxSuccess(responseHtml);	}
+				,	success :	 function(responseHtml) {	ajaxSuccess(responseHtml);	$("#freeBoardDetailFormComment").find(".content").val("");}
 				,	error 	: 	function() {
 						alert("검색 실패! 관리자에게 문의 바랍니다.");
 					}
@@ -247,36 +247,58 @@
 
 	<table align="center" cellpadding="7" style="width:900px; border-collapse: collapse; border-bottom: 1px solid #999999; margin-top: 50px;">
 		<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
-			<td>${ requestScope.freeBoardDetail.subject }</td>
-			<td style="text-align: right; margin-top: 15px;"><span style="color: #999999;">작성자&nbsp;</span>/&nbsp;${ requestScope.freeBoardDetail.nickname }<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${ requestScope.freeBoardDetail.readcount }</td>
+			<td colspan="2"><span>${ requestScope.freeBoardDetail.subject }</span><span style="float: right;"><span style="color: #999999; margin-top: 15px;">작성자&nbsp;</span>/&nbsp;${ requestScope.freeBoardDetail.nickname }<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${ requestScope.freeBoardDetail.readcount }</span></td>
 		</tr>
 		<tr style="width: 900px; height: 400px;">
 			<td colspan="2">${ requestScope.freeBoardDetail.content }</td>
 		</tr>
-		<tr>
-			<td colspan="2">
-				<div class="freeBoardDetailBtnDiv">
-					<c:if test="${requestScope.freeBoardDetail.nickname == sessionScope.nickname}">
-						<input type="button" value="수정/삭제" class="freeBoardUpDelBtn" onclick="document.freeBoardDetailForm.submit();">
-					</c:if>
-					<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/communityFreeBoardForm.do')">
-				</div>
-			</td>
-		</tr>
-		<tr style="border-top: 1px solid #999999;">
+	</table>
+	<div class="freeBoardDetailBtnDiv">
+		<c:if test="${requestScope.freeBoardDetail.nickname == sessionScope.nickname}">
+			<input type="button" value="수정/삭제" class="freeBoardUpDelBtn" onclick="document.freeBoardDetailForm.submit();">
+		</c:if>
+		<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/communityFreeBoardForm.do')">
+	</div>
+	<div class="freeBoardDetailCommentDiv">
+		<div class="freeBoardDetailCommentTitle" style="text-decoration: underline; text-underline-position: under;">
+			<strong>댓글쓰기</strong>
+		</div>
+	<form name="freeBoardDetailFormComment" id="freeBoardDetailFormComment" onsubmit="return false;">
+		<div class="freeBoardDetailWriter">
+			<div class="freeBoardDetailWriterTitle">
+				작성자
+			</div>
+			<div>
+				<%= session.getAttribute("nickname") %>
+			</div>
+		</div>
+		<div class="freeBoardDetailTextAndBtn">
+			<div class="freeBoardDetailTextAndBtn">
+				<input type="text" name="content" class="content" style="width: 700px;">
+				<input type="button" value="댓글쓰기" class="checkCommentBtn" onclick="comment();">
+			</div>
+		</div>
+	</div>	
+	
+		<input type="hidden" name="nick_name" class="nick_name" value="<%= session.getAttribute("nickname") %>">
+		<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
+		<input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
+		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage" value="10">
+	</form>		
+		<%-- <tr style="border-top: 1px solid #999999;">
 			<th style="background-color:rgba(197, 146, 70, 0.4); color: #000000;">댓글쓰기</th>
 			<td>
 				<form name="freeBoardDetailFormComment" id="freeBoardDetailFormComment" onsubmit="return false;">
 					<%= session.getAttribute("nickname") %>
 					<input type="hidden" name="nick_name" class="nick_name" value="<%= session.getAttribute("nickname") %>">
-					<input type="text" name="content" class="content" style="width: 530px;">
+					<input type="text" name="content" class="content" style="width: 500px;">
 					<input type="button" value="댓글쓰기" class="checkCommentBtn" onclick="comment();">
 					<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
 					<input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
 					<input type="hidden" name="rowCntPerPage" class="rowCntPerPage" value="10">
 				</form>		
 			</td>
-		</tr>
+		</tr> --%>
 		<%-- <c:if test="${ !empty requestScope.sampleDetailCommentList }">
 			<c:forEach var="comment" items="${ requestScope.sampleDetailCommentList }" varStatus="status">
 				<tr>
