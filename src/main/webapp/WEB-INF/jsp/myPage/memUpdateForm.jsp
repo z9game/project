@@ -16,7 +16,7 @@ function memUpdate()
 {
 	
 	var formobj = $("[name='memRegForm']");
-	var pwdobj = $(".pwd");
+	var pwdobj = $(".password");
 	var checkpwdobj = $(".checkpwd");
 	var emailObj = $(".email");
 	var nicknameObj = $(".nickname");
@@ -214,8 +214,8 @@ function memUpdate()
 			</tr> 
 		</table>
 		<div class="upConfirmBtnDiv">
-			<input type="button" class="upConfirmBtn" value="등록" onclick="memUpdate()">
-			<input type="button" class="moveLoginPage" value="로그인 화면" onclick="location.href='/mainForm.do'">
+			<input type="button" class="upConfirmBtn" value="등록" onclick="memUpdate()" style="cursor:pointer;">
+			<input type="button" class="moveLoginPage" value="메인 화면" onclick="location.href='/mainForm.do'" style="cursor:pointer;">
 		</div>
 		<input type="hidden" name="mid" value="${requestScope.memberDTO.mid}">
 	</form>

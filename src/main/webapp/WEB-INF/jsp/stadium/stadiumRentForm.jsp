@@ -108,7 +108,9 @@
 		
 		 var boardSearchFormObj = $("[name='StadiumSearchForm']");
 		 boardSearchFormObj.find(".sido").val("0");
-	     boardSearchFormObj.find(".sigungu").val("0");
+		 boardSearchFormObj.find(".sigungu").val("0");
+		 boardSearchFormObj.find(".sigungu").empty();
+		 boardSearchFormObj.find(".sigungu").append('<option value="0">군/구 선택</option>');
 		 boardSearchFormObj.find("input[type=text]").val("");
 		 boardSearchFormObj.find(".rowCntPerPage").val("8");
 		 boardSearchFormObj.find(".SelectPageNo").val("1")
