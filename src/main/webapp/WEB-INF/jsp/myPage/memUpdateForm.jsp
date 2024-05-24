@@ -7,8 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>adminFormTitle</title>
-<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+<link href="/style/memberUpdateFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
+
 
 <script>
 function memUpdate()
@@ -129,86 +130,58 @@ function memUpdate()
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 
-	<div class="communityFreeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+	<div class="memberUpdateTitle">
 		<p class="titleBackgoundText">회원정보수정</p>
 	</div>
 	
 	<form name="memRegForm">
-		<center>
-			<caption><b>[회원정보 수정]</b></caption>
-		</center>
-		<div style="height:10px;"></div>
-		<table align="center"  border="1">
-
-				
-			
-			<th>이 름</th>
-				<td  width="300px">
-				
-				<!-------------------------------------------------------->			
-				${requestScope.memberDTO.name}
-				<!-------------------------------------------------------->
-				</td>
-			</tr>
-			
+		<table class="memberUpdateFormTable" align="center" style="margin-bottom: 10px; margin-top: 10px;">
 			<tr>
-				<th>아 이 디</th>
+				<th class="memberRegFormMidTh">아이디</th>
 				<td>
-				<!--------------------------------------------------------> 
-				${requestScope.memberDTO.mid}
-				<!-------------------------------------------------------->
+					${requestScope.memberDTO.mid}
 				</td>
 			</tr>
-			
 			<tr>
-				<th>닉네임</th>
+				<th class="memberRegFormNameTh">이름</th>
 				<td>
-				<!-------------------------------------------------------->
-				<input type="text" name="nickname" class="nickname" size="15" maxlength="15" value="${requestScope.memberDTO.nickname}">
-				<!-------------------------------------------------------->
+					${requestScope.memberDTO.name}
 				</td>
-			</tr>
-			
+			</tr>	
 			<tr>
-				<th>암호</th>
+				<th class="memberRegFormPasswordTh">비밀번호</th>
 				<td>
-				<!-------------------------------------------------------->
-				<input type="password" name="password" class="pwd" size="15" maxlength="15" value="${requestScope.memberDTO.password}">
-				<!-------------------------------------------------------->
+					<input type="password" name="password" class="password" size="40" maxlength="30" value="${requestScope.memberDTO.password}">
 				</td>
 			</tr>
-			
 			<tr>
-				<th>암호확인</th>
+				<th class="memberRegFormPasswordCheckTh">비밀번호 확인</th>
 				<td>
-				<!-------------------------------------------------------->
-				<input type="password" name="checkpwd" class="checkpwd" size="15" maxlength="15" value="${requestScope.memberDTO.password}">
-				<!-------------------------------------------------------->
+					<input type="password" name="checkpwd" class="checkpwd" size="40" maxlength="30" value="${requestScope.memberDTO.password}">
 				</td>
 			</tr>
-			
 			<tr>
-				<th>이메일</th>
+				<th class="memberRegFormNicknameTh">닉네임</th>
 				<td>
-				<!-------------------------------------------------------->
-				<input type="email" name="email" class="email" size="25" maxlength="50" value="${requestScope.memberDTO.email}">
-				<!-------------------------------------------------------->
+					<input type="text" name="nickname" class="nickname" size="40" maxlength="30" value="${requestScope.memberDTO.nickname}">
 				</td>
 			</tr>
-			
 			<tr>
-				<th>전화번호</th>
+				<th class="memberRegFormEmailTh">이메일</th>
 				<td>
-				<!-------------------------------------------------------->
-				<input type="tel" name="phone1" class="phone1" size="3" maxlength="3" value="${requestScope.memberDTO.phone1}">-<input type="tel" name="phone2" class="phone2" size="3" maxlength="4" value="${requestScope.memberDTO.phone2}">-<input type="tel" name="phone3" class="phone3" size="3" maxlength="4" value="${requestScope.memberDTO.phone3}">
-				<!-------------------------------------------------------->
+					<input type="email" name="email" class="email" size="40" maxlength="100" value="${requestScope.memberDTO.email}">
+				</td>
+			</tr>
+			<tr>
+				<th class="memberRegFormPhoneTh">전화번호</th>
+				<td>
+					<input type="tel" name="phone1" class="phone1" size="3" maxlength="3" value="${requestScope.memberDTO.phone1}">-<input type="tel" name="phone2" class="phone2" size="3" maxlength="4" value="${requestScope.memberDTO.phone2}">-<input type="tel" name="phone3" class="phone3" size="3" maxlength="4" value="${requestScope.memberDTO.phone3}">
 				</td>
 			</tr>
 			
 			<tr>
-				<th>주소</th>
-				<td colspan="5" > ${requestScope.memberDTO.sido} ${requestScope.memberDTO.sigungu} -> (수정)
+				<th class="memberRegFormRegionTh">주소</th>
+				<td colspan="5" align="center"> ${requestScope.memberDTO.sido} ${requestScope.memberDTO.sigungu} -> (수정)
 		            <select name="sido_id" id="" onchange="categoryChange(this)">
 		              <option value="0">시/도 선택</option>
 		              <option value="1">강원</option>
@@ -233,30 +206,18 @@ function memUpdate()
 		            </select>
 				</td>
 			</tr>
-			
-			<tr>
-			
 			 <tr>
-				<th>상세주소</th>
+				<th class="memberRegFormAdressTh">상세주소</th>
 				<td>
-				<!-------------------------------------------------------->
-				<input type="text" name="detail_address" class="detail_address" size="25" maxlength="50" value="${requestScope.memberDTO.detail_address}">
-				<!-------------------------------------------------------->
+					<input type="text" name="detail_address" class="detail_address" size="40" maxlength="50" value="${requestScope.memberDTO.detail_address}">
 				</td>
 			</tr> 
 		</table>
-		<div style="height:10px;"></div>
-		<center>
-			<input type="button" value="등록" onclick="memUpdate()">
-			<input type="button" value="메인화면으로" style="cursor:pointer" onclick="location.href='/mainForm.do'" >
-		</center>
+		<div class="upConfirmBtnDiv">
+			<input type="button" class="upConfirmBtn" value="등록" onclick="memUpdate()">
+			<input type="button" class="moveLoginPage" value="로그인 화면" onclick="location.href='/mainForm.do'">
+		</div>
 		<input type="hidden" name="mid" value="${requestScope.memberDTO.mid}">
 	</form>
-	
-	
-	
-	<div style="height:50px;"></div>
-
-	
 </body>
 </html>

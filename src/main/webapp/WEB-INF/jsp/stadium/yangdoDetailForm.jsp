@@ -126,8 +126,8 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 				</tr>
 					
 				<tr>
-					<th style=" width: 100px; height:250px; color: #000000">내 용</th>
-					<td>
+					<th style="border-bottom: 1px solid #999999; width: 100px; height:250px; color: #000000">내 용</th>
+					<td style="border-bottom: 1px solid #999999;">
 						${ requestScope.yangdoDTO.content }
 					</td>
 				</tr>

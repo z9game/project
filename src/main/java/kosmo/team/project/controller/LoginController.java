@@ -79,18 +79,13 @@ public class LoginController {
 	
 
 	@RequestMapping(value = "/logoutProc.do")
-	public ModelAndView logoutProc(HttpSession session) {
+	public String logoutProc(HttpSession session) {
 		session.invalidate(); // 세션 무효화
-		
-	
-		
-		ModelAndView mav = new ModelAndView();
+
 		
 		
-		mav.setViewName("/main/mainForm.jsp");
-		return mav; // 로그인 페이지로 리다이렉트
+		return "redirect:/mainForm.do"; // 로그인 페이지로 리다이렉트
 	}
-	
 	
 	@RequestMapping(value = "/memberInfoFindForm.do")
 	public ModelAndView memberInfoFindForm() {
