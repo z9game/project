@@ -366,12 +366,11 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 
 	<div class="communityFreeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
 		<p class="titleBackgoundText">마이페이지</p>
 	</div>
 	<!-- ================================================================================================================= -->
 	<!-- 내정보  / 팀명 클릭시 팀원리스트 상세보기-->
-	<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+	<table cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
 	<caption><b>내 정보</b></caption>
 		<tr>
 			<th>이름</th>

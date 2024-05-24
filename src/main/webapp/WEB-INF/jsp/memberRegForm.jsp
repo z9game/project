@@ -273,7 +273,7 @@ function regMember()
 					</td>
 				</tr>
 				<tr>
-					<th class="memberRegFormNicknameTh">별명</th>
+					<th class="memberRegFormNicknameTh">닉네임</th>
 					<td>
 						<input type="text" name="nickname" class="nickname" size="40" maxlength="30">
 					</td>
@@ -304,10 +304,10 @@ function regMember()
 					</td>
 				</tr>
 				<tr>
-					<th class="memberRegFormRegionTh">시/도</th>
+					<th class="memberRegFormRegionTh">주소</th>
 					<td colspan="5" align="center">
 			            <select name="sido_id" id="" onchange="categoryChange(this)">
-			              <option value>시/도 선택</option>
+			              <option value="0">시/도 선택</option>
 			              <option value="1">강원</option>
 			              <option value="2">경기</option>
 			              <option value="3">경남</option>
@@ -326,7 +326,7 @@ function regMember()
 			              <option value="16">충북</option>
 			            </select>
 			            <select name="sigungu_id" id="state">
-			              <option>군/구 선택</option>
+			              <option value ="0">군/구 선택</option>
 			            </select>
 					</td>
 				</tr>

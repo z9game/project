@@ -13,10 +13,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RecruitTeamBoardDetailForm</title>
-<link href="/style/recruitTeamBoardDetailFormStyle.css" rel="stylesheet">
+<title>NewMatchingBoardForm</title>
+<link href="/style/newMatchingBoardFormStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
-
 <script>
 	$(function() {
 		
@@ -154,39 +153,29 @@
 <body>
    <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recruitTeamBoardDetailFormTitle">
-       <img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
        <p class="titleBackgoundText">매칭 찾기</p>
     </div>
 
    	<form name="newMatchingBoard">
-      <center>
-         <table align="center" bordercolor="gray" border=1 cellpadding=7
-            style="border-collapse: collapse">
-            <caption>[매칭찾기 새 글쓰기]</caption>
+      <table class="newMatchingBoardFormRegTable" style="border-collapse: collapse; margin-top: 50px; width: 900px;">
+      		<tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<input type="text" name="title" class="title" size="106" maxlength="100">
+				</td>
+			</tr>
             <tr>
-               <th bgColor="lightgray">제목</th>
-               <!--------------------------------------------------- -->
-               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 저장된 boardDTO 객체의 -->
-               <!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
-               <!-- 상세보기할 게시판의 이름 표현하기 -->
-               <!--------------------------------------------------- -->
-               <td>
-               		<input type="text" name="title" class="title" size="40" maxlength="30">
-               </td>
-            </tr>
-            <tr>
-               <th bgColor="lightgray">글쓴이</th>
-               <!--------------------------------------------------- -->
-               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-               <!-- subject 라는 멤버변수 안의 데이터를 표현하기 -->
-               <!-- 상세보기할 게시판의 제목 표현하기 -->
-               <!--------------------------------------------------- -->
-               <td>${sessionScope.nickname}</td>
-            </tr>
-            <tr>
-            	<th bgColor="lightgray">팀 명</th>
-            	<td>${requestScope.myInfo.team_name}</td>
-            </tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					${sessionScope.nickname}
+				</td>
+			</tr>
+			<tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">팀명</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					${requestScope.myInfo.team_name}
+				</td>
+			</tr>
             <!-- 	주석처리
             <tr>
                 <th bgColor="lightgray">지역</th>
@@ -218,13 +207,13 @@
              </tr>
 			-->
 			<tr>
-                <th bgColor="lightgray">경기장명</th>
-                <td>
+				<th style="border-bottom: 1px solid #FFFFFF;">경기장명</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
 					<select name="stadium_no" id="stadium_no" onchange="loadMachingDay()">
 						<option value="0">매칭예약 미신청 상태</option>
 					</select>
 				</td>
-             </tr>
+			</tr>
              <!-- 	주석처리
              <tr>
                 <th bgColor="lightgray">시간</th>
@@ -246,25 +235,23 @@
                 </td>
              </tr>
               -->
-              
-			<tr>
-				<th bgColor="lightgray">일시(날짜)</th>
-                <td>
-					<select name="day" onchange="loadMachingTime()">
+              <tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">일시(날짜)</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<select name="day" id="day" onchange="loadMachingTime()">
 						<option value="0">매칭예약 미신청 상태</option>
 					</select>
 				</td>
-             </tr>
-              
-			<tr>
-                <th bgColor="lightgray">시간</th>
-                <td>
-                	<select name="matchingTime">
+			</tr>
+            <tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">시간</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<select name="matchingTime" id="time">
                 		<option value="0">매칭예약 미신청 상태</option>
                 	</select>
-                </td>
-             </tr>
-             
+				</td>
+			</tr>  
+			
              <!-- 	주석처리 순서 위치도 바꿈 
              <tr>
                 <th bgColor="lightgray">일시</th>
@@ -273,36 +260,37 @@
 				</td>
              </tr>
 			-->
-          
-            <tr>
-               <th bgColor="lightgray">내 용</th>
-               <!--------------------------------------------------- -->
-               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-               <!-- content 라는 멤버변수 안의 데이터를 표현하기 -->
-               <!-- 상세보기할 게시판의 내용 표현하기 -->
-               <!--------------------------------------------------- -->
-               <td><textarea name="content" class="content" rows="13"
-                     cols="40" maxlength="500"></textarea></td>
-            </tr>
+			<tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
+				</td>
+			</tr>
          </table>
-      </center>
-      
+      	<div class="newMatchingBoardFormBtnDiv">
+			<div class="resetBtnDiv">
+				<input type="reset" class="boardResetBtn"value="다시 작성">
+			</div>
+			<div class="boardRegAndMoveList">
+				<input type="button" class="boardRegBtn" value="저장" onClick="checkBoardRegForm();">
+				<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/matchingForm.do')">
+			</div>
+		</div>
       <input type="hidden" name="writer" value="${sessionScope.m_no}">
       <input type="hidden" name="m_no" value="${sessionScope.m_no}">
       <input type="hidden" name="team_no" value="${requestScope.myInfo.team_no}">
       
      </form>
 
-      <center>
+      
          <!--------------------------------------------------- -->
          <!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
          <!--------------------------------------------------- -->
-         <span style="cursor: pointer"
+        <!--  <span style="cursor: pointer"
             onclick="location.href='/matchingForm.do'">
             [목록 화면으로] </span>
-         <input type="button" value="등록" style="cursor:pointer" onclick="checkBoardRegForm()" >
-       </center>
-       <div style="height:30px;"></div>
+         <input type="button" value="등록" style="cursor:pointer" onclick="checkBoardRegForm()" > -->
+      
      
     
 </body>

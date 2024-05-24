@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>RecruitTeamBoardDetailForm</title>
-<link href="/style/recruitTeamBoardDetailFormStyle.css" rel="stylesheet">
+<link href="/style/matchingDetailFormStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
 
 <script>
@@ -42,92 +42,54 @@
 <body>
    <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="recruitTeamBoardDetailFormTitle">
-       <img src="/image/RecruitTitleBackgroundImage.jpg" class="titleBackgoundImg">
        <p class="titleBackgoundText">매칭 찾기</p>
     </div>
-
-   
-      <center>
-         <table align="center" bordercolor="gray" border=1 cellpadding=7
-            style="border-collapse: collapse">
-            <caption>[매칭찾기 상세글 보기]</caption>
+        <table class="newMatchingBoardFormRegTable" cellpadding="7" style="width:900px; border-collapse: collapse; margin-top: 50px;">
+        	<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
+					
+				<td colspan="2"><span>${requestScope.detail.title}</span><span style="float: right;"><span style="color: #999999; margin-top: 15px;">작성자&nbsp;</span>/&nbsp;${requestScope.detail.nickname}<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${requestScope.detail.readcount}</span></td>
+			</tr>
+			<tr>
+				<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">팀명</th>
+				<td style="border-bottom: 1px solid #c59246e0;">${requestScope.detail.team_name}</td>
+			</tr>
             <tr>
-               <th bgColor="lightgray">제목</th>
-               <!--------------------------------------------------- -->
-               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 저장된 boardDTO 객체의 -->
-               <!-- writer 라는 멤버변수 안의 데이터를 표현하기 -->
-               <!-- 상세보기할 게시판의 이름 표현하기 -->
-               <!--------------------------------------------------- -->
-               <td>${requestScope.detail.title}</td>
-            </tr>
-            <tr>
-               <th bgColor="lightgray">글쓴이</th>
-               <!--------------------------------------------------- -->
-               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-               <!-- subject 라는 멤버변수 안의 데이터를 표현하기 -->
-               <!-- 상세보기할 게시판의 제목 표현하기 -->
-               <!--------------------------------------------------- -->
-               <td>${requestScope.detail.nickname}</td>
-            </tr>
-            <tr>
-            	<th bgColor="lightgray">팀 명</th>
-            	<td>${requestScope.detail.team_name}</td>
-            </tr>
-            <tr>
-               <th bgColor="lightgray">조회수</th>
-               <!--------------------------------------------------- -->
-               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-               <!-- readcount 라는 멤버변수 안의 데이터를 표현하기 -->
-               <!-- 상세보기할 게시판의 조회수 표현하기 -->
-               <!--------------------------------------------------- -->
-               <td>${requestScope.detail.readcount}</td>
-            </tr>
-            <tr>
-                <th bgColor="lightgray">경기장명</th>
-                <td>${requestScope.detail.stadium_name}</td>
-             </tr>
-             <tr>
-                <th bgColor="lightgray">일시(날짜)</th>
-                <td>${requestScope.detail.booking_date}</td>
-             </tr>
-             <tr>
-                <th bgColor="lightgray">시간</th>
-                <td>${requestScope.detail.time_range}</td>
-             </tr>
-             
-             
-          
-            <tr>
-               <th bgColor="lightgray">내 용</th>
-               <!--------------------------------------------------- -->
-               <!-- HttpServletRequest 객체에 "boardDTO" 라는 키값으로 boardDTO 객체의 -->
-               <!-- content 라는 멤버변수 안의 데이터를 표현하기 -->
-               <!-- 상세보기할 게시판의 내용 표현하기 -->
-               <!--------------------------------------------------- -->
-               <td><textarea name="content" class="content" rows="13"
-                     cols="40" maxlength="500" readonly>${requestScope.detail.content}</textarea></td>
-            </tr>
+				<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">경기장명</th>
+				<td style="border-bottom: 1px solid #c59246e0;">${requestScope.detail.stadium_name}</td>
+			</tr>
+			<tr>
+				<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">일시(날짜)</th>
+				<td style="border-bottom: 1px solid #c59246e0;">${requestScope.detail.booking_date}</td>
+			</tr>
+			<tr>
+				<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">시간</th>
+				<td style="border-bottom: 1px solid #c59246e0;">${requestScope.detail.time_range}</td>
+			</tr>
+			<tr>
+				<th style=" width: 100px; height:250px; color: #000000; border-bottom: 1px solid #999999;">내 용</th>
+				<td style="border-bottom: 1px solid #999999;">
+					${requestScope.detail.content}
+				</td>
+			</tr>
+			<c:if test="${requestScope.myInfo.team_master eq sessionScope.m_no}">
+          	 	<c:if test="${sessionScope.nickname ne requestScope.detail.nickname}">
+					<tr>
+						<td colspan="2" style="text-align: center; border-top: 1px solid #999999;">
+							<input type="button" value="경기신청" style="cursor:pointer" class="matchingRequestBtn" onclick="goWaitingList()" >
+						</td>
+					</tr>
+				</c:if>
+			</c:if>
          </table>
-      </center>
-
-      <center>
          <!--------------------------------------------------- -->
          <!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
          <!--------------------------------------------------- -->
-          <c:if test="${requestScope.myInfo.team_master eq sessionScope.m_no}">
-          	 <c:if test="${sessionScope.nickname ne requestScope.detail.nickname}">
-		  		<input type="button" value="경기신청" style="cursor:pointer" onclick="goWaitingList()" >
-		  	</c:if>
-		  </c:if>
-	
-         <span style="cursor: pointer"
-            onclick="location.href='/matchingForm.do'">
-            [목록 화면으로] </span>
-          <c:if test="${sessionScope.nickname eq requestScope.detail.nickname}">
-         	<input type="button" value="수정/삭제" style="cursor:pointer" onclick="document.matchingUpDelForm.submit()" >
-          </c:if>
-       </center>
-       <div style="height:30px;"></div>
+          <div class="matchingDetailBtnDiv">
+			<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/matchingForm.do')">
+			<c:if test="${sessionScope.nickname eq requestScope.detail.nickname}">
+				<input type="button" value="수정/삭제" style="cursor:pointer" class="matchingUpDelBtn" onclick="document.matchingUpDelForm.submit()" >
+			</c:if>
+		</div>
      <form name="matchingUpDelForm" action="/matchingUpDelForm.do" method="post">
 	 <!------------------------------------------------------------------------>
 	 <!-- 게시판 고유번호가 저장된 hidden 태그 선언하기 -->
