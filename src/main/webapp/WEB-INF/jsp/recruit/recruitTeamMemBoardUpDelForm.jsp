@@ -7,10 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>recruitLessonBoardUpDelForm</title>
-<link href="/style/recruitLessonBoardUpDelFormStyle.css" rel="stylesheet">
+<title>recruitTeamMemBoardUpDelForm</title>
+<link href="/style/recruitTeamMemBoardUpDelFormStyle.css" rel="stylesheet">
 <script src="/js/recruitTeamBoardFormScript.js"></script>
-
 
 
 
@@ -166,11 +165,13 @@
 	
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	
-	<div class="recruitLessonBoardUpDelFormTitle">
-		<p class="titleBackgoundText"> 레슨 모집 수정 / 삭제</p>
+	<div class="recruitTeamMemBoardUpDelFormTitle">
+		<p class="titleBackgoundText">팀 / 팀원 모집 수정 / 삭제</p>
 	</div>
-	<form name="recruitLessonBoardUpDelForm">
-		<table class="recruitLessonBoardUpDelFormRegTable">
+
+
+	<form name="recruitTeamMemBoardUpDelForm">
+		<table class="recruitTeamMemBoardUpDelFormRegTable">
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
@@ -186,7 +187,7 @@
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">지역</th>
 				<td colspan="5" style="border-bottom: 1px solid #c59246e0;">${requestScope.updel_sidosigungu.sido_c}-${requestScope.updel_sidosigungu.sigungu_c}->(수정)
-					<select name="sido" id="sido" onchange="categoryChange(this)">
+					<select name="sido_id" id="sido_id" onchange="categoryChange(this)">
 		              	<option value="0">시/도 선택</option>
 						<option value="1">강원</option>
 						<option value="2">경기</option>
@@ -206,7 +207,7 @@
 						<option value="16">충북</option>
 	            	</select>
 
-		            <select name="sigungu" id="state">
+		            <select name="sigungu_id" id="state">
 		              <option>군/구 선택</option>
 		            </select>
 				</td>
@@ -255,14 +256,35 @@
 				</td>
 			</tr>
 			<tr>
-				<th style="border-bottom: 1px solid #FFFFFF;">비용</th>
+				<th style="border-bottom: 1px solid #FFFFFF;">포지션</th>
 				<td style="border-bottom: 1px solid #c59246e0; text-align: center; display: flex; align-items: center;">
 					<label style="display: flex; align-items: center; margin-right: 50px;">
-						<input type="radio" name="money" value="무료" style="zoom:2.0; margin-right: 5px;" <c:if test="${requestScope.detail.money.contains('무료')}">checked</c:if>>무료
+						<input type="radio" name="pos" value="ST" style="zoom:2.0; margin-right: 5px;" <c:if test="${requestScope.detail.pos.contains('ST')}">checked</c:if>>ST
 					</label>
 					<label style="display: flex; align-items: center; margin-right: 50px;">
-						<input type="radio" name="money" value="유료" style="zoom:2.0; margin-right: 5px;" <c:if test="${requestScope.detail.money.contains('유료')}">checked</c:if>>유료
+						<input type="radio" name="pos" value="CM" style="zoom:2.0; margin-right: 5px;" <c:if test="${requestScope.detail.pos.contains('CM')}">checked</c:if>>CM
 					</label>
+					<label style="display: flex; align-items: center; margin-right: 50px;">
+						<input type="radio" name="pos" value="CB" style="zoom:2.0; margin-right: 5px;" <c:if test="${requestScope.detail.pos.contains('CB')}">checked</c:if>>CB
+					</label>
+					<label style="display: flex; align-items: center; margin-right: 50px;">
+						<input type="radio" name="pos" value="GK" style="zoom:2.0; margin-right: 5px;" <c:if test="${requestScope.detail.pos.contains('GK')}">checked</c:if>>GK
+					</label>
+					<label style="display: flex; align-items: center; margin-right: 50px;">
+						<input type="radio" name="pos" value="All" style="zoom:2.0; margin-right: 5px;" <c:if test="${requestScope.detail.pos.contains('ALL')}">checked</c:if>>ALL
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<th style="border-bottom: 1px solid #FFFFFF;">종류</th>
+				<td style="border-bottom: 1px solid #c59246e0; text-align: center; display: flex; align-items: center;">
+					<label style="display: flex; align-items: center; margin-right: 50px;">
+						<input type="radio" name="team_mem" value="팀" style="zoom:2.0; margin-right: 5px;" <c:if test="${requestScope.detail.team_mem.contains('팀')}">checked</c:if>>팀
+					</label>
+					<label style="display: flex; align-items: center; margin-right: 50px;">
+						<input type="radio" name="team_mem" value="팀원" style="zoom:2.0; margin-right: 5px;" <c:if test="${requestScope.detail.team_mem.contains('팀원')}">checked</c:if>>팀원
+					</label>
+				</td>
 			</tr>
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
@@ -271,9 +293,9 @@
 				</td>
 			</tr>
 		</table>
-		<div class="recruitLessonBoardUpDelFormBtnDiv">
+		<div class="recruitTeamMemBoardUpDelFormBtnDiv">
 			<div class="resetBtnDiv">
-				<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/recruitLessonBoardForm.do')">
+				<input type="button" class="moveListBtn" value="목록" onClick="location.replace('/recruitTeamMemBoardForm.do')">
 				
 			</div>
 			<div class="boardUpDelList">
@@ -281,8 +303,7 @@
 				<input type="reset" class="boardDelBtn"value="삭제" onclick="checkBoardDelForm();">
 			</div>
 		</div>
-		<input type="hidden" name="recruitment_no" value="${requestScope.detail.recruitment_no}">
+		<input type="hidden" name="b_no" value="${requestScope.detail.b_no}">
 	</form>
-	
 </body>
 </html>
