@@ -284,6 +284,11 @@ public class RecruitServiceImpl implements RecruitService {
          
    //용병 신청하면 승낙대기 테이블로 들어간다.
    public int goWaitingHiredList(RecruitHiredDTO recruitHiredDTO) {
+      int checkHiredOverLapCnt = this.recruitDAO.checkHiredOverLapCnt(recruitHiredDTO);
+      if(checkHiredOverLapCnt == 1)
+      {
+         return 2;
+      }
       int goWaitingHiredList = this.recruitDAO.goWaitingHiredList(recruitHiredDTO);
       return goWaitingHiredList;
    }

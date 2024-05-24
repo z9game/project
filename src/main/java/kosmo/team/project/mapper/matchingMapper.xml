@@ -374,9 +374,9 @@ where
 
 <!-- 매칭신청 버튼을 누르면 승낙테이블에 등록된다 -->
 <insert id="regWaitingList" parameterType="kosmo.team.project.dto.MatchingDTO">
-      insert
+insert
    into 
-         waiting_matchReg
+      waiting_matchReg
       values(
          #{match_team}
          ,#{vs_team}
@@ -384,7 +384,28 @@ where
          ,#{day}
          ,${stadium_no}
       )
-      </insert>
+</insert>
+      
+<!-- 매칭 중복신청 확인 -->
+<select id="checkOverLapMatchCnt" resultType="int" parameterType="kosmo.team.project.dto.MatchingDTO">
+   select
+         count(*)
+      from
+         waiting_matchReg
+      where
+         match_team = #{match_team}
+         and
+         vs_team = #{vs_team}
+         and
+         time_no = #{time_no}
+         and
+         to_date(day, 'YYYY-MM-DD') = to_date(#{day},'YYYY-MM-DD')
+         and
+         stadium = ${stadium_no}
+</select>     
+      
+      
+      
  
 
 

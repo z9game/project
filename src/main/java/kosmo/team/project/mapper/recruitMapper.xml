@@ -833,7 +833,7 @@
    </delete> 
    
    <!-- 용병 대기테이블 등록 -->
-   <insert id="goWaitingHiredList" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO">
+   <insert id="goWaitingHiredList" parameterType="kosmo.team.project.dto.RecruitHiredDTO">
          insert
          into 
             waiting_hiredreg
@@ -848,7 +848,26 @@
                 hr.recruitment_no = #{recruitment_no}
          )   
          )
-      </insert>   
+      </insert> 
+      
+      <!-- 용병승낙대기테이블에 중복된것이 있나 확인 -->
+   <select id="checkHiredOverLapCnt" parameterType="kosmo.team.project.dto.RecruitHiredDTO" resultType = "int">
+         select 
+            count(*)
+         from
+            waiting_hiredreg
+         where
+            m_no = #{m_no}
+            and
+            team = (
+                  select
+                   tm.team_no       
+               from
+                   team_member tm left join hired_recruitment hr on tm.team_member = hr.nickname 
+               where
+                   hr.recruitment_no = #{recruitment_no}
+                )
+      </select>  
    
    
    
@@ -1126,8 +1145,8 @@
       
       
       
-      <!-- 승낙대기테이블에 중복된것이 있나 확인 -->
-   <select id="checkingOverLapCnt" parameterType="kosmo.team.project.dto.RecruitLessonDTO" resultType="int">
+      <!-- 레슨승낙대기테이블에 중복된것이 있나 확인 -->
+   <select id="checkingOverLapCnt" parameterType="kosmo.team.project.dto.RecruitLessonDTO" resultType = "int">
          select
             count(*)
          from
@@ -1136,7 +1155,6 @@
             writer = #{writer}
             and
             m_no = #{m_no}
-         
       </select>
       
        

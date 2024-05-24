@@ -144,6 +144,7 @@ public interface RecruitDAO {
    
    
    //용병 신청하면 승낙대기 테이블로 들어간다.
+   int checkHiredOverLapCnt(RecruitHiredDTO recruitHiredDTO);
    int goWaitingHiredList(RecruitHiredDTO recruitHiredDTO);
    
    
