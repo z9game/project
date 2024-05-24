@@ -25,16 +25,25 @@
 		ing();
 	}) 
 	
-	ing_or_end = "초기";
+	//진행/마감 초기설정
+	 ing_or_end = "초기";
+	
+	 //지역선택 초기설정
+	 regionChoice = "초기"
+	 
+	//현재 시간 잡기위한 함수
+	 function nowDate(date) {
+	    var year = date.getFullYear();
+	    var month = date.getMonth()+1;
+	    var day = date.getDate();
+	    return year + "-" + month + "-" + day;
+	}
 	
 	function ing()
 	{
-		search("전체");
-		var now = new Date();
-		var year = now.getFullYear();
-		var month = now.getMonth()+1;
-		var day = now.getDate();
-		var nowdate = year + "-" + "0" + month + "-" + day;
+		regionChoice = "전체";
+	    var now = new Date();
+	    var nowdate = nowDate(now);
 	
 		
 		$.ajax({
@@ -72,11 +81,9 @@
 	
 	function end()
 	{
-		var now = new Date();
-		var year = now.getFullYear();
-		var month = now.getMonth()+1;
-		var day = now.getDate();
-		var nowdate = year + "-" + "0" + month + "-" + day;
+		regionChoice = "전체";
+	    var now = new Date();
+	    var nowdate = nowDate(now);
 		
 		$.ajax({
 			//----------------------------------------------------------
@@ -100,6 +107,7 @@
 				ing_or_end = "끝";
 				
 				$(".boardList").find("#addTextLine").addClass("textLineDecoration");
+	            $(".pagingNos").html(obj.find(".pagingNos").html());
 
 			}			
 			,error 	 : function(){alert("검색 실패 / 관리자에게 문의 바람");}
@@ -108,17 +116,25 @@
 	};
 
 	
-	function search(text)
+	function select(region)
+	{
+		 if (region) 
+		 {
+			 regionChoice = region;
+		 }
+		 search();
+	}
+	
+	 function search()
 	{	
 		$(".region1").click(function(){
 			$(".region1").removeClass("selected1");
 			$(this).addClass("selected1");
 		});
-		var now = new Date();
-		var year = now.getFullYear();
-		var month = now.getMonth()+1;
-		var day = now.getDate();
-		var nowdate = year + "-" + "0" + month + "-" + day;
+		var formObj = $("[name='regionchoice']")
+	      var choicedRegion = regionChoice;
+	      var now = new Date();
+		  var nowdate = nowDate(now);
 		
 		if(ing_or_end == "진행")
 		{
@@ -134,14 +150,14 @@
 				//----------------------------------------------------------
 				//WAS 에 보낼 파라미터명과 파라미터값을 설정하기  ?파라미터명=파라미터값&파라미터명=파라미터값~~
 				//----------------------------------------------------------
-				,data : "region=" + text + "&ing=" + nowdate
+				,data : formObj.serialize() + "&region=" + choicedRegion + "&ing=" + nowdate
 					
 				,success : function(responseHtml){
 					
 					var obj = $(responseHtml);
 					
-					$(".boardList").html( $(responseHtml).find(".boardList").html()  )
-					
+					$(".boardList").html( $(responseHtml).find(".boardList").html()  );
+		            $(".pagingNos").html(  obj.find(".pagingNos").html()  );
 					
 					
 		
@@ -165,14 +181,14 @@
 				//----------------------------------------------------------
 				//WAS 에 보낼 파라미터명과 파라미터값을 설정하기  ?파라미터명=파라미터값&파라미터명=파라미터값~~
 				//----------------------------------------------------------
-				,data : "region=" + text + "&end=" + nowdate
+				,data : formObj.serialize() +"&region=" + choicedRegion + "&end=" + nowdate
 					
 				,success : function(responseHtml){
 					
 					var obj = $(responseHtml);
 					
 					$(".boardList").html( $(responseHtml).find(".boardList").html()  );
-					
+		            $(".pagingNos").html(obj.find(".pagingNos").html());
 					$(".boardList").find("#addTextLine").addClass("textLineDecoration");
 					
 				}			
@@ -192,9 +208,9 @@
 	
 	function pageNoClick(clickPageNo) {
 		
-		$("[name='recruit_Team_mem']").find(".selectPageNo").val(clickPageNo);
+		$("[name='regionchoice']").find(".selectPageNo").val(clickPageNo);
 
-		search_detail();
+		search();
 
 	}
 </script>
@@ -206,6 +222,7 @@
     	<p class="titleBackgoundText">대회일정</p>
     </div>
 	<div>
+	<form name="regionchoice">
 		<div class="tournamentCategoryTabNavDiv">
 			<ul class="tournamentCategoryTabNav">
 	    		<li class="tournament onvalue" onclick="ing()">진행중인 대회</li>
@@ -215,17 +232,17 @@
 		<div class="region"> <!-- 지역 선택 Div -->
 			<table align="center" style="border-collapse:collapse; width: 900px;">
 				<tr align="center">
-					<td class="region1 selected1"  onClick="search('전체')" style="border-bottom: none;">전체</td>
-					<td class="region1" onClick="search('서울')" style="border-bottom: none;">서울</td>
-					<td class="region1" onClick="search('경인')" style="border-bottom: none;">경인</td>
-					<td class="region1" onClick="search('강원')" style="border-bottom: none;">강원</td>
-					<td class="region1" onClick="search('충청')" style="border-bottom: none;">충청</td>
-					<td class="region1" onClick="search('전라')" style="border-bottom: none;">전라</td>
-					<td class="region1" onClick="search('경상')" style="border-bottom: none;">경상</td>
-					<td class="region1" onClick="search('제주')" style="border-bottom: none;">제주</td>
+					<td class="region1 selected1"  onClick="select('전체')" style="border-bottom: none;">전체</td>
+					<td class="region1" onClick="select('서울')" style="border-bottom: none;">서울</td>
+					<td class="region1" onClick="select('경인')" style="border-bottom: none;">경인</td>
+					<td class="region1" onClick="select('강원')" style="border-bottom: none;">강원</td>
+					<td class="region1" onClick="select('충청')" style="border-bottom: none;">충청</td>
+					<td class="region1" onClick="select('전라')" style="border-bottom: none;">전라</td>
+					<td class="region1" onClick="select('경상')" style="border-bottom: none;">경상</td>
+					<td class="region1" onClick="select('제주')" style="border-bottom: none;">제주</td>
 				</tr>
 			</table> 
-		
+       		<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 		
 			<div class="boardList">
 			
@@ -255,7 +272,8 @@
 				</c:if>
 			</div>
 				
-		</div>	
+		</div>
+		</form>	
 	</div>
 	<div class="tournamentPaging">
 		<span class="pagingNos">

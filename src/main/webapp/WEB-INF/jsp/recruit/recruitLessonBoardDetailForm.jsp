@@ -96,7 +96,7 @@ function goWaitingLessonList()
 				</tr>
 				<c:if test="${sessionScope.nickname ne requestScope.lessondetailList.nickname}">
 					<tr>
-						<td colspan="2" style="text-align: center; border-top: 1px solid #999999;">
+						<td colspan="2" style="text-align: center; border-top: 1px solid #999999;"> 
 							<input type="button" value="신청" style="cursor:pointer" class="lessonRequestBtn" onclick="goWaitingLessonList()" >
 						</td>
 					</tr>
@@ -123,6 +123,7 @@ function goWaitingLessonList()
 		
 		<!-- 레슨모집 게시물일때 신청버튼을 누르면 넘어갈 정보들 -->
 		<form name="waitingLessonList">
+			<input type="hidden" name="writer" value="${requestScope.lessondetailList.m_no}">
 			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
 			<input type="hidden" name="recruitment_no"value="${requestScope.lessondetailList.recruitment_no}">
 		</form>

@@ -1124,5 +1124,20 @@
    		)
    	</insert>   
    	
+   	
+   	
+   	<!-- 승낙대기테이블에 중복된것이 있나 확인 -->
+	<select id="checkingOverLapCnt" parameterType="kosmo.team.project.dto.RecruitLessonDTO">
+   		select
+   			count(*)
+   		from
+   			waiting_lessonreg
+   		where
+   			writer = #{writer}
+   			and
+   			m_no = #{m_no}
+   		)
+   	</select>
+   	
    	 
 </mapper>

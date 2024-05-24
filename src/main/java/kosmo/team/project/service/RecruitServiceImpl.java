@@ -429,6 +429,11 @@ public class RecruitServiceImpl implements RecruitService {
 		 
 		//레슨 신청하면 승낙대기 테이블로 들어간다.
 		public int goWaitingLessonList(RecruitLessonDTO recruitLessonDTO) {
+			int checkingOverLapCnt = this.recruitDAO.checkingOverLapCnt(recruitLessonDTO);
+			if(checkingOverLapCnt == 1)
+			{
+				return 2;
+			}
 			int goWaitingLessonList = this.recruitDAO.goWaitingLessonList(recruitLessonDTO);
 			return goWaitingLessonList;
 		}
