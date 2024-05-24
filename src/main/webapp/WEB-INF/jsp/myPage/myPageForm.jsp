@@ -414,6 +414,10 @@
 						</tr>
 					</c:forEach>
 				</table>
+				<div style="height:10px;"></div>
+				
+				
+					<button onclick="">팀 탈퇴</button>
 				
 				<br><br><br>
 				
@@ -438,6 +442,7 @@
 					<b>현재 팀에 용병이 없습니다.</b>
 					</center>
 				</c:if>
+			<div style="height:10px;"></div>
 			<button onclick="modalClose_myTeamInfo()">닫기</button>
 			</div>
 		</div>
