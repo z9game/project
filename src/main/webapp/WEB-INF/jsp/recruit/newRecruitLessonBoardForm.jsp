@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>새 글쓰기</title>
+<title>NewRecruitLessonBoardForm</title>
 <link href="/style/newRecruitLessonBoardFormStyle.css" rel="stylesheet">
 <script src="/js/newRecruitLessonBoardFormScript.js"></script>
 <script src="/js/common.js"></script>
@@ -147,29 +147,28 @@
 <body>
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="newRecruitLessonBoardFormTitle">
-    	<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
     	<p class="titleBackgoundText">레슨 모집 등록</p>
     </div>
-    <div class="newRecruitHiredBoardFormContainer">
+    <div class="newRecruitLessonBoardFormContainer">
     
 		<form name="newRecruitLessonBoardForm">
-			<table class="newRecruitLessonBoardFormRegTable" border="1" bordercolor="black">
+			<table class="newRecruitLessonBoardFormRegTable">
 				<tr>
-					<th>제목</th>
-					<td>
-						<input type="text" name="title" class="title" size="40" maxlength="30">
+					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<input type="text" name="title" class="title" size="106" maxlength="100">
 					</td>
 				</tr>
 				<tr>
-					<th>작성자</th>
-					<td>
+					<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
 						${sessionScope.nickname}
 					</td>
 				</tr>
 				<tr>
-					<th>지역</th>
-					<td>
-						<select name="sido" id="" class="sido" onchange="categoryChange(this)">
+					<th style="border-bottom: 1px solid #FFFFFF;">지역</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<select name="sido" id="sido" onchange="categoryChange(this)">
 			              	<option value="0">시/도 선택</option>
 							<option value="1">강원</option>
 							<option value="2">경기</option>
@@ -189,46 +188,71 @@
 							<option value="16">충북</option>
 		            	</select>
 
-			            <select name="sigungu" id="state" class="sigungu">
-			              <option value="0">군/구 선택</option>
+			            <select name="sigungu" id="state">
 			              <option>군/구 선택</option>
 			            </select>
 					</td>
 				</tr>
 				
 				<tr>
-					<th>요일</th>
-					<td>
-						<input type="checkbox" name="day" class="day" value="1">월
-						<input type="checkbox" name="day" class="day" value="2">화
-						<input type="checkbox" name="day" class="day" value="3">수
-						<input type="checkbox" name="day" class="day" value="4">목
-						<input type="checkbox" name="day" class="day" value="5">금
-						<input type="checkbox" name="day" class="day" value="6">토
-						<input type="checkbox" name="day" class="day" value="7">일
+					<th style="border-bottom: 1px solid #FFFFFF;">요일</th>
+					<td style="border-bottom: 1px solid #c59246e0; text-align: center; display: flex; align-items: center;">
+						<label style="display: flex; align-items: center; margin-right: 65px;">
+							<input type="checkbox" name="day" value="1" style="zoom:2.0; margin-right: 5px;">월
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 65px;">
+							<input type="checkbox" name="day" value="2" style="zoom:2.0; margin-right: 5px;">화
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 65px;">
+							<input type="checkbox" name="day" value="3" style="zoom:2.0; margin-right: 5px;">수
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 65px;">
+							<input type="checkbox" name="day" value="4" style="zoom:2.0; margin-right: 5px;">목
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 65px;">
+							<input type="checkbox" name="day" value="5" style="zoom:2.0; margin-right: 5px;">금
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 65px;">
+							<input type="checkbox" name="day" value="6" style="zoom:2.0; margin-right: 5px;">토
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 65px;">
+							<input type="checkbox" name="day" value="7" style="zoom:2.0; margin-right: 5px;">일
+						</label>
 					</td>
 				</tr>
 				<tr>
-					<th>시간</th>
-					<td>
-						<input type="checkbox" name="time" class="time" value="새벽">새벽
-						<input type="checkbox" name="time" class="time" value="오전">오전
-						<input type="checkbox" name="time" class="time" value="오후">오후
-						<input type="checkbox" name="time" class="time" value="야간">야간
+					<th style="border-bottom: 1px solid #FFFFFF;">시간</th>
+					<td style="border-bottom: 1px solid #c59246e0; text-align: center; display: flex; align-items: center;">
+						<label style="display: flex; align-items: center; margin-right: 50px;">
+							<input type="checkbox" name="time" value="새벽" style="zoom:2.0; margin-right: 5px;">새벽
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 50px;">
+							<input type="checkbox" name="time" value="오전" style="zoom:2.0; margin-right: 5px;">오전
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 50px;">
+							<input type="checkbox" name="time" value="오후" style="zoom:2.0; margin-right: 5px;">오후
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 50px;">
+							<input type="checkbox" name="time" value="야간" style="zoom:2.0; margin-right: 5px;">야간
+						</label>
 					</td>
 				</tr>
 				
 				<tr>
-					<th>비용</th>
-					<td>
-						<input type="radio" name="money" class="money" value="무료">무료
-						<input type="radio" name="money" class="money" value="유료">유료
+					<th style="border-bottom: 1px solid #FFFFFF;">비용</th>
+					<td style="border-bottom: 1px solid #c59246e0; text-align: center; display: flex; align-items: center;">
+						<label style="display: flex; align-items: center; margin-right: 50px;">
+							<input type="radio" name="money" value="무료" style="zoom:2.0; margin-right: 5px;">무료
+						</label>
+						<label style="display: flex; align-items: center; margin-right: 50px;">
+							<input type="radio" name="money" value="유료" style="zoom:2.0; margin-right: 5px;">유료
+						</label>
 				</tr>
 				
 				<tr>
-					<th>내용</th>
-					<td>
-						<textarea name="content" class="content" rows="20" cols="40" maxlength="500" style="resize:none"></textarea>
+					<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
+					<td style="border-bottom: 1px solid #c59246e0;">
+						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
 					</td>
 				</tr>
 				

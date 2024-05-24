@@ -72,7 +72,10 @@
 
 		<div class="noticeBoardBtnDiv">
 			<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/communityNoticeBoardForm.do')">
-			<input type="button" value="수정/삭제" class="noticeBoardUpDelBtn" onclick="document.noticeboardUpDelForm.submit();">
+			
+			<!-- 추후에 수정 -->
+			<!-- <input type="button" value="수정/삭제" class="noticeBoardUpDelBtn" onclick="document.noticeboardUpDelForm.submit();"> -->
+			
 		</div>
 
 		<!--------------------------------------------------- -->
