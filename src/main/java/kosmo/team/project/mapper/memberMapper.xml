@@ -325,25 +325,29 @@
 	<insert id="matchReg" parameterType="kosmo.team.project.dto.TeamDTO"> 
 		    
 		insert into match_day
-		values(
-		    (select match_team from waiting_matchreg where vs_team = #{vs_team} and time_no = #{time_no} and stadium = #{stadium} and day = #{day})
-		    ,#{vs_team}
-		    ,(select time_no from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and day = #{day})  
-		    ,(select day from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and time_no = #{time_no})
-		    ,(select stadium from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and  time_no = #{time_no} and day = #{day})
-		)   
+	    values(
+	        #{match_team}
+	        ,#{vs_team}
+	        ,#{time_no}  
+	        ,(select day from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and time_no = #{time_no} )
+	        ,#{stadium}
+	    )  
+			
+			
 	</insert>
 	
 	<delete id="delMatch" parameterType="kosmo.team.project.dto.TeamDTO">
+	
 		delete 
 		from
 			waiting_matchreg
 		where
-			time_no=(select time_no from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and day = #{day})
+			time_no=#{time_no}
 			and
-			day=(select day from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and time_no = #{time_no})
+			day=(select day from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and time_no = #{time_no} )
 			and
-			stadium=(select stadium from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and  time_no = #{time_no} and day = #{day})
+			stadium=#{stadium}
+	
 	</delete>
 	
 	
@@ -353,7 +357,7 @@
    		 select
 		    t.team_name
 		    ,sta.stadium_name
-		    ,to_char(md.day, 'YYYY-MM-DD') as day
+		    ,md.day
 		    ,tt.time_range
 		from
 		    match_day md left join stadium sta on md.stadium = sta.stadium_no  

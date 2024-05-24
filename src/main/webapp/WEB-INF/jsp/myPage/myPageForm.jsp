@@ -137,7 +137,7 @@
 		if (confirm("정말 수락 하시겠습니까?") == false) {
 			return;
 		}
-		
+		alert(regMatch.serialize());
 		$.ajax({
 			url : "/matchingTeamProc.do",
 			type : "post",
@@ -750,21 +750,16 @@
 							<td align="center">${listMatch.stadium_name}</td>
 							<td align="center">${listMatch.day}</td>
 							<td align="center">${listMatch.time_range}</td>
-							<td align="center"><input type="radio" class="approve" name="team_no" value="${listMatch.vs_team}"></td>
+							<td align="center"><input type="radio" class="approve" name="vs_team" value="${listMatch.vs_team}"></td>
 						</tr>
+						<input type="hidden" name="stadium" value="${listMatch.stadium}">
+						<input type="hidden" name="time_no"    value="${listMatch.time_no}">
 					</c:forEach>
 				</table>
 				
 				<input type="hidden" name="m_no" value="${sessionScope.m_no}">
-				 
-				
-				<!-- 
 				<input type="hidden" name="match_team" value="${requestScope.myInfo.team_no}">
-				<input type="hidden" name="vs_team" value="${requestScope.matchWaitingList.vs_team}">
-				<input type="hidden" name="stadium_no" value="${requestScope.matchWaitingList.stadium}">
-				<input type="hidden" name="time_no" value="${requestScope.matchWaitingList.time_no}">
-				<input type="hidden" name="day" value="${requestScope.matchWaitingList.day}">
-				 -->
+
 				 
 			</form>
 			<div style="height:8px;"></div>

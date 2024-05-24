@@ -25,8 +25,6 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
-    @Autowired
-	private MatchingService matchingservice;
 	
     	//회원가입창
 		@RequestMapping(value = "/memberRegForm.do")
@@ -122,7 +120,7 @@ public class MemberController {
 			 List<bookingDTO> bookedStadium = this.memberService.getBookedStadium(m_no);
 			 
 			//다음 경기 일정 가져오기
-			 //List<TeamDTO> getTeamMatchDay = this.memberService.getTeamMatchDay(m_no);
+			 List<TeamDTO> getTeamMatchDay = this.memberService.getTeamMatchDay(m_no);
 			 
 			//내가 팀장일때 매칭 신청이 들어왔을때
 			 int matchWaitingCnt = this.memberService.getmatchWaitingCnt(m_no);
@@ -161,7 +159,7 @@ public class MemberController {
 		     //내팀 용병 정보
 		     mav.addObject("getHiredList", getHiredList);
 		     //다음경기 일정 가져오기
-		     //mav.addObject("getTeamMatchDay", getTeamMatchDay);
+		     mav.addObject("getTeamMatchDay", getTeamMatchDay);
 		     //나의 레슨을 듣는 인원목록 가져오기
 		     mav.addObject("getLessonList", getLessonList);
 
