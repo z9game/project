@@ -447,10 +447,10 @@
 				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer;">득점 △</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll!='goals_assist asc' and param.sortTabAll != 'goals_assist desc'}">
-				    				<th onClick="clickToSortTabAll('goals_assist desc')"style="width:50px;">도움</th>
+				    				<th onClick="clickToSortTabAll('goals_assist desc')"style="width:50px; cursor:pointer;">도움</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll == 'goals_assist desc'}">
-				    				<th onClick="clickToSortTabAll('goals_assist asc')"style="width:50px;">도움 ▽</th>
+				    				<th onClick="clickToSortTabAll('goals_assist asc')"style="width:50px; cursor:pointer;">도움 ▽</th>
 				    			</c:if>
 				    			<c:if test="${param.sortTabAll =='goals_assist asc'}">
 				    				<th onClick="clickToSortTabAll('')"style="width:50px; cursor:pointer;">도움 △</th>

@@ -162,6 +162,8 @@ function search() {
 		boardSearchFormObj.find("input[type=text]").val("");
 	    boardSearchFormObj.find(".sido").val("0");
 	    boardSearchFormObj.find(".sigungu").val("0");
+	    boardSearchFormObj.find(".sigungu").empty();
+	       boardSearchFormObj.find(".sigungu").append('<option value="0">군/구 선택</option>');
 	    boardSearchFormObj.find("input[type=checkbox]").prop("checked", false);
 	    boardSearchFormObj.find(".rowCntPerPage").val("10");
 	    boardSearchFormObj.find(".SelectPageNo").val("1");
@@ -344,8 +346,8 @@ function search() {
 							<div class="content">
 								<select name="searchType1" class="searchSelect">
 									<option value="all">전체</option>
-									<option value="writer">글작성자</option> 
-									<option value="subject">제목</option>
+									<option value="nickname">글작성자</option> 
+									<option value="title">제목</option>
 									<option value="content">내용</option>
 								</select> 
 							</div>
@@ -359,7 +361,6 @@ function search() {
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			<input type="hidden" name="selectPageNo" class="selectPageNo"  value="1">
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-			<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 			<!--nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
 			<input type="hidden" name="sort_date">
 			<!-- 위에 한 줄은 sort 관련 -->
