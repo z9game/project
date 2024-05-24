@@ -79,27 +79,6 @@
 					(to_date(#{end},'YYYY-MM-DD') - regist_end)>0
 				</if>
 				
-				 <if test="(keyword1 != null and keyword1.length() > 0)">
-			      and (
-			      </if>
-			         <if test="keyword1 != null and keyword1.length() > 0">
-			            (
-			            <if test="searchType1 == 'title'">
-			               upper(subject) like upper('%${keyword1}%')
-			            </if>
-			            <if test="searchType1== 'content'">
-			               upper(content) like upper('%${keyword1}%')
-			            </if>
-			            <if test="searchType1 == 'all'">
-			               upper(subject) like upper('%${keyword1}%')
-			               or
-			               upper(content) like upper('%${keyword1}%')
-			            </if>
-			            )
-			         </if>
-			      <if test="(keyword1 != null and keyword1.length() > 0)">
-			         )
-			      </if>
 			      
 			<![CDATA[
          ) zxcvb) where  RNUM  >= #{begin_rowNo}  and RNUM <= #{end_rowNo}
@@ -130,6 +109,30 @@
          tournament
        where
           1=1
+          	<if test="region != null and region != '전체' and ing != null">
+				and
+				region=#{region}
+				and 
+				(to_date(#{ing},'YYYY-MM-DD') - regist_end) <![CDATA[ <0 ]]>
+			</if>
+			
+			<if test="region != null and region != '전체' and end != null">
+				and
+				region=#{region}
+				and 
+				(to_date(#{end},'YYYY-MM-DD') - regist_end)>0
+			</if>
+			
+			
+			<if test="ing != null">
+				and 
+				(to_date(#{ing},'YYYY-MM-DD') - regist_end) <![CDATA[ <0 ]]>
+			</if>
+			
+			<if test="end != null">
+				and 
+				(to_date(#{end},'YYYY-MM-DD') - regist_end)>0
+			</if>
    </select>
 	
 </mapper>
