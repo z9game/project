@@ -59,6 +59,7 @@ public interface MemberDAO {
 	//매칭승낙
 	int matchReg(TeamDTO teamDTO);
 	int delMatch(TeamDTO teamDTO);
+	int updateChecking(TeamDTO teamDTO);
 	
 	//다음 경기 일정 가져오기
 	List<TeamDTO> getTeamMatchDay_match(int m_no);//수락팀에서

@@ -89,6 +89,7 @@
             ,to_char(m.reg_date,'YYYY-MM-DD') as "reg_date"
             ,sta.sido_name
             ,sta.sigungu_name
+            ,m.checking
          from
             match m left join member mb on m.writer = mb.m_no   
                     left join stadium sta on m.stadium = sta.stadium_no
@@ -151,6 +152,7 @@ select
    ,m.match_no
    ,t.team_name
    ,t.team_no
+   ,m.checking
 from
     match m left join member mb on m.writer = mb.m_no
             left join booking bk on m.writer = bk.m_no  
@@ -179,7 +181,7 @@ where
    //새글쓰기
 -->
 <insert id="regMatchingBoard" parameterType="kosmo.team.project.dto.MatchingDTO" >
-insert into match (match_no, title, writer, content, time_no, day, stadium, team_no)
+insert into match (match_no, title, writer, content, time_no, day, stadium, team_no, checking)
  values(
     (select nvl(max(match_no),0)+1 from match)
     ,#{title}
@@ -189,6 +191,7 @@ insert into match (match_no, title, writer, content, time_no, day, stadium, team
     ,#{day}
     ,${stadium_no}
     ,#{team_no}
+    ,'매칭대기중'
  )
  </insert>
  
@@ -412,6 +415,10 @@ insert
          stadium = ${stadium_no}
 </select>     
       
+      
+
+
+
       
       
  

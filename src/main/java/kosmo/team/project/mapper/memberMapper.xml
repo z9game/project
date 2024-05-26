@@ -332,8 +332,6 @@
 	        ,(select day from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and time_no = #{time_no} )
 	        ,#{stadium}
 	    )  
-			
-			
 	</insert>
 	
 	<delete id="delMatch" parameterType="kosmo.team.project.dto.TeamDTO">
@@ -349,6 +347,19 @@
 			stadium=#{stadium}
 	
 	</delete>
+	
+	<update id="updateChecking" parameterType="kosmo.team.project.dto.TeamDTO">
+		update
+			match
+		set
+			checking = '매칭완료'
+		where
+			time_no = #{time_no}
+			and
+			stadium = #{stadium}
+			and
+			day=(select day from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and time_no = #{time_no} )
+	</update>
 	
 	
 	

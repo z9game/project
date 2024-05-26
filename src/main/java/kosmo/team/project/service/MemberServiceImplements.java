@@ -153,6 +153,7 @@ public class MemberServiceImplements implements MemberService {
 	//매칭수락
 	public int matchReg(TeamDTO teamDTO) {
 		int matchReg = this.memberDAO.matchReg(teamDTO);
+		int updateChecking = this.memberDAO.updateChecking(teamDTO);
 		int delMatch = this.memberDAO.delMatch(teamDTO);
 		return matchReg;
 	}
