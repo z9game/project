@@ -159,8 +159,14 @@ public class MemberServiceImplements implements MemberService {
 	
 	//다음 경기 일정 가져오기
 	public List<TeamDTO> getTeamMatchDay(int m_no){
-		List<TeamDTO> getTeamMatchDay = this.memberDAO.getTeamMatchDay(m_no);
-		return getTeamMatchDay;
+		//수락팀에서
+		List<TeamDTO> getTeamMatchDay_match = this.memberDAO.getTeamMatchDay_match(m_no);
+		if(getTeamMatchDay_match.isEmpty() == true)
+		{
+			List<TeamDTO> getTeamMatchDay_vs = this.memberDAO.getTeamMatchDay_vs(m_no);
+			return getTeamMatchDay_vs;
+		}
+		return getTeamMatchDay_match;
 	}
 	
 	//용병승낙 대기인원 정보가져오기
