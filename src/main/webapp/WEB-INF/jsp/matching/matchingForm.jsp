@@ -365,7 +365,9 @@
 			</c:if>
 		</div>
 		<div class="newRecruitTeamMemBoardBtnDiv">
-			<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkLogin()">
+			<c:if test="${requestScope.myInfo.team_master eq sessionScope.m_no}">
+				<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkLogin()">
+			</c:if>
 		</div>
 		<div class="matchingBoardPaging">
 			<span class="pagingNos">

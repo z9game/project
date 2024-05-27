@@ -25,7 +25,7 @@
 				<ul class="headerNavList">
 					<li class="nav-item" id="nav-item-home"><a href="/mainForm.do">홈</a></li>
 
-					<li class="nav-item"><a href="/matchingForm.do">매칭 찾기</a></li>
+					<li class="nav-item"><a onclick="document.matchingForm.submit()">매칭 찾기</a></li>
 					<li class="nav-item"><a href="/recruitTeamMemBoardForm.do">모집</a>
 						<!-- 하위 카테고리 -->
 						<ul class="navInner">
@@ -107,6 +107,10 @@
 	
 	<form name="myPageForm" action="/myPageForm.do" method="post">
 		<input type="hidden" name="mid" value="${sessionScope.mid}">
+		<input type="hidden" name="m_no" value="${sessionScope.m_no}">
+	</form>
+	
+	<form name="matchingForm" action="/matchingForm.do" method="post">
 		<input type="hidden" name="m_no" value="${sessionScope.m_no}">
 	</form>
 	

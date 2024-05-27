@@ -719,7 +719,7 @@
                   </form>
                   <div style="height:8px;"></div>
                   <button onclick="allApprove()">전체선택</button>
-                  <button onclick="regLesson()()">수락</button>
+                  <button onclick="regLesson()">수락</button>
                   <button onclick="refuseLesson()">거절</button>
                   <button onclick="modalClose_lesson()">닫기</button>
                </div>
