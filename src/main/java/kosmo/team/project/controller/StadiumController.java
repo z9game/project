@@ -68,8 +68,8 @@ public class StadiumController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/stadiumDetailForm.do")
-	public ModelAndView stadiumDetailForm(
+	@RequestMapping(value = "/stadiumRentDetailForm.do")
+	public ModelAndView stadiumRentDetailForm(
 			// --------------------------------------
 			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
 			// 매개변수 b_no 에 저장하고 들어온다.
@@ -108,7 +108,7 @@ public class StadiumController {
 
 		System.out.println("fullRent 날" + fullRent);
 
-		mav.setViewName(stadiumFolder + "stadiumDetailForm.jsp");
+		mav.setViewName(stadiumFolder + "stadiumRentDetailForm.jsp");
 
 		return mav;
 
@@ -207,7 +207,7 @@ public class StadiumController {
 
 	//디테일
 	
-	@RequestMapping(value = "/transferDetailForm.do")
+	@RequestMapping(value = "/stadiumTransferDetailForm.do")
 	public ModelAndView transferDetailForm(@RequestParam(value = "yangdo_no") int yangdo_no, HttpSession session) {
 
 		Integer checkM_no = (Integer) session.getAttribute("m_no");
@@ -239,7 +239,7 @@ public class StadiumController {
 		
 		mav.addObject("yangdoDTO", yangdoDTO);
 
-		mav.setViewName(stadiumFolder + "yangdoDetailForm.jsp");
+		mav.setViewName(stadiumFolder + "stadiumTransferDetailForm.jsp");
 
 		return mav;
 
@@ -532,6 +532,8 @@ public class StadiumController {
 		// HashMap 객체에 게시판 수정 행의 개수 저장하기기
 		// -------------------------------------------
 		resultMap.put("result", StadiumYangdoCnt + "");
+		
+		System.out.println("Result: " + resultMap.get("result"));
 
 		// -------------------------------------------
 		// HashMap 객체의 메위주 리턴하기

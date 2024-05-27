@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityNoticeBoardDetailForm</title>
+<title>adminNoticeBoardDetailForm</title>
 <link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
 
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
@@ -17,7 +17,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+		
 		<p class="titleBackgoundText">공지사항</p>
 	</div>
 

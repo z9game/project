@@ -22,7 +22,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+		
 		<p class="titleBackgoundText">회원상세정보</p>
 	</div>
 
@@ -216,7 +216,7 @@
 			<span style="cursor: pointer"
 				onclick="location.replace('/adminForm.do')"> [목록 화면으로] </span> <input
 				type="button" value="수정/삭제"
-				onclick="document.adminDetailUpDelForm.submit();">
+				onclick="document.memberDetailUpDelForm.submit();">
 
 
 
@@ -234,7 +234,7 @@
 		<!-- [수정/삭제] 버튼 클릭하면 <form name="boardUpDelForm" ~> 태그에 설정한
 					정보를 이용하여 WAS 에 접속하기 -->
 		<!--------------------------------------------------- -->
-		<form name="adminDetailUpDelForm" action="/adminDetailUpDelForm.do"
+		<form name="memberDetailUpDelForm" action="/memberDetailUpDelForm.do"
 			method="post">
 			<input type="hidden" name="m_no"
 				value="${requestScope.memberDTO.m_no}"> <input type="hidden"

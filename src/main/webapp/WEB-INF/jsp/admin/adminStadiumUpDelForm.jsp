@@ -53,7 +53,7 @@
 		if (confirm("정말수정하시겠습니까?") == false) {
 			return;
 		}
-		alert(formObj.serialize());
+		//alert(formObj.serialize());
 
 		$.ajax({
 			url : "/adminStadiumUpProc.do",
@@ -111,7 +111,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+		
 		<p class="titleBackgoundText"></p>
 	</div>
 

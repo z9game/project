@@ -253,7 +253,7 @@
                         <img src="/image/SoccerBackground.jpg" class="tournamentBoardImg">
                      </td>
                      <td>
-                        <b style="font-size: 18px;">${gameList.subject}</b><span class="tournamentBoardFormFontLightGray"> - ${gameList.region}</span>
+                        <b style="font-size: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${gameList.subject}</b><p class="tournamentBoardFormFontLightGray" style="padding-top: 5px">${gameList.region}</p>
                      </td>
                   </tr>
                   <tr>

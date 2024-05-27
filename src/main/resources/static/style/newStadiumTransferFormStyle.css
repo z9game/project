@@ -86,3 +86,15 @@ a{
 	border: 1px solid #c59246e0;
 	text-align: center;
 }
+
+.title{
+	height: 35px;
+	border-radius: 10px;
+	border: 1px solid #c59246e0;
+}
+
+.content{
+	border-radius: 10px;
+	border: 1px solid #c59246e0;
+}
+

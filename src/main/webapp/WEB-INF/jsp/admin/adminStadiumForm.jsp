@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adminFormTitle</title>
+<title>adminStadium</title>
 <link href="/style/community/communityFreeBoardFormStyle.css"
 	rel="stylesheet">
 
@@ -44,7 +44,7 @@
 		    //$("[name='memberDetailForm'] [name='player_record_no']").val(player_record_no);
 		    
 	    // memberDetailForm 폼 submit
-	    alert("stadium_no :  " + stadium_no);
+	   // alert("stadium_no :  " + stadium_no);
 	    document.adminStadiumDetailForm.submit();
 	}
 	
@@ -75,7 +75,7 @@
 		    boardSearchFormObj.find(".rowCntPerPage").val($("select").filter(".rowCntPerPage").val())
 			
 			
-			console.log(boardSearchFormObj.serialize());
+			//console.log(boardSearchFormObj.serialize());
 		    
 	
 			
@@ -226,7 +226,7 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 
 	<div class="communityFreeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+		
 		<p class="titleBackgoundText">경기장관리</p>
 
 	</div>
@@ -343,9 +343,9 @@
 				<tr>
 					<th style="width: 30px;">번호</th>
 
-					<th style="width: 500px;">경기장이름</th>
+					<th style="width: 500px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">경기장이름</th>
 
-					<th style="width: 200px;">시/도</th>
+					<th style="width: 200px; ">시/도</th>
 
 					<th style="width: 200px;">시/군/구</th>
 

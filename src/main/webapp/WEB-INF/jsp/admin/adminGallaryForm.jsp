@@ -146,8 +146,8 @@
 					<div class="communityGallaryImageDiv">
 						<img src="/image/SoccerBall.jpg" class="communityGallaryImage">
 					</div>
-					<div class="communityGallarySubject">${imageboard.subject}</div>
-					<div class="communityGallaryWriter">${imageboard.nickname}</div>
+					<div class="communityGallarySubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${imageboard.subject}</div>
+					<div class="communityGallaryWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${imageboard.nickname}</div>
 					<div class="communityGallaryRegDate">${imageboard.reg_date}</div>
 				</div>
 			</c:forEach>
