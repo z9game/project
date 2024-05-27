@@ -162,9 +162,9 @@ public class AdminController {
 
 	}
 
-	@RequestMapping(value = "/adminDetailUpDelForm.do")
+	@RequestMapping(value = "/memberDetailUpDelForm.do")
 
-	public ModelAndView adminDetailUpDelForm(
+	public ModelAndView memberDetailUpDelForm(
 			// --------------------------------------
 			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
 			// 매개변수 b_no 에 저장하고 들어온다.
@@ -199,7 +199,7 @@ public class AdminController {
 
 		mav.addObject("playerRecordDTO", playerRecordDTO);
 
-		mav.setViewName(adminFolder + "adminDetailUpDelForm.jsp");
+		mav.setViewName(adminFolder + "memberDetailUpDelForm.jsp");
 
 		return mav;
 

@@ -245,7 +245,7 @@ $(document).ready(function() {
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 
 	<div class="communityFreeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+	
 		<p class="titleBackgoundText">어드민 페이지</p>
 
 	</div>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CommunityNoticeBoardForm</title>
+<title>adminNoticeBoardForm</title>
 <link href="/style/community/communityFreeBoardFormStyle.css"
 	rel="stylesheet">
 
@@ -250,7 +250,7 @@ function checkDate() {
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+	
 		<p class="titleBackgoundText">공지사항</p>
 	</div>
 

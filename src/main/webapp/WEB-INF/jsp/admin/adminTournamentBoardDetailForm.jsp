@@ -48,7 +48,7 @@
 <body>
    <%@ include file="/WEB-INF/jsp/header.jsp"%>
    <div class="adminTournamentBoardDetailFormTitle">
-      <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+    
       <p class="titleBackgoundText"></p>
    </div>
 

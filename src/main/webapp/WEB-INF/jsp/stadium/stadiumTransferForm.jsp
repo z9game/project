@@ -29,9 +29,9 @@ function goTransferDetailForm(yangdo_no) {
 	        location.href = '/loginForm.do';
 	        return;
 	    } else {
-	    	$("[name='transferDetailForm'] [name='yangdo_no']").val(yangdo_no);
+	    	$("[name='stadiumTransferDetailForm'] [name='yangdo_no']").val(yangdo_no);
 
-	    	document.transferDetailForm.submit();
+	    	document.stadiumTransferDetailForm.submit();
 	        
 	    }
 	}
@@ -287,7 +287,7 @@ function pageNoClick( clickPageNo ){
 		</span>
 	</div>
 	
-	<form name="transferDetailForm" action="/transferDetailForm.do"
+	<form name="stadiumTransferDetailForm" action="/stadiumTransferDetailForm.do"
 		method="post">
 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
 		<input type="hidden" name="yangdo_no" >

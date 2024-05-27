@@ -15,7 +15,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+		
 		<p class="titleBackgoundText">관리자 장터 상세보기</p>
 	</div>
 

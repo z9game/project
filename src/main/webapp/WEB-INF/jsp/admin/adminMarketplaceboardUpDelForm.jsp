@@ -83,7 +83,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+		
 		<p class="titleBackgoundText">장터</p>
 	</div>
 

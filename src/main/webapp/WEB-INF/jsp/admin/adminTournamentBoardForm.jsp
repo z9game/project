@@ -314,7 +314,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+	
 		<p class="titleBackgoundText"></p>
 	</div>
 

@@ -206,7 +206,7 @@
 <body>
    <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="communityMarketplaceBoardFormTitle">
-       <img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+     
        <p class="titleBackgoundText">관리자 장터</p>
     </div>    
     

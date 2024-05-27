@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>StadiumDetailForm</title>
+<title>StadiumRentDetailForm</title>
 <link href="/style/stadiumDetailFormStyle.css"
 	rel="stylesheet">
 <!-- <script src="/js/community/communityNoticeBoardFormScript.js"></script> -->

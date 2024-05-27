@@ -45,13 +45,6 @@ a{
 }
 
 .checkCommentBtn{
-	width: 70px;
-	height: 35px;
-	background-color: #c59246e0;
-    color: #FFFFFF;
-    border-radius: 10px;
-    border: 1px solid #c59246e0;
-    cursor: pointer;
     margin-left: 25px;
 }
 
@@ -151,4 +144,87 @@ a{
 	border-color: rgba(197, 146, 70, 0.4);
 	border-radius: 15px;
 	text-align: left;
+	border-collapse: collapse;
+}
+
+.freeBoardCommentWriterTitle{
+    background-color:rgba(197, 146, 70, 0.4);
+	width: 80px;
+	height: 40px;
+	line-height: 2.7;
+	border-radius: 10px;
+	margin-right: 10px;
+    text-align: center;
+}
+
+.freeBoardCommentTopContent{
+    display: flex;
+}
+
+.freeBoardCommentWriterAndRegDate{
+    flex-direction: column;
+}
+
+.checkCommentReplyBtn, .checkCommentUpBtn, .checkCommentDelBtn, .checkCommentRegBtn{
+    background-color:#c59246e0;
+	width: 80px;
+	height: 40px;
+	line-height: 2.7;
+	border-radius: 10px;
+	margin-right: 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+.freeBoardCommentDiv{
+    margin: 0 auto;
+    margin-top: 50px;
+    border-bottom: 1px solid #999999;
+    width: 840px;
+    padding: 0 30px;
+}
+
+.freeBoardCommentText{
+    margin-top: 15px;
+}
+
+.freeBoardReplyDiv{
+    margin: 0 auto;
+    margin-top: 10px;
+    border-bottom: 1px solid #999999;
+    width: 840px;
+    padding: 0 30px;
+}
+
+.freeBoardReplayWriterAndRegDate, .freeBoardReplyBtn, .freeBoardReplyText{
+    margin-left: 50px;
+}
+
+.freeBoardReplyText{
+    margin-top: 15px;
+}
+
+.freeBoardCommentUpDelBtn{
+    display: flex;
+    margin-left: auto;
+    gap: 10px; /* Optional: Adds space between the buttons */
+}
+
+.freeBoardCommentBottomContent{
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    justify-content: space-between; /* Distribute space between elements */
+    align-items: center; /* Align items vertically centered */
+}
+
+.checkCommentUpBtnDiv, .checkCommentDelBtnDiv{
+    display: inline-block;
+}
+
+.freeBoardReplytBottomContent{
+    margin-top: 15px;
+    margin-bottom: 10px;
 }

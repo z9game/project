@@ -210,8 +210,8 @@
 		function ajaxSuccess(responseHtml) {
 			
 			var obj = $(responseHtml);
-			var comment_div_filter = obj.filter(".comment_div").html();							
-			$(".comment_div").html(comment_div_filter);
+			var freeBoardCommentDiv_filter = obj.filter(".freeBoardCommentDiv").html();							
+			$(".freeBoardCommentDiv").html(freeBoardCommentDiv_filter);
 			
 			var comment_page_div_filter = obj.filter(".communityFreeBoardCommentPaging").html();							
 			$(".communityFreeBoardCommentPaging").html(comment_page_div_filter);
@@ -259,27 +259,26 @@
 		</c:if>
 		<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/communityFreeBoardForm.do')">
 	</div>
-	<div class="freeBoardDetailCommentDiv">
-		<div class="freeBoardDetailCommentTitle" style="text-decoration: underline; text-underline-position: under;">
-			<strong>댓글쓰기</strong>
-		</div>
 	<form name="freeBoardDetailFormComment" id="freeBoardDetailFormComment" onsubmit="return false;">
-		<div class="freeBoardDetailWriter">
-			<div class="freeBoardDetailWriterTitle">
-				작성자
+		<div class="freeBoardDetailCommentDiv">
+			<div class="freeBoardDetailCommentTitle" style="text-decoration: underline; text-underline-position: under;">
+				<strong>댓글쓰기</strong>
 			</div>
-			<div>
-				<%= session.getAttribute("nickname") %>
+			<div class="freeBoardDetailWriter">
+				<div class="freeBoardDetailWriterTitle">
+					작성자
+				</div>
+				<div>
+					<%= session.getAttribute("nickname") %>
+				</div>
 			</div>
-		</div>
-		<div class="freeBoardDetailTextAndBtn">
 			<div class="freeBoardDetailTextAndBtn">
-				<input type="text" name="content" class="content" style="width: 700px;">
-				<input type="button" value="댓글쓰기" class="checkCommentBtn" onclick="comment();">
+				<div class="freeBoardDetailTextAndBtn">
+					<input type="text" name="content" class="content" style="width: 700px;">
+					<input type="button" value="댓글쓰기" class="checkCommentBtn" onclick="comment();">
+				</div>
 			</div>
 		</div>
-	</div>	
-	
 		<input type="hidden" name="nick_name" class="nick_name" value="<%= session.getAttribute("nickname") %>">
 		<input type="hidden" name="b_no" value="${ requestScope.detailDTO.b_no }">
 		<input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
@@ -309,10 +308,61 @@
 				</tr>
 			</c:forEach>	
 		</c:if> --%>
-	</table>
-	<div class="comment_div">
+	<div class="freeBoardCommentDiv">
 		<c:if test="${ !empty requestScope.freeBoardDetailCommentList }">
-			<table align="center" cellpadding="7" style="margin-top: 20px;">
+			<c:forEach var="comment" items="${ requestScope.freeBoardDetailCommentList }" varStatus="status">
+				<div class="freeBoardCommentDiv">
+			        <div class="freeBoardCommentWriterAndRegDate">
+			        	<c:forEach var="n" begin="1" end="${ comment.print_level }">
+							&nbsp;&nbsp;
+						</c:forEach>
+			            <div class="freeBoardCommentWriter">
+			                <c:if test="${ comment.print_level > 0 }">
+								ㄴ
+							</c:if>${ comment.nick_name }
+			            </div>
+			            <div class="freeBoardCommentRegDate" style="color: #999999;">
+			                ${ comment.nick_name }
+			            </div>
+			        </div>
+			        <c:forEach var="n" begin="1" end="${ comment.print_level }">
+						&nbsp;&nbsp;
+					</c:forEach>
+			        <div class="freeBoardCommentText"> 
+			            ${ comment.content }
+			        </div>
+			        <div class="freeBoardCommentBottomContent">
+			        	<c:if test="${comment.content != '삭제된 댓글입니다.'}">
+				            <div class="freeBoardCommentBtn">
+				                <input type="button" value="답글쓰기" class="checkCommentReplyBtn" onclick="showOrHideCommentOfComment('trCommentOfComment${ comment.comment_no }');">
+				            </div>
+				            <div id="trCommentOfComment${ comment.comment_no }" class="trCommentOfComment" style="display: none;">
+								<div>
+									<input type="hidden" name="nick_name" class="nick_name" id="nick_name${ status.index }" value="<%= session.getAttribute("nickname") %>">
+									<input type="text" name="content" class="content" id="content${ status.index }" >
+								</div>
+								<div>
+									<c:if test="${comment.content != '삭제된 댓글입니다.'}">
+										<input type="button" value="쓰기" class="checkCommentRegBtn" onclick="insertCommentOfComment('${ status.index }', '${ comment.comment_no }');">
+										<c:if test="${comment.nick_name == sessionScope.nickname}">
+											<div class="freeBoardCommentUpDelBtn">
+								                <div class="checkCommentUpBtnDiv">
+								                    <input type="button" value="수정" class="checkCommentUpBtn" onclick="updateCommentOfComment('${ status.index }', '${ comment.comment_no }');">
+								                </div>
+								                <div class="checkCommentDelBtnDiv">
+								                    <input type="button" value="삭제" class="checkCommentDelBtn" onclick="deleteCommentOfComment('${ status.index }', '${ comment.comment_no }');">
+								                </div>
+								            </div>
+										</c:if>
+									</c:if>							
+								</div>
+							</div>
+				    	</c:if>
+			        </div>
+			    </div>
+			</c:forEach>
+			
+			<%-- <table align="center" cellpadding="7" style="margin-top: 20px;">
 				<c:forEach var="comment" items="${ requestScope.freeBoardDetailCommentList }" varStatus="status">
 					<tr>
 						<td style="background-color:rgba(197, 146, 70, 0.4); color: #000000;">
@@ -350,7 +400,7 @@
 						</td>
 					</tr>						
 				</c:forEach>
-			</table>
+			</table> --%>
 		</c:if>		
 			
 	</div>
@@ -396,8 +446,5 @@
 		<input type="hidden" name="b_no" class="b_no" value="0">
 		<input type="hidden" name="comment_no" class="comment_no" value="0">			
 	</form>
-	
-	<br><br><br><br><br><br><br>	
-
 </body>
 </html>

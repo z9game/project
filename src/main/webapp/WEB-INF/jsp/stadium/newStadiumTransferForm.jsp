@@ -139,7 +139,7 @@
 	    
 	    
 		
-	    alert(JSON.stringify(formData));
+	   // alert(JSON.stringify(formData));
 		
 		
 		
@@ -201,6 +201,11 @@
 	    					}else if(result == 2){
 	    						
 	    						alert("이미 같은날과 시간에 양도신청한 경기장이있습니다.");
+	
+	
+	    					}else if(result == 3){
+	    						
+	    						alert("현재 작성한 경기장은 이용불가 상태입니다.");
 	
 	
 	    					}

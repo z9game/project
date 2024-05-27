@@ -19,14 +19,14 @@
 	  
 	});
 	
-	function goStadiumDetailForm(stadium_no) {
+	function goStadiumRentDetailForm(stadium_no) {
 	    // m_no와 함께 player_record_no 파라미터 추가
-	    $("[name='stadiumDetailForm'] [name='stadium_no']").val(stadium_no);
+	    $("[name='stadiumRentDetailForm'] [name='stadium_no']").val(stadium_no);
 	    //$("[name='memberDetailForm'] [name='player_record_no']").val(player_record_no);
 	    
     // memberDetailForm 폼 submit
 
-    document.stadiumDetailForm.submit();
+    document.stadiumRentDetailForm.submit();
 }
 	
 	
@@ -222,7 +222,7 @@
 			varStatus="status">
 
 			<div class="stadiumRentFormBoard" style="cursor: pointer;"
-				onclick="goStadiumDetailForm(${stadiumList.stadium_no});">
+				onclick="goStadiumRentDetailForm(${stadiumList.stadium_no});">
 				<div class="stadiumRentImageDiv">
 					<img src="/image/SoccerBall.jpg" class="stadiumRentImage">
 				</div>
@@ -258,7 +258,7 @@
 			</span>
 		</div>
 		
-	<form name="stadiumDetailForm" action="/stadiumDetailForm.do"
+	<form name="stadiumRentDetailForm" action="/stadiumRentDetailForm.do"
 		method="post">
 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
 

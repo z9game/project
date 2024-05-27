@@ -97,7 +97,7 @@
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	
 	<div class="communityFreeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+
 		<p class="titleBackgoundText">자유게시판</p>
 	</div>
 

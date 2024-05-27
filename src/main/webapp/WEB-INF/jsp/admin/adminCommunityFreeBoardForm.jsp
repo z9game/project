@@ -124,7 +124,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityFreeBoardFormTitle">
-		<img src="/image/SoccerBackground.jpg" class="titleBackgoundImg">
+		
 		<p class="titleBackgoundText">관리자 자유게시판</p>
 	</div>
 	
