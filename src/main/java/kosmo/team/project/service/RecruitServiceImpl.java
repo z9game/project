@@ -52,9 +52,9 @@ public class RecruitServiceImpl implements RecruitService {
    }
    
    //새글쓰기에서 팀이 있나 확인
- 	public RecruitTeamMemDTO checkHaveTeam(RecruitTeamMemDTO recruitTeamMemDTO)
+ 	public int checkHaveTeam(int m_no)
  	{
- 		RecruitTeamMemDTO checkHaveTeam = this.recruitDAO.checkHaveTeam(recruitTeamMemDTO);
+ 		int checkHaveTeam = this.recruitDAO.checkHaveTeam(m_no);
  		return checkHaveTeam;
  	}
    

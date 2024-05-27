@@ -259,7 +259,6 @@ function checkReserveForm()
 	else
 	{
 		document.newRecruitTeamMemBoard.submit();
-		//location.href='/newRecruitTeamMemBoardForm.do'
 	}
 	   
 }

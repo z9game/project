@@ -27,7 +27,7 @@ public interface RecruitService {
 	public int regTeamMemRecruit(RecruitTeamMemDTO recruitTeamMemDTO);
 	
 	//새글쓰기에서 팀이 있나 확인
-	RecruitTeamMemDTO checkHaveTeam(RecruitTeamMemDTO recruitTeamMemDTO);
+	int checkHaveTeam(int m_no);
 	
 	//팀/팀원페이지 수정삭제페이지
 	RecruitTeamMemDTO getRecruit_TeamMemUpDel(int b_no);
