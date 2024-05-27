@@ -82,10 +82,12 @@ public class RecruitController {
 
     //팀/팀원새글쓰기페이지
     @RequestMapping(value = "/newRecruitTeamMemBoardForm.do")
-    public ModelAndView newRecruitTeamMemBoardForm() {
-    	
+    public ModelAndView newRecruitTeamMemBoardForm(RecruitTeamMemDTO recruitTeamMemDTO) {
+    	//새글쓰기에서 팀이 있나 확인
+    	RecruitTeamMemDTO checkHaveTeam = this.recruitService.checkHaveTeam(recruitTeamMemDTO);
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("/recruit/newRecruitTeamMemBoardForm.jsp");
+    	mav.addObject("checkHaveTeam", checkHaveTeam);
     	
         return mav;
     }
