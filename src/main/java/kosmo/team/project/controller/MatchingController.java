@@ -36,7 +36,7 @@ public class MatchingController {
     @RequestMapping(value = "/matchingForm.do")
     								//바로 밑의 매개변수는 JSP페이지에서 넘어오는 값을 저장하기위해 이렇게 선언. 무엇이 넘어오나? -> **검색조건**
     								//넘어오는 값들이 전부 DTO에 담을수 있는 값이기 때문
-    public ModelAndView matchingForm(MatchingSearchDTO matchingSearchDTO) {
+    public ModelAndView matchingForm(MatchingSearchDTO matchingSearchDTO, @RequestParam(value="m_no")int m_no) {
     	//페이징 처리를 위한 코드들
     	//--------------------------------------
 		// 게시판 검색 결과 개수를 구해서 변수 matchListCnt 에 저장하기
@@ -72,7 +72,8 @@ public class MatchingController {
     																//Map보다 DTO를 사용하는 이유는 자료형을 살릴수 있기때문에 DTO를 주로 사용
     	//matchingservice라는 인터페이스 안에 있는 getMatchingList 라는 메소드 호출. 그리고 그 결과값을 matchingList 라는 변수에 저장
     	List<MatchingDTO> matchingList = this.matchingservice.getMatchingList(matchingSearchDTO);
-    	
+    	//내 정보 가져오기, 오라클 실행결과물을 myInfo라는 변수에 저장
+		MemberDTO myInfo = this.memberService.getMyInfo(m_no);
     	
     	ModelAndView mav = new ModelAndView();
     	
@@ -83,6 +84,8 @@ public class MatchingController {
     	//즉, JSP페이지에서 boardList라는 키값을 부르면 그 키값에 해당하는 데이터(matchingList)를 사용할수 있는 것임.
     	mav.addObject("boardList", matchingList);
     	mav.addObject("boardMap", boardMap);
+    	//myInfo에 저장한 결과물을 페이지에서 requestScope를 사용해 얻어낼수 있게 설정
+        mav.addObject("myInfo", myInfo);
         return mav;
     }
     
