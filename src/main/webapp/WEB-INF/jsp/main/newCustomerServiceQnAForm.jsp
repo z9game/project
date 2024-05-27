@@ -33,7 +33,7 @@
 	    function checkPwd() {
 	    	var pwdInsert = prompt("계정 비밀번호를 입력해주세요.");
 	    	
-	    	alert(formObj.serialize());
+	    	//alert(formObj.serialize());
 			
 			if (pwdInsert == null) { 
 		        return;
@@ -94,7 +94,7 @@
 					<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
 					<td style="border-bottom: 1px solid #c59246e0;">
 						<% out.println((String)session.getAttribute("nickname")); %>
-						<input type="text" name="writer" class="writer" value="<%= session.getAttribute("nickname") %>">
+						<input type="hidden" name="writer" class="writer" value="<%= session.getAttribute("nickname") %>">
 					</td>
 				</tr>
 				<tr>

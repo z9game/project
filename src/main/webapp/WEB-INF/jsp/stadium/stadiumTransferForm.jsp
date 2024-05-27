@@ -198,7 +198,7 @@ function pageNoClick( clickPageNo ){
 						</tr>
 						<tr><td></td></tr>
 								<tr>
-									<th style="border-radius: 10px; border-bottom: none; border-top: none;">경기장이름</th>
+									<th style="border-radius: 10px; border-bottom: none; border-top: none; ">경기장이름</th>
 									<td><input type="text" name="Stadiumkeyword1"
 										class="Stadiumkeyword1"> <select name="orand" class="orAnd" style="text-align: center;">
 											<option value="or">or
@@ -242,8 +242,8 @@ function pageNoClick( clickPageNo ){
 				style="border-collapse: collapse;">
 				<tr>
 					<th style="width: 50px;">번호</th>
-					<th style="width: 300px;">제목</th>
-					<th style="width: 80px;">글쓴이</th>
+					<th style="width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">제목</th>
+					<th style="width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">글쓴이</th>
 					<th style="width: 100px;">조회수</th>
 					<th style="width: 100px;">등록일</th>
 					<c:forEach var="Yangdo" items="${requestScope.stadiumYangdoList}"

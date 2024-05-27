@@ -587,7 +587,7 @@
 					  
 					  , ima.content      
 					  , ima.readcount   
-					  , ima.reg_date
+					  , to_char(ima.reg_date,'yyyy-mm-dd') reg_date
 				
 				from imageboard ima   
 			)
@@ -822,7 +822,7 @@
                           
                   , s.content      
                   , s.readcount   
-                  , s.reg_date
+                  , to_char(s.reg_date,'yyyy-mm-dd') reg_date
                   , 'sale'     as "table_name"   
             
                from sale s
@@ -838,7 +838,7 @@
                          
                   , f.content         
                   , f.readcount      
-                  , f.reg_date
+                  , to_char(f.reg_date,'yyyy-mm-dd') reg_date
                   , 'free_sharing'   as "table_name"      
             
                from free_sharing f
@@ -871,7 +871,7 @@
                         
                   , s.content      
                   , s.readcount   
-                  , s.reg_date
+                  , to_char(s.reg_date,'yyyy-mm-dd') reg_date
                   , 'sale'   as "table_name"   
             
                from sale s
@@ -905,7 +905,7 @@
                      
                   , f.content         
                   , f.readcount      
-                  , f.reg_date
+                  ,to_char(f.reg_date,'yyyy-mm-dd') reg_date
                   , 'free_sharing'   as "table_name"
                      
             

@@ -343,9 +343,9 @@
 				<tr>
 					<th style="width: 30px;">번호</th>
 
-					<th style="width: 500px;">경기장이름</th>
+					<th style="width: 500px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">경기장이름</th>
 
-					<th style="width: 200px;">시/도</th>
+					<th style="width: 200px; ">시/도</th>
 
 					<th style="width: 200px;">시/군/구</th>
 

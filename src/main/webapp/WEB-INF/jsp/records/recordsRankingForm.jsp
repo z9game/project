@@ -400,7 +400,7 @@
 				    	<table class="recordsRankingFormTabAllTable" cellpadding="7" align="center" style="border-collapse:collapse; margin:0 auto; margin-top:10px; width:1000px;">
 				    		<tr style="background-color: #c59246e0;">
 				    			<th style="width:20px;">순위</th>
-				    			<th style="width:100px;">선수</th>
+				    			<th style="width:100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">선수</th>
 				    			<c:if test="${param.sortTabAll!='games_played asc' and param.sortTabAll != 'games_played desc'}">
 				    				<th onClick="clickToSortTabAll('games_played desc')"style="width:50px; cursor:pointer;">경기수</th>
 				    			</c:if>

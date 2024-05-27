@@ -228,7 +228,7 @@
 				</div>
 				<div class="staus">
 					${requestScope.StadiumMap.begin_serialNo_asc + status.index}</div>
-				<div class="stadiumRentSubject">경기장:${stadiumList.stadium_name}</div>
+				<div class="stadiumRentSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">경기장:${stadiumList.stadium_name}</div>
 				<div class="stadiumRentWriter">지역:${stadiumList.sido_name}-${stadiumList.sigungu_name}</div>
 			</div>
 		</c:forEach>

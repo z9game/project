@@ -413,21 +413,21 @@ $(document).ready(function() {
 				bordercolor="gray" align="center"
 				style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
 				<tr>
-					<th style="width: 30px;">번호</th>
+					<th style="width: 30px;" >번호</th>
 
 
 					<c:if test="${param.sort!='mid asc' and param.sort!='mid desc' }">
-						<th width="100px" style="cursor: pointer"
+						<th width="100px" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
 							onclick="searchWithSort('mid desc')">아이디</th>
 					</c:if>
 
 					<c:if test="${param.sort=='mid desc'}">
-						<th width="100px" style="cursor: pointer"
+						<th width="100px" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
 							onclick="searchWithSort('mid asc')">아이디▼</th>
 					</c:if>
 
 					<c:if test="${param.sort=='mid asc' }">
-						<th width="100px" style="cursor: pointer"
+						<th width="100px" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
 							onclick="searchWithSort('')">아이디▲</th>
 					</c:if>
 
@@ -456,17 +456,17 @@ $(document).ready(function() {
 
 					<c:if
 						test="${param.sort!='nickname asc' and param.sort!='nickname desc' }">
-						<th width="100px" style="cursor: pointer"
+						<th width="100px" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
 							onclick="searchWithSort('nickname desc')">별명</th>
 					</c:if>
 
 					<c:if test="${param.sort=='nickname desc'}">
-						<th width="100px" style="cursor: pointer"
+						<th width="100px" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
 							onclick="searchWithSort('nickname asc')">별명▼</th>
 					</c:if>
 
 					<c:if test="${param.sort=='nickname asc' }">
-						<th width="100px" style="cursor: pointer"
+						<th width="100px" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
 							onclick="searchWithSort('')">별명▲</th>
 					</c:if>
 

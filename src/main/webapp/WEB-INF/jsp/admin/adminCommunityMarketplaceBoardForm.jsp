@@ -268,8 +268,8 @@
                         <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
-                        <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
+                        <div class="communityMarketplaceBoardSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.subject}</div>
+                        <div class="communityMarketplaceBoardWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
                         <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
                      </div>
@@ -350,8 +350,8 @@
                         <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
-                        <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
+                        <div class="communityMarketplaceBoardSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.subject}</div>
+                        <div class="communityMarketplaceBoardWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
                         <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
                      </div>
@@ -431,8 +431,8 @@
                         <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
                            <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
                         </div>
-                        <div class="communityMarketplaceBoardSubject">${board.subject}</div>
-                        <div class="communityMarketplaceBoardWriter">${board.nickname}</div>
+                        <div class="communityMarketplaceBoardSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.subject}</div>
+                        <div class="communityMarketplaceBoardWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate">${board.reg_date}</div>
                         <div class="communityMarketplaceBoardReadcount">${board.readcount}</div>
                      </div>

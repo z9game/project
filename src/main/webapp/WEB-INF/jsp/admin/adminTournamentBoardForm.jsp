@@ -376,8 +376,8 @@
 			         <table class="tournamentTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin: 0 auto; margin-top:10px; width:1000px;">
 			            <tr>
 			               <th style="width:25px;">번호</th>
-			               <th style="width:150px;">제목</th>
-			               <th style="width:80px;">신청기간</th>
+			               <th style="width:150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">제목</th>
+			               <th style="width:80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">신청기간</th>
 			               <th style="width:40px;">지역</th>
 			                <th style="width:40px;">등록일</th>
 			               <c:forEach var="gameList" items="${requestScope.tournamentList}" varStatus="status">

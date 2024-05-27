@@ -321,8 +321,8 @@ function checkDate() {
 				bordercolor="gray" align="center" style="border-collapse: collapse">
 				<tr>
 					<th style="width: 50px;">번호</th>
-					<th style="width: 300px;">제목</th>
-					<th style="width: 80px;">글쓴이</th>
+					<th style="width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">제목</th>
+					<th style="width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">글쓴이</th>
 					<c:if
 						test="${param.sort!='readcount asc' and param.sort!='readcount desc' }">
 						<th width="80px" style="cursor: pointer"
