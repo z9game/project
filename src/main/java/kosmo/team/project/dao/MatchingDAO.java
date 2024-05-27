@@ -51,6 +51,7 @@ public interface MatchingDAO {
    public List<MatchingDTO> machingTimeSelectBoxLoad(MatchingDTO dto);   
    
    //승낙 대기 리스트로 팀정보 넘어감
+   int checkMember11(MatchingDTO matchingDTO);
    int regWaitingList(MatchingDTO matchingDTO);
    int checkOverLapMatchCnt(MatchingDTO matchingDTO);
 }

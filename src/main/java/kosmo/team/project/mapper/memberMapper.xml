@@ -332,8 +332,6 @@
 	        ,(select day from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and time_no = #{time_no} )
 	        ,#{stadium}
 	    )  
-			
-			
 	</insert>
 	
 	<delete id="delMatch" parameterType="kosmo.team.project.dto.TeamDTO">
@@ -350,10 +348,23 @@
 	
 	</delete>
 	
+	<update id="updateChecking" parameterType="kosmo.team.project.dto.TeamDTO">
+		update
+			match
+		set
+			checking = '매칭완료'
+		where
+			time_no = #{time_no}
+			and
+			stadium = #{stadium}
+			and
+			day=(select day from waiting_matchreg where vs_team = #{vs_team} and match_team = #{match_team} and stadium = #{stadium} and time_no = #{time_no} )
+	</update>
+	
 	
 	
 	<!-- 다음 경기 일정들 --> 
-	<select id="getTeamMatchDay" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
+	<select id="getTeamMatchDay_match" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
    		 select
 		    t.team_name
 		    ,sta.stadium_name
@@ -365,6 +376,23 @@
 		                 left join team t on md.vs_team = t.team_no
 		where
 		    md.match_team = (select team_no from team_member where team_member = #{m_no})
+		    and 
+			(sysdate - to_date(md.day)) <![CDATA[ <=0 ]]>
+	
+	</select>
+	
+	<select id="getTeamMatchDay_vs" parameterType="int" resultType="kosmo.team.project.dto.TeamDTO">
+   		 select
+		    t.team_name
+		    ,sta.stadium_name
+		    ,md.day
+		    ,tt.time_range
+		from
+		    match_day md left join stadium sta on md.stadium = sta.stadium_no  
+		                 left join time_table tt on md.time_no = tt.time_no            
+		                 left join team t on md.match_team = t.team_no
+		where
+		    md.vs_team = (select team_no from team_member where team_member = #{m_no})
 		    and 
 			(sysdate - to_date(md.day)) <![CDATA[ <=0 ]]>
 	

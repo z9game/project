@@ -28,8 +28,11 @@
 				if (result == 1) {
 					alert("신청이 완료되었습니다.");
 				}
-				else {
+				else if (result == 2) {
 					alert("이미 신청한 팀입니다.");
+				}
+				else{
+					alert("매칭신청을 위해서 용병포함 팀원이 최소 11명 있어야합니다.")
 				}
 			},
 			error : function() {
@@ -37,6 +40,16 @@
 			}
 		});
 	}
+	
+	function checkButton(checking) {
+        if (checking == '매칭완료') {
+            alert('매칭이 완료된 글은 수정이 불가능합니다.');
+            return false;
+        } 
+        else {
+            document.matchingUpDelForm.submit();
+        }
+    }
 </script>
 </head>
 <body>
@@ -47,7 +60,7 @@
         <table class="newMatchingBoardFormRegTable" cellpadding="7" style="width:900px; border-collapse: collapse; margin-top: 50px;">
         	<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 					
-				<td colspan="2"><span>${requestScope.detail.title}</span><span style="float: right;"><span style="color: #999999; margin-top: 15px;">작성자&nbsp;</span>/&nbsp;${requestScope.detail.nickname}<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${requestScope.detail.readcount}</span></td>
+				<td colspan="2"><span>${requestScope.detail.title}<b>(${requestScope.detail.checking})</b></span><span style="float: right;"><span style="color: #999999; margin-top: 15px;">작성자&nbsp;</span>/&nbsp;${requestScope.detail.nickname}<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${requestScope.detail.readcount}</span></td>
 			</tr>
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">팀명</th>
@@ -75,7 +88,9 @@
           	 	<c:if test="${sessionScope.nickname ne requestScope.detail.nickname}">
 					<tr>
 						<td colspan="2" style="text-align: center; border-top: 1px solid #999999;">
-							<input type="button" value="경기신청" style="cursor:pointer" class="matchingRequestBtn" onclick="goWaitingList()" >
+							<c:if test="${requestScope.detail.checking eq '매칭대기중'}">
+								<input type="button" value="경기신청" style="cursor:pointer" class="matchingRequestBtn" onclick="goWaitingList()" >
+							</c:if>
 						</td>
 					</tr>
 				</c:if>
@@ -87,9 +102,11 @@
           <div class="matchingDetailBtnDiv">
 			<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/matchingForm.do')">
 			<c:if test="${sessionScope.nickname eq requestScope.detail.nickname}">
-				<input type="button" value="수정/삭제" style="cursor:pointer" class="matchingUpDelBtn" onclick="document.matchingUpDelForm.submit()" >
+				<input type="button" value="수정/삭제" style="cursor:pointer" class="matchingUpDelBtn" 
+						onclick="checkButton('${requestScope.detail.checking}')" >
 			</c:if>
-		</div>
+		 </div>
+
      <form name="matchingUpDelForm" action="/matchingUpDelForm.do" method="post">
 	 <!------------------------------------------------------------------------>
 	 <!-- 게시판 고유번호가 저장된 hidden 태그 선언하기 -->

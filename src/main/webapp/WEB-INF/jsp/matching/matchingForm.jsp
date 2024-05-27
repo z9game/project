@@ -345,7 +345,12 @@
 														<!-- 클릭이 발생했을때 생기는 이벤트 -> goMatchDetail 함수 실행 / 매개변수로는 클릭한 게시물의 번호가 들어간다.-->
 						<tr style="cursor:pointer" onClick="goMatchDetail(${board.match_no})">
 							<td align="center" class="matchingFormFontLightGray">${requestScope.boardMap.begin_serialNo_desc - status.index}</td>
-							<td align="center">${board.title}</td>
+							<c:if test="${board.checking eq '매칭완료'}">
+								<td align="center">${board.title}<b>(${board.checking})</b></td>
+							</c:if>
+							<c:if test="${board.checking eq '매칭대기중'}">
+								<td align="center">${board.title}</td>
+							</c:if>
 							<td align="center" class="matchingFormFontLightGray">${board.nickname}</td>
 							<td align="center" class="matchingFormFontLightGray">${board.readcount}</td>
 							<td align="center" class="matchingFormFontLightGray">${board.reg_date}</td>

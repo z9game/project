@@ -72,6 +72,8 @@ public class MatchingController {
     																//Map보다 DTO를 사용하는 이유는 자료형을 살릴수 있기때문에 DTO를 주로 사용
     	//matchingservice라는 인터페이스 안에 있는 getMatchingList 라는 메소드 호출. 그리고 그 결과값을 matchingList 라는 변수에 저장
     	List<MatchingDTO> matchingList = this.matchingservice.getMatchingList(matchingSearchDTO);
+    	
+    	
     	ModelAndView mav = new ModelAndView();
     	
     	//URL 주소로 들어오면 보여줄 JSP 페이지의 위치.

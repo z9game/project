@@ -137,7 +137,6 @@
 		if (confirm("정말 수락 하시겠습니까?") == false) {
 			return;
 		}
-		alert(regMatch.serialize());
 		$.ajax({
 			url : "/matchingTeamProc.do",
 			type : "post",

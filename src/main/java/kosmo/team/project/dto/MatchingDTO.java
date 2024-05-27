@@ -39,11 +39,18 @@ public class MatchingDTO {
 	private int match_team;
 	private int vs_team;
 	private int stadium;
+	private String checking;
 	
 	
 	
 	
 	
+	public String getChecking() {
+		return checking;
+	}
+	public void setChecking(String checking) {
+		this.checking = checking;
+	}
 	public int getStadium() {
 		return stadium;
 	}
