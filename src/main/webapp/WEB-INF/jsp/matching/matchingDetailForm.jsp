@@ -40,7 +40,7 @@
 	
 	function checkButton(checking) {
         if (checking == '매칭완료') {
-            alert('매칭완료 상태입니다.');
+            alert('매칭이 완료된 글은 수정이 불가능합니다.');
             return false;
         } 
         else {
@@ -85,7 +85,7 @@
           	 	<c:if test="${sessionScope.nickname ne requestScope.detail.nickname}">
 					<tr>
 						<td colspan="2" style="text-align: center; border-top: 1px solid #999999;">
-							<c:if test="${board.checking eq '매칭대기중'}">
+							<c:if test="${requestScope.detail.checking eq '매칭대기중'}">
 								<input type="button" value="경기신청" style="cursor:pointer" class="matchingRequestBtn" onclick="goWaitingList()" >
 							</c:if>
 						</td>
