@@ -51,6 +51,13 @@ public class RecruitServiceImpl implements RecruitService {
 
    }
    
+   //새글쓰기에서 팀이 있나 확인
+ 	public int checkHaveTeam(int m_no)
+ 	{
+ 		int checkHaveTeam = this.recruitDAO.checkHaveTeam(m_no);
+ 		return checkHaveTeam;
+ 	}
+   
    //팀/팀원상세페이지에서 요일 가져오기
    public List<String> getRecruit_day(int b_no){
       List<String> getRecruit_day = this.recruitDAO.getRecruit_day(b_no); 

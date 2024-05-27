@@ -28,7 +28,8 @@ public interface RecruitDAO {
    
    public RecruitHiredDTO getRecruit_HiredDetail(int recruitment_no);
    
-   
+   //새글쓰기에서 팀이 있나 확인
+ 	int checkHaveTeam(int m_no);
    
    
    public int regTeamMemRecruit(RecruitTeamMemDTO recruitTeamMemDTO);

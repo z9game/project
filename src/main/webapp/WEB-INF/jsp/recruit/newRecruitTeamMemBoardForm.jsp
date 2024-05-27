@@ -269,9 +269,11 @@
 						<label style="display: flex; align-items: center; margin-right: 50px;">
 							<input type="radio" name="team_mem" value="팀" style="zoom:2.0; margin-right: 5px;">팀
 						</label>
-						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="radio" name="team_mem" value="팀원" style="zoom:2.0; margin-right: 5px;">팀원
-						</label>
+						<c:if test="${requestScope.checkHaveTeam eq 1}">
+							<label style="display: flex; align-items: center; margin-right: 50px;">
+								<input type="radio" name="team_mem" value="팀원" style="zoom:2.0; margin-right: 5px;">팀원
+							</label>
+						</c:if>
 					</td>
 				</tr>
 				<tr>
