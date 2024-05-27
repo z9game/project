@@ -106,6 +106,11 @@ public class MatchingServiceImpl implements MatchingService {
    
    //승낙 대기 리스트로 팀정보 넘어감
    public int regWaitingList(MatchingDTO matchingDTO) {
+	  int member11 = this.matchingDAO.checkMember11(matchingDTO);
+	  if(member11 < 11)
+	  {
+		  return 3;
+	  }
       int checkOverLapMatchCnt = this.matchingDAO.checkOverLapMatchCnt(matchingDTO);
       if(checkOverLapMatchCnt == 1)
       {

@@ -28,8 +28,11 @@
 				if (result == 1) {
 					alert("신청이 완료되었습니다.");
 				}
-				else {
+				else if (result == 2) {
 					alert("이미 신청한 팀입니다.");
+				}
+				else{
+					alert("매칭신청을 위해서 용병포함 팀원이 최소 11명 있어야합니다.")
 				}
 			},
 			error : function() {

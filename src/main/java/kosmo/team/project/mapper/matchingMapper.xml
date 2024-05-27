@@ -415,7 +415,14 @@ insert
          stadium = ${stadium_no}
 </select>     
       
-      
+<select id="checkMember11" resultType="int" parameterType="kosmo.team.project.dto.MatchingDTO">
+	select
+	    (select count(team_no) from team_member where team_no = #{vs_team})
+	    +
+	    (select count(team_no) from team_merc where team_no = #{vs_team})
+	from 
+	    dual
+</select>
 
 
 
