@@ -355,6 +355,18 @@
       
    </select>
    
+   <!-- 팀이있나? -->
+	<select id="checkHaveTeam" parameterType="kosmo.team.project.dto.RecruitTeamMemDTO" resultType="kosmo.team.project.dto.RecruitTeamMemDTO">     
+  		select
+  			team_member as m_no
+  		from
+  			team_member
+  		where
+  			team_member = #{m_no}
+	</select>
+   
+   
+   
    <!-- 팀/팀원 모집 게시물 상세페이지 -->
    <select id="getRecruit_TeamMemDetail" resultType="kosmo.team.project.dto.RecruitTeamMemDTO" parameterType="int">
           select 
