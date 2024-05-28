@@ -36,7 +36,8 @@ public class MatchingController {
     @RequestMapping(value = "/matchingForm.do")
     								//바로 밑의 매개변수는 JSP페이지에서 넘어오는 값을 저장하기위해 이렇게 선언. 무엇이 넘어오나? -> **검색조건**
     								//넘어오는 값들이 전부 DTO에 담을수 있는 값이기 때문
-    public ModelAndView matchingForm(MatchingSearchDTO matchingSearchDTO, @RequestParam(value="m_no")int m_no) {
+    public ModelAndView matchingForm(MatchingSearchDTO matchingSearchDTO, @RequestParam(name = "m_no", required = false, defaultValue = "0")int m_no) {
+
     	//페이징 처리를 위한 코드들
     	//--------------------------------------
 		// 게시판 검색 결과 개수를 구해서 변수 matchListCnt 에 저장하기

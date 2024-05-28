@@ -197,8 +197,8 @@
 	
 	function goTournamentBoardDetail(list_no)
 	{
-	   $("[name='adminTournamentDetailForm'] [name='list_no']").val(list_no); 
-	   document.adminTournamentDetailForm.submit();
+	   $("[name='upDelTournament'] [name='list_no']").val(list_no); 
+	   document.upDelTournament.submit();
 	}
 	
 	
@@ -431,9 +431,13 @@
     </center>
     
     
-    <form action="/adminTournamentDetailForm.do" method="post" name="adminTournamentDetailForm">
-    	<input type="hidden" name="list_no">
-    </form>
+
+    <form name="upDelTournament" action="/adminTournamentBoardUpForm.do" method="post">
+		<input type="hidden" name="list_no" value="${requestScope.detail.list_no}">
+	</form>
+    
+    
+    
     <div style="height:50px;"></div>
 	
 </body>

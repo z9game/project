@@ -693,8 +693,7 @@
 		select * from (
 		select rownum RNUM, zxcvb.* from (
 		select
-		m.m_no AS
-		"m_no",
+		m.m_no AS "m_no",
 		m.mid AS "mid",
 		m.name AS "name",
 		m.nickname as "nickname",
@@ -709,7 +708,8 @@
 		AS "reg_date"
 		, to_number(to_char(sysdate, 'YYYY')) -
 		to_number(to_char(birthdate, 'YYYY')) AS age
-
+		
+		,pr.player as "player"
 		,pr.games_played as
 		"games_played"
 		,pr.draws as "draws"
@@ -827,12 +827,10 @@
 		,mid = #{mid}
 		,nickname=#{nickname}
 		,email = #{email}
-		,birthdate = #{birthday}
 
-		,phone = #{phone}
+		,phone = '${phone1}-${phone2}-${phone3}'
 
-		,gender
-		=#{gender}
+		,gender=#{gender}
 		<if test="sido_id !=null and sido_id !=''">
 			,sido_id = #{sido_id}
 		</if>

@@ -303,7 +303,7 @@ function checkReserveForm()
 	
 	<!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
 		<form name="recruit_Team_mem" onsubmit="return false">
-			<table align="center">
+			<table align="center" style="border: 1px solid #c59246e0; border-collapse: separate; border-radius: 20px; padding: 0px 15px 15px 15px;">
 					<tr>
 						<td>
 							<table style="border-collapse: collapse; border-bottom: none;" align="center">

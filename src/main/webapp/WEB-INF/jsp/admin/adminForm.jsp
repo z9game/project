@@ -34,14 +34,14 @@ $(document).ready(function() {
 
 
 
-	function goAdminMemberDetailForm(m_no) {
-	    // m_no와 함께 player_record_no 파라미터 추가
-	    $("[name='adminMemberDetailForm'] [name='m_no']").val(m_no);
-	    //$("[name='memberDetailForm'] [name='player_record_no']").val(player_record_no);
+// 	function goAdminMemberDetailForm(m_no) {
+// 	    // m_no와 함께 player_record_no 파라미터 추가
+// 	    $("[name='adminMemberDetailForm'] [name='m_no']").val(m_no);
+// 	    //$("[name='memberDetailForm'] [name='player_record_no']").val(player_record_no);
 	    
-    // memberDetailForm 폼 submit
-    document.adminMemberDetailForm.submit();
-}
+//     // memberDetailForm 폼 submit
+//     document.adminMemberDetailForm.submit();
+// }
 
 
 	
@@ -238,6 +238,23 @@ $(document).ready(function() {
 		});
 
 	}
+	
+	
+	function goMemberDetail(m_no){
+
+		
+	    $("[name='memberDetailUpDelForm'] [name='m_no']").val(m_no);
+		
+		
+		document.memberDetailUpDelForm.submit();
+		
+		
+
+	}
+	
+	
+	
+	
 
 </script>
 </head>
@@ -329,7 +346,7 @@ $(document).ready(function() {
 							</select></td>
 						</tr>
 						<tr>
-							<th>날짜검색</th>
+							<th>가입일검색</th>
 							<td>최소<input type="text" name="minDate" id="minDate"
 								readonly="readonly"> ~ 최대 <input type="text"
 								name="maxDate" id="maxDate" readonly="readonly"></td>
@@ -481,17 +498,17 @@ $(document).ready(function() {
 					<c:if
 						test="${param.sort!='reg_date asc' and param.sort!='reg_date desc' }">
 						<th width="100px" style="cursor: pointer"
-							onclick="searchWithSort('reg_date desc')">등록일</th>
+							onclick="searchWithSort('reg_date desc')">가입일</th>
 					</c:if>
 
 					<c:if test="${param.sort=='reg_date desc'}">
 						<th width="100px" style="cursor: pointer"
-							onclick="searchWithSort('reg_date asc')">등록일▼</th>
+							onclick="searchWithSort('reg_date asc')">가입일▼</th>
 					</c:if>
 
 					<c:if test="${param.sort=='reg_date asc' }">
 						<th width="100px" style="cursor: pointer"
-							onclick="searchWithSort('')">등록일▲</th>
+							onclick="searchWithSort('')">가입일▲</th>
 					</c:if>
 
 
@@ -524,7 +541,7 @@ $(document).ready(function() {
 				<c:forEach var="admin" items="${requestScope.memberList}"
 					varStatus="status">
 					<tr style="cursor: pointer"
-						onClick="goAdminMemberDetailForm(${admin.m_no});">
+						onClick="goMemberDetail(${admin.m_no});">
 						<td align="center">${requestScope.memberMap.begin_serialNo_asc + status.index}</td>
 						<td align="center">${admin.mid}</td>
 						<td align="center">${admin.name}</td>
@@ -580,12 +597,19 @@ $(document).ready(function() {
 	</center>
 
 
-	<form name="adminMemberDetailForm" action="/adminMemberDetailForm.do"
-		method="post">
-		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
-		<input type="hidden" name="m_no"> <input type="hidden"
-			name="player">
+<!-- 	<form name="adminMemberDetailForm" action="/adminMemberDetailForm.do" -->
+<!-- 		method="post"> -->
+<!-- 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 --> 
+<!-- 		<input type="hidden" name="m_no"> <input type="hidden" -->
+<!-- 			name="player"> -->
 
-	</form>
+<!-- 	</form> -->
+	
+	<form name="memberDetailUpDelForm" action="/memberDetailUpDelForm.do"
+			method="post">
+			<input type="hidden" name="m_no" value="${requestScope.memberDTO.m_no}"> 
+			
+		</form>
+	
 </body>
 </html>

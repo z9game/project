@@ -155,9 +155,8 @@
         boardSearchFormObj.find("input[type=text]").val("");
         boardSearchFormObj.find(".sido").val("0");
         boardSearchFormObj.find(".sigungu").val("0");
-        boardSearchFormObj.find("#date").val(""); // Clear the date input
-        boardSearchFormObj.find("#matchingTime").val("0"); // Reset time to "0"
-
+        boardSearchFormObj.find("#date").val("");
+        boardSearchFormObj.find("#matchingTime").val("0");
         boardSearchFormObj.find(".rowCntPerPage").val("10");
         boardSearchFormObj.find(".SelectPageNo").val("1");
 
@@ -172,7 +171,7 @@
     	<p class="titleBackgoundText">매칭 찾기</p>
     </div>
    		<form name="matching_table" onsubmit="return false">
-   			<table align="center">
+   			<table align="center" style="border: 1px solid #c59246e0; border-radius: 15px;">
 					<tr>
 						<td>
 							<table style="border-collapse: collapse; border-bottom: none; text-align: center;" align="center">
@@ -365,7 +364,7 @@
 			</c:if>
 		</div>
 		<div class="newRecruitTeamMemBoardBtnDiv">
-			<c:if test="${requestScope.myInfo.team_master eq sessionScope.m_no}">
+			<c:if test="${requestScope.myInfo.team_master eq sessionScope.m_no or sessionScope.m_no eq null}">
 				<input type="button" class="newRecruitTeamBoardBtn" value="새 글 쓰기" onclick="checkLogin()">
 			</c:if>
 		</div>

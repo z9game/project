@@ -1,7 +1,7 @@
 *{
 	margin: 0;
 	padding: 0;
-	font-size: 15px;
+	font-size: 17px;
 }
 
 li{
@@ -60,16 +60,21 @@ header {
 	float: left;
 	line-height: 40px;
 	margin-right: 50px;
+	
 }
 
 .headerNavList > li > a:hover {
     text-decoration: underline;
     text-underline-position: under;
+    color: #006666;
+    font-weight: bold;
 }
 
 .navInner-item > a:hover {
     text-decoration: underline;
     text-underline-position: under;
+    color: #006666;
+    font-weight: bold;
 }
 
 .headerNavList{
@@ -89,18 +94,18 @@ header {
 }
 
 #login, #register, #changeMemberData, #logOut, #adminPage {
-    background: #eaeaec;
-    color: #000000;
+    background: #006666;
+    color: #FFFFFF;
     padding: 10px;
-    width: 100px;
     height: 30px;
+	width: 100px;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border-radius: 20px;
-    border: 1px solid #000000;
+    border-radius: 30px;
+    border: 1px solid #006666;
 }
 
 #adminPage a, #logOut a, #login a, #register a {
@@ -141,8 +146,8 @@ header {
 }
 
 #login:hover, #register:hover, #changeMemberData:hover, #logOut:hover, #adminPage:hover{
-	background: #006666;
-	color: white;
-	border-radius: 20px;
+	background: #eaeaec;
+	color: #000000;
+	border-radius: 30px;
     border: 1px solid #006666;
 }

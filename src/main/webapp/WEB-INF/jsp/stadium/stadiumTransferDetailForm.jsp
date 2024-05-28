@@ -157,7 +157,7 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 			</div>
 			<form name="yangdoDetailUpdDeleForm" action="/yangdoDetailUpdDeleForm.do" method="post">
 				<input type="hidden" name="yangdo_no" value="${ requestScope.yangdoDTO.yangdo_no }">
-				
+				<input type="hidden" name="m_no" value="${ requestScope.yangdoDTO.writer }">
 			</form>
 			<form name="yangdoSincheongFormNo" >
 				<input type="hidden" name="yangdo_no" value="${ requestScope.yangdoDTO.yangdo_no }">

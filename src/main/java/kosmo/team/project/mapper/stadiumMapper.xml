@@ -318,7 +318,7 @@
 		s.STADIUM_STATUS != '이용불가'
 		and
 		b.m_no = #{m_no}
-		and to_date(booking_date,'yyyy-mm-dd') >=TO_DATE(SYSDATE, 'yyyy-mm-dd')
+		 and to_date(booking_date,'yyyy-mm-dd') >TO_DATE(SYSDATE, 'yyyy-mm-dd')
 		group by
 		b.m_no,
 		s.stadium_no,

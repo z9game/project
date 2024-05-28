@@ -26,50 +26,14 @@ public class MemberDTO {
 	private String sido;
 	private String sigungu;
 	
+	
+	private int player;
 	private int games_played;
 	private int wins;
 	private int draws;
 	private int losses;
 	private int goals_for;
 	private int goals_assist;
-	
-	
-	
-	
-	
-	
-	
-	
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getPhone1() {
-		return phone1;
-	}
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
-	}
-	public String getPhone2() {
-		return phone2;
-	}
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
-	}
-	public String getPhone3() {
-		return phone3;
-	}
-	public void setPhone3(String phone3) {
-		this.phone3 = phone3;
-	}
-	public int getTeam_master() {
-		return team_master;
-	}
-	public void setTeam_master(int team_master) {
-		this.team_master = team_master;
-	}
 	public int getM_no() {
 		return m_no;
 	}
@@ -112,6 +76,30 @@ public class MemberDTO {
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
+	public String getPhone1() {
+		return phone1;
+	}
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public String getPhone3() {
+		return phone3;
+	}
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getGender() {
 		return gender;
 	}
@@ -148,6 +136,24 @@ public class MemberDTO {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	public int getTeam_no() {
+		return team_no;
+	}
+	public void setTeam_no(int team_no) {
+		this.team_no = team_no;
+	}
+	public String getTeam_name() {
+		return team_name;
+	}
+	public void setTeam_name(String team_name) {
+		this.team_name = team_name;
+	}
+	public int getTeam_master() {
+		return team_master;
+	}
+	public void setTeam_master(int team_master) {
+		this.team_master = team_master;
+	}
 	public String getSido() {
 		return sido;
 	}
@@ -160,12 +166,11 @@ public class MemberDTO {
 	public void setSigungu(String sigungu) {
 		this.sigungu = sigungu;
 	}
-	
-	public String getTeam_name() {
-		return team_name;
+	public int getPlayer() {
+		return player;
 	}
-	public void setTeam_name(String team_name) {
-		this.team_name = team_name;
+	public void setPlayer(int player) {
+		this.player = player;
 	}
 	public int getGames_played() {
 		return games_played;
@@ -203,12 +208,13 @@ public class MemberDTO {
 	public void setGoals_assist(int goals_assist) {
 		this.goals_assist = goals_assist;
 	}
-	public int getTeam_no() {
-		return team_no;
-	}
-	public void setTeam_no(int team_no) {
-		this.team_no = team_no;
-	}
+	
+	
+	
+	
+	
+	
+
 	
 	
 	

@@ -45,11 +45,12 @@
 
 
 function loadDate() {
+	var formObj = $("[name='yangdoDetailUpdDeleForm']");
     var stadiumId = $("select[name='MyStadium']").val();
-    var m_no = $("input[name='m_no']").val(); // m_no의 값을 가져옵니다
-    
+    var m_no = formObj.find("input[name='m_no']").val(); // m_no의 값을 가져옵니다 
+
     // 확인을 위해 alert으로 m_no 값 출력
-   // alert("m_no 값: " + m_no);
+    //alert("m_no 값: " + m_no);
     
     
     
@@ -104,8 +105,9 @@ function loadDate() {
 
 function loadTimeRanges() {
     var bookingDate = $("select[name='MyDate']").val();
+    var formObj = $("[name='yangdoDetailUpdDeleForm']");
     var stadiumId = $("select[name='MyStadium']").val();
-    var m_no = $("input[name='m_no']").val(); // m_no의 값을 가져옵니다
+    var m_no = formObj.find("input[name='m_no']").val(); // m_no의 값을 가져옵니다 
     
     if (bookingDate === "선택") {
         $("select[name='MyTimeRange']").html('<option value=0>시간</option>');
@@ -295,39 +297,72 @@ function loadTimeRanges() {
 	
 	
 	
-
 	function checkYangdoDelForm() {
-		var formObj = $("[name='yangdoDetailUpdDeleForm']");
-		if (confirm("정말 삭제하시겠습니까?") == false) {
-			return;
-		}
-		$.ajax({
-			url : "/yangdoDelProc.do",
-			type : "post",
-			data : formObj.serialize(),
-			success : function(json) {
-				var result = json["result"];
-				if (result == 0) {
-					alert("삭제된 양도입니다.");
-					location.href = "/stadiumTransferForm.do";
-				}else if ( result == 8){
-					alert("이미 양도완료한 글입니다.")
-					
-				}else if ( result == 6){
-					
-					alert("삭제된 경기장입니다");
-					location.href = "/stadiumTransferForm.do";
-						return;
-				}
-				
-				else {
-					alert("양도 삭제 성공입니다.");
-					location.href = "/stadiumTransferForm.do";
-				}
-			}
-			
-		});
+	    var formObj = $("[name='yangdoDetailUpdDeleForm']");
+	    if (!confirm("정말 삭제하시겠습니까?")) {
+	        return;
+	    }
+
+	    $.ajax({
+	        url: "/yangdoDelProc.do",
+	        type: "post",
+	        data: formObj.serialize(),
+	        success: function(json) {
+	            var result = json.result;
+	            if (result == 0) {
+	                alert("삭제된 양도입니다.");
+	            } else if (result == 8) {
+	                if (${sessionScope.mid eq 'admin'}) {
+	                var xxx = confirm("이미 양도완료한 글입니다. 정말로 삭제하시겠습니까?")
+	                   if (xxx){
+	                	adminDelete();
+	                   }
+	                } else {
+	                    alert("이미 양도완료한 글입니다.");
+	                }
+	            }else {
+	                alert("양도 삭제 성공입니다.");
+	                location.href = "/stadiumTransferForm.do";
+	            }
+	        }
+	    });
+
+	    
+	    
+	    function adminDelete() {
+	        $.ajax({
+	            url: "/yangdoAdminDelProc.do",
+	            type: "post",
+	            data: formObj.serialize(),
+	            success: function(json) {
+	                var result = json.result;
+	                if (result == 1) {
+	                    alert("성공적으로 삭제되었습니다.");
+	                } else {
+	                    alert("삭제 실패했습니다.");
+	                    return;
+	                }
+	                location.href = "/stadiumTransferForm.do";
+	            }
+	        });
+	    }
 	}
+
+	
+	function goMemberDetail(m_no){
+		
+		document.memberDetailUpDelForm.submit()
+
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 </script>
 
 </head>
@@ -350,12 +385,18 @@ function loadTimeRanges() {
 			</tr>
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
+				<c:if test="${sessionScope.mid ne 'admin'}">
 				<td style="border-bottom: 1px solid #c59246e0;">${ requestScope.yangdoDTO.nickname }</td>
+				</c:if>
+				<c:if test="${sessionScope.mid eq 'admin'}">
+				<td style="border-bottom: 1px solid #c59246e0; cursor: pointer;" onclick="goMemberDetail('${requestScope.yangdoDTO.writer}')" >${ requestScope.yangdoDTO.nickname }</td>
+				</c:if>
 			</tr>
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">경기장</th>
 				<td>
 					${requestScope.yangdoDTO.yangdo_stadium} - ${requestScope.yangdoDTO.yangdo_date} - ${requestScope.yangdoDTO.yangdo_time}<br>
+				   <c:if test="${sessionScope.mid eq 'admin' and requestScope.yangdoDTO.status ne'양도완료'}">
 				    <select name="MyStadium" class="MyStadium" onchange="loadDate()" style="margin-top: 10px;">
 					    <option value=0>경기장선택</option>
 					    <c:forEach var="myStadium" items="${requestScope.myStadiumList}">
@@ -364,30 +405,60 @@ function loadTimeRanges() {
 					        </option>
 					    </c:forEach>
 					</select>
+					</c:if>
+					<c:if test="${sessionScope.mid ne 'admin' and requestScope.yangdoDTO.status ne'양도완료'}">
+				    <select name="MyStadium" class="MyStadium" onchange="loadDate()" style="margin-top: 10px;">
+					    <option value=0>경기장선택</option>
+					    <c:forEach var="myStadium" items="${requestScope.myStadiumList}">
+					        <option value="${myStadium.stadium_no}">
+					            ${myStadium.stadium_name}
+					        </option>
+					    </c:forEach>
+					</select>
+					</c:if>
 					
 					
-					
-					
+					<c:if test="${sessionScope.mid eq 'admin' and requestScope.yangdoDTO.status ne'양도완료'}">
 				    <select name="MyDate" class="MyDate"onchange="loadTimeRanges()">
 				        <option value="선택">날짜</option>
 				       
 				    </select>
+				     </c:if>
+				    <c:if test="${sessionScope.mid ne 'admin' and requestScope.yangdoDTO.status ne'양도완료'}">
+				    <select name="MyDate" class="MyDate"onchange="loadTimeRanges()">
+				        <option value="선택">날짜</option>
+				       
+				    </select>
+				    </c:if>
+				    
+				    
+				    
+				  
+				    <c:if test="${sessionScope.mid eq 'admin' and requestScope.yangdoDTO.status ne'양도완료'}">
 				    <select name="MyTimeRange" class="MyTimeRange">
 				        <option value=0>시간</option>
 				       
 				    </select>
+				    </c:if>
+				    <c:if test="${sessionScope.mid ne 'admin' and requestScope.yangdoDTO.status ne'양도완료'}">	
+				    <select name="MyTimeRange" class="MyTimeRange">
+				        <option value=0>시간</option>
+				       
+				    </select>
+				    </c:if>
+				    
+				    
 				</td>
 			</tr>
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">내 용</th>
-				<td style="border-bottom: 1px solid #c59246e0;"><textarea name="content" class="content" rows="20" cols="108" maxlength="500" style="resize: none;">${requestScope.yangdoDTO.content}
-            </textarea>
+				<td style="border-bottom: 1px solid #c59246e0;"><textarea name="content" class="content" rows="20" cols="108" maxlength="500" style="resize: none;">${requestScope.yangdoDTO.content}</textarea>
 			</tr>
 
 		</table>
 		<input type="hidden" name="yangdo_no"
 			value="${requestScope.yangdoDTO.yangdo_no}">
-			<input type="hidden" name="m_no" value="<%= request.getSession().getAttribute("m_no") %>">
+		<input type="hidden" name="m_no" value="${requestScope.yangdoDTO.writer}">
 		
 	</form>
 	<div class="yangdoDetailUpDelBtnDiv">
@@ -399,5 +470,14 @@ function loadTimeRanges() {
 			<input type="button" class="checkBoardDelBtn" value="삭제" onClick="checkYangdoDelForm();">
 		</div>
 	</div>
+	
+	<form name="memberDetailUpDelForm" action="/memberDetailUpDelForm.do"
+			method="post">
+			<input type="hidden" name="m_no"
+				value="${requestScope.yangdoDTO.writer}">
+	</form>
+	
+	
+	
 </body>
 </html>

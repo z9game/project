@@ -106,7 +106,7 @@ a{
 	text-align: center;
 }
 
-.searchBtn, .searchAllBtn{
+.searchBtn, .searchAllBtn, .upDel{
 	width: 100px;
 	height: 40px;
     background-color: #c59246e0;
@@ -146,6 +146,9 @@ a{
     height: 70px;
     border-bottom: 1px solid gray;
 }
+
+
+
 
 [class$='boardListTable'] tr:nth-child(n+2):hover{
 	background-color:rgba(211, 211, 211, 0.3);

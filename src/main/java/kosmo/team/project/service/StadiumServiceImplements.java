@@ -295,4 +295,15 @@ public class StadiumServiceImplements implements StadiumService {
 		return sincheongCnt;
 	}
 
+	
+	//양도 삭제 어드민일때...
+	@Override
+	public int deleteAdminYangdo(YangdoDTO yangdoDTO) {
+
+		int yangdoDelCnt = this.stadiumDAO.deleteYangdo(yangdoDTO);
+
+		// 수정 적용개수 리턴하기
+		return yangdoDelCnt;
+	}
+
 }

@@ -503,7 +503,7 @@
 		    SUM(CASE WHEN sido_id = 1 THEN 1 ELSE 0 END) AS "count_gangwondo",
 		    SUM(CASE WHEN sido_id = 2 or sido_id = 11 THEN 1 ELSE 0 END) AS "count_gyeonggido",
 		    SUM(CASE WHEN sido_id = 3 or sido_id = 4 or sido_id = 6 or sido_id = 8 or sido_id = 10 THEN 1 ELSE 0 END) AS "count_gyeongsangdo",
-		    SUM(CASE WHEN sido_id = 5 or sido_id = 12 or sido_id = 13 THEN 1 ELSE 0 END) AS "count_gyeongsangdo",
+		    SUM(CASE WHEN sido_id = 5 or sido_id = 12 or sido_id = 13 THEN 1 ELSE 0 END) AS "count_jeollado",
 		    SUM(CASE WHEN sido_id = 7 or sido_id = 15 or sido_id = 16 THEN 1 ELSE 0 END) AS "count_chungcheongdo",
 		    SUM(CASE WHEN sido_id = 9 THEN 1 ELSE 0 END) AS "count_seoul",
 		    SUM(CASE WHEN sido_id = 14 THEN 1 ELSE 0 END) AS "count_jejudo"

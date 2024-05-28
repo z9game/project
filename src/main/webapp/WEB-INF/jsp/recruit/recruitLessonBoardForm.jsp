@@ -215,10 +215,10 @@ function search() {
    <div>
    <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
 		<form name="recruit_lesson" onsubmit="return false">
-			<table align="center">
-					<tr>
-						<td>
-							<table style="border-collapse: collapse; border-bottom: none;" align="center">
+			<table align="center" style="border: 1px solid #c59246e0; border-collapse: separate; border-radius: 20px; padding: 0px 15px 15px 15px;">
+					<tr style="border-radius: 15px;">
+						<td style="border-radius: 15px;">
+							<table style="border-collapse: collapse; border-bottom: none; border-radius: 15px;" align="center">
 								<tr class="area">
 									<th class="item" style="border-radius: 10px; border-bottom: none;">지역</th>
 									<td class="content" colspan="5" style="text-align: center; width:200px; border-bottom: none;"><select name="sido" class="sido" id=""

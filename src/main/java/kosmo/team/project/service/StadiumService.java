@@ -56,6 +56,8 @@ public interface StadiumService {
 
 	public int updateSincheong(YangdoDTO yangdoDTO);
 
+	public int deleteAdminYangdo(YangdoDTO yangdoDTO);
+
 
 
 }

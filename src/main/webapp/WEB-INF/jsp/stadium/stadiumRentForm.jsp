@@ -150,10 +150,10 @@
 	</div>
 
 	<form name="StadiumSearchForm" onsubmit="return false">
-		<table align="center">
+		<table align="center" style="border: 1px solid #c59246e0; border-collapse: separate; border-radius: 20px; padding: 0px 15px 15px 15px;">
 			<tr>
 				<td>
-					<table style="border-collapse: collapse;" align="center">
+					<table align="center" style="border-collapse: collapse; border-bottom: none;">
 						<tr>
 							<th style="border-radius: 10px;">지역</th>
 							<td colspan="5" style="text-align: center; width:200px;"><select name="sido" id="" class="sido"
@@ -190,9 +190,10 @@
 						</tr>
 						<tr><td></td></tr>
 					</table>
+					
 			</tr>
 			<tr align="center" style="border-top: 1px solid #c59246e0;">
-				<td><input type="button" value="검색" class="searchBtn"
+				<td style="border-top: 1px solid #c59246e0;"><input type="button" value="검색" class="searchBtn"
 					onclick="search()"> <input type="button" value="초기화"
 					class="searchAllBtn" onclick="searchAll()"></td>
 			</tr>
