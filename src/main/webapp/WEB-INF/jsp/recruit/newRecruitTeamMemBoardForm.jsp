@@ -250,16 +250,16 @@
 					<th style="border-bottom: 1px solid #FFFFFF;">포지션</th>
 					<td style="border-bottom: 1px solid #c59246e0; text-align: center; display: flex; align-items: center;">
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="checkbox" name="pos" value="ST" style="zoom:2.0; margin-right: 5px;">ST
+							<input type="radio" name="pos" value="ST" style="zoom:2.0; margin-right: 5px;">ST
 						</label>
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="checkbox" name="pos" value="CM" style="zoom:2.0; margin-right: 5px;">CM
+							<input type="radio" name="pos" value="CM" style="zoom:2.0; margin-right: 5px;">CM
 						</label>
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="checkbox" name="pos" value="CB" style="zoom:2.0; margin-right: 5px;">CB
+							<input type="radio" name="pos" value="CB" style="zoom:2.0; margin-right: 5px;">CB
 						</label>
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="checkbox" name="pos" value="GK" style="zoom:2.0; margin-right: 5px;">GK
+							<input type="radio" name="pos" value="GK" style="zoom:2.0; margin-right: 5px;">GK
 						</label>
 					</td>
 				</tr>

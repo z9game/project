@@ -476,7 +476,7 @@
                <th>골</th>
                <th>도움</th>
             </tr>
-            <tr>
+            <tr  align=center>
                <td>${requestScope.myStat.games_played}</td>
                <td>${requestScope.myStat.wins}</td>
                <td>${requestScope.myStat.draws}</td>
@@ -518,16 +518,16 @@
          <caption><b>다음 예정 경기</b></caption>
             <tr>
                <th>경기장명</th>
-               <th>일시</th>
+               <th>날짜</th>
                <th>시간</th>
                <th>상대팀</th>
             </tr>
             <c:forEach var="list" items="${requestScope.getTeamMatchDay}" varStatus="status">
                <tr>
-                  <td align="center">${list.stadium_name}</td>
-                  <td align="center">${list.day}</td>
-                  <td align="center">${list.time_range}</td>
-                  <td align="center">${list.team_name}</td>
+                  <td align="center" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${list.stadium_name}</td>
+                  <td align="center" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${list.day}</td>
+                  <td align="center" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${list.time_range}</td>
+                  <td align="center" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${list.team_name}</td>
                </tr>
             </c:forEach>
          </table>

@@ -258,11 +258,10 @@ public class StadiumController {
 			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
 			// --------------------------------------
 			@RequestParam(value = "yangdo_no") int yangdo_no
-			,HttpSession session
+			,@RequestParam(value = "m_no") int m_no
 
 	) {
 		
-		int m_no = (int) session.getAttribute("m_no");
 		// BoardDTO boardDTO = this.boardService.getBoard(b_no,false);
 		YangdoDTO yangdoDTO = this.stadiumService.getYangdoForUpDel(yangdo_no);
 
@@ -366,6 +365,37 @@ public class StadiumController {
 		return resultMap;
 	}
 
+	
+	@RequestMapping(value = "/yangdoAdminDelProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+
+	@ResponseBody
+	public Map<String, String> yangdoAdminDelProc(
+			// -------------------------
+			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
+			// -------------------------
+			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
+			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
+
+			YangdoDTO yangdoDTO
+
+	) {
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		int adminYangdoDelCnt = this.stadiumService.deleteAdminYangdo(yangdoDTO);
+
+		resultMap.put("result", adminYangdoDelCnt + "");
+
+		return resultMap;
+	}
+
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/yangdoUpProc.do"

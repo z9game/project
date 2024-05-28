@@ -137,6 +137,17 @@ function pageNoClick( clickPageNo ){
 	
 }
 
+function goYangdoDetailUpdDeleForm(yangdo_no, m_no) {
+    $("[name='yangdoDetailUpdDeleForm'] [name='yangdo_no']").val(yangdo_no);
+    $("[name='yangdoDetailUpdDeleForm'] [name='m_no']").val(m_no);
+    
+    //alert(m_no)
+    
+    
+    document.yangdoDetailUpdDeleForm.submit();
+}
+
+
 
 
 </script>
@@ -153,7 +164,7 @@ function pageNoClick( clickPageNo ){
 	
 	<form name="stadiumTransferFormConditionalSearch" onsubmit="return false">
 
-				<table align="center">
+				<table align="center" style="border: 1px solid #c59246e0; border-collapse: separate; border-radius: 20px; padding: 0px 15px 15px 15px;">
 					<tr>
 						<td>
 							<table style="border-collapse: collapse; border-bottom: none;" align="center">
@@ -209,8 +220,8 @@ function pageNoClick( clickPageNo ){
 								<tr><td></td></tr>
 							</table>
 					</tr>
-					<tr align="center" style="border-top: 1px solid #c59246e0;">
-						<td><input type="button" value="검색" class="searchBtn"
+					<tr align="center">
+						<td style="border-top: 1px solid #c59246e0;"><input type="button" value="검색" class="searchBtn"
 							onclick="search()"> <input type="button" value="초기화"
 							class="searchAllBtn" onclick="searchAll()"></td>
 					</tr>
@@ -246,16 +257,26 @@ function pageNoClick( clickPageNo ){
 					<th style="width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">글쓴이</th>
 					<th style="width: 100px;">조회수</th>
 					<th style="width: 100px;">등록일</th>
+					
 					<c:forEach var="Yangdo" items="${requestScope.stadiumYangdoList}"
 						varStatus="status">
-						<tr style="cursor: pointer"
-							onClick="goTransferDetailForm(${Yangdo.yangdo_no});">
-							<td align="center" class="stadiumTransferFormFontLightGray">${requestScope.StadiumYangdoMap.begin_serialNo_desc - status.count + 1}</td>
-							<!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
-							<td align="center">${Yangdo.title}</td>
-							<td align="center" class="stadiumTransferFormFontLightGray">${Yangdo.nickname}</td>
-							<td align="center" class="stadiumTransferFormFontLightGray">${Yangdo.readcount}</td>
-							<td align="center" class="stadiumTransferFormFontLightGray">${Yangdo.reg_date}</td>
+						<tr  style="cursor: pointer" 
+					        <c:if test="${sessionScope.mid eq 'admin'}">
+					            onClick="goYangdoDetailUpdDeleForm(${Yangdo.yangdo_no},${Yangdo.writer});"
+					        </c:if>
+					        <c:if test="${sessionScope.mid ne 'admin'}">
+					            onClick="goTransferDetailForm(${Yangdo.yangdo_no});"
+					        </c:if> >
+					        
+					        
+					        
+   							<td align="center"  class="stadiumTransferFormFontLightGray">${requestScope.StadiumYangdoMap.begin_serialNo_desc - status.count + 1}</td>
+						    <!--${requestScope.boardMap.begin_serialNo_desc - status.index} -->
+						    <td align="center" >${Yangdo.title}</td>
+						    <td align="center" class="stadiumTransferFormFontLightGray">${Yangdo.nickname}</td>
+						    <td align="center" class="stadiumTransferFormFontLightGray">${Yangdo.readcount}</td>
+						    <td align="center" class="stadiumTransferFormFontLightGray">${Yangdo.reg_date}</td>
+						   
 						</tr>
 					</c:forEach>
 			</table>
@@ -294,8 +315,11 @@ function pageNoClick( clickPageNo ){
 	</form>
 	
 	
-	
-	
+	<form name="yangdoDetailUpdDeleForm" action="/yangdoDetailUpdDeleForm.do" method="post">
+				<input type="hidden" name="yangdo_no" value="${ requestScope.yangdoDTO.yangdo_no }">
+				<input type="hidden" name="m_no" value="${ requestScope.yangdoDTO.writer }">
+				
+			</form>
 	
 	
 	

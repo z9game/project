@@ -16,7 +16,7 @@
 		<div class="headerTitle">
 			<a href="/mainForm.do">
                 <img src="/image/Coding247_Logo.png" class="headerLogo">
-                <p id="logoFont">CODING247</p>
+                <p id="logoFont"><p>MatchZone</p>
 			</a>
 		</div>
 		<div class="headerMenu">

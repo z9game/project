@@ -118,8 +118,7 @@
 		<!--------------------------------------------------- -->
 		<form name="adminNoticeboardUpDelForm"
 			action="/adminNoticeboardUpDelForm.do" method="post">
-			<input type="hidden" name="b_no"
-				value="${requestScope.communityDTO.b_no}">
+			<input type="hidden" name="b_no"value="${requestScope.communityDTO.b_no}">
 		</form>
 
 

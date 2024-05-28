@@ -220,6 +220,14 @@
 	
 		}
 	
+		function goAdminStadiumUpDelForm(stadium_no){
+			 $("[name='adminStadiumUpDelForm'] [name='stadium_no']").val(stadium_no);
+			document.adminStadiumUpDelForm.submit()
+
+			
+		}
+		
+		
 	</script>
 </head>
 <body>
@@ -360,7 +368,7 @@
 				<c:forEach var="stadium" items="${requestScope.stadiumList}"
 					varStatus="status">
 					<tr style="cursor: pointer"
-						onclick="goAdminStadiumDetailForm(${stadium.stadium_no});">
+						onclick="goAdminStadiumUpDelForm(${stadium.stadium_no});">
 						<td align="center">${requestScope.StadiumMap.begin_serialNo_asc + status.index}</td>
 						<td align="center">${stadium.stadium_name}</td>
 						<td align="center">${stadium.sido_name}</td>
@@ -414,10 +422,9 @@
 	</center>
 
 
-	<form name="adminStadiumDetailForm" action="/adminStadiumDetailForm.do"
-		method="post">
-		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
-		<input type="hidden" name="stadium_no">
-	</form>
+	<form name="adminStadiumUpDelForm"action="/adminStadiumUpDelForm.do" method="post">
+			<input type="hidden" name="stadium_no" value="${requestScope.stadim2DTO.stadium_no}">
+		</form>
+	
 </body>
 </html>

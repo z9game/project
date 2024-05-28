@@ -152,6 +152,7 @@
 				<input type="button" value="회원가입" class="regBtn" style="cursor:pointer" onclick="location.replace('/memberRegForm.do')">
 				<input type="button" value="회원정보찾기" class="memberInfoFindBtn" style="cursor:pointer" onclick="location.replace('/memberInfoFindForm.do')">
 			</div>
+			<p style="color: #999999; text-align: center; margin-top: 10px;"> * 관리자 모드가 있음 </p>
 		</form>
 	</div>
 </body>

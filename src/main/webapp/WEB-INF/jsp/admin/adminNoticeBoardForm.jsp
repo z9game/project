@@ -234,7 +234,12 @@ function checkDate() {
 
 
 
+function goadminNoticeboardUpDelForm(b_no){
+	 $("[name='adminNoticeboardUpDelForm'] [name='b_no']").val(b_no);
+	document.adminNoticeboardUpDelForm.submit()
 
+	
+}
 
 
 </script>
@@ -363,7 +368,7 @@ function checkDate() {
 					varStatus="status">
 
 					<tr style="cursor: pointer"
-						onClick="goNadminNticeboardDetailForm(${noticeboard.b_no});">
+						onclick="goadminNoticeboardUpDelForm(${noticeboard.b_no})">
 
 						<td align="center">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
 						<td>${noticeboard.subject}</td>
@@ -419,10 +424,9 @@ function checkDate() {
 
 
 	<!-- 이 form 태그를 /boardDetailForm.do로 WAS로 접속하기 위해 선언한다. -->
-	<form name="adminNoticeboardDetailForm"
-		action="/adminNoticeboardDetailForm.do" method="post">
-		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
-		<input type="hidden" name="b_no">
-	</form>
+	<form name="adminNoticeboardUpDelForm"
+			action="/adminNoticeboardUpDelForm.do" method="post">
+			<input type="hidden" name="b_no"value="${requestScope.communityDTO.b_no}">
+		</form>
 </body>
 </html>

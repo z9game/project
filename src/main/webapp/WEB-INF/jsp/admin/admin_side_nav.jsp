@@ -17,14 +17,14 @@
 			<li class="nav-item">
 				<a class="nav-link" href="/adminTournamentBoardForm.do">대회일정</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/adminGallaryForm.do">갤러리</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/adminMarketplaceBoardForm.do">장터</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/adminFreeBoardForm.do">자유게시판</a>
-			</li>
+<!-- 			<li class="nav-item"> -->
+<!-- 				<a class="nav-link" href="/adminGallaryForm.do">갤러리</a> -->
+<!-- 			</li> -->
+<!-- 			<li class="nav-item"> -->
+<!-- 				<a class="nav-link" href="/adminMarketplaceBoardForm.do">장터</a> -->
+<!-- 			</li> -->
+<!-- 			<li class="nav-item"> -->
+<!-- 				<a class="nav-link" href="/adminFreeBoardForm.do">자유게시판</a> -->
+<!-- 			</li> -->
 		</ul>
 	</div>

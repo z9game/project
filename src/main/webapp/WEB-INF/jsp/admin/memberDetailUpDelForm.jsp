@@ -109,14 +109,6 @@
 		
 		
 		
-		if(new RegExp(/^[a-zA-Z가-힣0-9\s]+$/).test(addressObj.val()) == false)
-		{	
-			alert("잘못된 주소형식입니다.");
-			//addressObj.val("");
-			return;
-		}
-		
-		
 		
 		if(formObj.find(".games_played").val() < 0 ||
 				   formObj.find(".wins").val() < 0 ||
@@ -147,6 +139,8 @@
 			return;
 		}
 
+		//alert(formObj.serialize())
+		
 		$.ajax({
 			url : "/adminMemberUpProc.do",
 			type : "post",
@@ -182,7 +176,7 @@
 					alert("삭제된 회원입니다.");
 					location.href = "/adminForm.do";
 				} else {
-					alert("공지사항 삭제 성공입니다.");
+					alert("회원 삭제 성공입니다.");
 					location.href = "/adminForm.do";
 				}
 			},
@@ -289,7 +283,13 @@
 		            </select>
 				</td>
 			</tr>
-			
+			<tr>
+				<th bgColor="lightgray">성별</th>
+				<td><input type="radio" name="gender" value="남"
+					<c:if test="${requestScope.memberDTO.gender.contains ('남')}">checked</c:if>>남
+					<input type="radio" name="gender" value="여"
+					<c:if test="${requestScope.memberDTO.gender.contains ('여')}">checked</c:if>>여</td>
+			</tr>
 			<tr>
 			
 			 <tr>
