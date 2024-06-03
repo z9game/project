@@ -70,13 +70,6 @@ public class StadiumController {
 
 	@RequestMapping(value = "/stadiumRentDetailForm.do")
 	public ModelAndView stadiumRentDetailForm(
-			// --------------------------------------
-			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
-			// 매개변수 b_no 에 저장하고 들어온다.
-			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
-			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
-			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
-			// --------------------------------------
 			@RequestParam(value = "stadium_no") int stadium_no
 
 	) {
@@ -89,24 +82,16 @@ public class StadiumController {
 		List<String> fullRent = this.stadiumService.getFullRent(stadium_no);
 
 		ModelAndView mav = new ModelAndView();
-		// --------------------------------
-		// [ModelAndView 객체]에
-		// 키값 "boardDTO" 에
-		// 1행m열의 검색 데이터가 저장된 BoardDTO 객체 붙여 저장하기
-		// ModelAndView 객체에 저장된 객체는
-		// HttpServletRequest 객체에도 저장된다.
-		// --------------------------------
+
 		mav.addObject("stadiumDTO", stadiumDTO);
 
 		mav.addObject("timeDTO", timeDTO);
 
 		for (int i = 0; i < fullRent.size(); i++) {
-			fullRent.set(i, "'" + fullRent.get(i) + "'");
+			fullRent.set( i, "'" + fullRent.get(i) + "'");
 		}
 
 		mav.addObject("fullRent", fullRent);
-
-		System.out.println("fullRent 날" + fullRent);
 
 		mav.setViewName(stadiumFolder + "stadiumRentDetailForm.jsp");
 

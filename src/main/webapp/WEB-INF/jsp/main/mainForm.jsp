@@ -23,14 +23,19 @@
             <c:forEach var="regionRatio" items="${requestScope.regionRatio}" varStatus="status">
 	            ['서울', ${regionRatio.count_seoul}],
 	            ['경기도', ${regionRatio.count_gyeonggido}],
+	            ['KR-28', ${regionRatio.count_gyeonggido}],
 	            ['강원도', ${regionRatio.count_gangwondo}],
 	            ['충청남도', ${regionRatio.count_chungcheongdo}],
 	            ['충청북도', ${regionRatio.count_chungcheongdo}],
+	            ['KR-30', ${regionRatio.count_chungcheongdo}],
 	            ['전라남도', ${regionRatio.count_jeollado}],
 	            ['전라북도', ${regionRatio.count_jeollado}],
+	            ['KR-29', ${regionRatio.count_jeollado}],
 	            ['경상남도', ${regionRatio.count_gyeongsangdo}],
 	            ['경상북도', ${regionRatio.count_gyeongsangdo}],
-	            ['대구', ${regionRatio.count_gyeongsangdo}],
+	            ['KR-27', ${regionRatio.count_gyeongsangdo}],
+	            ['KR-26', ${regionRatio.count_gyeongsangdo}],
+	            ['KR-31', ${regionRatio.count_gyeongsangdo}],
 	            ['제주도', ${regionRatio.count_jejudo}]
 	    	</c:forEach>
         ]);

@@ -43,14 +43,9 @@ public class StadiumServiceImplements implements StadiumService {
 	}
 
 	public int getStadiumListAllCnt() {
-		// --------------------------------------
-		// BoardDAOImpl 객체의 getBoardListCnt 메소드를 호출하여
-		// 게시판 총 개수를 구하여 변수 boardListCnt 에 저장하기
-		// --------------------------------------
+
 		int StadiumListAllCnt = this.stadiumDAO.getStadiumListAllCnt();
-		// --------------------------------------
-		// 변수 boardListAllCnt 안의 데이터를 리턴하기
-		// --------------------------------------
+
 		return StadiumListAllCnt;
 	}
 

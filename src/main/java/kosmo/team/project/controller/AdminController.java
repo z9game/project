@@ -118,13 +118,6 @@ public class AdminController {
 
 	@RequestMapping(value = "/adminMemberDetailForm.do")
 	public ModelAndView adminMemberDetailForm(
-			// --------------------------------------
-			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
-			// 매개변수 b_no 에 저장하고 들어온다.
-			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
-			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
-			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
-			// --------------------------------------
 			@RequestParam(value = "m_no") int m_no
 
 			, HttpSession session
@@ -165,13 +158,6 @@ public class AdminController {
 	@RequestMapping(value = "/memberDetailUpDelForm.do")
 
 	public ModelAndView memberDetailUpDelForm(
-			// --------------------------------------
-			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
-			// 매개변수 b_no 에 저장하고 들어온다.
-			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
-			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
-			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
-			// --------------------------------------
 			@RequestParam(value = "m_no") int m_no
 
 			, HttpSession session
@@ -211,16 +197,10 @@ public class AdminController {
 
 			, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public Map<String, String> adminMemberUpProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
-
-			MemberDTO memberDTO, PlayerRecordDTO playerRecordDTO
-
-	) {
+		public Map<String, String> adminMemberUpProc(
+				MemberDTO memberDTO, PlayerRecordDTO playerRecordDTO
+	
+		) {
 
 		// ------------------------------------------------
 		// 게시판 수정 결과물을 저장할 HashMap 객체 생성하기.
@@ -254,12 +234,6 @@ public class AdminController {
 
 	@ResponseBody
 	public Map<String, String> adminMemberDelProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
-
 			MemberDTO memberDTO, PlayerRecordDTO playerRecordDTO
 
 	) {
@@ -362,13 +336,6 @@ public class AdminController {
 	@RequestMapping(value = "/adminNoticeboardUpDelForm.do")
 
 	public ModelAndView adminNoticeboardUpDelForm(
-			// --------------------------------------
-			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
-			// 매개변수 b_no 에 저장하고 들어온다.
-			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
-			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
-			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
-			// --------------------------------------
 			@RequestParam(value = "b_no") int b_no
 
 	) {
@@ -399,12 +366,6 @@ public class AdminController {
 			, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public Map<String, String> adminNoticeboardUpProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
-
 			CommunityDTO communityDTO
 
 	) {
@@ -439,11 +400,6 @@ public class AdminController {
 
 	@ResponseBody
 	public Map<String, String> adminNoticeboardDelProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
 
 			CommunityDTO communityDTO
 
@@ -481,14 +437,7 @@ public class AdminController {
 			, produces = "application/json;charset=UTF-8")
 
 	@ResponseBody
-	public Map<String, String> adminNoticeboardRegProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
-
-			CommunityDTO communityDTO) {
+	public Map<String, String> adminNoticeboardRegProc(CommunityDTO communityDTO) {
 
 		Map<String, String> resultMap = new HashMap<String, String>();
 
@@ -601,17 +550,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/adminStadiumUpDelForm.do")
 
-	public ModelAndView adminStadiumUpDelForm(
-			// --------------------------------------
-			// "b_no" 라는 파라미터명에 해당하는 파라미터값을 꺼내서
-			// 매개변수 b_no 에 저장하고 들어온다.
-			// 즉 게시판 고유 번호가 매개변수 b_no 로 들어온다.
-			// 저런식으러 선언하면 파라미터는 필수로 들어와야한다 아니면 예외가 터짐
-			// 사실 숫자 문자지만 정수로 바꿔서 들어오는거다.
-			// --------------------------------------
-			@RequestParam(value = "stadium_no") int stadium_no
-
-	) {
+	public ModelAndView adminStadiumUpDelForm(@RequestParam(value = "stadium_no") int stadium_no) {
 
 		// BoardDTO boardDTO = this.boardService.getBoard(b_no,false);
 		Stadim2DTO stadim2DTO = this.adminService.getStadiumForUpDel(stadium_no);
@@ -639,16 +578,7 @@ public class AdminController {
 
 			, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public Map<String, String> adminStadiumUpProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
-
-			Stadim2DTO stadim2DTO
-
-	) {
+	public Map<String, String> adminStadiumUpProc(Stadim2DTO stadim2DTO) {
 
 		// ------------------------------------------------
 		// 게시판 수정 결과물을 저장할 HashMap 객체 생성하기.
@@ -679,16 +609,7 @@ public class AdminController {
 			, produces = "application/json;charset=UTF-8")
 
 	@ResponseBody
-	public Map<String, String> adminStadiumDelProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
-
-			Stadim2DTO stadim2DTO
-
-	) {
+	public Map<String, String> adminStadiumDelProc(Stadim2DTO stadim2DTO) {
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		int boardDelCnt = this.adminService.deleteStadium(stadim2DTO);
@@ -724,14 +645,7 @@ public class AdminController {
 			, produces = "application/json;charset=UTF-8")
 
 	@ResponseBody
-	public Map<String, String> adminStadiumRegProc(
-			// -------------------------
-			// 파라미터값이 저장된 [BoardDTO 객체]가 들어올 매개변수 선언
-			// -------------------------
-			// [파라미터명]과 [BoardDTO 객체] 의 [맴버변수명] 이 같으면
-			// setter 메소드가 작동되어 [파라미터명] 이 [맴버변수]에 저장된다.
-
-			Stadim2DTO stadim2DTO) {
+	public Map<String, String> adminStadiumRegProc(Stadim2DTO stadim2DTO) {
 
 		Map<String, String> resultMap = new HashMap<String, String>();
 
@@ -760,7 +674,7 @@ public class AdminController {
 		);
     	
  		tournamentSearchDTO.setSelectPageNo((int) tournamentMap.get("selectPageNo"));
- 		tournamentSearchDTO.setRowCntPerPage((int) tournamentMap.get("rowCntPerPage"));
+ 		tournamentSearchDTO.setRowCntPerPage((int) tournamentMap.get("rowCntPerPage"));	
  		tournamentSearchDTO.setBegin_rowNo((int) tournamentMap.get("begin_rowNo"));
  		tournamentSearchDTO.setEnd_rowNo((int) tournamentMap.get("end_rowNo"));
 	 
