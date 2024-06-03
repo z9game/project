@@ -96,19 +96,12 @@
 	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 	        minDate: 0+1, // 오늘 이전 날짜 선택 불가능
 	        beforeShowDay: function(date) {
-	            // `date`는 현재 검사 중인 날짜 객체입니다.
-	          var disabledDates = ${requestScope.fullRent};
 
-     
-	            
+	            var disabledDates = ${requestScope.fullRent};
 	            var dateString = $.datepicker.formatDate('yy-mm-dd', date);
-	            
-	            // 배열 `disabledDates`에 `dateString`이 포함되면 `false`를 반환하여 날짜를 비활성화합니다.
 	            if (disabledDates.includes(dateString)) {
 	                return [false];
 	            }
-	            
-	            // 그 외 날짜는 기본적으로 활성화된 상태로 반환합니다.
 	            return [true];
 	        }
 	    });
@@ -152,7 +145,7 @@
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">날짜</th>
 				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" id="date" name="date"
-					required="required"></td>
+					required="required" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">시간대</th>
