@@ -182,7 +182,7 @@ function memUpdate()
 			<tr>
 				<th class="memberRegFormRegionTh">주소</th>
 				<td colspan="5" align="center"> ${requestScope.memberDTO.sido} ${requestScope.memberDTO.sigungu} -> (수정)
-		            <select name="sido_id" id="" onchange="categoryChange(this)">
+		            <select name="sido_id" id="sido_id" onchange="categoryChange(this)">
 		              <option value="0">시/도 선택</option>
 		              <option value="1">강원</option>
 		              <option value="2">경기</option>
@@ -214,10 +214,11 @@ function memUpdate()
 			</tr> 
 		</table>
 		<div class="upConfirmBtnDiv">
-			<input type="button" class="upConfirmBtn" value="등록" onclick="memUpdate()" style="cursor:pointer;">
+			<input type="button" class="upConfirmBtn" value="수정하기" onclick="memUpdate()" style="cursor:pointer;">
 			<input type="button" class="moveLoginPage" value="메인 화면" onclick="location.href='/mainForm.do'" style="cursor:pointer;">
 		</div>
 		<input type="hidden" name="mid" value="${requestScope.memberDTO.mid}">
 	</form>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

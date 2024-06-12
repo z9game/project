@@ -7,9 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>TournamentBoardForm</title>
-<link href="/style/tournamentBoardFormStyle.css"
-	rel="stylesheet">
-
+<link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
+<link href="/style/adminFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 
@@ -302,53 +301,58 @@
 	
 		
 </script>
-
-
-
-
-
-
-
-
+<style>
+	#nav-item-tournament{
+		text-align: center;
+		border: 1px solid #006666;
+		border-radius: 30px;
+		width: 150px;
+		height: 50px;
+		line-height: 3.3;
+		margin-top: 30px;
+		background-color: #006666;
+		color: #FFFFFF;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
-	
-		<p class="titleBackgoundText"></p>
+		<p class="titleBackgoundText">대회 일정 관리</p>
 	</div>
 
+	<div class="adminPageSideBar">
+		<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	</div>
+	
 
-	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
-
-	<center>
-		
 		<form name="tournament_search" onsubmit="return false">
-			<select name="searchType1">
-				<option value="all">전체</option>
-				<option value="title">제목</option>
-				<option value="content">내용</option>
-			</select> 
-			<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()"> 
-			
-			<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
+			<div class="adminTournamentSearch">
+				<div class="searchSelectBox">
+					<select name="searchType1" class="searchType1" style="width: 90px;">
+						<option value="all">전체</option>
+						<option value="title">제목</option>
+						<option value="content">내용</option>
+					</select>
+				</div>
+				<input type="text" name="keyword1" placeholder="검색어를 입력하세요" class="keyword1" onkeyup="enterkey()" style="width: 400px;"> 
+				<input type="button" onclick="search_detail()" class="searchBtn" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-right: 10px;" value="검색">
+				<input type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
+			</div>
 		</form>	
 		
-		<div style="height:10px;"></div>
-		<input type="button" onclick="search_detail()" class="searchBtn" style="cursor:pointer" value="검색">
-		
-		<div style="height:25px;"></div>
+		<!-- <div style="height:25px;"></div>
 		<br>
 		<input type="button" class="new_RegBoard" style="cursor:pointer" onClick="location.href='/newTournamentBoard.do'" value="새 글쓰기">
 		<div style="height:25px;"></div>
-	
+	 -->
 		<div>
-			<table align="center" style="border-collapse:collapse" border="1">
+			<table align="center" class="adminTournamentCategoryTab">
 				<tr>
-					<td class="tournament onvalue" onclick="ing()">
+					<td class="tournament onvalue" onclick="ing()" style="cursor: pointer;">
 						진행중인 대회
 					</td>
-					<td class="tournament" onclick="end()">
+					<td class="tournament" onclick="end()" style="cursor: pointer;">
 						마감된 대회
 					</td>
 				</tr>
@@ -357,36 +361,36 @@
 			
 				
 			<div class="region"> <!-- 지역 선택 Div -->
-				<table align="center" style="border-collapse:collapse">
+				<table align="center" style="border-collapse:collapse; width: 900px;">
 					<tr>
-						<td class="region1 selected1" onClick="search('전체')">&middot;전체</td>
-						<td class="region1" onClick="search('서울')">&middot;서울</td>
-						<td class="region1" onClick="search('경인')">&middot;경인</td>
-						<td class="region1" onClick="search('강원')">&middot;강원</td>
-						<td class="region1" onClick="search('충청')">&middot;충청</td>
-						<td class="region1" onClick="search('전라')">&middot;전라</td>
-						<td class="region1" onClick="search('경상')">&middot;경상</td>
-						<td class="region1" onClick="search('제주')">&middot;제주</td>
+						<td class="region1 selected1" onClick="search('전체')" style="border-bottom: none;">전체</td>
+						<td class="region1" onClick="search('서울')" style="border-bottom: none;">서울</td>
+						<td class="region1" onClick="search('경인')" style="border-bottom: none;">경인</td>
+						<td class="region1" onClick="search('강원')" style="border-bottom: none;">강원</td>
+						<td class="region1" onClick="search('충청')" style="border-bottom: none;">충청</td>
+						<td class="region1" onClick="search('전라')" style="border-bottom: none;">전라</td>
+						<td class="region1" onClick="search('경상')" style="border-bottom: none;">경상</td>
+						<td class="region1" onClick="search('제주')" style="border-bottom: none;">제주</td>
 					</tr>
 				</table>
 			
 				
 				<!-- ================================================================================================================================ -->
 				<div class="tournamentBoard">
-			         <table class="tournamentTable" cellpadding="7" border="1" bordercolor="gray" align="center" style="border-collapse:collapse; margin: 0 auto; margin-top:10px; width:1000px;">
+			         <table class="tournamentTable" cellpadding="7" align="center" style="border-collapse:collapse; margin: 0 auto; margin-top:10px; width:1000px;">
 			            <tr>
-			               <th style="width:25px;">번호</th>
+			               <th style="width:30px;">번호</th>
 			               <th style="width:150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">제목</th>
 			               <th style="width:80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">신청기간</th>
 			               <th style="width:40px;">지역</th>
 			                <th style="width:40px;">등록일</th>
 			               <c:forEach var="gameList" items="${requestScope.tournamentList}" varStatus="status">
 			                  <tr style="cursor:pointer" onClick="goTournamentBoardDetail(${gameList.list_no});">
-			                     <td align="center">${requestScope.tournamentMap.begin_serialNo_desc - status.index}</td>
+			                     <td align="center" class="fontLightGray">${requestScope.tournamentMap.begin_serialNo_desc - status.index}</td>
 			                     <td align="center">${gameList.subject}</td>
-			                     <td align="center">${gameList.regist_start} ~ ${gameList.regist_end}</td>
-			                     <td align="center">${gameList.region}</td>
-			                     <td align="center">${gameList.reg_date}</td>
+			                     <td align="center" class="fontLightGray">${gameList.regist_start} ~ ${gameList.regist_end}</td>
+			                     <td align="center" class="fontLightGray">${gameList.region}</td>
+			                     <td align="center" class="fontLightGray">${gameList.reg_date}</td>
 			                  </tr>
 			               </c:forEach>
 			                  
@@ -403,32 +407,24 @@
 				<!-- ================================================================================================================================ -->	
 			</div>
 		</div>
-		<div style="height:10px;"></div>
-		<center>
-			<span class="pagingNos"> <span style="cursor: pointer"
-				onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
-				onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
-	
-	
-				<c:forEach var="pageNo"
-					begin="${requestScope.tournamentMap.begin_pageNo}"
-					end="${requestScope.tournamentMap.end_pageNo}">
-	
+		<div class="newCommunityFreeBoardFormBtnDiv">
+			<input type="button" value="새 글 쓰기" class="newCommunityFreeBoardFormBtn" onClick="location.href='/newTournamentBoard.do'">
+		</div>
+		<div class="adminFormPaging">
+			<span class="pagingNos">
+				<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+				<c:forEach var="pageNo" begin="${requestScope.tournamentMap.begin_pageNo}" end="${requestScope.tournamentMap.end_pageNo}">
 					<c:if test="${requestScope.tournamentMap.selectPageNo==pageNo}">
-	            ${pageNo}
-	         </c:if>
-	
+			            <p class="activePageNo">${pageNo}</p>
+			        </c:if>
 					<c:if test="${requestScope.tournamentMap.selectPageNo!=pageNo}">
-						<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+						<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
 					</c:if>
-				</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
-				onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}+1)">[다음]</span>
-				<span style="cursor: pointer"
-				onClick="pageNoClick(${requestScope.tournamentMap.last_pageNo})">[마지막]</span>
+				</c:forEach>
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tournamentMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
 			</span>
-		</center>
-		
-    </center>
+		</div>
     
     
 
@@ -437,8 +433,6 @@
 	</form>
     
     
-    
-    <div style="height:50px;"></div>
-	
+    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

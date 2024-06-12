@@ -203,5 +203,6 @@
 			<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
 		</span>
 	</div>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

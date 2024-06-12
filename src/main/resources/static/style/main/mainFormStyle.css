@@ -133,6 +133,10 @@ body {
 	border-right: 1px solid #006666;
 }
 
+.recordsStatisticsRegionRatioContainer{
+	margin-left: 100px;
+}
+
 .recordsStatisticsRegionRatioContainer, .recordsStatisticsGenderRatioContainer, .recordsStatisticsAgeRatioContainer{
 	padding: 50px;
 }
@@ -308,6 +312,7 @@ a{
     border-radius: 10px;
     margin-right: 20px;
     white-space: nowrap;
+    width: 300px;
 }
 
 .sectionScheduleFormBoardImageDiv {
@@ -324,25 +329,31 @@ a{
 	font-weight: bold;
 	font-size: 20px;
 	margin-bottom: 10px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .sectionScheduleFormBoardRegion{
 	margin-bottom: 5px;
 }
 
-.sectionScheduleTournamentImg {
-    max-height: 100%;
+.sectionScheduleImage {
+	max-height: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
+    width: 250px;
+    height: 200px;
 }
+
 /*<---------------------------------------------------->*/
 /*<------------------- 갤러리 Section ------------------->*/
 /*<---------------------------------------------------->*/
 
 #sectionMedia{
 	background-color: #F5F5F5;
-	height: 100%;
-	flex-direction: column;;
+	height: calc(100% - 400px);
+	flex-direction: column;
 }
 
 #sectionMedia strong{
@@ -379,6 +390,11 @@ a{
     border-radius: 10px;
     margin-right: 20px;
     white-space: nowrap;
+    width: 300px;
+}
+
+.sectionMediaGallaryContainer:hover .sectionMediaGallaryFormBoard {
+	animation-play-state: paused !important;
 }
 
 @keyframes bannermove{
@@ -396,15 +412,27 @@ a{
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid #ccc;
+    
 }
 
 .sectionMediaGallarySubject {
 	text-align: center;
 	margin-top: 25px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .sectionMediaGallaryImage {
     max-height: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
+    width: 250px;
+    height: 220px;
+}
+
+#sectionFooter{
+	background-color:#F5F5F5;
+	height: 600px;
+	margin: 0;
 }

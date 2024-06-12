@@ -224,7 +224,7 @@
         <p class="titleBackgoundText">QnA</p>
     </div>
     <div class="customerServiceQnADetailFormContainer">
-        <table class="customerServiceQnADetailFormRegTable" style="border-bottom: 1px solid #999999;">
+        <table class="customerServiceQnADetailFormRegTable" align="center" cellpadding=7 style="border-collapse: collapse; margin-top: 50px; width: 1100px; border-bottom: 1px solid #999999;">
             <tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
                 <td>${requestScope.customerServiceDetailDTO.subject}</td>
                 <td style="text-align: right; margin-top:15px;"><span style="color: #999999;">작성자&nbsp;</span>/&nbsp;${requestScope.customerServiceDetailDTO.writer}</td>
@@ -241,17 +241,15 @@
 		        <c:if test="${not empty requestScope.customerServiceDetailDTO.b_no}">
    					<button class="deleteBoardBtn" onclick="customerServiceQnADelete(${requestScope.customerServiceDetailDTO.b_no})" style="cursor: pointer">삭제</button>
 				</c:if>
+				<input type="button" class="moveListBtn" value="목록" onClick="location.href = '/customerServiceForm.do'">
 		    </div>
 		</c:if>
-		<div class="moveListBtnDiv">
-	        <input type="button" class="moveListBtn" value="목록" onClick="location.href = '/customerServiceForm.do'">
-	    </div>
         <div class="customerServiceQnADetailFormCommentInsertDiv">
         	<c:if test="${!empty requestScope.customerServiceQnADetailComment}">
         		<form name="customerServiceQnADetailFormCommentUpdateForm">
 		            <div class="customerServiceQnADetailFormComment">
 		            	<input type="hidden" name="b_no" value="${requestScope.customerServiceDetailDTO.b_no}">
-		                <table class="customerServiceQnADetailFormCommentTable" style="width:900px;">
+		                <table class="customerServiceQnADetailFormCommentTable" style="width:1100px;">
 		                	<c:forEach var="customerServiceQnADetailComment" items="${requestScope.customerServiceQnADetailComment}" varStatus="status">
 		            			<input type="hidden" name="c_no" value="${customerServiceQnADetailComment.c_no}">
 			                    <tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4);">
@@ -308,5 +306,6 @@
             </c:if>
         </div>
     </div>
+    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

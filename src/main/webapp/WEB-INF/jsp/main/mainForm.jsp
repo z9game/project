@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>MainForm</title>
 <link href="/style/main/mainFormStyle.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0 "></script>
 <script src="/js/main/mainFormScript.js"></script>
 <!-- 지역 차트 함수 -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -57,58 +59,166 @@
 
 <!-- 성별 차트 함수 -->
 
-<script type="text/javascript">
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawRecordsStatisticsGenderRatioChart);
-    function drawRecordsStatisticsGenderRatioChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Gender', '회원 수'],
-        <c:forEach var="genderRatio" items="${requestScope.genderRatio}" varStatus="status">
-	        ['남', ${genderRatio.count_men}],
-	        ['여', ${genderRatio.count_women}]
-	    </c:forEach>
-    ]);
+<script>
+  var genderData = [
+    <c:forEach var="genderRatio" items="${requestScope.genderRatio}">
+      { label: '남', count: ${genderRatio.count_men} },
+      { label: '여', count: ${genderRatio.count_women} }
+      <c:if test="${!status.last}">,</c:if>
+    </c:forEach>
+  ];
+</script>
 
-    var options = {
-        is3D: true,
-        backgroundColor: "#F5F5F5"
-    };
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // genderLabels와 genderCounts 배열을 생성합니다.
+    const genderLabels = genderData.map(data => data.label);
+    const genderCounts = genderData.map(data => data.count);
 
-    var chart = new google.visualization.PieChart(document.getElementById('recordsStatisticsGenderRatio'));
-    chart.draw(data, options);
-    }
+    const ctx1 = document.getElementById('recordsStatisticsGenderRatio').getContext('2d');
+  
+    const recordsStatisticsGenderRatio = new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: genderCounts, // 'count_men', 'count_women' 등의 값을 배열로 만듭니다.
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          
+          borderWidth: 1,
+          hoverOffset: 50,
+          datalabels: {
+        	  align: 'center',
+              anchor: 'center'
+          }
+        }]
+      },
+      options: {
+    	 responsive: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'right',
+            labels: {
+              color: 'black',
+              font: {
+                size: 14
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            titleColor: 'white',
+            bodyColor: 'white',
+            borderColor: 'white',
+            borderWidth: 1
+          }
+        },
+        animation: {
+          animateScale: true,
+          animateRotate: true
+        },
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 20
+          }
+        }
+      }
+    });
+  });
 </script>
 
 <!-- 연령별 차트 함수 -->
 
-<script type="text/javascript">
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawRecordsStatisticsAgeRatioChart);
-    function drawRecordsStatisticsAgeRatioChart() {
-    var data = google.visualization.arrayToDataTable([
-        ["연령대", "회원 수", { role: "style" } ],
-        <c:forEach var="ageRatio" items="${requestScope.ageRatio}" varStatus="status">
-	        ["10대", ${ageRatio.count_10}, "red"],
-	        ["20대", ${ageRatio.count_20}, "orange"],
-	        ["30대", ${ageRatio.count_30}, "yellow"],
-	        ["40대", ${ageRatio.count_40}, "green"],
-	        ["50대", ${ageRatio.count_50}, "blue"],
-	        ["60대", ${ageRatio.count_60}, "navy"],
-	        ["70대", ${ageRatio.count_70}, "purple"],
-	        ["80대", ${ageRatio.count_80}, "blue"]
-	   	</c:forEach>
-    ]);
+<script>
+  var ageData = [
+    <c:forEach var="ageRatio" items="${requestScope.ageRatio}">
+      { label: '10대', count: ${ageRatio.count_10} },
+      { label: '20대', count: ${ageRatio.count_20} },
+      { label: '30대', count: ${ageRatio.count_30} },
+      { label: '40대', count: ${ageRatio.count_40} },
+      { label: '50대', count: ${ageRatio.count_50} },
+      { label: '60대', count: ${ageRatio.count_60} },
+      { label: '70대', count: ${ageRatio.count_70} },
+      { label: '80대', count: ${ageRatio.count_80} }
+      <c:if test="${!status.last}">,</c:if>
+    </c:forEach>
+  ];
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+	const ageLabels = ageData.map(data => data.label);  
+    const ageCounts = ageData.map(data => data.count);
 
-    var options = {
-    	backgroundColor: "#F5F5F5"
-    };
-
-    var chart = new google.visualization.ColumnChart(document.getElementById("recordsStatisticsAgeRatio"));
-    chart.draw(data, options);
-    }
+    const ctx1 = document.getElementById('recordsStatisticsAgeRatio').getContext('2d');
+  
+    const recordsStatisticsAgeRatio = new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ageLabels, // 수정된 부분: labels 속성에는 데이터 레이블을 설정합니다.
+        datasets: [{
+          data: ageCounts,
+          backgroundColor: [
+            'red',
+            'orange',
+            'yellow',
+            'green',
+            'blue',
+            'navy',
+            'purple',
+            'pink'
+          ],
+          borderWidth: 1,
+          hoverOffset: 50
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false,
+            position: 'right',
+            labels: {
+              color: 'black',
+              font: {
+                size: 14
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            titleColor: 'white',
+            bodyColor: 'white',
+            borderColor: 'white',
+            borderWidth: 1
+          }
+        },
+        animation: {
+          animateScale: true,
+          animateRotate: true
+        },
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 20
+          }
+        }
+      }
+    });
+  });
 </script>
 </head>
 <body>
+<!-- push 테스트 -->
     <%@ include file="/WEB-INF/jsp/header.jsp" %>
     <div class="mainFormContainer">
 		<div class="section" id="sectionMain">
@@ -134,13 +244,80 @@
 			        <div class="recordsStatisticsRegionRatioTitle"><p>지역별 비율</p></div>
 			        <div id="recordsStatisticsRegionRatio" style="width: 500px; height: 500px;"></div>
 			    </div>
-			    <div class="recordsStatisticsGenderRatioContainer">
+			    <div class="recordsStatisticsGenderRatioContainer" style="position: relative;">
 			        <div class="recordsStatisticsGenderRatioTitle"><p>성별 비율</p></div>
-			        <div id="recordsStatisticsGenderRatio" style="width: 500px; height: 500px;"></div>
+			        <!-- <div id="recordsStatisticsGenderRatio" style="width: 50%; height: 600px; margin: 0 auto; margin-left:580px;"></div> -->
+			        <canvas id="recordsStatisticsGenderRatio" width="450" height="450" style="text-align: center; margin: 0 auto;"></canvas>
+			        <div style="position: absolute; bottom: 32%; left: 62%; color: #FFFFFF; font-weight: bold; font-size: 16px;">
+			        	<c:forEach var="genderRatio" items="${requestScope.genderRatio}" varStatus="status">
+					        <script>
+					            var menPercentage = ${(genderRatio.count_men / (genderRatio.count_men + genderRatio.count_women)) * 100};
+					            menPercentage = parseFloat(menPercentage.toFixed(3));
+					
+					            document.write(menPercentage + "%");
+					        </script>
+					    </c:forEach>
+			        </div>
+			        <div style="position: absolute; bottom: 65%; left: 25%; color: #FFFFFF; font-weight: bold; font-size: 16px;">
+			        	<c:forEach var="genderRatio" items="${requestScope.genderRatio}" varStatus="status">
+					        <script>
+					            var menPercentage = ${(genderRatio.count_women / (genderRatio.count_men + genderRatio.count_women)) * 100};
+					            menPercentage = parseFloat(menPercentage.toFixed(3));
+					
+					            document.write(menPercentage + "%");
+					        </script>
+					    </c:forEach>
+			        </div>
+			        <div style="margin-left: 20px;">
+				    	<div style="display: flex; justify-content: center;">
+					    	<div style="width: 50px; height: 30px; background-color: rgba(54, 162, 235, 0.6); border-radius: 15px;"></div>
+					    	<div style="align-content: center; padding-left: 10px; font-weight: bold; margin-right: 30px;">
+					    		: 남자
+					    	</div>
+					    	<div style="width: 50px; height: 30px; background-color: rgba(255, 99, 132, 0.6); border-radius: 15px;"></div>
+					    	<div style="align-content: center; padding-left: 10px; font-weight: bold;">
+					    		: 여자
+					    	</div>
+					    </div>
+				    </div>
 			    </div>
-			    <div class="recordsStatisticsAgeRatioContainer">
+			    <!-- <div>
+			    	<div style="display: flex; justify-content: center;">
+				    	<div style="width: 50px; height: 30px; background-color: rgba(54, 162, 235, 0.6); border-radius: 15px;"></div>
+				    	<div style="align-content: center; padding-left: 10px; font-weight: bold; margin-right: 30px;">
+				    		: 남자
+				    	</div>
+				    	<div style="width: 50px; height: 30px; background-color: rgba(255, 99, 132, 0.6); border-radius: 15px;"></div>
+				    	<div style="align-content: center; padding-left: 10px; font-weight: bold;">
+				    		: 여자
+				    	</div>
+				    </div>
+			    	
+			    </div> -->
+			    <div class="recordsStatisticsAgeRatioContainer" style="position: relative;">
 			        <div class="recordsStatisticsAgeRatioTitle"><p>연령별 비율</p></div>
-			        <div id="recordsStatisticsAgeRatio" style="width: 500px; height: 500px;"></div>
+			        <!-- <div id="recordsStatisticsAgeRatio" style="width: 50%; height: 300px; margin: 0 auto;"></div> -->
+			        <canvas id="recordsStatisticsAgeRatio" width="600" height="400" style="text-align: center; margin: 0 auto;"></canvas>
+			        <div style="position: absolute; color: black; font-weight: bold; font-size: 16px;">
+			        	<c:forEach var="ageRatio" items="${requestScope.ageRatio}" varStatus="status">
+					        <script>
+					            var 10Percentage = ${(ageRatio.count_10 / (ageRatio.count_10 + ageRatio.count_20 + ageRatio.count_30 + ageRatio.count_40 + ageRatio.count_50 + ageRatio.count_60 + ageRatio.count_70 + ageRatio.count_80)) * 100};
+					            10Percentage = parseFloat(10Percentage.toFixed(3));
+					
+					            document.write(10Percentage + "%");
+					        </script>
+					    </c:forEach>
+			        </div>
+			        <div style="position: absolute; color: #000000; font-weight: bold; font-size: 16px;">
+			        	<c:forEach var="ageRatio" items="${requestScope.ageRatio}" varStatus="status">
+					        <script>
+					            var 20Percentage = ${(ageRatio.count_20 / (ageRatio.count_10 + ageRatio.count_20 + ageRatio.count_30 + ageRatio.count_40 + ageRatio.count_50 + ageRatio.count_60 + ageRatio.count_70 + ageRatio.count_80)) * 100};
+					            20Percentage = parseFloat(20Percentage.toFixed(3));
+					
+					            document.write(20Percentage + "%");
+					        </script>
+					    </c:forEach>
+			        </div>
 			    </div>
 			</div>
 		</div>
@@ -334,7 +511,7 @@
 						    <div class="recordsRankingFormTabAgeRating">
 							    <table class="recordsRankingFormTabAgeWinRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px; color: #FFFFFF;">최다 승</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 승</th>
 							    	</tr>
 							    	<c:forEach var="recordsGoalRatingTabAge" items="${requestScope.recordsWinRatingTabAge}" varStatus="status" begin="0" end="2">
 								    	<tr style="border-bottom: 1px solid #c59246e0;">
@@ -345,7 +522,7 @@
 							    </table>
 							    <table class="recordsRankingFormTabAgeGoalRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px; color: #FFFFFF;">최다 득점</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 득점</th>
 							    	</tr>
 							    	<c:forEach var="recordsWinRatingTabAge" items="${requestScope.recordsGoalRatingTabAge}" varStatus="status" begin="0" end="2">
 								    	<tr style="border-bottom: 1px solid #c59246e0;">
@@ -356,7 +533,7 @@
 							    </table>
 							    <table class="recordsRankingFormTabAgeAssistRating" cellpadding="7" align="center" style="border-collapse:collapse; width:200px;">
 							    	<tr>
-							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px; color: #FFFFFF;">최다 도움</th>
+							    		<th colspan="2" style="background-color: #c59246e0; border-radius: 10px;">최다 도움</th>
 							    	</tr>
 							    	<c:forEach var="recordsAssistRatingTabAge" items="${requestScope.recordsAssistRatingTabAge}" varStatus="status" begin="0" end="2">
 								    	<tr style="border-bottom: 1px solid #c59246e0;">
@@ -378,14 +555,23 @@
 			<div class="regionlist">
 				<div class="sectionScheduleContainer">
 					<c:forEach var="mainTournamentList" items="${requestScope.mainTournamentList}" varStatus="status">
-						<div class="sectionScheduleFormBoard">
-							<div class="sectionScheduleFormBoardImageDiv">
-								<img src="/image/SoccerBall.jpg" class="sectionScheduleTournamentImg">
+						<c:if test="${mainTournamentList.imagename != null}">
+							<div class="sectionScheduleFormBoard">
+								<c:if test="${mainTournamentList.imagename != null}">
+									<div class="sectionScheduleFormBoardImageDiv">
+										<img src="/image/tournamentImg/${mainTournamentList.imagename}" class="sectionScheduleImage">
+									</div>
+								</c:if>
+								<c:if test="${mainTournamentList.imagename == null}">
+									<div class="sectionScheduleFormBoardImageDiv">
+										<img src="/image/noImage.png" class="sectionScheduleImage" style="width:250px; height:200px;">
+									</div>
+								</c:if>
+								<div class="sectionScheduleFormBoardSubject">${mainTournamentList.subject}</div>
+								<div class="sectionScheduleFormBoardRegion"><b style="font-size: 16px; margin-right: 20px; text-decoration: underline; text-underline-position: under;">대회 지역</b>${mainTournamentList.region}</div>
+								<div class="sectionScheduleFormBoardRegist"><b style="font-size: 16px; margin-right: 20px; text-decoration: underline; text-underline-position: under;">신청 기간</b>${mainTournamentList.regist_start} ~ ${mainTournamentList.regist_end}</div>
 							</div>
-							<div class="sectionScheduleFormBoardSubject">${mainTournamentList.subject}</div>
-							<div class="sectionScheduleFormBoardRegion">대회 지역 : ${mainTournamentList.region}</div>
-							<div class="sectionScheduleFormBoardRegist">신청 기간 : ${mainTournamentList.regist_start} ~ ${mainTournamentList.regist_end}</div>
-						</div>
+						</c:if>
 					</c:forEach>
 				</div>
 			</div> 
@@ -397,13 +583,23 @@
 			<div class="sectionMediaGallaryContainer">
 				<c:forEach var="imageboard" items="${requestScope.imageBoardList}" varStatus="status">
 					<div class="sectionMediaGallaryFormBoard">
-						<div class="sectionMediaGallaryImageDiv">
-							<img src="/image/SoccerBall.jpg" class="sectionMediaGallaryImage">
-						</div>
+						<c:if test="${imageboard.imagename != null}">
+							<div class="sectionMediaGallaryImageDiv">
+								<img src="/image/gallaryImg/${imageboard.imagename}" class="sectionMediaGallaryImage">
+							</div>
+						</c:if>
+						<c:if test="${imageboard.imagename == null}">
+							<div class="sectionMediaGallaryImageDiv">
+								<img src="/image/noImage.png" class="sectionMediaGallaryImage" style="width:250px; height:200px;">
+							</div>
+						</c:if>
 						<div class="sectionMediaGallarySubject">${imageboard.subject}</div>
 					</div>
 				</c:forEach>
 			</div>
+		</div>
+		<div class="section" id="sectionFooter">
+			<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 		</div>
 	</div>
 </body>

@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>adminNoticeBoardUpDelForm</title>
 <link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
-
+<link href="/style/adminFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 
@@ -85,44 +85,55 @@
 		});
 	}
 </script>
-
+<style>
+	#nav-item-notice{
+		text-align: center;
+		border: 1px solid #006666;
+		border-radius: 30px;
+		width: 150px;
+		height: 50px;
+		line-height: 3.3;
+		margin-top: 30px;
+		background-color: #006666;
+		color: #FFFFFF;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
 		
-		<p class="titleBackgoundText">공지사항</p>
+		<p class="titleBackgoundText">공지사항 수정</p>
+	</div>
+	<div class="adminPageSideBar">
+		<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 	</div>
 
-	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
-
-
 	<form name="adminNoticeboardUpDelForm">
-		<table align="center" bordercolor="gray" border=1 cellpadding=7
-			style="border-collpase: collpase">
-			<caption>[공지사항 수정/삭제]</caption>
+		<table align="center" cellpadding=7
+			style="border-collpase: collpase; margin: 0 auto; margin-top: 50px; width: 1000px; height: 400px; margin-left: 470px;">
 			<tr>
-				<th bgColor="lightgray">이 름</th>
-				<td><input type="text" name="writer" class="writer" size="10"
-					maxlength="15" value="${requestScope.communityDTO.writer}"></td>
+				<th style="width: 80px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">글쓴이</th>
+				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" name="writer" class="writer" size="103"
+					maxlength="15" value="${requestScope.communityDTO.writer}" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">제 목</th>
-				<td><input type="text" name="subject" class="subject" size="40"
-					maxlength="30" value="${requestScope.communityDTO.subject}"></td>
+				<th style="width: 80px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">제목</th>
+				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" name="subject" class="subject" size="103"
+					maxlength="30" value="${requestScope.communityDTO.subject}" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">조회수</th>
-				<td>${requestScope.communityDTO.readcount}</td>
+				<th style="width: 80px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">조회수</th>
+				<td style="border-bottom: 1px solid #c59246e0;">${requestScope.communityDTO.readcount}</td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">등록일</th>
-				<td>${requestScope.communityDTO.reg_date}</td>
+				<th style="width: 80px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">등록일</th>
+				<td style="border-bottom: 1px solid #c59246e0;">${requestScope.communityDTO.reg_date}</td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">내 용</th>
-				<td><textarea name="content" class="content" rows="13"
-						cols="40" maxlength="500">${requestScope.communityDTO.content}
+				<th style="width: 80px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">내용</th>
+				<td style="border-bottom: 1px solid #c59246e0;"><textarea name="content" class="content" rows="20"
+						cols="105" maxlength="500" style="border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px; resize: none; height: 300px;">${requestScope.communityDTO.content}
             </textarea>
 			</tr>
 
@@ -130,19 +141,11 @@
 		<input type="hidden" name="b_no"
 			value="${requestScope.communityDTO.b_no}">
 	</form>
-
-
-	<div style="height: 5px"></div>
-	<center>
-		<span style="cursor: pointer"
-			onclick="location.replace('/adminNoticeBoardForm.do')">[목록
-			화면으로]</span>
-	</center>
-	<center>
-		<input type="button" value="수정" onclick="checkNoticeBoardUpForm();">
-		<input type="button" value="삭제" onclick="checkNoticeBoardDelForm();">
-	</center>
-
-
+	<div class="adminMemberUpDel" style="text-align: center; margin-top: 20px; padding-bottom: 100px;">
+		<input type="button" value="수정" class="adminMemberUpBtn" style="cursor:pointer" onclick="checkNoticeBoardUpForm();">
+		<input type="button" value="삭제" class="adminMemberDelBtn" style="cursor:pointer" onclick="checkNoticeBoardDelForm();">
+		<input type="button" value="목록" class="adminMemberMoveBtn" onclick="location.replace('/adminNoticeBoardForm.do')">
+	</div>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

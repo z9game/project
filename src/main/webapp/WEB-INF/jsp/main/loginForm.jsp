@@ -179,7 +179,7 @@ function kakaoLogin() {
 				<tr>
 					<th class="loginFormMidTh">아이디</th>
 					<td>
-						<input type="text" name="mid" class="mid" style="width: 305px; height: 30px; margin-right: 100px;">
+						<input type="text" name="mid" class="mid" style="width: 305px; height: 30px; margin-right: 100px; border-radius: 10px; border: 1px solid #c59246e0; padding: 5px 15px;">
 						<!-- class 값은 JQuery, CSS에서 통합적으로 사용하기 위해 설정 -->
 						<!-- name 값은 파라미터명="파라미터값"으로 사용되며 대부분의 경우 DB의 Column명과 일치함 -->
 					</td>
@@ -188,7 +188,7 @@ function kakaoLogin() {
 				<tr>
 					<th class="loginFormPwdTh">비밀번호</th>
 					<td>
-						<input type="password" name="password" class="password" style="width: 305px; height: 30px;" onkeyup="enterkey()">
+						<input type="password" name="password" class="password" style="width: 305px; height: 30px; border-radius: 10px; border: 1px solid #c59246e0; padding: 5px 15px;" onkeyup="enterkey()">
 					</td>
 				</tr>
 			</table>
@@ -199,16 +199,17 @@ function kakaoLogin() {
 				<input type="button" value="회원가입" class="regBtn" style="cursor:pointer" onclick="location.replace('/memberRegForm.do')">
 				<input type="button" value="회원정보찾기" class="memberInfoFindBtn" style="cursor:pointer" onclick="location.replace('/memberInfoFindForm.do')">
 			</div>
-			<div class="kakaobtn">		
+			<!-- <div class="kakaobtn">		
 				<input type="hidden" name="kakaoname" id="kakaoname" />
 				<a href="javascript:kakaoLogin();"> 
 					<img src="/image/kakao_login_medium_narrow.png">
 				</a>
-			</div>
+			</div> -->
 			<p style="color: #999999; text-align: center; margin-top: 10px;"> * 관리자 모드가 있음 </p>
 			
 		</form>
 		
 	</div>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

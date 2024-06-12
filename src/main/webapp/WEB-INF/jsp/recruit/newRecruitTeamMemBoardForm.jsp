@@ -161,11 +161,11 @@
     <div class="newRecruitTeamMemBoardFormContainer">
     
 		<form name="newRecruitTeamMemBoardForm">
-			<table class="newRecruitTeamMemBoardFormRegTable">
+			<table class="newRecruitTeamMemBoardFormRegTable" align="center" cellpadding=7 style="border-collapse: collapse; margin-top: 50px; width: 1100px;">
 				<tr>
 					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
 					<td style="border-bottom: 1px solid #c59246e0;">
-						<input type="text" name="title" class="title" size="106" maxlength="100">
+						<input type="text" name="title" class="title" size="120" maxlength="100">
 					</td>
 				</tr>
 				<tr>
@@ -233,16 +233,16 @@
 					<th style="border-bottom: 1px solid #FFFFFF;">시간</th>
 					<td style="border-bottom: 1px solid #c59246e0; text-align: center; display: flex; align-items: center;">
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="checkbox" name="time" value="새벽" style="zoom:2.0; margin-right: 5px;">새벽
+							<input type="checkbox" name="time" value="새벽" style="zoom:2.0; margin-right: 4px;">새벽
 						</label>
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="checkbox" name="time" value="오전" style="zoom:2.0; margin-right: 5px;">오전
+							<input type="checkbox" name="time" value="오전" style="zoom:2.0; margin-right: 4px;">오전
 						</label>
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="checkbox" name="time" value="오후" style="zoom:2.0; margin-right: 5px;">오후
+							<input type="checkbox" name="time" value="오후" style="zoom:2.0; margin-right: 4px;">오후
 						</label>
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="checkbox" name="time" value="야간" style="zoom:2.0; margin-right: 5px;">야간
+							<input type="checkbox" name="time" value="야간" style="zoom:2.0; margin-right: 4px;">야간
 						</label>
 					</td>
 				</tr>
@@ -250,16 +250,16 @@
 					<th style="border-bottom: 1px solid #FFFFFF;">포지션</th>
 					<td style="border-bottom: 1px solid #c59246e0; text-align: center; display: flex; align-items: center;">
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="radio" name="pos" value="ST" style="zoom:2.0; margin-right: 5px;">ST
+							<input type="radio" name="pos" value="ST" style="zoom:2.0; margin-right: 11px;">ST
 						</label>
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="radio" name="pos" value="CM" style="zoom:2.0; margin-right: 5px;">CM
+							<input type="radio" name="pos" value="CM" style="zoom:2.0; margin-right: 9px;">CM
 						</label>
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="radio" name="pos" value="CB" style="zoom:2.0; margin-right: 5px;">CB
+							<input type="radio" name="pos" value="CB" style="zoom:2.0; margin-right: 9px;">CB
 						</label>
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="radio" name="pos" value="GK" style="zoom:2.0; margin-right: 5px;">GK
+							<input type="radio" name="pos" value="GK" style="zoom:2.0; margin-right: 9px;">GK
 						</label>
 					</td>
 				</tr>
@@ -267,11 +267,11 @@
 					<th style="border-bottom: 1px solid #FFFFFF;">종류</th>
 					<td style="border-bottom: 1px solid #c59246e0; text-align: center; display: flex; align-items: center;">
 						<label style="display: flex; align-items: center; margin-right: 50px;">
-							<input type="radio" name="team_mem" value="팀" style="zoom:2.0; margin-right: 5px;">팀
+							<input type="radio" name="team_mem" value="팀" style="zoom:2.0; margin-right: 11px;">팀
 						</label>
 						<c:if test="${requestScope.checkHaveTeam eq 1}">
 							<label style="display: flex; align-items: center; margin-right: 50px;">
-								<input type="radio" name="team_mem" value="팀원" style="zoom:2.0; margin-right: 5px;">팀원
+								<input type="radio" name="team_mem" value="팀원" style="zoom:2.0; margin-right: 11px;">팀원
 							</label>
 						</c:if>
 					</td>
@@ -279,7 +279,7 @@
 				<tr>
 					<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
 					<td style="border-bottom: 1px solid #c59246e0;">
-						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
+						<textarea name="content" class="content" rows="20" cols="122" maxlength="1000" style="resize:none"></textarea>
 					</td>
 				</tr>
 				
@@ -297,5 +297,6 @@
 		</form>
 		
 	</div>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

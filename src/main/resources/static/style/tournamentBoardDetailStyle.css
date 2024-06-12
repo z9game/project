@@ -33,11 +33,12 @@ a{
 .tournamentBoardDetailBtnDiv{
 	text-align: center;
 	margin-top: 10px;
-	margin-left: 870px;
+	margin-left: 950px;
 }
 .moveListBtn{
-	width: 70px;
-	height: 35px;
+	width: 150px;
+	height: 50px;
+	margin-top: 20px;
 	background-color: #c59246e0;
     color: #FFFFFF;
     border-radius: 10px;

@@ -159,11 +159,11 @@
 
 
 	<form name="recruitHiredBoardUpDelForm">
-		<table class="recruitLessonBoardUpDelFormRegTable">
+		<table class="recruitLessonBoardUpDelFormRegTable" align="center" cellpadding=7 style="border-collapse: collapse; margin-top: 50px; width: 1100px;">
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
-					<input type="text" name="title" class="title" size="106" maxlength="100" value="${requestScope.detail.title}">
+					<input type="text" name="title" class="title" size="115" maxlength="100" value="${requestScope.detail.title}" style="padding: 5px 15px;">
 				</td>
 			</tr>
 			<tr>
@@ -265,7 +265,7 @@
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
-					<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none">${requestScope.detail.content}</textarea>
+					<textarea name="content" class="content" rows="20" cols="118" maxlength="1000" style="resize:none; padding: 5px 15px;">${requestScope.detail.content}</textarea>
 				</td>
 			</tr>
 		</table>
@@ -281,5 +281,6 @@
 		</div>
 		<input type="hidden" name="recruitment_no" value="${requestScope.detail.recruitment_no}">
 	</form>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

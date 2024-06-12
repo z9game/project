@@ -10,7 +10,7 @@
 <title>adminStadium</title>
 <link href="/style/community/communityFreeBoardFormStyle.css"
 	rel="stylesheet">
-
+<link href="/style/adminFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 
@@ -229,32 +229,82 @@
 		
 		
 	</script>
+	<style>
+	#nav-item-stadium{
+		text-align: center;
+		border: 1px solid #006666;
+		border-radius: 30px;
+		width: 150px;
+		height: 50px;
+		line-height: 3.3;
+		margin-top: 30px;
+		background-color: #006666;
+		color: #FFFFFF;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 
 	<div class="communityFreeBoardFormTitle">
 		
-		<p class="titleBackgoundText">경기장관리</p>
+		<p class="titleBackgoundText">경기장 관리</p>
 
 	</div>
 
-	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	<div class="adminPageSideBar">
+		<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	</div>
 
 
 
 
 	<form name="adminStadiumSearchForm" onsubmit="return false">
 
-		<table align="center">
+		<table class="adminSearchFormTable" align="center" style="border: 1px solid #c59246e0; border-collapse: separate; border-radius: 20px; padding: 0px 15px 15px 15px;">
 			<tr>
-				<td>
-					<table border="1" cellpadding="5" cellspacing="0"
+				<td style="border-bottom: none;">
+					<table cellpadding="5" cellspacing="0"
 						style="border-collapse: collapse" align="center">
-						<caption>
-							<b>[검색조건]</b>
-						</caption>
 						<tr>
+							<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">시/도</th>
+							<td colspan="5" style="text-align: center; border-bottom: none; display: flex; align-items: center;"><select name="sido" id="" class="sido"
+								onchange="categoryChange(this)">
+									<option value="0">시/도 선택</option>
+									<option value="1">강원</option>
+									<option value="2">경기</option>
+									<option value="3">경남</option>
+									<option value="4">경북</option>
+									<option value="5">광주</option>
+									<option value="6">대구</option>
+									<option value="7">대전</option>
+									<option value="8">부산</option>
+									<option value="9">서울</option>
+									<option value="10">울산</option>
+									<option value="11">인천</option>
+									<option value="12">전남</option>
+									<option value="13">전북</option>
+									<option value="14">제주</option>
+									<option value="15">충남</option>
+									<option value="16">충북</option>
+							</select> <select name="sigungu" id="state" class="sigungu">
+									<option value="0">군/구 선택</option>
+							</select></td>
+						</tr>
+						<tr><td style="border-bottom: none;"></td></tr>
+						<tr>
+							<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">경기장 상태</th>
+							<td style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+								<label style="display: flex; align-items: center; margin-right: 50px;">
+									<input type="checkbox" name="stadium_status" value="사용가능" class="stadium_status" style="zoom:2.0; margin-right: 5px;">사용가능
+								</label>
+								<label style="display: flex; align-items: center;">
+									<input type="checkbox" name="stadium_status" value="이용불가" class="stadium_status" style="zoom:2.0; margin-right: 5px;">이용불가
+								</label>
+							</td>
+						</tr>
+						
+						<!-- <tr>
 							<th>키워드</th>
 
 							<td><select name="searchTypeStadium" class="searchType1">
@@ -262,12 +312,13 @@
 									<option value="stadium_name">경기장이름</option>
 									<option value="content">비고</option>
 
-									<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
+									추가적인 검색 조건을 샐렉트 박스에 추가
 							</select> <input type="text" name="keyword1" class="keyword1"> <select
-								name="orand">
+								name="orand" class="orAnd">
 									<option value="or">or
 									<option value="and">and
 							</select> <input type="text" name="keyword2" class="keyword2"></td>
+						</tr>
 						<tr>
 							<th>시/도</th>
 							<td colspan="5"><select name="sido" id="" class="sido"
@@ -292,13 +343,14 @@
 							</select> <select name="sigungu" id="state" class="sigungu">
 									<option value="0">군/구 선택</option>
 							</select></td>
+						</tr>
 						<tr>
 							<th>경기장상태</th>
 							<td><input type="checkbox" name="stadium_status" value="사용가능"
 								class="stadium_status">사용가능 
 								<input type="checkbox" name="stadium_status" value="이용불가"
 								class="stadium_status">이용불가</td>
-						</tr>
+						</tr> -->
 
 
 
@@ -314,15 +366,33 @@
 
 
 					</table>
+					<div class="search">
+						<select name="searchType1" class="searchType1">
+							<option value="all">전체</option>
+							<option value="stadium_name">경기장이름</option>
+							<option value="content">비고</option>
+						</select>
+						<input type="text" name="keyword1" class="keyword1"> 
+						<select name="orand" class="orAnd">
+							<option value="or">or
+							<option value="and">and
+						</select>
+						<input type="text" name="keyword2" class="keyword2">
+					</div>
+					<div class="searchBtnDiv">
+						<input type="button" value="검색" class="searchBtn" class="searchBtn" onclick="search()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-right: 10px;">
+						<input type="button" value="초기화" class="searchAllBtn" onclick="searchAll()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">   
+					</div>
+				</td>
 			</tr>
 
-			<tr align="center">
+			<!-- <tr align="center">
 				<td><input type="button" value="검색" class="searchBtn"
 					onclick="search()"> <input type="button" value="모두 검색"
 					class="searchAllBtn" onclick="searchAll()">&nbsp;&nbsp;&nbsp;
 					<input type="button" value="새글쓰기"
 					onclick="location.replace('/adminStadiumRegForm.do');"></td>
-			</tr>
+			</tr> -->
 
 		</table>
 		<input type="hidden" name="sort" class="sort"> <input
@@ -341,17 +411,25 @@
 
 
 
-
+<div class="adminFormTopContents">
+		<span class="fontLightGray" id="adminFormAllCount">Total. ${requestScope.StadiumListAllCnt}개</span>
+		<div class="adminFormRowCntPerPage">
+			<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+				<option value="10">10개씩 보기
+				<option value="15">15개씩 보기
+				<option value="20">20개씩 보기
+			</select>
+		</div>
+	</div>
 
 	<div class="adminFormContainer">
 		<div class="adminListDiv" style="margin-bottom: 20px;">
-			<table class="adminListTable" cellpadding="7" border="1"
-				bordercolor="gray" align="center"
+			<table class="adminListTable" cellpadding="7" align="center"
 				style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
 				<tr>
-					<th style="width: 30px;">번호</th>
+					<th style="width: 50px;">번호</th>
 
-					<th style="width: 500px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">경기장이름</th>
+					<th style="width: 500px;">경기장 이름</th>
 
 					<th style="width: 200px; ">시/도</th>
 
@@ -370,7 +448,7 @@
 					<tr style="cursor: pointer"
 						onclick="goAdminStadiumUpDelForm(${stadium.stadium_no});">
 						<td align="center">${requestScope.StadiumMap.begin_serialNo_asc + status.index}</td>
-						<td align="center">${stadium.stadium_name}</td>
+						<td align="center" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${stadium.stadium_name}</td>
 						<td align="center">${stadium.sido_name}</td>
 						<td align="center">${stadium.sigungu_name}</td>
 					</tr>
@@ -384,47 +462,29 @@
 			</c:if>
 		</div>
 	</div>
-
-
-
-
-	<center>
-
-		<span class="pagingNos"> <span style="cursor: pointer"
-			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.StadiumMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
-
-
-			<c:forEach var="pageNo"
-				begin="${requestScope.StadiumMap.begin_pageNo}"
-				end="${requestScope.StadiumMap.end_pageNo}">
-
+<div class="newCommunityFreeBoardFormBtnDiv">
+		<input type="button" value="새 글 쓰기" class="newCommunityFreeBoardFormBtn" onclick="location.replace('/adminStadiumRegForm.do');">
+	</div>
+	<div class="adminFormPaging">
+		<span class="pagingNos">
+			<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.StadiumMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+			<c:forEach var="pageNo" begin="${requestScope.StadiumMap.begin_pageNo}" end="${requestScope.StadiumMap.end_pageNo}">
 				<c:if test="${requestScope.StadiumMap.selectPageNo==pageNo}">
-	            ${pageNo}
-	         </c:if>
-
+		            <p class="activePageNo">${pageNo}</p>
+		        </c:if>
 				<c:if test="${requestScope.StadiumMap.selectPageNo!=pageNo}">
-					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
 				</c:if>
-			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.StadiumMap.selectPageNo}+1)">[다음]</span>
-			<span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.StadiumMap.last_pageNo})">[마지막]</span>
-			&nbsp;&nbsp;&nbsp;
-			[${requestScope.StadiumListCnt}/${requestScope.StadiumListAllCnt}]개
-			&nbsp;&nbsp;
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
-	</center>
+			</c:forEach>
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.StadiumMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+		</span>
+	</div>
 
 
 	<form name="adminStadiumUpDelForm"action="/adminStadiumUpDelForm.do" method="post">
 			<input type="hidden" name="stadium_no" value="${requestScope.stadim2DTO.stadium_no}">
 		</form>
-	
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

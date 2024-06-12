@@ -52,7 +52,7 @@ a{
 	width: 100px;
 	height: 40px;
 	margin-top: 10px;
-	margin-left: 900px;
+	margin-left: 1000px;
 	background-color: #c59246e0;
     color: #FFFFFF;
     border-radius: 10px;
@@ -73,4 +73,15 @@ a{
 
 .newCommunityFreeBoardFormBtnDiv{
 	text-align: center;
+}
+
+.subject{
+	height: 35px;
+	padding: 5px 15px;
+}
+
+.subject, .content{
+	border-radius: 10px;
+	border: 1px solid #c59246e0;
+	padding: 5px 15px;
 }

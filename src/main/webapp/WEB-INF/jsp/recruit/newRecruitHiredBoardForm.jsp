@@ -152,11 +152,11 @@
     <div class="newRecruitHiredBoardFormContainer">
     
 		<form name="newRecruitHiredBoardForm">
-			<table class="newRecruitHiredBoardFormRegTable">
+			<table class="newRecruitHiredBoardFormRegTable" align="center" cellpadding=7 style="border-collapse: collapse; margin-top: 50px; width: 1100px;">
 				<tr>
 					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
 					<td style="border-bottom: 1px solid #c59246e0;">
-						<input type="text" name="title" class="title" size="106" maxlength="100">
+						<input type="text" name="title" class="title" size="117" maxlength="100">
 					</td>
 				</tr>
 				<tr>
@@ -258,7 +258,7 @@
 				<tr>
 					<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
 					<td style="border-bottom: 1px solid #c59246e0;">
-						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
+						<textarea name="content" class="content" rows="20" cols="120" maxlength="1000" style="resize:none"></textarea>
 					</td>
 				</tr>
 			</table>
@@ -274,5 +274,6 @@
 			      <input type="hidden" name="nickname" value="${sessionScope.m_no}">
 		</form>
 	</div>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

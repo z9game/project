@@ -38,6 +38,7 @@ th,td{
 
 .upConfirmBtnDiv{
 	text-align: center;
+	margin-top: 30px;
 }
 
 .upConfirmBtn, .moveLoginPage{
@@ -54,69 +55,94 @@ th,td{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormNameTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormPasswordTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormPasswordCheckTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormNicknameTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormEmailTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormBirthdayTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormPhoneTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormGenderTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormRegionTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberRegFormAdressTh{
 	background: none;
 	color: #000000;
 	font-size: 18px;
+	height: 70px;
 }
 
 .memberUpdateFormTable td, .memberUpdateFormTable th{
 	border-bottom: 0.5px solid #000000;
-	height: 60px;
+	height: 70px;
+}
+
+.memberRegFormTh{
+	background: none;
+	color: #000000;
+	font-size: 18px;
+	height: 70px;
+}
+
+.password, .checkpwd, .nickname, .email, .detail_address, .phone1, .phone2, .phone3, #sido_id, #state{
+	border-radius: 10px;
+	border: 1px solid #c59246e0;
+	height: 30px;
+	padding: 5px 15px;
 }

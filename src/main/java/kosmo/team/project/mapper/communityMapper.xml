@@ -530,6 +530,7 @@
            , i.content		"content"
            , i.readcount	"readcount"
            , i.reg_date		"reg_date"
+		   , i.imagename as "imagename"
            
            from imageboard i, member m 
             
@@ -587,7 +588,8 @@
 					  
 					  , ima.content      
 					  , ima.readcount   
-					  , to_char(ima.reg_date,'yyyy-mm-dd') reg_date
+					  , ima.reg_date
+					  , ima.imagename as "imagename"
 				
 				from imageboard ima   
 			)
@@ -822,7 +824,8 @@
                           
                   , s.content      
                   , s.readcount   
-                  , to_char(s.reg_date,'yyyy-mm-dd') reg_date
+                  , s.reg_date
+                  , s.imagename as "imagename"
                   , 'sale'     as "table_name"   
             
                from sale s
@@ -838,7 +841,8 @@
                          
                   , f.content         
                   , f.readcount      
-                  , to_char(f.reg_date,'yyyy-mm-dd') reg_date
+                  , f.reg_date
+                  , f.imagename as "imagename"
                   , 'free_sharing'   as "table_name"      
             
                from free_sharing f
@@ -871,7 +875,8 @@
                         
                   , s.content      
                   , s.readcount   
-                  , to_char(s.reg_date,'yyyy-mm-dd') reg_date
+                  , s.reg_date
+                  , s.imagename as "imagename"
                   , 'sale'   as "table_name"   
             
                from sale s
@@ -905,7 +910,8 @@
                      
                   , f.content         
                   , f.readcount      
-                  ,to_char(f.reg_date,'yyyy-mm-dd') reg_date
+                  , f.reg_date
+                  , f.imagename as "imagename"
                   , 'free_sharing'   as "table_name"
                      
             

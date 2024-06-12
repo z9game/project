@@ -42,12 +42,12 @@
 			HttpServletRequest 객체에도 저장된다.  -->
 	<!-- 만약에 상세보기할 게시판이 있으면-->
 	<c:if test="${!empty requestScope.list}">
-		<table align="center" cellpadding=7 style="width:900px; border-collapse: collapse; border-bottom: 1px solid #999999; margin-top: 50px;">
+		<table align="center" cellpadding=7 style="width:1100px; border-collapse: collapse; border-bottom: 1px solid #999999; margin-top: 50px;">
 				<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 					<td>${requestScope.list.subject}</td>
 					<td style="text-align: right; margin-top: 15px;">${requestScope.list.regist_start} ~ ${requestScope.list.regist_end}&nbsp;&nbsp;&nbsp;<span style="color: #999999;">지역&nbsp;</span>/&nbsp;${requestScope.list.region}</td>
 				</tr>
-	            <tr style="width: 900px; height: 400px; text-align: center;">
+	            <tr style="width: 1100px; height: 400px; text-align: center;">
 					<td colspan="2">
 						<div class="tournamentBoardImageDiv" style="text-align: center; margin-bottom: 30px;">
 							<img src="/image/SoccerBall.jpg" class="communityGallaryImage">
@@ -60,5 +60,6 @@
 				<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/tournamentBoardForm.do')">
 			</div>
     	</c:if>
+    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>MatchingForm</title>
 <link href="/style/matchingFormStyle.css" rel="stylesheet">
-<!-- <link href="/style/matching.css" rel="stylesheet"> -->
 <script src="/js/matchingFormScript.js"></script>
 <script src="/js/common.js"></script>
 
@@ -171,7 +170,7 @@
     	<p class="titleBackgoundText">매칭 찾기</p>
     </div>
    		<form name="matching_table" onsubmit="return false">
-   			<table align="center" style="border: 1px solid #c59246e0; border-radius: 15px;">
+   			<table align="center" style="border: 1px solid #c59246e0; border-collapse: separate; border-radius: 20px; padding: 0px 15px 15px 15px;">
 					<tr>
 						<td>
 							<table style="border-collapse: collapse; border-bottom: none; text-align: center;" align="center">
@@ -427,6 +426,6 @@
 	<form action="/newMatchingBoardForm.do" method="post" name="newMatching">
 		<input type="hidden" name="m_no" value="${sessionScope.m_no}">
 	</form>
-	
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

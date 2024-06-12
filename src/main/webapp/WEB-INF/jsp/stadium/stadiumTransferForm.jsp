@@ -323,6 +323,6 @@ function goYangdoDetailUpdDeleForm(yangdo_no, m_no) {
 	
 	
 	
-	
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>
