@@ -250,7 +250,7 @@
 				<th class="memberRegFormPasswordTh">비밀번호</th>
 				<td>
 				<!-------------------------------------------------------->
-				<input type="password" name="password" class="pwd" size="40" maxlength="15" value="${requestScope.memberDTO.password}" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;">
+				<input type="text" name="password" class="pwd" size="40" maxlength="15" value="${requestScope.memberDTO.password}" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;">
 				<!-------------------------------------------------------->
 				</td>
 			</tr>
@@ -259,7 +259,7 @@
 				<th class="memberRegFormPasswordCheckTh">비밀번호 확인</th>
 				<td>
 				<!-------------------------------------------------------->
-				<input type="password" name="checkpwd" class="checkpwd" size="40" maxlength="15" value="${requestScope.memberDTO.password}" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;">
+				<input type="text" name="checkpwd" class="checkpwd" size="40" maxlength="15" value="${requestScope.memberDTO.password}" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;">
 				<!-------------------------------------------------------->
 				</td>
 			</tr>
