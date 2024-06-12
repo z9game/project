@@ -250,63 +250,67 @@ function regMember()
 				<tr>
 					<th class="memberRegFormMidTh">아이디</th>
 					<td>
-						<input type="text" name="mid" class="mid" size="30" maxlength="30">
-						<input type="button" onclick="checkmid()" value="중복 확인">
+						<input type="text" name="mid" class="mid" size="27" maxlength="30" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
+						<input type="button" onclick="checkmid()" value="중복 확인" style="width: 100px; height: 35px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-left: 10px;">
 					</td>
 				</tr>
 				<tr>
 					<th class="memberRegFormNameTh">이름</th>
 					<td>
-						<input type="text" name="name" class="name" size="40" maxlength="30">
+						<input type="text" name="name" class="name" size="40" maxlength="30" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 					</td>
 				</tr>
 				<tr>
 					<th class="memberRegFormPasswordTh">비밀번호</th>
 					<td>
-						<input type="password" name="password" class="password" size="40"  maxlength="30">
+						<input type="password" name="password" class="password" size="40"  maxlength="30" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 					</td>
 				</tr>
 				<tr>
 					<th class="memberRegFormPasswordCheckTh">비밀번호 확인</th>
 					<td>
-						<input type="password" name="checkpwd" class="checkpwd" size="40">
+						<input type="password" name="checkpwd" class="checkpwd" size="40" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 					</td>
 				</tr>
 				<tr>
 					<th class="memberRegFormNicknameTh">닉네임</th>
 					<td>
-						<input type="text" name="nickname" class="nickname" size="40" maxlength="30">
+						<input type="text" name="nickname" class="nickname" size="40" maxlength="30" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 					</td>
 				</tr>
 				<tr>
 					<th class="memberRegFormEmailTh">이메일</th>
 					<td>
-						<input type="text" name="email" class="email" size="40" maxlength="100">
+						<input type="text" name="email" class="email" size="40" maxlength="100" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 					</td>
 				</tr>
 				<tr>
 					<th class="memberRegFormBirthdayTh">생년월일</th>
 					<td>
-						<input type="date" name="birthday" class="birthday" size="40" maxlength="30">
+						<input type="date" name="birthday" class="birthday" size="40" maxlength="30" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 					</td>
 				</tr>
 				<tr>
 					<th class="memberRegFormPhoneTh">전화번호</th>
 					<td>
-						<input type="tel" name="phone1" class="phone1" size="3" maxlength="3">-<input type="tel" name="phone2" class="phone2" size="3" maxlength="4">-<input type="tel" name="phone3" class="phone3" size="3" maxlength="4">
+						<input type="tel" name="phone1" class="phone1" size="3" maxlength="3" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">-<input type="tel" name="phone2" class="phone2" size="3" maxlength="4" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">-<input type="tel" name="phone3" class="phone3" size="3" maxlength="4" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 					</td>
 				</tr>
 				<tr>
 					<th class="memberRegFormGenderTh">성별</th>
 					<td>
-						<input type="radio" name="gender" class="gender" value="남">남
-						<input type="radio" name="gender" class="gender" value="여">여
+						<label style="margin-right: 50px;">
+				            <input type="radio" name="gender" class="gender" value="남" style="zoom:1.5; margin-right: 10px; vertical-align: middle;">남
+				        </label>
+				        <label>
+				            <input type="radio" name="gender" class="gender" value="여" style="zoom:1.5; margin-right: 10px; vertical-align: middle;">여
+				        </label>
 					</td>
 				</tr>
 				<tr>
 					<th class="memberRegFormRegionTh">주소</th>
-					<td colspan="5" align="center">
-			            <select name="sido_id" id="" onchange="categoryChange(this)">
+					<td colspan="5">
+			            <select name="sido_id" id="" onchange="categoryChange(this)" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 			              <option value="0">시/도 선택</option>
 			              <option value="1">강원</option>
 			              <option value="2">경기</option>
@@ -325,7 +329,7 @@ function regMember()
 			              <option value="15">충남</option>
 			              <option value="16">충북</option>
 			            </select>
-			            <select name="sigungu_id" id="state">
+			            <select name="sigungu_id" id="state" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 			              <option value ="0">군/구 선택</option>
 			            </select>
 					</td>
@@ -333,7 +337,7 @@ function regMember()
 				<tr>
 					<th class="memberRegFormAdressTh">상세주소</th>
 					<td>
-			           <input type="text" name="detail_address" class="detail_address" size="40" maxlength="50">
+			           <input type="text" name="detail_address" class="detail_address" size="40" maxlength="50" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;">
 					</td>
 				</tr>
 			</table>
@@ -343,5 +347,6 @@ function regMember()
 			</div>
 		</form>
 	</div>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

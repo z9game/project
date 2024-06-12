@@ -10,7 +10,8 @@
 		        subject AS "subject",
 		        writer AS "writer",
 		        to_char(reg_date, 'YYYY-MM-DD') AS "reg_date",
-		        readcount AS "readcount"
+		        readcount AS "readcount",
+		        imagename AS "imagename"
 		    FROM 
 		        imageboard
 	</select>
@@ -317,6 +318,7 @@
 			,region
 			,to_char(regist_start,'YYYY-MM-DD') as "regist_start"
 			,to_char(regist_end,'YYYY-MM-DD') 	as "regist_end"
+			,imagename
 		from 
 			tournament
 	</select>

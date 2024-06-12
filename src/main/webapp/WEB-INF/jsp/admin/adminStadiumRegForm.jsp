@@ -9,7 +9,7 @@
 <title>adminStadiumRegForm</title>
 <link href="/style/community/communityFreeBoardFormStyle.css"
 	rel="stylesheet">
-
+<link href="/style/adminFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 <script>
@@ -109,18 +109,32 @@
 		});
 	}
 </script>
-
+<style>
+	#nav-item-stadium{
+		text-align: center;
+		border: 1px solid #006666;
+		border-radius: 30px;
+		width: 150px;
+		height: 50px;
+		line-height: 3.3;
+		margin-top: 30px;
+		background-color: #006666;
+		color: #FFFFFF;
+	}
+</style>
 </head>
 <body>
 
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
 	
-		<p class="titleBackgoundText"></p>
+		<p class="titleBackgoundText">경기장 등록</p>
 	</div>
 
 
-	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	<div class="adminPageSideBar">
+		<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	</div>
 
 
 
@@ -145,24 +159,25 @@
 			<input type="hidden" name="stadium_no" value="${param.stadium_no}">
 		</c:if>
 
-		<table align="center" bordercolor="gray" border=1 cellpadding=7
-			style="border-collapse: collapse">
+		<table align="center" cellpadding=7 style="border-collpase: collpase; border-bottom:0; margin: 0 auto; margin-top: 50px; width: 1000px; height: 400px; margin-left: 470px;">
 
 			<c:if test="${empty param.stadium_no}">
-				<caption>[새글쓰기]</caption>
 			</c:if>
 			<tr>
-				<th>사진</th>
-				<td width="300px">사진</td>
+				<th style="width: 100px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">경기장 사진</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<input type="file" name="imageFileAdd" class="imageFileAdd" accept="image/*" multiple>				
+				</td>
 			</tr>
 			<tr>
-				<th>경기장이름</th>
-				<td width="300px"><input type="text" name="stadium_name"
-					class="stadium_name" size="10" ></td>
+				<th style="width: 100px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">경기장 이름</th>
+				<td style="border-bottom: 1px solid #c59246e0;">
+					<input type="text" name="stadium_name" class="stadium_name" size="95" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;">
+				</td>
 			</tr>
 			<tr>
-				<th>시/도</th>
-				<td colspan="5"><select name="sido_id" id=""
+				<th style="width: 100px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">지역</th>
+				<td colspan="5" style="border-bottom: 1px solid #c59246e0;"><select name="sido_id" id="sido_id"
 					onchange="categoryChange(this)">
 						<option value="0">시/도 선택</option>
 						<option value="1">강원</option>
@@ -186,19 +201,25 @@
 				</select></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">상세주소</th>
-				<td><input type="text" name="detail_address"
-					class="detail_address" size="40" maxlength="30"></td>
+				<th style="width: 100px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">상세주소</th>
+				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" name="detail_address"
+					class="detail_address" size="95" maxlength="30" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;"></td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">상태</th>
-				<td><input type="radio" name="stadium_status" value="사용가능">사용가능
-					<input type="radio" name="stadium_status" value="이용불가">이용불가</td>
+				<th style="width: 100px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">상태</th>
+				<td style="text-align: center; display: flex; align-items: center; border-bottom: 1px solid #c59246e0;">
+					<label style="display: flex; align-items: center; margin-right: 50px;">
+						<input type="radio" name="stadium_status" value="사용가능" class="stadium_status" style="zoom:2.0; margin-right: 5px;">사용가능
+					</label>
+					<label style="display: flex; align-items: center;">
+						<input type="radio" name="stadium_status" value="이용불가" class="stadium_status" style="zoom:2.0; margin-right: 5px;">이용불가
+					</label>
+				</td>
 			</tr>
 			<tr>
-				<th bgColor="lightgray">비고</th>
-				<td><textarea name="content" class="content" rows="13"
-						cols="40" maxlength="500"></textarea>
+				<th style="width: 100px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">비고</th>
+				<td style="border-bottom: 1px solid #c59246e0;"><textarea name="content" class="content" rows="13"
+						cols="40" maxlength="500" style="height: 300px; width: 830px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px; resize: none;"></textarea>
 			</tr>
 
 
@@ -210,26 +231,13 @@
 
 
 		</table>
-		<div style="height: 5px;"></div>
-
-
-
-
-
-
-
-
-
-
-		<center>
-			<input type="button" value="저장" onClick="checkAdminStadiumRegForm();">
-			<input type="reset" value="다시작성"> <span
-				style="cursor: pointer"
-				onClick="location.replace('/adminStadiumForm.do');">[목록보기]</span>
-		</center>
-
+		<div class="adminMemberUpDel" style="text-align: center; margin-top: 20px; padding-bottom: 100px;">
+			<input type="reset" value="다시 작성" class="adminMemberUpBtn" style="cursor:pointer; width: 100px;">
+			<input type="button" value="저장" class="adminMemberDelBtn" style="cursor:pointer" onClick="checkAdminStadiumRegForm();">
+			<input type="button" value="목록" class="adminMemberMoveBtn" onClick="location.replace('/adminStadiumForm.do');">
+		</div>
 	</form>
-
+<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 
 </body>
 </html>

@@ -309,4 +309,13 @@ public class MainController {
 		
 		return resultMap;
 	}
+	
+	@RequestMapping(value = "/userGuideForm.do")
+	public ModelAndView userGuideForm() {
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/main/userGuideForm.jsp");
+
+		return mav;
+	}
 }

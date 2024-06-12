@@ -145,6 +145,7 @@
 		,st.content as
 		"content"
 		,st.stadium_status as "stadium_status"
+		,imagename as "imagename"
 
 		FROM
 		stadium st
@@ -212,6 +213,7 @@
 		,st.content as "content"
 		,st.stadium_status
 		as "stadium_status"
+		,imagename as "imagename"
 
 		FROM
 		stadium st

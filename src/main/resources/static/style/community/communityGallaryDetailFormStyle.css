@@ -44,28 +44,18 @@ a{
 	padding: 40px;
 }
 
-.checkCommentBtn{
-	width: 70px;
-	height: 35px;
-	background-color: #c59246e0;
-    color: #FFFFFF;
-    border-radius: 10px;
-    border: 1px solid #c59246e0;
-    cursor: pointer;
-    margin-left: 33px;
-}
-
 .gallaryDetailBtnDiv{
 	justify-content: center;
 	margin-top: 10px;
-	margin-left: 750px;
+	margin-left: 800px;
 	display: flex;
 	gap: 10px;
 }
 
 .moveListBtn, .gallaryUpDelBtn{
-	width: 70px;
-	height: 35px;
+	width: 150px;
+	height: 50px;
+	margin-top: 20px;
 	background-color: #c59246e0;
     color: #FFFFFF;
     border-radius: 10px;

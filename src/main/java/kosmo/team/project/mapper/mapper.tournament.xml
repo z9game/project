@@ -50,6 +50,7 @@
 				,to_char(regist_start,'YYYY-MM-DD') as "regist_start"
 				,to_char(regist_end,'YYYY-MM-DD') 	as "regist_end"
 				,to_char(reg_date,'YYYY-MM-DD')     as "reg_date"  
+				,imagename as "imagename"
 			from 
 				tournament
 			where

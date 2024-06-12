@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>admiNoticeBoardRegForm</title>
 <link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
-
+<link href="/style/adminFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 <script>
@@ -104,18 +104,31 @@
 		});
 	}
 </script>
-
+<style>
+	#nav-item-notice{
+		text-align: center;
+		border: 1px solid #006666;
+		border-radius: 30px;
+		width: 150px;
+		height: 50px;
+		line-height: 3.3;
+		margin-top: 30px;
+		background-color: #006666;
+		color: #FFFFFF;
+	}
+</style>
 </head>
 <body>
 
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
 	
-		<p class="titleBackgoundText">공지사항</p>
+		<p class="titleBackgoundText">공지사항 등록</p>
 	</div>
 
-
-<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	<div class="adminPageSideBar">
+		<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	</div>
 
 
 
@@ -140,49 +153,36 @@
 			<input type="hidden" name="b_no" value="${param.b_no}">
 		</c:if>
 
-		<table align="center" bordercolor="gray" border=1 cellpadding=7
-			style="border-collapse: collapse">
+		<table align="center" cellpadding=7 style="border-collpase: collpase; margin: 0 auto; margin-top: 50px; width: 1000px; height: 400px; margin-left: 470px;">
 
 			<c:if test="${empty param.b_no}">
-				<caption>[새글쓰기]</caption>
 			</c:if>
-
 			<tr>
-				<th>작성자</th>
-				<td width="300px">
-					<!--------------------------------------------------------> <input
-					type="text" name="writer" class="writer" size="10" maxlength="15" readonly="readonly"
-					value="관리자"> <!-------------------------------------------------------->
-					<%= session.getAttribute("nickname") %>
-				</td>
-			</tr>
+               <th style="width: 100px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">글쓴이</th>
+               <td style="border-bottom: 1px solid #c59246e0;">
+               		<input type="text" name="writer" class="writer" size="100" maxlength="15" readonly="readonly" value="관리자" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;"> 	 
+               </td>
+            </tr>
+            <tr>
+               <th style="width: 100px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">제목</th>
+               <td style="border-bottom: 1px solid #c59246e0;">
+               		<input type="text" size="100" maxlength="30" name="subject" style="height: 35px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px;"> 	 
+               </td>
+            </tr>
 			<tr>
-				<th>제 목</th>
-				<td>
-					<!--------------------------------------------------------> <input
-					type="text" name="subject" class="subject" size="40" maxlength="30">
-					<!-------------------------------------------------------->
-				</td>
-			</tr>
-			<tr>
-				<th>내 용</th>
-				<td>
-					<!--------------------------------------------------------> <textarea
-						name="content" class="content" rows="13" cols="40" maxlength="500"></textarea>
-					<!-------------------------------------------------------->
-				</td>
-			</tr>
+           		<th style="width: 100px; height: 50px; border-bottom: 1px solid #FFFFFF; color: #000000; background-color: rgba(197, 146, 70, 0.4);">내 용</th>
+	            <td style="border-bottom: 1px solid #c59246e0; height: 200px;">
+	               <textarea name="content" class="content" rows="20" cols="100" maxlength="500" style="height: 300px; border-radius: 10px; border: 1px solid #c59246e0; padding: 0px 15px; resize: none;"></textarea>
+	            </td>
+         	</tr>
 		</table>
-		<div style="height: 5px;"></div>
-		<center>
-			<input type="button" value="저장"
-				onClick="checkAdminNoticeBoardRegForm();"> <input
-				type="reset" value="다시작성"> <span style="cursor: pointer"
-				onClick="location.replace('/adminNoticeBoardForm.do');">[목록보기]</span>
-		</center>
-
+		<div class="adminMemberUpDel" style="text-align: center; margin-top: 20px; padding-bottom: 100px;">
+			<input type="reset" value="다시 작성" class="adminMemberUpBtn" style="cursor:pointer; width: 100px;">
+			<input type="button" value="저장" class="adminMemberDelBtn" style="cursor:pointer" onClick="checkAdminNoticeBoardRegForm();">
+			<input type="button" value="목록" class="adminMemberMoveBtn" onClick="location.replace('/adminNoticeBoardForm.do');">
+		</div>
 	</form>
-
+<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 
 </body>
 </html>

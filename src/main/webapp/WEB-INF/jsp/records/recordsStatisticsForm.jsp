@@ -206,5 +206,6 @@
         <div class="recordsStatisticsNumberOfTeamMemberTitle"><p style="padding-top: 10px;">팀원 수</p></div>
         <div id="recordsStatisticsNumberOfTeamMember" style="width: 50%; height: 300px; margin: 0 auto;"></div>
 	</div>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

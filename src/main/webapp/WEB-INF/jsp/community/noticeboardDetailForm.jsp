@@ -49,7 +49,7 @@
 			HttpServletRequest 객체에도 저장된다.  -->
 	<!-- 만약에 상세보기할 게시판이 있으면-->
 	<c:if test="${!empty requestScope.communityDTO}">
-		<table align="center" cellpadding=7 style="width:900px; border-collapse: collapse; border-bottom: 1px solid #999999; margin-top: 50px;">
+		<table align="center" cellpadding=7 style="width:1100px; border-collapse: collapse; border-bottom: 1px solid #999999; margin-top: 50px;">
 			<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 				<td>${requestScope.communityDTO.subject}</td>
 				<!--------------------------------------------------- -->
@@ -95,6 +95,6 @@
 
 	<!-- <p><input type="submit" name="submit" value="가입">&nbsp;<input type="reset" name="reset" value="초기화">
             &nbsp;<a href="loginForm.html">[로그인화면으로]</a></p> -->
-
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

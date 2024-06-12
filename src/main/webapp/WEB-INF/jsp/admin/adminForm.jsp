@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>adminFormTitle</title>
 <link href="/style/community/communityFreeBoardFormStyle.css" rel="stylesheet">
-
+<link href="/style/adminFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 
@@ -257,153 +257,212 @@ $(document).ready(function() {
 	
 
 </script>
+<style>
+	#nav-item-title{
+		text-align: center;
+		border: 1px solid #006666;
+		border-radius: 30px;
+		width: 150px;
+		height: 50px;
+		line-height: 3.3;
+		margin-top: 30px;
+		background-color: #006666;
+		color: #FFFFFF;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 
 	<div class="communityFreeBoardFormTitle">
-	
-		<p class="titleBackgoundText">어드민 페이지</p>
-
+		<p class="titleBackgoundText">관리자 페이지</p>
 	</div>
-
-	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	<div class="adminPageSideBar">
+		<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	</div>
 
 
 
 
 	<form name="adminSearchForm" onsubmit="return false">
 
-		<table align="center">
-			<tr>
-				<td>
-					<table border="1" cellpadding="5" cellspacing="0"
-						style="border-collapse: collapse" align="center">
-						<caption>
-							<b>[검색조건]</b>
-						</caption>
-						<tr>
-							<th>키워드</th>
-
-							<td><select name="searchType1" class="searchType1">
-									<option value="all">전체</option>
-									<option value="name">이름</option>
-									<option value="mid">아이디</option>
-									<option value="nickname">별명</option>
-									<option value="phone">전화번호</option>
-									<option value="email">이메일</option>
-
-									<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
-							</select> <input type="text" name="keyword1" class="keyword1"> <select
-								name="orand">
-									<option value="or">or
-									<option value="and">and
-							</select> <input type="text" name="keyword2" class="keyword2"></td>
-						<tr>
-							<th>성별</th>
-							<td><input type="checkbox" name="gender" value="남"
-								class="gender">남 <input type="checkbox" name="gender"
-								value="여" class="gender">여</td>
-						</tr>
-						<tr>
-							<th>연령대</th>
-							<td><input type="checkbox" name="ageRange" value="10대"
-								class="ageRange">10대 <input type="checkbox"
-								name="ageRange" value="20대" class="ageRange">20대 <input
-								type="checkbox" name="ageRange" value="30대" class="ageRange">30대
-								<input type="checkbox" name="ageRange" value="40대"
-								class="ageRange">40대 <input type="checkbox"
-								name="ageRange" value="50대" class="ageRange">50대 <input
-								type="checkbox" name="ageRange" value="60대" class="ageRange">60대
-								<input type="checkbox" name="ageRange" value="70대"
-								class="ageRange">70대 <input type="checkbox"
-								name="ageRange" value="80대" class="ageRange">80대</td>
-						</tr>
-
-						<tr>
-							<th>시/도</th>
-							<td colspan="5"><select name="sido" id="" class="sido"
-								onchange="categoryChange(this)">
-									<option value="0">시/도 선택</option>
-									<option value="1">강원</option>
-									<option value="2">경기</option>
-									<option value="3">경남</option>
-									<option value="4">경북</option>
-									<option value="5">광주</option>
-									<option value="6">대구</option>
-									<option value="7">대전</option>
-									<option value="8">부산</option>
-									<option value="9">서울</option>
-									<option value="10">울산</option>
-									<option value="11">인천</option>
-									<option value="12">전남</option>
-									<option value="13">전북</option>
-									<option value="14">제주</option>
-									<option value="15">충남</option>
-									<option value="16">충북</option>
-							</select> <select name="sigungu" id="state" class="sigungu">
-									<option value="0">군/구 선택</option>
-							</select></td>
-						</tr>
-						<tr>
-							<th>가입일검색</th>
-							<td>최소<input type="text" name="minDate" id="minDate"
-								readonly="readonly"> ~ 최대 <input type="text"
-								name="maxDate" id="maxDate" readonly="readonly"></td>
-						</tr>
-
-						<tr>
-							<th>경기수</th>
-							<td><input type="number" name="minGames_played"
-								class="minGames_played" value="0"> ~ <input
-								type="number" name="maxGames_played" class="maxGames_played"
-								value="0"></td>
-						</tr>
-
-						<tr>
-							<th>승리수</th>
-							<td><input type="number" name="minWin" class="minWin"
-								value="0"> ~ <input type="number" name="maxWin"
-								class="maxWin" value="0"></td>
-						</tr>
-
-						<tr>
-							<th>무승부</th>
-							<td><input type="number" name="minDraws" class="minDraws"
-								value="0"> ~ <input type="number" name="maxDraws"
-								class="maxDraws" value="0"></td>
-						</tr>
-
-						<tr>
-							<th>패배</th>
-							<td><input type="number" name="minLoss" class="minLoss"
-								value="0"> ~ <input type="number" name="maxLoss"
-								class="maxLoss" value="0"></td>
-						</tr>
-						<tr>
-							<th>골</th>
-							<td><input type="number" name="minGoals" class="minGoals"
-								value="0"> ~ <input type="number" name="maxGoals"
-								class="maxGoals" value="0"></td>
-						</tr>
-
-						<tr>
-							<th>어시스트</th>
-							<td><input type="number" name="minAssists"
-								class="minAssists" value="0"> ~ <input type="number"
-								name="maxAssists" class="maxAssists" value="0"></td>
-						</tr>
-
-					</table>
-			</tr>
-
-			<tr align="center">
-				<td><input type="button" value="검색" class="searchBtn"
-					onclick="search()"> <input type="button" value="모두 검색"
-					class="searchAllBtn" onclick="searchAll()"></td>
-			</tr>
-
-		</table>
+		<table class="adminSearchFormTable" align="center" style="border: 1px solid #c59246e0; border-collapse: separate; border-radius: 20px; padding: 0px 15px 15px 15px;">
+				<tr>
+					<td style="border-bottom: none;">
+						<table cellpadding="5" cellspacing="0"
+							style="border-collapse: collapse;" align="center">
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">성별</th>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+									<label style="display: flex; align-items: center; margin-right: 50px;">
+										<input type="checkbox" name="gender" value="남" class="gender" style="zoom:2.0; margin-right: 5px;">남
+									</label>
+									<label style="display: flex; align-items: center;">
+										<input type="checkbox" name="gender" value="여" class="gender" style="zoom:2.0; margin-right: 5px;">여
+									</label>
+								</td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">연령대</th>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+									<label style="display: flex; align-items: center; margin-right: 30px;">
+										<input type="checkbox" name="ageRange" value="10대" class="ageRange" style="zoom:2.0; margin-right: 5px;">10대
+									</label>
+									<label style="display: flex; align-items: center; margin-right: 30px;">
+										<input type="checkbox" name="ageRange" value="20대" class="ageRange" style="zoom:2.0; margin-right: 5px;">20대
+									</label>
+									<label style="display: flex; align-items: center; margin-right: 30px;">
+										<input type="checkbox" name="ageRange" value="30대" class="ageRange" style="zoom:2.0; margin-right: 5px;">30대
+									</label>
+									<label style="display: flex; align-items: center; margin-right: 30px;">
+										<input type="checkbox" name="ageRange" value="40대" class="ageRange" style="zoom:2.0; margin-right: 5px;">40대
+									</label>
+								</td>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+									<label style="display: flex; align-items: center; margin-right: 30px;">
+										<input type="checkbox" name="ageRange" value="50대" class="ageRange" style="zoom:2.0; margin-right: 5px;">50대
+									</label>
+									<label style="display: flex; align-items: center; margin-right: 30px;">
+										<input type="checkbox" name="ageRange" value="60대" class="ageRange" style="zoom:2.0; margin-right: 5px;">60대
+									</label>
+									<label style="display: flex; align-items: center; margin-right: 30px;">
+										<input type="checkbox" name="ageRange" value="70대" class="ageRange" style="zoom:2.0; margin-right: 5px;">70대
+									</label>
+									<label style="display: flex; align-items: center; margin-right: 30px;">
+										<input type="checkbox" name="ageRange" value="80대" class="ageRange" style="zoom:2.0; margin-right: 5px;">80대
+									</label>
+								</td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">시/도</th>
+								<td colspan="5" style="text-align: center; border-bottom: none; display: flex; align-items: center;"><select name="sido" id="" class="sido"
+									onchange="categoryChange(this)">
+										<option value="0">시/도 선택</option>
+										<option value="1">강원</option>
+										<option value="2">경기</option>
+										<option value="3">경남</option>
+										<option value="4">경북</option>
+										<option value="5">광주</option>
+										<option value="6">대구</option>
+										<option value="7">대전</option>
+										<option value="8">부산</option>
+										<option value="9">서울</option>
+										<option value="10">울산</option>
+										<option value="11">인천</option>
+										<option value="12">전남</option>
+										<option value="13">전북</option>
+										<option value="14">제주</option>
+										<option value="15">충남</option>
+										<option value="16">충북</option>
+								</select> <select name="sigungu" id="state" class="sigungu">
+										<option value="0">군/구 선택</option>
+								</select></td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">가입일</th>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="text" name="minDate" id="minDate"
+									readonly="readonly">&nbsp;~&nbsp;<input type="text"
+									name="maxDate" id="maxDate" readonly="readonly"></td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+	
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">경기수</th>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minGames_played"
+									class="minGames_played" value="0">&nbsp;~&nbsp;<input
+									type="number" name="maxGames_played" class="maxGames_played"
+									value="0"></td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+	
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">승리수</th>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minWin" class="minWin"
+									value="0">&nbsp;~&nbsp;<input type="number" name="maxWin"
+									class="maxWin" value="0"></td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+	
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">무승부</th>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minDraws" class="minDraws"
+									value="0">&nbsp;~&nbsp;<input type="number" name="maxDraws"
+									class="maxDraws" value="0"></td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+	
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">패배</th>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minLoss" class="minLoss"
+									value="0">&nbsp;~&nbsp;<input type="number" name="maxLoss"
+									class="maxLoss" value="0"></td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">골</th>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minGoals" class="minGoals"
+									value="0">&nbsp;~&nbsp;<input type="number" name="maxGoals"
+									class="maxGoals" value="0"></td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+	
+							<tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">어시스트</th>
+								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minAssists"
+									class="minAssists" value="0">&nbsp;~&nbsp;<input type="number"
+									name="maxAssists" class="maxAssists" value="0"></td>
+							</tr>
+							<tr><td style="border-bottom: none;"></td></tr>
+							
+							<!-- <tr>
+								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">키워드</th>
+	
+								<td><select name="searchType1" class="searchType1">
+										<option value="all">전체</option>
+										<option value="name">이름</option>
+										<option value="mid">아이디</option>
+										<option value="nickname">별명</option>
+										<option value="phone">전화번호</option>
+										<option value="email">이메일</option>
+	
+										추가적인 검색 조건을 샐렉트 박스에 추가
+								</select> <input type="text" name="keyword1" class="keyword1"> <select
+									name="orand">
+										<option value="or">or
+										<option value="and">and
+								</select> <input type="text" name="keyword2" class="keyword2"></td>
+							</tr> -->
+	
+						</table>
+						<div class="search">
+							<select name="searchType1" class="searchType1">
+								<option value="all">전체</option>
+								<option value="name">이름</option>
+								<option value="mid">아이디</option>
+								<option value="nickname">별명</option>
+								<option value="phone">전화번호</option>
+								<option value="email">이메일</option>
+							</select>
+							<input type="text" name="keyword1" class="keyword1"> 
+							<select name="orand" class="orAnd">
+								<option value="or">or
+								<option value="and">and
+							</select>
+							<input type="text" name="keyword2" class="keyword2">
+						</div>
+						<div class="searchBtnDiv">
+							<input type="button" value="검색" class="searchBtn" class="searchBtn" onclick="search()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-right: 10px;">
+							<input type="button" value="초기화" class="searchAllBtn" onclick="searchAll()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">   
+						</div>
+					</td>
+				</tr>
+					
+					
+	
+			</table>
 		<input type="hidden" name="sort" class="sort"> <input
 			type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
@@ -423,13 +482,22 @@ $(document).ready(function() {
 
 
 
-
+	<div class="adminFormTopContents">
+			<span class="fontLightGray" id="adminFormAllCount">Total. ${requestScope.memberListAllCnt}개</span>
+			<div class="adminFormRowCntPerPage">
+				<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+					<option value="10">10개씩 보기
+					<option value="15">15개씩 보기
+					<option value="20">20개씩 보기
+				</select>
+			</div>
+		</div>
+		
 	<div class="adminFormContainer">
-		<div class="adminListDiv" style="margin-bottom: 20px;">
-			<table class="adminListTable" cellpadding="7" border="1"
-				bordercolor="gray" align="center"
-				style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
-				<tr>
+			<div class="adminListDiv" style="margin-bottom: 20px;">
+				<table class="adminListTable" cellpadding="7" align="center"
+					style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
+					<tr>
 					<th style="width: 30px;" >번호</th>
 
 
@@ -560,43 +628,21 @@ $(document).ready(function() {
 		</div>
 	</div>
 
-
-
-
-	<center>
-
-		<span class="pagingNos"> <span style="cursor: pointer"
-			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.memberMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
-
-
-			<c:forEach var="pageNo"
-				begin="${requestScope.memberMap.begin_pageNo}"
-				end="${requestScope.memberMap.end_pageNo}">
-
-				<c:if test="${requestScope.memberMap.selectPageNo==pageNo}">
-            ${pageNo}
-         </c:if>
-
-				<c:if test="${requestScope.memberMap.selectPageNo!=pageNo}">
-					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
-				</c:if>
-			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.memberMap.selectPageNo}+1)">[다음]</span>
-			<span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.memberMap.last_pageNo})">[마지막]</span>
-			&nbsp;&nbsp;&nbsp;
-			[${requestScope.memberListCnt}/${requestScope.memberListAllCnt}]개
-			&nbsp;&nbsp;
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
-	</center>
-
-
+	<div class="adminFormPaging">
+			<span class="pagingNos">
+				<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.memberMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+				<c:forEach var="pageNo" begin="${requestScope.memberMap.begin_pageNo}" end="${requestScope.memberMap.end_pageNo}">
+					<c:if test="${requestScope.memberMap.selectPageNo==pageNo}">
+			            <p class="activePageNo">${pageNo}</p>
+			        </c:if>
+					<c:if test="${requestScope.memberMap.selectPageNo!=pageNo}">
+						<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
+					</c:if>
+				</c:forEach>
+				<span style="cursor: pointer" onClick="pageNoClick(${requestScope.memberMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+			</span>
+		</div>
 <!-- 	<form name="adminMemberDetailForm" action="/adminMemberDetailForm.do" -->
 <!-- 		method="post"> -->
 <!-- 		<!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 --> 
@@ -610,6 +656,6 @@ $(document).ready(function() {
 			<input type="hidden" name="m_no" value="${requestScope.memberDTO.m_no}"> 
 			
 		</form>
-	
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

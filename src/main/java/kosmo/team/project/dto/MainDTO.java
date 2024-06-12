@@ -12,6 +12,7 @@ public class MainDTO {
 	private String mid;
 	private String phone;
 	private String name;
+	private String imagename;
 	
 	private String region;
 	private String regist_start;
@@ -123,5 +124,11 @@ public class MainDTO {
 	}
 	public void setCustomerservice_content(String customerservice_content) {
 		this.customerservice_content = customerservice_content;
+	}
+	public void setImagename(String imagename) {
+		this.imagename = imagename;
+	}
+	public String getImagename() {
+		return imagename;
 	}
 }

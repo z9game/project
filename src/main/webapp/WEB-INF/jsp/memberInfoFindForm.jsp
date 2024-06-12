@@ -54,24 +54,24 @@
 							<form name="memberInfoFindResultForm">
 								<input type="hidden" name="mid" class="mid" value=" ` + response.memberInfo.mid + ` ">
 								<input type="hidden" name="password" class="password" value=" ` + response.memberInfo.password + ` ">
-								<table class="memberInfoFindResultTable" align="center">
+								<table class="memberInfoFindResultTable">
 									<tr>
 										<th class="membermemberInfoFindMidResultTh">아이디</th>
-										<td class="memberInfoFindMidResult">
+										<td class="memberInfoFindMidResult" style="text-align: left;">
 											` + response.memberInfo.mid + `
 										</td>
 									</tr>
 									<tr>
 										<th class="membermemberInfoFindPasswordResultTh">새 비밀번호</th>
 										<td class="memberInfoFindPasswordResult">
-											<input type="password" name="pwd" class="pwd" size="50" maxlength="15">
+											<input type="password" name="pwd" class="pwd" size="50" maxlength="15" style="height: 30px; border-radius: 10px; border: 1px solid #c59246e0; padding: 5px 15px;">
 										</td>
 									</tr>
 									
 									<tr>
 										<th class="memberInfoFindPasswordCheckResultTh">비밀번호 확인</th>
 										<td class="memberInfoFindPasswordCheckResult">
-											<input type="password" name="checkpwd" class="checkpwd" size="50" maxlength="15">
+											<input type="password" name="checkpwd" class="checkpwd" size="50" maxlength="15" style="height: 30px; border-radius: 10px; border: 1px solid #c59246e0; padding: 5px 15px;">
 										</td>
 									</tr>
 								</table>
@@ -169,13 +169,13 @@
 				<tr>
 					<th class="memberInfoFindFormNameTh">이름</th>
 					<td>
-						<input type="text" name="name" class="name" style="width: 305px; height: 30px;">
+						<input type="text" name="name" class="name" style="width: 305px; height: 30px; border-radius: 10px; border: 1px solid #c59246e0; padding: 5px 15px;">
 					</td>
 				</tr>
 				<tr>
 					<th class="memberInfoFindFormPhoneTh">전화번호</th>
 					<td>
-						<input type="text" name="phone" class="phone" style="width: 305px; height: 30px;">
+						<input type="text" name="phone" class="phone" style="width: 305px; height: 30px; border-radius: 10px; border: 1px solid #c59246e0; padding: 5px 15px;">
 					</td>
 				</tr>
 			</table>
@@ -186,5 +186,6 @@
 	</div>
 	<div class="memberInfoFindResultContainer">
 	</div>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

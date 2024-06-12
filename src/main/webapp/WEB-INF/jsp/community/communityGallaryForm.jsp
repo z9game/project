@@ -129,9 +129,16 @@
 		<div id="boardDiv" class="communityGallaryFormContainer">
 			<c:forEach var="imageboard" items="${requestScope.communityGallaryBoardList}" varStatus="status">
 				<div style="cursor: pointer;" class="communityGallaryFormBoard" onClick="submitGallaryDetailForm('${ imageboard.b_no }');">
-					<div class="communityGallaryImageDiv">
-						<img src="/image/SoccerBall.jpg" class="communityGallaryImage">
-					</div>
+					<c:if test="${imageboard.imagename != null}">
+						<div class="communityGallaryImageDiv">
+							<img src="/image/gallaryImg/${imageboard.imagename}" class="communityGallaryImage">
+						</div>
+					</c:if>
+					<c:if test="${imageboard.imagename == null}">
+						<div class="communityGallaryImageDiv">
+							<img src="/image/noImage.png" class="communityGallaryImage" style="width:250px; height:200px;">
+						</div>
+					</c:if>
 					<div class="communityGallarySubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${imageboard.subject}</div>
 					<div class="communityGallaryWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${imageboard.nickname}</div>
 					<div class="communityGallaryRegDate">${imageboard.reg_date}</div>
@@ -170,6 +177,6 @@
 			<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
 		</span>
 	</div>
-
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

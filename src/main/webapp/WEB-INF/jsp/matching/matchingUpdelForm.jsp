@@ -184,11 +184,11 @@
    
      	<form name="upDelMatching">
          <table class="matchingUpDelTable" align="center" cellpadding=7
-            style="border-collapse: collapse; margin-top: 50px;">
+            style="border-collapse: collapse; margin-top: 50px; width: 1100px;">
             <tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
-					<input type="text" name="title" class="title" size="106" maxlength="100" value="${requestScope.upDelDetail.title}">
+					<input type="text" name="title" class="title" size="113" maxlength="100" value="${requestScope.upDelDetail.title}" style="padding: 5px 15px;">
 				</td>
 			</tr>
 			<tr>
@@ -263,7 +263,7 @@
 				</td>
 			</tr>
           	 <tr>
-				<th style="border-bottom: 1px solid #FFFFFF;">일시(날짜)</th>
+				<th style="border-bottom: 1px solid #FFFFFF;">일시<br>(날짜)</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
 					<select name="day" id="day" onchange="loadMachingTime()">
 						<option value="0">매칭예약 미신청 상태</option>
@@ -281,7 +281,7 @@
 			 <tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
-					<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none">${requestScope.upDelDetail.content}</textarea>
+					<textarea name="content" class="content" rows="20" cols="115" maxlength="1000" style="resize:none; padding: 5px 15px;">${requestScope.upDelDetail.content}</textarea>
 				</td>
 			</tr>
          </table>
@@ -301,6 +301,6 @@
          <!--------------------------------------------------- -->
          <!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
          <!--------------------------------------------------- -->
-        
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

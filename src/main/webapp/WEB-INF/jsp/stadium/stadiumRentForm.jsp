@@ -224,9 +224,16 @@
 
 			<div class="stadiumRentFormBoard" style="cursor: pointer;"
 				onclick="goStadiumRentDetailForm(${stadiumList.stadium_no});">
-				<div class="stadiumRentImageDiv">
-					<img src="/image/SoccerBall.jpg" class="stadiumRentImage">
-				</div>
+				<c:if test="${stadiumList.imagename != null}">
+					<div class="stadiumRentImageDiv">
+						<img src="/image/stadiumImg/${stadiumList.imagename}" class="stadiumRentImage">
+					</div>
+				</c:if>
+				<c:if test="${stadiumList.imagename == null}">
+					<div class="stadiumRentImageDiv">
+						<img src="/image/noImage.png" class="stadiumRentImage" style="width:250px; height:200px;">
+					</div>
+				</c:if>
 				<div class="staus">
 					${requestScope.StadiumMap.begin_serialNo_asc + status.index}</div>
 				<div class="stadiumRentSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">경기장:${stadiumList.stadium_name}</div>
@@ -268,6 +275,6 @@
 		<input type="hidden" name="stadium_no">
 	</form>
 
-
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

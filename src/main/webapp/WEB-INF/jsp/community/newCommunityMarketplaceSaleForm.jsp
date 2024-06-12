@@ -67,11 +67,11 @@
 	</div>
 	<div class="newCommunityMarketplaceSaleBoardFormContainer">
 		<form name="newCommunityMarketplaceSaleBoardForm">
-			<table class="newCommunityMarketplaceSaleBoardFormRegTable">
+			<table class="newCommunityMarketplaceSaleBoardFormRegTable" align="center" cellpadding=7 style="border-collapse: collapse; margin-top: 50px; width: 1100px;">
 				<tr>
 					<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
 					<td style="border-bottom: 1px solid #c59246e0;">
-						<input type="text" name="subject" class="subject" size="106" maxlength="100">
+						<input type="text" name="subject" class="subject" size="115" maxlength="100">
 					</td>
 				</tr>
 				<tr>
@@ -84,7 +84,7 @@
 				<tr>
 					<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
 					<td style="border-bottom: 1px solid #c59246e0;">
-						<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
+						<textarea name="content" class="content" rows="20" cols="118" maxlength="1000" style="resize:none"></textarea>
 					</td>
 				</tr>
 				<!-- 
@@ -106,5 +106,6 @@
 			</div>
 		</form>
 	</div>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

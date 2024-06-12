@@ -376,12 +376,11 @@ function loadTimeRanges() {
 
 
 	<form name="yangdoDetailUpdDeleForm">
-		<table align="center" cellpadding=7
-			style="border-collpase: collpase">
+		<table align="center" cellpadding=7 style="border-collapse: collapse; margin-top: 50px; width: 1100px;">
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
-				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" name="title" class="title" size="106"
-					maxlength="30" value="${requestScope.yangdoDTO.title}"></td>
+				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" name="title" class="title" size="113"
+					maxlength="30" value="${requestScope.yangdoDTO.title}" style="padding: 5px 15px;"></td>
 			</tr>
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
@@ -452,7 +451,7 @@ function loadTimeRanges() {
 			</tr>
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">내 용</th>
-				<td style="border-bottom: 1px solid #c59246e0;"><textarea name="content" class="content" rows="20" cols="108" maxlength="500" style="resize: none;">${requestScope.yangdoDTO.content}</textarea>
+				<td style="border-bottom: 1px solid #c59246e0;"><textarea name="content" class="content" rows="20" cols="115" maxlength="500" style="resize: none; padding: 5px 15px;">${requestScope.yangdoDTO.content}</textarea>
 			</tr>
 
 		</table>
@@ -478,6 +477,6 @@ function loadTimeRanges() {
 	</form>
 	
 	
-	
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

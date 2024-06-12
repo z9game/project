@@ -107,7 +107,7 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 		</c:if>
 	
 		<c:if test="${!empty requestScope.yangdoDTO}">
-			<table align="center" cellpadding="7" style="width:900px; border-collapse: collapse; margin-top: 50px;">
+			<table align="center" cellpadding="7" style="width:1100px; border-collapse: collapse; margin-top: 50px;">
 				<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 					
 					<td colspan="2"><span>${ requestScope.yangdoDTO.title }</span><span style="float: right;"><span style="color: #999999; margin-top: 15px;">작성자&nbsp;</span>/&nbsp;${ requestScope.yangdoDTO.nickname }<span style="color: #999999; margin-left: 20px;">등록일&nbsp;</span>/&nbsp;${ requestScope.yangdoDTO.reg_date }<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${ requestScope.yangdoDTO.readcount }</span></td>
@@ -165,6 +165,7 @@ function yangdoSincheongForm(yangdo_no, m_no,booking_no){
 			</form>
 			
 		</c:if>
-		
+		<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 	</body>
+	
 </html>

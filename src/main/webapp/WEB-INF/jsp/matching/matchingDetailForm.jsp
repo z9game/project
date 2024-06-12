@@ -57,7 +57,7 @@
     <div class="recruitTeamBoardDetailFormTitle">
        <p class="titleBackgoundText">매칭 찾기</p>
     </div>
-        <table class="newMatchingBoardFormRegTable" cellpadding="7" style="width:900px; border-collapse: collapse; margin-top: 50px;">
+        <table class="newMatchingBoardFormRegTable" cellpadding="7" style="width:1100px; border-collapse: collapse; margin-top: 50px;">
         	<tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 					
 				<td colspan="2"><span>${requestScope.detail.title}<b>(${requestScope.detail.checking})</b></span><span style="float: right;"><span style="color: #999999; margin-top: 15px;">작성자&nbsp;</span>/&nbsp;${requestScope.detail.nickname}<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${requestScope.detail.readcount}</span></td>
@@ -71,7 +71,7 @@
 				<td style="border-bottom: 1px solid #c59246e0;">${requestScope.detail.stadium_name}</td>
 			</tr>
 			<tr>
-				<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">일시(날짜)</th>
+				<th style="border-bottom: 1px solid #FFFFFF; border-top: 1px solid #FFFFFF; width: 100px; color: #000000">일시<br>(날짜)</th>
 				<td style="border-bottom: 1px solid #c59246e0;">${requestScope.detail.booking_date}</td>
 			</tr>
 			<tr>
@@ -100,11 +100,11 @@
          <!-- [목록 화면으로] 글씨 표현하고 클릭하면  WAS 로 '/boardList.do' 로 접속하기-->
          <!--------------------------------------------------- -->
           <div class="matchingDetailBtnDiv">
-			<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/matchingForm.do')">
 			<c:if test="${sessionScope.nickname eq requestScope.detail.nickname}">
-				<input type="button" value="수정/삭제" style="cursor:pointer" class="matchingUpDelBtn" 
+				<input type="button" value="수정 / 삭제" style="cursor:pointer" class="matchingUpDelBtn" 
 						onclick="checkButton('${requestScope.detail.checking}')" >
 			</c:if>
+			<input type="button" value="목록" class="moveListBtn" onclick="location.replace('/matchingForm.do')">
 		 </div>
 
      <form name="matchingUpDelForm" action="/matchingUpDelForm.do" method="post">
@@ -123,6 +123,6 @@
 			<input type="hidden" name="time_no"value="${requestScope.detail.time_no}">
 			<input type="hidden" name="day"value="${requestScope.detail.booking_date}">
 		</form>
- 
+ 	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

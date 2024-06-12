@@ -71,7 +71,7 @@
          HttpServletRequest 객체에도 저장된다.  -->
    <!-- 만약에 상세보기할 게시판이 있으면-->
    <c:if test="${!empty requestScope.list}">
-         <table align="center" cellpadding="7" style="width:900px; border-collapse: collapse; margin-top: 50px;">
+         <table align="center" cellpadding="7" style="width:1100px; border-collapse: collapse; margin-top: 50px;">
             <tr style="border-bottom: 1px solid rgba(197, 146, 70, 0.4); border-top: 1px solid rgba(197, 146, 70, 0.4); background-color:rgba(197, 146, 70, 0.4); height: 70px;">
 					
 				<td colspan="2"><span>${requestScope.list.title}</span><span style="float: right;"><span style="color: #999999; margin-top: 15px;">작성자&nbsp;</span>/&nbsp;${requestScope.list.nickname}<span style="color: #999999; margin-left: 20px;">조회수&nbsp;</span>/&nbsp;${requestScope.list.readcount}</span></td>
@@ -133,6 +133,6 @@
 			<input type="hidden" name="m_no"value="${sessionScope.m_no}">
 			<input type="hidden" name="b_no"value="${requestScope.list.b_no}">
 		</form>
-    
+    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

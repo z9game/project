@@ -375,10 +375,11 @@
    </div>
    <!-- ================================================================================================================= -->
    <!-- 내정보  / 팀명 클릭시 팀원리스트 상세보기-->
-   <div class="myPageContainer" style="display: flex; justify-content: center; gap: 150px;">
-      <div class="profile" style="text-align: center; flex-direction: column; border: 1px solid #999999; border-radius:10px; height: 450px; width: 400px;">
+  <div class="myPageContainer" style="display: flex; justify-content: center; gap: 100px;">
+   	<div class="myPageLeftContainer">
+      <div class="profile" style="text-align: center; flex-direction: column; border: 1px solid #999999; border-radius:10px; height: 350px; width: 300px;">
          <div class="profileImg" style="margin-top: 20px;">
-            <img src="/image/profileImg.png" class="profileImg" style="width: 300px; height: 300px;">
+            <img src="/image/profileImg.png" class="profileImg" style="width: 200px; height: 200px;">
          </div>
          <div class="profileInfo" style="margin-top: 30px;">
             <span style="font-size: 20px;">${requestScope.myInfo.name}</span>
@@ -413,60 +414,302 @@
       <div class="userData" style="flex-direction: column;">
          <div class="modalDiv_myTeamInfo" align="center"> 
             <div class="bg_myTeamInfo">
-               <div class="modal_myTeamInfo">
-                  
-                  <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
-                  <caption><b>팀원 목록</b></caption>
+            
+               <div class="modal_myTeamInfo" style="display: flex; justify-content: right; padding-right: 50px;">
+	              
+	              <div style="flex-direction: column; margin-right: 100px;">
+	                  <div style="font-size: 18px; text-decoration: underline; text-underline-position: under;">팀원 목록</div>
+	                  <table cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 250;" align="center">
+	                     <tr style="height: 50px;">
+	                        <th>이름</th>
+	                        <th>지역</th>
+	                        <th>나이</th>
+	                     </tr>
+	                     <c:forEach var="team" items="${requestScope.teamInfo}" varStatus="status">
+	                        <tr style="height: 50px;">
+	                           <c:if test="${requestScope.myInfo.team_master eq team.m_no}">
+	                              <td align="center" style="height: 50px;">${team.name}(팀장)</td>
+	                           </c:if>
+	                           <c:if test="${requestScope.myInfo.team_master ne team.m_no}">
+	                              <td align="center" style="height: 50px;">${team.name}</td>
+	                           </c:if>
+	                           
+	                           <td align="center" style="height: 50px;">${team.sido}</td>
+	                           <td align="center" style="height: 50px;">${team.age}</td>
+	                        </tr>
+	                     </c:forEach>
+	                  </table>
+	              </div>
+	              <div style="flex-direction: column; margin-right: 100px;">
+	                  <div style="font-size: 18px; text-decoration: underline; text-underline-position: under;">용병 목록</div>
+	                  <table cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 250;" align="center">
+	                     <tr style="height: 50px;">
+	                        <th>이름</th>
+	                        <th>지역</th>
+	                        <th>나이</th>
+	                     </tr style="height: 50px;">
+	                     <c:forEach var="hired" items="${requestScope.getHiredList}" varStatus="status">
+	                        <tr>
+	                           <td align="center" style="height: 50px;">${hired.name}</td>
+	                           <td align="center" style="height: 50px;">${hired.sido}</td>
+	                           <td align="center" style="height: 50px;">${hired.age}</td>
+	                        </tr>
+	                     </c:forEach>
+	                  </table>
+	                  <c:if test="${empty requestScope.getHiredList}">
+	                     <center>
+	                     <br>
+	                     <b>현재 팀에 용병이 없습니다.</b>
+	                     </center>
+	                  </c:if>
+	              </div>
+	              <strong onclick="modalClose_myTeamInfo()" style="font-size: 30px; color: #999999; cursor: pointer;">X</strong>
+	              <div style="height: 30px;"></div>
+               <!-- <button onclick="modalClose_myTeamInfo()">닫기</button> -->
+               </div>
+               
+            </div>
+         </div>
+       <!-- ================================================================================================================= -->
+         <!-- 매칭 관련 -->
+         <c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
+            <c:if test="${requestScope.matchWaitingCnt > 0}">
+                <center>
+                  <table style="border-collapse:collapse; border: 3px solid #c59246e0; border-radius: 30px; width: 300px; height: 50px; text-align: center;">
+                  <tr style="border-radius: 30px;">
+                     <td style="cursor:pointer; border-radius: 30px;" class="matchWaitingCheck" onclick="modalOpen_matching()">
+                        매칭신청이 있습니다.
+                     </td>
+                  </tr>
+               </table>
+               </center>
+            </c:if>
+         </c:if>
+          
+         <div class="modalDiv_matching" align="center"> 
+            <div class="bg_matching">
+               <div class="modal_matching">
+               <form name = "matchWaitingList">
+               	<strong onclick="modalClose_matching()" style="font-size: 30px; color: #999999; margin-left: 900px; cursor: pointer;">X</strong>
+               	<div style="font-size: 18px; text-decoration: underline; text-underline-position: under;">신청 대기 인원</div>
+                  <table cellpadding="5" cellspacing="0" style="border-collapse: collapse; margin-bottom: 30px;" align="center">
                      <tr>
-                        <th>이름</th>
-                        <th>지역</th>
-                        <th>나이</th>
+                        <th>팀 명</th>
+                        <th>팀장명</th>
+                        <th>경기장</th>
+                        <th>일 시</th>
+                        <th>시 간</th>
+                        <th>선택</th>
                      </tr>
-                     <c:forEach var="team" items="${requestScope.teamInfo}" varStatus="status">
-                        <tr>
-                           <c:if test="${requestScope.myInfo.team_master eq team.m_no}">
-                              <td align="center">${team.name}(팀장)</td>
-                           </c:if>
-                           <c:if test="${requestScope.myInfo.team_master ne team.m_no}">
-                              <td align="center">${team.name}</td>
-                           </c:if>
-                           
-                           <td align="center">${team.sido}</td>
-                           <td align="center">${team.age}</td>
+                     <c:forEach var="listMatch" items="${requestScope.matchWaitingList}" varStatus="status">
+                        <tr style="height: 50px;">
+                           <td align="center">${listMatch.team_name}</td>
+                           <td align="center">${listMatch.nickname}</td>
+                           <td align="center">${listMatch.stadium_name}</td>
+                           <td align="center">${listMatch.day}</td>
+                           <td align="center">${listMatch.time_range}</td>
+                           <td align="center"><input type="radio" class="approve" name="vs_team" value="${listMatch.vs_team}"></td>
                         </tr>
+                        <input type="hidden" name="stadium" value="${listMatch.stadium}">
+                        <input type="hidden" name="time_no"    value="${listMatch.time_no}">
                      </c:forEach>
                   </table>
                   
-                  <br><br><br>
-                  
-                  <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
-                  <caption><b>용병 목록</b></caption>
-                     <tr>
-                        <th>이름</th>
-                        <th>지역</th>
-                        <th>나이</th>
-                     </tr>
-                     <c:forEach var="hired" items="${requestScope.getHiredList}" varStatus="status">
-                        <tr>
-                           <td align="center">${hired.name}</td>
-                           <td align="center">${hired.sido}</td>
-                           <td align="center">${hired.age}</td>
-                        </tr>
-                     </c:forEach>
-                  </table>
-                  <c:if test="${empty requestScope.getHiredList}">
-                     <center>
-                     <br>
-                     <b>현재 팀에 용병이 없습니다.</b>
-                     </center>
-                  </c:if>
-               <button onclick="modalClose_myTeamInfo()">닫기</button>
+                  <input type="hidden" name="m_no" value="${sessionScope.m_no}">
+                  <input type="hidden" name="match_team" value="${requestScope.myInfo.team_no}">
+      
+                   
+               </form>
+               <div style="height:8px;"></div>
+               <button onclick="matching()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">수락</button>
+               <button onclick="" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">거절</button>
                </div>
             </div>
          </div>
-      
+         <c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
+            <c:if test="${requestScope.WaitingCnt > 0}">
+                <center>
+                  <table style="border-collapse:collapse; border: 3px solid #c59246e0; border-radius: 30px; width: 300px; height: 50px; text-align: center; background-color: #FFFFFF; margin-top:20px; margin-bottom: 0;">
+                  <tr>
+                     <td style="cursor:pointer; background-color: #FFFFFF; font-weight: normal;" class="waitingCheck" onclick="modalOpen_waiting()">
+                        팀 모집 수락 대기인원이 있습니다.
+                     </td>
+                  </tr>
+                  </table>
+               </center>
+            </c:if>
+         </c:if>
+         
+         
+         <div class="modalDiv_waiting" align="center"> 
+            <div class="bg_waiting">
+               <div class="modal_waiting">
+               <form name = "waitingList">
+               	<strong onclick="modalClose_waiting()" style="font-size: 30px; color: #999999; margin-left: 900px; cursor: pointer;">X</strong>
+               	<div style="font-size: 18px; text-decoration: underline; text-underline-position: under;">신청 대기 인원</div>
+                  <table cellpadding="5" cellspacing="0" style="border-collapse: collapse; margin-bottom: 30px;" align="center">
+                     <tr>
+                        <th>이름</th>
+                        <th>나이</th>
+                        <th>지역</th>
+                        <th>선택</th>
+                     </tr>
+                     <c:forEach var="listTeam" items="${requestScope.waitList}" varStatus="status">
+                        <tr style="height: 50px;">
+                           <td align="center">${listTeam.name}</td>
+                           <td align="center">${listTeam.age}</td>
+                           <td align="center">${listTeam.sido}</td>
+                           <td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${listTeam.m_no}"></td>
+                        </tr>
+                     </c:forEach>
+                  </table>
+               </form>
+               <div style="height:8px;"></div>
+               <button onclick="allApprove()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">전체선택</button>
+               <button onclick="regTeamMem()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">수락</button>
+               <button onclick="refuseTeamMem()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">거절</button>
+               </div>
+            </div>
+         </div>
          <!-- ================================================================================================================= -->
-         <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; margin-top: 0; width: 550px;" align="center">
+         <!-- 용병 관련 -->
+         
+         <c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
+            <c:if test="${requestScope.mercWaitingCnt > 0}">
+                <center>
+                  <table style="border-collapse:collapse; border: 3px solid #c59246e0; border-radius: 30px; width: 300px; height: 50px; text-align: center; margin-top:20px; margin-bottom: 0;">
+                  <tr>
+                     <td style="cursor:pointer" class="matchWaitingCheck" onclick="modalOpen_hired()">
+                        용병신청이 있습니다.
+                     </td>
+                  </tr>
+               </table>
+               </center>
+            </c:if>
+         </c:if>
+         
+         <div class="modalDiv_hired" align="center"> 
+            <div class="bg_hired">
+               <div class="modal_hired">
+               <form name = "hiredWaitingList">
+               	<strong onclick="modalClose_hired()" style="font-size: 30px; color: #999999; margin-left: 900px; cursor: pointer;">X</strong>
+               	<div style="font-size: 18px; text-decoration: underline; text-underline-position: under;">신청 대기 인원</div>
+                  <table cellpadding="5" cellspacing="0" style="border-collapse: collapse; margin-bottom: 30px;" align="center">
+                     <tr>
+                        <th>이름</th>
+                        <th>나이</th>
+                        <th>지역</th>
+                        <th>선택</th>
+                     </tr>
+                     <c:forEach var="listhired" items="${requestScope.waitHiredList}" varStatus="status">
+                        <tr style="height: 50px;">
+                           <td align="center">${listhired.name}</td>
+                           <td align="center">${listhired.age}</td>
+                           <td align="center">${listhired.sido}</td>
+                           <td align="center"><input type="checkbox" class="approve" name="m_no_H" value="${listhired.m_no}"></td>
+                        </tr>
+                     </c:forEach>
+                  </table>
+                  
+                  
+               </form>
+               <div style="height:8px;"></div>
+               <button onclick="allApprove()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">전체선택</button>
+               <button onclick="regHired()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">수락</button>
+               <button onclick="refuseHired()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">거절</button>
+               </div>
+            </div>
+         </div>
+         
+         <!-- ================================================================================================================= -->
+         <!-- 레슨 관련 -->
+         
+         <center>
+            <table style="border-collapse:collapse; border: 3px solid #c59246e0; border-radius: 30px; width: 300px; height: 50px; text-align: center; margin-top:20px; margin-bottom: 0;">
+               <tr>
+                  <td style="cursor:pointer" class="matchWaitingCheck" onclick="modalOpen_lesson()">
+                     레슨 관리
+                  </td>
+               </tr>
+            </table>
+         </center>
+         
+         
+         <div class="modalDiv_lesson" align="center"> 
+            <div class="bg_lesson">
+               <div class="modal_lesson">
+                  <strong onclick="modalClose_lesson()" style="font-size: 30px; color: #999999; margin-left: 900px; cursor: pointer;">X</strong>
+               		<div style="font-size: 18px; text-decoration: underline; text-underline-position: under;">나의 레슨 인원</div>
+                  <table cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
+                     <tr>
+                        <th>이름</th>
+                        <th>지역</th>
+                        <th>나이</th>
+                     </tr>
+                     <c:forEach var="lesson" items="${requestScope.getLessonList}" varStatus="status">
+                        <tr style="height: 50px;">
+                           <td align="center">${lesson.name}</td>
+                           <td align="center">${lesson.sido}</td>
+                           <td align="center">${lesson.age}</td>
+                        </tr>
+                     </c:forEach>
+                  </table>
+                  <c:if test="${empty requestScope.getLessonList}">
+                     <center>
+                     <br>
+                     <b>관리하는 인원이 없습니다.</b>
+                     </center>
+                  </c:if>
+                  
+                  <br><br><br>
+                  <form name="lessonWaitingList">
+                  	<div style="font-size: 18px; text-decoration: underline; text-underline-position: under;">신청 대기 인원</div>
+                     <table cellpadding="5" cellspacing="0" style="border-collapse: collapse; margin-bottom: 30px;" align="center">
+                        <tr>
+                           <th>이름</th>
+                           <th>지역</th>
+                           <th>나이</th>
+                           <th>선택</th>
+                        </tr>
+                        <c:forEach var="lessonWaiting" items="${requestScope.waitLessonList}" varStatus="status">
+                           <tr style="height: 50px;">
+                              <td align="center">${lessonWaiting.name}</td>
+                              <td align="center">${lessonWaiting.sido}</td>
+                              <td align="center">${lessonWaiting.age}</td>
+                              <td align="center"><input type="checkbox" class="approve" name="m_no_L" value="${lessonWaiting.m_no}"></td>
+                           </tr>
+                        </c:forEach>
+                     </table>
+                     <c:if test="${empty requestScope.waitLessonList}">
+                        <center>
+                        <br>
+                        <b>대기중인 인원이 없습니다.</b>
+                        </center>
+                     </c:if>
+                     <input type="hidden" name="m_no" value="${sessionScope.m_no}">
+                  </form>
+                  <div style="height:8px;"></div>
+                  <button onclick="allApprove()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">전체선택</button>
+                  <button onclick="regLesson()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">수락</button>
+                  <button onclick="refuseLesson()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">거절</button>
+               </div>
+            </div>
+         </div>
+         
+         
+         
+         
+         
+         
+         
+      
+         
+       </div>
+        </div>
+      <div class="myPageRightContainer">
+         <!-- ================================================================================================================= -->
+         <div style="font-size: 18px; text-decoration: underline; text-underline-position: under;">개인 기록</div>
+         <table cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 650px;" align="center">
          
             <tr>
                <th>경기수</th>
@@ -487,8 +730,8 @@
          </table>
          <div style="height:25px;"></div>
          <!-- ================================================================================================================= -->
-         <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 550px;" align="center">
-         <caption><b>예약한 경기장</b></caption>
+         <div style="font-size: 18px; text-decoration: underline; text-underline-position: under; margin-top: 60px;">경기장 예약 목록</div>
+         <table cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 650px;" align="center">
             <tr>
                <th>경기장명</th>
                <th>날짜</th>
@@ -514,8 +757,8 @@
          
          <div style="height:25px;"></div>
          <!-- ================================================================================================================= -->
-         <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 550px;" align="center">
-         <caption><b>다음 예정 경기</b></caption>
+         <div style="font-size: 18px; text-decoration: underline; text-underline-position: under; margin-top: 60px;">다음 예정 경기</div>
+         <table cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 650px;" align="center">
             <tr>
                <th>경기장명</th>
                <th>날짜</th>
@@ -538,260 +781,6 @@
                </center>
                <div style="height:10px;"></div>
          </c:if>
-         
-         
-         <div style="height:30px;"></div>
-         <!-- ================================================================================================================= -->
-         <!-- 팀 수락 관련 -->
-         <c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
-            <c:if test="${requestScope.WaitingCnt > 0}">
-                <center>
-                  <table style="border-collapse:collapse" border="1">
-                  <tr>
-                     <td style="cursor:pointer" class="waitingCheck" onclick="modalOpen_waiting()">
-                        팀모집 수락 대기인원이 있습니다.
-                     </td>
-                  </tr>
-                  </table>
-               </center>
-            </c:if>
-         </c:if>
-         
-         
-         <div class="modalDiv_waiting" align="center"> 
-            <div class="bg_waiting">
-               <div class="modal_waiting">
-               <form name = "waitingList">
-                  <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
-                     <caption><b>수락대기중</b></caption>
-                     <tr>
-                        <th>이름</th>
-                        <th>나이</th>
-                        <th>지역</th>
-                        <th>선택</th>
-                     </tr>
-                     <c:forEach var="listTeam" items="${requestScope.waitList}" varStatus="status">
-                        <tr>
-                           <td align="center">${listTeam.name}</td>
-                           <td align="center">${listTeam.age}</td>
-                           <td align="center">${listTeam.sido}</td>
-                           <td align="center"><input type="checkbox" class="approve" name="m_no_A" value="${listTeam.m_no}"></td>
-                        </tr>
-                     </c:forEach>
-                  </table>
-               </form>
-               <div style="height:8px;"></div>
-               <button onclick="allApprove()">전체선택</button>
-               <button onclick="regTeamMem()">수락</button>
-               <button onclick="refuseTeamMem()">거절</button>
-               <button onclick="modalClose_waiting()">닫기</button>
-               </div>
-            </div>
-         </div>
-         
-         <div style="height:30px;"></div>
-         <!-- ================================================================================================================= -->
-         <!-- 용병 관련 -->
-         
-         <c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
-            <c:if test="${requestScope.mercWaitingCnt > 0}">
-                <center>
-                  <table style="border-collapse:collapse" border="1">
-                  <tr>
-                     <td style="cursor:pointer" class="matchWaitingCheck" onclick="modalOpen_hired()">
-                        용병신청이 있습니다.
-                     </td>
-                  </tr>
-               </table>
-               </center>
-            </c:if>
-         </c:if>
-         
-         <div class="modalDiv_hired" align="center"> 
-            <div class="bg_hired">
-               <div class="modal_hired">
-               <form name = "hiredWaitingList">
-                  <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
-                     <caption><b>수락대기중</b></caption>
-                     <tr>
-                        <th>이름</th>
-                        <th>나이</th>
-                        <th>지역</th>
-                        <th>선택</th>
-                     </tr>
-                     <c:forEach var="listhired" items="${requestScope.waitHiredList}" varStatus="status">
-                        <tr>
-                           <td align="center">${listhired.name}</td>
-                           <td align="center">${listhired.age}</td>
-                           <td align="center">${listhired.sido}</td>
-                           <td align="center"><input type="checkbox" class="approve" name="m_no_H" value="${listhired.m_no}"></td>
-                        </tr>
-                     </c:forEach>
-                  </table>
-                  
-                  
-               </form>
-               <div style="height:8px;"></div>
-               <button onclick="allApprove()">전체선택</button>
-               <button onclick="regHired()">수락</button>
-               <button onclick="refuseHired()">거절</button>
-               <button onclick="modalClose_hired()">닫기</button>
-               </div>
-            </div>
-         </div>
-         
-         
-         <div style="height:30px;"></div>
-         
-         
-         
-         
-         
-         
-         
-         
-         <!-- ================================================================================================================= -->
-         <!-- 레슨 관련 -->
-         
-         <center>
-            <table style="border-collapse:collapse" border="1">
-               <tr>
-                  <td style="cursor:pointer" class="matchWaitingCheck" onclick="modalOpen_lesson()">
-                     레슨 관리
-                  </td>
-               </tr>
-            </table>
-         </center>
-         
-         
-         <div class="modalDiv_lesson" align="center"> 
-            <div class="bg_lesson">
-               <div class="modal_lesson">
-                  
-                  <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
-                  <caption><b>나의 레슨 인원</b></caption>
-                     <tr>
-                        <th>이름</th>
-                        <th>지역</th>
-                        <th>나이</th>
-                     </tr>
-                     <c:forEach var="lesson" items="${requestScope.getLessonList}" varStatus="status">
-                        <tr>
-                           <td align="center">${lesson.name}</td>
-                           <td align="center">${lesson.sido}</td>
-                           <td align="center">${lesson.age}</td>
-                        </tr>
-                     </c:forEach>
-                  </table>
-                  <c:if test="${empty requestScope.getLessonList}">
-                     <center>
-                     <br>
-                     <b>관리하는 인원이 없습니다.</b>
-                     </center>
-                  </c:if>
-                  
-                  <br><br><br>
-                  <form name="lessonWaitingList">
-                     <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
-                     <caption><b>신청대기자</b></caption>
-                        <tr>
-                           <th>이름</th>
-                           <th>지역</th>
-                           <th>나이</th>
-                           <th>선택</th>
-                        </tr>
-                        <c:forEach var="lessonWaiting" items="${requestScope.waitLessonList}" varStatus="status">
-                           <tr>
-                              <td align="center">${lessonWaiting.name}</td>
-                              <td align="center">${lessonWaiting.sido}</td>
-                              <td align="center">${lessonWaiting.age}</td>
-                              <td align="center"><input type="checkbox" class="approve" name="m_no_L" value="${lessonWaiting.m_no}"></td>
-                           </tr>
-                        </c:forEach>
-                     </table>
-                     <c:if test="${empty requestScope.waitLessonList}">
-                        <center>
-                        <br>
-                        <b>대기중인 인원이 없습니다.</b>
-                        </center>
-                     </c:if>
-                     <input type="hidden" name="m_no" value="${sessionScope.m_no}">
-                  </form>
-                  <div style="height:8px;"></div>
-                  <button onclick="allApprove()">전체선택</button>
-                  <button onclick="regLesson()">수락</button>
-                  <button onclick="refuseLesson()">거절</button>
-                  <button onclick="modalClose_lesson()">닫기</button>
-               </div>
-            </div>
-         </div>
-         
-         
-         
-         
-         
-         
-         
-      
-         <!-- ================================================================================================================= -->
-         <!-- 매칭 관련 -->
-         <c:if test="${requestScope.myInfo.team_master eq requestScope.myInfo.m_no}">
-            <c:if test="${requestScope.matchWaitingCnt > 0}">
-                <center>
-                  <table style="border-collapse:collapse" border="1">
-                  <tr>
-                     <td style="cursor:pointer" class="matchWaitingCheck" onclick="modalOpen_matching()">
-                        매칭신청이 있습니다.
-                     </td>
-                  </tr>
-               </table>
-               </center>
-            </c:if>
-         </c:if>
-          
-         <div class="modalDiv_matching" align="center"> 
-            <div class="bg_matching">
-               <div class="modal_matching">
-               <form name = "matchWaitingList">
-                  <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center">
-                     <caption><b>수락대기중</b></caption>
-                     <tr>
-                        <th>팀 명</th>
-                        <th>팀장명</th>
-                        <th>경기장</th>
-                        <th>일 시</th>
-                        <th>시 간</th>
-                        <th>선택</th>
-                     </tr>
-                     <c:forEach var="listMatch" items="${requestScope.matchWaitingList}" varStatus="status">
-                        <tr>
-                           <td align="center">${listMatch.team_name}</td>
-                           <td align="center">${listMatch.nickname}</td>
-                           <td align="center">${listMatch.stadium_name}</td>
-                           <td align="center">${listMatch.day}</td>
-                           <td align="center">${listMatch.time_range}</td>
-                           <td align="center"><input type="radio" class="approve" name="vs_team" value="${listMatch.vs_team}"></td>
-                        </tr>
-                        <input type="hidden" name="stadium" value="${listMatch.stadium}">
-                        <input type="hidden" name="time_no"    value="${listMatch.time_no}">
-                     </c:forEach>
-                  </table>
-                  
-                  <input type="hidden" name="m_no" value="${sessionScope.m_no}">
-                  <input type="hidden" name="match_team" value="${requestScope.myInfo.team_no}">
-      
-                   
-               </form>
-               <div style="height:8px;"></div>
-               <button onclick="matching()">수락</button>
-               <button onclick="">거절</button>
-               <button onclick="modalClose_matching()">닫기</button>
-               </div>
-            </div>
-         </div>
-           
-         
-         <div style="height:30px;"></div>
          
          <!-- ================================================================================================================= -->
          <!-- 팀생성 관련 -->
@@ -834,6 +823,6 @@
       </div>
    </div>
 
-   
+   <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <title>adminNoticeBoardForm</title>
 <link href="/style/community/communityFreeBoardFormStyle.css"
 	rel="stylesheet">
-
+<link href="/style/adminFormStyle.css" rel="stylesheet">
 <script src="/js/community/communityFreeBoardFormScript.js"></script>
 
 <script>
@@ -243,87 +243,96 @@ function goadminNoticeboardUpDelForm(b_no){
 
 
 </script>
-
-
-
-
-
-
-
-
+<style>
+	#nav-item-notice{
+		text-align: center;
+		border: 1px solid #006666;
+		border-radius: 30px;
+		width: 150px;
+		height: 50px;
+		line-height: 3.3;
+		margin-top: 30px;
+		background-color: #006666;
+		color: #FFFFFF;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 	<div class="communityNoticeBoardFormTitle">
 	
-		<p class="titleBackgoundText">공지사항</p>
+		<p class="titleBackgoundText">공지사항 관리</p>
 	</div>
 
-
-	<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
-
-
-
+	<div class="adminPageSideBar">
+		<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
+	</div>
 	<form name="adminNoticeBoardSearchForm" onsubmit="return false">
 
-		<table align="center">
+		<table class="adminSearchFormTable" align="center" style="border: 1px solid #c59246e0; border-collapse: separate; border-radius: 20px; padding: 0px 15px 15px 15px;">
 			<tr>
-				<td>
-					<table border="1" cellpadding="5" cellspacing="0"
+				<td style="border-bottom: none;">
+					<table cellpadding="5" cellspacing="0"
 						style="border-collapse: collapse" align="center">
-						<caption>
-							<b>[검색조건]</b>
-						</caption>
 						<tr>
-							<th>키워드</th>
-
-							<td><select name="searchType1">
-									<option value="all">전체</option>
-									<option value="content">내용</option>
-									<option value="subject">제목</option>
-									<!-- 추가적인 검색 조건을 샐렉트 박스에 추가 -->
-							</select> <input type="text" name="keyword1" class="keyword1"> <select
-								name="orand">
-									<option value="or">or
-									<option value="and">and
-							</select> <input type="text" name="keyword2" class="keyword2"></td>
-						<tr>
-							<th>날짜검색</th>
-							<td>최소<input type="text" name="minDate" id="minDate"
-								readonly="readonly"> ~ 최대 <input type="text"
+							<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">날짜검색</th>
+							<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="text" name="minDate" id="minDate"
+								readonly="readonly">&nbsp;~&nbsp;<input type="text"
 								name="maxDate" id="maxDate" readonly="readonly"></td>
 						</tr>
-
+						<tr><td style="border-bottom: none;"></td></tr>
 					</table>
+					<div class="search">
+						<select name="searchType1" class="searchType1">
+							<option value="all">전체</option>
+							<option value="stadium_name">경기장이름</option>
+							<option value="content">비고</option>
+						</select>
+						<input type="text" name="keyword1" class="keyword1"> 
+						<select name="orand" class="orAnd">
+							<option value="or">or
+							<option value="and">and
+						</select>
+						<input type="text" name="keyword2" class="keyword2">
+					</div>
+					<div class="searchBtnDiv">
+						<input type="button" value="검색" class="searchBtn" class="searchBtn" onclick="search()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer; margin-right: 10px;">
+						<input type="button" value="초기화" class="searchAllBtn" onclick="searchAll()" style="width: 100px; height: 40px; background-color: #c59246e0; color: #FFFFFF; border-radius: 10px; border: 1px solid #c59246e0; cursor: pointer;">   
+					</div>
+				</td>
 			</tr>
 
-			<tr align="center">
+			<!-- <tr align="center">
 				<td><input type="button" value="검색" class="searchBtn" onclick="search()">
 					<input type="button" value="모두 검색" class="searchAllBtn" onclick="searchAll()">&nbsp;&nbsp;&nbsp;
 					<input type="button" value="새글쓰기" 
 					onclick="location.replace('/adminNoticeboardRegForm.do');">
 
 				</td>
-			</tr>
+			</tr> -->
 		</table>
-
 		<input type="hidden" name="sort" class="sort"> <input
 			type="hidden" name="SelectPageNo" class="SelectPageNo" value="1">
 		<input type="hidden" name="rowCntPerPage" class="rowCntPerPage">
 	</form>
 
-
-
-
-
-
+	<div class="adminFormTopContents" style="margin-top: 50px;">
+		<span class="fontLightGray" id="adminFormAllCount">Total. ${requestScope.noticeBoardListAllCnt}개</span>
+		<div class="adminFormRowCntPerPage">
+			<select name="rowCntPerPage" class="rowCntPerPage" onChange="search()">
+				<option value="10">10개씩 보기
+				<option value="15">15개씩 보기
+				<option value="20">20개씩 보기
+			</select>
+		</div>
+	</div>
 
 
 	<div class="communityNoticeBoardFormContainer">
 
-		<div class="noticeboardListDiv" style="margin-bottom: 20px;">
-			<table class="noticeboardListTable" cellpadding="7" border="1"
-				bordercolor="gray" align="center" style="border-collapse: collapse">
+		<div class="adminListDiv" style="margin-bottom: 20px;">
+			<table class="adminListTable" cellpadding="7" align="center"
+					style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
 				<tr>
 					<th style="width: 50px;">번호</th>
 					<th style="width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">제목</th>
@@ -370,11 +379,11 @@ function goadminNoticeboardUpDelForm(b_no){
 					<tr style="cursor: pointer"
 						onclick="goadminNoticeboardUpDelForm(${noticeboard.b_no})">
 
-						<td align="center">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
+						<td align="center" class="fontLightGray">${requestScope.noticeBoardMap.begin_serialNo_desc - status.index}</td>
 						<td>${noticeboard.subject}</td>
-						<td align="center">${noticeboard.writer}</td>
-						<td align="center">${noticeboard.readcount}</td>
-						<td align="center">${noticeboard.reg_date}</td>
+						<td align="center" class="fontLightGray">${noticeboard.writer}</td>
+						<td align="center" class="fontLightGray">${noticeboard.readcount}</td>
+						<td align="center" class="fontLightGray">${noticeboard.reg_date}</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -384,42 +393,24 @@ function goadminNoticeboardUpDelForm(b_no){
 			</c:if>
 		</div>
 	</div>
-
-
-
-
-	<center>
-
-		<span class="pagingNos"> <span style="cursor: pointer"
-			onClick="pageNoClick(1)">[처음]</span> <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}-1)">[이전]</span>&nbsp;&nbsp;
-
-
-			<c:forEach var="pageNo"
-				begin="${requestScope.noticeBoardMap.begin_pageNo}"
-				end="${requestScope.noticeBoardMap.end_pageNo}">
-
+	<div class="newCommunityFreeBoardFormBtnDiv">
+		<input type="button" value="새 글 쓰기" class="newCommunityFreeBoardFormBtn" onclick="location.replace('/adminNoticeboardRegForm.do');">
+	</div>
+	<div class="adminFormPaging">
+		<span class="pagingNos">
+			<!-- <span style="cursor: pointer" onClick="pageNoClick(1)">[처음]</span> -->
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}-1)" class="arrowLeft"><strong>&lt</strong></span>
+			<c:forEach var="pageNo" begin="${requestScope.noticeBoardMap.begin_pageNo}" end="${requestScope.noticeBoardMap.end_pageNo}">
 				<c:if test="${requestScope.noticeBoardMap.selectPageNo==pageNo}">
-            ${pageNo}
-         </c:if>
-
+		            <p class="activePageNo">${pageNo}</p>
+		        </c:if>
 				<c:if test="${requestScope.noticeBoardMap.selectPageNo!=pageNo}">
-					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">[${pageNo}]</span>
+					<span style="cursor: pointer" onClick="pageNoClick(${pageNo})">${pageNo}</span>
 				</c:if>
-			</c:forEach>&nbsp;&nbsp; <span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}+1)">[다음]</span>
-			<span style="cursor: pointer"
-			onClick="pageNoClick(${requestScope.noticeBoardMap.last_pageNo})">[마지막]</span>
-			&nbsp;&nbsp;&nbsp;
-			[${requestScope.noticeBoardListCnt}/${requestScope.noticeBoardListAllCnt}]개
-			&nbsp;&nbsp;
-		</span> <select name="rowCntPerPage" class="rowCntPerPage"
-			onChange="search()">
-			<option value="10">10
-			<option value="15">15
-			<option value="20">20
-		</select>행보기 &nbsp;&nbsp;&nbsp;
-	</center>
+			</c:forEach>
+			<span style="cursor: pointer" onClick="pageNoClick(${requestScope.noticeBoardMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
+		</span>
+	</div>
 
 
 
@@ -428,5 +419,6 @@ function goadminNoticeboardUpDelForm(b_no){
 			action="/adminNoticeboardUpDelForm.do" method="post">
 			<input type="hidden" name="b_no"value="${requestScope.communityDTO.b_no}">
 		</form>
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

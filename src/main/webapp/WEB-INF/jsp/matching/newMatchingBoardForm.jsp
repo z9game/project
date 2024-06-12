@@ -157,11 +157,11 @@
     </div>
 
    	<form name="newMatchingBoard">
-      <table class="newMatchingBoardFormRegTable" style="border-collapse: collapse; margin-top: 50px; width: 900px;">
+      <table class="newMatchingBoardFormRegTable" align="center" cellpadding=7 style="border-collapse: collapse; margin-top: 50px; width: 1100px;">
       		<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
-					<input type="text" name="title" class="title" size="106" maxlength="100">
+					<input type="text" name="title" class="title" size="113" maxlength="100" style="padding: 5px 15px;">
 				</td>
 			</tr>
             <tr>
@@ -236,7 +236,7 @@
              </tr>
               -->
               <tr>
-				<th style="border-bottom: 1px solid #FFFFFF;">일시(날짜)</th>
+				<th style="border-bottom: 1px solid #FFFFFF;">일시<br>(날짜)</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
 					<select name="day" id="day" onchange="loadMachingTime()">
 						<option value="0">매칭예약 미신청 상태</option>
@@ -263,7 +263,7 @@
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
-					<textarea name="content" class="content" rows="20" cols="108" maxlength="1000" style="resize:none"></textarea>
+					<textarea name="content" class="content" rows="20" cols="115" maxlength="1000" style="resize:none; padding: 5px 15px;"></textarea>
 				</td>
 			</tr>
          </table>
@@ -292,6 +292,6 @@
          <input type="button" value="등록" style="cursor:pointer" onclick="checkBoardRegForm()" > -->
       
      
-    
+    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

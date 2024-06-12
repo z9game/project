@@ -137,7 +137,12 @@
 	<c:if test="${!empty requestScope.stadiumDTO}">
 		<div class="stadiumDiv">
 			<div class="stadiumImgDiv">
-				<img src="/image/st.jpg" style="border-radius: 15px;">
+				<c:if test="${requestScope.stadiumList.imagename != null}">
+					<img src="/image/stadiumImg/${requestScope.stadiumList.imagename}" class="stadiumRentImage" style="width:250px; height:200px; border-radius: 15px;">
+				</c:if>
+				<c:if test="${requestScope.stadiumList.imagename == null}">
+					<img src="/image/noImage.png" class="stadiumRentImage" style="width:250px; height:200px; border-radius: 15px;">
+				</c:if>
 				<form name="rentStadiumForm">
 
 		<table class="rentStadiumTable" align="center" cellpadding="7" style="border-collapse: collapse; margin-top: 20px;">
@@ -203,6 +208,6 @@
 		</div>
 	</c:if>
 
-	
+	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

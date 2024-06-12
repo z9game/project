@@ -257,9 +257,16 @@
                  <div id="allBoardDiv" class="communityMarketplaceBoardFormContainer">
                   <c:forEach var="board" items="${requestScope.tabAllMarketplaceBoardList}" varStatus="status">
                      <div style="cursor: pointer;" class="communityMarketplaceBoardFormBoard" onClick="submitMarketplaceDetailForm('${ board.b_no }', '${ board.table_name }');">
-                        <div class="communityMarketplaceBoardImageDiv">
-                           <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
-                        </div>
+                        <c:if test="${board.imagename != null}">
+							<div class="communityMarketplaceBoardImageDiv">
+								<img src="/image/marketPlaceImg/${board.imagename}" class="communityMarketplaceBoardImage">
+							</div>
+						</c:if>
+						<c:if test="${board.imagename == null}">
+							<div class="communityMarketplaceBoardImageDiv">
+								<img src="/image/noImage.png" class="communityMarketplaceBoardImage" style="width:250px; height:200px;">
+							</div>
+						</c:if>
                         <div class="communityMarketplaceBoardSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.subject}</div>
                         <div class="communityMarketplaceBoardWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.reg_date}</div>
@@ -284,6 +291,7 @@
 						<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
 					</span>
 				</div>
+				<%@ include file="/WEB-INF/jsp/footer.jsp" %>
          </div>   
     
          <div id="tabSale">
@@ -309,9 +317,16 @@
                   <c:forEach var="board" items="${requestScope.tabSaleMarketplaceBoardList}" varStatus="status">
                      
                      <div style="cursor: pointer;" class="communityMarketplaceBoardFormBoard" onClick="submitMarketplaceDetailForm('${ board.b_no }', '${ board.table_name }');">
-                        <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
-                           <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
-                        </div>
+                        <c:if test="${board.imagename != null}">
+							<div class="communityMarketplaceBoardImageDiv">
+								<img src="/image/marketPlaceImg/${board.imagename}" class="communityMarketplaceBoardImage">
+							</div>
+						</c:if>
+						<c:if test="${board.imagename == null}">
+							<div class="communityMarketplaceBoardImageDiv">
+								<img src="/image/noImage.png" class="communityMarketplaceBoardImage" style="width:250px; height:200px;">
+							</div>
+						</c:if>
                         <div class="communityMarketplaceBoardSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.subject}</div>
                         <div class="communityMarketplaceBoardWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.reg_date}</div>
@@ -340,6 +355,7 @@
 						<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
 					</span>
 				</div> 
+				<%@ include file="/WEB-INF/jsp/footer.jsp" %>
          </div>
          
          <div id="tabFreeSharing">
@@ -365,9 +381,16 @@
                  <div id="freeSharingBoardDiv" class="communityMarketplaceBoardFormContainer">
                   <c:forEach var="board" items="${requestScope.tabFreeSharingMarketplaceBoardList}" varStatus="status">
                      <div style="cursor: pointer;" class="communityMarketplaceBoardFormBoard" onClick="submitMarketplaceDetailForm('${ board.b_no }', '${ board.table_name }');">
-                        <div class="communityMarketplaceBoardImageDiv" style="border-bottom:">
-                           <img src="/image/SoccerBall.jpg" class="communityMarketplaceBoardImage">
-                        </div>
+                        <c:if test="${board.imagename != null}">
+							<div class="communityMarketplaceBoardImageDiv">
+								<img src="/image/marketPlaceImg/${board.imagename}" class="communityMarketplaceBoardImage">
+							</div>
+						</c:if>
+						<c:if test="${board.imagename == null}">
+							<div class="communityMarketplaceBoardImageDiv">
+								<img src="/image/noImage.png" class="communityMarketplaceBoardImage" style="width:250px; height:200px;">
+							</div>
+						</c:if>
                         <div class="communityMarketplaceBoardSubject" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.subject}</div>
                         <div class="communityMarketplaceBoardWriter" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.nickname}</div>
                         <div class="communityMarketplaceBoardRegDate" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${board.reg_date}</div>
@@ -396,14 +419,14 @@
 						<span style="cursor: pointer" onClick="pageNoClick(${requestScope.tabFreeSharingMarketplaceBoardPageMap.selectPageNo}+1)" class="arrowRight"><strong>&gt</strong></span>
 						<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
 					</span>
-				</div> 
+				</div>
+				<%@ include file="/WEB-INF/jsp/footer.jsp" %> 
          </div>
          
       
       </div>   <!-- 끝. [탭] 콘텐츠 -->
     
    </div>   <!-- 끝. [카테고리] 탭 -->
-   
    
 </body>
 </html>

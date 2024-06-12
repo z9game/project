@@ -186,6 +186,7 @@
 			            </div>
 			        </div>
 			    </div>
+			    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 			</div>
 			<div id="customerServiceCategoryTabQnA">
 				<div class="customerServiceQnAFormContainer">
@@ -241,6 +242,7 @@
 						<%-- <span style="cursor: pointer" onClick="pageNoClick(${requestScope.customerServiceQnABoardMap.last_pageNo})">[마지막]</span> --%>
 					</span>
 				</div>
+				<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 			</div>
 		</div>
 	</div>

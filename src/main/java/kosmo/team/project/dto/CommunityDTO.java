@@ -11,6 +11,8 @@ public class CommunityDTO {
 	private int readcount;
 	private String nickname;
 	private String table_name;
+	
+	private String imagename;
 
 	public int getB_no() {
 		return b_no;
@@ -84,4 +86,11 @@ public class CommunityDTO {
 		this.table_name = table_name;
 	}
 
+	public String getImagename() {
+		return imagename;
+	}
+
+	public void setImagename(String imagename) {
+		this.imagename = imagename;
+	}
 }

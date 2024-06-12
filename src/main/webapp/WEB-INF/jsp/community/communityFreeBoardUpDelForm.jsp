@@ -117,12 +117,11 @@
 
 
 	<form name="communityFreeBoardUpDelForm">
-		<table align="center"cellpadding=7
-			style="border-collpase: collpase">
+		<table align="center" cellpadding=7 style="border-collapse: collapse; margin-top: 50px; width: 1100px;">
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">제목</th>
-				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" name="subject" class="subject" size="106"
-					maxlength="30" value="${requestScope.communityDTO.subject}"></td>
+				<td style="border-bottom: 1px solid #c59246e0;"><input type="text" name="subject" class="subject" size="113"
+					maxlength="30" value="${requestScope.communityDTO.subject}" style="border-radius: 10px; border: 1px solid #c59246e0; height: 30px; padding: 5px 15px;"></td>
 			</tr>
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">글쓴이</th>
@@ -131,7 +130,7 @@
 			<tr>
 				<th style="border-bottom: 1px solid #FFFFFF;">내용</th>
 				<td style="border-bottom: 1px solid #c59246e0;">
-					<textarea name="content" class="content" rows="20" cols="108" maxlength="500" style="resize: none;">${requestScope.communityDTO.content}</textarea>
+					<textarea name="content" class="content" rows="20" cols="115" maxlength="500" style="resize: none; border-radius: 10px; border: 1px solid #c59246e0; padding: 5px 15px;">${requestScope.communityDTO.content}</textarea>
 				</td>
 			</tr>
 

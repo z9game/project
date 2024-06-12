@@ -250,7 +250,16 @@
                <c:forEach var="gameList" items="${requestScope.tournamentList}">
                   <tr style="cursor:pointer;" onClick="goTournamentBoardDetail(${gameList.list_no});">
                      <td rowspan="2" style="width: 250px;">
-                        <img src="/image/SoccerBackground.jpg" class="tournamentBoardImg">
+                        <c:if test="${gameList.imagename != null}">
+							<div class="tournamentBoardImgDiv">
+								<img src="/image/tournamentImg/${gameList.imagename}" class="tournamentBoardImg" style="width:250px; height:200px;">
+							</div>
+						</c:if>
+						<c:if test="${gameList.imagename == null}">
+							<div class="tournamentBoardImgDiv">
+								<img src="/image/noImage.png" class="tournamentBoardImg" style="width:250px; height:200px;">
+							</div>
+						</c:if>
                      </td>
                      <td>
                         <b style="font-size: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${gameList.subject}</b><p class="tournamentBoardFormFontLightGray" style="padding-top: 5px">${gameList.region}</p>
@@ -316,5 +325,6 @@
     <form action="/tournamentBoardDetail.do" method="post" name="tournamentBoardDetail">
        <input type="hidden" name="list_no">
     </form>
+    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

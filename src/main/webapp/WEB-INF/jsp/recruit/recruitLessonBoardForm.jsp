@@ -440,7 +440,7 @@ function search() {
          <!-- 클릭한 행의 게시판 고유번호가 저장될 히든태그 선언 -->
          <input type="hidden" name="recruitment_no">
       </form>        
-     
+     <%@ include file="/WEB-INF/jsp/footer.jsp" %>
       
 </body>
 </html>
