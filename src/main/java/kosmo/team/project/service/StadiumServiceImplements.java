@@ -127,6 +127,16 @@ public class StadiumServiceImplements implements StadiumService {
 
 	@Override
 	public int insertStadiumYangdo(YangdoDTO yangdoDTO) {
+		
+				
+		int MatchStadiumCnt = this.stadiumDAO.getMatchStadiumCnt(yangdoDTO);
+		
+		if(MatchStadiumCnt >0) {
+			
+			return 4;
+			
+		}
+		
 
 		int yangdoCnt = this.stadiumDAO.getYangdoCnt(yangdoDTO);
 
@@ -235,6 +245,14 @@ public class StadiumServiceImplements implements StadiumService {
 
 	@Override
 	public int updateYangdo(YangdoDTO yangdoDTO) {
+		
+//		int MatchStadiumCnt = this.stadiumDAO.getMatchStadiumCnt(yangdoDTO);
+//		
+//		if(MatchStadiumCnt >0) {
+//			
+//			return 4;
+//			
+//		}
 		
 		//경기장상태가 이용불가면 리턴5
 		int StadiumUpStatusCnt = this.stadiumDAO.getUpStadiumStatus(yangdoDTO);

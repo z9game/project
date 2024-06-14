@@ -746,6 +746,94 @@
 	</select>
 
 
+									
+
+	<select id="getMemberSearchSettingList"
+		resultType="kosmo.team.project.dto.MemberSearchSettingDTO"
+		parameterType="kosmo.team.project.dto.MemberSearchSettingDTO">
+		select 
+			search_condition_type		
+            ,is_active
+           ,display_position
+		from
+			member_search_setting
+		order by 
+			display_position asc
+	</select>
+	
+	<update id="updateGenderSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+    UPDATE member_search_setting
+    SET is_active = #{genderSetting}
+    WHERE SEARCH_CONDITION_TYPE = 'gender'
+	</update>
+	
+	<!-- 연령대 설정 업데이트 쿼리 -->
+	<update id="updateAgeRangeSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+	    UPDATE member_search_setting
+	    SET is_active = #{ageRangeSetting}
+	    WHERE SEARCH_CONDITION_TYPE = 'age_group'
+	</update>
+	
+	<!-- 시/도 설정 업데이트 쿼리 -->
+	<update id="updateSidoSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+	    UPDATE member_search_setting
+	    SET is_active = #{sidoSetting}
+	    WHERE SEARCH_CONDITION_TYPE = 'city'
+	</update>
+	
+	<!-- 가입일 설정 업데이트 쿼리 -->
+	<update id="updateJoinDateSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+	    UPDATE member_search_setting
+	    SET is_active = #{joinDateSetting}
+	    WHERE SEARCH_CONDITION_TYPE = 'join_date'
+	</update>
+	
+	<!-- 경기수 설정 업데이트 쿼리 -->
+	<update id="updateGameCountSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+	    UPDATE member_search_setting
+	    SET is_active = #{gameCountSetting}
+	    WHERE SEARCH_CONDITION_TYPE = 'game_count'
+	</update>
+	
+	<!-- 승리수 설정 업데이트 쿼리 -->
+	<update id="updateWinCountSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+	    UPDATE member_search_setting
+	    SET is_active = #{winCountSetting}
+	    WHERE SEARCH_CONDITION_TYPE = 'win_count'
+	</update>
+	
+	<!-- 무승부 설정 업데이트 쿼리 -->
+	<update id="updateDrawCountSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+	    UPDATE member_search_setting
+	    SET is_active = #{drawCountSetting}
+	    WHERE SEARCH_CONDITION_TYPE = 'draw_count'
+	</update>
+	
+	<!-- 패배 설정 업데이트 쿼리 -->
+	<update id="updateLossCountSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+	    UPDATE member_search_setting
+	    SET is_active = #{lossCountSetting}
+	    WHERE SEARCH_CONDITION_TYPE = 'loss_count'
+	</update>
+	
+	<!-- 골 설정 업데이트 쿼리 -->
+	<update id="updateGoalCountSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+	    UPDATE member_search_setting
+	    SET is_active = #{goalCountSetting}
+	    WHERE SEARCH_CONDITION_TYPE = 'goals'
+	</update>
+	
+	<!-- 어시스트 설정 업데이트 쿼리 -->
+	<update id="updateAssistsCountSetting" parameterType="kosmo.team.project.dto.MemberSearchShowHideSettingDTO">
+	    UPDATE member_search_setting
+	    SET is_active = #{assistsCountSetting}
+	    WHERE SEARCH_CONDITION_TYPE = 'assists'
+	</update>
+
+
+
+
+
 
 
 

@@ -9,6 +9,8 @@ import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.MemberSearchSettingDTO;
+import kosmo.team.project.dto.MemberSearchShowHideSettingDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 import kosmo.team.project.dto.Stadim2DTO;
 import kosmo.team.project.dto.TournamentDTO;
@@ -19,6 +21,11 @@ public interface AdminDAO {
 	// 모든 회원 목록을 가져오는 메서드
 	public List<MemberDTO> getMemberList(AdminSearchDTO adminSearchDTO);
 
+	// 검색조건을 거져옴
+	public List<MemberSearchSettingDTO> getMemberSearchSettingList(MemberSearchSettingDTO memberSearchSettingDTO);
+	//검색조건 숨기기/보이기 업데이트
+	public int updateMemberSearchShowHideSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+	
 	public int getMemberListCnt(AdminSearchDTO adminSearchDTO);
 
 	public int getMemberListAllCnt();
@@ -235,5 +242,29 @@ public interface AdminDAO {
    public int adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO);
 
    public int getStadiumDuplication(Stadim2DTO stadim2dto);
+
+public int updateGenderSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+public int updateAgeRangeSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+public int updateSidoSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+public int updateJoinDateSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+public int updateGameCountSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+public int updateWinCountSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+public int updateDrawCountSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+public int updateLossCountSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+public int updateGoalCountSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+public int updateAssistsCountSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+
+
+
+
    
 }

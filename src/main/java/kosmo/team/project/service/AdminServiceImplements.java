@@ -11,6 +11,8 @@ import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.MemberSearchSettingDTO;
+import kosmo.team.project.dto.MemberSearchShowHideSettingDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 import kosmo.team.project.dto.Stadim2DTO;
 import kosmo.team.project.dto.TournamentDTO;
@@ -22,6 +24,79 @@ public class AdminServiceImplements implements AdminService {
 	@Autowired
 	private AdminDAO adminDAO;
 
+	
+	
+	//회원목록쪽 검색조건을 가져오는것
+	
+	@Override
+	public List<MemberSearchSettingDTO> getMemberSearchSettingList(MemberSearchSettingDTO memberSearchSettingDTO) {
+		
+		List<MemberSearchSettingDTO> memberSearchSettingList = this.adminDAO.getMemberSearchSettingList(memberSearchSettingDTO);
+		
+		return memberSearchSettingList;
+	}
+	
+	
+	//검색조건 숨기기/보이기 업데이트
+	@Override
+	public int updateMemberSearchShowHideSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO) {
+		int updatedRows = 0;
+
+	    // Gender 설정 업데이트
+	   
+	        updatedRows = this.adminDAO.updateGenderSetting(memberSearchShowHideSettingDTO);
+	   
+
+	    // 연령대 설정 업데이트
+	    
+	        updatedRows = this.adminDAO.updateAgeRangeSetting(memberSearchShowHideSettingDTO);
+	    
+
+	    // 시/도 설정 업데이트
+	   
+	        updatedRows = this.adminDAO.updateSidoSetting(memberSearchShowHideSettingDTO);
+	    
+
+	    // 가입일 설정 업데이트
+	   
+	        updatedRows = this.adminDAO.updateJoinDateSetting(memberSearchShowHideSettingDTO);
+	    
+
+	    // 경기수 설정 업데이트
+	   
+	        updatedRows = this.adminDAO.updateGameCountSetting(memberSearchShowHideSettingDTO);
+	   
+
+	    // 승리수 설정 업데이트
+	   
+	        updatedRows = this.adminDAO.updateWinCountSetting(memberSearchShowHideSettingDTO);
+	  
+
+	    // 무승부 설정 업데이트
+	   
+	        updatedRows = this.adminDAO.updateDrawCountSetting(memberSearchShowHideSettingDTO);
+	   
+
+	    // 패배 설정 업데이트
+	   
+	        updatedRows = this.adminDAO.updateLossCountSetting(memberSearchShowHideSettingDTO);
+	   
+
+	    // 골 설정 업데이트
+	   
+	        updatedRows = this.adminDAO.updateGoalCountSetting(memberSearchShowHideSettingDTO);
+	   
+
+	    // 어시스트 설정 업데이트
+	   
+	        updatedRows = this.adminDAO.updateAssistsCountSetting(memberSearchShowHideSettingDTO);
+	   
+
+	    return updatedRows;
+	}
+	
+	
+	
 	@Override
 	public List<MemberDTO> getMemberList(AdminSearchDTO AdminSearchDTO) {
 
@@ -803,6 +878,15 @@ public class AdminServiceImplements implements AdminService {
 		 public int adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO) {
 			 return adminDAO.adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(detailDTO);
 		 }
+
+
+
+
+
+
+
+		
+		
 	
 	
 	

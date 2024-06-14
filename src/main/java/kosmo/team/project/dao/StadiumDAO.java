@@ -89,6 +89,8 @@ public interface StadiumDAO {
 
 	public int getSincheongStadiumStatus(YangdoDTO yangdoDTO);
 
+	public int getMatchStadiumCnt(YangdoDTO yangdoDTO);
+
 
 	
 	

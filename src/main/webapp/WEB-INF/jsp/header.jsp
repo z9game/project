@@ -63,7 +63,9 @@
 					<li class="nav-item" id="welcomeLogin">
 				        <span>${sessionScope.nickname} 님 환영합니다!</span>
 				        <ul class="navInner">
+				        	<c:if test="${sessionScope.mid != 'admin'}">
 				        	<li class="navInner-item" onclick="document.myPageForm.submit()" style="cursor: pointer;"><a>마이 페이지</a></li>
+				        	</c:if>
 				        </ul>
 				    </li>
 					<ul class="myPageAndLogout">

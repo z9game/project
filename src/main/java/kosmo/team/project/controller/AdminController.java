@@ -19,6 +19,8 @@ import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.MemberSearchSettingDTO;
+import kosmo.team.project.dto.MemberSearchShowHideSettingDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
 import kosmo.team.project.dto.Stadim2DTO;
 import kosmo.team.project.dto.TournamentDTO;
@@ -40,7 +42,7 @@ public class AdminController {
 	
 	@RequestMapping("/adminForm.do")
 
-	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, HttpSession session  ) {
+	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, MemberSearchSettingDTO memberSearchSettingDTO,HttpSession session  ) {
 		
 		
 		// 세션에서 사용자 아이디를 가져옴
@@ -83,7 +85,7 @@ public class AdminController {
 		
 		List<MemberDTO> memberList = this.adminService.getMemberList(adminSearchDTO);
 		//System.out.println("maxDate2: " + adminSearchDTO.getMaxDate());
-		
+		List<MemberSearchSettingDTO> memberSearchSettingList = this.adminService.getMemberSearchSettingList(memberSearchSettingDTO);
 
 		System.out.println("Sigungu  " + adminSearchDTO.getSigungu());
 		System.out.println("Keyword2  " + adminSearchDTO.getKeyword2());
@@ -94,7 +96,8 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("memberList", memberList);
-
+		mav.addObject("memberSearchSettingList", memberSearchSettingList);
+		
 		mav.addObject("memberListCnt", memberListCnt);
 		mav.addObject("memberListAllCnt", memberListAllCnt);
 		mav.addObject("memberMap", memberMap);
@@ -106,7 +109,32 @@ public class AdminController {
 	
 	
 	
+	@RequestMapping(value = "/MemberSettingProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+		public Map<String, String> MemberSettingProc(
+				MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO
 	
+		) {
+
+		// ------------------------------------------------
+		// 게시판 수정 결과물을 저장할 HashMap 객체 생성하기.
+		// ------------------------------------------------
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+
+		int updateMemberSearchShowHideSetting = this.adminService.updateMemberSearchShowHideSetting(memberSearchShowHideSettingDTO);
+
+
+
+		resultMap.put("result", updateMemberSearchShowHideSetting + "");
+
+
+		return resultMap;
+	}
 	
 	
 	

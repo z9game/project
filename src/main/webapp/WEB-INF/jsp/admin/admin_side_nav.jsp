@@ -3,7 +3,7 @@
 
 
 
-<div class="row-admin_side_nav">
+<div class="row-admin_side_nav" style="position:absolute;">
 	<ul class="nav nav-pills flex-column">
 		<!-- <li class="nav-item">관리자 메뉴</li> -->
 		<li class="nav-item" id="nav-item-title" onClick="location.href = '/adminForm.do'" style="cursor: pointer;">회원관리</li>

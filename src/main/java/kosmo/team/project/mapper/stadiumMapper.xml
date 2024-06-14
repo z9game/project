@@ -431,6 +431,29 @@
 		
 	</select>
 	
+	
+	<select id="getMatchStadiumCnt"
+		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
+		select 
+            count(*) 
+        from 
+            match
+        where 
+            
+             stadium = (select 
+                stadium_no
+                from
+                    booking
+                where 
+                    stadium_no = #{MyStadium}
+                    and 
+                    booking_date = to_date(#{MyDate},'yyyy-mm-dd')
+                    and
+                    time_slot = #{MyTimeRange}
+                    and
+                    m_no = #{m_no}        )
+	</select>
+	
 	<select id="getStadiumStatus"
 		parameterType="kosmo.team.project.dto.YangdoDTO" resultType="int">
 		select count(*) from stadium
