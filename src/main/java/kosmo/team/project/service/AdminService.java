@@ -7,8 +7,9 @@ import kosmo.team.project.dto.AdminSearchDTO;
 import kosmo.team.project.dto.CommunityDTO;
 import kosmo.team.project.dto.CommunityFreeBoardDetailDTO;
 import kosmo.team.project.dto.MemberDTO;
+import kosmo.team.project.dto.MemberSearchSettingDTO;
+import kosmo.team.project.dto.MemberSearchShowHideSettingDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
-import kosmo.team.project.dto.RecruitSearchDTO;
 import kosmo.team.project.dto.Stadim2DTO;
 import kosmo.team.project.dto.TournamentDTO;
 import kosmo.team.project.dto.TournamentSearchDTO;
@@ -17,6 +18,11 @@ public interface AdminService {
 	// 모든 회원 목록을 불러오는 메서드
 	public List<MemberDTO> getMemberList(AdminSearchDTO adminSearchDTO);
 
+	//검색조건을 가져옴
+	public List<MemberSearchSettingDTO> getMemberSearchSettingList(MemberSearchSettingDTO memberSearchSettingDTO);
+	//검색조건 숨기기/보이기 업데이트
+	public int updateMemberSearchShowHideSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
+	
 	public int getMemberListCnt(AdminSearchDTO adminSearchDTO);
 
 	public int getMemberListAllCnt();
@@ -209,4 +215,7 @@ public int getCommunityGallaryBoardListAllCnt();
 
 	 public int adminCommunityFreeBoardDetailCommentOfCommentDeleteProc(CommunityFreeBoardDetailDTO detailDTO);
 
+	
+
+	
 }

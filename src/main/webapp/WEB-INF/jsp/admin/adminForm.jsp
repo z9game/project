@@ -252,9 +252,58 @@ $(document).ready(function() {
 
 	}
 	
+	function settingOpen() {
+        var modal = document.querySelector(".settingModal");
+        modal.style.display = "block";
+    }
+
+    // 모달 닫기
+    function settingClose() {
+        var modal = document.querySelector(".settingModal");
+        modal.style.display = "none";
+    }
 	
-	
-	
+   
+    function saveSettings() {
+    	
+    	var settingFormObj = $("[name='settingForm']");
+    	
+//      	alert(settingFormObj.serialize())
+//     	console.log(settingFormObj.serialize())
+    	 
+    	$.ajax({
+			//-------------------------------
+			// WAS 로 접속할 주소 설정
+			//-------------------------------
+			url : "/MemberSettingProc.do"
+			//-------------------------------
+			// WAS 로 접속하는 방법 설정. get 또는 post
+			//-------------------------------
+			,
+			type : "post"
+
+			,
+			data : settingFormObj.serialize()
+
+			,
+			success : function(response) {
+				
+				settingClose()
+				alert("저장되었습니다.")
+				$('#adminFormContent').html(response);
+
+			}
+
+			,
+			error : function() {
+
+				alert("수정실패! 관리자에게 문의 바랍니다.");
+			}
+
+		});
+        
+    }
+  
 
 </script>
 <style>
@@ -269,6 +318,60 @@ $(document).ready(function() {
 		background-color: #006666;
 		color: #FFFFFF;
 	}
+	#setting {
+		position: fixed;
+		width: 3%;
+		bottom: 50%;
+		right: 15%;
+		border-radius: 50%;
+		opacity: 0.7;
+		border:3px solid #999999;
+  	}
+  	#setting:hover {
+	/* 마우스 가져다 대면 외각 색설정 */
+	cursor:pointer;
+	/* 효과시간  */
+	transition: 0.3s;
+	/* 크기 확대 */
+	transform: scale(1.1);
+	}
+
+	 /* 스타일은 여기에 추가하세요 */
+    .settingModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* 닫기 버튼 스타일 */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -281,31 +384,174 @@ $(document).ready(function() {
 		<%@ include file="/WEB-INF/jsp/admin/admin_side_nav.jsp"%>
 	</div>
 
+	 <div >
+        <img src="image/adminSettingIcon.png" id="setting" onclick="settingOpen()">
+        
+    </div>
+
+    <div id="settingModal" class="settingModal">
+    <div class="modal-content">
+        <span class="close" onclick="settingClose()">X</span>
+        <div class="adminSetting" align="center">
+            <!-- 여기에 모달 내용 추가 -->
+      <form name="settingForm" onsubmit="return false">
+          <table >
+          	<c:forEach var="list" items="${requestScope.memberSearchSettingList}">
+          		 <c:if test="${list.search_condition_type == 'gender'}">
+				<tr>
+					<th >성별</th>
+					<td >
+						<input type="radio" name="genderSetting" value="show"  <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="genderSetting" value="hide"  <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${list.search_condition_type == 'age_group'}">
+				<tr>
+					<th >연령대</th>
+					<td >
+						<input type="radio" name="ageRangeSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="ageRangeSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${list.search_condition_type == 'city'}">
+				<tr>
+					<th >시/도</th>
+					<td >
+						<input type="radio" name="sidoSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="sidoSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${list.search_condition_type == 'join_date'}">
+				<tr>
+					<th >가입일</th>
+					<td >
+						<input type="radio" name="joinDateSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="joinDateSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${list.search_condition_type == 'game_count'}">
+				<tr>
+					<th >경기수</th>
+					<td >
+						<input type="radio" name="gameCountSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="gameCountSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${list.search_condition_type == 'win_count'}">
+				<tr>
+					<th >승리수</th>
+					<td >
+						<input type="radio" name="winCountSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="winCountSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${list.search_condition_type == 'draw_count'}">
+				<tr>
+					<th >무승부</th>
+					<td >
+						<input type="radio" name="drawCountSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="drawCountSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${list.search_condition_type == 'loss_count'}">
+				<tr>
+					<th >패배</th>
+					<td >
+						<input type="radio" name="lossCountSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="lossCountSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${list.search_condition_type == 'goals'}">
+				<tr>
+					<th >골</th>
+					<td >
+						<input type="radio" name="goalCountSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="goalCountSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				<c:if test="${list.search_condition_type == 'assists'}">
+				<tr>
+					<th >어시스트</th>
+					<td >
+						<input type="radio" name="assistsCountSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >보이기
+						<input type="radio" name="assistsCountSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >숨기기
+					</td>
+				</tr>
+				</c:if>
+				
+		</c:forEach>
+			</table>	
+		</form>
+			<input type="button" class="boardRegBtn" value="저장" onclick="saveSettings()">
+            
+        </div>
+    </div>
+</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
-
-	<form name="adminSearchForm" onsubmit="return false">
+	<form name="adminSearchForm" class="adminSearchForm" onsubmit="return false">
 
 		<table class="adminSearchFormTable" align="center" style="border: 1px solid #c59246e0; border-collapse: separate; border-radius: 20px; padding: 0px 15px 15px 15px;">
 				<tr>
 					<td style="border-bottom: none;">
+					
 						<table cellpadding="5" cellspacing="0"
 							style="border-collapse: collapse;" align="center">
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">성별</th>
-								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;">
-									<label style="display: flex; align-items: center; margin-right: 50px;">
-										<input type="checkbox" name="gender" value="남" class="gender" style="zoom:2.0; margin-right: 5px;">남
-									</label>
-									<label style="display: flex; align-items: center;">
-										<input type="checkbox" name="gender" value="여" class="gender" style="zoom:2.0; margin-right: 5px;">여
-									</label>
-								</td>
-							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">연령대</th>
-								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+							<c:forEach var="setting" items="${requestScope.memberSearchSettingList}">
+							
+							<c:if test="${setting.is_active == 'show'}">
+						
+							<tr class="${setting.search_condition_type}">
+                                <th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">
+                                
+                                    <c:if test="${setting.search_condition_type == 'gender'}">성별
+                                    	<td style="text-align: center; border-bottom: none; display: flex; align-items: center; " >
+											<label style="display: flex; align-items: center; margin-right: 50px;">
+												<input type="checkbox" name="gender" value="남" class="gender" style="zoom:2.0; margin-right: 5px;">남
+											</label>
+											<label style="display: flex; align-items: center;">
+												<input type="checkbox" name="gender" value="여" class="gender" style="zoom:2.0; margin-right: 5px;">여
+											</label>
+										</td>
+										<tr><td style="border-bottom: none;"></td></tr>                                   
+                                    </c:if>
+                                    
+                                    
+                                    <c:if test="${setting.search_condition_type == 'age_group'}">연령대
+                                    	<td style="text-align: center; border-bottom: none; display: flex; align-items: center;">
 									<label style="display: flex; align-items: center; margin-right: 30px;">
 										<input type="checkbox" name="ageRange" value="10대" class="ageRange" style="zoom:2.0; margin-right: 5px;">10대
 									</label>
@@ -333,12 +579,12 @@ $(document).ready(function() {
 										<input type="checkbox" name="ageRange" value="80대" class="ageRange" style="zoom:2.0; margin-right: 5px;">80대
 									</label>
 								</td>
-							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">시/도</th>
-								<td colspan="5" style="text-align: center; border-bottom: none; display: flex; align-items: center;"><select name="sido" id="" class="sido"
-									onchange="categoryChange(this)">
+								<tr><td style="border-bottom: none;"></td></tr>  
+                                    </c:if>
+                                    
+                                    <c:if test="${setting.search_condition_type == 'city'}">시/도
+                                    	<td colspan="5" style="text-align: center; border-bottom: none; display: flex; align-items: center;"><select name="sido" id="" class="sido"
+												onchange="categoryChange(this)">
 										<option value="0">시/도 선택</option>
 										<option value="1">강원</option>
 										<option value="2">경기</option>
@@ -359,83 +605,74 @@ $(document).ready(function() {
 								</select> <select name="sigungu" id="state" class="sigungu">
 										<option value="0">군/구 선택</option>
 								</select></td>
-							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">가입일</th>
-								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="text" name="minDate" id="minDate"
-									readonly="readonly">&nbsp;~&nbsp;<input type="text"
-									name="maxDate" id="maxDate" readonly="readonly"></td>
-							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
-	
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">경기수</th>
-								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minGames_played"
+								<tr><td style="border-bottom: none;"></td></tr>  
+                                   </c:if>
+                                    
+                                    <c:if test="${setting.search_condition_type == 'join_date'}">가입일
+                                    	<td style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+                                    	<input type="text" name="minDate" id="minDate"readonly="readonly">&nbsp;~&nbsp;
+                                    	<input type="text" name="maxDate" id="maxDate" readonly="readonly">
+                                    	<tr><td style="border-bottom: none;"></td></tr>  
+                                    	</td>
+		                                    
+                                    </c:if>
+                                    
+                                    <c:if test="${setting.search_condition_type == 'game_count'}">경기수
+										<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minGames_played"
 									class="minGames_played" value="0">&nbsp;~&nbsp;<input
 									type="number" name="maxGames_played" class="maxGames_played"
-									value="0"></td>
-							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
-	
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">승리수</th>
-								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minWin" class="minWin"
-									value="0">&nbsp;~&nbsp;<input type="number" name="maxWin"
-									class="maxWin" value="0"></td>
-							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
-	
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">무승부</th>
-								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minDraws" class="minDraws"
+									value="0"></td>    
+									<tr><td style="border-bottom: none;"></td></tr>                                  
+                                    </c:if>
+                                    
+                                    <c:if test="${setting.search_condition_type == 'win_count'}">승리수
+                                    	<td style="text-align: center; border-bottom: none; display: flex; align-items: center;">
+                                    	<input type="number" name="minWin" class="minWin"value="0">&nbsp;~&nbsp;
+                                    	<input type="number" name="maxWin"class="maxWin" value="0"></td>
+                                    	<tr><td style="border-bottom: none;"></td></tr>  
+                                    </c:if>
+                                    
+                                    <c:if test="${setting.search_condition_type == 'draw_count'}">무승부
+                                    	<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minDraws" class="minDraws"
 									value="0">&nbsp;~&nbsp;<input type="number" name="maxDraws"
 									class="maxDraws" value="0"></td>
-							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
-	
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">패배</th>
-								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minLoss" class="minLoss"
+									<tr><td style="border-bottom: none;"></td></tr>  
+                                    </c:if>
+                                    
+                                    <c:if test="${setting.search_condition_type == 'loss_count'}">패배
+                                    	<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minLoss" class="minLoss"
 									value="0">&nbsp;~&nbsp;<input type="number" name="maxLoss"
 									class="maxLoss" value="0"></td>
-							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">골</th>
-								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minGoals" class="minGoals"
+									<tr><td style="border-bottom: none;"></td></tr>  
+                                    </c:if>
+                                    
+                                    <c:if test="${setting.search_condition_type == 'goals'}">골
+                                    	<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minGoals" class="minGoals"
 									value="0">&nbsp;~&nbsp;<input type="number" name="maxGoals"
 									class="maxGoals" value="0"></td>
-							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
-	
-							<tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">어시스트</th>
-								<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minAssists"
+									<tr><td style="border-bottom: none;"></td></tr>  
+                                   
+                                    </c:if>
+                                    	
+                                    
+                                    <c:if test="${setting.search_condition_type == 'assists'}">어시스트
+                                    	<td style="text-align: center; border-bottom: none; display: flex; align-items: center;"><input type="number" name="minAssists"
 									class="minAssists" value="0">&nbsp;~&nbsp;<input type="number"
 									name="maxAssists" class="maxAssists" value="0"></td>
+                                    
+                                    </c:if>
+                                </th>
 							</tr>
-							<tr><td style="border-bottom: none;"></td></tr>
 							
-							<!-- <tr>
-								<th style="border-radius: 10px; height: 55px; border-bottom: none; border-top: none;">키워드</th>
-	
-								<td><select name="searchType1" class="searchType1">
-										<option value="all">전체</option>
-										<option value="name">이름</option>
-										<option value="mid">아이디</option>
-										<option value="nickname">별명</option>
-										<option value="phone">전화번호</option>
-										<option value="email">이메일</option>
-	
-										추가적인 검색 조건을 샐렉트 박스에 추가
-								</select> <input type="text" name="keyword1" class="keyword1"> <select
-									name="orand">
-										<option value="or">or
-										<option value="and">and
-								</select> <input type="text" name="keyword2" class="keyword2"></td>
-							</tr> -->
-	
+							
+							
+							
+							
+							
+							
+						
+							</c:if>	
+						</c:forEach>
 						</table>
 						<div class="search">
 							<select name="searchType1" class="searchType1">
@@ -498,7 +735,24 @@ $(document).ready(function() {
 				<table class="adminListTable" cellpadding="7" align="center"
 					style="border-collapse: collapse; margin: 0 auto; margin-top: 10px; width: 1000px;">
 					<tr>
-					<th style="width: 30px;" >번호</th>
+<!-- 					<th style="width: 30px;" >번호</th> -->
+					
+					<c:if test="${param.sort!='m_no asc' and param.sort!='m_no desc' }">
+						<th width="100px" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+							onclick="searchWithSort('m_no desc')">번호</th>
+					</c:if>
+
+					<c:if test="${param.sort=='m_no desc'}">
+						<th width="100px" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+							onclick="searchWithSort('m_no asc')">번호▼</th>
+					</c:if>
+
+					<c:if test="${param.sort=='m_no asc' }">
+						<th width="100px" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+							onclick="searchWithSort('')">번호▲</th>
+					</c:if>
+					
+					
 
 
 					<c:if test="${param.sort!='mid asc' and param.sort!='mid desc' }">
