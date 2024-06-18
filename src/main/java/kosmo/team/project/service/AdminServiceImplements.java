@@ -140,7 +140,7 @@ public class AdminServiceImplements implements AdminService {
 			
 			updatedSidoRows = adminDAO.updateSidoShowHideSetting(sidoShowHideSettingDTO);
 			
-			System.out.println("Updated rows for sido_id " + sido_id + ": " + updatedSidoRows);
+			//System.out.println("Updated rows for sido_id " + sido_id + ": " + updatedSidoRows);
 		
 		}
 		return null;

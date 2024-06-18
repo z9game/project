@@ -719,7 +719,7 @@ function saveSidoSettings() {
         z-index: 1;
         left: 29%;
         top: 22.5%;
-        width: 450px;
+        width: 400px;
         /* height: 100%; */
         height: 750px;
     }
@@ -1094,14 +1094,17 @@ function saveSidoSettings() {
 			    <c:forEach var="sidolist" items="${requestScope.sidoShowHideSettingList}">
 			        <li data-sido-id="${sidolist.sido_id}" style="margin-bottom: 10px;">
 			            <div style="display: flex; align-items: center;">
-			                <div class="sidoName" onclick="toggleButtons(this)" style="cursor: pointer; text-align: center; width: 100px; border: 1px solid #999999; border-radius:10px;">
+			                <div class="sidoName" onclick="toggleButtons(this)" style="cursor: pointer; text-align: center; width: 100px; border: 1px solid #999999; border-radius:10px; margin-right: 30px;">
 			                    ${sidolist.name}
 			                </div> 
-<!-- 			                <div> -->
-<%-- 								<input type="radio" name="assistsCountSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >사용 --%>
-<%-- 								<input type="radio" name="assistsCountSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >미사용 --%>
-							
-<!-- 			                </div>  -->
+				            <div style="display: flex;">
+				            	<div style="margin-right: 20px;">
+									<input type="radio" name="assistsCountSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >사용
+								</div>
+								<div>
+									<input type="radio" name="assistsCountSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >미사용
+								</div>
+			                </div>
 <!-- 			                <div style="display: none;"> -->
 <!-- 			                    <button type="button" onclick="moveUp(this)">▲</button> -->
 <!-- 			                    <button type="button" onclick="moveDown(this)">▼</button> -->

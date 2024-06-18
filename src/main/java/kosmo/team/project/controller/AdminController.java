@@ -57,8 +57,23 @@ public class AdminController {
 		
 		
 		
-		
-		
+//		int[] no = {5, 8, 3, 2};
+//		int tmp = 0;
+//
+//		for (int i = 0; i < no.length - 1; i++) {
+//		    for (int j = 0; j < no.length - 1; j++) {
+//		        if (no[j] > no[j + 1]) {
+//		            tmp = no[j];       // Store the value of no[j] in tmp
+//		            no[j] = no[j + 1]; // Assign the value of no[j+1] to no[j]
+//		            no[j + 1] = tmp;   // Assign the value in tmp to no[j+1]
+//		        }
+//		    }
+//		}
+//		// 정렬된 배열 출력
+//		for (int i = 0; i < no.length; i++) {
+//			System.out.print(no[i] + " ");
+//		}
+//		
 		
 		
 		
@@ -82,7 +97,7 @@ public class AdminController {
 		adminSearchDTO.setEnd_rowNo((int) memberMap.get("end_rowNo"));
 			
 		
-	     System.out.println("gender: " + adminSearchDTO.getAgeRange());
+	    // System.out.println("gender: " + adminSearchDTO.getAgeRange());
 		//System.out.println("maxDate1: " + adminSearchDTO.getMaxDate());
 		
 		List<MemberDTO> memberList = this.adminService.getMemberList(adminSearchDTO);
@@ -99,8 +114,8 @@ public class AdminController {
 		
 		
 
-		System.out.println("Sigungu  " + adminSearchDTO.getSigungu());
-		System.out.println("Keyword2  " + adminSearchDTO.getKeyword2());
+		//System.out.println("Sigungu  " + adminSearchDTO.getSigungu());
+		//System.out.println("Keyword2  " + adminSearchDTO.getKeyword2());
 		
 		//System.out.println("minDate: " + adminSearchDTO.getMinDate());
 
@@ -284,7 +299,7 @@ public class AdminController {
 		// -------------------------------------------
 		int memberUpCnt = this.adminService.updateMember(memberDTO);
 		int playerRecordUpCnt = this.adminService.updatePlayerRecord(playerRecordDTO);
-		System.out.println(memberDTO.getNickname());
+		//System.out.println(memberDTO.getNickname());
 		// -------------------------------------------
 		// HashMap 객체에 게시판 수정 행의 개수 저장하기기
 		// -------------------------------------------
