@@ -22,6 +22,8 @@ import kosmo.team.project.dto.MemberDTO;
 import kosmo.team.project.dto.MemberSearchSettingDTO;
 import kosmo.team.project.dto.MemberSearchShowHideSettingDTO;
 import kosmo.team.project.dto.PlayerRecordDTO;
+import kosmo.team.project.dto.SidoSearchSettingDTO;
+import kosmo.team.project.dto.SidoSearchShowHideSettingDTO;
 import kosmo.team.project.dto.Stadim2DTO;
 import kosmo.team.project.dto.TournamentDTO;
 import kosmo.team.project.dto.TournamentSearchDTO;
@@ -42,7 +44,11 @@ public class AdminController {
 	
 	@RequestMapping("/adminForm.do")
 
-	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, MemberSearchSettingDTO memberSearchSettingDTO,HttpSession session  ) {
+	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, 
+			MemberSearchSettingDTO memberSearchSettingDTO,
+			SidoSearchSettingDTO sidoSearchSettingDTO ,
+			SidoSearchShowHideSettingDTO sidoSearchShowHideSettingDTO,
+			HttpSession session  ) {
 		
 		
 		// 세션에서 사용자 아이디를 가져옴
@@ -86,6 +92,16 @@ public class AdminController {
 		List<MemberDTO> memberList = this.adminService.getMemberList(adminSearchDTO);
 		//System.out.println("maxDate2: " + adminSearchDTO.getMaxDate());
 		List<MemberSearchSettingDTO> memberSearchSettingList = this.adminService.getMemberSearchSettingList(memberSearchSettingDTO);
+		
+		
+		List<MemberSearchSettingDTO> memberShowHideSettingList = this.adminService.getMemberShowHideSettingList(memberSearchSettingDTO);
+		
+		
+		List<SidoSearchSettingDTO> sidoSearchSettingList = this.adminService.getSidoSearchSettingList(sidoSearchSettingDTO);
+		
+		List<String> sidoShowHideSettingList = this.adminService.getSidoShowHideSettingList(sidoSearchShowHideSettingDTO);
+		
+		
 
 		System.out.println("Sigungu  " + adminSearchDTO.getSigungu());
 		System.out.println("Keyword2  " + adminSearchDTO.getKeyword2());
@@ -97,6 +113,12 @@ public class AdminController {
 
 		mav.addObject("memberList", memberList);
 		mav.addObject("memberSearchSettingList", memberSearchSettingList);
+		
+		mav.addObject("memberShowHideSettingList", memberShowHideSettingList);
+		
+		mav.addObject("sidoSearchSettingList", sidoSearchSettingList);
+		
+		mav.addObject("sidoShowHideSettingList", sidoShowHideSettingList);
 		
 		mav.addObject("memberListCnt", memberListCnt);
 		mav.addObject("memberListAllCnt", memberListAllCnt);
@@ -138,7 +160,32 @@ public class AdminController {
 	
 	
 	
+	@RequestMapping(value = "/SidoSettingProc.do"
+
+			, method = RequestMethod.POST
+
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+		public Map<String, String> SidoSettingProc(
+				SidoSearchShowHideSettingDTO sidoSearchShowHideSettingDTO
 	
+		) {
+
+		// ------------------------------------------------
+		// 게시판 수정 결과물을 저장할 HashMap 객체 생성하기.
+		// ------------------------------------------------
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+
+		int updateSidoSearchShowHideSetting = this.adminService.updateSidoShowHideSetting(sidoSearchShowHideSettingDTO);
+
+
+
+		resultMap.put("result", updateSidoSearchShowHideSetting + "");
+
+
+		return resultMap;
+	}
 	
 	
 	
