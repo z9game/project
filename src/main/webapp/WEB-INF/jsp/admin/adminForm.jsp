@@ -459,31 +459,51 @@ $(document).ready(function() {
         
         if (lastClickedElement && lastClickedElement !== buttons) {
             lastClickedElement.style.display = 'none';
+            lastClickedElement.previousElementSibling.classList.remove('focusOn');
         }
 
         if (buttons.style.display === 'block') {
             buttons.style.display = 'none';
+            element.classList.remove('focusOn');
         } else {
             buttons.style.display = 'block';
+            element.classList.add('focusOn');
         }
 
         lastClickedElement = buttons;
     }
 
-    function moveUp(button) {
-        const item = button.closest('li');
-        const prevItem = item.previousElementSibling;
-        if (prevItem) {
-            item.parentNode.insertBefore(item, prevItem);
+//     function moveUp(button) {
+//         const item = button.closest('li');
+//         const prevItem = item.previousElementSibling;
+//         if (prevItem) {
+//             item.parentNode.insertBefore(item, prevItem);
+//             updateOrderValues();
+//         }
+//     }
+
+//     function moveDown(button) {
+//         const item = button.closest('li');
+//         const nextItem = item.nextElementSibling;
+//         if (nextItem) {
+//             item.parentNode.insertBefore(nextItem, item);
+//             updateOrderValues();
+//         }
+//     }
+    
+    
+    function moveUpSido() {
+        const selectedLi = document.querySelector('li .focusOn');
+        if (selectedLi && selectedLi.closest('li').previousElementSibling) {
+            selectedLi.closest('li').parentNode.insertBefore(selectedLi.closest('li'), selectedLi.closest('li').previousElementSibling);
             updateOrderValues();
         }
     }
 
-    function moveDown(button) {
-        const item = button.closest('li');
-        const nextItem = item.nextElementSibling;
-        if (nextItem) {
-            item.parentNode.insertBefore(nextItem, item);
+    function moveDownSido() {
+        const selectedLi = document.querySelector('li .focusOn');
+        if (selectedLi && selectedLi.closest('li').nextElementSibling) {
+            selectedLi.closest('li').parentNode.insertBefore(selectedLi.closest('li').nextElementSibling, selectedLi.closest('li'));
             updateOrderValues();
         }
     }
@@ -511,12 +531,12 @@ $(document).ready(function() {
         // Here you would typically send this order to the server via an AJAX request
     }
 
-    function clearOrderSidoNum() {
-        const list = document.getElementById('sidoList');
-        while (list.firstChild) {
-            list.removeChild(list.firstChild);
-        }
-    }
+//     function clearOrderSidoNum() {
+//         const list = document.getElementById('sidoList');
+//         while (list.firstChild) {
+//             list.removeChild(list.firstChild);
+//         }
+//     }
 
     // Initialize the order values on page load
     document.addEventListener('DOMContentLoaded', (event) => {
@@ -621,7 +641,7 @@ function saveSidoSettings() {
 	 /* 스타일은 여기에 추가하세요 */
     .settingModal {
         display: none;
-        position: fixed;
+        position: absolute;
         z-index: 1;
         left: 50%;
         top: 20%;
@@ -636,7 +656,7 @@ function saveSidoSettings() {
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
-        border-radius: 30px;
+        border-radius: 10px;
     }
 
     /* 닫기 버튼 스타일 */
@@ -695,14 +715,13 @@ function saveSidoSettings() {
     
     .settingSidoModal {
         display: none;
-        position: fixed;
+        position: absolute;
         z-index: 1;
-        left: 35%;
-        top: 25%;
-        width: 300px;
+        left: 29%;
+        top: 22.5%;
+        width: 450px;
         /* height: 100%; */
-        height: 700px;
-        overflow: auto;
+        height: 750px;
     }
 
     .modal-sido-content {
@@ -711,7 +730,8 @@ function saveSidoSettings() {
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
-        border-radius: 30px;
+        border-radius: 10px;
+        height: 610px;
     }
     
     .sidoSettingClose {
@@ -726,6 +746,20 @@ function saveSidoSettings() {
         color: black;
         text-decoration: none;
         cursor: pointer;
+    }
+    
+    .focusOn{
+    	background-color: #999999;
+    }
+    
+    .listOrderBtn{
+    	width: 40px;
+    	height: 40px;
+    	background: #c59246e0;
+    	border-radius: 10px;
+    	border: none;
+    	color: #FFFFFF;
+    	cursor: pointer;
     }
 </style>
 </head>
@@ -1047,33 +1081,44 @@ function saveSidoSettings() {
         </div>
     </div>
 </div>
-	
+
+
+
+
 	<div id="settingSidoModal" class="settingSidoModal">
-    <div class="modal-sido-content">
+    <div class="modal-sido-content" style="text-align: center;">
         <span class="sidoSettingClose" onclick="settingSidoClose()">X</span>
-        시 이름
+        <strong style="font-size: 20px; text-align: center; margin: 0 auto; justify-content: center;">시 이름</strong>
         <form name="sidoSettingForm" onsubmit="return false">
-           <ul id="sidoList">
+           <ul id="sidoList" style="text-align: center; margin-top: 20px; ">
 			    <c:forEach var="sidolist" items="${requestScope.sidoShowHideSettingList}">
 			        <li data-sido-id="${sidolist.sido_id}" style="margin-bottom: 10px;">
 			            <div style="display: flex; align-items: center;">
-			                <div class="sidoName" onclick="toggleButtons(this)" style="cursor: pointer;">
+			                <div class="sidoName" onclick="toggleButtons(this)" style="cursor: pointer; text-align: center; width: 100px; border: 1px solid #999999; border-radius:10px;">
 			                    ${sidolist.name}
-			                </div>  
-			                <div style="margin-left: auto; display: none;">
-			                    <button type="button" onclick="moveUp(this)">▲</button>
-			                    <button type="button" onclick="moveDown(this)">▼</button>
-			                </div>
+			                </div> 
+<!-- 			                <div> -->
+<%-- 								<input type="radio" name="assistsCountSetting" value="show" <c:if test="${list.is_active == 'show'}">checked</c:if> >사용 --%>
+<%-- 								<input type="radio" name="assistsCountSetting" value="hide" <c:if test="${list.is_active == 'hide'}">checked</c:if> >미사용 --%>
+							
+<!-- 			                </div>  -->
+<!-- 			                <div style="display: none;"> -->
+<!-- 			                    <button type="button" onclick="moveUp(this)">▲</button> -->
+<!-- 			                    <button type="button" onclick="moveDown(this)">▼</button> -->
+<!-- 			                </div> -->
 			                <input type="hidden" name="sidoOrder" value="">
 			            </div>
 			        </li>
 			    </c:forEach>
 			</ul>
-
+				<div>
+			                    <button type="button" class="listOrderBtn" onclick="moveUpSido(event)" style="margin-right: 10px;">▲</button>
+			                    <button type="button" class="listOrderBtn" onclick="moveDownSido(event)">▼</button>
+			                    <input type="button" class="boardRegBtn" value="저장" onclick="saveSidoSettings()" style="margin-left: 60px;">
+			    </div>
 
         </form>
-        <input type="button" class="boardRegBtn" value="저장" onclick="saveSidoSettings()">
-        <input type="button" class="boardEmptyBtn" value="비우기" onclick="clearOrderSidoNum()">
+<!--         <input type="button" class="boardRegBtn" value="저장" onclick="saveSidoSettings()"> -->
     </div>
 </div>
 
