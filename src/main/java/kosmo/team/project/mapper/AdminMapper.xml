@@ -871,17 +871,27 @@
            ,display_position
 		from
 			sido
+		order by 
+			display_position asc
 		
 	</select>
 
 	<!-- 시도 설정 업데이트 쿼리 -->
-	<update id="updateSidoShowHideSettings" parameterType="kosmo.team.project.dto.SidoSearchShowHideSettingDTO" >
+	<update id="updateSidoShowHideSetting" parameterType="kosmo.team.project.dto.SidoSearchShowHideSettingDTO" >
   
-        UPDATE sido
-        SET DISPLAY_POSITION = 
-        WHERE SIDO_ID = 
+        UPDATE 
+			sido
+        
+        SET 
+        	display_position = ${display_position}
+        WHERE 
+        	sido_id = ${sido_id}
    
-</update>
+	</update>
+	
+	
+	
+	
 
 
 
