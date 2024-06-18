@@ -29,6 +29,8 @@ public interface AdminDAO {
 	public List<SidoSearchSettingDTO> getSidoSearchSettingList(SidoSearchSettingDTO sidoSearchSettingDTO);
 	public List<SidoSearchSettingDTO> getSidoShowHideSettingList(SidoSearchSettingDTO sidoSearchSettingDTO);
 	
+	public int updateSidoShowHideSetting(SidoSearchShowHideSettingDTO sidoSearchShowHideSettingDTO);
+	
 	//검색조건 숨기기/보이기 업데이트
 	public int updateMemberSearchShowHideSetting(MemberSearchShowHideSettingDTO memberSearchShowHideSettingDTO);
 	
@@ -277,7 +279,7 @@ public int updateAssistsCountSetting(MemberSearchShowHideSettingDTO memberSearch
 
 
 
-public List<String> updateSidoShowHideSetting(SidoSearchShowHideSettingDTO sidoSearchShowHideSettingDTO);
+
 
 
 

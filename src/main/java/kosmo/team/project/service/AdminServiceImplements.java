@@ -134,14 +134,19 @@ public class AdminServiceImplements implements AdminService {
 			int sido_id = Integer.parseInt(id_value[0]);
 			int display_position = Integer.parseInt(id_value[1]);
 			
+			SidoSearchShowHideSettingDTO sidoShowHideSettingDTO = new SidoSearchShowHideSettingDTO();
+			sidoShowHideSettingDTO.setSido_id(sido_id);
+			sidoShowHideSettingDTO.setDisplay_position(display_position);
 			
+			updatedSidoRows = adminDAO.updateSidoShowHideSetting(sidoShowHideSettingDTO);
 			
-			
-			
+			System.out.println("Updated rows for sido_id " + sido_id + ": " + updatedSidoRows);
+		
 		}
+		return null;
 
 
-	    return updatedSidoRows;
+	    
 	}
 
 	

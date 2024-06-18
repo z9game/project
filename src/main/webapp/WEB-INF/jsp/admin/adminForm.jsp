@@ -493,7 +493,7 @@ $(document).ready(function() {
         items.forEach((item, index) => {
             const hiddenInput = item.querySelector('input[type="hidden"]');
             const sidoId = item.getAttribute('data-sido-id'); // data-sido-id 값을 읽어옵니다.
-            hiddenInput.value = sidoId + '_' +  ${index + 1}; // sidoId와 인덱스를 결합하여 값을 설정합니다.
+            hiddenInput.value = sidoId + '_' +  (index + 1); // sidoId와 인덱스를 결합하여 값을 설정합니다.
         });
     }
 

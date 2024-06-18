@@ -44,11 +44,7 @@ public class AdminController {
 	
 	@RequestMapping("/adminForm.do")
 
-	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, 
-			MemberSearchSettingDTO memberSearchSettingDTO,
-			SidoSearchSettingDTO sidoSearchSettingDTO ,
-			SidoSearchShowHideSettingDTO sidoSearchShowHideSettingDTO,
-			HttpSession session  ) {
+	public ModelAndView adminForm(AdminSearchDTO adminSearchDTO, MemberSearchSettingDTO memberSearchSettingDTO,SidoSearchSettingDTO sidoSearchSettingDTO ,HttpSession session  ) {
 		
 		
 		// 세션에서 사용자 아이디를 가져옴
@@ -99,7 +95,7 @@ public class AdminController {
 		
 		List<SidoSearchSettingDTO> sidoSearchSettingList = this.adminService.getSidoSearchSettingList(sidoSearchSettingDTO);
 		
-		List<String> sidoShowHideSettingList = this.adminService.getSidoShowHideSettingList(sidoSearchShowHideSettingDTO);
+		List<SidoSearchSettingDTO> sidoShowHideSettingList = this.adminService.getSidoShowHideSettingList(sidoSearchSettingDTO);
 		
 		
 
@@ -177,7 +173,7 @@ public class AdminController {
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 
-		int updateSidoSearchShowHideSetting = this.adminService.updateSidoShowHideSetting(sidoSearchShowHideSettingDTO);
+		List<String> updateSidoSearchShowHideSetting = this.adminService.updateSidoShowHideSetting(sidoSearchShowHideSettingDTO);
 
 
 
